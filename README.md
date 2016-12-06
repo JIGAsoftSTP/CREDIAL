@@ -1,2 +1,0 @@
-# CREDIAL
-for do credial
