@@ -1,0 +1,94 @@
+.XpertTreeMenu{
+	padding: 1rem 2rem 2rem;
+	max-height: 80vh;
+	overflow: auto;
+}
+.XpertTreeMenu ul{
+	padding-left: 1.5rem;
+	
+}
+.XpertTreeMenu li{
+	
+	
+}
+/*.XpertTreeMenu li:last-child{
+	cursor: pointer;
+	
+}*/
+
+
+.XpertTreeMenu li.isFather{
+	margin: 4px 0 8px;
+	/*line-height: 1.6rem;*/
+	
+}
+.XpertTreeMenu li.isFather.open{
+	border-left: 1px #aaa dashed;
+	
+}
+.XpertTreeMenu li.isFather ul{
+	max-height: 0;
+	overflow: hidden;
+}
+.XpertTreeMenu li.isFather > nav{
+	display: flex;
+	min-width: 200px;
+	justify-content: space-between;
+	align-items: center;
+}
+.XpertTreeMenu li.isFather > nav span,
+.XpertTreeMenu .icon-ctrl{
+	cursor: pointer;
+}
+.XpertTreeMenu li.isFather.open > ul{
+	max-height: 500px;
+}
+.XpertTreeMenu li.isFather.open > nav{
+	color: #0C83DA;
+}
+.XpertTreeMenu li.isFather.open > nav i.icon-ctrl{
+	transform: rotate(0);
+}
+.XpertTreeMenu li.isChild{
+	display: flex;
+	align-items: center;
+	font-size: .9rem;
+	line-height: 1.6rem;
+	cursor: pointer;
+}
+.XpertTreeMenu li.isChild:hover{
+	color: #000;
+	background: #fafafa;
+}
+
+.XpertTreeMenu li.isChild span{
+	display: inline-block;
+}
+
+.XpertTreeMenu i.icon-ctrl{
+	font-weight: bold;
+	transform: rotate(180deg);
+}
+.XpertTreeMenu i.icon-checkbox-unchecked,
+.XpertTreeMenu i.icon-checkbox-checked{
+	margin-right: 5px;
+	
+}
+.XpertTreeMenu i.icon-checkbox-checked{
+	color: #0C83DA;
+}
+
+.XpertTreeMenu .xpert-check.partial{
+	display: inline-block;
+	height: 15px;
+	width: 15px;
+	border: 2px #666 solid;
+	border-radius: 2px;
+	padding: 3px;
+	background: content-box #666; 
+	margin-right: 5px;
+}
+.XpertTreeMenu .xpert-check.partial.checked{
+	background-color: #0C83DA;
+	border: 2px #0C83DA solid;
+}
