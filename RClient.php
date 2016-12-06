@@ -322,7 +322,7 @@
 	        <div class="modalContainer">
 				<div class="content">
 					<div class="divSec">
-						<ul class="menu-info">
+						<ul class="menu-info single">
 							<li class="active">Geral</li>
 							<li>Rendimento</li>
 							<li>Contacto</li>

@@ -1,3 +1,4 @@
+menuLateralID($('.mp-info-client .menu-info'));
 
     $('.header-tittle').click(function(event) {
         var father;

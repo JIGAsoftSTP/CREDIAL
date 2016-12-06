@@ -12,6 +12,18 @@
 /*noinspection CssInvalidPseudoSelector*/
 :-o-input-placeholder { color:#999;  font-style: italic; } /* ie */
 
+::-webkit-scrollbar {
+    width: 5px;
+}
+ 
+::-webkit-scrollbar-track {
+    background: #eee; 
+}
+ 
+::-webkit-scrollbar-thumb {
+    background: #00B9A3; 
+}
+
 
 body,
 .content-body,

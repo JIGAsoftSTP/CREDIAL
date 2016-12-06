@@ -105,6 +105,7 @@ $('.xpert-list').on( 'click','b', function(event) {
 
 $('.content-w-lateral aside li').click(function(event) {
     controlLateralMenu($(this), $('article > section'), event);
+
 });
 
 $('.content-w-lateral .icon-menu').click(function(event) {
@@ -201,9 +202,10 @@ function controlLateralMenu(element, element2, event){
     ctt = element2.eq(idx);
     element.addClass('active').siblings().removeClass('active');
     ctt.addClass('active').siblings().removeClass('active');
-    /*if(element.parent().hasClass('lateral-menu'))
-        $('article .title').text(element.text());*/
+    if(element.parent().hasClass('lateral-menu'))
+        $('article .title').text(element.text());
     element.find('li').eq(0).trigger('click');  
+    tableEstructure(ctt.find('table'));
     event.stopPropagation();
     
 }

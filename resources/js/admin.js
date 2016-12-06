@@ -82,7 +82,7 @@ $('.cheq .menu-cheq li').click(function(event) {
     controlLateralMenu($(this) , $('.cheq .abas section'));
     // tableEstructure($('.active table'));
     	var sec = $('.cheq .abas section').eq($(this).index());
-    	tableEstructure(sec.find('table'));
+    	/*tableEstructure(sec.find('table'));*/
 });
 
 // ############## USER 	###########

@@ -14,9 +14,9 @@
 		</nav>
 		<nav class="header-2">
 			<ul>
-				<li class="active-menu"><a href="RClient.php" id="m1">Crédito</a></li>
-				<li><a href="Reports.php" id="m3">Relatórios</a></li>
-				<li><a href="Admin.php" id="m4">Administração</a></li>
+				<li class="active-menu"><a href="RClient" id="m1">Crédito</a></li>
+				<li><a href="Reports" id="m3">Relatórios</a></li>
+				<li><a href="Admin" id="m4">Administração</a></li>
 			</ul>
 		</nav>
 	</header>
