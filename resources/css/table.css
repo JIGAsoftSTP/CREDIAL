@@ -1,0 +1,56 @@
+table{
+	text-align: left;
+	border: 1px #dfdfdf solid;
+	border-radius: 2px;
+	padding-top: 10px;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+table *{
+	/*transition: none;*/
+	
+}
+table thead,
+table tbody,
+table tr{
+	display: block;
+	width: 100%;
+
+}
+table tr{
+	padding: 0 5px;
+}
+table thead{	
+	border-bottom: 1px #dfdfdf solid;	
+	line-height: 2rem;
+	color: #222;
+}
+table th{
+	font-weight: normal;	
+} 
+tbody td{
+	line-height: 2.4em;
+	
+	font-weight: lighter;
+}
+tbody tr:nth-child(odd){
+	background: #F7F7F7;
+}
+table tbody{
+	overflow: auto;
+}
+table i{
+	margin-right: 8px;
+	color: #333;
+	font-size: .97rem;
+}
+table.selectable tbody tr:hover{
+	background: rgba(0, 185, 163, .2);
+	cursor: pointer;
+}
+table.selectable tbody tr.selected,
+table.selectable tbody tr.selected i{
+	background: #00B9A3;
+	color: #fff;
+}
