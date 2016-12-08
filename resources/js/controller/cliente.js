@@ -18,6 +18,7 @@ var nCount = 0;
 var mCount = 5;
 var addTable = 0;
 var clienteData = undefined;
+var clienteLetra = 0;
 
 var clientes = [];
 function listarCliente() {
@@ -57,10 +58,12 @@ function addMES() {
 
 function carregarCliente() {
     var carregou = false;
-    addTable += (per/100*clientes.length);
-    addTable = 196;
-    for (var ff = i; ff < clientes.length && ff < addTable ; ff++) {
-        var client = clientes[ff];
+    // addTable += (per/100*clientes.length);
+    addTable = (clientes[clienteLetra] != undefined) ? clientes[clienteLetra].length : 0;
+    $('#tableCliente').empty();
+    i = 0;
+    for (var ff = i; ff < addTable ; ff++) {
+        var client = clientes[clienteLetra][ff];
         var table = document.getElementById("tableCliente");
         var row = table.insertRow(table.childElementCount);
 
@@ -81,9 +84,9 @@ function carregarCliente() {
         cell3.innerHTML = client['NAME']+" "+client['SURNAME'];
         cell4.innerHTML = client['TELE'];
         carregou = true;
-        lastI = ff;
+        // lastI = ff;
     }
-    i = lastI+1;
+    // i = lastI+1;
     if(carregou) {
         tableEstructure($('#table-client'));
     }
@@ -91,10 +94,10 @@ function carregarCliente() {
 }
 
 function credito(a) {
-    $("#cred-cli-nif").text(clientes[a]["NIF"]+" - ");
-    var lastName = clientes[a]['SURNAME'].split(" ");
-    $("#cred-cli-comName").text(clientes[a]['NAME']+" "+lastName[lastName.length-1]);
-    nifClient = clientes[a]["NIF"];
+    $("#cred-cli-nif").text(clientes[clienteLetra][a]["NIF"]+" - ");
+    var lastName = clientes[clienteLetra][a]['SURNAME'].split(" ");
+    $("#cred-cli-comName").text(clientes[clienteLetra][a]['NAME']+" "+lastName[lastName.length-1]);
+    nifClient = clientes[clienteLetra][a]["NIF"];
     si.nifClient = nifClient;
     $('.mp-new-credit').fadeIn(500);
     tableEstructure($('#table-liquid'));
@@ -105,7 +108,7 @@ function inforCiente(b) {
     $.ajax({
         url: "./bean/cliente.php",
         type: "POST",
-        data: {"intensao": "loadStatusClient", "nifCliente": clientes[b]["NIF"]},
+        data: {"intensao": "loadStatusClient", "nifCliente": clientes[clienteLetra][b]["NIF"]},
         dataType: "json",
         success: function (e) {
             clienteData = e.resultRealDataCliente;
@@ -301,4 +304,9 @@ function listCreditoCliente(_type) {
 
 $(".show-cred").click(function () {
     listCreditoCliente(($(this).hasClass("cred-pago") ? "0" : ($(this).hasClass("cred-porPagar") ? "1" : "-1")));
+});
+
+$("div.alphabet").on("click","span",function () {
+    clienteLetra = Number($(this).attr("value"));
+    carregarCliente();
 });

@@ -40,32 +40,33 @@
 			</table>
 		</div>
 		<div class="alphabet">
-		<span class="active">A</span>
-			<span>B</span>
-			<span>C</span>
-			<span>D</span>
-			<span>E</span>
-			<span>F</span>
-			<span>G</span>
-			<span>H</span>
-			<span>I</span>
-			<span>J</span>
-			<span>K</span>
-			<span>L</span>
-			<span>M</span>
-			<span>N</span>
-			<span>O</span>
-			<span>P</span>
-			<span>Q</span>
-			<span>R</span>
-			<span>S</span>
-			<span>T</span>
-			<span>U</span>
-			<span>V</span>
-			<span>W</span>
-			<span>X</span>
-			<span>Y</span>
-			<span>Z</span>
+		<span class="active" value="0">A</span>
+			<span value="1">B</span>
+			<span value="2">C</span>
+			<span value="3">D</span>
+			<span value="4">E</span>
+			<span value="5">F</span>
+			<span value="6">G</span>
+			<span value="7">H</span>
+			<span value="8">I</span>
+			<span value="9">J</span>
+			<span value="10">K</span>
+			<span value="11">L</span>
+			<span value="12">M</span>
+			<span value="13">N</span>
+			<span value="14">O</span>
+			<span value="15">P</span>
+			<span value="16">Q</span>
+			<span value="17">R</span>
+			<span value="18">S</span>
+			<span value="19">T</span>
+			<span value="20">U</span>
+			<span value="21">V</span>
+			<span value="22">W</span>
+			<span value="23">X</span>
+			<span value="24">Y</span>
+			<span value="25">Z</span>
+			<span value="26">*</span>
 		</div>
 		<div class="add-new-form">
 		<span class="close-add-client">x</span>

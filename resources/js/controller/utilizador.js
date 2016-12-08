@@ -101,9 +101,9 @@ function alertForSelectMenu() {
     }
     else return true;
 }
-
+var listUser = undefined;
 function loadListClient() {
-    var listUser = new ListUser();
+     listUser = new ListUser();
     $.ajax({
         url: "./bean/utilizador.php",
         type: "POST",
@@ -125,8 +125,7 @@ function loadListClient() {
                 listUser.addUser(us);
             }
             listUser.bluider();
-            $(".list-user").empty();
-            $(".list-user").append(listUser.getList());
+            $(".list-user").empty().append(listUser.getList());
             for (var ui = 0; ui < listUser.list.length; ui++) {
                 var css = {"background":"content-box #444 url('"+listUser.list[ui].img+"') no-repeat"
                     ,"background-position":"center"
@@ -151,3 +150,16 @@ function getSelectMenu() {
             listMenuSelect[listMenuSelect.length] = $(this).attr("_id");
     });
 }
+
+$(".list-user").on("click", "i.icon-undo2", function () {
+    console.info(listUser.list[$(this).closest("section").attr("item")]);
+})
+    .on("click", "i.icon-pencil", function () {
+        console.info(listUser.list[$(this).closest("section").attr("item")]);
+    })
+    .on("click", "i.icon-unlocked", function () {
+        console.info(listUser.list[$(this).closest("section").attr("item")]);
+    })
+    .on("click", "i.icon-lock", function () {
+        console.info(listUser.list[$(this).closest("section").attr("item")]);
+    });

@@ -90,33 +90,12 @@ Amortizacao.prototype.idTipoPagam = "0";
 Amortizacao.prototype.nomeBanco = "";
 Amortizacao.prototype.tipoPagam = "";
 
-
-var ListUser =  function () {
-    this.list = [];
-    this.listContainer = "";
-    this.addUser = function (user) {
-        this.list[this.list.length] = user;
-    };
-    this.bluider = function () {
-        for(var k = 0; k < this.list.length; k++)
-            this.listContainer += '<section id="user-'+this.list[k].id+'">' +
-                                '<span><i class="icon-undo2" title="Redefinir senha"></i><i class="icon-pencil" title="Editar"></i><i class="icon-lock" title="Bloquear utilizador"></i></span>' +
-                                    '<div>' +
-                                    '<nav class="default-user-img-'+this.list[k].id+'"></nav>' +
-                                    '<h4>'+this.list[k].nome+' '+this.list[k].apelido+'</h4>' +
-                                '<p>NIF: '+this.list[k].nif+'</p>' +
-                                '<p>'+this.list[k].nivel+' na agência '+this.list[k].agencia+'</p>' +
-                                '</div>' +
-                              '</section>';
-    };
-
-    this.getList = function () {
-        return this.listContainer;
-    };
-};
-
+/**
+ *
+ * @constructor USER
+ */
 var User =  function () {};
-User.prototype.id = undefined;
+User.prototype.id = "";
 User.prototype.nome = undefined;
 User.prototype.apelido = undefined;
 User.prototype.nif = undefined;
@@ -127,6 +106,33 @@ User.prototype.idNivel = undefined;
 User.prototype.img = undefined;
 User.prototype.estado = undefined;
 User.prototype.menu = undefined;
+
+
+var ListUser =  function () {
+    this.list = [];
+    this.listContainer = "";
+};
+
+ListUser.prototype.addUser = function (user) {
+    if(user.nif != undefined)
+        this.list[this.list.length] = user;
+};
+ListUser.prototype.bluider = function () {
+    for(var k = 0; k < this.list.length; k++)
+    this.listContainer += '<section item="'+k+'">' +
+        '<span>'+ ((this.list[k].estado === "Pre-Ativo") ? '' : '<i class="icon-undo2" title="Redefinir senha"></i>')+'<i class="icon-pencil" title="Editar"></i><i class="icon-unlocked" title="Bloquear utilizador"></i></span>' +
+        '<div>' +
+        '<nav class="default-user-img-'+this.list[k].nif+'"></nav>' +
+        '<h4>'+this.list[k].nome+' '+this.list[k].apelido+'</h4>' +
+        '<p>NIF: '+this.list[k].nif+'</p>' +
+        '<p>'+this.list[k].nivel+' na agência '+this.list[k].agencia+'</p>' +
+        '</div>' +
+        '</section>';
+};
+
+ListUser.prototype.getList = function () {
+    return this.listContainer;
+};
 
 
 

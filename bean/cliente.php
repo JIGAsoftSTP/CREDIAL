@@ -21,8 +21,18 @@ function listCliente(){
     $call->selects("ver_client_simple", "*");
     $call->execute();
     $resut = array();
+    $arrayList = str_split("ABCDEFGHIJKLMNOPQRSTUVWXYZ*");
     while ( $valor = $call->getValors()){
-        $resut[count($resut)] = $valor;
+        $letra = $valor["NAME"];
+        $letra = str_split(strtoupper(str_replace(" ", "", $letra)));
+        $letra = $letra[0];
+        $cont = is_numeric(array_search($letra, $arrayList))
+            ?
+            array_key_exists(array_search($letra, $arrayList), $resut)
+                ? count($resut[array_search($letra, $arrayList)])
+                : 0
+            : count($arrayList)-1;
+        $resut[array_search($letra,$arrayList)][$cont] = $valor;
     }
     $j = json_encode(array("data" => $resut));
     die($j);
