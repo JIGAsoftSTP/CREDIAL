@@ -12,6 +12,7 @@ include "Session.php";
 if($_POST["intensao"] ==  "loadImagem" ) {carregarImagem();}
 if($_POST["intensao"] ==  "regUser" ) {regUser();}
 if($_POST["intensao"] ==  "loadDataUser" ) {loadDataUser();}
+if($_POST["intensao"] ==  "disibleUSER" ) {disableUser();}
 
 function carregarImagem()
 {
@@ -106,4 +107,16 @@ function loadDataUser(){
         }
     }
     die (json_encode(array("return" => $result)));
+}
+
+function disableUser(){
+    $call = new CallPgSQL();
+    $call->functionTable("funct_disable_user", "*")
+        ->addString(Session::getUserLogado()->getId())
+        ->addNumeric(Session::getUserLogado()->getIdAgencia())
+        ->addString($_POST["USER"]["id"])
+        ->addString($_POST["USER"]["disableMode"]);
+    $call->execute();
+    $result = $call->getValors();
+    die (json_encode(array("result" => $result["RESULT"] == "true", "return" => $result)));
 }

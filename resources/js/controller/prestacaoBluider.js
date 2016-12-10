@@ -50,11 +50,11 @@ var PrestacaoBluider = function () {
             '</tr>' +
             '</thead>' +
             '<tbody id="list-prestacao-'+this.id+'">' +
-            '<td>fjjfjfjf</td>' +
-            '<td>fjjfjfjf</td>' +
-            '<td>fjjfjfjf</td>' +
-            '<td>fjjfjfjf</td>' +
-            '<td>fjjfjfjf</td>' +
+            '<td> </td>' +
+            '<td> </td>' +
+            '<td> </td>' +
+            '<td> </td>' +
+            '<td> </td>' +
             '</tbody>' +
             '</table>' +
             '</span>' +
@@ -124,11 +124,13 @@ function showAmortizacao(id, jk) {
     loadCreditoCliente(id,jk, $("#pret-"+id).parent().find('.more-details').hasClass("show"));
     $("#pret-"+id).parent().find('.more-details').toggleClass('show');
     tableEstructure($('#table-amortizacao-'+id));
+    setTimeout(function (e) {
+        window.location = '#table-amortizacao-'+id;
+    }, 350);
 }
 
 var prePage = new Prestacao();
 function clickPestacao(_idPrestacao,_idCredito) {
-    prePage =
     $("#"+_idPrestacao+"-amor").addClass('selected') .siblings().removeClass('selected');
 }
 

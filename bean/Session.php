@@ -29,6 +29,8 @@ class Session
     
     static function getUserLogado()
     {
+        if(session_status() != PHP_SESSION_ACTIVE)
+            session_start();
         if(isset($_SESSION[Session::USER]))
         {
             return $_SESSION[Session::USER];
@@ -40,6 +42,8 @@ class Session
      */
     static function getUserMenu()
     {
+        if(session_status() != PHP_SESSION_ACTIVE)
+            session_start();
         if(isset($_SESSION[Session::MENU]))
            return $_SESSION[Session::MENU];
         else return null;
@@ -49,7 +53,6 @@ class Session
     }
     static function  user()
     {
-        session_start();
         $user =Session::getUserLogado();
         if($user != null)
            return $user->getNome()." ".$user->getApelido();
@@ -61,6 +64,7 @@ class Session
      */
     static function nomeUtilizador()
     {
+
          $user =Session::getUserLogado();
         if($user != null)
            return $user->getNome()." ".$user->getApelido();

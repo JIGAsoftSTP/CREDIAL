@@ -34,12 +34,12 @@ function listarCliente() {
         }
     });
 }
-$("#tableCliente").scroll(function () {
-    if($(this).scrollTop() === document.getElementById("tableCliente").scrollTopMax) {
-        limite();
-        carregarCliente();
-    }
-});
+// $("#tableCliente").scroll(function () {
+//     if($(this).scrollTop() === document.getElementById("tableCliente").scrollTopMax) {
+//         limite();
+//         carregarCliente();
+//     }
+// });
 
 function addLETRAS() {
     var letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -115,7 +115,9 @@ function inforCiente(b) {
             listCredito = e.resultCredito;
             clienteShortData = e.resultClient;
             listCreditoCliente("-1");
-            $('.history-selected').toggleClass('show');
+            setTimeout(function () {
+                $('.history-selected').toggleClass('show');
+            }, 700);
         },
         beforeSend: function () {  $(".mp-loading").fadeIn(); },
         complete: function () { $(".mp-loading").fadeOut();}
@@ -309,4 +311,8 @@ $(".show-cred").click(function () {
 $("div.alphabet").on("click","span",function () {
     clienteLetra = Number($(this).attr("value"));
     carregarCliente();
+});
+
+$("#table-client").on("dblclick","tr", function () {
+    credito($(this).attr("id"));
 });

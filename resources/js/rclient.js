@@ -23,8 +23,7 @@ menuLateralID($('.mp-info-client .menu-info'));
 
     $('.search-span input').focusin(function(event) {
         $('.search-span').addClass('is-focused');
-    });
-    $('.search-span input').focusout(function(event) {
+    }).focusout(function(event) {
         $('.search-span').removeClass('is-focused');
     });
 
@@ -51,28 +50,28 @@ menuLateralID($('.mp-info-client .menu-info'));
         tableEstructure($('#table-amortizacao'));
     });
 
-    $('.table-liquid table').on('dblclick',function(event) {
-        $('.add-detail-table').addClass('show');
-    });
+    // $('.table-liquid table').on('dblclick',function(event) {
+    //     $('.add-detail-table').addClass('show');
+    // });
+    //
+    // $('.close-add-detail').on("click",function(event) {
+    //     $('.add-detail-table').removeClass('show');
+    // });
+    //
+    // $('.icon-credit-card').on("click",function(event) {
+    //     $('.mp-new-credit').fadeIn(500);
+    //     tableEstructure($('#table-liquid'));
+    // });
 
-    $('.close-add-detail').on("click",function(event) {
-        $('.add-detail-table').removeClass('show');
-    });
-
-    $('.icon-credit-card').on("click",function(event) {
-        $('.mp-new-credit').fadeIn(500);
-        tableEstructure($('#table-liquid'));
-    });
-
-    $('.table-client table').on("dblclick",function(event) {
-        $('.icon-credit-card').trigger('click');
-    });
+    // $('.table-client table').on("dblclick",function(event) {
+    //     $('.icon-credit-card').trigger('click');
+    // });
 
 // icon-info close-history
-    $('#tableCliente').find(".close-history,.icon-info").on("click",function(event) {
-        $('.history-selected').toggleClass('show');
-        // alert("fkkf");
-    });
+//     $('#tableCliente').on("click",".close-history,.icon-info",function(event) {
+//         $('.history-selected').toggleClass('show');
+//         // alert("fkkf");
+//     });
 
 
 

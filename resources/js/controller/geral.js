@@ -106,6 +106,7 @@ User.prototype.idNivel = undefined;
 User.prototype.img = undefined;
 User.prototype.estado = undefined;
 User.prototype.menu = undefined;
+User.prototype.disableMode = undefined;
 
 
 var ListUser =  function () {
@@ -120,7 +121,7 @@ ListUser.prototype.addUser = function (user) {
 ListUser.prototype.bluider = function () {
     for(var k = 0; k < this.list.length; k++)
     this.listContainer += '<section item="'+k+'">' +
-        '<span>'+ ((this.list[k].estado === "Pre-Ativo") ? '' : '<i class="icon-undo2" title="Redefinir senha"></i>')+'<i class="icon-pencil" title="Editar"></i><i class="icon-unlocked" title="Bloquear utilizador"></i></span>' +
+        '<span>'+ ((this.list[k].estado === "Pre-Ativo") ? '' : '<i class="icon-undo2" title="Redefinir senha"></i>')+'<i class="icon-pencil" title="Editar"></i>'+((this.list[k].estado != "Inativo") ? '<i class="icon-lock" title="Bloquear utilizador"></i>' : '' )+'</span>' +
         '<div>' +
         '<nav class="default-user-img-'+this.list[k].nif+'"></nav>' +
         '<h4>'+this.list[k].nome+' '+this.list[k].apelido+'</h4>' +
@@ -133,6 +134,11 @@ ListUser.prototype.bluider = function () {
 ListUser.prototype.getList = function () {
     return this.listContainer;
 };
+
+
+// function foo(...args) {
+//     console.log(args);
+// }
 
 
 

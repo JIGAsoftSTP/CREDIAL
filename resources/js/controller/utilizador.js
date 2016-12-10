@@ -66,7 +66,7 @@ function regUser() {
                         ,"background-size":"cover"};
                     $(".adm-ph-user").css(css);
                     imageUser = undefined;
-                    loadListClient();
+                    setTimeout(loadListClient,4000,true);
                 }
                 else {
                     callXpertAlert(data.return["MESSAGE"], new Mensage().cross, 10000);
@@ -102,7 +102,7 @@ function alertForSelectMenu() {
     else return true;
 }
 var listUser = undefined;
-function loadListClient() {
+function loadListClient(at) {
      listUser = new ListUser();
     $.ajax({
         url: "./bean/utilizador.php",
@@ -134,7 +134,11 @@ function loadListClient() {
             }
         },
         beforeSend: function () {  $(".mp-loading").fadeIn(); },
-        complete: function () { $(".mp-loading").fadeOut(); }
+        complete: function () {
+            $(".mp-loading").fadeOut();
+            if(at !== undefined)
+                callXpertAlert("Lista de Utilizador actualizada", new Mensage().notification, 10000);
+        }
     });
 }
 
@@ -152,14 +156,39 @@ function getSelectMenu() {
 }
 
 $(".list-user").on("click", "i.icon-undo2", function () {
-    console.info(listUser.list[$(this).closest("section").attr("item")]);
+    var user =  listUser.list[$(this).closest("section").attr("item")];
+    user.disableMode = "F";
+    disibleUser(user);
 })
     .on("click", "i.icon-pencil", function () {
-        console.info(listUser.list[$(this).closest("section").attr("item")]);
-    })
-    .on("click", "i.icon-unlocked", function () {
-        console.info(listUser.list[$(this).closest("section").attr("item")]);
+        var user =  listUser.list[$(this).closest("section").attr("item")];
+        $("#gest-user-nif").val(user.nif);
+        $("#gest-user-nome").val(user.nome);
+        $("#gest-user-apelido").val(user.apelido);
+        $("#gest-user-agencia").val(user.agencia);
+        // formDataReg.append("typeperfil", $("#gest-user-type").find("i.icon-radio-checked2").attr("value"));
     })
     .on("click", "i.icon-lock", function () {
-        console.info(listUser.list[$(this).closest("section").attr("item")]);
+        var user =  listUser.list[$(this).closest("section").attr("item")];
+        user.disableMode = "B";
+        disibleUser(user);
     });
+
+function disibleUser(user) {
+    $.ajax({
+        url:"./bean/utilizador.php",
+        type:"POST",
+        dataType: "json",
+        data: {intensao:"disibleUSER", USER : user},
+        success: function (data) {
+            if (data.result) {
+                callXpertAlert(user.nome+" "+user.apelido+" foi " +((user.disableMode === "F") ? " Redifinido " : " Desativado ")+" com secesso!", new Mensage().checkmark, 10000);
+                setTimeout(loadListClient,4000,true);
+            }
+            else {
+                callXpertAlert(data.return["MESSAGE"], new Mensage().cross, 10000);
+            }
+        }
+    });
+}
+

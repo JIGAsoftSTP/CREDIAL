@@ -144,12 +144,8 @@ function bluiderTablePestacao() {
 
         id = (i);
 
-        if(i == 0){
-            si.valorAmotizado = si.totalPagar - si.reembolsoPeriodo;
-        }
-        else{
-            si.valorAmotizado -= (si.reembolsoPeriodo + si.valorDesconto);
-        }
+        if(i == 0){ si.valorAmotizado = si.totalPagar - si.reembolsoPeriodo; }
+        else{ si.valorAmotizado -= (si.reembolsoPeriodo + si.valorDesconto); }
         si.valorAmotizado = ((si.valorAmotizado<0) ? 0 : si.valorAmotizado);
 
         var am = new Amortizacao();
@@ -165,14 +161,11 @@ function bluiderTablePestacao() {
 
 function addPestacao(data) {
     var table = document.getElementById("cred-table-prestacao");
-
     var row = table.insertRow(table.childElementCount);
-
     row.id = id;
-
     row.onclick = function () {
-        $(this).addClass('selected')
-            .siblings().removeClass('selected');
+        $(this).addClass('selected').siblings().removeClass('selected');
+
         id = Number($(this).attr("id"));
         $('#cred-tab-selNomeBanco').text(si.dataTableAmortizacao[id].nomeBanco);
         $("#cred-tab-selNumDoc").text(si.dataTableAmortizacao[id].nunDoc);
