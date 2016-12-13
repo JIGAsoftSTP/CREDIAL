@@ -191,4 +191,21 @@ function disibleUser(user) {
         }
     });
 }
+/**
+ *
+ * @param id {string}
+ */
+function seletedMenuUser(id) {
+    $("#menuAccessUser").find("li").each(function (e) {
+        if($(this).attr("_id") === id) {
+            var childs = $(this).find('.isChild');
+            i = childs.find('i');
+            i.removeClass('icon-checkbox-checked').addClass('icon-checkbox-unchecked');
+            childs.removeClass('checked');
+            autoCheck(childs);
+            // e.stopPropagation();
+            // return false;
+        }
+    })
+}
 

@@ -92,7 +92,7 @@ Amortizacao.prototype.tipoPagam = "";
 
 /**
  *
- * @constructor USER
+ * @constructor User
  */
 var User =  function () {};
 User.prototype.id = "";
@@ -108,12 +108,19 @@ User.prototype.estado = undefined;
 User.prototype.menu = undefined;
 User.prototype.disableMode = undefined;
 
-
+/**
+ *
+ * @constructor ListUser
+ */
 var ListUser =  function () {
     this.list = [];
     this.listContainer = "";
 };
 
+/**
+ *
+ * @param user {User}
+ */
 ListUser.prototype.addUser = function (user) {
     if(user.nif != undefined)
         this.list[this.list.length] = user;
@@ -131,14 +138,16 @@ ListUser.prototype.bluider = function () {
         '</section>';
 };
 
+/**
+ *
+ * @returns {string|*|string}
+ */
 ListUser.prototype.getList = function () {
     return this.listContainer;
 };
 
-
 // function foo(...args) {
 //     console.log(args);
 // }
-
 
 
