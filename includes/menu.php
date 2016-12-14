@@ -20,6 +20,7 @@
 			</ul>
 		</nav>
 	</header>
+	
 	<section class="modalPage mp-logout">
 	    <div class="modalFrame">
 	        <div class="modalContainer">
@@ -35,6 +36,7 @@
 	        </div>
 	    </div>
 	</section>
+
 	<section class="modalPage mp-change-pwd" >
 	    <div class="modalFrame">
 	        <div class="modalContainer">

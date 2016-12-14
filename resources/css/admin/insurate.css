@@ -1,0 +1,25 @@
+.taxa .container,
+.seguro .container{
+	margin-top: 2rem;
+}
+.taxa p{
+	font-size: 1.1rem;
+	font-weight: lighter;
+}
+.taxa .flex-form,
+.seguro .flex-form{
+	margin: 2rem auto;
+	max-width: 500px;
+	text-align: center;
+}
+.taxa .table-taxa,
+.seguro .table-seguro{
+	background: #fff;
+	margin: auto;
+	width: 90%;
+	display: block;
+	height:50vh;
+}
+.seguro .table-seguro{
+	margin-top: 2rem;
+}

@@ -1,5 +1,9 @@
+@import url('adobe-clean.css');
+@import url('fonts.css');
+@import url('table.css');
+
 *{	
-	font-family: 'Titillium Web',  'adobe-clean', 'arial';
+	font-family: 'adobe-clean', 'arial';
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
@@ -41,9 +45,9 @@ body,
 .modal-header,
 .bt-yes-no-cancel,
 .xpert-alert,
-.content-w-lateral .contentOfSection,
-.content-w-lateral .multiple nav,
-.content-w-lateral article{
+.content-w-lateral aside,
+.content-w-lateral article,
+.content-w-lateral .multiple nav{
 	display: flex;
 }
 
@@ -56,7 +60,6 @@ body,
 .alert nav,
 .modal-header,
 .xpert-list ul li,
-.content-w-lateral .contentOfSection,
 .content-w-lateral .multiple nav{
 	justify-content: space-between;
 }
@@ -162,7 +165,6 @@ header nav{
 }
 .header-1{
 	font-size: .9rem;
-	/*font-weight: bold;*/
 	color: #00B9A3;
 }
 .header-1 .user-span{
@@ -182,6 +184,7 @@ header nav{
 	position: absolute;
 	right: 0;
 	
+	min-width: 200px;
 	width: 100%;
 	/*transform: translateY(-18%);*/
 	background: #fff;
@@ -194,7 +197,6 @@ header nav{
 .user-span .menu-user.show{
 	border: 1px #00B9A3 solid;
 	padding: .5rem 0;
-	min-width: 200px;
 	max-height: 200px;
 	transition: all .5s;
 }
@@ -241,23 +243,22 @@ header nav{
 	background-position: center;
 	background-size: cover;
 }
+
 /*####################### LATERAL MENU ################*/
 
 .content-w-lateral{
 	width: 100%;
 	flex-grow: 1;
-
 }
 
 .content-w-lateral aside{
+	flex-direction: column;
 	width: 250px;
 	flex-shrink: 0;
 	background: #fff;
 	border-right: 1px #eee solid;
 	position: relative;
 	color: #666;
-	overflow: auto;
-	overflow-x: hidden;
 }
 .content-w-lateral aside .icon-menu{
 	position: absolute;
@@ -267,7 +268,8 @@ header nav{
 	cursor: pointer;
 	color: #00B9A3;
 }
-.content-w-lateral ul.lateral-menu{
+.content-w-lateral aside > ul{
+	flex-grow: 1;
 	margin-top: 3rem;
 	overflow: auto;
 	max-height: 100%;
@@ -288,28 +290,62 @@ header nav{
 	background: #FAFAFA;
 	color: #3398DC;
 }
-.content-w-lateral .multiple li.active{
-	background: #FAFAFA;	
+.content-w-lateral .multiple li{
+	padding-left: 1rem;
+	line-height: 2.4rem;
+	margin-bottom: 5px;
+	cursor: pointer;
 }
-
-.content-w-lateral .lateral-mult > li.active{
+.multiple li:last-child{
+	margin-bottom: 0;
+}
+.multiple li.active{
+	background: #FAFAFA;
 	font-weight: bold;
-	color: #111;
 }
-.content-w-lateral .lateral-mult > li ul{
+.multiple li:hover{
+	color: #555;
+
+}
+.multiple li li{
+	font-size: .9rem;
+}
+.multiple nav{
+	padding-right: 1rem;
+}
+.multiple nav i{
+	font-size: 1.2rem;
+}
+.multiple nav i.icon-ctrl{
+	font-size: 1.1rem;
+	line-height: 5px;
+	transform: rotate(180deg);
+}
+.multiple > li ul{
 	max-height: 0;
 	overflow: hidden;
 	transition: all .6s;
+	padding-left: 1rem;
+
 }
-.content-w-lateral .lateral-mult > li.active ul{
+.multiple > li.active nav i.icon-ctrl{
+	transform: translateY(30%) rotate(0deg);
+}
+.multiple > li.active ul{
 	max-height: 500px;
 	transition: all 1s;
 }
-.content-w-lateral .lateral-mult > li .icon-ctrl{
-	transform: rotate(180deg);
+
+.multiple ul{
+	font-weight: normal;
+	font-size: .92rem;
+	color: #666;
 }
-.content-w-lateral .lateral-mult > li.active .icon-ctrl{
-	transform: translateY(30%) rotate(0deg);
+.multiple li{
+	margin-bottom: 0;
+}
+.multiple ul li.active{
+	color: #3398DC;
 }
 
 .multiple ul ul{
@@ -324,44 +360,13 @@ header nav{
 .content-w-lateral article{
 	flex-grow: 1;
 	flex-direction: column;
-	padding: 1rem;
 	position: relative;
-	/*border: 5px tomato solid;*/
+	border: 5px tomato solid;
 	
 }
-.content-w-lateral article > section{
-	flex-grow: 1;
-	position: absolute;
-	left: 0;
-	bottom: 0;	
-	width: 100%;
-	/*border: 5px #333 solid;*/
-	/*overflow: hidden;
-	overflow-y: auto;*/
-	height: 90%;
 
-	display: none;
-}
-.content-w-lateral .contentOfSection{
-	width: 100%;
-	height: 100%;
-	flex-direction: column;
-	padding: 0 1rem;
-	overflow-y: auto;
-}
-.contentOfSection > .container{
-	flex-grow: 1;
-	max-height: 100%;
-}
-.content-w-lateral article h1{
-	font-size: 1.3rem;
-	font-weight: normal;
-	width: 50%; 
-}
-.content-w-lateral article > section.active{
-	display: flex;
-	flex-direction: column;	
-}
+/*###############################################*/
+
 
 .content-w-lateral.shrinked aside{
 	width: 45px;

@@ -1,7 +1,6 @@
 
 isNull($('.xpert-form select'));
 setTitle($('input, select, textarea'));
-menuLateralID($('.content-w-lateral aside'));
 
 $('.xpert-form select').change(function(event) {
     isNull($(this));
@@ -102,12 +101,6 @@ $('.xpert-list').on( 'click','b', function(event) {
 
 /*########      CONTROL LATERAL MENU        ####################*/
 
-
-$('.content-w-lateral aside li').click(function(event) {
-    controlLateralMenu($(this), $('article > section'), event);
-
-});
-
 $('.content-w-lateral .icon-menu').click(function(event) {
     $('.content-w-lateral').toggleClass('shrinked');
 
@@ -120,6 +113,11 @@ $('.content-w-lateral .icon-menu').click(function(event) {
 
 
 /*########      FUNCTIONS      ####################*/
+
+function CtrlTabs(el1, el2){
+    el1.addClass('active').siblings().removeClass('active');
+    el2.eq(el1.index()).addClass('active').siblings().removeClass('active');
+}
 
 function openModalFrame(modal) {
     modal.fadeIn(300);
@@ -183,31 +181,12 @@ function XpertToggleCtrl(tgID, txtON, txtOFF){
     
     tgID.find('.bar').toggleClass('on off');
 }
-function menuLateralID(menu){
-    var i = 0;
-    if(menu.hasClass('single')){
-        menu.find('li').each(function(index, el) {
-            $(this).attr('identity', i);
-            i++;
-        });
-    }else{
-        menu.find('li li').each(function(index, el) {
-            $(this).attr('identity', i);
-            i++;
-        });
-    }
-}
-function controlLateralMenu(element, element2, event){
-    idx = element.attr('identity');
-    ctt = element2.eq(idx);
+
+function CtrlMenu(element, element2){
     element.addClass('active').siblings().removeClass('active');
-    ctt.addClass('active').siblings().removeClass('active');
-    if(element.parent().hasClass('lateral-menu'))
-        $('article .title').text(element.text());
-    element.find('li').eq(0).trigger('click');  
-    tableEstructure(ctt.find('table'));
-    event.stopPropagation();
-    
+    element2.html('<iframe src="'+ element.attr('urldata') +'" frameborder="0"></iframe>');
+    element.find('li').eq(0).trigger('click');
+    /*event.stopPropagation();*/
 }
 
 // ###################     VALIDATION      ##############

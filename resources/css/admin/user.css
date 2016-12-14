@@ -1,0 +1,137 @@
+.adm-user .container{
+	/*position: relative;*/
+	height: 100%;
+	padding: 1rem;
+}
+
+.adm-user .list-user{
+	padding-bottom: 1rem;
+	height: 100%;
+	position: relative;
+}
+.list-user{
+	display: flex;
+}
+.list-user{
+	flex-wrap: wrap;
+	align-items: flex-start;
+	overflow: auto;
+}
+
+.list-user section{
+	text-align: center;
+	width: 32%;
+	min-width: 300px;
+	margin-bottom: 1rem;
+	margin-right: 2%;
+	background: #fff;
+	padding: 15px;
+	position: relative;
+	border: 1px #e5e6e9 solid;
+	border-bottom: 2px #ddd solid;
+}
+.list-user section:nth-child(3n){
+	margin-right: 0;
+}
+.list-user span{
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+.list-user i{
+	margin-left: 8px;
+	color: #888;
+	cursor: pointer;
+	display: none;
+}
+.list-user section:hover i{
+	display: inline-block;
+}
+.list-user i:hover{
+	color: #000;
+}
+.list-user div{
+	color: #666;
+}
+.list-user h4{
+	margin: 1rem 0 1.5rem 0;
+	color: #19BD9B;
+}
+.list-user p{
+	line-height: 1.7rem;
+}
+.list-user nav{
+	margin: auto;
+	width: 120px;
+	height: 120px;
+	border-radius: 50%;
+	flex-shrink: 0;
+	box-shadow: 0 0 2px 0 #ddd;
+}
+
+
+.adm-user .adm-ph-user{
+	width: 140px;
+	height: 140px;
+	border-radius: 50%;
+	border: 1px #ededed solid;
+	margin: -1rem auto 1rem auto;
+	overflow: hidden;
+}
+.adm-ph-user input{
+	display: none;
+}
+.adm-ph-user nav{
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,.7);
+	color: #f5f5f5;
+	font-size: 1.7rem;
+	position: relative;
+	bottom: -100%;
+	z-index: 1;
+}
+.adm-ph-user:hover nav{
+	bottom: 0;
+}
+.adm-ph-user label{
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+}
+.add-new-user p{
+	cursor: pointer;
+}
+
+
+.mp-menu-user .content{
+	display: flex;
+}
+.mp-menu-user .default{
+	padding: 1rem;
+	border: 1px #eee solid;
+	background: #F7FCF8;
+	max-height: 80vh;
+	overflow: auto;
+	margin-right: 1rem;
+}
+.mp-menu-user .def{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 2rem;
+	color: #02A8F4;
+}
+.mp-menu-user .def b{
+	font-size: 1.2rem;
+	cursor: pointer;
+}
+.mp-menu-user .default i{
+	display: block;
+	min-width: 8rem;
+	margin: 0 35% 1rem 0;
+	cursor: pointer;
+}

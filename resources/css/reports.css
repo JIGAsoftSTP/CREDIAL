@@ -1,9 +1,17 @@
-.article-report{
-	position: relative;
-	overflow: hidden;
+.report-content{
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+}
+iframe{
+	flex-grow: 1;
+	width: 100%;
+	display: block;
 }
 
-
+.article-report{
+	overflow: hidden;
+}
 .article-report .search-agency{
 	width: 100%;
 	background: #FFF;

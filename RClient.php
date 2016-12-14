@@ -4,15 +4,10 @@
 	<meta charset="UTF-8">
 	<title>Document</title>
 	<link rel="stylesheet" href="./resources/css/geralStyle.css">
-	<link rel="stylesheet" href="./resources/css/table.css">
 	<link rel="stylesheet" href="./resources/css/client.css">
-	<link rel="stylesheet" href="./resources/css/fonts.css">
-	<link rel="stylesheet" href="./resources/css/adobe-clean.css">
 </head>
 <body id="p1">
-	<?php
-		include 'includes/menu.php';
-	?> 
+	<?php include 'includes/menu.php'; ?> 
 	<div class="content-body">
 		<span class="new-client">+</span>
 		<span class="search-span"><input type="text" placeholder="Faça sua pesquisa aqui...">
@@ -28,14 +23,14 @@
 			<table id="table-client" class="selectable" cellpadding="0" cellspacing="0">
 				<thead>
 					<tr>                    
-                        <th width="12">Ações</th>
-                        <th width="18">NIF</th>
-                        <th width="55">Nome</th>
-                        <th width="15">Telemóvel</th>
+                        <th width="12" grow="1">Ações</th>
+                        <th width="18" grow="2">NIF</th>
+                        <th width="55" grow="5">Nome</th>
+                        <th width="15" grow="1">Telemóvel</th>
                     </tr>
 				</thead>
 				<tbody id="tableCliente">
-<!--                <tr><td><i class="icon-credit-card"></i><i class="icon-info"></i><i class="icon-pencil"></i></td><td>109935310</td><td>WALDEMIRO QUARESMA FERNANDES</td><td>9969457</td></tr>-->
+                <tr><td><i class="icon-credit-card"></i><i class="icon-info"></i><i class="icon-pencil"></i></td><td>109935310</td><td>WALDEMIRO QUARESMA FERNANDES</td><td>9969457</td></tr>
 				</tbody>
 			</table>
 		</div>

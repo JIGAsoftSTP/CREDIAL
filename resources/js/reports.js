@@ -1,4 +1,11 @@
+$(document).ready(function() {
+    $('.multiple li').eq(0).trigger('click');
+});
 
+$('.multiple li').click(function(event) {
+    CtrlMenu($(this), $('.report-content'));
+    event.stopPropagation();
+});
 
 $('.search-agency .param').val('1');
 

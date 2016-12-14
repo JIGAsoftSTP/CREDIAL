@@ -1,0 +1,74 @@
+
+.entity .container{	
+	overflow: auto;
+}
+.entity-div{
+	padding: .5rem 1rem;
+	border-bottom: 1px #eee solid;
+	background: #fbfbfb;
+}
+.entity-div.showed{
+	background: #FFF !important;
+}
+.entity-div:last-child{
+	border-bottom: none;
+}
+.entity .primordial{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: .7rem 0;
+}
+.primordial h3{
+	font-weight: normal;
+	color: #0198CD;
+}
+
+.primordial .show-hide{
+	background: #02A8F4;
+	transform: rotate(180deg);
+	display: inline-block;
+}
+.primordial .show-hide i{
+	font-weight: bold;
+	transform: translateY(25%);
+}
+
+.entity .list{
+	max-height: 0;
+	overflow: hidden;
+}
+.entity .list.show{
+	max-height: 250px;
+	overflow: auto;
+	background: #FFF;
+}
+.entity .list div{
+	display: inline-block;
+	background: #fbfbfb;
+	border: 1px #ddd solid;
+	line-height: 2rem;
+	padding-left: 15px;
+	margin: 0 1rem 1rem 0;
+	color: #444;
+}
+.entity .list .delete{
+	font: 1rem 'Gill Sans MT';
+	display: inline-block;
+	width: 2rem;
+	line-height: 2rem;
+	margin-left: 15px;
+	text-align: center;
+	background: #f2f2f2;
+	cursor: pointer;
+	border-left: 1px #ddd solid;
+}
+.entity .list .delete:hover{
+	color: red;
+}
+article .first{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 1rem;
+}

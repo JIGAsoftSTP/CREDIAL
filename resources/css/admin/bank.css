@@ -1,0 +1,205 @@
+.bank{
+
+}
+.bank .second,
+.bank .container,
+.bank .menu-1,
+.bank .menu-bank,
+.bank .menu-bank li,
+.bank .content,
+.bank .abas,
+.bank .article-bank,
+.bank .list-bank,
+.bank .bank-descript{
+	display: flex;
+}
+
+.bank .menu-bank,
+.bank .bank-descript{
+	justify-content: space-between;	
+	align-items: center;
+}
+.bank .second,
+.bank .container,
+.bank .abas,
+.bank .list-bank,
+.bank .article-bank{
+	flex-direction: column;
+}
+.bank .second{
+
+}
+.bank .container{
+	flex-grow: 1;
+	position: relative;
+}
+
+.bank .menu-bank li{
+	justify-content: space-around;
+	align-items: center;
+	width: 15%;
+	min-width: 150px;
+	padding: .5rem 0;
+	text-align: center;
+	font-size: 1rem;
+	color: #fff;
+	cursor: pointer;
+}
+.bank .menu-bank li:first-child{
+	display: none;
+}
+.menu-bank .menu-1{
+	flex-grow: 1;
+}
+.menu-bank .menu-1 li{
+	margin-right: 10px;
+	border-radius: 2px;
+}
+.bank li.active{
+	/*box-shadow: 0px 0 7px 0 #aaa;*/
+}
+.bank .li-account{
+	background: #2DCE71;
+}
+.bank .li-account{
+	margin-left: 10px;
+}
+.bank .li-mov{
+	background: #3398DC;
+}
+.bank .li-dc{
+	background: #FF855C ;
+}
+.bank .menu-bank i{
+	font-size: 1rem;
+}
+.bank .abas{
+	flex-grow: 1;
+	background: #fff;
+	position: relative;
+	margin-top: 1rem;
+	padding: 1rem;
+	border: 1px #ddd solid;
+	max-width: 100%;
+	overflow: auto;
+}
+.bank .abas > section{
+	position: absolute;
+	left: 0;	
+	width: 100%;
+	height: 100%;
+	display: none;
+}
+.bank .abas > section.active{
+	display: block;
+}
+.bank .content{
+	flex-grow: 1;
+}
+.bank .list-bank{
+	width: 200px;
+	flex-shrink: 0;
+}
+
+.bank .siglas{
+	background: #f8f8f8;
+	color: #555;
+	font-weight: bold;
+	flex-grow: 1;
+	margin-top: 5px;
+	max-height: 100%;
+	overflow: auto;
+}
+.bank .siglas li{
+	font-size: .9rem;
+	margin-bottom: 8px;
+	padding: 3px 1rem;
+	cursor: pointer;
+}
+.bank .siglas li:hover{
+	background: #fff;
+	color: #111;
+}
+.bank .siglas li.active{
+	background: #fff;
+	color: #3398DC;
+}
+.bank .article-bank{
+	flex-grow: 1;
+	padding-left: 2rem;
+}
+.article-bank .bank-descript{
+	font-size: 1.2rem;
+	padding-bottom: 1rem;
+	border-bottom: 1px #eaebec solid;
+}
+.bank-descript .name{
+	color: #3398DC;
+}
+.bank-descript .sald.good{
+	color: #00C853;
+}
+.bank-descript .sald.bad{
+	color: red;
+}
+
+.bank .table-list-bank{
+	flex-grow: 1;
+	margin-top: 1.5rem;
+}
+.table-list-bank table{
+	height: 100%;
+}
+.bank .with-info{
+	/*display: flex;*/
+	position: relative;
+	width: 100%;
+}
+.bank .with-info input,
+.bank .with-info select{
+	padding-right: 18px;
+}
+/*.bank .flex-form > section{
+	width: 100%;
+}*/
+.bank .with-info i{
+	position: absolute;
+	margin-left: -18px;
+	font:  italic bold 15px 'Times New Roman';
+	display: inline-block;
+	height: 18px;
+	width: 18px;
+	border-radius: 50%;
+	text-align: center;
+	cursor: pointer;
+	color: #fff;
+}
+.bank .with-info:hover i,
+.bank .with-info i:hover{
+	background: #0C83DA;
+
+}
+.bank .add-new-admin section{
+	width: 100%;
+	display: none;
+}
+.bank .add-new-admin section.active{
+	display: block;
+}
+.bank textarea{
+	height: 90px;
+}
+/*########### MOVIMETACOES ##########*/
+.add-new-admin .add-mov{
+	position: relative;
+}
+
+/*############	DEBIT / CREDIT 	#########*/
+.add-deb-cred .xpert-toggle-bt{
+	width: 180px;
+	margin: auto;
+	margin-bottom: 3rem;
+}
+.add-deb-cred .xpert-toggle-bt .bar{
+	font-size: 1rem;
+}

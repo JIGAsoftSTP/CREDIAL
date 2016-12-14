@@ -5,7 +5,6 @@
 	<title>Credial</title>
 	<link rel="stylesheet" href="./resources/css/geralStyle.css">
 	<link rel="stylesheet" href="./resources/css/fonts.css">
-	<link rel="stylesheet" href="./resources/css/adobe-clean.css">
 	<link rel="stylesheet" href="./resources/css/index.css">
 </head>
 <body>

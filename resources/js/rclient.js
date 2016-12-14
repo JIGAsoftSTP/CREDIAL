@@ -1,4 +1,3 @@
-menuLateralID($('.mp-info-client .menu-info'));
 
     $('.header-tittle').click(function(event) {
         var father;
@@ -77,7 +76,7 @@ menuLateralID($('.mp-info-client .menu-info'));
 
 
     $('.mp-info-client .menu-info li').click(function(event) {
-        controlLateralMenu($(this), $('.content-info section'))
+        CtrlTabs($(this), $('.content-info section'));
     });
 
     $('.mini-report.rep2 small').click(function(event) {

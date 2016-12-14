@@ -4,27 +4,18 @@
 	<meta charset="UTF-8">
 	<title>Document</title>
 	<link rel="stylesheet" href="./resources/css/geralStyle.css">
-	<link rel="stylesheet" href="./resources/css/xMenu.css">
-	<link rel="stylesheet" href="./resources/css/table.css">
-	<link rel="stylesheet" href="./resources/css/fonts.css">
-	<link rel="stylesheet" href="./resources/css/adobe-clean.css">
 	<link rel="stylesheet" href="./resources/css/reports.css">
 </head>
 <body id="p3">
-	<?php
-	include 'includes/menu.php';
-	?> 
+	<?php include 'includes/menu.php'; ?> 
 	<div class="content-body">
 		<div class="content-w-lateral">
-			<aside class="multiple">
+			<aside class="">
 				<i class="icon-menu"></i>
-				<ul class="lateral-menu lateral-mult">
+				<ul class="multiple">
 					<li class="active">
 						<nav>
-							<span>
-								<i class="icon-user-tie"></i>
-								<span>Clientes</span>
-							</span>
+							<span><i class="icon-upload"></i>Clientes</span>
 							<i class="icon-ctrl"></i>
 						</nav>
 						<ul>
@@ -35,54 +26,42 @@
 					</li>	
 					<li class="">
 						<nav>
-							<span>
-								<i class="icon-coin-dollar"></i>
-								<span>Créditos</span>
-							</span>
+							<span><i class="icon-upload"></i>Créditos</span>
 							<i class="icon-ctrl"></i>
 						</nav>
-						<ul class="shrinked">
+						<ul>
 							<li>Concedidos</li>
 						</ul>
-					</li>	
+					</li>
 					<li class="">
 						<nav>
-							<span>
-								<i class="icon-"></i>
-								<span>Cobranças</span>
-							</span>
+							<span><i class="icon-upload"></i>Cobranças</span>
 							<i class="icon-ctrl"></i>
 						</nav>
-						<ul class="shrinked">
+						<ul>
 							<li>Cobranças</li>
 						</ul>
 					</li>	
 					<li class="">
 						<nav>
-							<span>
-								<i class="icon-coin-dollar"></i>
-								<span>Dívidas</span>
-							</span>
+							<span><i class="icon-upload"></i>Dívidas</span>
 							<i class="icon-ctrl"></i>
 						</nav>
-						<ul class="shrinked">
+						<ul>
 							<li>Capital / TAEG</li>
 							<li>Dívidas p/ produto</li>
 						</ul>
-					</li>	
+					</li>
 					<li class="">
 						<nav>
-							<span>
-								<i class="icon-coin-dollar"></i>
-								<span>Cheques</span>
-							</span>
+							<span><i class="icon-upload"></i>Cheques</span>
 							<i class="icon-ctrl"></i>
 						</nav>
-						<ul class="shrinked">
+						<ul>
 							<li>Cheques</li>
 						</ul>
 					</li>			
-				</ul>
+				</ul>				
 			</aside>
 			<article class="article-report">
 				<div class="search-agency xpert-form float">
@@ -105,62 +84,9 @@
 					<i class="icon-ctrl sh-srch-agc"></i>
 					<i class="icon-pushpin pin"></i>
 				</div>
-				<section class="active">
-					<div class="contentOfSection">
-						<div class="container">
-							<?php include 'includes/report/menu1.php';?>
-						</div>
-					</div>
-				</section>
-				<section>
-					<div class="contentOfSection">
-						<div class="container">
-							<?php include 'includes/report/menu2.php';?>
-						</div>
-					</div>
-				</section>
-				<section>
-					<div class="contentOfSection">
-						<div class="container">
-							<?php include 'includes/report/menu3.php';?>
-						</div>
-					</div>
-				</section>
-				<section>
-					<div class="contentOfSection">
-						<div class="container">
-							<?php include 'includes/report/menu4.php';?>
-						</div>
-					</div>
-				</section>
-				<section>
-					<div class="contentOfSection">
-						<div class="container">
-							<?php include 'includes/report/menu5.php';?>
-						</div>
-					</div>
-				</section>
-				<section>
-					<div class="contentOfSection">
-						<div class="container">
-							<?php include 'includes/report/menu6.php';?>
-						</div>
-					</div>
-				</section>
-				<section>
-					<div class="contentOfSection">
-						<div class="container">
-							<?php include 'includes/report/menu7.php';?>
-						</div>
-					</div>
-				</section>
-				<section>
-					<div class="contentOfSection">
-						<div class="container">
-							<?php include 'includes/report/menu8.php';?>
-						</div>
-					</div>
-				</section>
+				<div class="report-content">
+					
+				</div>
 			</article>
 		</div>
 	</div>

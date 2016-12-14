@@ -1,24 +1,38 @@
-<div class="contentOfSection">
-	<div class="container">
-		<ul class="menu-bank">
-			<nav class="menu-1">
-				<li>Banco</li>
-				<li class="li-mov openModal"><i class="icon-loop2"></i>Transferências</li>
-				<li class="li-dc openModal"><i class="icon-coin-dollar"></i>Débito/Crédito</li>
-				<li class="li-account openModal"><i class="icon-box-add"></i>Conta Banco</li>
-			</nav>
-		</ul>
-		<div class="abas">
-			<div class="content">
-				<div class="list-bank">
-					<h3>Siglas</h3>
-					<ul class="siglas">
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="../../resources/css/geralStyle.css">
+	<link rel="stylesheet" href="../../resources/css/admin/bank.css">
+	<link rel="stylesheet" href="../../resources/css/admin.css">
+</head>
+<body>
+<div class="master-content bank">
+	<nav class="first">
+		<h1 class="title">Banco</h1>
+		<span class="add-more default">+</span>
+	</nav>
+	<div class="second">
+		<div class="container">
+			<ul class="menu-bank">
+				<nav class="menu-1">
+					<li>Banco</li>
+					<li class="li-mov openModal"><i class="icon-loop2"></i>Transferências</li>
+					<li class="li-dc openModal"><i class="icon-coin-dollar"></i>Débito/Crédito</li>
+					<li class="li-account openModal"><i class="icon-box-add"></i>Conta Banco</li>
+				</nav>
+			</ul>
+			<div class="abas">
+				<div class="content">
+					<div class="list-bank">
+						<h3>Siglas</h3>
+						<ul class="siglas">
 
-					</ul>
-				</div>
-				<nav class="article-bank">
-					<div class="bank-descript">
-						<span><b class="name" id="bankMovimentName"></b></span><span><b class="sald good">37 000 000,00</b> STD</span></div>
+						</ul>
+					</div>
+					<nav class="article-bank">
+						<div class="bank-descript">
+							<span><b class="name" id="bankMovimentName"></b></span><span><b class="sald good">37 000 000,00</b> STD</span></div>
 						<div class="table-list-bank">
 							<table id="table-bank" cellpadding="0" cellspacing="0">
 								<thead>
@@ -38,6 +52,7 @@
 				</div>
 			</div>
 		</div>
+	</div>	
 		<div class="add-new-admin xpert-form">
 			<b class="head"><span class="closeIt">X</span><h2>Banco</h2></b>
 			<div class="flex-form">
@@ -76,7 +91,7 @@
 						<option value="">(Banco)</option>
 					</select>
 				</section>
-				
+
 				<section class="add-account">
 					<select name="" class="input-total" id="">
 						<option value="0">(Banco)</option>
@@ -90,4 +105,14 @@
 			</div>
 			<button id="btBankActions">Adicionar</button>
 		</div>
-	</div>
+</div>	
+</body>
+<script type="text/javascript" src="../../resources/js/jQuery.js"></script>
+<script type="text/javascript" src="../../resources/js/geralScript.js"></script>
+<script type="text/javascript" src="../../resources/js/xMenu.js"></script>
+<script type="text/javascript" src="../../resources/js/table.js"></script>
+<script type="text/javascript" src="../../resources/js/admin.js"></script>
+</html>
+
+
+

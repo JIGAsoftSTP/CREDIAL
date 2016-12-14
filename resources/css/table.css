@@ -12,14 +12,14 @@ table *{
 	
 }
 table thead,
-table tbody,
-table tr{
+table tbody{
 	display: block;
 	width: 100%;
 
 }
 table tr{
 	padding: 0 5px;
+	display: flex;
 }
 table thead{	
 	border-bottom: 1px #dfdfdf solid;	
@@ -30,8 +30,7 @@ table th{
 	font-weight: normal;	
 } 
 tbody td{
-	line-height: 2.4em;
-	
+	line-height: 2.4em;	
 	font-weight: lighter;
 }
 tbody tr:nth-child(odd){
