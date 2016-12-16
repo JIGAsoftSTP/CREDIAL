@@ -5,9 +5,6 @@
 	<title>Document</title>
 	<link rel="stylesheet" href="./resources/css/geralStyle.css">
 	<link rel="stylesheet" href="./resources/css/reports.css">
-    <script type="text/javascript" src="./resources/js/jQuery.js"></script>
-    <script type="text/javascript" src="./resources/js/controller/menu.js"></script>
-    <script type="text/javascript" src="resources/js/controller/logar.js"></script>
 </head>
 <body id="p2">
 	<?php include 'includes/menu.php'; ?> 
@@ -94,8 +91,10 @@
 		</div>
 	</div>
 </body>
-<!--<script type="text/javascript" src="resources/js/jQuery.js"></script>-->
+<script type="text/javascript" src="./resources/js/jQuery.js"></script>
 <script type="text/javascript" src="resources/js/geralScript.js"></script>
+<script type="text/javascript" src="./resources/js/controller/menu.js"></script>
+<script type="text/javascript" src="resources/js/controller/logar.js"></script>
 <script type="text/javascript" src="resources/js/table.js"></script>
 <script type="text/javascript" src="resources/js/reports.js"></script>
 <script type="text/javascript" src="resources/js/controller/geral.js"></script>

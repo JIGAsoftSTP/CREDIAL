@@ -1,15 +1,11 @@
 
-$(document).ready(function() {
-    $('.single li').eq(0).trigger('click');
-});
+// $(document).ready(function() {
+//
+// });
 XpertToggle($('#toggle-deb-cred') , 'on', 'Crédito');
 
 $('#toggle-deb-cred').click(function(event) {
     XpertToggleCtrl($(this), 'Crédito', 'Débito');
-});
-
-$('.single li').click(function(event) {
-    CtrlMenu($(this), $('.article-admin'));
 });
 
 $('.search-span2 input').focusout(function(event) {

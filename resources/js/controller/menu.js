@@ -40,6 +40,9 @@ function loadMenuUserLogado(){
                    ul.appendChild(li);
                }
            }
+
+           if(idSuper === 3){ $('.single').find("li").eq(0).trigger('click'); }
+           else if(idSuper === 2){ $('.multiple').find("li").eq(0).trigger('click'); }
         }
     });
 }
@@ -68,3 +71,13 @@ function loadSubMenuSecondaryReport(menus) {
     $("#secondary-menu").append(mn);
     isFirstReport = false;
 }
+
+$('.multiple').on("click", "li", function(event) {
+    CtrlMenu($(this), $('.report-content'));
+    console.log("fhfhfh");
+    event.stopPropagation();
+});
+
+$('.single').on("click", "li", function(event) {
+    CtrlMenu($(this), $('.article-admin'));
+});
