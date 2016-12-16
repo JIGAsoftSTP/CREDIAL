@@ -13,6 +13,7 @@ if($_POST["intensao"] ==  "loadImagem" ) {carregarImagem();}
 if($_POST["intensao"] ==  "regUser" ) {regUser();}
 if($_POST["intensao"] ==  "loadDataUser" ) {loadDataUser();}
 if($_POST["intensao"] ==  "disibleUSER" ) {disableUser();}
+if($_POST["intensao"] ==  "loadMENU-USER-log" ) { loadMenuUserlogado(); }
 
 function carregarImagem()
 {
@@ -25,7 +26,7 @@ function carregarImagem()
 }
 
 function regUser(){
-    session_start();
+//    session_start();
     $call = new CallPgSQL();
     $call->functionTable("funct_reg_user","*")
         ->addString(Session::getUserLogado()->getId())
@@ -99,14 +100,16 @@ function loadDataUser(){
             $img = md5($values["NIF"]) /*. ".png"*/;
             file_put_contents("../resources/img/userImg/" . $img, pg_unescape_bytea($values["PHOTO"]));
             $values["PHOTO"] = "./resources/img/userImg/" . $img;
-            $result[count($result)] = $values;
         }
         else{
             $values["PHOTO"] = "./resources/img/user.png";
-            $result[count($result)] = $values;
         }
+        $values["MENU"] = loadMenuUser($values["NIF"]);
+        $result[count($result)] = $values;
     }
-    die (json_encode(array("return" => $result)));
+    $agencias = $call->loadDados("ver_agencia", "\"ID\"", "\"NOME\"");
+
+    die (json_encode(array("return" => $result, "listMenu" => getListMenu(), "agencias" => $agencias)));
 }
 
 function disableUser(){
@@ -119,4 +122,42 @@ function disableUser(){
     $call->execute();
     $result = $call->getValors();
     die (json_encode(array("result" => $result["RESULT"] == "true", "return" => $result)));
+}
+
+function getListMenu(){
+    $call = new CallPgSQL();
+    $call->selects("ver_menu_active","*")
+        ->finilize("order by","asc","\"LEVEL\"");
+    $call->execute();
+    $list = array();
+    while ($values = $call->getValors())
+        $list[count($list)] = $values;
+    return  $list;
+}
+
+function loadMenuUser($user){
+    $call = new CallPgSQL();
+    $call->functionTable("funct_load_menuser","*")
+        ->addString(Session::getUserLogado()->getId())
+        ->addNumeric(Session::getUserLogado()->getIdAgencia())
+        ->addString($user)
+        ->finilize("order by","ASC","\"LEVEL\"");
+    $call->execute();
+    $list = array();
+    while ($values = $call->getValors())
+        $list[count($list)] = $values;
+    return  $list;
+}
+
+function loadMenuPerfil(){
+    $call = new CallPgSQL();
+    $call->functionTable("funct_load_menuperfil","*")
+            ->addString(Session::getUserLogado()->getId())
+            ->addNumeric(Session::getUserLogado()->getIdAgencia())
+            ->addString($_POST['perfil']);
+    $call->execute();
+}
+
+function loadMenuUserlogado (){
+    die (json_encode(array("MENU" => loadMenuUser(Session::getUserLogado()->getId()))));
 }

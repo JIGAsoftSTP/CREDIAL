@@ -11,7 +11,7 @@
     include "Session.php";
     include_once "../modelo/User.php";
 
-    session_start();
+//    session_start();
 
     switch ($_POST["intention"])
     {
@@ -42,8 +42,7 @@
         $j = json_encode(array("agencias"=>$agencias,
                             "tipoCreditos"=>$tipoCreditos,
                             "bancos"=>$bancos,
-                            "localidades"=>$localidades,
-                            "listMenu" => getListMenu()));
+                            "localidades"=>$localidades));
         die($j);
 
     }
@@ -54,7 +53,16 @@
         $call = new CallPgSQL();
         $retorno = $call->loadDados("ver_typeobjecto", "\"ID\"", "\"NAME\"");
         $j = json_encode(array("objeto" =>$retorno));
-        die($j);
+        die($j);function getListMenu(){
+    $call = new CallPgSQL();
+    $call->selects("ver_menu_active","*")
+        ->finilize("order by","asc","\"LEVEL\"");
+    $call->execute();
+    $list = array();
+    while ($values = $call->getValors())
+        $list[count($list)] = $values;
+    return  $list;
+}
     }
 
     function loadObjectValues()
@@ -100,14 +108,3 @@
         $js = json_encode(array("resultado" =>$result));
         die($js);
     }
-
-function getListMenu(){
-    $call = new CallPgSQL();
-    $call->selects("ver_menu_active","*")
-        ->finilize("order by","asc","\"LEVEL\"");
-    $call->execute();
-    $list = array();
-    while ($values = $call->getValors())
-        $list[count($list)] = $values;
-    return  $list;
-}

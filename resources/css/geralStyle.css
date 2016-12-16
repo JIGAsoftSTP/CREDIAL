@@ -361,8 +361,7 @@ header nav{
 	flex-grow: 1;
 	flex-direction: column;
 	position: relative;
-	border: 5px tomato solid;
-	
+	/*border: 5px tomato solid;*/
 }
 
 /*###############################################*/
@@ -750,8 +749,8 @@ header nav{
 /*#########################################*/
 
 #p1 #m1:after,
-#p3 #m3:after,
-#p4 #m4:after{
+#p2 #m2:after,
+#p3 #m3:after{
 	content: "";
 	position: absolute;
 	border-left: 5px transparent solid;
@@ -759,7 +758,7 @@ header nav{
 	left: 50%;
 	transform: translateX(-50%);
 }
-#p1 #m1:after, #p3 #m3:after, #p4 #m4:after{
+#p1 #m1:after, #p2 #m2:after, #p3 #m3:after{
 	border-bottom: 7px #f7f7f7 solid;
 	bottom: 0;
 	margin-bottom: -.5rem;

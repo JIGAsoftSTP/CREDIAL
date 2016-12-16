@@ -4,7 +4,7 @@
     include "Session.php";
     include_once "../modelo/User.php";
 
-    session_start();
+//    session_start();
     switch ($_POST["intention"])
     {
         case "load Insurance":

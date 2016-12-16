@@ -25,13 +25,6 @@ $(function () {
 });
 
 var entidades = [];
-function loadMenu(listMenu) {
-    for (var j=0; j< listMenu.length; j++)
-        $("#menuAccessUser").append('<li _id="'+listMenu[j]['ID']+'" id="'+listMenu[j]['COD']+'" level="'+listMenu[j]['LEVEL']+'" idfrw="'+((listMenu[j]['SUPER.COD']==null) ? listMenu[j]['COD'] : listMenu[j]['SUPER.COD'] )+'">' +
-                        '<nav><span>'+listMenu[j]["NAME"]+'</span></nav>' +
-                    '</li>');
-    organizeMenu($('#menuAccessUser'));
-}
 
 function dadosComboBox()
 {
@@ -47,7 +40,6 @@ function dadosComboBox()
             loadComoBoxIDandValue($("#chequeAgencias"), e.agencias, "ID", "DESC");
             loadComoBoxIDandValue($(".listBanks"), e.bancos, "ID", "NAME");
             loadComoBoxIDandValue($(".listAgencies"), e.agencias, "ID", "NOME");
-            loadMenu(e.listMenu);
         }
     });
 }

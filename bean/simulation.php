@@ -46,7 +46,7 @@ function loadStartSimulation(){
 
     $valores = $call->getValors();
 //
-    session_start();
+//    session_start();
     $call = new CallPgSQL();
     $call->functionTable("funct_load_banco_simulacao","*")
         ->addString(Session::getUserLogado()->getId())
@@ -61,7 +61,7 @@ function loadStartSimulation(){
 }
 
 function loadChequeBanco(){
-    session_start();
+//    session_start();
     $call = new CallPgSQL();
     $call->functionTable("funct_retirar_cheque", "*")
         ->addString(Session::getUserLogado()->getId())
@@ -74,7 +74,7 @@ function loadChequeBanco(){
 }
 
 function importSimulation(){
-    session_start();
+//    session_start();
     $call = new CallPgSQL();
     $call->functionTable("funct_reg_credito_import_simulacao","*")
         ->addString(Session::getUserLogado()->getId())

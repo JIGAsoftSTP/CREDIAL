@@ -5,6 +5,7 @@
 	<link rel="stylesheet" href="../../resources/css/geralStyle.css">
 	<link rel="stylesheet" href="../../resources/css/admin/user.css">
 	<link rel="stylesheet" href="../../resources/css/admin.css">
+    <link rel="stylesheet" href="../../resources/css/xMenu.css">
 </head>
 <body>
 	<div class="master-content adm-user">
@@ -25,7 +26,7 @@
 					<input type="file" id="add-ph-user">
 					<nav><label for="add-ph-user" class="icon-camera"></label></nav>
 				</div>
-				<input type="text" id="gest-user-nif" max="9" placeholder="NIF" class="input-total integer">
+				<input type="text" id="gest-user-nif" maxlength="9" placeholder="NIF" class="input-total integer">
 				<input type="text" id="gest-user-nome" placeholder="Nome" class="input-2">
 				<input type="text" id="gest-user-apelido" placeholder="Apelido" class="input-2">
 				<select name="" id="gest-user-agencia" class="input-total listAgencies">
@@ -66,10 +67,14 @@
 			</div>
 		</div>
 	</section>
+    <?php include "../process.html"; ?>
 </body>
 <script type="text/javascript" src="../../resources/js/jQuery.js"></script>
 <script type="text/javascript" src="../../resources/js/geralScript.js"></script>
+<script type="text/javascript" src="../../resources/js/xMenu.js"></script>
 <script type="text/javascript" src="../../resources/js/admin.js"></script>
+<script type="text/javascript" src="../../resources/js/controller/geral.js"></script>
+<script type="text/javascript" src="../../resources/js/controller/utilizador.js"></script>
 </html>
 
 

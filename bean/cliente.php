@@ -8,7 +8,7 @@
 include "../conexao/CallPgSQL.php";
 include "../modelo/User.php";
 include "Session.php";
-session_start();
+//session_start();
 
 if($_POST["intensao"] == "loadOuther"){ loadDadosForRegCliente(); }
 if($_POST["intensao"] == "listarCliente"){ listCliente(); }

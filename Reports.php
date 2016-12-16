@@ -5,61 +5,64 @@
 	<title>Document</title>
 	<link rel="stylesheet" href="./resources/css/geralStyle.css">
 	<link rel="stylesheet" href="./resources/css/reports.css">
+    <script type="text/javascript" src="./resources/js/jQuery.js"></script>
+    <script type="text/javascript" src="./resources/js/controller/menu.js"></script>
+    <script type="text/javascript" src="resources/js/controller/logar.js"></script>
 </head>
-<body id="p3">
+<body id="p2">
 	<?php include 'includes/menu.php'; ?> 
 	<div class="content-body">
 		<div class="content-w-lateral">
 			<aside class="">
 				<i class="icon-menu"></i>
-				<ul class="multiple">
-					<li class="active">
-						<nav>
-							<span><i class="icon-upload"></i>Clientes</span>
-							<i class="icon-ctrl"></i>
-						</nav>
-						<ul>
-							<li class="active">Clientes</li>
-							<li>Créditos Obtidos</li>
-							<li>Crescimento Homólogo</li>
-						</ul>
-					</li>	
-					<li class="">
-						<nav>
-							<span><i class="icon-upload"></i>Créditos</span>
-							<i class="icon-ctrl"></i>
-						</nav>
-						<ul>
-							<li>Concedidos</li>
-						</ul>
-					</li>
-					<li class="">
-						<nav>
-							<span><i class="icon-upload"></i>Cobranças</span>
-							<i class="icon-ctrl"></i>
-						</nav>
-						<ul>
-							<li>Cobranças</li>
-						</ul>
-					</li>	
-					<li class="">
-						<nav>
-							<span><i class="icon-upload"></i>Dívidas</span>
-							<i class="icon-ctrl"></i>
-						</nav>
-						<ul>
-							<li>Capital / TAEG</li>
-							<li>Dívidas p/ produto</li>
-						</ul>
-					</li>
-					<li class="">
-						<nav>
-							<span><i class="icon-upload"></i>Cheques</span>
-							<i class="icon-ctrl"></i>
-						</nav>
-						<ul>
-							<li>Cheques</li>
-						</ul>
+				<ul class="multiple" id="secondary-menu">
+<!--					<li class="active">-->
+<!--						<nav>-->
+<!--							<span><i class="icon-upload"></i>Clientes</span>-->
+<!--							<i class="icon-ctrl"></i>-->
+<!--						</nav>-->
+<!--						<ul>-->
+<!--							<li class="active">Clientes</li>-->
+<!--							<li>Créditos Obtidos</li>-->
+<!--							<li>Crescimento Homólogo</li>-->
+<!--						</ul>-->
+<!--					</li>	-->
+<!--					<li class="">-->
+<!--						<nav>-->
+<!--							<span><i class="icon-upload"></i>Créditos</span>-->
+<!--							<i class="icon-ctrl"></i>-->
+<!--						</nav>-->
+<!--						<ul>-->
+<!--							<li>Concedidos</li>-->
+<!--						</ul>-->
+<!--					</li>-->
+<!--					<li class="">-->
+<!--						<nav>-->
+<!--							<span><i class="icon-upload"></i>Cobranças</span>-->
+<!--							<i class="icon-ctrl"></i>-->
+<!--						</nav>-->
+<!--						<ul>-->
+<!--							<li>Cobranças</li>-->
+<!--						</ul>-->
+<!--					</li>	-->
+<!--					<li class="">-->
+<!--						<nav>-->
+<!--							<span><i class="icon-upload"></i>Dívidas</span>-->
+<!--							<i class="icon-ctrl"></i>-->
+<!--						</nav>-->
+<!--						<ul>-->
+<!--							<li>Capital / TAEG</li>-->
+<!--							<li>Dívidas p/ produto</li>-->
+<!--						</ul>-->
+<!--					</li>-->
+<!--					<li class="">-->
+<!--						<nav>-->
+<!--							<span><i class="icon-upload"></i>Cheques</span>-->
+<!--							<i class="icon-ctrl"></i>-->
+<!--						</nav>-->
+<!--						<ul>-->
+<!--							<li>Cheques</li>-->
+<!--						</ul>-->
 					</li>			
 				</ul>				
 			</aside>
@@ -91,11 +94,9 @@
 		</div>
 	</div>
 </body>
-<script type="text/javascript" src="resources/js/jQuery.js"></script>
+<!--<script type="text/javascript" src="resources/js/jQuery.js"></script>-->
 <script type="text/javascript" src="resources/js/geralScript.js"></script>
 <script type="text/javascript" src="resources/js/table.js"></script>
 <script type="text/javascript" src="resources/js/reports.js"></script>
 <script type="text/javascript" src="resources/js/controller/geral.js"></script>
-<script type="text/javascript" src="resources/js/controller/utilizador.js"></script>
-<script type="text/javascript" src="resources/js/controller/logar.js"></script>
 </html>

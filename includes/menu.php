@@ -13,10 +13,10 @@
 			</span>
 		</nav>
 		<nav class="header-2">
-			<ul>
-				<li class="active-menu"><a href="RClient.php" id="m1">Crédito</a></li>
-				<li><a href="Reports.php" id="m3">Relatórios</a></li>
-				<li><a href="Admin.php" id="m4">Administração</a></li>
+			<ul id="principal-menu">
+<!--				<li class="active-menu"><a href="RClient.php" id="m1">Crédito</a></li>-->
+<!--				<li><a href="Reports.php" id="m3">Relatórios</a></li>-->
+<!--				<li><a href="Admin.php" id="m4">Administração</a></li>-->
 			</ul>
 		</nav>
 	</header>
@@ -58,12 +58,4 @@
 	        </div>
 	    </div>
 	</section>
-
-	<section class="modalPage mp-loading" >
-	    <div class="modalFrame">
-	    	<span>
-	        	<i class="icon-spinner9"></i>
-	    		<h4>Carregando...</h4>
-	    	</span>
-	    </div>
-	</section>
+    <?php include "process.html"; ?>

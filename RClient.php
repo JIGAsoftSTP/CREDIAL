@@ -5,6 +5,9 @@
 	<title>Document</title>
 	<link rel="stylesheet" href="./resources/css/geralStyle.css">
 	<link rel="stylesheet" href="./resources/css/client.css">
+    <script type="text/javascript" src="./resources/js/jQuery.js"></script>
+    <script type="text/javascript" src="./resources/js/controller/menu.js"></script>
+    <script type="text/javascript" src="resources/js/controller/logar.js"></script>
 </head>
 <body id="p1">
 	<?php include 'includes/menu.php'; ?> 
@@ -35,7 +38,8 @@
 			</table>
 		</div>
 		<div class="alphabet">
-		<span class="active" value="0">A</span>
+            <span value="26">*</span>
+            <span class="active" value="0">A</span>
 			<span value="1">B</span>
 			<span value="2">C</span>
 			<span value="3">D</span>
@@ -61,7 +65,6 @@
 			<span value="23">X</span>
 			<span value="24">Y</span>
 			<span value="25">Z</span>
-			<span value="26">*</span>
 		</div>
 		<div class="add-new-form">
 		<span class="close-add-client">x</span>
@@ -401,12 +404,11 @@
 	</section>
 	<!-- <div class="xpert-alert notification"><i class="icon-notification"></i><span class="txt">Text here!</span> <span class="close">X</span></div> -->
 </body>
-<script type="text/javascript" src="resources/js/jQuery.js"></script>
+<!--<script type="text/javascript" src="resources/js/jQuery.js"></script>-->
 <script type="text/javascript" src="resources/js/geralScript.js"></script>
 <script type="text/javascript" src="resources/js/table.js"></script>
 <script type="text/javascript" src="resources/js/rclient.js"></script>
 <script type="text/javascript" src="resources/js/controller/geral.js"></script>
-<script type="text/javascript" src="resources/js/controller/logar.js"></script>
 <script type="text/javascript" src="resources/js/controller/forMask.js"></script>
 <script type="text/javascript" src="resources/js/controller/cliente.js"></script>
 <script type="text/javascript" src="resources/js/controller/simulacao.js"></script>

@@ -16,14 +16,14 @@ $("#add-ph-user").change(function (e)
     formData.append("img",file);
 
     $.ajax({
-        url:"./bean/utilizador.php",
+        url:"../../bean/utilizador.php",
         type:"POST",
         processData: false,
         contentType: false,
         dataType: "json",
         data: formData,
         success: function (data) {
-            var css = {"background":"content-box #444 url('"+data.img+"') no-repeat"
+            var css = {"background":"content-box #444 url('"+'../.'+data.img+"') no-repeat"
                 ,"background-position":"center"
                 ,"background-size":"cover"};
             $(".adm-ph-user").css(css);
@@ -50,7 +50,7 @@ function regUser() {
         for (var o =0; o< listMenuSelect.length; o++)
             formDataReg.append("menu[]",listMenuSelect[o]);
         $.ajax({
-            url: "./bean/utilizador.php",
+            url: "../../bean/utilizador.php",
             type: "POST",
             processData: false,
             contentType: false,
@@ -61,7 +61,7 @@ function regUser() {
                     callXpertAlert("Novo utilizador registado com sucesso!", new Mensage().checkmark, 10000);
                     $(".add-new-user").find("input:text").val("");
                     $(".add-new-user").find("select").val("0");
-                    var css = {"background":"content-box #444 url('./resources/img/user.png') no-repeat"
+                    var css = {"background":"content-box #444 url('../../resources/img/user.png') no-repeat"
                         ,"background-position":"center"
                         ,"background-size":"cover"};
                     $(".adm-ph-user").css(css);
@@ -105,7 +105,7 @@ var listUser = undefined;
 function loadListClient(at) {
      listUser = new ListUser();
     $.ajax({
-        url: "./bean/utilizador.php",
+        url: "../../bean/utilizador.php",
         type: "POST",
         data: {"intensao": "loadDataUser"},
         dataType: "json",
@@ -122,15 +122,20 @@ function loadListClient(at) {
                 us.estado = e.return[u]["STATE"];
                 us.img = e.return[u]["PHOTO"];
                 us.idNivel = e.return[u]["PERFIL ID"];
+                us.menu = e.return[u]["MENU"];
                 listUser.addUser(us);
             }
             listUser.bluider();
             $(".list-user").empty().append(listUser.getList());
             for (var ui = 0; ui < listUser.list.length; ui++) {
-                var css = {"background":"content-box #444 url('"+listUser.list[ui].img+"') no-repeat"
+                var css = {"background":"content-box #444 url('../."+listUser.list[ui].img+"') no-repeat"
                     ,"background-position":"center"
                     ,"background-size":"cover"};
                 $(".default-user-img-"+listUser.list[ui].id).css(css);
+            }
+            if(at === undefined) {
+                loadMenu(e.listMenu);
+                loadComoBoxIDandValue($(".listAgencies"), e.agencias, "ID", "NOME");
             }
         },
         beforeSend: function () {  $(".mp-loading").fadeIn(); },
@@ -142,9 +147,9 @@ function loadListClient(at) {
     });
 }
 
-$("#section-user").click(function () {
+// $("#section-user").click(function () {
     loadListClient();
-});
+// });
 
 var listMenuSelect = [];
 function getSelectMenu() {
@@ -176,7 +181,7 @@ $(".list-user").on("click", "i.icon-undo2", function () {
 
 function disibleUser(user) {
     $.ajax({
-        url:"./bean/utilizador.php",
+        url:"../../bean/utilizador.php",
         type:"POST",
         dataType: "json",
         data: {intensao:"disibleUSER", USER : user},
@@ -205,5 +210,13 @@ function seletedMenuUser(id) {
                 $(this).trigger("click");
         }
     })
+}
+
+function loadMenu(listMenu) {
+    for (var j=0; j< listMenu.length; j++)
+        $("#menuAccessUser").append('<li _id="'+listMenu[j]['ID']+'" id="'+listMenu[j]['COD']+'" level="'+listMenu[j]['LEVEL']+'" idfrw="'+((listMenu[j]['SUPER.COD']==null) ? listMenu[j]['COD'] : listMenu[j]['SUPER.COD'] )+'">' +
+            '<nav><span>'+listMenu[j]["NAME"]+'</span></nav>' +
+            '</li>');
+    organizeMenu($('#menuAccessUser'));
 }
 
