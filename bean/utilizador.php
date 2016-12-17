@@ -14,6 +14,7 @@ if($_POST["intensao"] ==  "regUser" ) {regUser();}
 if($_POST["intensao"] ==  "loadDataUser" ) {loadDataUser();}
 if($_POST["intensao"] ==  "disibleUSER" ) {disableUser();}
 if($_POST["intensao"] ==  "loadMENU-USER-log" ) { loadMenuUserlogado(); }
+if($_POST["intensao"] ==  "loadMENU-Perfil" ) { loadMenuPerfil(); }
 
 function carregarImagem()
 {
@@ -109,7 +110,9 @@ function loadDataUser(){
     }
     $agencias = $call->loadDados("ver_agencia", "\"ID\"", "\"NOME\"");
 
-    die (json_encode(array("return" => $result, "listMenu" => getListMenu(), "agencias" => $agencias)));
+    $typesUser = $call->loadDados("ver_type_user", "\"ID\"","\"NAME\"");
+
+    die (json_encode(array("return" => $result, "listMenu" => getListMenu(), "agencias" => $agencias, "typesUser" => $typesUser)));
 }
 
 function disableUser(){
@@ -154,8 +157,14 @@ function loadMenuPerfil(){
     $call->functionTable("funct_load_menuperfil","*")
             ->addString(Session::getUserLogado()->getId())
             ->addNumeric(Session::getUserLogado()->getIdAgencia())
-            ->addString($_POST['perfil']);
+            ->addNumeric($_POST['perfil']);
     $call->execute();
+    $menuList = array();
+    while ($menu =  $call->getValors()) {
+        if($menu["IN PERFIL"] == "t")
+            $menuList[count($menuList)] = $menu;
+    }
+    die (json_encode(array("MENU" => $menuList)));
 }
 
 function loadMenuUserlogado (){

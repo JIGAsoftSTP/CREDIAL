@@ -53,7 +53,8 @@ $('.bank').on('click','.siglas li', function(event) {
     if(unformatted(bkds[idx+3]) <= 1000000)
         $('.bank-descript .sald').addClass('bad').removeClass('good');
     else
-        $('.bank-descript .sald').addClass('good').removeClass('bad');*/
+        $('.bank-descript .sald').addClass('goo
+d').removeClass('bad');*/
 });
 
 
@@ -71,7 +72,7 @@ $('.add-new-user p').click(function(event) {
      openModalFrame($('.mp-menu-user'));
 });
 
-$('.mp-menu-user .default i').click(function(event) {
+$('.mp-menu-user .default').on("click","i",function(event) {
     $(this).addClass('icon-radio-checked2').removeClass('icon-radio-unchecked');
     $(this).siblings().removeClass('icon-radio-checked2').addClass('icon-radio-unchecked');
 });

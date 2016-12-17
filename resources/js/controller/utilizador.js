@@ -93,7 +93,6 @@ function alertForAddImagem() {
 }
 
 function alertForSelectMenu() {
-    getSelectMenu();
     if(listMenuSelect.length == 0){
         callXpertAlert('Por favor, selecione Menu para o Utilizador!', new Mensage().cross, 10000);
         $(".icon-cog").click();
@@ -102,6 +101,7 @@ function alertForSelectMenu() {
     else return true;
 }
 var listUser = undefined;
+var listMenus = undefined;
 function loadListClient(at) {
      listUser = new ListUser();
     $.ajax({
@@ -134,8 +134,10 @@ function loadListClient(at) {
                 $(".default-user-img-"+listUser.list[ui].id).css(css);
             }
             if(at === undefined) {
-                loadMenu(e.listMenu);
+                listMenus = e.listMenu;
+                loadMenu(listMenus);
                 loadComoBoxIDandValue($(".listAgencies"), e.agencias, "ID", "NOME");
+                loadTypeUser(e.typesUser);
             }
         },
         beforeSend: function () {  $(".mp-loading").fadeIn(); },
@@ -171,7 +173,14 @@ $(".list-user").on("click", "i.icon-undo2", function () {
         $("#gest-user-nome").val(user.nome);
         $("#gest-user-apelido").val(user.apelido);
         $("#gest-user-agencia").val(user.agencia);
-        // formDataReg.append("typeperfil", $("#gest-user-type").find("i.icon-radio-checked2").attr("value"));
+        disableAllCheck();
+        for (var b = 0; b < user.menu.length; b++){
+            var ids = user.menu[b]['ID'];
+            if(!thisMenuHaveSon(ids, user.menu)) {
+                seletedMenuUser(ids);
+            }
+        }
+        $('.add-more.default').click();
     })
     .on("click", "i.icon-lock", function () {
         var user =  listUser.list[$(this).closest("section").attr("item")];
@@ -203,7 +212,6 @@ function disibleUser(user) {
 function seletedMenuUser(id) {
     $("#menuAccessUser").find("li").each(function (e) {
         if($(this).attr("_id") === id) {
-
             if($(this).hasClass("isFather"))
                 $(this).find(".partial").trigger("click");
             else
@@ -220,3 +228,43 @@ function loadMenu(listMenu) {
     organizeMenu($('#menuAccessUser'));
 }
 
+$("#gest-user-menu-change").click(function () {
+    getSelectMenu();
+    $('.mp-menu-user').fadeOut(300);
+});
+
+function loadTypeUser(typeUser) {
+    for(var r = 0; r < typeUser.length; r++){
+        $("#gest-user-type").append('<i value="'+typeUser[r]['ID']+'" class="icon-radio-'+((r==0) ? "checked2" : "unchecked")+'"><span> '+typeUser[r]['NAME']+'</span></i>');
+    }
+}
+
+$("#gest-user-type").on("click","i", function () {
+    $.ajax({
+        url:"../../bean/utilizador.php",
+        type:"POST",
+        dataType: "json",
+        data: {intensao:"loadMENU-Perfil", perfil : $(this).attr("value")},
+        success: function (data) {
+            var menu = data.MENU;
+           disableAllCheck();
+            for (var v = 0; v < menu.length; v++){
+                seletedMenuUser(menu[v]['ID']);
+            }
+        }
+    });
+});
+
+function disableAllCheck() {
+    $("#menuAccessUser").empty();
+    loadMenu(listMenus);
+}
+
+function thisMenuHaveSon(id, menu) {
+    for (var b = 0; b < menu.length; b++){
+        if(id === menu[b]['SUPER.ID']) {
+            return true
+        }
+    }
+    return false;
+}

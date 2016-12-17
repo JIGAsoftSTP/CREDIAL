@@ -135,5 +135,5 @@ function clickPestacao(_idPrestacao,_idCredito) {
 }
 
 function pagamentoPestacao(_idPrestacao,_idCredito) {
-
+    openModalFrame($('.mp-liquida'));
 }

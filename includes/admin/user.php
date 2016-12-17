@@ -47,17 +47,15 @@
 							<b>+</b>
 						</div>
 						<div id="gest-user-type">
-							<i value="1" class="icon-radio-checked2"><span> Operador</span></i><i value="2" class="icon-radio-unchecked"><span> Analista</span></i><i value="3" class="icon-radio-unchecked"><span> Administrador</span></i>
+<!--							<i value="1" class="icon-radio-checked2"><span> Operador</span></i>-->
 						</div>
 					</div>
 					<ul class="XpertTreeMenu" id="menuAccessUser">
-						<!--<li fix≃"true" id="1" level="0" idfrw="1"><nav><span>Crédito</span></nav></li>
-						<li fix≃"true" id="2" level="0" idfrw="2"><nav><span>Relatório</span></nav></li>
-						<li fix≃"true" id="3" level="0" idfrw="1"><nav><span>Administração</span></nav></li>-->
+						<!--<li fix≃"true" id="1" level="0" idfrw="1"><nav><span>Crédito</span></nav></li>-->
 					</ul>
 				</div>
 				<div class="bt-yes-no-cancel">
-					<button id="">OK</button>
+					<button id="gest-user-menu-change">OK</button>
 					<button class="bt-no-option">Cancelar</button>
 				</div>
 				<div class="modal-header">

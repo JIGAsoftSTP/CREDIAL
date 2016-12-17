@@ -5,6 +5,7 @@
  *
  * @param user {User}
  */
+var menusText = undefined;
 function loadMenuUserLogado(){
     $.ajax({
         url:"./bean/utilizador.php",
@@ -15,19 +16,15 @@ function loadMenuUserLogado(){
             var body = $("body").attr('id');
             var seletedMenu = Number(body.substring(1,body.length));
             var menus = data.MENU;
-            var idSuper = undefined;
+            var idSuper = getUrlParameter("id");
            for (var gg =0; gg < menus.length; gg++){
                if(menus[gg]["LEVEL"] == "0")
-               $("#principal-menu").append('<li '+((gg === 0) ? 'class="active-menu"' : '' )+'><a href="'+menus[gg]['LINK']+'" id="m'+(gg+1)+'">'+menus[gg]['NAME']+'</a></li>');
-                if(seletedMenu === (gg+1)) {
-                    idSuper = menus[gg]['ID'];
-                }
+               $("#principal-menu").append('<li id="pri-'+menus[gg]['ID']+'" '+((gg === 0) ? 'class="active-menu"' : '' )+'><a href="'+menus[gg]['LINK']+'?id='+menus[gg]['ID']+'" id="m'+(gg+1)+'">'+menus[gg]['NAME']+'</a></li>');
+
                if(menus[gg]["SUPER.ID"] === idSuper && seletedMenu == 3){
-                   // console.log(menus[gg]);
                    loadSubMenuSecondaryADM(menus[gg]);
                }
                if(menus[gg]["SUPER.ID"] === idSuper && seletedMenu == 2){
-                   // console.log(menus[gg]);
                    loadSubMenuSecondaryReport(menus[gg]);
                }
                var cod = menus[gg]["SUPER.COD"];
@@ -40,9 +37,9 @@ function loadMenuUserLogado(){
                    ul.appendChild(li);
                }
            }
-
-           if(idSuper === 3){ $('.single').find("li").eq(0).trigger('click'); }
-           else if(idSuper === 2){ $('.multiple').find("li").eq(0).trigger('click'); }
+            menusText = menus;
+           if(seletedMenu === 3){ $('.single').find("li").eq(0).trigger('click'); }
+           else if(seletedMenu === 2){ $('.multiple').find("li").eq(0).trigger('click'); }
         }
     });
 }
@@ -74,10 +71,10 @@ function loadSubMenuSecondaryReport(menus) {
 
 $('.multiple').on("click", "li", function(event) {
     CtrlMenu($(this), $('.report-content'));
-    console.log("fhfhfh");
     event.stopPropagation();
 });
 
 $('.single').on("click", "li", function(event) {
     CtrlMenu($(this), $('.article-admin'));
+    event.stopPropagation();
 });

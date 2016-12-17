@@ -30,27 +30,27 @@
                     </tr>
 				</thead>
 				<tbody id="tableCliente">
-                <tr><td><i class="icon-credit-card"></i><i class="icon-info"></i><i class="icon-pencil"></i></td><td>109935310</td><td>WALDEMIRO QUARESMA FERNANDES</td><td>9969457</td></tr>
-                <tr><td><i class="icon-credit-card"></i><i class="icon-info"></i><i class="icon-pencil"></i></td><td>109935310</td><td>WALDEMIRO QUARESMA FERNANDES</td><td>9969457</td></tr>
-                <tr><td><i class="icon-credit-card"></i><i class="icon-info"></i><i class="icon-pencil"></i></td><td>109935310</td><td>WALDEMIRO QUARESMA FERNANDES</td><td>9969457</td></tr>
-                <tr><td><i class="icon-credit-card"></i><i class="icon-info"></i><i class="icon-pencil"></i></td><td>109935310</td><td>WALDEMIRO QUARESMA FERNANDES</td><td>9969457</td></tr>
-                <tr><td><i class="icon-credit-card"></i><i class="icon-info"></i><i class="icon-pencil"></i></td><td>109935310</td><td>WALDEMIRO QUARESMA FERNANDES</td><td>9969457</td></tr>
-                <tr><td><i class="icon-credit-card"></i><i class="icon-info"></i><i class="icon-pencil"></i></td><td>109935310</td><td>WALDEMIRO QUARESMA FERNANDES</td><td>9969457</td></tr>
-                <tr><td><i class="icon-credit-card"></i><i class="icon-info"></i><i class="icon-pencil"></i></td><td>109935310</td><td>WALDEMIRO QUARESMA FERNANDES</td><td>9969457</td></tr>
-                <tr><td><i class="icon-credit-card"></i><i class="icon-info"></i><i class="icon-pencil"></i></td><td>109935310</td><td>WALDEMIRO QUARESMA FERNANDES</td><td>9969457</td></tr>
-                <tr><td><i class="icon-credit-card"></i><i class="icon-info"></i><i class="icon-pencil"></i></td><td>109935310</td><td>WALDEMIRO QUARESMA FERNANDES</td><td>9969457</td></tr>
-                <tr><td><i class="icon-credit-card"></i><i class="icon-info"></i><i class="icon-pencil"></i></td><td>109935310</td><td>WALDEMIRO QUARESMA FERNANDES</td><td>9969457</td></tr>
-                <tr><td><i class="icon-credit-card"></i><i class="icon-info"></i><i class="icon-pencil"></i></td><td>109935310</td><td>WALDEMIRO QUARESMA FERNANDES</td><td>9969457</td></tr>
-                <tr><td><i class="icon-credit-card"></i><i class="icon-info"></i><i class="icon-pencil"></i></td><td>109935310</td><td>WALDEMIRO QUARESMA FERNANDES</td><td>9969457</td></tr>
-                <tr><td><i class="icon-credit-card"></i><i class="icon-info"></i><i class="icon-pencil"></i></td><td>109935310</td><td>WALDEMIRO QUARESMA FERNANDES</td><td>9969457</td></tr>
-                <tr><td><i class="icon-credit-card"></i><i class="icon-info"></i><i class="icon-pencil"></i></td><td>109935310</td><td>WALDEMIRO QUARESMA FERNANDES</td><td>9969457</td></tr>
-                <tr><td><i class="icon-credit-card"></i><i class="icon-info"></i><i class="icon-pencil"></i></td><td>109935310</td><td>WALDEMIRO QUARESMA FERNANDES</td><td>9969457</td></tr>
-                <tr><td><i class="icon-credit-card"></i><i class="icon-info"></i><i class="icon-pencil"></i></td><td>109935310</td><td>WALDEMIRO QUARESMA FERNANDES</td><td>9969457</td></tr>
-                <tr><td><i class="icon-credit-card"></i><i class="icon-info"></i><i class="icon-pencil"></i></td><td>109935310</td><td>WALDEMIRO QUARESMA FERNANDES</td><td>9969457</td></tr>
-                <tr><td><i class="icon-credit-card"></i><i class="icon-info"></i><i class="icon-pencil"></i></td><td>109935310</td><td>WALDEMIRO QUARESMA FERNANDES</td><td>9969457</td></tr>
-                <tr><td><i class="icon-credit-card"></i><i class="icon-info"></i><i class="icon-pencil"></i></td><td>109935310</td><td>WALDEMIRO QUARESMA FERNANDES</td><td>9969457</td></tr>
-                <tr><td><i class="icon-credit-card"></i><i class="icon-info"></i><i class="icon-pencil"></i></td><td>109935310</td><td>WALDEMIRO QUARESMA FERNANDES</td><td>9969457</td></tr>
-                <tr><td><i class="icon-credit-card"></i><i class="icon-info"></i><i class="icon-pencil"></i></td><td>109935310</td><td>WALDEMIRO QUARESMA FERNANDES</td><td>9969457</td></tr>
+<!--                <tr><td><i class="icon-credit-card"></i><i class="icon-info"></i><i class="icon-pencil"></i></td><td>109935310</td><td>WALDEMIRO QUARESMA FERNANDES</td><td>9969457</td></tr>-->
+<!--                <tr><td><i class="icon-credit-card"></i><i class="icon-info"></i><i class="icon-pencil"></i></td><td>109935310</td><td>WALDEMIRO QUARESMA FERNANDES</td><td>9969457</td></tr>-->
+<!--                <tr><td><i class="icon-credit-card"></i><i class="icon-info"></i><i class="icon-pencil"></i></td><td>109935310</td><td>WALDEMIRO QUARESMA FERNANDES</td><td>9969457</td></tr>-->
+<!--                <tr><td><i class="icon-credit-card"></i><i class="icon-info"></i><i class="icon-pencil"></i></td><td>109935310</td><td>WALDEMIRO QUARESMA FERNANDES</td><td>9969457</td></tr>-->
+<!--                <tr><td><i class="icon-credit-card"></i><i class="icon-info"></i><i class="icon-pencil"></i></td><td>109935310</td><td>WALDEMIRO QUARESMA FERNANDES</td><td>9969457</td></tr>-->
+<!--                <tr><td><i class="icon-credit-card"></i><i class="icon-info"></i><i class="icon-pencil"></i></td><td>109935310</td><td>WALDEMIRO QUARESMA FERNANDES</td><td>9969457</td></tr>-->
+<!--                <tr><td><i class="icon-credit-card"></i><i class="icon-info"></i><i class="icon-pencil"></i></td><td>109935310</td><td>WALDEMIRO QUARESMA FERNANDES</td><td>9969457</td></tr>-->
+<!--                <tr><td><i class="icon-credit-card"></i><i class="icon-info"></i><i class="icon-pencil"></i></td><td>109935310</td><td>WALDEMIRO QUARESMA FERNANDES</td><td>9969457</td></tr>-->
+<!--                <tr><td><i class="icon-credit-card"></i><i class="icon-info"></i><i class="icon-pencil"></i></td><td>109935310</td><td>WALDEMIRO QUARESMA FERNANDES</td><td>9969457</td></tr>-->
+<!--                <tr><td><i class="icon-credit-card"></i><i class="icon-info"></i><i class="icon-pencil"></i></td><td>109935310</td><td>WALDEMIRO QUARESMA FERNANDES</td><td>9969457</td></tr>-->
+<!--                <tr><td><i class="icon-credit-card"></i><i class="icon-info"></i><i class="icon-pencil"></i></td><td>109935310</td><td>WALDEMIRO QUARESMA FERNANDES</td><td>9969457</td></tr>-->
+<!--                <tr><td><i class="icon-credit-card"></i><i class="icon-info"></i><i class="icon-pencil"></i></td><td>109935310</td><td>WALDEMIRO QUARESMA FERNANDES</td><td>9969457</td></tr>-->
+<!--                <tr><td><i class="icon-credit-card"></i><i class="icon-info"></i><i class="icon-pencil"></i></td><td>109935310</td><td>WALDEMIRO QUARESMA FERNANDES</td><td>9969457</td></tr>-->
+<!--                <tr><td><i class="icon-credit-card"></i><i class="icon-info"></i><i class="icon-pencil"></i></td><td>109935310</td><td>WALDEMIRO QUARESMA FERNANDES</td><td>9969457</td></tr>-->
+<!--                <tr><td><i class="icon-credit-card"></i><i class="icon-info"></i><i class="icon-pencil"></i></td><td>109935310</td><td>WALDEMIRO QUARESMA FERNANDES</td><td>9969457</td></tr>-->
+<!--                <tr><td><i class="icon-credit-card"></i><i class="icon-info"></i><i class="icon-pencil"></i></td><td>109935310</td><td>WALDEMIRO QUARESMA FERNANDES</td><td>9969457</td></tr>-->
+<!--                <tr><td><i class="icon-credit-card"></i><i class="icon-info"></i><i class="icon-pencil"></i></td><td>109935310</td><td>WALDEMIRO QUARESMA FERNANDES</td><td>9969457</td></tr>-->
+<!--                <tr><td><i class="icon-credit-card"></i><i class="icon-info"></i><i class="icon-pencil"></i></td><td>109935310</td><td>WALDEMIRO QUARESMA FERNANDES</td><td>9969457</td></tr>-->
+<!--                <tr><td><i class="icon-credit-card"></i><i class="icon-info"></i><i class="icon-pencil"></i></td><td>109935310</td><td>WALDEMIRO QUARESMA FERNANDES</td><td>9969457</td></tr>-->
+<!--                <tr><td><i class="icon-credit-card"></i><i class="icon-info"></i><i class="icon-pencil"></i></td><td>109935310</td><td>WALDEMIRO QUARESMA FERNANDES</td><td>9969457</td></tr>-->
+<!--                <tr><td><i class="icon-credit-card"></i><i class="icon-info"></i><i class="icon-pencil"></i></td><td>109935310</td><td>WALDEMIRO QUARESMA FERNANDES</td><td>9969457</td></tr>-->
 				</tbody>
 			</table>
 		</div>
@@ -424,8 +424,8 @@
 <!--<script type="text/javascript" src="resources/js/jQuery.js"></script>-->
 <script type="text/javascript" src="./resources/js/jQuery.js"></script>
 <script type="text/javascript" src="resources/js/geralScript.js"></script>
-<script type="text/javascript" src="./resources/js/controller/menu.js"></script>
 <script type="text/javascript" src="resources/js/controller/logar.js"></script>
+<script type="text/javascript" src="./resources/js/controller/menu.js"></script>
 <script type="text/javascript" src="resources/js/table.js"></script>
 <script type="text/javascript" src="resources/js/rclient.js"></script>
 <script type="text/javascript" src="resources/js/controller/geral.js"></script>

@@ -1,6 +1,6 @@
 
 
-organizeMenu($('#menuAccessUser'));
+// organizeMenu($('#menuAccessUser'));
 
 $('.XpertTreeMenu').on('click','.isFather .icon-ctrl, .isFather > nav span', function(event) {
 	li_me = $(this).closest('li');
