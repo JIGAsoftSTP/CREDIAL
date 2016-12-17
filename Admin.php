@@ -14,32 +14,6 @@
         <aside>
             <i class="icon-menu"></i>
             <ul class="single" id="secondary-menu">
-<!--                <li urldata="includes/admin/entity.php" class="active">-->
-<!--                    <i class="icon-cogs"></i>-->
-<!--                    <span>Entidades</span>-->
-<!--                </li>-->
-<!--                <li urldata="includes/admin/rate.php">-->
-<!--                    <i class="icon- icon-stats-bars"></i>-->
-<!--                    <span>Taxa</span>-->
-<!--                </li>-->
-<!--                <li urldata="includes/admin/insurance.php">-->
-<!--                    <i class="icon-shield"></i>-->
-<!--                    <span>Seguros</span>-->
-<!--                </li>-->
-<!--                <li urldata="includes/admin/bank.php">-->
-<!--                    <i class="icon-office"></i>-->
-<!--                    <span>Banco</span>-->
-<!--                </li>-->
-<!--                <li class="li-item-cheq" urldata="includes/admin/cheq.php">-->
-<!--                    <i class="icon-file-text"></i>-->
-<!--                    <span>Cheque</span>-->
-<!--                </li>-->
-<!--                <li id="section-user" urldata="includes/admin/user.php">-->
-<!--                    <i class="icon-user"></i>-->
-<!--                    <span>Utilizador</span></li>-->
-<!--                <li urldata="includes/admin/agency.php">-->
-<!--                    <i class="icon-home3"></i>-->
-<!--                    <span>Agência</span></li>-->
             </ul>
         </aside>
         <article class="article-admin">

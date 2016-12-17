@@ -10,10 +10,7 @@ $(function () {
     dadosComboBox();
     loadObjectType();
 
-    $("#btAddEntity").click(function()
-    {
-        addNewEntity();
-    });
+
     $(".addAgency").click(function () {
 
     });
@@ -72,7 +69,6 @@ function loadObjectType() {
            }
         }
     });
-
 }
 
 function disableObject(idObject) {
@@ -92,29 +88,7 @@ function disableObject(idObject) {
         }
     });
 }
-function addNewEntity() {
-    if($("#ADMINENTITY").val() !== "" && $("#txtEntity").val() !== "")
-     {
-        $.ajax({
-           url:"./bean/user.php",
-            type:"POST",
-            data: {"intention":"add Entity","entity":$("#txtEntity").val(), "idTypeEntity" : $("#adminEntity").val()},
-            dataType:"json",
-            success:function (e) {
 
-                if(e.entity["RESULT"] === "true")
-                {
-                    loadObjectValues($("#adminEntity").val());
-                    callXpertAlert(entityName($("#adminEntity").val())+" adicionado.", 'checkmark', 8000);
-                    $("#txtEntity").val("");
-                    $("#adminEntity").val("");
-                }
-                else
-                    callXpertAlert(e.entity["MESSAGE"], 'warning', 8000);
-            }
-        });
-    }
-}
 function showHideValue(idEntidade) {
     $("#"+idEntidade).closest('.entity-div').find('.list').toggleClass('show');
 
@@ -138,7 +112,6 @@ function loadObjectValues(id)
 
         }
     });
-
 }
 function addMore(id) {
     title = $("#".id).closest('nav').find('h3').text();
@@ -147,12 +120,3 @@ function addMore(id) {
     idTypeEntity = id;
 }
 
-function entityName(idEntity) {
-    for(var i =0;i<entidades.length;i++)
-    {
-        if(entidades[i]["ID"] == idEntity)
-        {
-            return entidades[i]["NAME"];
-        }
-    }
-}

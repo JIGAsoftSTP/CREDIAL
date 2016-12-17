@@ -268,3 +268,12 @@ function loadInsurance()
         die($j);
     }
 
+    function loadDataBank()
+    {
+        $call = new CallPgSQL();
+        $call->selects("ver_bank", "*");
+        $call->execute();
+        $result = $call->getValors();
+        die(json_encode(array("banks" => $result)));
+    }
+
