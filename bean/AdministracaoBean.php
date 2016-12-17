@@ -5,12 +5,14 @@
     include_once "../modelo/User.php";
 
 //    session_start();
+
+
     switch ($_POST["intention"])
     {
         case "load Insurance":
             loadInsurance();
             break;
-        case "taxs":
+        case "tax data":
             loadTax();
             break;
         case "agency adm":
@@ -48,6 +50,9 @@
             break;
         case "bank moviment":
             loadBankMoviment();
+            break;
+        case "bank data":
+            loadBankData();
             break;
     }
 
@@ -90,8 +95,8 @@
         $call->execute();
 
         $result = $call->getValors();
-         $j = json_encode(array("resultado" => $result));
-        die($j);
+         die(json_encode(array("resultado" => $result)));
+
     }
 
     function registrarBanco()
@@ -186,6 +191,7 @@
     function loadTax()
     {
         $call = new CallPgSQL();
+        $tipoCreditos = $call->loadDados("ver_tipocredito","\"ID\"", "\"DESC\"");
         $call->functionTable("funct_load_taxa", "*")
             ->addNumeric(Session::getUserLogado()->getId())
             ->addNumeric(Session::getUserLogado()->getIdAgencia())
@@ -197,8 +203,7 @@
         {
             $arrayValues[count($arrayValues)] = $result;
         }
-        $j = json_encode(array("result" =>$arrayValues));
-        die($j);
+        die(json_encode(array("result" =>$arrayValues, "tipoCreditos" =>$tipoCreditos)));
     }
 
 function loadBankMoviment()
@@ -233,8 +238,8 @@ function loadInsurance()
         {
             $arrayValues[count($arrayValues)] = $result;
         }
-        $j = json_encode(array("result" =>$arrayValues));
-        die($j);
+        die(json_encode(array("result" =>$arrayValues)));
+
     }
     function makeBanktransfer()
     {
@@ -275,5 +280,12 @@ function loadInsurance()
         $call->execute();
         $result = $call->getValors();
         die(json_encode(array("banks" => $result)));
+    }
+
+    function loadBankData()
+    {
+        $call = new CallPgSQL();
+        $bancos = $call->loadDados("ver_bank", "\"ID\"", "\"NAME\"");
+        die(json_encode(array("banks" =>$bancos)));
     }
 

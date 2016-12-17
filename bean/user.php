@@ -36,11 +36,8 @@
     {
         $call = new CallPgSQL();
         $agencias = $call->loadDados("ver_agencia", "\"ID\"", "\"NOME\"");
-        $tipoCreditos = $call->loadDados("ver_tipocredito","\"ID\"", "\"DESC\"");
-        $bancos = $call->loadDados("ver_bank", "\"ID\"", "\"NAME\"");
         $localidades = $call->loadDados("ver_localidade", "\"ID\"", "\"DESC\"");
         $j = json_encode(array("agencias"=>$agencias,
-                            "tipoCreditos"=>$tipoCreditos,
                             "bancos"=>$bancos,
                             "localidades"=>$localidades));
         die($j);

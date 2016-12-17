@@ -71,7 +71,7 @@ function disableObject(idObject) {
         success:function (e) {
             if(e.resultado["RESULT"] === "true")
             {
-                callXpertAlert("Entidade removida com sucesso.", 'checkmark', 8000);
+                callXpertAlert("Entidade removida com sucesso!", 'checkmark', 8000);
                 $("#objectData"+idObject).remove();
             }
             else
@@ -93,7 +93,7 @@ function addNewEntity() {
                 if(e.entity["RESULT"] === "true")
                 {
                     loadObjectValues($("#adminEntity").val());
-                    callXpertAlert(entityName($("#adminEntity").val())+" adicionado.", 'checkmark', 8000);
+                    callXpertAlert(entityName($("#adminEntity").val())+" adicionado!", 'checkmark', 8000);
                     $("#txtEntity").val("");
                     $("#adminEntity").val("");
                 }

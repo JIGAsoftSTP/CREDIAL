@@ -51,6 +51,8 @@
 </body>
 <script type="text/javascript" src="../../resources/js/jQuery.js"></script>
 <script type="text/javascript" src="../../resources/js/geralScript.js"></script>
+<script type="text/javascript" src="../../resources/js/controller/geral.js"></script>
+<script type="text/javascript" src="../../resources/js/controller/taxs.js"></script>
 <script type="text/javascript" src="../../resources/js/admin.js"></script>
 <script type="text/javascript" src="../../resources/js/table.js"></script>
 </html>
