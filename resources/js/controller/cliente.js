@@ -104,29 +104,35 @@ function credito(a) {
 }
 var listCredito = [];
 var clienteShortData = undefined;
-function inforCiente(b) {
+function inforCiente(b, fill) {
     $.ajax({
         url: "./bean/cliente.php",
         type: "POST",
-        data: {"intensao": "loadStatusClient", "nifCliente": clientes[clienteLetra][b]["NIF"]},
+        data: {"intensao": "loadStatusClient", "nifCliente": clientes[clienteLetra][b]["NIF"], fill : fill},
         dataType: "json",
         success: function (e) {
             clienteData = e.resultRealDataCliente;
-            listCredito = e.resultCredito;
-            clienteShortData = e.resultClient;
-            listCreditoCliente("-1");
-            setTimeout(function () {
-                $('.history-selected').toggleClass('show');
-            }, 700);
+            if(fill == undefined) {
+                listCredito = e.resultCredito;
+                clienteShortData = e.resultClient;
+                listCreditoCliente("-1");
+                setTimeout(function () {
+                    $('.history-selected').toggleClass('show');
+                }, 700);
+            }
+            else {
+                $('.add-new-form').toggleClass('show');
+                $('.add-new-form h1').text('Editar cliente');
+                $("#cli-reg").text('Editar cliente');
+                getDadosCliente();
+            }
         },
         beforeSend: function () {  $(".mp-loading").fadeIn(); },
         complete: function () { $(".mp-loading").fadeOut();}
     });
 }
 function editCiente(c) {
-    $('.add-new-form').toggleClass('show');
-    $('.add-new-form h1').text('Editar cliente');
-    $("#cli-reg").text('Editar cliente');
+    inforCiente(c, true);
 }
 
 // loadOuther
@@ -316,3 +322,33 @@ $("div.alphabet").on("click","span",function () {
 $("#table-client").on("dblclick","tr", function () {
     credito($(this).attr("id"));
 });
+
+
+function getDadosCliente() {
+    $("#cli-nif").val(clienteData["NIF"]);
+    $("#cli-nome").val(clienteData["NAME"]);
+    $("#cli-sobNome").val(clienteData["SURNAME"]);
+    $("#cli-dataNasc").val(clienteData["DATA NASCIMENTO"]);
+    $("#cli-sexo").val(clienteData["SEXO ID"]);
+    $("#cli-stateCivil").val(clienteData["ESTADO CIVIL ID"]);
+    $("#cli-mora").val(clienteData["MORADA"]);
+
+    $("#cli-prof").val(clienteData["PROFISSAO ID"]);
+    $("#cli-salar").val(clienteData["CLIENTE SALARIO"]);
+    $("#cli-local").val(clienteData["LOCALIDADE ID"]);
+    $("#cli-localTrab").val(clienteData["LOCAL TRABALHA ID"]);
+
+    $("#cli-cont-telm").val(clienteData["TELE MOVEL"]);
+    $("#cli-cont-telf").val(clienteData["TELE FIXO"]);
+    $("#cli-cont-tels").val(clienteData["TELE SERVICO"]);
+    $("#cli-email").val(clienteData["MAIL"]);
+
+    if(clienteData["TRADOSSIER ANO"] != null)
+        $("#cli-ar-ano").val(clienteData["TRADOSSIER ANO"]);
+    if(clienteData["TRADOSSIER MES"] != null)
+        $("#cli-ar-mes").val(clienteData["TRADOSSIER MES"]);
+    if(clienteData["TRADOSSIER LETRA"] != null)
+        $("#cli-ar-let").val(clienteData["TRADOSSIER LETRA"]);
+    if(clienteData["TRADOSSIER NUMERO DE CAPA"] != null)
+        $("#cli-ar-capa").val(clienteData["TRADOSSIER NUMERO DE CAPA"]);
+}

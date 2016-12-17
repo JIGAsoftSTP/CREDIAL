@@ -124,6 +124,9 @@ function regSalarioCliente(){
 }
 
 function loadStatusClient() {
+    if(isset($_POST["fill"]))
+        die(json_encode(array("resultRealDataCliente" => loadDataCliente())));
+
     $call = new CallPgSQL();
     $call->functionTable("funct_load_status_cliente","*")
         ->addString(Session::getUserLogado()->getId())
@@ -132,8 +135,7 @@ function loadStatusClient() {
     $call->execute();
     die(json_encode(array("resultClient" => $call->getValors(),
                         "resultCredito" => loadCreditoClient(),
-                        "resultRealDataCliente" => loadDataCliente())
-                    ));
+                        "resultRealDataCliente" => loadDataCliente())));
 }
 
 function loadCreditoClient(){
@@ -169,7 +171,7 @@ function loadPrestacao($idCredito){
 
 function loadDataCliente(){
     $call = new CallPgSQL();
-    $call->functionTable("funct_load_client_data","*")
+    $call->functionTable("funct_load_client_data", "*")
         ->addString(Session::getUserLogado()->getId())
         ->addNumeric(Session::getUserLogado()->getIdAgencia())
         ->addString($_POST["nifCliente"]);
