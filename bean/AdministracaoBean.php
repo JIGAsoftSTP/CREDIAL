@@ -4,7 +4,7 @@
     include "Session.php";
     include_once "../modelo/User.php";
 
-//    session_start();
+    session_start();
 
 
     switch ($_POST["intention"])
@@ -216,7 +216,7 @@
         $call->functionTable("funct_load_taxa", "*")
             ->addNumeric(Session::getUserLogado()->getId())
             ->addNumeric(Session::getUserLogado()->getIdAgencia())
-             ->addNumeric(($_POST["typeCredit"] == "" || $_POST["typeCredit"] == null) ? 1353 : $_POST["typeCredit"]);
+             ->addNumeric(1353);
         $call->execute();
 
         $arrayValues = array();

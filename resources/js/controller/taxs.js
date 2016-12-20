@@ -50,7 +50,7 @@ function taxData() {
         url: taxAdress,
         type:"POST",
         dataType:"json",
-        data:{"intention": "tax data", "typeCredit": $("#tipoCreditoSearch").val()},
+        data:{"intention": "tax data", "typeCredit": null},
         success:function (e) {
             taxs = e.result;
             loadTax();
