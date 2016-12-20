@@ -19,6 +19,7 @@ $(function(){
 var bankAddress = "../../bean/AdministracaoBean.php";
 
 var listBanks = [];
+var listMoviments = [];
 var value;
 var Movimentation = function () {};
 Movimentation.prototype.bankFrom;
@@ -77,7 +78,7 @@ function carregarSiglas()
 
 function loadBankMoviment(position)
 {
-    $(".good").html(listBanks[position]["SALDO"]);
+
 
     $.ajax
     ({
@@ -87,10 +88,13 @@ function loadBankMoviment(position)
         data:{"intention": "bank moviment", "bank" : listBanks[position]["ID"]},
         success:function (e)
         {
+            listMoviments = e.result;
             $("#bankMovimentName").html(listBanks[position]["NAME"]);
+            $(".good").html(listBanks[position]["SALDO"]);
+            $("#bankMovimentName").empty();
             $("#tablebankmoviments").empty();
 
-            for(var i=0;i<e.result.length;i++)
+            for(var i=0;i<listMoviments.length;i++)
             {   var table = document.getElementById("tableBankMoviments");
                 var row = table.insertRow(table.childElementCount);
                 var moviments = e.result[i];
