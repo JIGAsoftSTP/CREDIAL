@@ -196,7 +196,7 @@ function disibleUser(user) {
         data: {intensao:"disibleUSER", USER : user},
         success: function (data) {
             if (data.result) {
-                callXpertAlert(user.nome+" "+user.apelido+" foi " +((user.disableMode === "F") ? " Redifinido " : " Desativado ")+" com secesso!", new Mensage().checkmark, 10000);
+                callXpertAlert(user.nome+" "+user.apelido+" foi " +((user.disableMode === "F") ? " Redifinido " : " Desativado ")+" com sucesso!", new Mensage().checkmark, 10000);
                 setTimeout(loadListClient,4000,true);
             }
             else {

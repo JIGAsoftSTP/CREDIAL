@@ -69,6 +69,7 @@ function loadChequeData() {
 }
 
 function carregarCheques() {
+
     $.ajax({
         url: chequeUrl,
         type:"POST",
