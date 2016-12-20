@@ -67,9 +67,12 @@ $('.cheq .menu-cheq li').click(function(event) {
     CtrlTabs($(this), $('.cheq .abas section'));
 });
 
+$('.reset-cheq').click(function(event) {
+     openModalFrame($('.mp-reset-cheq'));
+});
 
 
-/* ############## USER 	###########*/
+/* ############## USER  ###########*/
 
 $('.add-new-user p').click(function(event) {
      openModalFrame($('.mp-menu-user'));

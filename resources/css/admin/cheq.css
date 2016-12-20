@@ -43,4 +43,8 @@
 	max-width: 160px;
 	margin-bottom: 1rem;
 	border-radius: 2px;
+	cursor: pointer;
+}
+.cheq .icon-undo2 span{
+	cursor: pointer;
 }

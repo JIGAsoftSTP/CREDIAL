@@ -15,7 +15,7 @@
 		</nav>
 		<div class="second">
 			<div class="container">
-					<i class="icon-undo2"><span> <b><label id="bt-restaurar-cheque">Restaurar</label></b></span></i>
+					<i class="icon-undo2 reset-cheq"><span> <b><label id="bt-restaurar-cheque">Restaurar</label></b></span></i>
 					<section class="">
 						<div class="table-list-cheq x-table">
 							<table class="selectable" id="table-cheq" cellpadding="0" cellspacing="0">
@@ -51,6 +51,24 @@
 			</div>
 		</div>
 	</div>
+	<section class="modalPage mp-reset-cheq">
+	<div class="modalFrame">
+		<div class="modalContainer">
+			<div class="content">
+				<p>Certeza?</p>
+				
+			</div>
+			<div class="bt-yes-no-cancel">
+				<button id="">OK</button>
+				<button class="bt-no-option">Cancelar</button>
+			</div>
+			<div class="modal-header">
+				<b>Restaurar</b>
+				<span class="mp-close">X</span>
+			</div>
+		</div>
+	</div>
+</section>
     <?php include "../process.html"; ?>
 </body>
 <script type="text/javascript" src="../../resources/js/jQuery.js"></script>
