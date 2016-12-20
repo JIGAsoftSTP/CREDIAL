@@ -373,3 +373,11 @@ function loadInsurance()
         }
         die(json_encode(array("result" =>$cheques)));
     }
+
+    function restaurarCheque()
+    {
+        $call = new CallPgSQL();
+        $call->functionTable("funct_cheque_restore_effect", "*")
+            ->addString(Session::getUserLogado()->getId())
+            ->addNumeric(Session::getUserLogado()->getIdAgencia())
+    }

@@ -104,10 +104,6 @@ function loadBankMoviment(position)
                 var moviments = e.result[i];
                 row.id = i;
 
-                row.onclick = function () {
-                    (this).addClass('selected') .siblings().removeClass('selected');
-                };
-
                 var column0 = row.insertCell(0);
                 var column1 = row.insertCell(1);
                 var column2 = row.insertCell(2);
