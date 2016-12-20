@@ -53,7 +53,7 @@ function loadAgencyAdm() {
         dataType:"json",
         data:{"intention": "agency adm"},
         success:function (e) {
-
+            agencies = e.result;
             for(var index=0;index<e.result.length;index++)
             {
 
