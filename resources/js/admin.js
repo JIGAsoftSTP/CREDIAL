@@ -77,7 +77,9 @@ $('.mp-menu-user .default').on("click","i",function(event) {
     $(this).siblings().removeClass('icon-radio-checked2').addClass('icon-radio-unchecked');
 });
 
-
+$('.filter li').click(function(event) {
+     filterUser($(this));
+});
 
 /*###################### AGENCY ##############*/
 
@@ -109,4 +111,17 @@ function addNewItem(title){
     title = title.text();
 	itemForm.find('h2').text(title);
 	itemForm.addClass('show');
+}
+
+function filterUser(el){
+    el.addClass('active').siblings().removeClass('active');
+    typeAttr = el.attr('type');
+    users = $('.list-user section');
+    users.removeClass('hidden')
+    if( typeAttr !== undefined)
+        users.each(function(index, el) {
+            if (typeAttr !== $(this).attr('status'))
+                $(this).addClass('hidden');
+        });
+    
 }

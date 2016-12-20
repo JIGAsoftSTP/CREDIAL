@@ -11,6 +11,12 @@
 	<div class="master-content adm-user">
 		<nav class="first">
 			<h1 class="title">Utilizador</h1>
+			<ul class="filter">
+				<li type="Pre-Ativo">Pré-Ativos</li>
+				<li type="Ativo">Ativos</li>
+				<li type="Inativo">Inativos</li>
+				<li class="active">Todos</li>
+			</ul>
 			<span class="add-more default">+</span>
 		</nav>
 		<div class="second">
