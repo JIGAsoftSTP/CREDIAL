@@ -14,12 +14,12 @@
 		</nav>
 		<div class="second">
 			<div class="container">
-				<div class="table-seguro">
+				<div class="table-seguro x-table">
 					<table id="table-seguro" class="selectable" cellpadding="0" cellspacing="0">
 						<thead>
 							<tr>
-								<th width="20">Valor</th>
-								<th width="10">Estado</th>
+								<th grow="2">Valor</th>
+								<th grow="1">Estado</th>
 							</tr>
 						</thead>
 						<tbody id="tableInsurances"></tbody>

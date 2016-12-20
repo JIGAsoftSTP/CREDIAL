@@ -19,7 +19,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="show add-new-admin xpert-form">
+		<div class="add-new-admin xpert-form">
 			<b class="head"><span class="closeIt">X</span><h2>Adicionar utilizador</h2></b>
 			<div class="flex-form add-new-user">
 				<div class="adm-ph-user default-user-img">

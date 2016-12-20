@@ -18,7 +18,7 @@
 		</div>	
 
 
-		<div class="show add-new-admin xpert-form">
+		<div class="add-new-admin xpert-form">
 			<b class="head"><span class="closeIt">X</span><h2>Adicionar Entidade</h2></b>
 			<div class="flex-form">
 				<select name="" class="input-total listAccounts" id="adminEntity">

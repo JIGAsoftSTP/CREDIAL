@@ -14,7 +14,7 @@
 				<nav class="photo default-user-img"></nav>
 				<p>
 				<i class="icon-user"></i>	
-				<input id="user" type="text" placeholder="NIF">
+				<input id="user" type="text" placeholder="NIF" autofocus>
 				</p>
 				<p>
 				<i class="icon-lock"></i>	

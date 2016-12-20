@@ -24,15 +24,15 @@
 				</ul>
 				<div class="abas">
 					<section class="active">
-						<div class="table-list-cheq">
+						<div class="table-list-cheq x-table">
 							<table id="table-cheq" cellpadding="0" cellspacing="0">
 								<thead>
 									<tr>                    
-										<th width="25">Banco</th>
-										<th width="25">Agência</th>
-										<th width="20">Seq. Início</th>
-										<th width="20">Seq. Fim</th>
-										<th width="10">Folhas</th>
+										<th grow="3">Banco</th>
+										<th grow="3">Agência</th>
+										<th grow="2">Seq. Início</th>
+										<th grow="2">Seq. Fim</th>
+										<th grow="1">Folhas</th>
 									</tr>
 								</thead>
 								<tbody>							
@@ -41,14 +41,14 @@
 						</div>					
 					</section>
 					<section class="">
-						<div class="table-list-saldos">
+						<div class="table-list-saldos x-table">
 							<table id="table-saldos" cellpadding="0" cellspacing="0">
 								<thead>
 									<tr>                    
-										<th width="15">Data</th>
-										<th width="20">Débito</th>
-										<th width="20">Crédito</th>
-										<th width="45">Designação</th>
+										<th grow="1">Data</th>
+										<th grow="2">Débito</th>
+										<th grow="2">Crédito</th>
+										<th grow="5">Designação</th>
 									</tr>
 								</thead>
 								<tbody>							
@@ -57,14 +57,14 @@
 						</div>
 					</section>
 					<section class="">
-						<div class="table-list-cobranca">
+						<div class="table-list-cobranca x-table">
 							<table id="table-cobranca" cellpadding="0" cellspacing="0">
 								<thead>
 									<tr>                    
-										<th width="15">Data</th>
-										<th width="30">Débito</th>
-										<th width="30">Crédito</th>
-										<th width="25">Banco</th>
+										<th grow="1.5">Data</th>
+										<th grow="3">Débito</th>
+										<th grow="3">Crédito</th>
+										<th grow="2.5">Banco</th>
 									</tr>
 								</thead>
 								<tbody>						
@@ -73,14 +73,14 @@
 						</div>
 					</section>
 					<section>
-						<div class="table-list-cheq">
+						<div class="table-list-cheq x-table">
 							<table id="table-cheq-dist" cellpadding="0" cellspacing="0">
 								<thead>
 									<tr>                    
-										<th width="25">Data</th>
-										<th width="20">Seq. Início</th>
-										<th width="20">Seq. Fim</th>
-										<th width="25">Agência</th>
+										<th grow="2.5">Data</th>
+										<th grow="2.0">Seq. Início</th>
+										<th grow="2.0">Seq. Fim</th>
+										<th grow="2.5">Agência</th>
 									</tr>
 								</thead>
 								<tbody>							

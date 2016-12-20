@@ -33,14 +33,14 @@
 					<nav class="article-bank">
 						<div class="bank-descript">
 							<span><b class="name" id="bankMovimentName"></b></span><span><b class="sald good">37 000 000,00</b> STD</span></div>
-						<div class="table-list-bank">
+						<div class="table-list-bank x-table">
 							<table id="table-bank" cellpadding="0" cellspacing="0">
 								<thead>
 									<tr>                    
-										<th width="15">Data</th>
-										<th width="20">Débito</th>
-										<th width="20">Crédito</th>
-										<th width="45">Designação</th>
+										<th grow="15">Data</th>
+										<th grow="20">Débito</th>
+										<th grow="20">Crédito</th>
+										<th grow="45">Designação</th>
 									</tr>
 								</thead>
 								<tbody id="tableBankMoviments">

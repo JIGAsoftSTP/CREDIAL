@@ -18,16 +18,16 @@
 					<option value="">(Tipo de crédito)</option>
 				</select>
 			</div>
-			<div class="table-taxa">
+			<div class="table-taxa x-table">
 				<table id="table-taxa" class="selectable" cellpadding="0" cellspacing="0">
 					<thead>
 						<tr>
-							<th width="20">Taxa</th>
-							<th width="20">Dias</th>
-							<th width="90">Tipo Crédito</th>
-							<th width="100">Data Inicio</th>
-							<th width="90">Data Fim</th>
-							<th width="120">Estado</th>
+							<th grow="2">Taxa</th>
+							<th grow="1">Dias</th>
+							<th grow="4">Tipo Crédito</th>
+							<th grow="2">Data Inicio</th>
+							<th grow="2">Data Fim</th>
+							<th grow="3">Estado</th>
 						</tr>
 					</thead>
 					<tbody id="tableTax"></tbody>
