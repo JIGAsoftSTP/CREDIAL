@@ -16,6 +16,7 @@
 			<div class="flex-form xpert-form">
 				<select name="" class="input-total listTipoCredito" id="tipoCreditoSearch">
 					<option value="">(Tipo de crédito)</option>
+					<option value="-1">Todos</option>
 				</select>
 			</div>
 			<div class="table-taxa x-table">

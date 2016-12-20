@@ -8,6 +8,10 @@ $(function () {
     $("#addCheck").click(function () {
         regCheque();
     })
+
+    $("#bt-restaurar-cheque").click(function(){
+
+    });
 });
 
 var chequeUrl = "../../bean/AdministracaoBean.php";

@@ -15,7 +15,7 @@
 		</nav>
 		<div class="second">
 			<div class="container">
-					<i class="icon-undo2"><span> <b>Restaurar</b></span></i>
+					<i class="icon-undo2"><span> <b><label id="bt-restaurar-cheque">Restaurar</label></b></span></i>
 					<section class="">
 						<div class="table-list-cheq x-table">
 							<table class="selectable" id="table-cheq" cellpadding="0" cellspacing="0">
