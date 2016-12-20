@@ -187,6 +187,7 @@
     {
         $call = new CallPgSQL();
         $call->selects("ver_agencia_administracao", "*");
+        $localidades= $call->loadDados("ver_localidade","\"ID\"", "\"DESC\"");
         $call->execute();
         $values = array();
 
@@ -194,8 +195,7 @@
         {
             $values[count($values)] = $row;
         }
-        $j = json_encode(array("result" =>$values));
-        die($j);
+        die(json_encode(array("result" =>$values, "localidades" =>$localidades)));
     }
     function registrarAgencia()
     {
