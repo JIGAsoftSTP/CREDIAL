@@ -92,8 +92,7 @@ function loadBankMoviment(position)
             listMoviments = e.result;
             $("#bankMovimentName").html(listBanks[position]["NAME"]);
             $(".good").html(listBanks[position]["SALDO"]);
-            $("#bankMovimentName").empty();
-            $("#tablebankmoviments").empty();
+            $("#tableBankMoviments").empty();
 
             for(var i=0;i<listMoviments.length;i++)
             {   var table = document.getElementById("tableBankMoviments");
