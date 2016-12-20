@@ -37,5 +37,6 @@ $('.x-table').on('click','.sh-rcrs',function(event) {
 });
 
 function setRowCount(table){
-	table.find('.rowCount span').text(table.find('tbody tr').length);
+	rows = table.find('tbody tr').length;
+	table.find('.rowCount span').text(rows);
 }
