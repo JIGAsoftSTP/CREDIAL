@@ -21,11 +21,11 @@
 								<thead>
 									<tr>                    
 										<th grow="1">Ação</th>
-										<th grow="3">Banco</th>
+										<th grow="2">Banco</th>
 										<th grow="3">Agência</th>
-										<th grow="2">Seq. Início</th>
-										<th grow="2">Seq. Fim</th>
-										<th grow="1">Folhas</th>
+										<th grow="6">Seq. Início</th>
+										<th grow="6">Seq. Fim</th>
+										<th grow="2">Folhas</th>
 									</tr>
 								</thead>
 								<tbody id="chequesTabela">

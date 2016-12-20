@@ -63,6 +63,9 @@
         case "load cheque data":
             loadChequeData();
             break;
+        case "load cheque":
+            loadCheckBanks();
+            break;
         case "localidades":
             carregarLocalidades();
             break;
@@ -358,7 +361,7 @@ function loadInsurance()
         die(json_encode(array("contas" =>$contas, "agencias" =>$agencias)));
     }
 
-    function carregarCheques()
+    function loadCheckBanks()
     {
         $call = new CallPgSQL();
         $call->selects("ver_cheques_disponiveis", "*");

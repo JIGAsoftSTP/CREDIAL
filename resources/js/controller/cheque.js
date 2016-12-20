@@ -3,7 +3,7 @@
  */
 
 $(function () {
-
+    carregarCheques();
     loadChequeData();
     $("#addCheck").click(function () {
         regCheque();
@@ -95,14 +95,15 @@ function carregarCheques() {
                 var column4 = row.insertCell(4);
                 var column5 = row.insertCell(5);
 
-                column0.innerHTML = cheque["DATA"];
+                // "<i class='icon-credit-card' onclick='"+"credito("+ff+")' ></i>" +
+                column0.innerHTML = '<i class="icon-cancel-circle"></i>';
                 column1.innerHTML = cheque["BANCO"];
                 column2.innerHTML = cheque["AGENCIA"];
                 column3.innerHTML = cheque["INICIO"];
                 column4.innerHTML = cheque["FIM"];
-                column5.innerHTML = cheque["FIM"];
+                column5.innerHTML = cheque["TOTAL"];
             }
-            tableEstructure($("#table-bank"));
+            tableEstructure($("#table-cheq"));
         }
     });
 }
