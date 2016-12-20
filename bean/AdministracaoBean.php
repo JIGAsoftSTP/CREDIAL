@@ -383,7 +383,7 @@ function loadInsurance()
             ->addNumeric($_POST["idChequeAnular"])
             ->addNumeric($_POST["idChequeRestaurar"]);
         $call->execute();
-        $result =  $call->getValors();
+        $result = $call->getValors();
     }
 
     function checkRestoreEffect()
