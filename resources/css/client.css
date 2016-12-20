@@ -6,8 +6,8 @@
 .mini-report nav,
 /*.geral-info section,*/
 .list-history div,
-.mp-liquidar .secDiv,
-.content-body .alphabet{
+.mp-liquidar .secDiv/*,
+.content-body .alphabet*/{
 	display: flex;
 
 }
@@ -101,13 +101,31 @@
 }
 .content-body .alphabet{
 	/*padding: 5px 0;*/
-	max-width: 1000px;
+	/*max-width: 1000px;
 	width: 100%;
 	align-self: flex-start;
-	margin: auto;
+	margin: auto;*/
+	position: absolute;
+	font-size: .97rem;
+	left: 0;
+	bottom: 0;
+	height: 88%;
+	overflow: auto;
+	background: rgba(0,0,0,.8);
+	text-align: center;
+	transform: translateX(-101%);
+}
+.content-body .alphabet.show{
+	transform: translateX(0);
 }
 .alphabet span{
-	display: inline-block;
+	display: block;
+	width: 4rem;
+	cursor: pointer;
+	line-height: 2rem;
+	margin-bottom: 7px;
+	color: #f5f5f5;
+	/*display: inline-block;
 	width: 2.5rem;
 	line-height: 1.6rem;
 	text-align: center;
@@ -118,21 +136,16 @@
 	cursor: pointer;
 	font-size: .8rem;
 	font-weight: bold;
-	color: #555;
+	color: #555;*/
 }
-.alphabet span:first-child{
-	border-left: 1px #cdcdcd solid;
 
-}
 .alphabet span:hover{
-	background: rgba(67, 135, 253, .6);
+	background: rgba(0,0,0, .6);
 	color: #FFF;
 }
 .alphabet span.active{
-	background: #4387fd;
+	background: rgba(0,0,0, .6);
 	color: #FFF;
-	border-right: 1px #4387fd solid;
-	border-bottom: 1px #4387fd solid;
 }
 .content-body .add-new-form{
 	position: absolute;

@@ -53,8 +53,7 @@
 <!--                <tr><td><i class="icon-credit-card"></i><i class="icon-info"></i><i class="icon-pencil"></i></td><td>109935310</td><td>WALDEMIRO QUARESMA FERNANDES</td><td>9969457</td></tr>-->
 				</tbody>
 			</table>
-		</div>
-		<div class="alphabet">
+		<div class="alphabet table-resources">
             <span value="26">*</span>
             <span class="active" value="0">A</span>
 			<span value="1">B</span>
@@ -82,6 +81,7 @@
 			<span value="23">X</span>
 			<span value="24">Y</span>
 			<span value="25">Z</span>
+		</div>
 		</div>
 		<div class="add-new-form">
 		<span class="close-add-client">x</span>
