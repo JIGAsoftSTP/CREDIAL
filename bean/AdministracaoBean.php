@@ -60,6 +60,9 @@
         case "search tax":
             searchTax();
             break;
+        case "load cheque data":
+            loadChequeData();
+            break;
     }
 
 
@@ -154,7 +157,7 @@
         $call->functionTable("funct_reg_chequempresa", "*")
             ->addString(Session::getUserLogado()->getId())
             ->addNumeric(Session::getUserLogado()->getIdAgencia())
-            ->addNumeric($_POST["Cheque"]["banco"])
+            ->addNumeric($_POST["Cheque"]["conta"])
             ->addNumeric($_POST["Cheque"]["agencia"])
             ->addString($_POST["Cheque"]["sequenciaInicial"])
             ->addString($_POST["Cheque"]["sequenciaFinal"])
@@ -332,5 +335,18 @@ function loadInsurance()
             $values[count($values)] = $row;
         }
         die(json_encode(array("banks" =>$bancos)));
+    }
+    function loadChequeData()
+    {
+        $call = new CallPgSQL();
+        $bancos = $call->selects("ver_conta_cheque", "*");
+        $call->execute();
+        $values = array();
+
+        while($row = $call->getValors())
+        {
+            $values[count($values)] = $row;
+        }
+        die(json_encode(array("contas" =>$values)));
     }
 

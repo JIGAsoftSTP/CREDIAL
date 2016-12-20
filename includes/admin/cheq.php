@@ -93,7 +93,7 @@
 			<div class="add-new-admin xpert-form">
 				<b class="head"><span class="closeIt">X</span><h2>Adicionar cheque</h2></b>
 				<div class="flex-form">
-					<select name="" class="input-total listAccounts" id="">
+					<select name="" class="input-total listAccounts" id="chequeContas">
 						<option value="">(Selecione Conta)</option>
 					</select>
 					<input type="text" placeholder="Sequência de início" class="input-total integer" id="sequenciaInicioCheque" maxlength="30">
@@ -107,6 +107,9 @@
 </body>
 <script type="text/javascript" src="../../resources/js/jQuery.js"></script>
 <script type="text/javascript" src="../../resources/js/geralScript.js"></script>
+<script type="text/javascript" src="../../resources/js/controller/geral.js"></script>
+<script type="text/javascript" src="../../resources/js/controller/cheque.js"></script>
 <script type="text/javascript" src="../../resources/js/admin.js"></script>
+<script type="text/javascript" src="../../resources/js/table.js"></script>
 </html>
 

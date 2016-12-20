@@ -115,7 +115,6 @@ function loadBankMoviment(position)
                 column2.innerHTML = moviments["CREDITO"];
                 column3.innerHTML = moviments["LIBELE"];
             }
-            tableEstructure($("#table-bank"));
         }
     });
 }
@@ -206,38 +205,6 @@ function makeCreditDebit() {
     }
 }
 
-function regCheque()
-{
-    if($("#chequeBanco").val() !=='' &&
-        ($("#chequeAgencia").val() !=='' &&
-        ($("#sequenciaInicioCheque").val() !== '' &&
-        $("#sequenciaFimCheque").val() !=='' &&
-        $("#totalFolhas").val() !=='')))
-    {
-        cheque.banco = $("#chequeBanco").val();
-        cheque.agencia = $("#chequeAgencia").val();
-        cheque.sequenciaInicial = $("#sequenciaInicioCheque").val();
-        cheque.sequenciaFinal =  $("#sequenciaFimCheque").val();
-        cheque.totalCheque =  $("#totalFolhas").val();
-
-        $.ajax({
-            url: bankAddress,
-            type:"POST",
-            dataType:"json",
-            data:{"intention": "registrar cheque", "Cheque": cheque},
-            success:function (e) {
-                if(e.result["RESULT"] ==='true')
-                {
-                    callXpertAlert("Cheque adicionado com sucesso.", "checkmark", 8000);
-                    $('.add-new-admin').find('input, select').val("");
-                    $('.add-new-admin').find('input, select').css("border", "");
-                }
-                else
-                    callXpertAlert(e.result["MESSAGE"], "warning", 8000);
-            }
-        });
-    }
-}
 
 function debitCreditCheckFields()
 {

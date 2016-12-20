@@ -23,9 +23,7 @@ $(function () {
         listTaxs();
     });
 
-    $("#addCheck").click(function () {
-        regCheque();
-    })
+
 });
 
 
@@ -97,13 +95,6 @@ function addAgency()
 
 
 
-var Cheque = function(){};
-Cheque.prototype.banco;
-Cheque.prototype.agencia;
-Cheque.prototype.sequenciaInicial;
-Cheque.prototype.sequenciaFinal;
-Cheque.prototype.totalCheque;
-var cheque = new Cheque();
 
 
 
