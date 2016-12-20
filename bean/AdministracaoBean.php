@@ -24,6 +24,9 @@
         case "regBank":
             registrarBanco();
             break;
+        case "add bank account":
+            registarContaBanco();
+            break;
         case "regInsurance":
             registrarSeguro();
             break;
@@ -106,14 +109,29 @@
             ->addString(Session::getUserLogado()->getId())
             ->addNumeric(Session::getUserLogado()->getIdAgencia())
             ->addString($_POST["Banco"]["sigla"])
-            ->addString($_POST["Banco"]["nome"]);
+            ->addString($_POST["Banco"]["nome"])
+            ->addString($_POST["Banco"]["codigoConta"]);
         $call->execute();
 
         $result = $call->getValors();
-        $j = json_encode(array("resultado" =>$result));
-        die($j);
+        die(json_encode(array("resultado" =>$result)));
+
     }
 
+    function registarContaBanco()
+    {
+        $call = new CallPgSQL();
+        $call->functionTable("funct_reg_conta", "*")
+            ->addString(Session::getUserLogado()->getId())
+            ->addNumeric(Session::getUserLogado()->getIdAgencia())
+            ->addNumeric($_POST["bank"]["nome"])
+            ->addString($_POST["bank"]["codigoConta"])
+            ->addString($_POST["bank"]["codigoAgencia"])
+            ->addString($_POST["bank"]["descricao"]);
+        $call->execute();
+        $result = $call->getValors();
+        die(json_encode(array("resultado" =>$result)));
+    }
     function registrarSeguro()
     {
         $call = new CallPgSQL();
@@ -252,9 +270,9 @@ function loadInsurance()
             ->addNumeric($_POST["Movimentation"]["bankTo"])
             ->addString($_POST["Movimentation"]["desc"]);
         $call->execute();
+        $result = $call->getValors();
+        die(json_encode(array("result" =>$result)));
 
-        $j = json_encode(array("result" =>$call->getValors()));
-        die($j);
     }
 
     function makeDebitCredit()

@@ -9,15 +9,7 @@ $(function () {
     loadInsurance();
     loadAgencyAdm();
 
-    $("#btBankActions").click(function () {
 
-       if($(".bank .add-new-admin h2").html() === 'Adicionar Banco')
-            regBank();
-        else if($(".bank .add-new-admin h2").html() ==='Adicionar Movimentações')
-           bankTransfer();
-        else
-            makeCreditDebit();
-    });
 
     $("#btAddTax").click(function () {
         addtax();
@@ -67,28 +59,6 @@ function loadAgencyAdm() {
 
 
 
-
-function bankCheckFields() {
-
-    if($("#bancoSigla").val() ==='') {
-        $('#bancoSigla').addClass('empty');
-        return false;
-    }
-    else
-    {
-        $("#bancoSigla").removeClass('empty');
-        if($("#bancoNome").val() === '')
-        {
-            $('#bancoNome').addClass('empty');
-            return false;
-        }
-        else
-        {
-            $("#bancoNome").removeClass('empty');
-            return true;
-        }
-    }
-}
 
 
 

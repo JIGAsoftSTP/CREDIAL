@@ -59,7 +59,7 @@
 				<section class="add-new-bank active">
 					<input type="text" placeholder="Sigla" class="input-total" id="bancoSigla" />
 					<input type="text" placeholder="Nome" class="input-total" id="bancoNome" />
-					<input type="text" placeholder="Código Bancário" class="input-total integer" maxlength="4" />
+					<input type="text" placeholder="Código Bancário" class="input-total integer" id="bancoCodigoBancario" maxlength="4" />
 				</section>
 				<section class="add-mov">
 					<span class="with-info">
@@ -75,7 +75,7 @@
 						<!-- <i>i</i> -->
 					</span>															
 					<input type="text" placeholder="Valor" class="input-total formatNumber double" id="movimentValue">
-					<textarea name="" placeholder="Descrição" class="input-total" id="movimentDesc"></textarea>
+					<textarea  placeholder="Descrição" class="input-total" id="movimentDesc"></textarea>
 				</section>
 
 				<section class="add-deb-cred" >
@@ -93,12 +93,12 @@
 				</section>
 
 				<section class="add-account">
-					<select name="" class="input-total listBanks" id="">
+					<select name="" class="input-total listBanks" id="bk-conta-nome">
 						<option value="0">(Banco)</option>
 					</select>
-                    <input type="text" placeholder="Código Agência" class="input-total integer" maxlength="4" />
-					<input type="text" placeholder="Conta" class="input-total integer" maxlength="11" />
-					<textarea name="" placeholder="Descrição" class="input-total" id=""></textarea>
+                    <input type="text" placeholder="Código Agência" class="input-total integer" maxlength="4" id="bk-conta-agencia" />
+					<input type="text" placeholder="Conta" class="input-total integer" maxlength="11" id="bk-conta-conta" />
+					<textarea name="" placeholder="Descrição" class="input-total" id="bk-conta-descricao"></textarea>
 				</section>
 			</div>
 			<button id="btBankActions">Adicionar</button>
