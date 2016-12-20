@@ -52,6 +52,10 @@ function loadAgencyAdm() {
         type:"POST",
         dataType:"json",
         data:{"intention": "agency adm"},
+        beforeSend: function () {  $(".mp-loading").fadeIn(); },
+        complete: function () {
+            $(".mp-loading").fadeOut();
+        },
         success:function (e) {
             agencies = e.result;
             for(var index=0;index<e.result.length;index++)
