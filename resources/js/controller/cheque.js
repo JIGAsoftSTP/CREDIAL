@@ -74,6 +74,10 @@ function carregarCheques() {
         type:"POST",
         dataType:"json",
         data:{"intention": "load cheque"},
+        beforeSend: function () {  $(".mp-loading").fadeIn(); },
+        complete: function () {
+            $(".mp-loading").fadeOut();
+        },
         success:function (e) {
             listaCheques = e.result;
             $("#chequesTabela").empty();
