@@ -18,6 +18,7 @@
 .bank .bank-descript{
 	justify-content: space-between;	
 	align-items: center;
+	flex-shrink: 0;
 }
 .bank .second,
 .bank .container,
