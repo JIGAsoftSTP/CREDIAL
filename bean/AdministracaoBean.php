@@ -9,6 +9,9 @@
 
     switch ($_POST["intention"])
     {
+        case "restaurar cheque":
+            checkRestoreEffect();
+            break;
         case "load Insurance":
             loadInsurance();
             break;

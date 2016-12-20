@@ -98,6 +98,7 @@
 					</select>
                     <input type="text" placeholder="Código Agência" class="input-total integer" maxlength="4" id="bk-conta-agencia" />
 					<input type="text" placeholder="Conta" class="input-total integer" maxlength="11" id="bk-conta-conta" />
+					<input type="text" placeholder="Saldo Mínimo" class="input-total formatNumber double" maxlength="11" id="bk-contaSaldoMinimo" />
 					<textarea name="" placeholder="Descrição" class="input-total" id="bk-conta-descricao"></textarea>
 				</section>
 			</div>

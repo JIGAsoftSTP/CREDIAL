@@ -10,7 +10,7 @@ $(function () {
     })
 
     $("#bt-restaurar-cheque").click(function(){
-
+        restaurarCheque();
     });
 });
 
@@ -100,7 +100,6 @@ function carregarCheques() {
                 var column4 = row.insertCell(4);
                 var column5 = row.insertCell(5);
 
-                // "<i class='icon-credit-card' onclick='"+"credito("+ff+")' ></i>" +
                 column0.innerHTML = '<i class="icon-cancel-circle"></i>';
                 column1.innerHTML = cheque["BANCO"];
                 column2.innerHTML = cheque["AGENCIA"];
@@ -109,6 +108,19 @@ function carregarCheques() {
                 column5.innerHTML = cheque["TOTAL"];
             }
             tableEstructure($("#table-cheq"));
+        }
+    });
+}
+
+function restaurarCheque()
+{
+    $.ajax({
+        url: chequeUrl,
+        type:"POST",
+        dataType:"json",
+        data:{"intention": "restaurar cheque"},
+        success:function (e) {
+
         }
     });
 }

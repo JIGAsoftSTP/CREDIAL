@@ -33,6 +33,7 @@ Banco.prototype.nome = undefined;
 Banco.prototype.codigoAgencia = undefined;
 Banco.prototype.codigoConta = undefined;
 Banco.prototype.descricao = undefined;
+Banco.prototype.saldoMinimo = undefined;
 
 var DebitCredit = function(){};
 DebitCredit.prototype.numDoc = undefined;
@@ -292,32 +293,40 @@ function regBankAccount()
                     $("#bk-conta-descricao").addClass("empty");
                 else{
                     $("#bk-conta-descricao").removeClass("empty");
+                    if($("#bk-contaSaldoMinimo").val() === "")
+                        $("#bk-conta-saldo-minimo").addClass("empty");
+                    else
+                    {
+                        $("#bk-conta-saldo-minimo").removeClass("empty");
 
-                    var banco = new Banco();
-                    banco.nome = $("#bk-conta-nome").val();
-                    banco.codigoAgencia = $("#bk-conta-agencia").val();
-                    banco.codigoConta = $("#bk-conta-conta").val();
-                    banco.descricao = $("#bk-conta-descricao").val();
+                        var banco = new Banco();
+                        banco.nome = $("#bk-conta-nome").val();
+                        banco.codigoAgencia = $("#bk-conta-agencia").val();
+                        banco.codigoConta = $("#bk-conta-conta").val();
+                        banco.descricao = $("#bk-conta-descricao").val();
+                        banco.saldoMinimo = unformatted($("#bk-conta-saldo-minimo").val());
 
-                    $.ajax({
-                        url: bankAddress,
-                        type:"POST",
-                        dataType:"json",
-                        async: false,
-                        data:{"intention": "add bank account", "bank" : banco},
-                        success:function (e) {
-                            if(e.resultado["RESULT"] === "true")
-                            {
-                                callXpertAlert('Conta Banco registrado com sucesso!', 'checkmark', 8000);
-                                $('.add-account').find('input, select').val("");
-                                $('.add-account').find('input, select').css("border", "");
-                                $("#bk-conta-descricao").val("");
-                                $("#bk-conta-descricao").css("border", "");
+                        $.ajax({
+                            url: bankAddress,
+                            type:"POST",
+                            dataType:"json",
+                            async: false,
+                            data:{"intention": "add bank account", "bank" : banco},
+                            success:function (e) {
+                                if(e.resultado["RESULT"] === "true")
+                                {
+                                    callXpertAlert('Conta Banco registrado com sucesso!', 'checkmark', 8000);
+                                    $('.add-account').find('input, select').val("");
+                                    $('.add-account').find('input, select').css("border", "");
+                                    $("#bk-conta-descricao").val("");
+                                    $("#bk-conta-descricao").css("border", "");
+                                }
+                                else
+                                    callXpertAlert(e.resultado["MESSAGE"], 'warning', 8000);
                             }
-                            else
-                                callXpertAlert(e.resultado["MESSAGE"], 'warning', 8000);
-                        }
-                    });
+                        });
+                    }
+
 
                 }
 
