@@ -36,12 +36,15 @@ $('.containerEntidades').on('click', '.show-hide', function(event) {
 
 
 /* ############## BANK  ###########*/
-
 $('.bank .menu-bank li').click(function(event) {
     var idx = $(this).index();
     var sec = $('.bank').find('.add-new-admin section');
     sec.eq(idx).addClass('active').siblings().removeClass('active'); 
     addNewItem($(this));
+});
+
+$('.bank .add-more').click(function(event) {
+    $('.bank .menu-bank li').eq(0).click();
 });
 
 $('.bank').on('click','.siglas li', function(event) {
