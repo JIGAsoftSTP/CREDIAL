@@ -204,14 +204,11 @@
         $call = new CallPgSQL();
         $call->selects("ver_agencia_administracao", "*");
         $call->execute();
-
-
         $values = array();
         while($row = $call->getValors())
         {
             $values[count($values)] = $row;
         }
-
         die(json_encode(array("result" =>$values)));
     }
     function registrarAgencia()
@@ -361,3 +358,15 @@ function loadInsurance()
         die(json_encode(array("contas" =>$contas, "agencias" =>$agencias)));
     }
 
+    function carregarCheques()
+    {
+        $call = new CallPgSQL();
+        $call->selects("ver_cheques_disponiveis", "*");
+        $call->execute();
+        $cheques = array();
+        while($row = $call->getValors())
+        {
+            $cheques[count($cheques)] = $row;
+        }
+        die(json_encode(array("result" =>$cheques)));
+    }

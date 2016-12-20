@@ -15,20 +15,12 @@
 		</nav>
 		<div class="second">
 			<div class="container">
-				<ul class="menu-cheq">
-					<nav>
-						<li class="active">Cheques</li>
-						<li class="">Saldos diários</li>
-						<li class="">Cobrança e depósitos diários</li>
-						<li class="">Cheques distribuídos</li>
-					</nav>
-				</ul>
-				<div class="abas">
-					<section class="active">
+					<section class="">
 						<div class="table-list-cheq x-table">
 							<table id="table-cheq" cellpadding="0" cellspacing="0">
 								<thead>
 									<tr>                    
+										<th grow="1">Ação</th>
 										<th grow="3">Banco</th>
 										<th grow="3">Agência</th>
 										<th grow="2">Seq. Início</th>
@@ -36,60 +28,11 @@
 										<th grow="1">Folhas</th>
 									</tr>
 								</thead>
-								<tbody>							
+								<tbody id="chequesTabela">
 								</tbody>
 							</table>
 						</div>					
 					</section>
-					<section class="">
-						<div class="table-list-saldos x-table">
-							<table id="table-saldos" cellpadding="0" cellspacing="0">
-								<thead>
-									<tr>                    
-										<th grow="1">Data</th>
-										<th grow="2">Débito</th>
-										<th grow="2">Crédito</th>
-										<th grow="5">Designação</th>
-									</tr>
-								</thead>
-								<tbody>							
-								</tbody>
-							</table>
-						</div>
-					</section>
-					<section class="">
-						<div class="table-list-cobranca x-table">
-							<table id="table-cobranca" cellpadding="0" cellspacing="0">
-								<thead>
-									<tr>                    
-										<th grow="1.5">Data</th>
-										<th grow="3">Débito</th>
-										<th grow="3">Crédito</th>
-										<th grow="2.5">Banco</th>
-									</tr>
-								</thead>
-								<tbody>						
-								</tbody>
-							</table>
-						</div>
-					</section>
-					<section>
-						<div class="table-list-cheq x-table">
-							<table id="table-cheq-dist" cellpadding="0" cellspacing="0">
-								<thead>
-									<tr>                    
-										<th grow="2.5">Data</th>
-										<th grow="2.0">Seq. Início</th>
-										<th grow="2.0">Seq. Fim</th>
-										<th grow="2.5">Agência</th>
-									</tr>
-								</thead>
-								<tbody>							
-								</tbody>
-							</table>
-						</div>			
-					</section>
-				</div>
 			</div>
 			<div class="add-new-admin xpert-form">
 				<b class="head"><span class="closeIt">X</span><h2>Adicionar cheque</h2></b>

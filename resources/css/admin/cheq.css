@@ -17,40 +17,7 @@
 .cheq .container{
 	flex-grow: 1;
 }
-.cheq .menu-cheq{
-	display: flex;
-	/*align-items: center;*/
-	margin-bottom: 1rem;
-}
-.cheq .menu-cheq li{
-	display: inline-block;
-	line-height: 2.5rem;
-	min-width: 120px;
-	margin-right: 10px;
-	padding: 0 1rem;
-	background: #fff;
-	text-align: center;
-	border: 2px #ececec solid;
-	cursor: pointer;
-}
-.cheq .menu-cheq li.active{
-	background: #00B9A3;
-	border: 2px #00B9A3 solid;
-	color: #fff;
-}
-.cheq .abas{
-	position: relative;
-	overflow: hidden;
-	flex-grow: 1;
-}
-.cheq .abas section{
-	position: absolute;
-	top: 100%;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: #fff;
-}
+
 /*.cheq .abas [class*="table-"]{
 	height: 100%;
 }*/
