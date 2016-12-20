@@ -20,6 +20,7 @@ $(function(){
                 success:function (e) {
                     taxs = e.result;
                     loadTax();
+                    setRowCount($("#table-taxa"));
                 }
             });
         }

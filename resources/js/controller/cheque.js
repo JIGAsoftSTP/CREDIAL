@@ -100,7 +100,7 @@ function carregarCheques() {
                 var column4 = row.insertCell(4);
                 var column5 = row.insertCell(5);
 
-                column0.innerHTML = '<i class="icon-cancel-circle"></i>';
+                column0.innerHTML = '<i class="icon-cancel-circle" onclick()></i>';
                 column1.innerHTML = cheque["BANCO"];
                 column2.innerHTML = cheque["AGENCIA"];
                 column3.innerHTML = cheque["INICIO"];
@@ -123,4 +123,9 @@ function restaurarCheque()
 
         }
     });
+}
+
+function anularCheque()
+{
+
 }
