@@ -28,6 +28,7 @@
 	max-width: 600px;
 	margin: 2rem 0;
 	color: #555;
+	flex-shrink: 0;	
 }
 .search-span span{
 	padding: 5px 0;

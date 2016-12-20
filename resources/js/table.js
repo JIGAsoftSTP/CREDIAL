@@ -32,7 +32,7 @@ $('table.selectable td').click(function(event) {
 
 $('.x-table').on('click','.sh-rcrs',function(event) {
 	table = $(this).closest('.x-table');
-	setRowCount(table, table.find('tr').length);
+	setRowCount(table, table.find('tbody tr').length );
 	table.find('.table-resources').toggleClass('show');
 });
 
