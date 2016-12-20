@@ -3,7 +3,7 @@
  */
 
 $(function () {
-
+   carregarLocalidade();
     loadAgencyAdm();
     $("#addAgency").click(function () {
         addAgency();
@@ -15,6 +15,8 @@ var Agency = function(){};
 Agency.prototype.nome;
 Agency.prototype.localidade;
 var agency = new Agency();
+
+var agencies = [];
 
 
 function addAgency()
@@ -52,7 +54,6 @@ function loadAgencyAdm() {
         data:{"intention": "agency adm"},
         success:function (e) {
 
-            loadComoBoxIDandValue($("#agenciaLocalidade"), e.localidades ,"ID", "DESC");
             for(var index=0;index<e.result.length;index++)
             {
 
@@ -67,10 +68,24 @@ function loadAgencyAdm() {
     });
 }
 
+function carregarLocalidade()
+{
+    $.ajax({
+        url:agencyUrl,
+        type:"POST",
+        dataType:"json",
+        data:{"intention": "localidades"},
+        success:function (e) {
+
+            loadComoBoxIDandValue($("#agenciaLocalidade"), e.localidades ,"ID", "DESC");
+        }
+    });
+}
+
 function loadUserAgency(indice) {
 
     $.ajax({
-        url:"./bean/AdministracaoBean.php",
+        url:agencyUrl,
         type:"POST",
         dataType:"json",
         data:{"intention": "load user agency", "agency": agencies[indice]["ID"]},

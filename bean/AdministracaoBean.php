@@ -63,6 +63,9 @@
         case "load cheque data":
             loadChequeData();
             break;
+        case "localidades":
+            carregarLocalidades();
+            break;
     }
 
 
@@ -89,8 +92,8 @@
             }
             $result[count($result)] = $values;
         }
-        $j = json_encode(array("result" =>$result));
-        die($j);
+        die(json_encode(array("result" =>$result)));
+
     }
     function registarTaxa()
     {
@@ -182,20 +185,33 @@
         die(json_encode(array("siglas" =>$values)));
 
     }
+    function carregarLocalidades()
+    {
+        $call = new CallPgSQL();
+        $call->selects("ver_localidade", "*");
+        $call->execute();
+        $result = array();
+        while($row = $call->getValors())
+        {
+            $result[count($result)] = $row;
+        }
+        die(json_encode(array("localidades" =>$result)));
+    }
 
     function loadAgencyAdm()
     {
         $call = new CallPgSQL();
         $call->selects("ver_agencia_administracao", "*");
-        $localidades= $call->loadDados("ver_localidade","\"ID\"", "\"DESC\"");
         $call->execute();
-        $values = array();
 
+
+        $values = array();
         while($row = $call->getValors())
         {
             $values[count($values)] = $row;
         }
-        die(json_encode(array("result" =>$values, "localidades" =>$localidades)));
+
+        die(json_encode(array("result" =>$values)));
     }
     function registrarAgencia()
     {
