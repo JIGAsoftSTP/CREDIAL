@@ -16,6 +16,7 @@
 }
 .cheq .container{
 	flex-grow: 1;
+	padding: 1rem;
 }
 
 /*.cheq .abas [class*="table-"]{
@@ -30,4 +31,8 @@
 }*/
 .cheq .abas section.active{
 	top: 0;
+}
+.table-list-cheq{
+	max-height: 400px;
+	background: #FFF;
 }
