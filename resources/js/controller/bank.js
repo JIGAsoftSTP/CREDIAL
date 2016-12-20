@@ -2,7 +2,6 @@
  * Created by Helcio on 12/17/2016.
  */
 $(function(){
-    loadBankData();
     carregarSiglas();
 
     $("#btBankActions").click(function () {
@@ -19,7 +18,7 @@ $(function(){
 
 var bankAddress = "../../bean/AdministracaoBean.php";
 
-
+var listBanks = [];
 var Movimentation = function () {};
 Movimentation.prototype.bankFrom;
 Movimentation.prototype.bankTo;
@@ -49,6 +48,7 @@ function loadBankData()
         data:{"intention" : "bank data"},
         success:function (param) {
             loadComoBoxIDandValue($(".listBanks"), param.banks ,"ID", "NAME");
+            listBanks =  param.banks;
         }
     });
 }
@@ -62,7 +62,8 @@ function carregarSiglas()
         data:{"intention": "siglas"},
         success:function (e)
         {
-            banks = e.siglas;
+            listBanks = e.siglas;
+            loadComoBoxIDandValue($(".listBanks"), e.siglas ,"ID", "NAME");
             $(".siglas").append('<li class="active">'+e.siglas[0]["SIGLA"]+'</li>');
             loadBankMoviment(0);
             for(var i = 1;i<e.siglas.length;i++)
@@ -75,16 +76,17 @@ function carregarSiglas()
 
 function loadBankMoviment(position)
 {
+    $(".good").html(listBanks[position]["SALDO"]);
 
     $.ajax
     ({
         url: bankAddress,
         type:"POST",
         dataType:"json",
-        data:{"intention": "bank moviment", "bank" : banks[position]["ID"] },
+        data:{"intention": "bank moviment", "bank" : listBanks[position]["ID"]},
         success:function (e)
         {
-            $("#bankMovimentName").html(banks[position]["NAME"]);
+            $("#bankMovimentName").html(listBanks[position]["NAME"]);
             $("#tablebankmoviments").empty();
 
             for(var i=0;i<e.result.length;i++)

@@ -174,8 +174,8 @@
         {
             $values[count($values)] = $row;
         }
-        $j = json_encode(array("siglas" =>$values));
-        die($j);
+        die(json_encode(array("siglas" =>$values)));
+
     }
 
     function loadAgencyAdm()
@@ -303,7 +303,14 @@ function loadInsurance()
     function loadBankData()
     {
         $call = new CallPgSQL();
-        $bancos = $call->loadDados("ver_bank", "\"ID\"", "\"NAME\"");
+        $bancos = $call->selects("ver_bank", "*");
+        $call->execute();
+        $values = array();
+
+        while($row = $call->getValors())
+        {
+            $values[count($values)] = $row;
+        }
         die(json_encode(array("banks" =>$bancos)));
     }
 
