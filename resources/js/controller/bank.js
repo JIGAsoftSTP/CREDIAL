@@ -62,6 +62,10 @@ function carregarSiglas()
         type:"POST",
         dataType:"json",
         data:{"intention": "siglas"},
+        beforeSend: function () {  $(".mp-loading").fadeIn(); },
+        complete: function () {
+            $(".mp-loading").fadeOut();
+        },
         success:function (e)
         {
             listBanks = e.siglas;
