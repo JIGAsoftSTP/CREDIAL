@@ -22,7 +22,7 @@ $('.add-new-admin button').click(function(event) {
 });
 
 $('.add-more.default').click(function(event) {    
-	addNewItem($(this).prev());
+	addNewItem($(this).closest('nav').find('.title'));
 });
 
 

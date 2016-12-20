@@ -180,7 +180,7 @@ $(".list-user").on("click", "i.icon-undo2", function () {
                 seletedMenuUser(ids);
             }
         }
-        $('.add-more.default').click();
+        addNewItem($(this).closest('section').find('h4'));
     })
     .on("click", "i.icon-lock", function () {
         var user =  listUser.list[$(this).closest("section").attr("item")];
