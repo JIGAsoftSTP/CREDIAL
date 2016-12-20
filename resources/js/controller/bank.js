@@ -19,6 +19,7 @@ $(function(){
 var bankAddress = "../../bean/AdministracaoBean.php";
 
 var listBanks = [];
+var value;
 var Movimentation = function () {};
 Movimentation.prototype.bankFrom;
 Movimentation.prototype.bankTo;
