@@ -376,10 +376,22 @@ function loadInsurance()
 
     function restaurarCheque()
     {
-//        $call = new CallPgSQL();
-//        $call->functionTable("funct_cheque_restore", "*")
-//            ->addString(Session::getUserLogado()->getId())
-//            ->addNumeric(Session::getUserLogado()->getIdAgencia())
-            //id cheque anular
+        $call = new CallPgSQL();
+        $call->functionTable("funct_cheque_restore", "*")
+            ->addString(Session::getUserLogado()->getId())
+            ->addNumeric(Session::getUserLogado()->getIdAgencia())
+            ->addNumeric($_POST["idChequeAnular"])
+            ->addNumeric($_POST["idChequeRestaurar"]);
+        $call->execute();
+        $result =  $call->getValors()
 
+    }
+
+    function checkRestoreEffect()
+    {
+        $call = new CallPgSQL();
+        $call->functionTable("funct_cheque_restore_effect", "*");
+        $call->execute();
+        $result = $call->getValors();
+        die(json_encode(array("result" => $result)));
     }
