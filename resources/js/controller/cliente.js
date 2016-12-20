@@ -88,8 +88,8 @@ function carregarCliente() {
     }
     // i = lastI+1;
     if(carregou) {
-        tableEstructure($('.x-table'));
-        setRowCount($('.x-table.table-client'), $('.x-table.table-client').find('tr').length);
+        tableEstructure($('.x-table.table-client'));
+        setRowCount($('.x-table.table-client'));
     }
 
 }
