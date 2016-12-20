@@ -88,7 +88,8 @@ function carregarCliente() {
     }
     // i = lastI+1;
     if(carregou) {
-        tableEstructure($('#table-client'));
+        tableEstructure($('.x-table'));
+        setRowCount($('.x-table.table-client'), $('.x-table.table-client').find('tr').length);
     }
 
 }
