@@ -17,8 +17,8 @@ function tableEstructure(myTable){
 		grow = head.eq(idx).attr('grow');
 		$(this).css('width', (unitGrow * grow) + 'px');
 	});
-	$('.x-table').prepend('<span class="icon-magic-wand sh-rcrs"></span>')
-	$('.x-table').append('<div class="table-resources rowCount"><span>2</span></div>')
+	myTable.prepend('<span class="icon-magic-wand sh-rcrs"></span>')
+	myTable.append('<div class="table-resources rowCount"><span></span></div>')
 	
 }
 
@@ -30,9 +30,11 @@ $('table.selectable td').click(function(event) {
 });
 
 $('.x-table').on('click','.sh-rcrs',function(event) {
-	$(this).closest('.x-table').find('.table-resources').toggleClass('show');
+	table = $(this).closest('.x-table');
+	setRowCount(table, table.find('tr').length);
+	table.find('.table-resources').toggleClass('show');
 });
 
-function setRowCount(_value){
-	$('.x-table').find('.rowCount span').text(_value);
+function setRowCount(table, _value){
+	table.find('.rowCount span').text(_value);
 }
