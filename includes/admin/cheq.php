@@ -95,6 +95,8 @@
 				<div class="flex-form">
 					<select name="" class="input-total listAccounts" id="chequeContas">
 						<option value="">(Selecione Conta)</option>
+					</select><select name="" class="input-total listAccounts" id="chequeAgencia">
+						<option value="">(Selecione Agência)</option>
 					</select>
 					<input type="text" placeholder="Sequência de início" class="input-total integer" id="sequenciaInicioCheque" maxlength="30">
 					<input type="text" placeholder="Sequência de fim" class="input-total integer" id="sequenciaFimCheque" maxlength="30">

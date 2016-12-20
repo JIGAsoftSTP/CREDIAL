@@ -165,8 +165,7 @@
         $call->execute();
 
         $result = $call->getValors();
-        $j = json_encode(array("result" =>$result));
-        die($j);
+        die(json_encode(array("result" =>$result)));
     }
 
     function siglas()
@@ -339,14 +338,9 @@ function loadInsurance()
     function loadChequeData()
     {
         $call = new CallPgSQL();
-        $bancos = $call->selects("ver_conta_cheque", "*");
-        $call->execute();
-        $values = array();
+        $contas = $call->loadDados("ver_conta_cheque","\"ID\"", "\"CONTA\"");
+        $agencias = $call->loadDados("ver_agencia","\"ID\"", "\"NOME\"");
 
-        while($row = $call->getValors())
-        {
-            $values[count($values)] = $row;
-        }
-        die(json_encode(array("contas" =>$values)));
+        die(json_encode(array("contas" =>$contas, "agencias" =>$agencias)));
     }
 

@@ -4,16 +4,7 @@
 
 $(function () {
 
-    listTaxs();
-    carregarSiglas();
-    loadInsurance();
     loadAgencyAdm();
-
-
-
-    $("#btAddTax").click(function () {
-        addtax();
-    });
 
     $("#addAgency").click(function () {
        addAgency();
@@ -92,10 +83,6 @@ function addAgency()
         });
     }
 }
-
-
-
-
 
 
 function loadUserAgency(indice) {
