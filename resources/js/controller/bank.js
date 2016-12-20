@@ -88,6 +88,7 @@ function loadBankMoviment(position)
         data:{"intention": "bank moviment", "bank" : listBanks[position]["ID"]},
         success:function (e)
         {
+            listMoviments = [];
             listMoviments = e.result;
             $("#bankMovimentName").html(listBanks[position]["NAME"]);
             $(".good").html(listBanks[position]["SALDO"]);

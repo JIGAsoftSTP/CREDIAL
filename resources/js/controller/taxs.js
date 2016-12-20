@@ -8,6 +8,22 @@ $(function(){
     $("#btAddTax").click(function () {
        addtax();
     });
+
+    $("#tipoCreditoSearch").change(function () {
+        if($(this).val() !== "")
+        {
+            $.ajax({
+                url: taxAdress,
+                type:"POST",
+                dataType:"json",
+                data:{"intention": "search tax", "typeCredit": $("#tipoCreditoSearch").val()},
+                success:function (e) {
+                    taxs = e.result;
+                    loadTax();
+                }
+            });
+        }
+    });
 });
 
 var taxAdress = "../../bean/AdministracaoBean.php";
@@ -75,6 +91,7 @@ function addtax() {
         });
     }
 }
+
 
 
 function loadTax()

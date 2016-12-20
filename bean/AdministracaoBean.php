@@ -57,6 +57,9 @@
         case "bank data":
             loadBankData();
             break;
+        case "search tax":
+            searchTax();
+            break;
     }
 
 
@@ -222,6 +225,23 @@
             $arrayValues[count($arrayValues)] = $result;
         }
         die(json_encode(array("result" =>$arrayValues, "tipoCreditos" =>$tipoCreditos)));
+    }
+
+    function searchTax()
+    {
+        $call = new CallPgSQL();
+        $call->functionTable("funct_load_taxa", "*")
+            ->addNumeric(Session::getUserLogado()->getId())
+            ->addNumeric(Session::getUserLogado()->getIdAgencia())
+            ->addNumeric($_POST["typeCredit"]);
+        $call->execute();
+        $arrayValues = array();
+        while($result = $call->getValors())
+        {
+            $arrayValues[count($arrayValues)] = $result;
+        }
+        die(json_encode(array("result" =>$arrayValues)));
+
     }
 
 function loadBankMoviment()
