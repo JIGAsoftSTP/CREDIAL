@@ -18,7 +18,7 @@ function tableEstructure(myTable){
 		$(this).css('width', (unitGrow * grow) + 'px');
 	});
 	myTable.prepend('<span class="icon-magic-wand sh-rcrs"></span>')
-	if(myTable.find('.rowCount').length < 1)
+	if(myTable.find('.rowCount').length !== 1)
 	myTable.append('<div class="table-resources rowCount"><span></span></div>')
 	
 }

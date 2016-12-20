@@ -15,9 +15,10 @@
 		</nav>
 		<div class="second">
 			<div class="container">
+					<i class="icon-undo2"><span> <b>Restaurar</b></span></i>
 					<section class="">
 						<div class="table-list-cheq x-table">
-							<table id="table-cheq" cellpadding="0" cellspacing="0">
+							<table class="selectable" id="table-cheq" cellpadding="0" cellspacing="0">
 								<thead>
 									<tr>                    
 										<th grow="1">Ação</th>
