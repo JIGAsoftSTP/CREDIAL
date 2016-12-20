@@ -83,12 +83,13 @@
         $result = array();
         while ($values = $call->getValors()) {
             if ($values["PHOTO"] == null)
-                $values["PHOTO"] = "./resources/img/user.png";
+          $values["PHOTO"] = "../../resources/img/user.png";
+//                  $values["PHOTO"] = "./resources/img/user.png";
             else
             {
                 $img = md5($values["ID"]) /*. ".png"*/;
                 file_put_contents("../resources/img/userImg/" . $img, pg_unescape_bytea($values["PHOTO"]));
-                $values["PHOTO"] = "./resources/img/userImg/" . $img;
+                $values["PHOTO"] = "../../resources/img/userImg/" . $img;
             }
             $result[count($result)] = $values;
         }

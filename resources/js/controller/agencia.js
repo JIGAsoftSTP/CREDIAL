@@ -90,7 +90,9 @@ function loadUserAgency(indice) {
         dataType:"json",
         data:{"intention": "load user agency", "agency": agencies[indice]["ID"]},
         beforeSend: function () {  $(".mp-loading").fadeIn(); },
-        complete: function () { $(".mp-loading").fadeOut(); },
+        complete: function () {
+            $(".mp-loading").fadeOut();
+        },
         success:function (e) {
             $("#agencyNameWorker h3").html(agencies[indice]["NOME AGENCIA"]);
             $(".agencyFunc li").empty();
@@ -98,6 +100,7 @@ function loadUserAgency(indice) {
             {
                 $(".agencyFunc").append('<li><img src='+e.result[i]["PHOTO"]+' alt="" width="200">'+e.result[i]["NAME"]+" "+e.result[i]["SURNAME"]+'</li>');
             }
+            $(".list-funcs").addClass("show");
 
         }
     });

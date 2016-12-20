@@ -5,6 +5,7 @@
 	<link rel="stylesheet" href="../../resources/css/geralStyle.css">
 	<link rel="stylesheet" href="../../resources/css/admin/insurate.css">
 	<link rel="stylesheet" href="../../resources/css/admin.css">
+
 </head>
 <body>
 	<div class="master-content seguro">
@@ -42,6 +43,7 @@
 <script type="text/javascript" src="../../resources/js/admin.js"></script>
 <script type="text/javascript" src="../../resources/js/controller/seguro.js"></script>
 <script type="text/javascript" src="../../resources/js/table.js"></script>
+<script type="text/javascript" src="../../resources/js/xMenu.js"></script>
 
 </html>
 

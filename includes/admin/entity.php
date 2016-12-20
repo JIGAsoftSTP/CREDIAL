@@ -5,6 +5,7 @@
 	<link rel="stylesheet" href="../../resources/css/geralStyle.css">
 	<link rel="stylesheet" href="../../resources/css/admin/entity.css">
 	<link rel="stylesheet" href="../../resources/css/admin.css">
+
 </head>
 <body>
 	<div class="master-content entity">
@@ -35,6 +36,7 @@
 <script type="text/javascript" src="../../resources/js/controller/geral.js"></script>
 <script type="text/javascript" src="../../resources/js/controller/entity.js"></script>
 <script type="text/javascript" src="../../resources/js/admin.js"></script>
+<script type="text/javascript" src="../../resources/js/xMenu.js"></script>
 </html>
 
 
