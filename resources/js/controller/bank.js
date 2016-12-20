@@ -3,6 +3,7 @@
  */
 $(function(){
     loadBankData();
+    carregarSiglas();
 
     $("#btBankActions").click(function () {
         if($(".xpert-form .head h2").html() === 'Banco')
@@ -33,10 +34,10 @@ Banco.prototype.codigoConta = undefined;
 Banco.prototype.descricao = undefined;
 
 var DebitCredit = function(){};
-DebitCredit.prototype.numDoc;
-DebitCredit.prototype.value;
-DebitCredit.prototype.bank;
-DebitCredit.prototype.typeOperation;
+DebitCredit.prototype.numDoc = undefined;
+DebitCredit.prototype.value = undefined;
+DebitCredit.prototype.bank = undefined;
+DebitCredit.prototype.typeOperation = undefined;
 
 
 function loadBankData()
