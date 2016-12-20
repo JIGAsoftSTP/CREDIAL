@@ -29,7 +29,7 @@
 			</div>
 			<button id="addAgency" >Adicionar</button>
 		</div>
-		<div class="show list-funcs">
+		<div class="list-funcs">
 			<span class="closeIt">X</span>
 			<div class="cont" id="agencyNameWorker">
 				<h3></h3>

@@ -1,7 +1,6 @@
 .adm-user .container{
 	/*position: relative;*/
 	height: 100%;
-	padding: 1rem;
 }
 
 .adm-user .list-user{
@@ -22,17 +21,14 @@
 	text-align: center;
 	width: 32%;
 	min-width: 300px;
-	margin-bottom: 1rem;
-	margin-right: 2%;
+	margin: .5%;
 	background: #fff;
 	padding: 15px;
 	position: relative;
 	border: 1px #e5e6e9 solid;
 	border-bottom: 2px #ddd solid;
 }
-.list-user section:nth-child(3n){
-	margin-right: 0;
-}
+
 .list-user span{
 	position: absolute;
 	top: 10px;
