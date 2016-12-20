@@ -70,6 +70,9 @@ $('.cheq .menu-cheq li').click(function(event) {
 $('.reset-cheq').click(function(event) {
      openModalFrame($('.mp-reset-cheq'));
 });
+$('.x-table').on('click','i',function(event) {
+     openModalFrame($('.mp-cancel-cheq'));
+});
 
 
 /* ############## USER  ###########*/

@@ -52,23 +52,41 @@
 		</div>
 	</div>
 	<section class="modalPage mp-reset-cheq">
-	<div class="modalFrame">
-		<div class="modalContainer">
-			<div class="content">
-				<p>Certeza?</p>
-				
-			</div>
-			<div class="bt-yes-no-cancel">
-				<button id="">OK</button>
-				<button class="bt-no-option">Cancelar</button>
-			</div>
-			<div class="modal-header">
-				<b>Restaurar</b>
-				<span class="mp-close">X</span>
+		<div class="modalFrame">
+			<div class="modalContainer">
+				<div class="content">
+					<p>Certeza Restaurar?</p>
+					
+				</div>
+				<div class="bt-yes-no-cancel">
+					<button id="">OK</button>
+					<button class="bt-no-option">Cancelar</button>
+				</div>
+				<div class="modal-header">
+					<b>Restaurar Cheque</b>
+					<span class="mp-close">X</span>
+				</div>
 			</div>
 		</div>
-	</div>
-</section>
+	</section>
+	<section class="modalPage mp-cancel-cheq">
+		<div class="modalFrame">
+			<div class="modalContainer">
+				<div class="content">
+					<p>Certeza Anular?</p>
+					
+				</div>
+				<div class="bt-yes-no-cancel">
+					<button id="">OK</button>
+					<button class="bt-no-option">Cancelar</button>
+				</div>
+				<div class="modal-header">
+					<b>Anular Cheque</b>
+					<span class="mp-close">X</span>
+				</div>
+			</div>
+		</div>
+	</section>
     <?php include "../process.html"; ?>
 </body>
 <script type="text/javascript" src="../../resources/js/jQuery.js"></script>
