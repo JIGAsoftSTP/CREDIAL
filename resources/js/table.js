@@ -6,6 +6,7 @@ tableEstructure($('.x-table'));
 function tableEstructure(myTable){
 	head = myTable.find('th');
 	var unitGrow = myTable.width();
+	console.log(unitGrow);
 	var grow = 0;
 	head.each(function() {
 		grow += parseInt($(this).attr('grow'));

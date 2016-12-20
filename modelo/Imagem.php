@@ -141,11 +141,10 @@ class Imagem {
     }
 
     public function deleteAllFileInDirectory(){
-//        echo "fkf";
+        $user = Session::getUserLogado()->getId());
         foreach (scandir($this->getRepositorio()) as $file)
         {
-//            echo $file;
-            if(is_file($this->getRepositorio()."/".$file) && !strpos($file."",md5(Session::getUserLogado()->getId())) ){
+            if(is_file($this->getRepositorio()."/".$file) && !strpos($file."",md5($user) ){
                 unlink($this->getRepositorio()."/".$file);
             }
         }

@@ -40,7 +40,8 @@
 	overflow: auto;
 }
 .x-table th{
-	font-weight: normal;	
+	font-weight: normal;
+	white-space: nowrap;	
 } 
 .x-table tbody td{
 	line-height: 2.4em;	
