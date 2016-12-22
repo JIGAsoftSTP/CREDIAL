@@ -37,6 +37,11 @@ $('.periodic i.icon-ctrl').click(function(event) {
 	$(this).add($('.prd-enabled')).toggleClass('show');
 });
 
+$('.filter-added .icon-ctrl').click(function(event) {
+	$('.filter-added').toggleClass('hidden');
+	$(this).toggleClass('show');
+});
+
 
 
 function filterConstruct(selected, filter){

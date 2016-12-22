@@ -125,6 +125,13 @@ iframe{
 	width: 100%;
 }
 
+.filter-added section{
+	max-height: 400px;	
+}
+.filter-added.hidden section{
+	max-height: 0;
+	overflow: hidden;
+}
 .filter-added nav{
 	margin-bottom: 1rem;
 }
