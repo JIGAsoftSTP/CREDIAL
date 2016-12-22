@@ -14,7 +14,6 @@ $('.add-section-filter b').click(function(event) {
 	selected = $(this).prev();
 	filter = $(this).prev().find('option:selected', this).attr('filter');;
 	if(!isEmpty(selected))
-		
 		filterConstruct(selected, filter);
 });
 
@@ -67,12 +66,11 @@ function filterConstruct(selected, filter){
 		'<span class="x-autocomplete">'+
 		'<input type="text" placeholder="'+ filter +'">'+
 		'<ul id="'+ selected +'">'+
-				setTimeout( function(){returnListFilter(selected)}, 1000);+
+				setTimeout(returnListFilter(selected), 100);+
 		'</ul>'+
-		'</span>'+						
+		'</span>'+
 		'</section>';
 		$('.filter-added').append(structure);
-		console.info("value "+returnListFilter(selected));
 	} else{
 		$('.filter-added section').eq(filterExists(filter).position)
 		.insertBefore($('.filter-added section').eq(0))
