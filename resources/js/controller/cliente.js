@@ -102,7 +102,7 @@ function credito(a) {
     $("#cred-cli-comName").text(clientes[clienteLetra][a]['NAME']+" "+lastName[lastName.length-1]);
     nifClient = clientes[clienteLetra][a]["NIF"];
     si.nifClient = nifClient;
-    $('.mp-new-credit').fadeIn(500);
+    openModalFrame($('.mp-new-credit'));
     tableEstructure($('#table-liquid'));
 }
 var listCredito = [];

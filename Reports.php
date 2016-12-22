@@ -25,16 +25,23 @@
 						<i class="icon-arrow-right2 hide-filter"></i>
 					</nav>
 					<div class="add-section-filter">
-						<select name="" id="">
-							<option value="">Selecione</option>
-							<option value="f1" filter="f1">Agência</option>
-							<option value="f2" filter="f2">Salário</option>
-							<option value="f3" filter="f3">Localidade</option>
+						<select name="" id="report-entities">
+							<option value="">(Selecione)</option>
 						</select>
 						<b></b>
+						
+					</div>
+					<div class="periodic">
+					<nav><i class="icon-checkbox-unchecked"><span> Filtrar por periodo</span></i> <i class="icon-ctrl"></i></nav>
+					
+					<div class="prd-enabled">
+						<input type="text" placeholder="Data Inicial">
+						<input type="text" placeholder="Data Final">
+						<p><span>5</span> em comparação</p>
+					</div>
 					</div>
 					<div class="filter-added">
-						
+					<nav> Filtro selecionado</span></i> <i class="icon-ctrl show"></i></nav>
 
 						
 					</div>
@@ -50,4 +57,5 @@
 <script type="text/javascript" src="resources/js/table.js"></script>
 <script type="text/javascript" src="resources/js/reports.js"></script>
 <script type="text/javascript" src="resources/js/controller/geral.js"></script>
+<script type="text/javascript" src="resources/js/controller/report.js"></script>
 </html>

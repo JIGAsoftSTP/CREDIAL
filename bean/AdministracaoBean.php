@@ -9,6 +9,12 @@
 
     switch ($_POST["intention"])
     {
+        case "anular cheque":
+            anularCheque();
+            break;
+        case "confirmar restauro cheque":
+            restaurarCheque();
+            break;
         case "restaurar cheque":
             checkRestoreEffect();
             break;
@@ -126,11 +132,19 @@
             ->addNumeric(Session::getUserLogado()->getIdAgencia())
             ->addString($_POST["Banco"]["sigla"])
             ->addString($_POST["Banco"]["nome"])
-            ->addString($_POST["Banco"]["codigoConta"]);
+            ->addString($_POST["Banco"]["codigoConta"])
+            ->addDouble($_POST["Banco"]["saldoMinimo"]);
         $call->execute();
 
         $result = $call->getValors();
-        die(json_encode(array("resultado" =>$result)));
+        if($result["result"] == true){
+            $result["result"] = "true";
+            die(json_encode(array("resultado" => $result)));
+        }
+        else{
+            $result["result"] = "false";
+            die(json_encode(array("resultado" => $result)));
+        }
 
     }
 
@@ -146,7 +160,15 @@
             ->addString($_POST["bank"]["descricao"]);
         $call->execute();
         $result = $call->getValors();
-        die(json_encode(array("resultado" =>$result)));
+
+        if($result["result"] == true){
+            $result["result"] = "true";
+            die(json_encode(array("resultado" => $result)));
+        }
+        else{
+            $result["result"] = "false";
+            die(json_encode(array("resultado" => $result)));
+        }
     }
     function registrarSeguro()
     {
@@ -328,9 +350,16 @@ function loadInsurance()
             ->addDouble(($_POST["DebitCredit"]["typeOperation"] == 'Crédito' ? $_POST["DebitCredit"]["value"] : 0))
             ->addString($_POST["DebitCredit"]["numDoc"]);
         $call->execute();
+        $result = $call->getValors();
 
-        $j = json_encode(array("result" =>$call->getValors()));
-        die($j);
+        if($result["result"] == true){
+            $result["result"] = "true";
+            die(json_encode(array("result" => $result)));
+        }
+        else{
+            $result["result"] = "false";
+            die(json_encode(array("result" => $result)));
+        }
     }
 
     function loadDataBank()
@@ -381,12 +410,21 @@ function loadInsurance()
     {
         $call = new CallPgSQL();
         $call->functionTable("funct_cheque_restore", "*")
-            ->addString(Session::getUserLogado()->getId())
-            ->addNumeric(Session::getUserLogado()->getIdAgencia())
-            ->addNumeric($_POST["idChequeAnular"])
-            ->addNumeric($_POST["idChequeRestaurar"]);
+            ->addInt(Session::getUserLogado()->getId())
+            ->addInt(Session::getUserLogado()->getIdAgencia())
+            ->addInt($_POST["idChequeAnular"])
+            ->addInt(($_POST["idChequeRestaurar"] == "0" ? null : $_POST["idChequeRestaurar"]));
         $call->execute();
         $result = $call->getValors();
+
+        if($result["result"] == true){
+            $result["result"] = "true";
+            die(json_encode(array("result" => $result)));
+        }
+        else{
+            $result["result"] = "false";
+            die(json_encode(array("result" => $result)));
+        }
     }
 
     function checkRestoreEffect()
@@ -394,6 +432,30 @@ function loadInsurance()
         $call = new CallPgSQL();
         $call->functionTable("funct_cheque_restore_effect", "*");
         $call->execute();
+        $arrayValues = array();
+        while($row = $call->getValors())
+        {
+            $arrayValues[count($arrayValues)] = $row;
+        }
+        die(json_encode(array("result" => $arrayValues)));
+    }
+
+    function anularCheque()
+    {
+        $call= new CallPgSQL();
+        $call->functionTable("funct_cheques_end", "*")
+        ->addInt(Session::getUserLogado()->getId())
+        ->addInt(Session::getUserLogado()->getIdAgencia())
+        ->addInt($_POST["idCheque"]);
+        $call->execute();
         $result = $call->getValors();
-        die(json_encode(array("result" => $result)));
+
+        if($result["result"] == true){
+            $result["result"] = "true";
+            die(json_encode(array("result" => $result)));
+        }
+        else{
+            $result["result"] = "false";
+            die(json_encode(array("result" => $result)));
+        }
     }

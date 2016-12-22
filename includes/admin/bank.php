@@ -32,7 +32,7 @@
 					</div>
 					<nav class="article-bank">
 						<div class="bank-descript">
-							<span><b class="name" id="bankMovimentName"></b></span><span><b class="sald good"></b><label class="moeda"> STD</label> </span></div>
+							<span><b class="name" id="bankMovimentName"></b></span><span><b class="sald"></b><label class="moeda"> STD</label> </span></div>
 						<div class="table-list-bank x-table">
 							<table id="table-bank" cellpadding="0" cellspacing="0">
 								<thead>
@@ -60,6 +60,7 @@
 					<input type="text" placeholder="Sigla" class="input-total" id="bancoSigla" />
 					<input type="text" placeholder="Nome" class="input-total" id="bancoNome" />
 					<input type="text" placeholder="Código Bancário" class="input-total integer" id="bancoCodigoBancario" maxlength="4" />
+                    <input type="text" placeholder="Saldo Mínimo" class="input-total formatNumber double" maxlength="11" id="bk-contaSaldoMinimo" />
 				</section>
 				<section class="add-mov">
 					<span class="with-info">
@@ -98,7 +99,6 @@
 					</select>
                     <input type="text" placeholder="Código Agência" class="input-total integer" maxlength="4" id="bk-conta-agencia" />
 					<input type="text" placeholder="Conta" class="input-total integer" maxlength="11" id="bk-conta-conta" />
-					<input type="text" placeholder="Saldo Mínimo" class="input-total formatNumber double" maxlength="11" id="bk-contaSaldoMinimo" />
 					<textarea name="" placeholder="Descrição" class="input-total" id="bk-conta-descricao"></textarea>
 				</section>
 			</div>

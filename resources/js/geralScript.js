@@ -120,6 +120,7 @@ function CtrlTabs(el1, el2){
 }
 
 function openModalFrame(modal) {
+    resetForm(modal);
     modal.fadeIn(300);
 }
 
@@ -299,3 +300,10 @@ if ((text.indexOf(',') != -1) &&
     event.preventDefault();
 }
 });
+
+function resetForm(form){
+    form.find('input, textarea').val("");
+    form.find('select').val(form.find('select option:first').val());
+    form.find('i.icon-checkbox-checked').addClass('icon-checkbox-unchecked').removeClass('icon-checkbox-checked');
+    isNull(form.find('select'));
+}

@@ -67,9 +67,7 @@ $('.cheq .menu-cheq li').click(function(event) {
     CtrlTabs($(this), $('.cheq .abas section'));
 });
 
-$('.reset-cheq').click(function(event) {
-     openModalFrame($('.mp-reset-cheq'));
-});
+
 $('.x-table').on('click','i',function(event) {
      openModalFrame($('.mp-cancel-cheq'));
 });

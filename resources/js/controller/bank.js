@@ -84,7 +84,6 @@ function carregarSiglas()
 function loadBankMoviment(position)
 {
 
-
     $.ajax
     ({
         url: bankAddress,
@@ -96,8 +95,18 @@ function loadBankMoviment(position)
             listMoviments = [];
             listMoviments = e.result;
             $("#bankMovimentName").html(listBanks[position]["NAME"]);
-            $(".good").html(listBanks[position]["SALDO"]);
             $("#tableBankMoviments").empty();
+            $(".good").html(listBanks[position]["SALDO"]);
+
+
+            if(Number(listBanks[position]["banco_saldo"])<Number(listBanks[position]["banco_saldominimo"])){
+                $(".sald").removeClass("good");
+                $(".sald").addClass("bad");
+            }
+            else{
+                $(".sald").removeClass("bad");
+                $(".sald").addClass("good");
+            }
 
             for(var i=0;i<listMoviments.length;i++)
             {   var table = document.getElementById("tableBankMoviments");
@@ -156,6 +165,7 @@ function bankTransfer() {
                             console.log(e.result["RESULT"]);
                             if(e.result["RESULT"] ==='true')
                             {
+                                carregarSiglas();
                                 $('.add-mov').find('input, select').val("");
                                 $('.add-mov').find('input, select').css("border", "");
                                 $("#movimentDesc").val("");
@@ -170,9 +180,6 @@ function bankTransfer() {
                 }
             }
         }
-    }
-    {
-
     }
 }
 
@@ -193,14 +200,15 @@ function makeCreditDebit() {
             data:{"intention" : "make debit or credit", "DebitCredit" :debitCredit},
             success:function(e)
             {
-                if(e.result["RESULT"] ==='true')
+                if(e.result["result"] ==='true')
                 {
                     callXpertAlert("Operação efetuada com sucesso!", "checkmark", 8000);
                     $('.debitCreditField').val("");
                     $('.debitCreditField').css("border", "");
+                    carregarSiglas();
                 }
                 else
-                    callXpertAlert(e.result["MESSAGE"], "warning", 8000);
+                    callXpertAlert(e.result["message"], "warning", 8000);
             }
         });
     }
@@ -244,12 +252,14 @@ function regBank()
 {
     if($("#bancoNome").val() !== "" &&
         $("#bancoSigla").val() !=="" &&
-        $("#bancoCodigoBancario").val() !== "")
+        $("#bancoCodigoBancario").val() !== "" &&
+        $("#bk-contaSaldoMinimo").val() !== "")
     {
         var banco = new Banco();
         banco.nome = $("#bancoNome").val();
         banco.sigla = $("#bancoSigla").val();
         banco.codigoConta = $("#bancoCodigoBancario").val();
+        banco.saldoMinimo= unformatted($("#bk-contaSaldoMinimo").val());
 
         $.ajax({
             url: bankAddress,
@@ -259,7 +269,7 @@ function regBank()
             dataType:"json",
             success:function(e)
             {
-                if(e.resultado["RESULT"] === "true")
+                if(e.resultado["result"] === "true")
                 {
                     callXpertAlert('Banco registado com sucesso!', 'checkmark', 8000);
                     $('.add-new-bank').find('input').val("");
@@ -267,7 +277,7 @@ function regBank()
                     carregarSiglas();
                 }
                 else
-                    callXpertAlert(e.resultado["MESSAGE"], 'warning', 8000);
+                    callXpertAlert(e.resultado["message"], 'warning', 8000);
             }
         });
     }
@@ -290,48 +300,39 @@ function regBankAccount()
             else
             {
                 $("#bk-conta-conta").removeClass("empty");
-                if($("#bk-contaSaldoMinimo").val() === "")
-                    $("#bk-contaSaldoMinimo").addClass("empty");
+                if($("#bk-conta-descricao").val() === "")
+                    $("#bk-conta-descricao").addClass("empty");
                 else
                 {
-                    $("#bk-contaSaldoMinimo").removeClass("empty");
-                    if($("#bk-conta-descricao").val() === "")
-                        $("#bk-conta-descricao").addClass("empty");
-                    else
-                    {
-                        $("#bk-conta-descricao").removeClass("empty");
+                    $("#bk-conta-descricao").removeClass("empty");
 
-                        var banco = new Banco();
-                        banco.nome = $("#bk-conta-nome").val();
-                        banco.codigoAgencia = $("#bk-conta-agencia").val();
-                        banco.codigoConta = $("#bk-conta-conta").val();
-                        banco.descricao = $("#bk-conta-descricao").val();
-                        banco.saldoMinimo = unformatted($("#bk-contaSaldoMinimo").val());
+                    var banco = new Banco();
+                    banco.nome = $("#bk-conta-nome").val();
+                    banco.codigoAgencia = $("#bk-conta-agencia").val();
+                    banco.codigoConta = $("#bk-conta-conta").val();
+                    banco.descricao = $("#bk-conta-descricao").val();
 
-                        $.ajax({
-                            url: bankAddress,
-                            type:"POST",
-                            dataType:"json",
-                            async: false,
-                            data:{"intention": "add bank account", "bank" : banco},
-                            success:function (e) {
-                                if(e.resultado["RESULT"] === "true")
-                                {
-                                    callXpertAlert('Conta Banco registado com sucesso!', 'checkmark', 8000);
-                                    $('.add-account').find('input, select').val("");
-                                    $('.add-account').find('input, select').css("border", "");
-                                    $("#bk-conta-descricao").val("");
-                                    $("#bk-conta-descricao").css("border", "");
-                                }
-                                else
-                                    callXpertAlert(e.resultado["MESSAGE"], 'warning', 8000);
+                    $.ajax({
+                        url: bankAddress,
+                        type:"POST",
+                        dataType:"json",
+                        async: false,
+                        data:{"intention": "add bank account", "bank" : banco},
+                        success:function (e) {
+                            if(e.resultado["result"] === "true")
+                            {
+                                callXpertAlert('Conta Banco registado com sucesso!', 'checkmark', 8000);
+                                $('.add-account').find('input, select').val("");
+                                $('.add-account').find('input, select').css("border", "");
+                                $("#bk-conta-descricao").val("");
+                                $("#bk-conta-descricao").css("border", "");
+                                carregarSiglas();
                             }
-                        });
-                    }
-
-
+                            else
+                                callXpertAlert(e.resultado["message"], 'warning', 8000);
+                        }
+                    });
                 }
-
             }
         }
     }
