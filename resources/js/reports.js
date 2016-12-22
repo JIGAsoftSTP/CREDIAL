@@ -14,6 +14,7 @@ $('.add-section-filter b').click(function(event) {
 	selected = $(this).prev();
 	filter = $(this).prev().find('option:selected', this).attr('filter');;
 	if(!isEmpty(selected))
+		
 		filterConstruct(selected, filter);
 });
 
