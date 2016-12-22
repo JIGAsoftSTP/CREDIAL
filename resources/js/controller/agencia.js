@@ -38,6 +38,7 @@ function addAgency()
                     callXpertAlert("Agência "+agency.nome+" adicionado com sucesso!", "checkmark", 8000);
                     $('.add-new-admin').find('input, select, textarea').val("");
                     $('.add-new-admin').find('input, select, textarea').css("border", "");
+                    loadAgencyAdm();
                 }
                 else
                     callXpertAlert(e.result["MESSAGE"], "warning", 8000);
