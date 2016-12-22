@@ -315,7 +315,7 @@ function regBankAccount()
                             async: false,
                             data:{"intention": "add bank account", "bank" : banco},
                             success:function (e) {
-                                if(e.resultado["RESULT"] === "true")
+                                if(e.resultado["result"] === "true")
                                 {
                                     callXpertAlert('Conta Banco registado com sucesso!', 'checkmark', 8000);
                                     $('.add-account').find('input, select').val("");
@@ -324,7 +324,7 @@ function regBankAccount()
                                     $("#bk-conta-descricao").css("border", "");
                                 }
                                 else
-                                    callXpertAlert(e.resultado["MESSAGE"], 'warning', 8000);
+                                    callXpertAlert(e.resultado["message"], 'warning', 8000);
                             }
                         });
                     }

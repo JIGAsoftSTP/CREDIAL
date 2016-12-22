@@ -149,10 +149,19 @@
             ->addNumeric($_POST["bank"]["nome"])
             ->addString($_POST["bank"]["codigoConta"])
             ->addString($_POST["bank"]["codigoAgencia"])
-            ->addString($_POST["bank"]["descricao"]);
+            ->addString($_POST["bank"]["descricao"])
+            ->addDouble($_POST["bank"]["saldoMinimo"]);
         $call->execute();
         $result = $call->getValors();
-        die(json_encode(array("resultado" =>$result)));
+
+        if($result["result"] == true){
+            $result["result"] = "true";
+            die(json_encode(array("resultado" => $result)));
+        }
+        else{
+            $result["result"] = "false";
+            die(json_encode(array("resultado" => $result)));
+        }
     }
     function registrarSeguro()
     {
@@ -435,7 +444,4 @@ function loadInsurance()
             $result["result"] = "false";
             die(json_encode(array("result" => $result)));
         }
-
-
-
     }
