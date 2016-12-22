@@ -24,13 +24,13 @@ function tableEstructure(myTable){
 }
 
 
-$('table.selectable td').click(function(event) {
+$('x-table .selectable td').click(function(event) {
 	$(this).closest('tr')
 	.addClass('selected')
 	.siblings().removeClass('selected');
 });
 
-$('.x-table').on('click','.sh-rcrs',function(event) {
+$('body').on('click','.x-table .sh-rcrs',function(event) {
 	table = $(this).closest('.x-table');
 	setRowCount(table);
 	table.find('.table-resources').toggleClass('show');
@@ -38,5 +38,5 @@ $('.x-table').on('click','.sh-rcrs',function(event) {
 
 function setRowCount(table){
 	rows = table.find('tbody tr').length;
-	table.find('.rowCount span').text(rows);
+	table.find('.rowCount span').text(rows + ' registos');
 }

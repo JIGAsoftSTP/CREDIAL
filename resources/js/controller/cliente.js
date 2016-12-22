@@ -76,6 +76,7 @@ function carregarCliente() {
         var cell2 = row.insertCell(1);
         var cell3 = row.insertCell(2);
         var cell4 = row.insertCell(3);
+        var cell5 = row.insertCell(4);
 
         cell1.innerHTML = "<i class='icon-credit-card' onclick='"+"credito("+ff+")' ></i>" +
                         "<i class='icon-info' onclick='"+"inforCiente("+ff+")' ></i>" +
@@ -83,6 +84,7 @@ function carregarCliente() {
         cell2.innerHTML = client['NIF'];
         cell3.innerHTML = client['NAME']+" "+client['SURNAME'];
         cell4.innerHTML = client['TELE'];
+        cell5.innerHTML = client['TELE'];
         carregou = true;
         // lastI = ff;
     }

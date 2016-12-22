@@ -23,9 +23,6 @@
 .x-table .rowCount.show{
 	transform: translateX(0);
 }
-.rowCount:after{
-	content: ' registos';
-}
 .x-table,
 .x-table table,
 .x-table tr{

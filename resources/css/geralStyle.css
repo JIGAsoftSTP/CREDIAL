@@ -102,6 +102,12 @@ body,
 .xpert-form textarea:focus{
 	border: 2px #3598DB solid !important;
 }
+.xpert-form input[type=text]:disabled,
+.xpert-form  input[type=password]:disabled,
+.xpert-form  select:disabled,
+.xpert-form textarea:disabled{
+    border-bottom: 2px transparent solid !important;
+}
 input.empty,
 select.empty{
 	border-bottom: 2px red solid !important;
@@ -109,6 +115,9 @@ select.empty{
 select.is-placeholder{
 	color: #aaa !important;
 	font-style: italic;
+}
+.xpert-form input[type=text].number-right{
+	text-align: right;
 }
 .flex-form{
     flex-wrap: wrap;
@@ -746,6 +755,76 @@ header nav{
 }
 
 
+.x-autocomplete{
+	display: block;
+	position: relative;
+}
+.x-autocomplete ul{
+	position: absolute;
+	width: 100%;
+	left: 0;
+	top: 100%;
+	margin-top: -1.6rem;
+	/*box-shadow: 1px 0 20px 0 #ccc;*/
+	border: 1px #ddd solid;
+	border-bottom: 2px #eee solid;
+	border-top: 0;
+	color: #555;
+	max-height: 0;
+	overflow: hidden;
+	background: #FFF;
+	opacity: 0;
+	z-index: 5;
+	
+}
+.x-autocomplete input:focus + ul{
+	opacity: 1;
+	max-height: 200px;
+	overflow: auto;
+}
+.x-autocomplete ul li{
+	line-height: 2rem;
+	font-size: .94rem;
+	padding: 0 1rem;
+	cursor: pointer;
+}
+.x-autocomplete ul li.obsolete{
+	display: none;
+}
+.x-autocomplete ul li:first-child{
+	background: #00B9A3;
+	color: #FFF;
+}
+.x-autocomplete ul li:hover{
+	background: rgba(0, 185, 163, .2);
+	color: #555;
+}
+
+
+.xClose{
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 25px;
+	height: 25px;
+	top: 5px;
+	right: 5px;
+	cursor: pointer;
+}
+
+.xClose hr{
+	width: 60%;
+	border: 1px tomato solid;
+}
+.xClose hr:first-child{
+	transform: rotate(45deg);
+}
+.xClose hr:last-child{
+	transform: rotate(-45deg);
+	margin-top: -2px;
+}
 /*#########################################*/
 
 #p1 #m1:after,

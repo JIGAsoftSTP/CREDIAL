@@ -19,6 +19,7 @@
 					<table id="table-seguro" class="selectable" cellpadding="0" cellspacing="0">
 						<thead>
 							<tr>
+								<th grow="1">Ação</th>
 								<th grow="2">Valor</th>
 								<th grow="1">Estado</th>
 							</tr>

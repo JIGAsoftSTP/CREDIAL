@@ -23,7 +23,7 @@ var PrestacaoBluider = function () {
             '<i class="icon-ctrl sh-more" id="pret-'+this.id+'" onclick="showAmortizacao('+this.id+','+jk+')"></i>' +
             '<nav> ' +
             '<div class="primary"><b>Dossier nº '+this.nunDossierCredito+'</b> <b>'+this.totalCreditoAPagar+'</b></div> ' +
-            '<div class="secondary"><small>Efetuado em '+this.dataInicioCredito+'</small><small>Data fim crédito: '+this.dataFimCredito+'</small></div>' +
+            '<div class="secondary"><small>Efetuado em '+this.dataInicioCredito+'</small> <b><small>'+ "Provision here!" +'</small></b> <small>Data fim crédito: '+this.dataFimCredito+'</small></div>' +
             '</nav> ' +
             '<nav class="more-details"> ' +
             '<hr> ' +
@@ -39,14 +39,15 @@ var PrestacaoBluider = function () {
             '</div>' +
             '<span class="table-amort">' +
             '<h2>Tabela de amortização</h2>' +
+            '<div class="x-table table-amort">'+
             '<table id="table-amortizacao-'+this.id+'" class="selectable" cellpadding="0" cellspacing="0">' +
             '<thead>' +
             '<tr>' +
-            '<th width="18">Data Emissão</th>' +
-            '<th width="18">Data Endosse</th> ' +
-            '<th width="25">Reembolso</th>' +
-            '<th width="25">Prestação paga</th>' +
-            '<th width="16">Estado</th>' +
+            '<th grow="1.5">Data Emissão</th>' +
+            '<th grow="1.5">Data Endosse</th> ' +
+            '<th grow="2.5">Reembolso</th>' +
+            '<th grow="2.5">Prestação paga</th>' +
+            '<th grow="2">Estado</th>' +
             '</tr>' +
             '</thead>' +
             '<tbody id="list-prestacao-'+this.id+'">' +
@@ -57,6 +58,7 @@ var PrestacaoBluider = function () {
             '<td> </td>' +
             '</tbody>' +
             '</table>' +
+            '</div>'+
             '</span>' +
             '</nav>' +
             '</section>';

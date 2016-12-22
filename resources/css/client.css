@@ -791,6 +791,7 @@
 .mp-liquidar i,
 .mp-liquidar label{
 	cursor: pointer;
+	white-space: nowrap;
 }
 
 .mp-liquidar section{
@@ -814,6 +815,9 @@
 	max-width: 0;
 	overflow: hidden;
 	
+}
+.mp-liquidar .sec-another p{
+	margin-bottom: 1rem;
 }
 .mp-liquidar .sec-another.show{
 	padding-left: 2rem;

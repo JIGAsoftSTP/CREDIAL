@@ -1,6 +1,5 @@
 .cheq .second,
-.cheq .container,
-.cheq .menu-cheq{
+.cheq .container{
 	display: flex;
 }
 .cheq .menu-cheq{
@@ -11,26 +10,10 @@
 	flex-direction: column;
 
 }
-.cheq table *{
-	transition: none;
-}
 .cheq .container{
 	flex-grow: 1;
 }
 
-/*.cheq .abas [class*="table-"]{
-	height: 100%;
-}*/
-.cheq .abas table{
-	height: 100%;
-}
-/*.cheq .abas table *{
-	transition: none;
-
-}*/
-.cheq .abas section.active{
-	top: 0;
-}
 .table-list-cheq{
 	max-height: 400px;
 	background: #FFF;
@@ -38,7 +21,7 @@
 .cheq .icon-undo2{
 	line-height: 2.7rem;
 	padding: 0 2rem;
-	background: #02A8F4;
+	background: #0C83DA;
 	color: #FFF;
 	max-width: 160px;
 	margin-bottom: 1rem;
@@ -46,5 +29,32 @@
 	cursor: pointer;
 }
 .cheq .icon-undo2 span{
-	cursor: pointer;
+	cursor: label;
+}
+
+.mp-reset-cheq .content{
+	display: flex;
+	margin: 1rem 0 2rem;
+}
+.mp-reset-cheq section:first-child{
+	margin-right: 2rem;
+	padding: 0 2rem 2rem 0;
+	border-right: 1px #eee solid;
+}
+.mp-reset-cheq h1{
+	font-weight: 1.5rem;
+	font-weight: normal;
+	margin: 1rem 0;
+	color: #0C83DA;
+}
+.mp-reset-cheq nav{
+	line-height: 2.7rem;
+	border-bottom: 1px #eee solid;
+}
+.mp-reset-cheq .content b{
+	display: inline-block;
+	min-width: 120px;
+}
+.mp-reset-cheq .content span:before{
+	content: ": "
 }

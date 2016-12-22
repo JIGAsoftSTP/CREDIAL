@@ -15,14 +15,14 @@
 		</nav>
 		<div class="second">
 			<div class="container">
-					<i class="icon-undo2 reset-cheq"><span> <b><label id="bt-restaurar-cheque">Restaurar</label></b></span></i>
+					<i class="icon-undo2 reset-cheq" id="bt-restaurar-cheque"><span> <b>Restaurar</b></span></i>
 					<section class="">
 						<div class="table-list-cheq x-table">
 							<table class="selectable" id="table-cheq" cellpadding="0" cellspacing="0">
 								<thead>
 									<tr>                    
 										<th grow="1">Ação</th>
-										<th grow="2">Banco</th>
+										<th grow="2.5">Banco</th>
 										<th grow="3">Agência</th>
 										<th grow="6">Seq. Início</th>
 										<th grow="6">Seq. Fim</th>
@@ -55,11 +55,25 @@
 		<div class="modalFrame">
 			<div class="modalContainer">
 				<div class="content">
-					<p>Certeza Restaurar?</p>
+					<section>
+						<h1>Registo atual</h1>
+						<nav><b>Banco</b> <span></span>rhwe</nav>
+						<nav><b>Agência</b> <span></span></nav>
+						<nav><b>Seq. Inicio</b> <span>0006000103110400421610081051</span></nav>
+						<nav><b>Seq. Fim</b> <span>0006000103110400421610081051</span></nav>
+					</section>
+					<section>
+						<h1>Registo anterior</h1>
+						<nav><b>Banco</b> <span></span>rhwe</nav>
+						<nav><b>Agência</b> <span></span></nav>
+						<nav><b>Seq. Inicio</b> <span>0006000103110400421610081051</span></nav>
+						<nav><b>Seq. Fim</b> <span>0006000103110400421610081051</span></nav>
+					</section>
+					
 					
 				</div>
 				<div class="bt-yes-no-cancel">
-					<button id="">OK</button>
+					<button id="">Restaurar</button>
 					<button class="bt-no-option">Cancelar</button>
 				</div>
 				<div class="modal-header">

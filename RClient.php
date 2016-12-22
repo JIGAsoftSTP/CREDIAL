@@ -24,9 +24,10 @@
 				<thead>
 					<tr>                    
 						<th grow="1">Ações</th>
-						<th grow="2">NIF</th>
+						<th grow="1.5">NIF</th>
 						<th grow="5">Nome</th>
 						<th grow="1">Telemóvel</th>
+						<th grow="1">Créditos</th>
 					</tr>
 				</thead>
 				<tbody id="tableCliente">
@@ -222,21 +223,17 @@
 									</section>
 								</div>
 								<div class="div-total-2">
-									<div class="table-liquid">
+									<div class="table-liquid x-table">
 										<table id="table-liquid" class="selectable" cellpadding="0" cellspacing="0">
 											<thead>
 												<tr>                    
-													<th width="24">Data</th>
-													<th width="38">Reembolso</th>
-													<th width="33">Capital restante</th>
+													<th grow="1.5">Data</th>
+													<th grow="3">Reembolso</th>
+													<th grow="3">Capital restante</th>
 												</tr>
 											</thead>
 											<tbody id="cred-table-prestacao" >
-												<tr>
-													<td> </td>
-													<td> </td>
-													<td> </td>
-												</tr>
+												
 											</tbody>
 										</table>
 										
@@ -363,7 +360,7 @@
 		</div>
 	</div>
 </section>
-<section class="modalPage mp-liquida">
+<section class="modalPage mp-liquidar">
 	<div class="modalFrame">
 		<div class="modalContainer">
 			<div class="content">
@@ -374,18 +371,19 @@
 				</p>
 				<div class="secDiv xpert-form">
 					<section class="sec-same flex-form">
-						<input type="text" placeholder="Nº Documento" class="input-total">							
-						<select id="" class="input-total" title="Banco">
+						<input type="text" placeholder="Nº Documento" class="input-total" disabled>							
+						<select id="" class="input-total" title="Banco" disabled>
 							<option value="0">(Banco)</option>
 						</select>			
-						<input type="text" placeholder="Data" class="input-total">			
-						<input type="text" placeholder="Valor" class=" formatNumber double input-total">
+						<input type="text" placeholder="Data" class="input-total" disabled>			
+						<input type="text" placeholder="Valor" class=" formatNumber double input-total number-right" disabled>
 						<p class="rest input-total">0,00</p>
 					</section>
 					<section class="sec-another flex-form">
-						
+						<span>
 						<p class="input-total"><i class="icon-checkbox-unchecked"> <label>Pagamento Faseado</label></i> </p>
 						<p class="input-total"><i class="icon-checkbox-unchecked"> <label>Desconto</label></i> </p>
+						</span>
 					</section>
 				</div>
 			</div>
