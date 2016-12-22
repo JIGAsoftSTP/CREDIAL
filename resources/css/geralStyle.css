@@ -796,11 +796,6 @@ header nav{
 	background: #00B9A3;
 	color: #FFF;
 }
-.x-autocomplete ul li:hover{
-	background: rgba(0, 185, 163, .2);
-	color: #555;
-}
-
 
 .xClose{
 	position: absolute;

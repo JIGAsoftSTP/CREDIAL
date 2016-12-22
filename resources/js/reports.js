@@ -17,17 +17,26 @@ $('.add-section-filter b').click(function(event) {
 		filterConstruct(selected, filter);
 });
 
-$('.filter-added').on('keyup focusin','input', function(event) {
+$('.filter-added').on('keyup','input', function(event) {
 	
 	printWanted($(this), event);
 });
 
+
+
 $('.filter-added').on('click','.x-autocomplete li', function(event) {
-	$(this).closest('.x-autocomplete').find('input').val($(this).text())
+	selected = $('.x-autocomplete li.lighted').text();
+	Ipt = $(this).parent().prev();
+	Ipt.val(selected);
+});
+$('.filter-added').on('mouseover','.x-autocomplete li', function(event) {
+	lighting($(this));
 });
 $('.filter-added').on('click','.xClose',function(event) {
 	$(this).closest('section').remove();
 });
+
+
 
 $('.periodic i:first').click(function(event) {
 	$(this).toggleClass('icon-checkbox-checked icon-checkbox-unchecked');
@@ -94,13 +103,15 @@ function printWanted(input, event){
 			$(this).removeClass('found');
 
 		});
-		listSelected = input.next().find('li.found').first();
-		list.removeClass('lighted');
-		listSelected.addClass('lighted');
-		if(event.which === 13){
+		listSelected = input.next().find('li.lighted');
+		lighting(listSelected);
+		if(event.which === 13)
 			input.val(listSelected.text());
-			list.removeClass('found');
-		}
 	} else
 		list.removeClass('found');
+}
+
+function lighting(el){
+	el.addClass('lighted').siblings().removeClass('lighted');
+	
 }
