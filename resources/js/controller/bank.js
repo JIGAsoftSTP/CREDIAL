@@ -99,7 +99,7 @@ function loadBankMoviment(position)
             $(".good").html(listBanks[position]["SALDO"]);
 
 
-            if(listBanks[position]["banco_saldo"]<listBanks[position]["banco_saldominimo"]){
+            if(Number(listBanks[position]["banco_saldo"])<Number(listBanks[position]["banco_saldominimo"])){
                 $(".sald").removeClass("good");
                 $(".sald").addClass("bad");
                 console.info("entrou");
