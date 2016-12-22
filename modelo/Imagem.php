@@ -141,7 +141,7 @@ class Imagem {
     }
 
     public function deleteAllFileInDirectory(){
-        $user = Session::getUserLogado()->getId();
+//        $user = Session::getUserLogado()->getId();
         /*foreach (scandir($this->getRepositorio()) as $file)
         {
             if(is_file($this->getRepositorio()."/".$file) && !strpos($file."",md5($user) )){
