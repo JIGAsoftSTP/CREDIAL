@@ -61,16 +61,18 @@ function filterConstruct(selected, filter){
 	var structure;
 	selected = parseInt(selected.val());
 	if(!filterExists(filter).exist){
-		structure = '<section class="sec-added" filter="'+ filter +'">'+
-		'<span class="xClose"><hr><hr></span>'+
-		'<span class="x-autocomplete">'+
-		'<input type="text" placeholder="'+ filter +'">'+
-		'<ul id="'+ selected +'">'+
-				setTimeout(returnListFilter(selected), 100);+
-		'</ul>'+
-		'</span>'+
-		'</section>';
-		$('.filter-added').append(structure);
+            structure = '<section class="sec-added" filter="' + filter + '">' +
+                '<span class="xClose"><hr><hr></span>' +
+                '<span class="x-autocomplete">' +
+                '<input type="text" placeholder="' + filter + '">' +
+                '<ul id="' + selected + '">' +
+                returnListFilter(selected);
+            +
+                '</ul>' +
+            '</span>' +
+            '</section>';
+            $('.filter-added').append(structure);
+
 	} else{
 		$('.filter-added section').eq(filterExists(filter).position)
 		.insertBefore($('.filter-added section').eq(0))
@@ -106,6 +108,7 @@ function returnListFilter(listDB){
 
         }
 	});
+	return "";
 }
 
 function printWanted(input, event){
