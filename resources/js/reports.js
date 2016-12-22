@@ -17,9 +17,13 @@ $('.add-section-filter b').click(function(event) {
 		filterConstruct(selected, filter);
 });
 
-$('.filter-added').on('keyup','input', function(event) {
+$('.filter-added').on('keyup focusin','input', function(event) {
 	
 	printWanted($(this), event);
+});
+
+$('.filter-added').on('click','.x-autocomplete li', function(event) {
+	$(this).closest('.x-autocomplete').find('input').val($(this).text())
 });
 $('.filter-added').on('click','.xClose',function(event) {
 	$(this).closest('section').remove();
