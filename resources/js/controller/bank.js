@@ -167,6 +167,7 @@ function bankTransfer() {
                             console.log(e.result["RESULT"]);
                             if(e.result["RESULT"] ==='true')
                             {
+                                carregarSiglas();
                                 $('.add-mov').find('input, select').val("");
                                 $('.add-mov').find('input, select').css("border", "");
                                 $("#movimentDesc").val("");
@@ -206,6 +207,7 @@ function makeCreditDebit() {
                     callXpertAlert("Operação efetuada com sucesso!", "checkmark", 8000);
                     $('.debitCreditField').val("");
                     $('.debitCreditField').css("border", "");
+                    carregarSiglas();
                 }
                 else
                     callXpertAlert(e.result["message"], "warning", 8000);
@@ -326,6 +328,7 @@ function regBankAccount()
                                 $('.add-account').find('input, select').css("border", "");
                                 $("#bk-conta-descricao").val("");
                                 $("#bk-conta-descricao").css("border", "");
+                                carregarSiglas();
                             }
                             else
                                 callXpertAlert(e.resultado["message"], 'warning', 8000);
