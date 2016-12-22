@@ -787,11 +787,12 @@ header nav{
 	font-size: .94rem;
 	padding: 0 1rem;
 	cursor: pointer;
-}
-.x-autocomplete ul li.obsolete{
 	display: none;
 }
-.x-autocomplete ul li:first-child{
+.x-autocomplete ul li.found{
+	display: block;
+}
+.x-autocomplete ul li.lighted{
 	background: #00B9A3;
 	color: #FFF;
 }

@@ -1,6 +1,6 @@
 $('.ctrls .hide-filter').click(function(event) {
 	if($('.filter-report').hasClass('float'))
-	$('.filter-report').addClass('hidden');
+		$('.filter-report').addClass('hidden');
 });
 $('.ctrls .pin').click(function(event) {
 	$(this).toggleClass('pinned');
@@ -11,13 +11,15 @@ $('.add-section-filter select').change(function(event) {
 	$('.add-section-filter b').click();
 });
 $('.add-section-filter b').click(function(event) {
-	filter = $(this).prev();
-	if(!isEmpty(filter))
-		filterConstruct(filter.val());
+	selected = $(this).prev();
+	filter = $(this).prev().find('option:selected', this).attr('filter');;
+	if(!isEmpty(selected))
+		filterConstruct(selected, filter);
 });
 
 $('.filter-added').on('keyup','input', function(event) {
-	printWanted($(this));
+	
+	printWanted($(this), event);
 });
 $('.filter-added').on('click','.xClose',function(event) {
 	$(this).closest('section').remove();
@@ -25,19 +27,19 @@ $('.filter-added').on('click','.xClose',function(event) {
 
 
 
-function filterConstruct(filter){
+function filterConstruct(selected, filter){
 	var structure;
 	if(!filterExists(filter).exist){
 		structure = '<section class="sec-added" filter="'+ filter +'">'+
-						'<span class="xClose"><hr><hr></span>'+
-						'<span class="x-autocomplete">'+
-							'<input type="text" placeholder="'+ filter +'">'+
-							'<ul>'+
-								returnListFilter()+
-							'</ul>'+
-						'</span>'+						
-					'</section>';
-	$('.filter-added').append(structure);
+		'<span class="xClose"><hr><hr></span>'+
+		'<span class="x-autocomplete">'+
+		'<input type="text" placeholder="'+ filter +'">'+
+		'<ul>'+
+		returnListFilter(selected)+
+		'</ul>'+
+		'</span>'+						
+		'</section>';
+		$('.filter-added').append(structure);
 	} else{
 		$('.filter-added section').eq(filterExists(filter).position)
 		.insertBefore($('.filter-added section').eq(0))
@@ -59,22 +61,29 @@ function filterExists(filter){
 	return arrayExist;
 }
 
-function returnListFilter(){
+function returnListFilter(listDB){
 	var list = '<li>some</li><li>some1</li><li>some11</li>';
 	return list;
 }
-function printWanted(input){
+function printWanted(input, event){
 	list = input.next().find('li');
-	console.log(list.length)
 	textIpt = input.val();
-	list.each(function() {
-		console.log($(this).text().contains("some"))
+	if(!isEmpty(input)){
 
-	});
-	/*list.each(function(index, el) {
-		if( $(this).text().contains(textIpt))
-			$(this).removeClass('obsolete');
-		else
-			$(this).addClass('obsolete');
-	});*/
+		list.each(function() {
+			if($(this).text().match(textIpt)) {
+				$(this).addClass('found');
+			} else
+			$(this).removeClass('found');
+
+		});
+		listSelected = input.next().find('li.found').first();
+		list.removeClass('lighted');
+		listSelected.addClass('lighted');
+		if(event.which === 13){
+			input.val(listSelected.text());
+			list.removeClass('found');
+		}
+	} else
+		list.removeClass('found');
 }

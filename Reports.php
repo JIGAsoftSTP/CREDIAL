@@ -27,9 +27,9 @@
 					<div class="add-section-filter">
 						<select name="" id="">
 							<option value="">Selecione</option>
-							<option value="f1" filter="f1">Agência</option>
-							<option value="f2" filter="f2">Salário</option>
-							<option value="f3" filter="f3">Localidade</option>
+							<option value="f1" filter="Agência">Agência</option>
+							<option value="f2" filter="Salário">Salário</option>
+							<option value="f3" filter="Localidade">Localidade</option>
 						</select>
 						<b></b>
 					</div>
