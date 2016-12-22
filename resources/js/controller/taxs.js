@@ -81,7 +81,6 @@ function addtax() {
             {
                 if(e.resultado["RESULT"] === "true")
                 {
-                    $("#tipoCreditoSearch").trigger("change");
                     callXpertAlert("Taxa registrado com sucesso!", "checkmark", 8000);
                     $('.flex-form').find('input, select').val("");
                     $('.flex-form').find('input, select').css("border", "");
