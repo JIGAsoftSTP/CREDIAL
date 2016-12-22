@@ -123,5 +123,5 @@ function loadTax()
         column6.innerHTML = tax["ESTADO"];
     }
     tableEstructure($("#table-taxa"));
-     // setRowCount(".x-table");
+     setRowCount($(".x-table"));
 }
