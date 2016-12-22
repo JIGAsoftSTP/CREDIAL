@@ -58,20 +58,21 @@ $('.filter-added .icon-ctrl').click(function(event) {
 });
 
 
-
 function filterConstruct(selected, filter){
 	var structure;
+	selected = parseInt(selected.val());
 	if(!filterExists(filter).exist){
 		structure = '<section class="sec-added" filter="'+ filter +'">'+
 		'<span class="xClose"><hr><hr></span>'+
 		'<span class="x-autocomplete">'+
 		'<input type="text" placeholder="'+ filter +'">'+
-		'<ul>'+
-		returnListFilter(selected)+
+		'<ul id="'+ selected +'">'+
+				setTimeout( function(){returnListFilter(selected)}, 1000);+
 		'</ul>'+
 		'</span>'+						
 		'</section>';
 		$('.filter-added').append(structure);
+		console.info("value "+returnListFilter(selected));
 	} else{
 		$('.filter-added section').eq(filterExists(filter).position)
 		.insertBefore($('.filter-added section').eq(0))
@@ -94,16 +95,28 @@ function filterExists(filter){
 }
 
 function returnListFilter(listDB){
-	var list = '<li>some</li><li>some1</li><li>some11</li>';
-	return list;
+	var list="";
+	$.ajax({
+		url: "bean/relatorio.php",
+		type:"POST",
+		dataType:"json",
+		data:{"intention" : "load object values", "id" : listDB},
+		success:function (e) {
+			for(var i=0;i<e.objeto.length;i++){
+				$("ul#"+listDB).append('<li>'+e.objeto[i]["DESCRICAO"]+'</li>');
+			}
+
+        }
+	});
 }
+
 function printWanted(input, event){
 	list = input.next().find('li');
 	textIpt = input.val();
 	if(!isEmpty(input)){
 
 		list.each(function() {
-			if($(this).text().match(textIpt)) {
+			if($(this).text().toLowerCase().match(textIpt.toLowerCase())) {
 				$(this).addClass('found');
 			} else
 			$(this).removeClass('found');
