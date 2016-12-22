@@ -826,6 +826,10 @@ header nav{
 	transform: rotate(-45deg);
 	margin-top: -2px;
 }
+
+i.icon-checkbox-checked{
+	color: #3879D9;
+}
 /*#########################################*/
 
 #p1 #m1:after,

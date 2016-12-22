@@ -25,6 +25,15 @@ $('.filter-added').on('click','.xClose',function(event) {
 	$(this).closest('section').remove();
 });
 
+$('.periodic i:first').click(function(event) {
+	$(this).toggleClass('icon-checkbox-checked icon-checkbox-unchecked');
+	if($(this).hasClass('icon-checkbox-checked'))
+		$('.periodic i.icon-ctrl').click();
+});
+$('.periodic i.icon-ctrl').click(function(event) {
+	$(this).add($('.prd-enabled')).toggleClass('show');
+});
+
 
 
 function filterConstruct(selected, filter){

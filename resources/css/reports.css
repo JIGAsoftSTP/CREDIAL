@@ -40,9 +40,36 @@ iframe{
 .filter-report .add-section-filter{
 	position: relative;
 	display: flex;
-	margin-bottom: 2rem;
 }
-
+.filter-report .periodic{
+	margin: 1rem 0 3rem;
+	color: #555;
+}
+.filter-report nav{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.periodic i{
+	cursor: pointer;
+}
+.periodic i.icon-ctrl{
+	font-weight: bold;
+	transform: rotate(180deg);
+}
+.periodic i.icon-ctrl.show{
+	transform: none;
+}
+.periodic .prd-enabled{
+	max-height: 0;
+	overflow: hidden;
+}
+.periodic .prd-enabled.show{
+	margin-top: 1rem;
+	max-height: 500px;
+	border-bottom: 1px #eee solid;
+	padding-bottom: 1rem;
+}
 .add-section-filter b{
 	display: none;
 }
@@ -52,6 +79,7 @@ iframe{
 	/*display: flex;
 	justify-content: space-between;*/
 }
+
 .ctrls i{
 	position: relative;
 	left: 75%;
@@ -95,4 +123,9 @@ iframe{
 .filter-report input,
 .filter-report select{
 	width: 100%;
+}
+
+.filter-added{
+	padding-top: 1rem;
+	position: relative;
 }

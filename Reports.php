@@ -32,9 +32,19 @@
 							<option value="f3" filter="Localidade">Localidade</option>
 						</select>
 						<b></b>
+						
+					</div>
+					<div class="periodic">
+					<nav><i class="icon-checkbox-unchecked"><span> Filtrar por periodo</span></i> <i class="icon-ctrl"></i></nav>
+					
+					<div class="prd-enabled">
+						<input type="text" placeholder="Data Inicial">
+						<input type="text" placeholder="Data Final">
+						<p><span>5</span> em comparação</p>
+					</div>
 					</div>
 					<div class="filter-added">
-						
+					<nav> Filtro selecionado</span></i> <i class="icon-ctrl"></i></nav>
 
 						
 					</div>
