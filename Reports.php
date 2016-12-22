@@ -25,11 +25,8 @@
 						<i class="icon-arrow-right2 hide-filter"></i>
 					</nav>
 					<div class="add-section-filter">
-						<select name="" id="">
-							<option value="">Selecione</option>
-							<option value="f1" filter="Agência">Agência</option>
-							<option value="f2" filter="Salário">Salário</option>
-							<option value="f3" filter="Localidade">Localidade</option>
+						<select name="" id="report-entities">
+							<option value="">(Selecione)</option>
 						</select>
 						<b></b>
 						
@@ -60,4 +57,5 @@
 <script type="text/javascript" src="resources/js/table.js"></script>
 <script type="text/javascript" src="resources/js/reports.js"></script>
 <script type="text/javascript" src="resources/js/controller/geral.js"></script>
+<script type="text/javascript" src="resources/js/controller/report.js"></script>
 </html>
