@@ -201,14 +201,14 @@ function makeCreditDebit() {
             data:{"intention" : "make debit or credit", "DebitCredit" :debitCredit},
             success:function(e)
             {
-                if(e.result["RESULT"] ==='true')
+                if(e.result["result"] ==='true')
                 {
                     callXpertAlert("Operação efetuada com sucesso!", "checkmark", 8000);
                     $('.debitCreditField').val("");
                     $('.debitCreditField').css("border", "");
                 }
                 else
-                    callXpertAlert(e.result["MESSAGE"], "warning", 8000);
+                    callXpertAlert(e.result["message"], "warning", 8000);
             }
         });
     }

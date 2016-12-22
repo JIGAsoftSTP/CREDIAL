@@ -350,9 +350,16 @@ function loadInsurance()
             ->addDouble(($_POST["DebitCredit"]["typeOperation"] == 'Crédito' ? $_POST["DebitCredit"]["value"] : 0))
             ->addString($_POST["DebitCredit"]["numDoc"]);
         $call->execute();
+        $result = $call->getValors();
 
-        $j = json_encode(array("result" =>$call->getValors()));
-        die($j);
+        if($result["result"] == true){
+            $result["result"] = "true";
+            die(json_encode(array("result" => $result)));
+        }
+        else{
+            $result["result"] = "false";
+            die(json_encode(array("result" => $result)));
+        }
     }
 
     function loadDataBank()
