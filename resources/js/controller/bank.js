@@ -84,7 +84,6 @@ function carregarSiglas()
 function loadBankMoviment(position)
 {
 
-
     $.ajax
     ({
         url: bankAddress,
@@ -96,8 +95,20 @@ function loadBankMoviment(position)
             listMoviments = [];
             listMoviments = e.result;
             $("#bankMovimentName").html(listBanks[position]["NAME"]);
-            $(".good").html(listBanks[position]["SALDO"]);
             $("#tableBankMoviments").empty();
+            $(".good").html(listBanks[position]["SALDO"]);
+
+
+            if(listBanks[position]["banco_saldo"]<listBanks[position]["banco_saldominimo"]){
+                $(".sald").removeClass("good");
+                $(".sald").addClass("bad");
+                console.info("entrou");
+            }
+            else{
+                $(".sald").removeClass("bad");
+                $(".sald").addClass("good");
+                console.info("entrou inferior");
+            }
 
             for(var i=0;i<listMoviments.length;i++)
             {   var table = document.getElementById("tableBankMoviments");
@@ -258,7 +269,7 @@ function regBank()
             dataType:"json",
             success:function(e)
             {
-                if(e.resultado["RESULT"] === "true")
+                if(e.resultado["result"] === "true")
                 {
                     callXpertAlert('Banco registado com sucesso!', 'checkmark', 8000);
                     $('.add-new-bank').find('input').val("");
@@ -266,7 +277,7 @@ function regBank()
                     carregarSiglas();
                 }
                 else
-                    callXpertAlert(e.resultado["MESSAGE"], 'warning', 8000);
+                    callXpertAlert(e.resultado["message"], 'warning', 8000);
             }
         });
     }

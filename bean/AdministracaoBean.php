@@ -137,7 +137,14 @@
         $call->execute();
 
         $result = $call->getValors();
-        die(json_encode(array("resultado" =>$result)));
+        if($result["result"] == true){
+            $result["result"] = "true";
+            die(json_encode(array("resultado" => $result)));
+        }
+        else{
+            $result["result"] = "false";
+            die(json_encode(array("resultado" => $result)));
+        }
 
     }
 
