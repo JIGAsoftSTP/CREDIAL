@@ -360,35 +360,35 @@
 		</div>
 	</div>
 </section>
-<section class="modalPage mp-liquidar">
+<section class="modalPage mp-liquidar" id="cred-pay-form">
 	<div class="modalFrame">
 		<div class="modalContainer">
 			<div class="content">
 				<p class="type-font">
-					<i class="icon-checkbox-unchecked">
+					<i class="icon-checkbox-unchecked" id="cred-pay-dife">
 						<label>Fonte de pagamento diferente</label>							
 					</i>
 				</p>
-				<div class="secDiv xpert-form">
-					<section class="sec-same flex-form">
-						<input type="text" placeholder="Nº Documento" class="input-total" disabled>							
-						<select id="" class="input-total" title="Banco" disabled>
+				<div class="secDiv xpert-form" >
+					<section class="sec-same flex-form ">
+						<input type="text" id="cred-pay-doc" placeholder="Nº Documento" class="input-total" disabled>
+						<select id="cred-pay-bank" class="input-total" title="Banco" disabled>
 							<option value="0">(Banco)</option>
 						</select>			
-						<input type="text" placeholder="Data" class="input-total" disabled>			
-						<input type="text" placeholder="Valor" class=" formatNumber double input-total number-right" disabled>
-						<p class="rest input-total">0,00</p>
+						<input type="text" placeholder="Data" id="cred-pay-data" class="input-total date-liquida">
+						<input type="text" placeholder="Valor" id="cred-pay-value" class=" formatNumber double input-total number-right" disabled>
+						<p class="rest input-total" id="cred-pay-value-rest">0,00</p>
 					</section>
 					<section class="sec-another flex-form">
 						<span>
-						<p class="input-total"><i class="icon-checkbox-unchecked"> <label>Pagamento Faseado</label></i> </p>
-						<p class="input-total"><i class="icon-checkbox-unchecked"> <label>Desconto</label></i> </p>
+						<p class="input-total"><i class="icon-checkbox-unchecked" id="cred-pay-fazea" > <label>Pagamento Faseado</label></i> </p>
+						<p class="input-total"><i class="icon-checkbox-unchecked" id="cred-pay-desco"> <label>Desconto</label></i> </p>
 						</span>
 					</section>
 				</div>
 			</div>
 			<div class="bt-yes-no-cancel">
-				<button id="">OK</button>
+				<button id="cred-pay-bt">OK</button>
 				<button class="bt-no-option">Cancelar</button>
 			</div>
 			<div class="modal-header">

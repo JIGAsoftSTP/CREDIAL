@@ -84,7 +84,7 @@ function carregarCliente() {
         cell2.innerHTML = client['NIF'];
         cell3.innerHTML = client['NAME']+" "+client['SURNAME'];
         cell4.innerHTML = client['TELE'];
-        cell5.innerHTML = client['TELE'];
+        cell5.innerHTML = client['QUANTIDADE DE CREDITO'];
         carregou = true;
         // lastI = ff;
     }
@@ -226,12 +226,14 @@ $(".close-history").click(function () {
     $('.history-selected').toggleClass('show');
 });
 
+var listPrestacao = undefined;
 function loadCreditoCliente(_idCreito, jk,_asClassShow) {
-    var listPrestacao = listCredito[jk]["prestacao"];
+    listPrestacao = listCredito[jk]["prestacao"];
     if(!_asClassShow) {
         var pre = new Prestacao();
         for (var h = 0; h < listPrestacao.length; h++) {
             pre.id = listPrestacao[h]["ID"];
+            pre.i = h;
             pre.reembolso(listPrestacao[h]["REEMBOLSO"])
                 .prestacaoPaga(listPrestacao[h]["PRESTACAO PAGA"])
                 .estado(listPrestacao[h]["STATE"])
@@ -355,3 +357,32 @@ function getDadosCliente() {
     if(clienteData["TRADOSSIER NUMERO DE CAPA"] != null)
         $("#cli-ar-capa").val(clienteData["TRADOSSIER NUMERO DE CAPA"]);
 }
+
+$("#cred-pay-bt").click(function () {
+    if(validation1($("#cred-pay-form input, #cred-pay-form select"))){
+
+        var paga = new Pagamento();
+        paga.id = prestacaoS["ID"];
+        paga.data = $("#cred-pay-data").val();
+        paga.type = ( !$("#cred-pay-dife").hasClass("icon-checkbox-checked") ? "S"
+            : (!$("#cred-pay-fazea").hasClass("icon-checkbox-checked") ? "D"
+                : "F") );
+        paga.idBank = $("#cred-pay-bank").val();
+        paga.value = unformatted($("#cred-pay-value").val());
+        paga.doc = $("#cred-pay-doc").val();
+
+        $.ajax({
+            url: "./bean/cliente.php",
+            type: "POST",
+            data: {"intensao": "efectuarPagamento", pagamento : paga },
+            dataType: "json",
+            success: function (e) {
+                if (!e.result) {  callXpertAlert(e.msg, new Mensage().cross, -1); }
+                else {
+                    callXpertAlert("Novo pagamento registado sucesso!", 8000);
+                }
+            }
+        });
+    }
+});
+

@@ -15,6 +15,7 @@ if($_POST["intensao"] == "listarCliente"){ listCliente(); }
 if($_POST["intensao"] == "regCliente"){ regCliente(); }
 if($_POST["intensao"] == "loadStatusClient"){ loadStatusClient(); }
 if($_POST["intensao"] == "loadCreditoClient"){ loadCreditoClient(); }
+if($_POST["intensao"] == "efectuarPagamento"){ efectuarPagamento(); }
 
 function listCliente(){
     $call = new CallPgSQL();
@@ -178,4 +179,21 @@ function loadDataCliente(){
     $call->execute();
     $result = $call->getValors();
     return $result;
+}
+
+function efectuarPagamento(){
+    $call = new CallPgSQL();
+    $call->functionTable("funct_efetuar_pagamento","*")
+        ->addNumeric(Session::getUserLogado()->getIdAgencia())
+        ->addString(Session::getUserLogado()->getId())
+        ->addNumeric($_POST["pagamento"]['id'])
+        ->addString($_POST["pagamento"]["doc"])
+        ->addNumeric($_POST["pagamento"]["idBank"])
+        ->addString($_POST["pagamento"]["type"])
+        ->addDouble($_POST["pagamento"]["value"])
+        ->addDate($_POST["pagamento"]["data"]);
+    $call->execute();
+    $return = $call->getValors();
+    if($return["result"]!=true){ $j = json_encode(array("result"=>false,"msg"=>$return["message"])); die($j); }
+    else { $j = json_encode(array("result"=>true)); die($j); }
 }

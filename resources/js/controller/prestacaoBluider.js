@@ -1,6 +1,36 @@
 /**
  * Created by ahmedjorge on 10/16/16.
  */
+var Pagamento = function () {};
+/**
+ * @type {Number}
+ */
+Pagamento.prototype.id = undefined;
+
+/**
+ * @type {String}
+ */
+Pagamento.prototype.type = undefined;
+
+/**
+ * @type {String}
+ */
+Pagamento.prototype.doc = undefined;
+
+/**
+ * @type {Number}
+ */
+Pagamento.prototype.value = undefined;
+
+/**
+ * @type {Number}
+ */
+Pagamento.prototype.idBank = undefined;
+
+/**
+ * @type {String}
+ */
+Pagamento.prototype.data = undefined;
 
 var PrestacaoBluider = function () {
 
@@ -17,13 +47,13 @@ var PrestacaoBluider = function () {
     this.totalCreditoAPagar = undefined;
 
     this.bluider = function(jk) {
-
+        var numCredi = listCredito[jk]["prestacao"].length;
         this.credito =
             '<section class="'+((this.idState == 0) ? "pago" : ((this.idState == 1) ? "por-pagar" : "amortizado" ) )+'">' +
             '<i class="icon-ctrl sh-more" id="pret-'+this.id+'" onclick="showAmortizacao('+this.id+','+jk+')"></i>' +
             '<nav> ' +
             '<div class="primary"><b>Dossier nº '+this.nunDossierCredito+'</b> <b>'+this.totalCreditoAPagar+'</b></div> ' +
-            '<div class="secondary"><small>Efetuado em '+this.dataInicioCredito+'</small> <b><small>'+ "Provision here!" +'</small></b> <small>Data fim crédito: '+this.dataFimCredito+'</small></div>' +
+            '<div class="secondary"><small>Efetuado em '+this.dataInicioCredito+'</small> <b><small>'+ numCredi +'</small></b> <small>Data fim crédito: '+this.dataFimCredito+'</small></div>' +
             '</nav> ' +
             '<nav class="more-details"> ' +
             '<hr> ' +
@@ -69,6 +99,7 @@ var PrestacaoBluider = function () {
 var Prestacao =  function () {
 
     this.id = undefined;
+    this.i = undefined;
     this.estadoValue = undefined;
     this.estado = function (estado) {
         this.estadoValue = estado;
@@ -100,7 +131,7 @@ var Prestacao =  function () {
     };
 
     this.addAmortizacao = function (_idCredito) {
-        this.amortizacao = '<tr id="'+this.id+'-amor" ondblclick="pagamentoPestacao('+this.id+','+_idCredito+')" onclick="clickPestacao('+this.id+','+_idCredito+')">' +
+        this.amortizacao = '<tr id="'+this.id+'-amor" ondblclick="pagamentoPestacao('+this.i+','+_idCredito+')" onclick="clickPestacao('+this.id+','+_idCredito+')">' +
             '<td>'+this.dataEmissaoValue+'</td>' +
             '<td>'+this.dataEndosseValue+'</td>' +
             '<td>'+this.reembolsoValue+'</td>' +
@@ -136,6 +167,61 @@ function clickPestacao(_idPrestacao,_idCredito) {
     $("#"+_idPrestacao+"-amor").addClass('selected') .siblings().removeClass('selected');
 }
 
-function pagamentoPestacao(_idPrestacao,_idCredito) {
-    openModalFrame($('.mp-liquida'));
+var prestacaoS = undefined;
+function pagamentoPestacao(i,_idCredito) {
+    prestacaoS = listPrestacao[i];
+    if (prestacaoS["STATE COD"] !== "0") {
+        loadDataCredForForm();
+    }
 }
+
+var reembloso = undefined;
+var valorPago = undefined;
+var valorPorPago = undefined;
+function loadDataCredForForm() {
+    reembloso = unformatted(prestacaoS["REEMBOLSO"].replace(".",","));
+    valorPago = unformatted(prestacaoS["PRESTACAO PAGA"].replace(".",","));
+    valorPorPago = (reembloso-valorPago).toFixed(2);
+    $("#cred-pay-bank").val((valorPago > 0) ? prestacaoS["BANCO REAL ID"] : prestacaoS["BANCO PREVISTO ID"]);
+    $("#cred-pay-value-rest").html(formattedString("0"));
+    $("#cred-pay-value").val(formattedString((valorPorPago).toString()));
+    $("#cred-pay-doc").val(prestacaoS["DOCUMENTO PAGAMENTO"]);
+
+    openModalFrame($('.mp-liquidar'));
+}
+
+$("#cred-pay-value").change(function () { alterValorApagar($(this)); });
+
+$("#cred-pay-value").keyup(function () { alterValorApagar($(this)); });
+
+function alterValorApagar(value) {
+    var restPay = (valorPorPago - unformatted(value.val())).toFixed(2);
+    if(restPay< 0) {
+        value.val("");
+        $("#cred-pay-value-rest").html(formattedString(valorPorPago.toString()));
+    }
+    else{
+        $("#cred-pay-value-rest").html(formattedString(restPay.toString()));
+    }
+}
+
+$("#cred-pay-fazea").click(function () {
+    if($(this).hasClass('icon-checkbox-checked')){
+        $("#cred-pay-value").val(formattedString(""));
+        $("#cred-pay-value-rest").html(formattedString(valorPorPago.toString()));
+    }else{
+        $("#cred-pay-value").val(formattedString(valorPorPago.toString()));
+        $("#cred-pay-value-rest").html(formattedString("0"));
+    }
+});
+
+$("#cred-pay-dife").click(function () {
+        if ($(this).hasClass('icon-checkbox-checked')) {
+            $("#cred-pay-doc").val("");
+            $("#cred-pay-bank").val("0");
+        } else {
+            $("#cred-pay-doc").val(prestacaoS["DOCUMENTO PAGAMENTO"]);
+            $("#cred-pay-bank").val(prestacaoS["BANCO PREVISTO ID"]);
+        }
+    }
+);

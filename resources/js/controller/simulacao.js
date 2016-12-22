@@ -4,6 +4,7 @@
 $(function () {
     loadDataSimulation();
     $("#cred-data").mask("99-99-9999");
+    $("#cred-pay-data").mask("99-99-9999");
 });
 function validarSimulacao(element) {
     return validation1(element);
@@ -111,6 +112,7 @@ function loadDataSimulation() {
             loadComoBoxIDandValue($("#cred-tipoCred"), e.tipocreditos, "ID", "DESC");
 
             loadComoBoxIDandValue($("#cred-tab-amor-banco"), e.banks, "ID", "SIGLA");
+            loadComoBoxIDandValue($("#cred-pay-bank"), e.banks, "ID", "SIGLA");
             loadComoBoxIDandValue($("#cred-tab-amor-tipoPagamento"), e.fontepagamentos, "ID", "DESC");
 
             loadComoBoxIDandValue($("#cred-cli-modaPag"), e.fontepagamentos, "ID", "DESC");
@@ -162,6 +164,7 @@ function bluiderTablePestacao() {
 function addPestacao(data) {
     var table = document.getElementById("cred-table-prestacao");
     var row = table.insertRow(table.childElementCount);
+
     row.id = id;
     row.onclick = function () {
         $(this).addClass('selected').siblings().removeClass('selected');
