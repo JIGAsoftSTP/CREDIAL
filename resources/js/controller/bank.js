@@ -261,7 +261,7 @@ function regBank()
             {
                 if(e.resultado["RESULT"] === "true")
                 {
-                    callXpertAlert('Banco registrado com sucesso!', 'checkmark', 8000);
+                    callXpertAlert('Banco registado com sucesso!', 'checkmark', 8000);
                     $('.add-new-bank').find('input').val("");
                     $('.add-new-bank').find('input').css("border", "");
                     carregarSiglas();
@@ -290,22 +290,23 @@ function regBankAccount()
             else
             {
                 $("#bk-conta-conta").removeClass("empty");
-                if($("#bk-conta-descricao").val() === "")
-                    $("#bk-conta-descricao").addClass("empty");
-                else{
-                    $("#bk-conta-descricao").removeClass("empty");
-                    if($("#bk-contaSaldoMinimo").val() === "")
-                        $("#bk-conta-saldo-minimo").addClass("empty");
+                if($("#bk-contaSaldoMinimo").val() === "")
+                    $("#bk-contaSaldoMinimo").addClass("empty");
+                else
+                {
+                    $("#bk-contaSaldoMinimo").removeClass("empty");
+                    if($("#bk-conta-descricao").val() === "")
+                        $("#bk-conta-descricao").addClass("empty");
                     else
                     {
-                        $("#bk-conta-saldo-minimo").removeClass("empty");
+                        $("#bk-conta-descricao").removeClass("empty");
 
                         var banco = new Banco();
                         banco.nome = $("#bk-conta-nome").val();
                         banco.codigoAgencia = $("#bk-conta-agencia").val();
                         banco.codigoConta = $("#bk-conta-conta").val();
                         banco.descricao = $("#bk-conta-descricao").val();
-                        banco.saldoMinimo = unformatted($("#bk-conta-saldo-minimo").val());
+                        banco.saldoMinimo = unformatted($("#bk-contaSaldoMinimo").val());
 
                         $.ajax({
                             url: bankAddress,
@@ -316,7 +317,7 @@ function regBankAccount()
                             success:function (e) {
                                 if(e.resultado["RESULT"] === "true")
                                 {
-                                    callXpertAlert('Conta Banco registrado com sucesso!', 'checkmark', 8000);
+                                    callXpertAlert('Conta Banco registado com sucesso!', 'checkmark', 8000);
                                     $('.add-account').find('input, select').val("");
                                     $('.add-account').find('input, select').css("border", "");
                                     $("#bk-conta-descricao").val("");
