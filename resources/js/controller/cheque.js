@@ -13,6 +13,9 @@ $(function () {
     $("#bt-restaurar-cheque").click(function(){
         restaurarCheque();
     });
+    $("#conf-anularCheque").click(function () {
+       anularCheque();
+    });
 
     $("#bt-conf-restaurar-cheque").click(function () {
 
@@ -30,6 +33,8 @@ $(function () {
                     $(".mp-reset-cheq").fadeOut();
                     carregarCheques();
                 }
+                else
+                    callXpertAlert(e.result["MESSAGE"], "warning", 8000);
             }
         });
     });
@@ -38,6 +43,7 @@ $(function () {
 var chequeUrl = "../../bean/AdministracaoBean.php";
 
 var listaCheques = [];
+var indiceChequeAnular = undefined;
 var listaChequesRestaurar = [];
 var Cheque = function(){};
 Cheque.prototype.conta = undefined;
@@ -72,6 +78,7 @@ function regCheque()
                     callXpertAlert("Cheque registado com sucesso!", "checkmark", 8000);
                     $('.add-new-admin').find('input, select').val("");
                     $('.add-new-admin').find('input, select').css("border", "");
+                    carregarCheques();
                 }
                 else
                     callXpertAlert(e.result["MESSAGE"], "warning", 8000);
@@ -122,7 +129,7 @@ function carregarCheques() {
                 var column4 = row.insertCell(4);
                 var column5 = row.insertCell(5);
 
-                column0.innerHTML = '<i class="icon-cancel-circle" onclick=anularCheque('+row.id+')></i>';
+                column0.innerHTML = '<i class="icon-cancel-circle" onclick=anularChequeIndice('+row.id+')></i>';
                 column1.innerHTML = cheque["BANCO"];
                 column2.innerHTML = cheque["AGENCIA"];
                 column3.innerHTML = cheque["INICIO"];
@@ -144,27 +151,52 @@ function restaurarCheque()
         dataType:"json",
         data:{"intention": "restaurar cheque"},
         success:function (e) {
-            listaChequesRestaurar = e.result;
-            $("#section-cheque-anular").append("" +
+            if(e.result.length === 0){
+                callXpertAlert("Não há cheque para restaurar!", "notification", 8000);
+            }
+            else{
+                listaChequesRestaurar = e.result;
+                $("#section-cheque-anular").append("" +
                     "<h1>Registo a anular</h1>"+
                     "<nav><b>Banco</b><span>"+listaChequesRestaurar[0]["BANCO"]+"</span></nav>"+
                     "<nav><b>Agência</b><span>"+listaChequesRestaurar[0]["AGENCIA"]+"</span></nav>"+
                     "<nav><b>Seq. Inicio</b><span></span>"+listaChequesRestaurar[0]["INICIO"]+"</nav>"+
                     "<nav><b>Seq. Fim </b> <span>"+listaChequesRestaurar[0]["FIM"]+"</span></nav>");
 
-            $("#section-cheque-restaurar").append("" +
-                   "<h1>Registo a restaurar</h1>"+
+                $("#section-cheque-restaurar").append("" +
+                    "<h1>Registo a restaurar</h1>"+
                     "<nav><b>Banco</b><span>"+listaChequesRestaurar[1]["BANCO"]+"</span></nav>"+
                     "<nav><b>Agência</b><span>"+listaChequesRestaurar[1]["AGENCIA"]+"</span></nav>"+
                     "<nav><b>Seq. Inicio</b><span></span>"+listaChequesRestaurar[1]["INICIO"]+"</nav>"+
                     "<nav><b>Seq. Fim </b> <span>"+listaChequesRestaurar[1]["FIM"]+"</span></nav>");
 
-            $(".mp-reset-cheq").fadeIn(300);
+                $(".mp-reset-cheq").fadeIn(300);
+            }
         }
     });
 }
 
-function anularCheque()
+function anularChequeIndice(id)
 {
+    indiceChequeAnular = id;
+    $(".mp-cancel-cheq").fadeIn();
+}
 
+function anularCheque() {
+    $.ajax({
+        url: chequeUrl,
+        type:"POST",
+        dataType:"json",
+        async: false,
+        data:{"intention" : "anular cheque",
+            "idCheque" : listaCheques[indiceChequeAnular]["ID"]},
+        success:function (e) {
+            if(e.result["result"] === "true"){
+                callXpertAlert("Cheque anulado com sucesso!", "checkmark", 8000);
+                carregarCheques();
+            }
+            else
+                callXpertAlert(e.result["message"], "warning", 8000);
+        }
+    });
 }

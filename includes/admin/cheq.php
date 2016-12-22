@@ -87,11 +87,11 @@
 		<div class="modalFrame">
 			<div class="modalContainer">
 				<div class="content">
-					<p>Certeza Anular?</p>
+					<p>Tem a certeza que queres anular?</p>
 					
 				</div>
 				<div class="bt-yes-no-cancel">
-					<button id="">OK</button>
+					<button id="conf-anularCheque">OK</button>
 					<button class="bt-no-option">Cancelar</button>
 				</div>
 				<div class="modal-header">

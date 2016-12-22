@@ -9,6 +9,9 @@
 
     switch ($_POST["intention"])
     {
+        case "anular cheque":
+            anularCheque();
+            break;
         case "confirmar restauro cheque":
             restaurarCheque();
             break;
@@ -404,4 +407,27 @@ function loadInsurance()
             $arrayValues[count($arrayValues)] = $row;
         }
         die(json_encode(array("result" => $arrayValues)));
+    }
+
+    function anularCheque()
+    {
+        $call= new CallPgSQL();
+        $call->functionTable("funct_cheques_end", "*")
+        ->addInt(Session::getUserLogado()->getId())
+        ->addInt(Session::getUserLogado()->getIdAgencia())
+        ->addInt($_POST["idCheque"]);
+        $call->execute();
+        $result = $call->getValors();
+
+        if($result["result"] == true){
+            $result["result"] = "true";
+            die(json_encode(array("result" => $result)));
+        }
+        else{
+            $result["result"] = "false";
+            die(json_encode(array("result" => $result)));
+        }
+
+
+
     }
