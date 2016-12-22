@@ -9,6 +9,9 @@
 
     switch ($_POST["intention"])
     {
+        case "confirmar restauro cheque":
+            restaurarCheque();
+            break;
         case "restaurar cheque":
             checkRestoreEffect();
             break;
@@ -381,12 +384,13 @@ function loadInsurance()
     {
         $call = new CallPgSQL();
         $call->functionTable("funct_cheque_restore", "*")
-            ->addString(Session::getUserLogado()->getId())
-            ->addNumeric(Session::getUserLogado()->getIdAgencia())
-            ->addNumeric($_POST["idChequeAnular"])
-            ->addNumeric($_POST["idChequeRestaurar"]);
+            ->addInt(Session::getUserLogado()->getId())
+            ->addInt(Session::getUserLogado()->getIdAgencia())
+            ->addInt($_POST["idChequeAnular"])
+            ->addInt($_POST["idChequeRestaurar"]);
         $call->execute();
         $result = $call->getValors();
+        die(json_encode(array("result" =>$result)));
     }
 
     function checkRestoreEffect()
@@ -394,6 +398,10 @@ function loadInsurance()
         $call = new CallPgSQL();
         $call->functionTable("funct_cheque_restore_effect", "*");
         $call->execute();
-        $result = $call->getValors();
-        die(json_encode(array("result" => $result)));
+        $arrayValues = array();
+        while($row = $call->getValors())
+        {
+            $arrayValues[count($arrayValues)] = $row;
+        }
+        die(json_encode(array("result" => $arrayValues)));
     }

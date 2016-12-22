@@ -55,25 +55,25 @@
 		<div class="modalFrame">
 			<div class="modalContainer">
 				<div class="content">
-					<section>
-						<h1>Registo atual</h1>
-						<nav><b>Banco</b> <span></span>rhwe</nav>
-						<nav><b>Agência</b> <span></span></nav>
-						<nav><b>Seq. Inicio</b> <span>0006000103110400421610081051</span></nav>
-						<nav><b>Seq. Fim</b> <span>0006000103110400421610081051</span></nav>
+					<section id="section-cheque-anular">
+						<h1>Registo a anular</h1>
+<!--						<nav><b>Banco</b> <span></span>rhwe</nav>-->
+<!--						<nav><b>Agência</b> <span></span></nav>-->
+<!--						<nav><b>Seq. Inicio</b> <span></span></nav>-->
+<!--						<nav><b>Seq. Fim</b> <span></span></nav>-->
 					</section>
-					<section>
-						<h1>Registo anterior</h1>
-						<nav><b>Banco</b> <span></span>rhwe</nav>
-						<nav><b>Agência</b> <span></span></nav>
-						<nav><b>Seq. Inicio</b> <span>0006000103110400421610081051</span></nav>
-						<nav><b>Seq. Fim</b> <span>0006000103110400421610081051</span></nav>
+					<section id="section-cheque-restaurar">
+						<h1>Registo a restaurar</h1>
+<!--						<nav><b>Banco</b> <span></span>rhwe</nav>-->
+<!--						<nav><b>Agência</b> <span></span></nav>-->
+<!--						<nav><b>Seq. Inicio</b> <span></span></nav>-->
+<!--						<nav><b>Seq. Fim</b> <span></span></nav>-->
 					</section>
 					
 					
 				</div>
 				<div class="bt-yes-no-cancel">
-					<button id="">Restaurar</button>
+					<button id="bt-conf-restaurar-cheque">Restaurar</button>
 					<button class="bt-no-option">Cancelar</button>
 				</div>
 				<div class="modal-header">

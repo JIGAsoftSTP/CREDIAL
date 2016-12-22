@@ -5,6 +5,7 @@
 $(function () {
     carregarCheques();
     loadChequeData();
+
     $("#addCheck").click(function () {
         regCheque();
     })
@@ -12,11 +13,32 @@ $(function () {
     $("#bt-restaurar-cheque").click(function(){
         restaurarCheque();
     });
+
+    $("#bt-conf-restaurar-cheque").click(function () {
+
+        $.ajax({
+           url: chequeUrl,
+            type:"POST",
+            dataType:"json",
+            async: false,
+            data:{"intention" : "confirmar restauro cheque",
+                "idChequeAnular" : listaChequesRestaurar[0]["ID"],
+                "idChequeRestaurar" : listaChequesRestaurar[1]["ID"]},
+            success:function (e) {
+                if(e.result["RESULT"] === "true"){
+                    callXpertAlert("Registo de Cheque restaurado com sucesso!", "checkmark", 8000);
+                    $(".mp-reset-cheq").fadeOut();
+                    carregarCheques();
+                }
+            }
+        });
+    });
 });
 
 var chequeUrl = "../../bean/AdministracaoBean.php";
 
 var listaCheques = [];
+var listaChequesRestaurar = [];
 var Cheque = function(){};
 Cheque.prototype.conta = undefined;
 Cheque.prototype.agencia = undefined;
@@ -120,7 +142,20 @@ function restaurarCheque()
         dataType:"json",
         data:{"intention": "restaurar cheque"},
         success:function (e) {
+            listaChequesRestaurar = e.result;
+            $("#section-cheque-anular").append("" +
+                    "<nav><b>Banco</b><span>"+listaChequesRestaurar[0]["BANCO"]+"</span></nav>"+
+                    "<nav><b>Agência</b><span>"+listaChequesRestaurar[0]["AGENCIA"]+"</span></nav>"+
+                    "<nav><b>Seq. Inicio</b><span></span>"+listaChequesRestaurar[0]["INICIO"]+"</nav>"+
+                    "<nav><b>Seq. Fim </b> <span>"+listaChequesRestaurar[0]["FIM"]+"</span></nav>");
 
+            $("#section-cheque-restaurar").append("" +
+                    "<nav><b>Banco</b><span>"+listaChequesRestaurar[1]["BANCO"]+"</span></nav>"+
+                    "<nav><b>Agência</b><span>"+listaChequesRestaurar[1]["AGENCIA"]+"</span></nav>"+
+                    "<nav><b>Seq. Inicio</b><span></span>"+listaChequesRestaurar[1]["INICIO"]+"</nav>"+
+                    "<nav><b>Seq. Fim </b> <span>"+listaChequesRestaurar[1]["FIM"]+"</span></nav>");
+
+            $(".mp-reset-cheq").fadeIn(300);
         }
     });
 }
