@@ -45,19 +45,19 @@ iframe{
 	margin: 1rem 0 3rem;
 	color: #555;
 }
-.filter-report nav{
+.filter-report div nav{
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 }
-.periodic i{
+.filter-report i{
 	cursor: pointer;
 }
-.periodic i.icon-ctrl{
+.filter-report i.icon-ctrl{
 	font-weight: bold;
 	transform: rotate(180deg);
 }
-.periodic i.icon-ctrl.show{
+.filter-report i.icon-ctrl.show{
 	transform: none;
 }
 .periodic .prd-enabled{
@@ -125,7 +125,6 @@ iframe{
 	width: 100%;
 }
 
-.filter-added{
-	padding-top: 1rem;
-	position: relative;
+.filter-added nav{
+	margin-bottom: 1rem;
 }

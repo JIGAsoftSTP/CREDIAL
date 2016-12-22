@@ -44,7 +44,7 @@
 					</div>
 					</div>
 					<div class="filter-added">
-					<nav> Filtro selecionado</span></i> <i class="icon-ctrl"></i></nav>
+					<nav> Filtro selecionado</span></i> <i class="icon-ctrl show"></i></nav>
 
 						
 					</div>
