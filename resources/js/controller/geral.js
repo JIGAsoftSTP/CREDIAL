@@ -14,6 +14,14 @@ function loadComoBoxIDandValue(element, array, id, value) {
     }
 }
 
+function loadComoBoxIDandValueReport(element, array, id, value) {
+    for (var x=0; x < array.length; x++){
+        var lista = array[x];
+        element.append('<option value="'+ lista[id] +'" filter="'+ lista[value] +'">'+lista[value]+'</option>');
+    }
+}
+
+
 
 
 function formattedString(nStr) {
