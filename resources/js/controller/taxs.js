@@ -81,7 +81,7 @@ function addtax() {
             {
                 if(e.resultado["RESULT"] === "true")
                 {
-                    callXpertAlert("Taxa registrado com sucesso!", "checkmark", 8000);
+                    callXpertAlert("Taxa registado com sucesso!", "checkmark", 8000);
                     $('.flex-form').find('input, select').val("");
                     $('.flex-form').find('input, select').css("border", "");
                 }

@@ -102,12 +102,10 @@ function loadBankMoviment(position)
             if(Number(listBanks[position]["banco_saldo"])<Number(listBanks[position]["banco_saldominimo"])){
                 $(".sald").removeClass("good");
                 $(".sald").addClass("bad");
-                console.info("entrou");
             }
             else{
                 $(".sald").removeClass("bad");
                 $(".sald").addClass("good");
-                console.info("entrou inferior");
             }
 
             for(var i=0;i<listMoviments.length;i++)
