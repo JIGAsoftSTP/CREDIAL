@@ -20,7 +20,7 @@ $(function(){
                 success:function (e) {
                     taxs = e.result;
                     loadTax();
-                    setRowCount($("#table-taxa"));
+
                 }
             });
         }
@@ -54,7 +54,6 @@ function taxData() {
         data:{"intention": "tax data", "typeCredit": null},
         success:function (e) {
             taxs = e.result;
-            loadTax();
             loadComoBoxIDandValue($("#taxaTipoCredito"), e.tipoCreditos ,"ID", "DESC");
             loadComoBoxIDandValue($("#tipoCreditoSearch"), e.tipoCreditos ,"ID", "DESC");
             loadTax();
@@ -82,6 +81,7 @@ function addtax() {
             {
                 if(e.resultado["RESULT"] === "true")
                 {
+                    $("#tipoCreditoSearch").trigger("change");
                     callXpertAlert("Taxa registrado com sucesso!", "checkmark", 8000);
                     $('.flex-form').find('input, select').val("");
                     $('.flex-form').find('input, select').css("border", "");
@@ -123,6 +123,6 @@ function loadTax()
         column5.innerHTML = tax["DATA FIM"];
         column6.innerHTML = tax["ESTADO"];
     }
-
     tableEstructure($("#table-taxa"));
+     // setRowCount(".x-table");
 }

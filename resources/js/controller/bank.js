@@ -264,6 +264,7 @@ function regBank()
                     callXpertAlert('Banco registrado com sucesso!', 'checkmark', 8000);
                     $('.add-new-bank').find('input').val("");
                     $('.add-new-bank').find('input').css("border", "");
+                    carregarSiglas();
                 }
                 else
                     callXpertAlert(e.resultado["MESSAGE"], 'warning', 8000);
