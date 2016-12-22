@@ -31,7 +31,8 @@ function loadMenuUserLogado(){
                if(cod !== null && $("[id='"+cod+"']").length > 0){
                    var ul = document.getElementById(cod);
                    var li = document.createElement("li");
-                   li.urldata = menus['LINK'];
+                   li.id = menus[gg]["COD"];
+                   li.setAttribute("urldata", menus[gg]['LINK']);
                    var liText = document.createTextNode(menus[gg]['NAME']);
                    li.appendChild(liText);
                    ul.appendChild(li);
