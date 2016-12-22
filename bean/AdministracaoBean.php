@@ -390,10 +390,18 @@ function loadInsurance()
             ->addInt(Session::getUserLogado()->getId())
             ->addInt(Session::getUserLogado()->getIdAgencia())
             ->addInt($_POST["idChequeAnular"])
-            ->addInt($_POST["idChequeRestaurar"]);
+            ->addInt(($_POST["idChequeRestaurar"] == "0" ? null : $_POST["idChequeRestaurar"]));
         $call->execute();
         $result = $call->getValors();
-        die(json_encode(array("result" =>$result)));
+
+        if($result["result"] == true){
+            $result["result"] = "true";
+            die(json_encode(array("result" => $result)));
+        }
+        else{
+            $result["result"] = "false";
+            die(json_encode(array("result" => $result)));
+        }
     }
 
     function checkRestoreEffect()

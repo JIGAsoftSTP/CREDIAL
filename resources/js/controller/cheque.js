@@ -19,24 +19,47 @@ $(function () {
 
     $("#bt-conf-restaurar-cheque").click(function () {
 
-        $.ajax({
-           url: chequeUrl,
-            type:"POST",
-            dataType:"json",
-            async: false,
-            data:{"intention" : "confirmar restauro cheque",
-                "idChequeAnular" : listaChequesRestaurar[0]["ID"],
-                "idChequeRestaurar" : listaChequesRestaurar[1]["ID"]},
-            success:function (e) {
-                if(e.result["RESULT"] === "true"){
-                    callXpertAlert("Registo de Cheque restaurado com sucesso!", "checkmark", 8000);
-                    $(".mp-reset-cheq").fadeOut();
-                    carregarCheques();
+        if(listaChequesRestaurar.length === 2){
+            $.ajax({
+                url: chequeUrl,
+                type:"POST",
+                dataType:"json",
+                async: false,
+                data:{"intention" : "confirmar restauro cheque",
+                    "idChequeAnular" : listaChequesRestaurar[0]["ID"],
+                    "idChequeRestaurar" : listaChequesRestaurar[1]["ID"]},
+                success:function (e) {
+                    if(e.result["result"] === "true"){
+                        callXpertAlert("Registo de Cheque restaurado com sucesso!", "checkmark", 8000);
+                        $(".mp-reset-cheq").fadeOut();
+                        carregarCheques();
+                    }
+                    else
+                        callXpertAlert(e.result["message"], "warning", 8000);
                 }
-                else
-                    callXpertAlert(e.result["MESSAGE"], "warning", 8000);
-            }
-        });
+            });
+        }
+        else{
+            $.ajax({
+                url: chequeUrl,
+                type:"POST",
+                dataType:"json",
+                async: false,
+                data:{"intention" : "confirmar restauro cheque",
+                    "idChequeAnular" : listaChequesRestaurar[0]["ID"],
+                    "idChequeRestaurar" : "0"},
+                success:function (e) {
+                    if(e.result["result"] === "true"){
+                        callXpertAlert("Registo de Cheque restaurado com sucesso!", "checkmark", 8000);
+                        $(".mp-reset-cheq").fadeOut();
+                        carregarCheques();
+                    }
+                    else
+                        callXpertAlert(e.result["message"], "warning", 8000);
+                }
+            });
+        }
+
     });
 });
 
