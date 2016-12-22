@@ -136,6 +136,8 @@ function carregarCheques() {
 
 function restaurarCheque()
 {
+    $("#section-cheque-anular").empty();
+    $("#section-cheque-restaurar").empty();
     $.ajax({
         url: chequeUrl,
         type:"POST",
@@ -144,12 +146,14 @@ function restaurarCheque()
         success:function (e) {
             listaChequesRestaurar = e.result;
             $("#section-cheque-anular").append("" +
+                    "<h1>Registo a anular</h1>"+
                     "<nav><b>Banco</b><span>"+listaChequesRestaurar[0]["BANCO"]+"</span></nav>"+
                     "<nav><b>Agência</b><span>"+listaChequesRestaurar[0]["AGENCIA"]+"</span></nav>"+
                     "<nav><b>Seq. Inicio</b><span></span>"+listaChequesRestaurar[0]["INICIO"]+"</nav>"+
                     "<nav><b>Seq. Fim </b> <span>"+listaChequesRestaurar[0]["FIM"]+"</span></nav>");
 
             $("#section-cheque-restaurar").append("" +
+                   "<h1>Registo a restaurar</h1>"+
                     "<nav><b>Banco</b><span>"+listaChequesRestaurar[1]["BANCO"]+"</span></nav>"+
                     "<nav><b>Agência</b><span>"+listaChequesRestaurar[1]["AGENCIA"]+"</span></nav>"+
                     "<nav><b>Seq. Inicio</b><span></span>"+listaChequesRestaurar[1]["INICIO"]+"</nav>"+

@@ -56,14 +56,14 @@
 			<div class="modalContainer">
 				<div class="content">
 					<section id="section-cheque-anular">
-						<h1>Registo a anular</h1>
+<!--						<h1>Registo a anular</h1>-->
 <!--						<nav><b>Banco</b> <span></span>rhwe</nav>-->
 <!--						<nav><b>Agência</b> <span></span></nav>-->
 <!--						<nav><b>Seq. Inicio</b> <span></span></nav>-->
 <!--						<nav><b>Seq. Fim</b> <span></span></nav>-->
 					</section>
 					<section id="section-cheque-restaurar">
-						<h1>Registo a restaurar</h1>
+<!--						<h1>Registo a restaurar</h1>-->
 <!--						<nav><b>Banco</b> <span></span>rhwe</nav>-->
 <!--						<nav><b>Agência</b> <span></span></nav>-->
 <!--						<nav><b>Seq. Inicio</b> <span></span></nav>-->
