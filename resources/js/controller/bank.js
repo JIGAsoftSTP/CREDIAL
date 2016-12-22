@@ -171,9 +171,6 @@ function bankTransfer() {
             }
         }
     }
-    {
-
-    }
 }
 
 function makeCreditDebit() {
@@ -244,12 +241,14 @@ function regBank()
 {
     if($("#bancoNome").val() !== "" &&
         $("#bancoSigla").val() !=="" &&
-        $("#bancoCodigoBancario").val() !== "")
+        $("#bancoCodigoBancario").val() !== "" &&
+        $("#bk-contaSaldoMinimo").val() !== "")
     {
         var banco = new Banco();
         banco.nome = $("#bancoNome").val();
         banco.sigla = $("#bancoSigla").val();
         banco.codigoConta = $("#bancoCodigoBancario").val();
+        banco.saldoMinimo= unformatted($("#bk-contaSaldoMinimo").val());
 
         $.ajax({
             url: bankAddress,
@@ -290,48 +289,38 @@ function regBankAccount()
             else
             {
                 $("#bk-conta-conta").removeClass("empty");
-                if($("#bk-contaSaldoMinimo").val() === "")
-                    $("#bk-contaSaldoMinimo").addClass("empty");
+                if($("#bk-conta-descricao").val() === "")
+                    $("#bk-conta-descricao").addClass("empty");
                 else
                 {
-                    $("#bk-contaSaldoMinimo").removeClass("empty");
-                    if($("#bk-conta-descricao").val() === "")
-                        $("#bk-conta-descricao").addClass("empty");
-                    else
-                    {
-                        $("#bk-conta-descricao").removeClass("empty");
+                    $("#bk-conta-descricao").removeClass("empty");
 
-                        var banco = new Banco();
-                        banco.nome = $("#bk-conta-nome").val();
-                        banco.codigoAgencia = $("#bk-conta-agencia").val();
-                        banco.codigoConta = $("#bk-conta-conta").val();
-                        banco.descricao = $("#bk-conta-descricao").val();
-                        banco.saldoMinimo = unformatted($("#bk-contaSaldoMinimo").val());
+                    var banco = new Banco();
+                    banco.nome = $("#bk-conta-nome").val();
+                    banco.codigoAgencia = $("#bk-conta-agencia").val();
+                    banco.codigoConta = $("#bk-conta-conta").val();
+                    banco.descricao = $("#bk-conta-descricao").val();
 
-                        $.ajax({
-                            url: bankAddress,
-                            type:"POST",
-                            dataType:"json",
-                            async: false,
-                            data:{"intention": "add bank account", "bank" : banco},
-                            success:function (e) {
-                                if(e.resultado["result"] === "true")
-                                {
-                                    callXpertAlert('Conta Banco registado com sucesso!', 'checkmark', 8000);
-                                    $('.add-account').find('input, select').val("");
-                                    $('.add-account').find('input, select').css("border", "");
-                                    $("#bk-conta-descricao").val("");
-                                    $("#bk-conta-descricao").css("border", "");
-                                }
-                                else
-                                    callXpertAlert(e.resultado["message"], 'warning', 8000);
+                    $.ajax({
+                        url: bankAddress,
+                        type:"POST",
+                        dataType:"json",
+                        async: false,
+                        data:{"intention": "add bank account", "bank" : banco},
+                        success:function (e) {
+                            if(e.resultado["result"] === "true")
+                            {
+                                callXpertAlert('Conta Banco registado com sucesso!', 'checkmark', 8000);
+                                $('.add-account').find('input, select').val("");
+                                $('.add-account').find('input, select').css("border", "");
+                                $("#bk-conta-descricao").val("");
+                                $("#bk-conta-descricao").css("border", "");
                             }
-                        });
-                    }
-
-
+                            else
+                                callXpertAlert(e.resultado["message"], 'warning', 8000);
+                        }
+                    });
                 }
-
             }
         }
     }

@@ -226,8 +226,10 @@ function anularCheque() {
             "idCheque" : listaCheques[indiceChequeAnular]["ID"]},
         success:function (e) {
             if(e.result["result"] === "true"){
+                $(".mp-cancel-cheq").fadeOut();
                 callXpertAlert("Cheque anulado com sucesso!", "checkmark", 8000);
                 carregarCheques();
+
             }
             else
                 callXpertAlert(e.result["message"], "warning", 8000);
