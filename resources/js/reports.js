@@ -17,17 +17,22 @@ $('.add-section-filter b').click(function(event) {
 		filterConstruct(selected, filter);
 });
 
-$('.filter-added').on('keyup','input', function(event) {
+$('.filter-added').on('keyup focusin','input', function(event) {
 	
 	printWanted($(this), event);
 });
 
+$('.filter-added').on('focusout','input', function(event) {	
+	$(this).next().find('li').removeClass('found');
+});
 
 
-$('.filter-added').on('click','.x-autocomplete li', function(event) {
-	selected = $('.x-autocomplete li.lighted').text();
+
+$('.filter-added').on('mousemove','.x-autocomplete li', function(event) {
+	
 	Ipt = $(this).parent().prev();
-	Ipt.val(selected);
+	Ipt.val($(this).text());
+	event.stopPropagation();
 });
 $('.filter-added').on('mouseover','.x-autocomplete li', function(event) {
 	lighting($(this));
