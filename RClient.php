@@ -6,7 +6,9 @@
 	<link rel="stylesheet" href="./resources/css/geralStyle.css">
 	<link rel="stylesheet" href="./resources/css/client.css">
 	<link rel="stylesheet" href="resources/fw/css/datePicker.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
+
 <body id="p1" ng-controller="masterController">
 	<?php include 'includes/menu.php'; ?> 
 	<div class="content-body">
