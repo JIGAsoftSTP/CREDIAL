@@ -17,26 +17,6 @@ $('.add-section-filter b').click(function(event) {
 		filterConstruct(selected, filter);
 });
 
-$('.filter-added').on('keyup focusin','input', function(event) {
-	
-	printWanted($(this), event);
-});
-
-$('.filter-added').on('focusout','input', function(event) {	
-	$(this).next().find('li').removeClass('found');
-});
-
-
-
-$('.filter-added').on('mousemove','.x-autocomplete li', function(event) {
-	
-	Ipt = $(this).parent().prev();
-	Ipt.val($(this).text());
-	event.stopPropagation();
-});
-$('.filter-added').on('mouseover','.x-autocomplete li', function(event) {
-	lighting($(this));
-});
 $('.filter-added').on('click','.xClose',function(event) {
 	$(this).closest('section').remove();
 });
@@ -62,17 +42,17 @@ function filterConstruct(selected, filter){
 	selected = parseInt(selected.val());
 	if(!filterExists(filter).exist){
             structure = '<section class="sec-added" filter="' + filter + '">' +
-                '<span class="xClose"><hr><hr></span>' +
+                '<span class="xClose" title="Remover filtragem por '+ filter +'"><hr><hr></span>' +
                 '<span class="x-autocomplete">' +
-                '<input type="text" placeholder="' + filter + '">' +
-                '<ul id="' + selected + '">' +
+                '<input list ="'+ selected +'" placeholder="' + filter + '">' +
+                '<datalist id="' + selected + '">' +
                 returnListFilter(selected);
             +
-                '</ul>' +
+                '</datalist>' +
             '</span>' +
             '</section>';
             $('.filter-added').append(structure);
-
+            $("datalist#"+selected).prev().focus();
 	} else{
 		$('.filter-added section').eq(filterExists(filter).position)
 		.insertBefore($('.filter-added section').eq(0))
@@ -85,12 +65,11 @@ function filterExists(filter){
 	$('.filter-added section').each(function(index, el) {
 		if($(this).attr('filter') === filter){
 			arrayExist.exist = true;
-			arrayExist.position = $(this).index();
+			arrayExist.position = $(this).index() - 1;
 			return false;
 		}
 
 	});
-	console.log(arrayExist);
 	return arrayExist;
 }
 
@@ -103,35 +82,27 @@ function returnListFilter(listDB){
 		data:{"intention" : "load object values", "id" : listDB},
 		success:function (e) {
 			for(var i=0;i<e.objeto.length;i++){
-				$("ul#"+listDB).append('<li>'+e.objeto[i]["DESCRICAO"]+'</li>');
+				$("datalist#"+listDB).append('<option value="'+e.objeto[i]["DESCRICAO"]+'"></option>');
+				localStorage
 			}
 
         }
 	});
-	return "";
 }
 
-function printWanted(input, event){
-	list = input.next().find('li');
-	textIpt = input.val();
-	if(!isEmpty(input)){
 
-		list.each(function() {
-			if($(this).text().toLowerCase().match(textIpt.toLowerCase())) {
-				$(this).addClass('found');
-			} else
-			$(this).removeClass('found');
-
-		});
-		listSelected = input.next().find('li.lighted');
-		lighting(listSelected);
-		if(event.which === 13)
-			input.val(listSelected.text());
-	} else
-		list.removeClass('found');
-}
 
 function lighting(el){
 	el.addClass('lighted').siblings().removeClass('lighted');
 	
+}
+function setPositionXC(el){
+    var divPos = {};
+    var offset = $('body').offset();
+
+    divPos = {
+        left: el.offset().left - offset.left,
+        top: el.offset().top - offset.top
+    };
+    console.log(divPos.left + ' ' + divPos.top + ' '+ el.next().height());
 }

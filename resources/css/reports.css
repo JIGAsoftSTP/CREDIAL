@@ -109,6 +109,7 @@ iframe{
 }
 .filter-report .sec-added{
 	position: relative;
+	margin-bottom: 1rem;
 }
 .filter-report .xClose{
 	opacity: 0;
@@ -133,5 +134,5 @@ iframe{
 	overflow: hidden;
 }
 .filter-added nav{
-	margin-bottom: 1rem;
+	margin-bottom: 2rem;
 }

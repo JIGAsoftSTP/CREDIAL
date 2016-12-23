@@ -16,6 +16,10 @@
 /*noinspection CssInvalidPseudoSelector*/
 :-o-input-placeholder { color:#999;  font-style: italic; } /* ie */
 
+input::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
 ::-webkit-scrollbar {
     width: 5px;
 }
@@ -75,7 +79,7 @@ body,
 .xpert-form button{
 	cursor: pointer;
 }
-
+.x-autocomplete input,
 .xpert-form  input[type=text],
 .xpert-form  input[type=password],
 .xpert-form  select{
@@ -94,6 +98,7 @@ body,
 	padding: 0 6px;
 	resize: none; 
 }
+.x-autocomplete input:focus,
 .xpert-form input[type=text]:focus,
 .xpert-form  input[type=password]:focus,
 .xpert-form  select:focus{
@@ -752,49 +757,6 @@ header nav{
 	background: #3398DC;
 }
 .xpert-alert.warning i{
-}
-
-
-.x-autocomplete{
-	display: block;
-	position: relative;
-}
-.x-autocomplete ul{
-	position: absolute;
-	width: 100%;
-	left: 0;
-	top: 100%;
-	margin-top: -1.6rem;
-	/*box-shadow: 1px 0 20px 0 #ccc;*/
-	border: 1px #ddd solid;
-	border-bottom: 2px #eee solid;
-	border-top: 0;
-	color: #555;
-	max-height: 0;
-	overflow: hidden;
-	background: #FFF;
-	opacity: 0;
-	z-index: 5;
-	
-}
-.x-autocomplete input:focus + ul{
-	opacity: 1;
-	max-height: 200px;
-	overflow: auto;
-}
-.x-autocomplete ul li{
-	line-height: 2rem;
-	font-size: .94rem;
-	padding: 0 1rem;
-	cursor: pointer;
-	display: none;
-}
-.x-autocomplete ul li.found{
-	display: block;
-}
-.x-autocomplete ul li.lighted{
-	background: #3879D9;
-	color: #FFF;
 }
 
 .xClose{
