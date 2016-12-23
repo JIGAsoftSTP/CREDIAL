@@ -120,7 +120,8 @@ function CtrlTabs(el1, el2){
 }
 
 function openModalFrame(modal) {
-    resetForm(modal);
+    if(modal.hasClass('resetOnOpening'))
+        resetForm(modal);
     modal.fadeIn(300);
 }
 
