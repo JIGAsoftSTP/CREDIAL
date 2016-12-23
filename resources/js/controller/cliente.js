@@ -9,6 +9,19 @@ $(function () {
     loadComoBox($("#cli-ar-let"),addLETRAS());
     loadOutherData();
     $("#cli-dataNasc").mask("99-99-9999");
+
+    $("#span-type-search-client i").click(function () {
+       typeSearch = $(this).attr("title");
+    });
+
+    $("#client-search").keypress(function (e) {
+        if(e.keyCode === 13)
+            searchClient();
+    })
+    $("#client-search").keyup(function () {
+        if($(this).val() === "")
+            listarCliente();
+    })
 });
 var i = 0;
 var lastI = 0;
@@ -19,6 +32,7 @@ var mCount = 5;
 var addTable = 0;
 var clienteData = undefined;
 var clienteLetra = 0;
+var typeSearch;
 
 var clientes = [];
 function listarCliente() {
@@ -385,4 +399,47 @@ $("#cred-pay-bt").click(function () {
         });
     }
 });
+
+function searchClient()
+{
+    var value = $("#client-search").val();
+    value = value.toUpperCase();
+    $.ajax({
+       url: "bean/cliente.php",
+        type: "POST",
+       dataType: "json",
+       data:{"intensao" : "search client", "search" : typeSearch, "valueSearch": value},
+        success:function (e) {
+            clientes = e.data;
+
+            $('#tableCliente').empty();
+            for (var i = 0; i< clientes.length ; i++) {
+                var client = clientes[i];
+                var table = document.getElementById("tableCliente");
+                var row = table.insertRow(table.childElementCount);
+
+                row.id = i;
+                row.onclick = function () { $(this).addClass('selected') .siblings().removeClass('selected'); };
+
+                var cell1 = row.insertCell(0);
+                var cell2 = row.insertCell(1);
+                var cell3 = row.insertCell(2);
+                var cell4 = row.insertCell(3);
+                var cell5 = row.insertCell(4);
+
+                cell1.innerHTML = "<i class='icon-credit-card' onclick='"+"credito("+i+")' ></i>" +
+                    "<i class='icon-info' onclick='"+"inforCiente("+i+")' ></i>" +
+                    "<i class='icon-pencil' onclick='"+"editCiente("+i+")' ></i>";
+                cell2.innerHTML = client['NIF'];
+                cell3.innerHTML = client['NAME']+" "+client['SURNAME'];
+                cell4.innerHTML = client['TELE'];
+                cell5.innerHTML = client['QUANTIDADE DE CREDITO'];
+                carregou = true;
+                // lastI = ff;
+            }
+            tableEstructure($('.x-table.table-client'));
+            setRowCount($('.x-table.table-client'));
+        }
+    });
+}
 
