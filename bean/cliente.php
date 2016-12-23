@@ -17,6 +17,7 @@ include "Session.php";
     if($_POST["intensao"] == "loadCreditoClient"){ loadCreditoClient(); }
     if($_POST["intensao"] == "efectuarPagamento"){ efectuarPagamento(); }
     if($_POST["intensao"] == "efectuarPagamento"){ efectuarPagamento(); }
+    if($_POST["intensao"] == "reloadPestacaoCreditdo"){ reloadPestacaoCreditdo(); }
     if($_POST["intensao"] == "search client"){
         if($_POST["search"] == "Nº documento") searchClientByNumDoc();
         else if($_POST["search"] == "NIF") searchClientByNif();
@@ -273,4 +274,6 @@ include "Session.php";
         die(json_encode(array("data" => $arrayValues)));
     }
 
-
+function reloadPestacaoCreditdo(){
+    die(json_encode(array("prestacao" => loadPrestacao($_POST['idCred']))));
+}

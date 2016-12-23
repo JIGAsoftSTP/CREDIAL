@@ -159,4 +159,14 @@ ListUser.prototype.getList = function () {
 //     console.log(args);
 // }
 
+if(!Number.prototype.dc){
+    Number.prototype.dc = function () {
+        return Number(this.toFixed(2));
+    }
+}
 
+if(!Number.prototype.rp){
+    Number.prototype.rp = function () {
+        return this.toString().replace(".",",");
+    }
+}

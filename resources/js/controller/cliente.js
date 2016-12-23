@@ -241,8 +241,12 @@ $(".close-history").click(function () {
 });
 
 var listPrestacao = undefined;
+var iPrestacao = undefined;
+var idCredSeleted = undefined;
 function loadCreditoCliente(_idCreito, jk,_asClassShow) {
     listPrestacao = listCredito[jk]["prestacao"];
+    iPrestacao = jk;
+    idCredSeleted = _idCreito;
     if(!_asClassShow) {
         var pre = new Prestacao();
         for (var h = 0; h < listPrestacao.length; h++) {
@@ -253,7 +257,7 @@ function loadCreditoCliente(_idCreito, jk,_asClassShow) {
                 .estado(listPrestacao[h]["STATE"])
                 .dataEndosse((listPrestacao[h]["DATA ENDOSSADO"] == null) ? " ---------------- " : listPrestacao[h]["DATA ENDOSSADO"])
                 .dataEmissao(listPrestacao[h]["DATA EMISAO"])
-                .addAmortizacao(_idCreito);
+                .addAmortizacao();
         }
         $("#list-prestacao-" + _idCreito).html(pre.getListAmortiza());
     }
@@ -393,7 +397,9 @@ $("#cred-pay-bt").click(function () {
             success: function (e) {
                 if (!e.result) {  callXpertAlert(e.msg, new Mensage().cross, -1); }
                 else {
-                    callXpertAlert("Novo pagamento registado sucesso!", 8000);
+                    callXpertAlert("Novo pagamento registado sucesso!", new Mensage().checkmark, 8000);
+                    $('#cred-pay-form').closest('.modalPage').fadeOut(300);
+                    setTimeout(reloadPestacaoCreditdo, 700);
                 }
             }
         });
@@ -440,6 +446,22 @@ function searchClient()
             tableEstructure($('.x-table.table-client'));
             setRowCount($('.x-table.table-client'));
         }
+    });
+}
+
+function reloadPestacaoCreditdo() {
+    $.ajax({
+        url: "./bean/cliente.php",
+        type: "POST",
+        data: { "intensao": "reloadPestacaoCreditdo", idCred : idCredSeleted },
+        dataType: "json",
+        success: function (e) {
+            // listCredito[iPrestacao]["prestacao"] = e.prestacao;
+            // loadCreditoCliente(idCredSeleted, iPrestacao, false);
+            // tableEstructure($('#table-amortizacao-'+id));
+        }//,
+        // beforeSend: function () {  $(".mp-loading").fadeIn(); },
+        // complete: function () { $(".mp-loading").fadeOut(); }
     });
 }
 
