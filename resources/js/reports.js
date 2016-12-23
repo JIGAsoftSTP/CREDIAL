@@ -12,9 +12,10 @@ $('.add-section-filter select').change(function(event) {
 });
 $('.add-section-filter b').click(function(event) {
 	selected = $(this).prev();
-	filter = $(this).prev().find('option:selected', this).attr('filter');;
+	filter = $(this).prev().find('option:selected', this).attr('filter');
+	identifier = $(this).prev().find('option:selected', this).attr('identifier');
 	if(!isEmpty(selected))
-		filterConstruct(selected, filter);
+		filterConstruct(identifier, selected, filter);
 });
 
 $('.filter-added').on('click','.xClose',function(event) {
@@ -37,7 +38,7 @@ $('.filter-added .icon-ctrl').click(function(event) {
 });
 
 
-function filterConstruct(selected, filter){
+function filterConstruct(identifier, selected, filter){
 	var structure;
 	selected = parseInt(selected.val());
 	if(!filterExists(filter).exist){
@@ -46,7 +47,7 @@ function filterConstruct(selected, filter){
                 '<span class="x-autocomplete">' +
                 '<input list ="'+ selected +'" placeholder="' + filter + '">' +
                 '<datalist id="' + selected + '">' +
-                returnListFilter(selected);
+                returnListFilter(identifier, selected);
             +
                 '</datalist>' +
             '</span>' +
@@ -73,21 +74,26 @@ function filterExists(filter){
 	return arrayExist;
 }
 
-function returnListFilter(listDB){
-	var list="";
-	$.ajax({
-		url: "bean/relatorio.php",
-		type:"POST",
-		dataType:"json",
-		data:{"intention" : "load object values", "id" : listDB},
-		success:function (e) {
-			for(var i=0;i<e.objeto.length;i++){
-				$("datalist#"+listDB).append('<option value="'+e.objeto[i]["DESCRICAO"]+'"></option>');
-				localStorage
-			}
+function returnListFilter(identfier, listDB){
+	intention = identifier === "entity" ? "load object values" : "load agency";
+	listDB = identifier === "entity" ? listDB : 100;
+	returnValue = identifier === "entity" ? "DESCRICAO" : "NOME";
+	
+	if(identifier === "entity" || identfier === "agency")
+		$.ajax({
+			url: "bean/relatorio.php",
+			type:"POST",
+			dataType:"json",
+			data:{"intention" : intention, "id" : listDB},
+			success:function (e) {
+				for(var i=0;i<e.objeto.length;i++){
+					$("datalist#"+listDB).append('<option value="'+e.objeto[i][returnValue]+'"></option>');
+					localStorage
+				}
 
-        }
-	});
+	        }
+		});
+
 }
 
 

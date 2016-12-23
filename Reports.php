@@ -27,8 +27,8 @@
 					<div class="add-section-filter">
 						<select name="" id="report-entities">
 							<option value="">(Selecione)</option>
-							<option value="Ag">Agência</option>
-							<option value="15">Periodo</option>
+							<option value="100" identifier="agency" filter="Agência">Agência</option>
+							<option value="50" filter="Periodo">Periodo</option>
                     </select>
 						<b></b>
 						
