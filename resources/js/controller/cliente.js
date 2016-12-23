@@ -25,6 +25,7 @@ $(function () {
         };
     })
 });
+
 var i = 0;
 var lastI = 0;
 var per = 1;
