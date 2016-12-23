@@ -45,6 +45,6 @@ function listaAgencias()
 {
     $call = new CallPgSQL();
     $agencias = $call->loadDados("ver_agencia","\"ID\"", "\"NOME\"");
-    die(json_encode(array("agencies" =>$agencias)));
+    die(json_encode(array("objeto" =>$agencias)));
 }
 
