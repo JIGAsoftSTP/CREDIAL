@@ -14,6 +14,9 @@
         case "load object values":
             loadObjectValues();
             break;
+        case "load agency":
+            listaAgencias();
+            break;
     }
 
     function loadObjectType()
@@ -36,5 +39,12 @@ function loadObjectValues()
         $retorno[count($retorno)] = array("idCredito" => $values["ID"], "DESCRICAO" => $values["DESCRICAO"]);
     }
     die(json_encode(array("objeto" =>$retorno)));
+}
+
+function listaAgencias()
+{
+    $call = new CallPgSQL();
+    $agencias = $call->loadDados("ver_agencia","\"ID\"", "\"NOME\"");
+    die(json_encode(array("agencies" =>$agencias)));
 }
 
