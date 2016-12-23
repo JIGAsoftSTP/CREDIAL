@@ -305,6 +305,13 @@ if ((text.indexOf(',') != -1) &&
 function resetForm(form){
     form.find('input, textarea').val("");
     form.find('select').val(form.find('select option:first').val());
-    form.find('i.icon-checkbox-checked').addClass('icon-checkbox-unchecked').removeClass('icon-checkbox-checked');
+    check = form.find('i.icon-checkbox-checked');
+    check.each(function () {
+        if(!$(this).closest('li').hasClass('isFather'))
+            $(this).addClass('icon-checkbox-unchecked').removeClass('icon-checkbox-checked');
+        else
+            $(this).addClass('xpert-check partial').removeClass('icon-checkbox-checked');
+    });
+
     isNull(form.find('select'));
 }

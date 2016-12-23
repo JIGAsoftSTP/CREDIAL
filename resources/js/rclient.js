@@ -77,3 +77,10 @@
             $('.sec-another i').addClass('icon-checkbox-unchecked').removeClass('icon-checkbox-checked');
         }
     });
+
+    $('.table-liquid').on('dblclick','td', function(event) {
+        $('.add-detail-table').addClass('show');
+    });
+    $('.close-add-detail').click( function(event) {
+        $('.add-detail-table').removeClass('show');
+    });
