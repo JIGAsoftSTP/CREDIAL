@@ -114,9 +114,14 @@ User.prototype.nivel = undefined;
 User.prototype.idNivel = undefined;
 User.prototype.img = undefined;
 User.prototype.estado = undefined;
+/**
+ *
+ * @type {Array}
+ */
 User.prototype.menu = undefined;
 User.prototype.disableMode = undefined;
 
+var USEREDITE = false;
 /**
  *
  * @constructor ListUser

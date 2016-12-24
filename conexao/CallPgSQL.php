@@ -18,6 +18,9 @@ class CallPgSQL {
     public $sql;
     private $rs;
     public $con;
+    /**
+     * @var $queryName string
+     */
     private  $queryName;
     public $listCondition = array();
     public $listParam = array();
@@ -117,8 +120,7 @@ class CallPgSQL {
         $this->queryName = md5(time().date("d-m-y h:M:s").microtime());
         pg_prepare($this->getCon(), $this->queryName, $this->sql);
         $arrayParam = array_merge($this->listParam,$this->listCondition);
-//        echo "sql:: ".$this->sql.json_encode($arrayParam);
-        $this->rs = pg_execute($this->getCon(), $this->queryName, $arrayParam);
+        $this->rs = pg_execute($this->getCon(),$this->queryName, $arrayParam);
     }
 
     function connect($hostName, $userName, $password, $bdName, $port  = 5432)

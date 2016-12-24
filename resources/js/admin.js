@@ -22,7 +22,11 @@ $('.add-new-admin button').click(function(event) {
 });
 
 $('.add-more.default').click(function(event) {
+    imageUser = undefined;
+    $("#gest-user-nif").removeAttr("disabled");
     USEREDITE = false;
+    resetForm($(".add-new-admin"));
+    resetForm($(".mp-menu-user"));
 	addNewItem($(this).closest('nav').find('.title'));
 });
 

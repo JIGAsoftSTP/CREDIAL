@@ -15,6 +15,7 @@ if($_POST["intensao"] ==  "loadDataUser" ) {loadDataUser();}
 if($_POST["intensao"] ==  "disibleUSER" ) {disableUser();}
 if($_POST["intensao"] ==  "loadMENU-USER-log" ) { loadMenuUserlogado(); }
 if($_POST["intensao"] ==  "loadMENU-Perfil" ) { loadMenuPerfil(); }
+if($_POST["intensao"] ==  "alter-user" ) { alteruser(); }
 
 function carregarImagem()
 {
@@ -51,7 +52,7 @@ function regUser(){
 
 }
 
-function regtLocalTabalha()
+function regtLocalTabalha($at =  false)
 {
     $call = new CallPgSQL();
     $call->functionTable("funct_reg_trabalhagencia","*")
@@ -64,9 +65,9 @@ function regtLocalTabalha()
     $result = $call->getValors();
 
     if($result["RESULT"] != "true")
-        die (json_encode(array("result" => false, "return" => $result)));
+        die (json_encode(array("result" => false, "return" => $result, "message" => "MESSAGE")));
 
-    addMenuToUser();
+    if(!$at) addMenuToUser();
 
 }
 
@@ -169,4 +170,47 @@ function loadMenuPerfil(){
 
 function loadMenuUserlogado (){
     die (json_encode(array("MENU" => loadMenuUser(Session::getUserLogado()->getId()))));
+}
+
+
+function changeMenuUser(){
+    $call = new CallPgSQL();
+    $call->functionTable("funct_change_menuser","*")
+        ->addString(Session::getUserLogado()->getId())
+        ->addInt(Session::getUserLogado()->getIdAgencia())
+        ->addString($_POST['USER']["nif"])
+        ->addIntArray($_POST['USER']['menu']);
+    $call->execute();
+
+    $result = $call->getValors();
+    if($result["result"] != true)
+        die (json_encode(array("result" => false, "message" => $result["message"])));
+}
+
+
+function changeUserData(){
+    $call = new CallPgSQL();
+    $call->functionTable("funct_change_user","*")
+        ->addString(Session::getUserLogado()->getId())
+        ->addNumeric(Session::getUserLogado()->getIdAgencia())
+        ->addString($_POST['USER']["nif"])
+        ->addString($_POST['USER']['nome'])
+        ->addString($_POST['USER']['apelido'])
+        ->addNumeric($_POST['USER']['idNivel']);
+    $call->execute();
+
+    $result = $call->getValors();
+    if($result["RESULT"] != "true")
+        die (json_encode(array("result" => false, "message" => $result["MESSAGE"])));
+}
+
+function alterUser(){
+    if($_POST["change"]['names'] || $_POST["change"]['nivel'] ) { changeUserData(); };
+    if($_POST["change"]['agencia']) {
+        $_POST["nif"] = $_POST['USER']["nif"];
+        $_POST['idAgencia'] = $_POST['USER']["idAgencia"];
+        regtLocalTabalha(true);
+    }
+    if($_POST["change"]['menu']) { changeMenuUser(); }
+    die (json_encode(array("result" => true)));
 }

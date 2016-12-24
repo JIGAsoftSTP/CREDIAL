@@ -18,4 +18,14 @@ class TYPE
     const BYTEA="::BYTEA";
     const TEXT="::TEXT";
     const BOOLEAN="::BOOLEAN";
+    const NUMERIC_ARRAY="::NUMERIC[]";
+    const INTEGER_ARRAY="::INTEGER[]";
+    const VARCHAR_ARRAY="::CHARACTER VARYING[]";
+    const DOUBLE_ARRAY="::DOUBLE PRECISION[]";
+    const DATE_ARRAY="::DATE[]";
+    const TIMESTAMP_ARRAY="::TIMESTAMP[]";
+    const CHARACTER_ARRAY="::CHARACTER[]";
+    const BYTEA_ARRAY="::BYTEA[]";
+    const TEXT_ARRAY="::TEXT[]";
+    const BOOLEAN_ARRAY="::BOOLEAN[]";
 }

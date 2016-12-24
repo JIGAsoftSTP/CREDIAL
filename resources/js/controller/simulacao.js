@@ -184,8 +184,8 @@ function addPestacao(data) {
     var cell3 = row.insertCell(2);
 
     cell1.innerHTML = data;
-    cell2.innerHTML = formattedString(si.reembolsoPeriodo+"");
-    cell3.innerHTML = formattedString(si.valorAmotizado+"");
+    cell2.innerHTML = formattedString((si.reembolsoPeriodo.dc()).rp());
+    cell3.innerHTML = formattedString((si.valorAmotizado.dc()).rp());
 }
 
 $("#cred-edit-table-amor").click(function () {
