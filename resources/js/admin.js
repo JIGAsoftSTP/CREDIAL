@@ -21,7 +21,8 @@ $('.add-new-admin button').click(function(event) {
 	validation1($(this).closest('.add-new-admin').find('input, select, textarea'));
 });
 
-$('.add-more.default').click(function(event) {    
+$('.add-more.default').click(function(event) {
+    USEREDITE = false;
 	addNewItem($(this).closest('nav').find('.title'));
 });
 

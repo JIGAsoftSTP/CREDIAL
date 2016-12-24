@@ -17,12 +17,7 @@ include "Session.php";
     if($_POST["intensao"] == "loadCreditoClient"){ loadCreditoClient(); }
     if($_POST["intensao"] == "efectuarPagamento"){ efectuarPagamento(); }
     if($_POST["intensao"] == "efectuarPagamento"){ efectuarPagamento(); }
-    if($_POST["intensao"] == "search client"){
-        if($_POST["search"] == "Nº documento") searchClientByNumDoc();
-        else if($_POST["search"] == "NIF") searchClientByNif();
-        if($_POST["search"] == "Garantia") searchClientByWarranty();
-        else searchClientByAll();
-    }
+    if($_POST["intensao"] == "reloadPestacaoCreditdo"){ reloadPestacaoCreditdo(); }
 
     function listCliente(){
         $call = new CallPgSQL();
@@ -205,72 +200,6 @@ include "Session.php";
         else { $j = json_encode(array("result"=>true)); die($j); }
     }
 
-    function searchClientByAll()
-    {
-        $call = new CallPgSQL();
-        $call->functionTable("filter.funct_filter_client", "*")
-            ->addString(Session::getUserLogado()->getId())
-            ->addInt(Session::getUserLogado()->getIdAgencia())
-            ->addString($_POST["valueSearch"]);
-        $call->execute();
-        $arrayValues = array();
-
-        while($row = $call->getValors())
-        {
-            $arrayValues[count($arrayValues)] = $row;
-        }
-        die(json_encode(array("data" => $arrayValues)));
-
-    }
-
-    function searchClientByNif()
-    {
-        $call = new CallPgSQL();
-        $call->functionTable("filter.funct_filter_client_by_nif", "*")
-            ->addString(Session::getUserLogado()->getId())
-            ->addInt(Session::getUserLogado()->getIdAgencia())
-            ->addString($_POST["valueSearch"]);
-        $call->execute();
-        $arrayValues = array();
-
-        while($row = $call->getValors())
-        {
-            $arrayValues[count($arrayValues)] = $row;
-        }
-        die(json_encode(array("data" => $arrayValues)));
-    }
-
-    function searchClientByNumDoc()
-    {
-        $call = new CallPgSQL();
-        $call->functionTable("filter.funct_filter_client_by_document_payment", "*")
-            ->addString(Session::getUserLogado()->getId())
-            ->addInt(Session::getUserLogado()->getIdAgencia())
-            ->addString($_POST["valueSearch"]);
-        $call->execute();
-        $arrayValues = array();
-
-        while($row = $call->getValors())
-        {
-            $arrayValues[count($arrayValues)] = $row;
-        }
-        die(json_encode(array("data" => $arrayValues)));
-    }
- function searchClientByWarranty()
-    {
-        $call = new CallPgSQL();
-        $call->functionTable("filter.funct_filter_client_by_credito_garantias", "*")
-            ->addString(Session::getUserLogado()->getId())
-            ->addInt(Session::getUserLogado()->getIdAgencia())
-            ->addString($_POST["valueSearch"]);
-        $call->execute();
-        $arrayValues = array();
-
-        while($row = $call->getValors())
-        {
-            $arrayValues[count($arrayValues)] = $row;
-        }
-        die(json_encode(array("data" => $arrayValues)));
-    }
-
-
+function reloadPestacaoCreditdo(){
+    die(json_encode(array("prestacao" => loadPrestacao($_POST['idCred']))));
+}

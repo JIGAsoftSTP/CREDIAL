@@ -130,8 +130,8 @@ var Prestacao =  function () {
         return this;
     };
 
-    this.addAmortizacao = function (_idCredito) {
-        this.amortizacao = '<tr id="'+this.id+'-amor" ondblclick="pagamentoPestacao('+this.i+','+_idCredito+')" onclick="clickPestacao('+this.id+','+_idCredito+')">' +
+    this.addAmortizacao = function () {
+        this.amortizacao = '<tr id="'+this.id+'-amor" ondblclick="pagamentoPestacao('+this.i+')" onclick="clickPestacao('+this.id+')">' +
             '<td>'+this.dataEmissaoValue+'</td>' +
             '<td>'+this.dataEndosseValue+'</td>' +
             '<td>'+this.reembolsoValue+'</td>' +
@@ -162,13 +162,12 @@ function showAmortizacao(id, jk) {
     }, 350);
 }
 
-var prePage = new Prestacao();
-function clickPestacao(_idPrestacao,_idCredito) {
+function clickPestacao(_idPrestacao) {
     $("#"+_idPrestacao+"-amor").addClass('selected') .siblings().removeClass('selected');
 }
 
 var prestacaoS = undefined;
-function pagamentoPestacao(i,_idCredito) {
+function pagamentoPestacao(i) {
     prestacaoS = listPrestacao[i];
     if (prestacaoS["STATE COD"] !== "0") {
         loadDataCredForForm();
@@ -181,10 +180,14 @@ var valorPorPago = undefined;
 function loadDataCredForForm() {
     reembloso = unformatted(prestacaoS["REEMBOLSO"].replace(".",","));
     valorPago = unformatted(prestacaoS["PRESTACAO PAGA"].replace(".",","));
-    valorPorPago = (reembloso-valorPago).toFixed(2);
+    if(valorPago > 0) {
+        $("#cred-pay-dife").click();
+        $("#cred-pay-fazea").click();
+    }
+    valorPorPago = (reembloso-valorPago).dc();
     $("#cred-pay-bank").val((valorPago > 0) ? prestacaoS["BANCO REAL ID"] : prestacaoS["BANCO PREVISTO ID"]);
     $("#cred-pay-value-rest").html(formattedString("0"));
-    $("#cred-pay-value").val(formattedString((valorPorPago).toString()));
+    $("#cred-pay-value").val(formattedString(valorPorPago.toString()));
     $("#cred-pay-doc").val(prestacaoS["DOCUMENTO PAGAMENTO"]);
 
     openModalFrame($('.mp-liquidar'));
@@ -195,22 +198,22 @@ $("#cred-pay-value").change(function () { alterValorApagar($(this)); });
 $("#cred-pay-value").keyup(function () { alterValorApagar($(this)); });
 
 function alterValorApagar(value) {
-    var restPay = (valorPorPago - unformatted(value.val())).toFixed(2);
+    var restPay = (valorPorPago - unformatted(value.val())).dc();
     if(restPay< 0) {
         value.val("");
-        $("#cred-pay-value-rest").html(formattedString(valorPorPago.toString()));
+        $("#cred-pay-value-rest").html(formattedString(valorPorPago.rp()));
     }
     else{
-        $("#cred-pay-value-rest").html(formattedString(restPay.toString()));
+        $("#cred-pay-value-rest").html(formattedString(restPay.rp()));
     }
 }
 
 $("#cred-pay-fazea").click(function () {
     if($(this).hasClass('icon-checkbox-checked')){
         $("#cred-pay-value").val(formattedString(""));
-        $("#cred-pay-value-rest").html(formattedString(valorPorPago.toString()));
+        $("#cred-pay-value-rest").html(formattedString(valorPorPago.rp()));
     }else{
-        $("#cred-pay-value").val(formattedString(valorPorPago.toString()));
+        $("#cred-pay-value").val(formattedString(valorPorPago.rp()));
         $("#cred-pay-value-rest").html(formattedString("0"));
     }
 });

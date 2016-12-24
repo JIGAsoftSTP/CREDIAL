@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" ng-app="datepickerDemo">
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
 	<link rel="stylesheet" href="./resources/css/geralStyle.css">
 	<link rel="stylesheet" href="./resources/css/client.css">
+	<link rel="stylesheet" href="resources/fw/css/datePicker.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
-<body id="p1">
+
+<body id="p1" ng-controller="masterController">
 	<?php include 'includes/menu.php'; ?> 
 	<div class="content-body">
 		<span class="new-client">+</span>
@@ -74,7 +77,16 @@
 						<p class="input-total"><input type="text" maxlength="9" id="cli-nif" class="input-2" placeholder="NIF"></p>
 						<p class="input-2"><input type="text" id="cli-nome" class="input-total" placeholder="Nome"></p>
 						<p class="input-2"><input type="text" id="cli-sobNome" class="input-total" placeholder="Sobrenome"></p>
-						<p class="input-2"><input type="text" id="cli-dataNasc" class="input-total" placeholder="Data de nascimento"></p>
+						<p class="input-2"><input type="text" id="cli-dataNasc" ng-model="datepicker" format="dd-MM-yyyy"
+                                                  class="input-total" placeholder="Data de nascimento"></p>
+<!--                        <p class="input-2">-->
+<!--                        <div class="datepicker-container">-->
+<!--                            <div class="datepicker-1">-->
+<!--                                <date-picker ng-model="datepicker" placeholder="Seleionar data" callback="dateChange()"-->
+<!--                                             format="dd-MM-yyyy" autohide="true" language="pt"></date-picker>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        </p>-->
 						<p class="input-2">
 							<select id="cli-sexo" class="input-total">
 								<option value="0">(Sexo)</option>
@@ -411,4 +423,7 @@
 <script type="text/javascript" src="resources/js/controller/cliente.js"></script>
 <script type="text/javascript" src="resources/js/controller/simulacao.js"></script>
 <script type="text/javascript" src="resources/js/controller/prestacaoBluider.js"></script>
+<script type="text/javascript" src="resources/fw/js/angular.min.js"></script>
+<script type="text/javascript" src="resources/fw/js/datepicker.js"></script>
+<script type="text/javascript" src="resources/fw/js/demo.js"></script>
 </html>
