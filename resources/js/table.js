@@ -24,10 +24,11 @@ function tableEstructure(myTable){
 }
 
 
-$('x-table .selectable td').click(function(event) {
+$('.x-table .selectable td').click(function(event) {
 	$(this).closest('tr')
 	.addClass('selected')
 	.siblings().removeClass('selected');
+	/*$(this).closest('table').next().removeClass('show');*/
 });
 
 $('body').on('click','.x-table .sh-rcrs',function(event) {
@@ -38,5 +39,5 @@ $('body').on('click','.x-table .sh-rcrs',function(event) {
 
 function setRowCount(table){
 	rows = table.find('tbody tr').length;
-	table.find('.rowCount span').text(rows + ' registos');
+	table.find('.rowCount span').text(rows + (rows !== 1 ? ' registos': ' registo'));
 }

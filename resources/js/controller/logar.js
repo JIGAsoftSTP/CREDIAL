@@ -148,9 +148,8 @@ function loadDataUser() {
         dataType: "json",
         success: function (e) {
             if(e.result) {
-                $(".photo").css({
+                $(".default-user-img").css({
                     'background': 'content-box #444 url(' + e.user_logo + ') no-repeat',
-                    'backgroundPosition': 'center',
                     'backgroundSize': 'cover'
                 });
                 $(".aut-user-login-name").text(e.user_name_complete);

@@ -175,61 +175,142 @@ i.icon-radio-checked2{
 }
 header nav{
 	width: 100%;
-	padding: .5rem 1rem;
+	
 }
 .header-1{
 	font-size: .9rem;
 	color: #00B9A3;
+	padding-left: 1rem;
 }
-.header-1 .user-span{
+/*.header-1 .user-span{
 	position: relative;
 	cursor: pointer;
 }
 .user-span .photo{
 	width: 45px;
 	height: 45px;
-	/*background: #444;*/
+	background: #444;
 	border: 1px #eee solid;
 	border-radius: 50%;
 	display: inline-block;
 	vertical-align: middle;
-}
-.user-span .menu-user{
-	position: absolute;
-	right: 0;
-	
-	min-width: 200px;
-	width: 100%;
-	/*transform: translateY(-18%);*/
-	background: #fff;
+}*/
 
-	max-height: 0;
+.header-1 .logged-user{
+	position: relative;	
 	overflow: hidden;
+    padding: .6rem 1rem;
+}
+.logged-user .photo{
+	width: 50px;
+	height: 50px;
+	background: #FFF;
+	
+}
+.logged-user .photo2{
+	width: 100px;
+	height: 100px;
+	background: #333;
+	margin: 1rem auto;
+	
+}
+.logged-user ul{
+	position: absolute;
+	right: 4px;
+	margin-right: .7rem;
+	width: 100%;
+	min-width: 260px;
+	background: #FBFBFB;
+	transform: translateY(10%);
+	border-radius: 2px;
+	color: #444;
+	border: 1px #ddd solid;
+	padding-top: 1rem;
+	opacity: 0;
+	
+	z-index: 500;
+}
+.logged-user ul:before,
+.logged-user ul:after{
+	content: "";
+	position: absolute;
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+}
+.logged-user ul:after{
+	top: -7px;
+	right: 1.2rem;
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-bottom: 7px solid #FBFBFB;
 
-	z-index: 1;
 }
-.user-span .menu-user.show{
-	border: 1px #00B9A3 solid;
-	padding: .5rem 0;
-	max-height: 200px;
-	transition: all .5s;
+.logged-user ul:before{
+	top: -9px;
+	right: 1.1rem;
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	border-bottom: 8px solid #ddd;
+	
 }
-.menu-user li{
-	line-height: 2rem;
+.logged-user:hover{
+	overflow: visible;
+}
+.logged-user:hover ul{
+	transform: translateY(0);
+	margin-top: .6rem;
+	opacity: 1;
+	
+}
+.logged-user ul p{
+	padding: .5rem 1rem;
 	text-align: center;
-	color: #555;
 }
-.menu-user li:hover{
-	color: #111;
+.logged-user .username{
+	font-size: 1.05rem;
+	color: #00B9A3;
 }
-.user-span .icon-ctrl{
-	transform: rotate(180deg);
-	font-weight: bold;
+.logged-user .more-opt{	
+	margin-top: 2rem;
+}
+.more-opt li{
+	padding-left: 1rem;
+	border-top: 1px solid #eee;
+	line-height: 2.5rem;
+	font-size: .95rem;
+	cursor: pointer;
+}
+.more-opt li:hover{
+	background: #eee;
+}
+.more-opt div{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	
+}
+.more-opt i{
+	display: block;
+	text-align: center;
+	width: 2.7rem;
+	background: #FC716A;
+	color: #FFF;
+	line-height: 2.5rem;
+}
+.more-opt i:hover{
+	background: #E61326;
+}
+.master-menu .menu-2{
+	background: #FFF;
+	padding: 1rem;
+	border-bottom: 2px #eee solid;
+	color: #4A585F;
 }
 
 .header-2{
 	justify-content: flex-end;
 	background: #00B9A3;
+	padding: .5rem 1rem;
 }
 .header-2 ul{
 	max-width: 600px;
@@ -256,6 +337,7 @@ header nav{
 	background: content-box #444 url("../img/user.png") no-repeat;
 	background-position: center;
 	background-size: cover;
+	border: 1px #eee solid;
 }
 
 /*####################### LATERAL MENU ################*/
@@ -603,7 +685,7 @@ header nav{
     height: 100vh;
     left:0; top:0;
     color: #555;
-    z-index: 100;
+    z-index: 1000;
     transition: none;
     display: none;
 }
@@ -720,7 +802,7 @@ header nav{
 	min-width: 200px;
 	max-width: 400px;
 	transition: all 1s;
-	z-index: 1000;
+	z-index: 5000;
 }
 .xpert-alert.show{
 	right: 0;
@@ -786,6 +868,12 @@ header nav{
 
 i.icon-checkbox-checked{
 	color: #3879D9;
+}
+
+nav.ph-bk{
+	border-radius: 50%;
+	background-position: center;
+	background-size: cover;
 }
 /*#########################################*/
 

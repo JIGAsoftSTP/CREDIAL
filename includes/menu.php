@@ -1,7 +1,34 @@
 	<header>
 		<nav class="header-1"><i class="logo">
 			<h1>LOGO here!</h1></i> 
-			<span class="user-span">
+
+
+
+
+
+			<div class="logged-user">
+			<nav class="photo default-user-img ph-bk"></nav>
+			<ul>
+				<nav class="photo2 default-user-img ph-bk"></nav>
+				<p><span class="aut-user-login-name username"></span></p>
+				<p>Administrador na agência SEDE</p>
+				
+				<div class="more-opt">
+					<li><span>Suporte</span></li>
+					<li class="chg-pwd"><span>Alterar senha</span></li>
+					<li>
+					<div class="logout">
+						<span>Sair</span>
+						<span><i class="icon-exit"></i></span>
+					</div>
+					</li>
+				</div>
+				
+			</ul>
+		</div>
+
+
+			<!-- <span class="user-span">
 				<span class="photo default-user-img"></span> 
 				<span class=""><label class="aut-user-login-name"></label>
 					<i class="icon-ctrl"></i>
@@ -10,13 +37,20 @@
 						<li class="logout">Terminar sessão</li>
 					</ul>
 				</span>
-			</span>
+			</span> -->
+
+
+
+
+
+
+
 		</nav>
 		<nav class="header-2">
 			<ul id="principal-menu">
 <!--				<li class="active-menu"><a href="RClient.php" id="m1">Crédito</a></li>-->
-<!--				<li><a href="Reports.php" id="m3">Relatórios</a></li>-->
-<!--				<li><a href="Admin.php" id="m4">Administração</a></li>-->
+<!--				<li><a href="Reports.php" id="m2">Relatórios</a></li>-->
+<!--				<li><a href="Admin.php" id="m3">Administração</a></li>-->
 			</ul>
 		</nav>
 	</header>

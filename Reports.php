@@ -15,8 +15,22 @@
 				<ul class="multiple" id="secondary-menu"></ul>				
 			</aside>
 			<article class="article-report ">
-				<div class="report-content">
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis esse placeat minus ipsum necessitatibus modi, temporibus expedita maiores alias nam repellendus. Nisi sed repudiandae tempora suscipit eius pariatur at minima.
+				<div class="content">
+					<div class="header-report">
+						<h1 class="title-report">Clientes</h1>
+						<span class="funtionality">
+
+							<i class="icon-file-pdf" title="Exportar para PDF"></i>
+							<i class="icon-file-excel" title="Exportar para Excel"></i>
+							<separator></separator>
+							<i class="icon-filter callFilter"></i>
+						</span>
+						
+					</div>
+					<div class="report-content">
+						<!-- ALL PAGE HERE! -->
+					</div>
+
 				</div>
 
 				<div class="filter-report xpert-form float">
@@ -29,21 +43,21 @@
 							<option value="">(Selecione)</option>
 							<option value="100" identifier="agency" filter="Agência">Agência</option>
 							<option value="50" filter="Periodo">Periodo</option>
-                    </select>
+						</select>
 						<b></b>
 						
 					</div>
 					<div class="periodic">
-					<nav><i class="icon-checkbox-unchecked"><span> Filtrar por periodo</span></i> <i class="icon-ctrl"></i></nav>
-					
-					<div class="prd-enabled">
-						<input type="text" placeholder="Data Inicial">
-						<input type="text" placeholder="Data Final">
-						<p><span>5</span> em comparação</p>
-					</div>
+						<nav><i class="icon-checkbox-unchecked"><span> Filtrar por periodo de tempo</span></i> <i class="icon-ctrl"></i></nav>
+
+						<div class="prd-enabled">
+							<input type="text" placeholder="Data Inicial">
+							<input type="text" placeholder="Data Final">
+							<p><span>5</span> em comparação</p>
+						</div>
 					</div>
 					<div class="filter-added">
-					<nav> Filtro selecionado</span></i> <i class="icon-ctrl show"></i></nav>
+						<nav> Filtro selecionado<i class="icon-ctrl show"></i></nav>
 
 						
 					</div>

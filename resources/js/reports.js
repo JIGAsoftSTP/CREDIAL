@@ -1,3 +1,8 @@
+$('aside .multiple').on('click','li',function(event) {
+	$('.title-report').text($(this).text());
+});
+
+
 $('.ctrls .hide-filter').click(function(event) {
 	if($('.filter-report').hasClass('float'))
 		$('.filter-report').addClass('hidden');
@@ -36,6 +41,12 @@ $('.filter-added .icon-ctrl').click(function(event) {
 	$('.filter-added').toggleClass('hidden');
 	$(this).toggleClass('show');
 });
+
+$('.callFilter').click(function(event) {
+	$('.filter-report').removeClass('hidden');
+});
+
+
 
 
 function filterConstruct(identifier, selected, filter){
@@ -112,3 +123,5 @@ function setPositionXC(el){
     };
     console.log(divPos.left + ' ' + divPos.top + ' '+ el.next().height());
 }
+
+

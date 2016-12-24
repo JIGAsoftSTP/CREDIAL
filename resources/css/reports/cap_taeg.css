@@ -1,0 +1,44 @@
+.true-report,
+.true-report h1,
+.true-report section{
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+.true-report{
+	margin-bottom: 2rem;
+}
+.true-report h1{
+	margin-bottom: 3rem;
+	padding: 1rem;
+}
+.true-report section{
+	flex-direction: column;
+	width: 32%;
+	padding-bottom: 0;
+	color: #FFF;
+}
+.true-report nav{
+	text-align: center;
+	line-height: 2.5rem;
+	font-size: .97rem;
+}
+.true-report section[bkg=green]{
+	background: #00A663;
+}
+.true-report section[bkg=red]{
+	background: #FA6759;
+}
+.true-report section[bkg=blue]{
+	background: #00BCD4;
+}
+
+.true-report section[bkg=green] nav{
+	background: #009659;
+}
+.true-report section[bkg=red] nav{
+	background: #E15D50;
+}
+.true-report section[bkg=blue] nav{
+	background: #00A6BB;
+}
