@@ -260,7 +260,7 @@
         $call->functionTable("funct_load_taxa", "*")
             ->addNumeric(Session::getUserLogado()->getId())
             ->addNumeric(Session::getUserLogado()->getIdAgencia())
-             ->addNumeric(1353);
+             ->addNumeric(-1);
         $call->execute();
 
         $arrayValues = array();

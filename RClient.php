@@ -6,7 +6,7 @@
 	<link rel="stylesheet" href="./resources/css/geralStyle.css">
 	<link rel="stylesheet" href="./resources/css/client.css">
 	<link rel="stylesheet" href="resources/fw/css/datePicker.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 </head>
 
 <body id="p1" ng-controller="masterController">
@@ -77,7 +77,7 @@
 						<p class="input-total"><input type="text" maxlength="9" id="cli-nif" class="input-2" placeholder="NIF"></p>
 						<p class="input-2"><input type="text" id="cli-nome" class="input-total" placeholder="Nome"></p>
 						<p class="input-2"><input type="text" id="cli-sobNome" class="input-total" placeholder="Sobrenome"></p>
-						<p class="input-2"><input type="text" id="cli-dataNasc" ng-model="datepicker" format="dd-MM-yyyy"
+						<p class="input-2"><input type="text" id="cli-dataNasc" ng-model="datePicker"
                                                   class="input-total" placeholder="Data de nascimento"></p>
 <!--                        <p class="input-2">-->
 <!--                        <div class="datepicker-container">-->

@@ -3,8 +3,8 @@
  */
 
 $(function () {
-
-    loadInsurance();
+    // testJson();
+     loadInsurance();
     $("#btAddInsurance").click(function () {
         regInsurance();
     });
@@ -63,4 +63,19 @@ function loadInsurance() {
             tableEstructure($("#table-seguro"));
         }
     });
+}
+
+function testJson()
+{
+    var data ={"intention" : "load Insurance", "name" : "Hinori"};
+    var person = {};
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", securityAddress, false);
+    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhr.send(JSON.stringify(data));
+    xhr.onreadystatechange = function () {
+        if(xhr.readyState === 4 &&xhr.status === 200){
+            console.info(JSON.parse(xhr.responseText));
+        }
+    }
 }

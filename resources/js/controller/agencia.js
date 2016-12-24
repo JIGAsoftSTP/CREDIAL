@@ -103,7 +103,7 @@ function loadUserAgency(indice) {
             $(".agencyFunc li").empty();
             for(var i=0;i<e.result.length;i++)
             {
-                $(".agencyFunc").append('<li><img src='+e.result[i]["PHOTO"]+' alt="" width="200">'+e.result[i]["NAME"]+" "+e.result[i]["SURNAME"]+'</li>');
+                $(".agencyFunc").append('<li><img src='+e.result[i]["PHOTO"]+' alt="" width="200">'+e.result[i]["NAME"]+'</li>');
             }
             $(".list-funcs").addClass("show");
 

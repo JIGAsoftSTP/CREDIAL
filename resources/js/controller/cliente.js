@@ -8,7 +8,7 @@ $(function () {
     loadComoBox($("#cli-ar-mes"),addMES());
     loadComoBox($("#cli-ar-let"),addLETRAS());
     loadOutherData();
-    $("#cli-dataNasc").mask("99-99-9999");
+    // $("#cli-dataNasc").mask("99-99-9999");
 
     $("#span-type-search-client i").click(function () {
        typeSearch = $(this).attr("title");
