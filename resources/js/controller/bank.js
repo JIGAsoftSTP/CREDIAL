@@ -124,7 +124,7 @@ function loadBankMoviment(position)
                 column2.innerHTML = moviments["CREDITO"];
                 column3.innerHTML = moviments["LIBELE"];
             }
-            tableEstructure($("#table-bank"));
+            tableEstructure($(".x-table"));
         }
     });
 }

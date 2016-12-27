@@ -6,9 +6,12 @@
  * Time: 11:19 PM
  */
 include "../modelo/Imagem.php";
-include "../modelo/User.php";
-include "../conexao/CallPgSQL.php";
-include "Session.php";
+if($_POST['intensao']!="login") {
+    include "../modelo/User.php";
+    include "../conexao/CallPgSQL.php";
+    include "Session.php";
+}
+
 if($_POST["intensao"] ==  "loadImagem" ) {carregarImagem();}
 if($_POST["intensao"] ==  "regUser" ) {regUser();}
 if($_POST["intensao"] ==  "loadDataUser" ) {loadDataUser();}
@@ -131,7 +134,7 @@ function disableUser(){
 function getListMenu(){
     $call = new CallPgSQL();
     $call->selects("ver_menu_active","*")
-        ->finilize("order by","asc","\"LEVEL\"");
+        ->finilize("order by","asc","\"RAIZ\"");
     $call->execute();
     $list = array();
     while ($values = $call->getValors())
@@ -139,13 +142,13 @@ function getListMenu(){
     return  $list;
 }
 
-function loadMenuUser($user){
+  function loadMenuUser($user){
     $call = new CallPgSQL();
     $call->functionTable("funct_load_menuser","*")
         ->addString(Session::getUserLogado()->getId())
         ->addNumeric(Session::getUserLogado()->getIdAgencia())
         ->addString($user)
-        ->finilize("order by","ASC","\"LEVEL\"");
+        ->finilize("order by","ASC","\"RAIZ\"");
     $call->execute();
     $list = array();
     while ($values = $call->getValors())
@@ -196,12 +199,13 @@ function changeUserData(){
         ->addString($_POST['USER']["nif"])
         ->addString($_POST['USER']['nome'])
         ->addString($_POST['USER']['apelido'])
-        ->addNumeric($_POST['USER']['idNivel']);
+        ->addNumeric($_POST['USER']['idNivel'])
+        ->addFile($_POST['USER']['img']);
     $call->execute();
 
     $result = $call->getValors();
-    if($result["RESULT"] != "true")
-        die (json_encode(array("result" => false, "message" => $result["MESSAGE"])));
+    if($result["result"] != true)
+        die (json_encode(array("result" => false, "message" => $result["message"])));
 }
 
 function alterUser(){

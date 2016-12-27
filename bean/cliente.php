@@ -16,17 +16,17 @@ include "Session.php";
     if($_POST["intensao"] == "loadStatusClient"){ loadStatusClient(); }
     if($_POST["intensao"] == "loadCreditoClient"){ loadCreditoClient(); }
     if($_POST["intensao"] == "efectuarPagamento"){ efectuarPagamento(); }
-    if($_POST["intensao"] == "efectuarPagamento"){ efectuarPagamento(); }
     if($_POST["intensao"] == "reloadPestacaoCreditdo"){ reloadPestacaoCreditdo(); }
+    if($_POST["intensao"] == "editeSelectedClient"){ regHistoricoClient(); }
 
     function listCliente(){
         $call = new CallPgSQL();
         $call->selects("ver_client_simple", "*");
         $call->execute();
         $resut = array();
-        $arrayList = str_split("ABCDEFGHIJKLMNOPQRSTUVWXYZ*");
+        $arrayList = str_split("*ABCDEFGHIJKLMNOPQRSTUVWXYZ");
         while ( $valor = $call->getValors()){
-            $letra = $valor["NAME"];
+            $letra = $valor["S_NAME"];
             $letra = str_split(strtoupper(str_replace(" ", "", $letra)));
             $letra = $letra[0];
             $cont = is_numeric(array_search($letra, $arrayList))
@@ -34,7 +34,8 @@ include "Session.php";
                 array_key_exists(array_search($letra, $arrayList), $resut)
                     ? count($resut[array_search($letra, $arrayList)])
                     : 0
-                : count($arrayList)-1;
+                : 0;
+//            echo $cont." ".$letra."\n";
             $resut[array_search($letra,$arrayList)][$cont] = $valor;
         }
         $j = json_encode(array("data" => $resut));
@@ -196,7 +197,7 @@ include "Session.php";
             ->addDate($_POST["pagamento"]["data"]);
         $call->execute();
         $return = $call->getValors();
-        if($return["result"]!=true){ $j = json_encode(array("result"=>false,"msg"=>$return["message"])); die($j); }
+        if($return["result"]==true){ $j = json_encode(array("result"=>false,"msg"=>$return["message"])); die($j); }
         else { $j = json_encode(array("result"=>true)); die($j); }
     }
 

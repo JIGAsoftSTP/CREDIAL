@@ -69,13 +69,13 @@ function disableObject(idObject) {
         type:"POST",
         dataType:"json",
         success:function (e) {
-            if(e.resultado["result"] === "true")
+            if(e.resultado["RESULT"] === "true")
             {
                 callXpertAlert("Entidade removida com sucesso!", 'checkmark', 8000);
                 $("#objectData"+idObject).remove();
             }
             else
-                callXpertAlert(e.resultado["message"], 'warning', 8000);
+                callXpertAlert(e.resultado["MESSAGE"], 'warning', 8000);
         }
     });
 }

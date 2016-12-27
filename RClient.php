@@ -1,15 +1,13 @@
 <!DOCTYPE html>
-<html lang="pt-br" ng-app="datepickerDemo">
+<html lang="pt-br">
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
 	<link rel="stylesheet" href="./resources/css/geralStyle.css">
 	<link rel="stylesheet" href="./resources/css/client.css">
-	<link rel="stylesheet" href="resources/fw/css/datePicker.css">
-
 </head>
 
-<body id="p1" ng-controller="masterController">
+<body id="p1">
 	<?php include 'includes/menu.php'; ?> 
 	<div class="content-body">
 		<span class="new-client">+</span>
@@ -38,33 +36,33 @@
 				</tbody>
 			</table>
 			<div class="alphabet table-resources">
-				<span value="26">*</span>
-				<span class="active" value="0">A</span>
-				<span value="1">B</span>
-				<span value="2">C</span>
-				<span value="3">D</span>
-				<span value="4">E</span>
-				<span value="5">F</span>
-				<span value="6">G</span>
-				<span value="7">H</span>
-				<span value="8">I</span>
-				<span value="9">J</span>
-				<span value="10">K</span>
-				<span value="11">L</span>
-				<span value="12">M</span>
-				<span value="13">N</span>
-				<span value="14">O</span>
-				<span value="15">P</span>
-				<span value="16">Q</span>
-				<span value="17">R</span>
-				<span value="18">S</span>
-				<span value="19">T</span>
-				<span value="20">U</span>
-				<span value="21">V</span>
-				<span value="22">W</span>
-				<span value="23">X</span>
-				<span value="24">Y</span>
-				<span value="25">Z</span>
+				<span value="0">*</span>
+				<span class="active" value="1">A</span>
+				<span value="2">B</span>
+				<span value="3">C</span>
+				<span value="4">D</span>
+				<span value="5">E</span>
+				<span value="6">F</span>
+				<span value="7">G</span>
+				<span value="8">H</span>
+				<span value="9">I</span>
+				<span value="10">J</span>
+				<span value="11">K</span>
+				<span value="12">L</span>
+				<span value="13">M</span>
+				<span value="14">N</span>
+				<span value="15">O</span>
+				<span value="16">P</span>
+				<span value="17">Q</span>
+				<span value="18">R</span>
+				<span value="19">S</span>
+				<span value="20">T</span>
+				<span value="21">U</span>
+				<span value="22">V</span>
+				<span value="23">W</span>
+				<span value="24">X</span>
+				<span value="25">Y</span>
+				<span value="26">Z</span>
 			</div>
 		</div>
 		<div class="add-new-form">
@@ -77,16 +75,7 @@
 						<p class="input-total"><input type="text" maxlength="9" id="cli-nif" class="input-2" placeholder="NIF"></p>
 						<p class="input-2"><input type="text" id="cli-nome" class="input-total" placeholder="Nome"></p>
 						<p class="input-2"><input type="text" id="cli-sobNome" class="input-total" placeholder="Sobrenome"></p>
-						<p class="input-2"><input type="text" id="cli-dataNasc" ng-model="datePicker"
-                                                  class="input-total" placeholder="Data de nascimento"></p>
-<!--                        <p class="input-2">-->
-<!--                        <div class="datepicker-container">-->
-<!--                            <div class="datepicker-1">-->
-<!--                                <date-picker ng-model="datepicker" placeholder="Seleionar data" callback="dateChange()"-->
-<!--                                             format="dd-MM-yyyy" autohide="true" language="pt"></date-picker>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        </p>-->
+						<p class="input-2"><input type="text" id="cli-dataNasc" class="input-total is-datepicker" placeholder="Data de nascimento"></p>
 						<p class="input-2">
 							<select id="cli-sexo" class="input-total">
 								<option value="0">(Sexo)</option>
@@ -97,7 +86,7 @@
 								</select>
 							</p>
 							<p class="input-2"><input type="text" id="cli-mora" class="input-total" placeholder="Morada"></p>
-							
+
 						</section>
 						<section class="flex-form header-tittle shrink"><b>Rendimento</b><i class="icon-ctrl"></i></section>
 						<section class="flex-form">
@@ -120,13 +109,13 @@
 						</section>
 						<section class="flex-form header-tittle shrink"><b>Contacto</b><i class="icon-ctrl"></i></section>
 						<section class="flex-form">
-							
+
 							<p class="input-3"><input type="text" id="cli-cont-telm" class="input-total integer" placeholder="Telemóvel"></p>
 							<p class="input-3"><input type="text" id="cli-cont-telf" class="input-total integer _noObrigatory" placeholder="Telefone"></p>
 							<p class="input-3"><input type="text" id="cli-cont-tels" class="input-total integer _noObrigatory" placeholder="Serviço"></p>
 							<p class="input-total"><input type="text" id="cli-email" class="input-total _noObrigatory" placeholder="Email"></p>
 
-							
+
 						</section>
 						<section class="flex-form header-tittle shrink"><b>Arquivagem</b><i class="icon-ctrl"></i></section>
 						<section class="flex-form">
@@ -164,7 +153,7 @@
 									<p id="inf-cli-ano" ></p>
 									<small><i>Mais informações</i></small>
 								</section>
-								
+
 							</div>
 							<div class="mini-report rep1">
 								<section class="show-cred cred-pedido">
@@ -195,7 +184,7 @@
 					</div>
 				</div>
 			</div>
-			<section class="modalPage mp-new-credit">
+			<section class="modalPage mp-new-credit" style="display: none;">
 				<div class="modalFrame">
 					<div class="modalContainer">
 						<div class="master-add-customer">
@@ -213,8 +202,8 @@
 										<select id="cred-tipoCred" class="input-total">
 											<option value="0">(Tipo de Crédito)</option>
 										</select>
-										<input type="text" id="cred-data" placeholder="Data" class="input-2">
-										<input type="text" id="cred-dia" placeholder="Dias" class="input-2">
+										<input type="text" id="cred-data" placeholder="Data" class="is-datepicker input-2">
+										<input type="text" id="cred-dia" placeholder="Dias" class="input-2 integer">
 										<input type="text" id="cred-desco" value="0" placeholder="Desconto (10%-20%)" class="input-2 double">
 										<input type="text" id="cred-corr" value="0" placeholder="Correção" class="input-2 double formatNumber">
 										<span><span class="xpert-toggle-2"><span class="active">A</span><span>B</span></span></span>
@@ -244,10 +233,10 @@
 												</tr>
 											</thead>
 											<tbody id="cred-table-prestacao" >
-												
+
 											</tbody>
 										</table>
-										
+
 									</div>
 									<section class="flex-form add-detail-table">
 										<span class="close-add-detail">X</span>
@@ -273,10 +262,14 @@
 								<span>
 									<h2>O cliente</h2>
 									<div class="flex-form" id="cred-form-cli">
-										<input type="text"  id="cred-cli-numDoc" placeholder="Nº Doc. p/ pgto" title="Número documento" class="input-2-1">
-										<select id="cred-cli-bank" class="input-3-1" title="Banco">
+										<select id="cred-cli-bank" class="input-total" title="Banco">
 											<option value="0">(Banco)</option>
 										</select>
+										<div class="special-ipt">
+											<span placeholder="Nº Doc. p/ pgto" id="cred-cli-numDoc-veiw" ></span>
+											<input type="text"  id="cred-cli-numDoc" placeholder="Nº Doc. p/ pgto" title="Número documento" class="integer" maxlength="3">
+										</div>
+
 										<select id="cred-cli-fonRend" class="input-total" title="Fonte rendimento">
 											<option value="0">(Fonte rendimento)</option>
 										</select>
@@ -309,7 +302,7 @@
 							</div>							
 						</p>
 					</div>
-					<h1 class="total-val">A pagar: <b id="cred-totalPagar">0,00</b></h1>
+					<h1 class="total-val">A pagar: <br><b id="cred-totalPagar">0,00</b></h1>
 				</span>
 
 				<button id="import-simulation">Concluir Operação</button>
@@ -386,14 +379,14 @@
 						<select id="cred-pay-bank" class="input-total" title="Banco" disabled>
 							<option value="0">(Banco)</option>
 						</select>			
-						<input type="text" placeholder="Data" id="cred-pay-data" class="input-total date-liquida">
+						<input type="text" placeholder="Data" id="cred-pay-data" class="input-total date-liquida is-datepicker">
 						<input type="text" placeholder="Valor" id="cred-pay-value" class=" formatNumber double input-total number-right" disabled>
 						<p class="rest input-total" id="cred-pay-value-rest">0,00</p>
 					</section>
 					<section class="sec-another flex-form">
 						<span>
-						<p class="input-total"><i class="icon-checkbox-unchecked" id="cred-pay-fazea" > <label>Pagamento Faseado</label></i> </p>
-						<p class="input-total"><i class="icon-checkbox-unchecked" id="cred-pay-desco"> <label>Desconto</label></i> </p>
+							<p class="input-total"><i class="icon-checkbox-unchecked" id="cred-pay-fazea" > <label>Pagamento Faseado</label></i> </p>
+							<p class="input-total"><i class="icon-checkbox-unchecked" id="cred-pay-desco"> <label>Desconto</label></i> </p>
 						</span>
 					</section>
 				</div>
@@ -409,21 +402,18 @@
 		</div>
 	</div>
 </section>
+	<script type="text/javascript" src="./resources/fw/pikaday/pikaday.js"></script>
 <!-- <div class="xpert-alert notification"><i class="icon-notification"></i><span class="txt">Text here!</span> <span class="close">X</span></div> -->
 </body>
-<!--<script type="text/javascript" src="resources/js/jQuery.js"></script>-->
 <script type="text/javascript" src="./resources/js/jQuery.js"></script>
+<script type="text/javascript" src="resources/js/table.js"></script>
 <script type="text/javascript" src="resources/js/geralScript.js"></script>
 <script type="text/javascript" src="resources/js/controller/logar.js"></script>
 <script type="text/javascript" src="./resources/js/controller/menu.js"></script>
-<script type="text/javascript" src="resources/js/table.js"></script>
 <script type="text/javascript" src="resources/js/rclient.js"></script>
 <script type="text/javascript" src="resources/js/controller/geral.js"></script>
 <script type="text/javascript" src="resources/js/controller/forMask.js"></script>
 <script type="text/javascript" src="resources/js/controller/cliente.js"></script>
 <script type="text/javascript" src="resources/js/controller/simulacao.js"></script>
 <script type="text/javascript" src="resources/js/controller/prestacaoBluider.js"></script>
-<script type="text/javascript" src="resources/fw/js/angular.min.js"></script>
-<script type="text/javascript" src="resources/fw/js/datepicker.js"></script>
-<script type="text/javascript" src="resources/fw/js/demo.js"></script>
 </html>

@@ -15,7 +15,7 @@
 		</nav>
 		<div class="second">
 			<div class="container">
-				<div class="table-seguro x-table">
+				<div class="table-seguro x-table auto-width">
 					<table id="table-seguro" class="selectable" cellpadding="0" cellspacing="0">
 						<thead>
 							<tr>

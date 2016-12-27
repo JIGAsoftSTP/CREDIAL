@@ -16,31 +16,28 @@ function loadMenuUserLogado(){
             var body = $("body").attr('id');
             var seletedMenu = Number(body.substring(1,body.length));
             var menus = data.MENU;
-            var idSuper = getUrlParameter("id");
+            // var idSuper = getUrlParameter("id");
            for (var gg =0; gg < menus.length; gg++){
                if(menus[gg]["LEVEL"] == "0")
-               $("#principal-menu").append('<li id="pri-'+menus[gg]['ID']+'" '+((gg === 0) ? 'class="active-menu"' : '' )+'><a href="'+menus[gg]['LINK']+'?id='+menus[gg]['ID']+'" id="m'+(gg+1)+'">'+menus[gg]['NAME']+'</a></li>');
+               $("#principal-menu").append('<li id="pri-'+menus[gg]['ID']+'" '+((gg === 0) ? 'class="active-menu"' : '' )+'><a href="'+menus[gg]['LINK']+'" id="m'+(menus[gg]['ID'])+'">'+menus[gg]['NAME']+'</a></li>');
 
-               if(menus[gg]["SUPER.ID"] === idSuper && seletedMenu == 3){
+               if(menus[gg]["SUPER.ID"] === seletedMenu+""){
                    loadSubMenuSecondaryADM(menus[gg]);
                }
-               if(menus[gg]["SUPER.ID"] === idSuper && seletedMenu == 2){
-                   loadSubMenuSecondaryReport(menus[gg]);
-               }
-               var cod = menus[gg]["SUPER.COD"];
-               if(cod !== null && $("[id='"+cod+"']").length > 0){
-                   var ul = document.getElementById(cod);
-                   var li = document.createElement("li");
-                   li.id = menus[gg]["COD"];
-                   li.setAttribute("urldata", menus[gg]['LINK']);
-                   var liText = document.createTextNode(menus[gg]['NAME']);
-                   li.appendChild(liText);
-                   ul.appendChild(li);
-               }
+
+               // var cod = menus[gg]["SUPER.COD"];
+               // if(cod !== null && $("[id='"+cod+"']").length > 0){
+               //     var ul = document.getElementById(cod);
+               //     var li = document.createElement("li");
+               //     li.id = menus[gg]["COD"];
+               //     li.setAttribute("urldata", menus[gg]['LINK']);
+               //     var liText = document.createTextNode(menus[gg]['NAME']);
+               //     li.appendChild(liText);
+               //     ul.appendChild(li);
+               // }
            }
             menusText = menus;
-           if(seletedMenu === 3){ $('.single').find("li").eq(0).trigger('click'); }
-           else if(seletedMenu === 2){ $('.multiple').find("li").eq(0).trigger('click'); }
+            $('.single').find("li").eq(0).trigger('click');
         }
     });
 }

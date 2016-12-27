@@ -17,7 +17,7 @@
 			<div class="container">
 					<i class="icon-undo2 reset-cheq" id="bt-restaurar-cheque"><span> <b>Restaurar</b></span></i>
 					<section class="">
-						<div class="table-list-cheq x-table">
+						<div class="table-list-cheq x-table auto-width">
 							<table class="selectable" id="table-cheq" cellpadding="0" cellspacing="0">
 								<thead>
 									<tr>                    

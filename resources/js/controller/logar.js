@@ -13,11 +13,17 @@ $("#logar").click(function () {
         dataType: "json",
         success: function (e) {
             if(e.result){
-                if(e.state === 1)
-                    window.location = "./RClient.php";
+                if(e.state === 1) {
+                    if(e.pageUser !== null) {
+                        window.location = e.pageUser["LINK"];
+                    }else{
+
+                    }
+                }
                 else if(e.state=== 2) {
                     $("b#nome").text(e.nome);
                     $(".mp-change-pwd").fadeIn();
+                    $('#pwd1').focus();
                 }
                 else
                     callXpertAlert('Acesso Negado!', new Mensage().cross, 10000);
@@ -37,7 +43,13 @@ $("#confirme").click(function () {
             dataType: "json",
             success: function (e) {
                 if(e.result){
-                    window.location = "./RClient.php?newUser="+e.msg;
+                    if(e.pageUser !== null) {
+                        window.location = e.pageUser["LINK"];
+                        sessionStorage.setItem("hasBeenActiveNow",true);
+                    }else{
+
+                    }
+                    // window.location = "./RClient.php?newUser="+e.msg;
                 }
                 else { callXpertAlert(e.msg, new Mensage().warning, 10000); }
             }
@@ -83,8 +95,11 @@ function changePwd() {
             data: {"intensao": "changePwd","pwdOld":$("#pwdAT").val(),"pwdNew":$("#pwdN1").val()},
             dataType: "json",
             success: function (e) {
-                if(e.result)
+                if(e.result) {
                     callXpertAlert('A senha foi alterada com sucessso!', new Mensage().checkmark, 10000);
+                    resetForm($(".mp-change-pwd"));
+                    $("#changePwd").closest(".bt-no-option").click();
+                }
                 else
                     callXpertAlert(e.msg, new Mensage().cross, 10000);
             }
@@ -107,8 +122,9 @@ function logOut() {
 }
 
 $(document).ready(function (e) {
-    if (getUrlParameter("newUser") != undefined)
+    if (sessionStorage.getItem("hasBeenActiveNow") === "true")
         callXpertAlert('Bem vindo a aplicação CREDIAL SA!', new Mensage().notification, 20000);
+    sessionStorage.removeItem("hasBeenActiveNow");
 });
 
 
@@ -153,7 +169,36 @@ function loadDataUser() {
                     'backgroundSize': 'cover'
                 });
                 $(".aut-user-login-name").text(e.user_name_complete);
+                $("#menu-ag-user").text(e.user_perfil+" na "+e.user_agency);
             }
         }
     });
 }
+
+var feedback = function () {};
+feedback.prototype.type = undefined;
+feedback.prototype.text = undefined;
+feedback.prototype.other = undefined;
+feedback.prototype.mail = undefined;
+
+$("#cli-feed-bt").click(function () {
+    if(validation1($(".content-feed input, .content-feed textarea, .content-feed select")))
+    {
+        var feed = new feedback();
+        feed.mail = $("#cli-feed-mail").val();
+        feed.text = $("#cli-feed-text").val();
+        feed.type = $("#cli-feed-type").val();
+        feed.other = $("#cli-feed-other").val();
+        $.ajax({
+            url: "./bean/logar.php",
+            type: "POST",
+            data: {"intensao": "sendfeeback", feed : feed},
+            dataType: "json",
+            success: function (e) {
+                if(e.result) {
+                    callXpertAlert('A sua mensagem foi enviada com sucesso!', new Mensage().checkmark, 80000);
+                }
+            }
+        });
+    }
+});

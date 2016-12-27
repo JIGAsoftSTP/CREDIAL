@@ -52,6 +52,12 @@
 .x-table tr{
 	padding-left: 5px;
 }
+.x-table tr > *{
+	white-space: nowrap;
+	-o-text-overflow: ellipsis;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
 .x-table thead{	
 	border-bottom: 1px #EEE solid;	
 	line-height: 2.5rem;

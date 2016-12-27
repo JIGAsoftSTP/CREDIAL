@@ -545,14 +545,16 @@
 .div-total-2,
 .detail-table ul,
 .about-customer,
-.about-customer .total-val{
+.about-customer .total-val,
+.about-customer .special-ipt{
 	display: flex;
 }
 .part-2 ul,
 .part-2 li,
 .detail-table ul,
 .about-customer,
-.about-customer .total-val{
+.about-customer .total-val,
+.special-ipt{
 	justify-content: space-between;
 }
 .div-total{
@@ -669,24 +671,50 @@
 	padding: 1rem !important;
 	border: 1px #eee solid;
 	position: relative;
+	max-height: 70%;
+	overflow: auto;
 }
 
 .about-customer .total-val{
+	flex-wrap: wrap;
 	position: absolute;
 	bottom: 95px;
 	right: 1rem;
-	font-size: 1.8rem;
+	font-size: 1.6rem;
 	width: 100%;
 	padding-left: 2rem;
 }
 .total-val b{
+	display: block;
+	width: 100%;
 	color: #00C853;
+	text-align: right;
 }
 .about-customer h2{
 	margin-bottom: 1rem;
 }
 .about-customer .xpert-list{
 	margin-bottom: 1rem;
+}
+.about-customer .special-ipt{
+	flex-wrap: nowrap;
+	width: 100%;
+	border-bottom: 2px #dfdfdf solid;
+	margin-bottom: 1.6rem;
+}
+.special-ipt.focused{
+	border-bottom: 2px #3598DB solid ;
+}
+.special-ipt.empty{
+	border-bottom: 2px red solid ;
+}
+.special-ipt.focused input.integer{
+	border-bottom: none !important;
+}
+.special-ipt input{
+	flex-grow: 1;
+	border-bottom: none !important;
+	margin-bottom: 0 !important;
 }
 
 /*#############################################*/
@@ -824,4 +852,7 @@
 	margin-left: 2rem;
 	border-left: 1px #ddd solid;
 	max-width: 220px;
+}
+i.unchange{
+	color: #888 !important;
 }

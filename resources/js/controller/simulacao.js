@@ -3,8 +3,8 @@
  */
 $(function () {
     loadDataSimulation();
-    $("#cred-data").mask("99-99-9999");
-    $("#cred-pay-data").mask("99-99-9999");
+    /*$("#cred-data").mask("99-99-9999");
+    $("#cred-pay-data").mask("99-99-9999");*/
 });
 function validarSimulacao(element) {
     return validation1(element);
@@ -33,9 +33,13 @@ Simulation.prototype.reembolsoPeriodo = 0;
 Simulation.prototype.dataTableAmortizacao = [];
 Simulation.prototype.valorAmotizado = 0;
 Simulation.prototype.idBank = 0;
+Simulation.prototype.bankState = 0;
 
 var si = new Simulation();
-
+/**
+ * @type {Array}
+ */
+var banks = undefined;
 $("#start-simulation").click(function () {
     if(validarSimulacao($(".xpert-form .part-1 input, .xpert-form .part-1 select"))){
         var dt = {"intensao": "start-simulation", "value" : unformatted($("#cred-value").val()),"data" : $("#cred-data").val(), "dia":$("#cred-dia").val(),
@@ -53,27 +57,28 @@ $("#start-simulation").click(function () {
             dataType: "json",
             success: function (e) {
                 if (e.result) {
-                    $("#cred-taxa").text(e.return['TAXA']);
+                    $("#cred-taxa").text(Number(e.return['TAXA']).dc().rp());
                     $("#cred-peri").text(e.return['PERIODO']);
-                    $("#cred-capi").text(formattedString(e.return['CAPITAL']));
-                    $("#cred-taxaS").text(formattedString(e.return['TAXA SEM DESCONTO']));
-                    $("#cred-taxaC").text(formattedString(e.return['TAXA COM DESCONTO']));
-                    $("#cred-totalPagar").text(formattedString(e.return['TOTAL PAGAR']));
-                    $("#cred-prest").text(formattedString(e.return['PRESTACAO']));
-                    $("#cred-reePer").text(formattedString(e.return['REEMBOLSO/PRESTACAO']));
-                    $("#cred-segu").text(formattedString(e.return['SEGURO']));
+                    $("#cred-capi").text(formattedString(Number(e.return['CAPITAL']).dc().rp()));
+                    $("#cred-taxaS").text(formattedString(Number(e.return['TAXA SEM DESCONTO']).dc().rp()));
+                    $("#cred-taxaC").text(formattedString(Number(e.return['TAXA COM DESCONTO']).dc().rp()));
+                    $("#cred-totalPagar").text(formattedString(Number(e.return['TOTAL PAGAR']).dc().rp()));
+                    $("#cred-prest").text(formattedString(Number(e.return['PRESTACAO']).dc().rp()));
+                    $("#cred-reePer").text(formattedString(Number(e.return['REEMBOLSO/PRESTACAO']).dc().rp()));
+                    $("#cred-segu").text(formattedString(Number(e.return['SEGURO']).dc().rp()));
 
                     si.numSemanaMes = Number(e.return["NUMERO SEMANA MES"]);
                     si.dia = Number($("#cred-dia").val());
                     si.data = $("#cred-data").val();
-                    si.reembolsoPeriodo = Number(e.return['REEMBOLSO/PRESTACAO']);
-                    si.totalPagar = Number(e.return['TOTAL PAGAR']);
-                    si.numeroPrestacao = Number(e.return['PERIODO']);
-                    si.valorDesconto = Number($("#cred-desco").val());
-                    si.taeg = Number(e.return['TAXA COM DESCONTO']);
-                    si.idTaxa = Number(e.return['ID TAXA INFERIOR']);
+                    si.reembolsoPeriodo = Number(e.return['REEMBOLSO/PRESTACAO']).dc();
+                    si.totalPagar = Number(e.return['TOTAL PAGAR']).dc();
+                    si.numeroPrestacao = Number(e.return['PERIODO']).dc();
+                    si.valorDesconto = Number($("#cred-desco").val()).dc();
+                    si.taeg = Number(e.return['TAXA COM DESCONTO']).dc();
+                    si.idTaxa = Number(e.return['ID TAXA INFERIOR']).dc();
 
                     $("#cred-cli-bank").html('<option value="0">(Banco)</option>');
+                    banks = e.banks;
                     loadComoBoxIDandValue($("#cred-cli-bank"), e.banks, "ID", "SIGLA");
 
                     // "ID TAXA INFERIOR":"51"
@@ -148,7 +153,7 @@ function bluiderTablePestacao() {
 
         if(i == 0){ si.valorAmotizado = si.totalPagar - si.reembolsoPeriodo; }
         else{ si.valorAmotizado -= (si.reembolsoPeriodo + si.valorDesconto); }
-        si.valorAmotizado = ((si.valorAmotizado<0) ? 0 : si.valorAmotizado);
+        si.valorAmotizado = ((si.valorAmotizado<1) ? 0 : si.valorAmotizado);
 
         var am = new Amortizacao();
         am.data = day + "-" + mouth + "-" + year;
@@ -184,8 +189,8 @@ function addPestacao(data) {
     var cell3 = row.insertCell(2);
 
     cell1.innerHTML = data;
-    cell2.innerHTML = formattedString((si.reembolsoPeriodo.dc()).rp());
-    cell3.innerHTML = formattedString((si.valorAmotizado.dc()).rp());
+    cell2.innerHTML = formattedString(si.reembolsoPeriodo.dc().rp());
+    cell3.innerHTML = formattedString(si.valorAmotizado.dc().rp());
 }
 
 $("#cred-edit-table-amor").click(function () {
@@ -269,37 +274,51 @@ function searchElement(obj, _title) {
 
 $("#cred-cli-bank").change(loadChequeSimulacao);
 
-
+var sBank = undefined;
 function loadChequeSimulacao() {
-    $.ajax({
-        url: "./bean/simulation.php",
-        type: "POST",
-        data: {"intensao":"load-cheque","value":unformatted($("#cred-value").val()),"idbank":$("#cred-cli-bank").val()},
-        dataType: "json",
-        success: function (e) {
-            if(e.result){
-                $("#cred-cli-numDoc").val(e.return['NUM SEQUENCIA']);
-                si.idCheque = e.return['ID CHEQUE'];
-                si.numeroCheque = e.return['NUM SEQUENCIA'];
+    si.idBank = $("#cred-cli-bank").val();
+    $("#cred-cli-numDoc").val("0");
+    sBank = getStateBankByID();
+    si.bankState = ($("#cred-cli-bank").val() === "0") ? "0" :  sBank['STATE'];
+    if(si.bankState !== "0" ) {
+        $.ajax({
+            url: "./bean/simulation.php",
+            type: "POST",
+            data: {
+                "intensao": "load-cheque",
+                "value": unformatted($("#cred-value").val()),
+                "idbank": si.idBank
+            },
+            dataType: "json",
+            success: function (e) {
+                if (e.result) {
+                    $("#cred-cli-numDoc-veiw").html(e.return['NUM SEQUENCIA']);
+                    $("#cred-cli-numDoc").attr("maxlength", sBank["VARIABLE_DIGITS"]);
+                    si.idCheque = e.return['ID CHEQUE'];
+                    si.numeroCheque = e.return['NUM SEQUENCIA'];
+                }
+                else {
+                    si.idCheque = undefined;
+                    si.numeroCheque = undefined;
+                    callXpertAlert(e.return['MESSAGE'], new Mensage().cross, 8000);
+                    $("#cred-cli-numDoc").val("");
+                }
             }
-            else {
-                si.idCheque = undefined;
-                si.numeroCheque = undefined;
-                callXpertAlert(e.return['MESSAGE'], new Mensage().cross, 8000);
-                $("#cred-cli-numDoc").val("");
-            }
-        }
-    });
+        });
+    }else{
+        callXpertAlert("Banco "+sBank["NAME"]+" "+sBank["MESSAGE"], new Mensage().cross, 8000);
+        si.numeroCheque = undefined;
+        si.idCheque = undefined;
+    }
 }
 
 $("#import-simulation").click(function () {
     if (validarSimulacao($("#cred-form-cli input, #cred-form-cli select")) && checkIsValid() && testTableAmortizacao() && testlistDocGar()) {
 
-        si.numeroCheque =  $("#cred-cli-numDoc").val();
+        si.numeroCheque =  $("#cred-cli-numDoc-veiw").html()+$("#cred-cli-numDoc").val();
         si.idBank =  $("#cred-cli-bank").val();
         si.objectoTipoCredito =  $("#cred-tipoCred").val();
         si.objectoFontePagamento =  $("#cred-cli-fonRend").val();
-        // si. =  $("#cred-cli-fonRend").val();
 
         $.ajax({
             url: "./bean/simulation.php",
@@ -356,18 +375,28 @@ function checkIsValid() {
         callXpertAlert("Por Favor, Selecione o Banco!", new Mensage().warning, 8000);
         $("#cred-cli-numDoc").addClass("empty");
         $("#cred-cli-bank").addClass("empty");
-    }else if(!$("#cred-cli-numDoc").val().$$(si.numeroCheque)){
-        callXpertAlert("Cheque invalido!", new Mensage().warning, 8000);
-        $("#cred-cli-numDoc").val(si.numeroCheque);
-        $("#cred-cli-numDoc").addClass("empty");
-    }
-    else if( $("#cred-cli-numDoc").val().length > si.numeroCheque.length+3 ){
-        var va = $("#cred-cli-numDoc").val();
-        $("#cred-cli-numDoc").val(va.substring(0, si.numeroCheque.length+3));
-    }
-    else {
+    }else if($("#cred-cli-numDoc").val().length !== Number($("#cred-cli-numDoc").attr("maxlength"))){
+        var numDocVeiw = $("#cred-cli-numDoc-veiw").html().length;
+        var numDoc = $("#cred-cli-numDoc").val().length;
+        var numDocMiss = Number($("#cred-cli-numDoc").attr("maxlength"));
+        callXpertAlert("Numero de Cheque incompleto!<br>" +
+            "Atual: "+(numDocVeiw+numDoc)+"<br>"+
+            "Necessário: "+(numDocVeiw+numDocMiss), new Mensage().warning, 8000);
+            $("#cred-cli-numDoc").addClass("empty");
+    } else{
         $("#cred-cli-numDoc").removeClass("empty");
-        isValid = true;
+        return true;
     }
     return isValid;
+}
+
+function getStateBankByID() {
+    var sBank = undefined;
+    banks.forEach(function (bt) {
+       if (bt["ID"] === si.idBank ){
+           sBank = bt;
+           return false;
+       }
+    });
+    return sBank;
 }

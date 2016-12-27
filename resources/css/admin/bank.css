@@ -82,6 +82,7 @@
 	padding: 1rem;
 	border: 1px #ddd solid;
 	max-width: 100%;
+	
 	overflow: auto;
 }
 .bank .abas > section{
@@ -128,6 +129,7 @@
 .bank .article-bank{
 	flex-grow: 1;
 	padding-left: 2rem;
+	max-width: 100%;
 }
 .article-bank .bank-descript{
 	font-size: 1.2rem;
@@ -147,10 +149,11 @@
 .bank .table-list-bank{
 	flex-grow: 1;
 	margin-top: 1.5rem;
+	max-width: 800px;
 }
-.table-list-bank table{
+/*.table-list-bank table{
 	height: 100%;
-}
+}*/
 .bank .with-info{
 	/*display: flex;*/
 	position: relative;

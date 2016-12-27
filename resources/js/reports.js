@@ -13,17 +13,22 @@ $('.ctrls .pin').click(function(event) {
 });
 
 $('.add-section-filter select').change(function(event) {
-	$('.add-section-filter b').click();
+	selected = $(this).val();
+	filter = $(this).find('option:selected', this).attr('filter');
+	identifier = $(this).find('option:selected', this).attr('identifier');
+	if(!isEmpty($(this))){
+		filterConstruct(identifier, $(this), filter);
+		/*setDataStorage(sessionStorage, 'filterReport', identifier +'-' + selected , "");*/
+	}
 });
 $('.add-section-filter b').click(function(event) {
-	selected = $(this).prev();
-	filter = $(this).prev().find('option:selected', this).attr('filter');
-	identifier = $(this).prev().find('option:selected', this).attr('identifier');
-	if(!isEmpty(selected))
-		filterConstruct(identifier, selected, filter);
 });
 
 $('.filter-added').on('click','.xClose',function(event) {
+	Ipt = $(this).parent().find('input');
+	myIdent = Ipt.attr('identifier');
+  	myValue = "";
+  	setDataStorage(sessionStorage, 'filterReport', myIdent , myValue);
 	$(this).closest('section').remove();
 });
 
@@ -42,10 +47,20 @@ $('.filter-added .icon-ctrl').click(function(event) {
 	$(this).toggleClass('show');
 });
 
+$('.filter-added').on('change','datalist',function(){
+  	_id = $(this).attr('id');
+  	alert(_id);
+});
+
 $('.callFilter').click(function(event) {
 	$('.filter-report').removeClass('hidden');
 });
 
+
+$('.x-icon-ok').click(function(event) {
+	createFilterReport();
+
+});
 
 
 
@@ -53,24 +68,28 @@ function filterConstruct(identifier, selected, filter){
 	var structure;
 	selected = parseInt(selected.val());
 	if(!filterExists(filter).exist){
-            structure = '<section class="sec-added" filter="' + filter + '">' +
-                '<span class="xClose" title="Remover filtragem por '+ filter +'"><hr><hr></span>' +
-                '<span class="x-autocomplete">' +
-                '<input list ="'+ selected +'" placeholder="' + filter + '">' +
-                '<datalist id="' + selected + '">' +
-                returnListFilter(identifier, selected);
-            +
-                '</datalist>' +
-            '</span>' +
-            '</section>';
-            $('.filter-added').append(structure);
-            $("datalist#"+selected).prev().focus();
+		structure = '<section class="sec-added" filter="' + filter + '">' +
+		'<span class="xClose" title="Remover filtragem por '+ filter +'"><hr><hr></span>' +
+		'<span class="x-autocomplete">' +
+		'<input identifier="'+ identifier + '-'+ selected +'" list ="'+ selected +'" placeholder="' + filter + '">' +
+		'<datalist id="' + selected + '">' +
+		returnListFilter(identifier, selected);
+		+
+		'</datalist>' +
+		'</span>' +
+		'</section>';
+		$('.filter-added').append(structure);
+		$("datalist#"+selected).prev().focus();
 	} else{
 		$('.filter-added section').eq(filterExists(filter).position)
 		.insertBefore($('.filter-added section').eq(0))
 		.find('input').focus();
 	}
 }
+
+
+
+
 
 function filterExists(filter){
 	var arrayExist = {exist: false, position: 0};
@@ -98,30 +117,51 @@ function returnListFilter(identfier, listDB){
 			data:{"intention" : intention, "id" : listDB},
 			success:function (e) {
 				for(var i=0;i<e.objeto.length;i++){
-					$("datalist#"+listDB).append('<option value="'+e.objeto[i][returnValue]+'"></option>');
-					localStorage
+					$("datalist#"+listDB).append('<option value="'+ e.objeto[i][returnValue] +'"></option>');
+					sessionStorage
 				}
 
-	        }
+			}
 		});
 
 }
 
 
 
-function lighting(el){
+/*function lighting(el){
 	el.addClass('lighted').siblings().removeClass('lighted');
 	
 }
 function setPositionXC(el){
-    var divPos = {};
-    var offset = $('body').offset();
+	var divPos = {};
+	var offset = $('body').offset();
 
-    divPos = {
-        left: el.offset().left - offset.left,
-        top: el.offset().top - offset.top
-    };
-    console.log(divPos.left + ' ' + divPos.top + ' '+ el.next().height());
+	divPos = {
+		left: el.offset().left - offset.left,
+		top: el.offset().top - offset.top
+	};
+	console.log(divPos.left + ' ' + divPos.top + ' '+ el.next().height());
+}*/
+
+
+/*function dataStorage(myObject, myKey, myValue){
+	
+	console.log(getDataStorage(sessionStorage, myObject));
+}*/
+
+/*function listDataStorage(dataName){
+	if (sessionStorage.getItem(dataName)) {
+
+			var personView = $.parseJSON(sessionStorage.getItem(dataName));
+			
+			console.log(sessionStorage.getItem(dataName));
+		}
+}*/
+function createFilterReport(){
+	$('.filter-added section').each(function(index, el) {
+		myIdent = $(this).find('input').attr('identifier');
+	  	myValue = $(this).find('input').val();
+	  	setDataStorage(sessionStorage, 'filterReport', myIdent , myValue);
+	});
 }
-
 

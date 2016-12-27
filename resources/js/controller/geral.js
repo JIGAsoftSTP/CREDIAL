@@ -14,10 +14,21 @@ function loadComoBoxIDandValue(element, array, id, value) {
     }
 }
 
-function loadComoBoxIDandValueReport(element, array, id, value) {
+function loadComoBoxIDandValueReport(element, array) {
+  var id = $(".report-P").attr('id');
     for (var x=0; x < array.length; x++){
         var lista = array[x];
-        element.append('<option value="'+ lista[id] +'" filter="'+ lista[value] +'" identifier="entity">'+lista[value]+'</option>');
+        if(lista["cod"] !== "anoSub"){
+            if(id !== undefined)
+                $(".report-P").remove();
+
+            element.append('<option value="'+ lista["contents"]["table"] +'" filter="'+ lista["name"] +'" identifier="'+lista["cod"]+'">'+lista["name"]+'</option>');
+        }
+        else
+            $(".prd-enabled").append('<input type="text" id="relatorio-periodo" class="report-P integer" maxlength="3" ' +
+                'onkeypress="numericNumbers(event)" placeholder="Periodo em Comparação"/>');
+
+
     }
 }
 
@@ -94,6 +105,7 @@ var Amortizacao = function () {};
 Amortizacao.prototype.data = "";
 Amortizacao.prototype.idBanco = "0";
 Amortizacao.prototype.reebolso = "";
+Amortizacao.prototype.reebolsoVew = "";
 Amortizacao.prototype.nunDoc = "";
 Amortizacao.prototype.idTipoPagam = "0";
 Amortizacao.prototype.nomeBanco = "";
@@ -122,6 +134,7 @@ User.prototype.menu = undefined;
 User.prototype.disableMode = undefined;
 
 var USEREDITE = false;
+var CLIENTEEDITE = false;
 /**
  *
  * @constructor ListUser
@@ -173,5 +186,13 @@ if(!Number.prototype.dc){
 if(!Number.prototype.rp){
     Number.prototype.rp = function () {
         return this.toString().replace(".",",");
+    }
+}
+
+function numericNumbers(event) {
+    if ((event.which != 44 || $(this).val().indexOf(',') != -1) &&
+        ((event.which < 48 || event.which > 57) &&
+        (event.which != 0 && event.which != 8))) {
+        event.preventDefault();
     }
 }

@@ -182,7 +182,7 @@ $(".list-user").on("click", "i.icon-undo2", function () {
 })
     .on("click", "i.icon-pencil", function () {
         resetForm($(".add-new-admin"));
-        resetForm($(".mp-menu-user"));
+        // resetForm($(".mp-menu-user"));
         USEREDITE = true;
         user =  listUser.list[$(this).closest("section").attr("item")];
         $("#gest-user-nif").val(user.nif).attr("disabled",true);
@@ -202,7 +202,7 @@ $(".list-user").on("click", "i.icon-undo2", function () {
             listMenuSelect[listMenuSelect.length] = men["ID"];
         });
 
-        imageUser = "noEditavel";
+        imageUser = "."+user.img;
 
         isNull($("#gest-user-agencia"));
 
@@ -211,12 +211,15 @@ $(".list-user").on("click", "i.icon-undo2", function () {
             ,"background-size":"cover"};
         $(".adm-ph-user").css(css);
 
+        disableAllCheck();
         for (var b = 0; b < user.menu.length; b++){
             var ids = user.menu[b]['ID'];
             if(!thisMenuHaveSon(ids, user.menu)) {
                 seletedMenuUser(ids);
             }
         }
+        openFatherHaveSonSelected();
+        autoCheck($("li.isChild"));
         addNewItem($(this).closest('section').find('h4'));
     })
     .on("click", "i.icon-lock", function () {
@@ -289,6 +292,7 @@ $("#gest-user-type").on("click","i", function () {
                 for (var v = 0; v < menu.length; v++){
                     seletedMenuUser(menu[v]['ID']);
                 }
+                autoCheck($("li.isChild"));
             },700);
         }
     });
@@ -321,6 +325,7 @@ function editeClient() {
         userChange.idAgencia = $("#gest-user-agencia").val();
         userChange.idNivel = $("#gest-user-type").find("i.icon-radio-checked2").attr("value");
         userChange.menu = listMenuSelect;
+        userChange.img = imageUser;
 
         var change = {
             menu : areChangeMenu(),
@@ -386,4 +391,12 @@ function areChageAgencia() {
 
 function areChengeNivel() {
     return userChange.idNivel != user.idNivel;
+}
+
+function openFatherHaveSonSelected() {
+    $(".XpertTreeMenu").find('.isFather').each(function () {
+        if ($(this).hasClass("checked")) {
+            $(this).find('.icon-ctrl').click();
+        }
+    });
 }

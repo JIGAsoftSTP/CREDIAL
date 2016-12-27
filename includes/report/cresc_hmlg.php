@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="../../resources/css/geralStyle.css">
-	<link rel="stylesheet" href="../../resources/css/reports.css">
+	<link rel="stylesheet" href="../../resources/css/report.css">
 	
 	
 </head>
@@ -17,18 +17,19 @@
 			
 
 
-			<div class="x-table table-client">
-				<table id="table-client" class="selectable" cellpadding="0" cellspacing="0">
+			<div class="x-table table-client auto-width">
+				<table id="table-report-growth" class="selectable" cellpadding="0" cellspacing="0">
 					<thead>
 						<tr>                    
-							<th grow="2">Ano Atual</th>
-							<th grow="2">Ano Passado</th>
+							<th grow="2">NIF</th>
+							<th grow="4">Cliente</th>
+							<th grow="2">Localidade</th>
+							<th grow="2">Ano atual</th>
 							<th grow="2">Diferença</th>
 							<th grow="1">Resultado</th>
 						</tr>
 					</thead>
-					<tbody id="tableCliente">
-						<tr><td>109935310</td><td>WALDEMIRO QUARESMA FERNANDES</td><td>9969457</td><td>5</td></tr>
+					<tbody id="tabelaCresHCorpo">
 					</tbody>
 				</table>
 			</div>
@@ -36,8 +37,8 @@
 	</div>
 </body>
 <script type="text/javascript" src="../../resources/js/jQuery.js"></script>
-<script type="text/javascript" src="../../resources/js/geralScript.js"></script>
 <script type="text/javascript" src="../../resources/js/table.js"></script>
+<script type="text/javascript" src="../../resources/js/geralScript.js"></script>
 </html>
 
 

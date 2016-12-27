@@ -1,0 +1,97 @@
+body,
+body header,
+body .master-container,
+nav.nv{
+	display: flex;
+	align-items: center;
+	
+}
+
+
+body{
+	flex-direction: column;
+	justify-content: space-between;
+	min-height: 100vh;
+	overflow: auto;
+}
+body header{
+	width: 100%;
+	justify-content: space-between;
+	flex-shrink: 0;
+	background: #F7f7f7;
+	padding: 1rem 10% ;
+	border-bottom: 2px #eee solid;
+}
+body .master-container{
+	flex-grow: 1;
+	justify-content: center;
+	width: 100%;
+	flex-shrink: 0;
+}
+header h1{
+	font-size: 1.3rem;
+	font-weight: bold;
+	color: #00B9A3;
+}
+header span{
+	color: #777;
+}
+header i.icon-ctrl{
+	transform: rotate(90deg);
+
+}
+.container{
+	max-width: 480px;
+	padding: 0 1rem;
+}
+.container h1{
+	font-weight: bolder;
+	font-size: 12rem;
+	text-align: center;
+	color: #00B9A3;
+	position: relative;
+}
+.container h1:before{
+	content: "OOOPS";
+	position: absolute;
+	font-size: 1.8rem;
+	padding: 0 .5rem;
+	top: 50%; left: 50%;
+	transform: translate(-50%, -20%);
+	background: #FFF;
+}
+.container nav.nv{
+	
+}
+nav.nv b{
+	line-height: 2rem;
+}
+nav.nv span{
+	flex-grow: 1;
+	background: #f7f7f7;
+	height: 1.3rem;
+	margin-left: 1rem;
+}
+.cortesy-msg{
+	margin: 2rem 0 1rem;
+	color: #555;
+	font-size: .97rem;
+}
+.cortesy-msg:nth-child(2){
+	text-align: center;
+}
+.container button{
+	margin: 2rem auto;
+	display: block;
+	line-height: 3rem;
+	width: 100%;
+	max-width: 320px;
+	cursor: pointer;
+	font-size: 1rem;
+	border-radius: 3px;
+	border: 1px solid #00B9A3;
+	font-weight: bold;
+	color: #fff;
+	background: #00B9A3;
+	box-shadow: 0 1px 0 rgba(0,0,0,.15);
+}

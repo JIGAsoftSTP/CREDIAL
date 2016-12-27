@@ -21,16 +21,16 @@
         </article>
     </div>
 </div>
-
+    <script type="text/javascript" src="./resources/fw/pikaday/pikaday.js"></script>
 </body>
 <script type="text/javascript" src="./resources/js/jQuery.js"></script>
+<script type="text/javascript" src="resources/js/table.js"></script>
 <script type="text/javascript" src="resources/js/geralScript.js"></script>
 <script type="text/javascript" src="resources/js/controller/logar.js"></script>
 <script type="text/javascript" src="./resources/js/controller/menu.js"></script>
 <!--<script type="text/javascript" src="resources/js/jQuery.js"></script>-->
 <!--<script type="text/javascript" src="resources/js/xMenu.js"></script>-->
-<script type="text/javascript" src="resources/js/table.js"></script>
-<!--<script type="text/javascript" src="resources/js/admin.js"></script>-->
+<script type="text/javascript" src="resources/js/admin.js"></script>
 <!--<script type="text/javascript" src="resources/js/controller/user.js"></script>-->
 <!--<script type="text/javascript" src="resources/js/controller/Administracao.js"></script>-->
 </html>

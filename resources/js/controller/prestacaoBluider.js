@@ -48,12 +48,13 @@ var PrestacaoBluider = function () {
 
     this.bluider = function(jk) {
         var numCredi = listCredito[jk]["prestacao"].length;
+        var numCrediText = numCredi+" "+((numCredi == 0 || numCredi > 1) ? "prestações" : "prestação");
         this.credito =
             '<section class="'+((this.idState == 0) ? "pago" : ((this.idState == 1) ? "por-pagar" : "amortizado" ) )+'">' +
             '<i class="icon-ctrl sh-more" id="pret-'+this.id+'" onclick="showAmortizacao('+this.id+','+jk+')"></i>' +
             '<nav> ' +
             '<div class="primary"><b>Dossier nº '+this.nunDossierCredito+'</b> <b>'+this.totalCreditoAPagar+'</b></div> ' +
-            '<div class="secondary"><small>Efetuado em '+this.dataInicioCredito+'</small> <b><small>'+ numCredi +'</small></b> <small>Data fim crédito: '+this.dataFimCredito+'</small></div>' +
+            '<div class="secondary"><small>Efetuado em '+this.dataInicioCredito+'</small> <b><small>'+ numCrediText +'</small></b> <small>Data fim crédito: '+this.dataFimCredito+'</small></div>' +
             '</nav> ' +
             '<nav class="more-details"> ' +
             '<hr> ' +
@@ -153,8 +154,8 @@ var Prestacao =  function () {
 
 };
 
-function showAmortizacao(id, jk) {
-    loadCreditoCliente(id,jk, $("#pret-"+id).parent().find('.more-details').hasClass("show"));
+function showAmortizacao(id, jk, show) {
+    loadCreditoCliente(id,jk, (show === undefined) ? $("#pret-"+id).parent().find('.more-details').hasClass("show") : show);
     $("#pret-"+id).parent().find('.more-details').toggleClass('show');
     tableEstructure($('#table-amortizacao-'+id));
     setTimeout(function (e) {
@@ -168,6 +169,9 @@ function clickPestacao(_idPrestacao) {
 
 var prestacaoS = undefined;
 function pagamentoPestacao(i) {
+    // $(".mp-liquida").removeClass("icon-checkbox-checked").addClass("icon-checkbox-unchecked");
+    // resetForm($("#cred-pay-form"));
+    // $('.sec-another').removeClass('show');
     prestacaoS = listPrestacao[i];
     if (prestacaoS["STATE COD"] !== "0") {
         loadDataCredForForm();
@@ -177,18 +181,29 @@ function pagamentoPestacao(i) {
 var reembloso = undefined;
 var valorPago = undefined;
 var valorPorPago = undefined;
+var missFazeado = false;
 function loadDataCredForForm() {
     reembloso = unformatted(prestacaoS["REEMBOLSO"].replace(".",","));
     valorPago = unformatted(prestacaoS["PRESTACAO PAGA"].replace(".",","));
-    if(valorPago > 0) {
-        $("#cred-pay-dife").click();
-        $("#cred-pay-fazea").click();
-    }
+    missFazeado = false;
+
+    var state = (valorPago > 0) ? 1 : 0;
+    CtrlFormLiquidar(state);
+
     valorPorPago = (reembloso-valorPago).dc();
-    $("#cred-pay-bank").val((valorPago > 0) ? prestacaoS["BANCO REAL ID"] : prestacaoS["BANCO PREVISTO ID"]);
-    $("#cred-pay-value-rest").html(formattedString("0"));
-    $("#cred-pay-value").val(formattedString(valorPorPago.toString()));
-    $("#cred-pay-doc").val(prestacaoS["DOCUMENTO PAGAMENTO"]);
+    if(state === 0){
+        $("#cred-pay-bank").val(prestacaoS["BANCO PREVISTO ID"]);
+        $("#cred-pay-value-rest").html(formattedString("0"));
+        $("#cred-pay-value").val(formattedString(valorPorPago.rp()));
+        $("#cred-pay-doc").val(prestacaoS["DOCUMENTO PAGAMENTO"]);
+    }else{
+        $("#cred-pay-bank").val(prestacaoS["BANCO REAL ID"]);
+        $("#cred-pay-value-rest").html(formattedString(valorPorPago.rp()));
+        $("#cred-pay-value").val("");
+        $("#cred-pay-doc").val("");
+    }
+
+    isNull($("#cred-pay-bank"));
 
     openModalFrame($('.mp-liquidar'));
 }
@@ -209,22 +224,28 @@ function alterValorApagar(value) {
 }
 
 $("#cred-pay-fazea").click(function () {
-    if($(this).hasClass('icon-checkbox-checked')){
-        $("#cred-pay-value").val(formattedString(""));
-        $("#cred-pay-value-rest").html(formattedString(valorPorPago.rp()));
-    }else{
-        $("#cred-pay-value").val(formattedString(valorPorPago.rp()));
-        $("#cred-pay-value-rest").html(formattedString("0"));
+    if(!$(this).hasClass('unchange')){
+        if ($(this).hasClass('icon-checkbox-checked')) {
+            $("#cred-pay-value").val(formattedString("")).removeAttr("disabled");
+            $("#cred-pay-value-rest").html(formattedString(valorPorPago.rp()));
+        } else {
+            $("#cred-pay-value").val(formattedString(valorPorPago.rp())).attr("disabled", true);
+            $("#cred-pay-value-rest").html(formattedString("0"));
+        }
     }
 });
 
 $("#cred-pay-dife").click(function () {
-        if ($(this).hasClass('icon-checkbox-checked')) {
-            $("#cred-pay-doc").val("");
-            $("#cred-pay-bank").val("0");
-        } else {
-            $("#cred-pay-doc").val(prestacaoS["DOCUMENTO PAGAMENTO"]);
-            $("#cred-pay-bank").val(prestacaoS["BANCO PREVISTO ID"]);
+        if (!$(this).hasClass('unchange')) {
+            if ($(this).hasClass('icon-checkbox-checked')) {
+                $("#cred-pay-doc").val("").removeAttr("disabled");
+                $("#cred-pay-bank").val("0").removeAttr("disabled");
+            } else {
+                $("#cred-pay-doc").val(prestacaoS["DOCUMENTO PAGAMENTO"]).attr("disabled", true);
+                $("#cred-pay-bank").val(prestacaoS["BANCO PREVISTO ID"]).attr("disabled", true);
+                $("#cred-pay-fazea").addClass("icon-checkbox-checked").removeClass("icon-checkbox-unchecked").click();
+            }
+            isNull($("#cred-pay-bank"));
         }
     }
 );

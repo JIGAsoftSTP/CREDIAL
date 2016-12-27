@@ -1,7 +1,5 @@
 
-// $(document).ready(function() {
-//
-// });
+
 XpertToggle($('#toggle-deb-cred') , 'on', 'Crédito');
 
 $('#toggle-deb-cred').click(function(event) {
@@ -55,16 +53,13 @@ $('.bank .add-more').click(function(event) {
 $('.bank').on('click','.siglas li', function(event) {
     var idx = $(this).index();
     $(this).addClass('active').siblings().removeClass('active');
-/*    var bkds = ['Banco Internacional de STP', 'Banco Equandor', 'EcoBank', '37 000 000,00', '1 000 000,00', '5 000 000,00'];
-    $('.bank-descript .name').text(bkds[idx]);
-    $('.bank-descript .sald').text(bkds[idx+3]);
-    if(unformatted(bkds[idx+3]) <= 1000000)
-        $('.bank-descript .sald').addClass('bad').removeClass('good');
-    else
-        $('.bank-descript .sald').addClass('goo
-d').removeClass('bad');*/
+
+});
+$('.bank .add-new-admin').click(function(event) {
+    $('.bank .siglas li.active').click();
 });
 
+$('.table-list-bank').css('max-width', $('.article-bank').width() + 'px');
 
 /* ############## CHEQ 	###########*/
 

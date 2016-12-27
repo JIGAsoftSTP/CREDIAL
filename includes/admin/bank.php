@@ -33,7 +33,7 @@
 					<nav class="article-bank">
 						<div class="bank-descript">
 							<span><b class="name" id="bankMovimentName"></b></span><span><b class="sald"></b><label class="moeda"> STD</label> </span></div>
-						<div class="table-list-bank x-table">
+						<div class="table-list-bank x-table auto-width">
 							<table id="table-bank" cellpadding="0" cellspacing="0">
 								<thead>
 									<tr>                    

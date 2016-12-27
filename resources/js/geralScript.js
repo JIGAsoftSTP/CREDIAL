@@ -1,6 +1,25 @@
-
 isNull($('.xpert-form select'));
 setTitle($('input, select, textarea'));
+
+$('.content-feed select').click(function(event) {
+    if($(this).val() === 'another')
+        $('.another').removeClass('disabled')
+    else
+        $('.another').addClass('disabled')
+});
+$('.xClose').click(function(event) {
+    $(this).closest('section.modalPage').fadeOut(400);
+});
+$('.feedback-li').click(function(event) {
+    openModalFrame($('.mp-feedback'));
+    $('.mp-feedback .modalContainer').addClass('jello');
+});
+
+
+$('header .pin').click(function(event) {
+    $('.header-1').toggleClass('shrinked');
+    $(this).toggleClass('unpin');
+});
 
 $('.xpert-form select').change(function(event) {
     isNull($(this));
@@ -84,7 +103,7 @@ $('.xpert-list').on( 'click','.delete-item-list', function(event) {
             }
         }
 
-            /*$(this).find('i').toggleClass('icon-checkbox-unchecked icon-checkbox-checked');*/
+        /*$(this).find('i').toggleClass('icon-checkbox-unchecked icon-checkbox-checked');*/
     });
 
     meList.remove();
@@ -145,12 +164,12 @@ function XpertListItem(li){
     var i = li.find('i');
     var realId = li.attr("id").split("-")[3]; // para pegar a ultima posição do id separado com '-'
     lst.before('<div class="item-list"><span value="'+realId+'">'
-                    + li.find('.list-name').text() +
-                    '</span><span>' +
-                    '<i class="state-desc"></i>' +
-                    '<span class="delete-item-list">X</span></span>' +
-                    '<input type="text" placeholder="Descrição '+ li.find('.list-name').text() +'" class="input-desc-list _noObrigatory show-hide">' +
-                '</div>');
+        + li.find('.list-name').text() +
+        '</span><span>' +
+        '<i class="state-desc"></i>' +
+        '<span class="delete-item-list">X</span></span>' +
+        '<input type="text" placeholder="Descrição '+ li.find('.list-name').text() +'" class="input-desc-list _noObrigatory show-hide">' +
+        '</div>');
     qttNum +=1;
     li.find('b').text(qttNum);
     if(qttNum > 0){
@@ -186,7 +205,7 @@ function XpertToggleCtrl(tgID, txtON, txtOFF){
 
 function CtrlMenu(element, element2){
     element.addClass('active').siblings().removeClass('active');
-    element2.html('<iframe src="'+ element.attr('urldata') +'" frameborder="0"></iframe>');
+    element2.html('<iframe src="'+ element.attr('urldata') +'" frameborder="0" id="iframe-'+ element.index() +'"></iframe>');
     element.find('li').eq(0).trigger('click');
     /*event.stopPropagation();*/
 }
@@ -267,7 +286,7 @@ function setTitle(element){
             $(this).attr('title', $(this).find('option').eq(0).text());
         
     });
-        
+
 }
 
 
@@ -315,3 +334,51 @@ function resetForm(form){
 
     isNull(form.find('select'));
 }
+
+setDatePicker();
+
+function setDatePicker(){
+    i = 0;
+    $('.is-datepicker').each(function(index, el) {
+        new Pikaday(
+        {
+            field: $('.is-datepicker')[i],
+            firstDay: 1,
+        });
+        i++;
+    });
+}
+
+function setDataStorage(_type, myObject, myKey, myValue){
+
+    typeData = _type === localStorage ? localStorage : sessionStorage;
+    var objectData = {};
+
+    if (typeData.getItem(myObject))
+        objectData = $.parseJSON(typeData.getItem(myObject));
+
+
+    objectData[myKey] = myValue;
+
+    typeData.setItem(myObject, JSON.stringify(objectData));
+    console.log(getDataStorage(sessionStorage, myObject));
+}
+
+function getDataStorage(_type, myObject){
+    typeData = _type === localStorage ? localStorage : sessionStorage;
+    
+    return $.parseJSON(typeData.getItem(myObject));
+
+}
+function limitString(element){
+    element.on('keydown keyup', function(e){
+    if ($(this).val() > 100 
+        && e.keyCode != 46 // delete
+        && e.keyCode != 8 // backspace
+       ) {
+       e.preventDefault();
+       $(this).val(100);
+    }
+});
+}
+

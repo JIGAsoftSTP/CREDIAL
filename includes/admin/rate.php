@@ -19,7 +19,7 @@
 					<option value="-1">Todos</option>
 				</select>
 			</div>
-			<div class="table-taxa x-table">
+			<div class="table-taxa x-table auto-width">
 				<table id="table-taxa" class="selectable" cellpadding="0" cellspacing="0">
 					<thead>
 						<tr>

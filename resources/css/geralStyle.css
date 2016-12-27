@@ -1,6 +1,7 @@
 @import url('adobe-clean.css');
 @import url('fonts.css');
 @import url('table.css');
+@import url('../fw/pikaday/pikaday.css');
 
 *{	
 	font-family: 'adobe-clean', 'arial';
@@ -177,25 +178,47 @@ header nav{
 	width: 100%;
 	
 }
+header .pin{
+	position: fixed;
+	top: 15px;
+	left: 5px;
+	font-size: .95rem;
+	cursor: pointer;
+	width: 37px;
+	line-height: 35px;
+	background: rgba(220,220,220, .1);
+	
+	text-align: center;
+	border-radius: 50%;
+	color: #3879D9;
+	transform: rotate(-45deg);
+	border: 1px solid #3879D9;
+}
+header .pin:hover{
+	border: 1px solid #3879D9;
+}
+header .pin.unpin{
+	border-color: transparent;
+	transform: rotate(135deg);
+	border: 1px solid rgba(220,220,220, .5);
+	background: #FFF;
+}
 .header-1{
 	font-size: .9rem;
 	color: #00B9A3;
 	padding-left: 1rem;
-}
-/*.header-1 .user-span{
-	position: relative;
-	cursor: pointer;
-}
-.user-span .photo{
-	width: 45px;
-	height: 45px;
-	background: #444;
-	border: 1px #eee solid;
-	border-radius: 50%;
-	display: inline-block;
-	vertical-align: middle;
-}*/
+	max-height: 500px;
+	transition: all 1s;
 
+}
+.header-1.shrinked{
+	max-height: 0;
+	overflow: hidden;
+	transition: all .5s;
+}
+.header-1 .logo{
+	margin-left: 2.5rem;
+}
 .header-1 .logged-user{
 	position: relative;	
 	overflow: hidden;
@@ -220,12 +243,13 @@ header nav{
 	margin-right: .7rem;
 	width: 100%;
 	min-width: 260px;
-	background: #FBFBFB;
+	background: #FFF;
 	transform: translateY(10%);
 	border-radius: 2px;
 	color: #444;
 	border: 1px #ddd solid;
 	padding-top: 1rem;
+	box-shadow: 0 5px 15px -5px rgba(100,100,100,.5);
 	opacity: 0;
 	
 	z-index: 500;
@@ -281,7 +305,7 @@ header nav{
 	cursor: pointer;
 }
 .more-opt li:hover{
-	background: #eee;
+	background: #f5f5f5;
 }
 .more-opt div{
 	display: flex;
@@ -311,6 +335,7 @@ header nav{
 	justify-content: flex-end;
 	background: #00B9A3;
 	padding: .5rem 1rem;
+	min-height: 61.594px;
 }
 .header-2 ul{
 	max-width: 600px;
@@ -378,6 +403,8 @@ header nav{
 	margin-top: 7px;
 	padding-left: 1rem;
 	cursor: pointer;
+	white-space: nowrap;
+	overflow-x: hidden;
 }
 .content-w-lateral aside ul li:hover span{
 	color: #111;
@@ -875,6 +902,70 @@ nav.ph-bk{
 	background-position: center;
 	background-size: cover;
 }
+
+
+.mp-feedback{
+	background-color: rgba(255, 255, 255, 0.75)
+}
+.mp-feedback .modalContainer{
+	display: flex;
+	padding: 0;
+	border-radius: 0;
+    box-shadow: 0 4px 23px 5px rgba(0, 0, 0, 0.2), 0 2px 6px rgba(0,0,0,0.15);
+	max-width: 680px;
+}
+.mp-feedback .left-panel{
+	width: 240px;
+	background: #252B37;
+	padding: 2rem;
+
+	flex-shrink: 0;
+}
+
+.mp-feedback h1{
+	text-align: center;
+	color: #00B9A3;
+	font-size: 2.5rem;
+}
+.mp-feedback p{
+	line-height: 1.8rem;
+	margin-top: 2rem;
+	color: #f5f5f5;
+	text-align: center;
+	font-weight: lighter;
+}
+.mp-feedback .content-feed{
+	padding: 2rem;
+	padding-bottom: 0;
+	align-items: flex-end;
+}
+.content-feed .another{
+	max-height: 200px;
+	transition: all 1s;	
+}
+.content-feed .another.disabled{
+	max-height: 0;
+	overflow: hidden;
+}
+.content-feed textarea{
+	height: 160px;
+	font-size: .98rem;
+	font-weight: lighter;
+}
+.content-feed button{
+	margin: 2rem 0;
+	display: block;
+	line-height: 3rem;
+	width: 100%;
+	cursor: pointer;
+	font-size: 1rem;
+	border-radius: 3px;
+	border: 1px solid #00B9A3;
+	font-weight: bold;
+	color: #fff;
+	background: #00B9A3;
+	box-shadow: 0 1px 0 rgba(0,0,0,.15);
+}
 /*#########################################*/
 
 #p1 #m1:after,
@@ -900,4 +991,95 @@ nav.ph-bk{
 	100%{
 		transform: rotate(360deg);
 	}
+}
+
+@-webkit-keyframes jello {
+  from, 11.1%, to {
+    -webkit-transform: none;
+    transform: none;
+  }
+
+  22.2% {
+    -webkit-transform: skewX(-12.5deg) skewY(-12.5deg);
+    transform: skewX(-12.5deg) skewY(-12.5deg);
+  }
+
+  33.3% {
+    -webkit-transform: skewX(6.25deg) skewY(6.25deg);
+    transform: skewX(6.25deg) skewY(6.25deg);
+  }
+
+  44.4% {
+    -webkit-transform: skewX(-3.125deg) skewY(-3.125deg);
+    transform: skewX(-3.125deg) skewY(-3.125deg);
+  }
+
+  55.5% {
+    -webkit-transform: skewX(1.5625deg) skewY(1.5625deg);
+    transform: skewX(1.5625deg) skewY(1.5625deg);
+  }
+
+  66.6% {
+    -webkit-transform: skewX(-0.78125deg) skewY(-0.78125deg);
+    transform: skewX(-0.78125deg) skewY(-0.78125deg);
+  }
+
+  77.7% {
+    -webkit-transform: skewX(0.390625deg) skewY(0.390625deg);
+    transform: skewX(0.390625deg) skewY(0.390625deg);
+  }
+
+  88.8% {
+    -webkit-transform: skewX(-0.1953125deg) skewY(-0.1953125deg);
+    transform: skewX(-0.1953125deg) skewY(-0.1953125deg);
+  }
+}
+
+@keyframes jello {
+  from, 11.1%, to {
+    -webkit-transform: none;
+    transform: none;
+  }
+
+  22.2% {
+    -webkit-transform: skewX(-12.5deg) skewY(-12.5deg);
+    transform: skewX(-12.5deg) skewY(-12.5deg);
+  }
+
+  33.3% {
+    -webkit-transform: skewX(6.25deg) skewY(6.25deg);
+    transform: skewX(6.25deg) skewY(6.25deg);
+  }
+
+  44.4% {
+    -webkit-transform: skewX(-3.125deg) skewY(-3.125deg);
+    transform: skewX(-3.125deg) skewY(-3.125deg);
+  }
+
+  55.5% {
+    -webkit-transform: skewX(1.5625deg) skewY(1.5625deg);
+    transform: skewX(1.5625deg) skewY(1.5625deg);
+  }
+
+  66.6% {
+    -webkit-transform: skewX(-0.78125deg) skewY(-0.78125deg);
+    transform: skewX(-0.78125deg) skewY(-0.78125deg);
+  }
+
+  77.7% {
+    -webkit-transform: skewX(0.390625deg) skewY(0.390625deg);
+    transform: skewX(0.390625deg) skewY(0.390625deg);
+  }
+
+  88.8% {
+    -webkit-transform: skewX(-0.1953125deg) skewY(-0.1953125deg);
+    transform: skewX(-0.1953125deg) skewY(-0.1953125deg);
+  }
+}
+
+.jello {
+  -webkit-animation-name: jello;
+  animation-name: jello;
+  -webkit-transform-origin: center;
+  transform-origin: center;
 }

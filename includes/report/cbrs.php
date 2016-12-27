@@ -5,37 +5,35 @@
 	<link rel="stylesheet" href="../../resources/css/geralStyle.css">
 	<link rel="stylesheet" href="../../resources/css/report.css">
 	<link rel="stylesheet" href="../../resources/css/reports/report.css">
-	<link rel="stylesheet" href="../../resources/css/reports/cheq.css">
-	
+	<link rel="stylesheet" href="../../resources/css/reports/cbrs.css">
 	
 </head>
 <body>
 	<div class="master-content">
-		
-		<ul class="filter-type-cheq">
-			<li type="entrados" class="bt-table-action active">Entrados</li>
-			<li type="porcobrar" class="bt-table-action">Por cobrar</li>
-			<li type="cobrados" class="bt-table-action">Cobrados</li>
-			<li class="bt-table-action">Todos</li>
-		</ul>
+
 		<div class="table-list">
 			<nav class="to-report">
-				<h2>Lista de cheques</h2>
+				<h2>Lista de clientes</h2>
+				<button class="test-expand bt-table-action">Vista Completa</button>
 			</nav>
 			
 
 
-			<div class="x-table table-client auto-width">
-				<table id="tabela-relatorio-cheque" class="selectable" cellpadding="0" cellspacing="0">
+			<div class="x-table table-cbrs auto-width">
+				<table id="tabela-cobrancas" class="" cellpadding="0" cellspacing="0">
 					<thead>
 						<tr>                    
-							<th grow="2">Ano Atual</th>
-							<th grow="2">Ano Passado</th>
-							<th grow="2">Diferença</th>
-							<th grow="1">Resultado</th>
+							<th grow="1.5">NIF</th>
+							<th grow="5">Cliente</th>
+							<th grow="2">Valor Reembolso</th>
+							<th grow="2">Nº Doc. Real</th>
+							<th grow="0" grow2="2">Nº Doc. Previsto</th>
+							<th grow="1">Data Real</th>
+							<th grow="0" grow2="2">Data Prevista</th>
 						</tr>
 					</thead>
-					<tbody id="tabela-cheque-corpo">
+					<tbody id="report-cobrancas-corpo">
+						<tr><td>Value here!</td><td>Value here!</td><td>Value here!</td><td>Value here!</td><td>Value here!</td><td>Value here!</td><td>Value here!</td></tr>
 					</tbody>
 				</table>
 			</div>

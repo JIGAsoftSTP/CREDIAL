@@ -1,21 +1,10 @@
 .filter-type-cheq{
 	margin-bottom: 1rem;
 }
-
 .filter-type-cheq li{
-	line-height: 2.2rem;
-	min-width: 100px;
-	display: inline-block;
 	margin: .5rem;
-	border-radius: 2px;
-	cursor: pointer;
-	text-align: center;
-	font-size: .97rem;
+	
 }
 .filter-type-cheq li:first-child{
 	margin-left: 0;
-}
-.filter-type-cheq li.active{
-	background: #4C9ED9;
-	color: #FFF;
 }

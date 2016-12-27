@@ -102,12 +102,6 @@
         $call->execute();
 
         $result = $call->getValors();
-        if($result["result"] == true){
-            $result["result"] = "true";
-            die(json_encode(array("resultado" => $result)));
-        }
-        else{
-            $result["result"] = "false";
-            die(json_encode(array("resultado" => $result)));
-        }
+        $js = json_encode(array("resultado" =>$result));
+        die($js);
     }

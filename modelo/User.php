@@ -233,7 +233,7 @@ class User
     }
 
     /**
-     * @return mixed
+     * @return array
      */
     public function getMenu()
     {

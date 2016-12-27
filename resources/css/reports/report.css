@@ -1,0 +1,17 @@
+
+.bt-table-action{
+	line-height: 2.2rem;
+	min-width: 100px;
+	display: inline-block;
+	border: 1px transparent solid;
+	border-radius: 2px;
+	cursor: pointer;
+	text-align: center;
+	font-size: .97rem;
+	background: transparent;
+}
+.bt-table-action.active{
+	background: #4C9ED9;
+	color: #FFF;
+	border: 1px solid #4C9ED9 !important;
+}

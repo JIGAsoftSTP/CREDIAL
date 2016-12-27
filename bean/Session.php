@@ -13,7 +13,8 @@ class Session
 
     static function newSession($name,$object)
     {
-        session_start();
+        if(session_status() != PHP_SESSION_ACTIVE)
+            session_start();
         $_SESSION[$name]=$object;
     }
     

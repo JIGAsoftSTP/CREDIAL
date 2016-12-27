@@ -28,4 +28,5 @@ class TYPE
     const BYTEA_ARRAY="::BYTEA[]";
     const TEXT_ARRAY="::TEXT[]";
     const BOOLEAN_ARRAY="::BOOLEAN[]";
+    const JSON = "::JSON";
 }

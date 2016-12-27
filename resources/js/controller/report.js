@@ -3,19 +3,29 @@
  */
 
 $(function () {
-    loadObjectType();
+
+    $(".is-datepicker").blur(function () {
+        var yearComparation = 0;
+
+        if($("#report-inicial-date").val() !== "" &&
+                $("#report-final-date").val() !== "")
+        {
+            var dataI = $("#report-inicial-date").val(), dataF = $("#report-final-date").val();
+            if(Number(dataF.substr(6, 9))>= Number(dataI.substr(6, 9))){
+
+                yearComparation = Number(dataF.substr(6, 9)) - Number(dataI.substr(6, 9));
+                if(yearComparation >1)
+                    $("#yerC").html(yearComparation+" anos em comparação");
+                else if(yearComparation === 1)
+                    $("#yerC").html(yearComparation+" ano em comparação");
+            }
+
+        }
+
+    });
 });
 
-var reportUrl = "bean/relatorio.php";
 
-function loadObjectType() {
-    $.ajax({
-        url: reportUrl,
-        type:"POST",
-        dataType:"json",
-        data:{"intention" : "load object type"},
-        success:function (e) {
-            loadComoBoxIDandValueReport($("#report-entities"), e.objeto ,"ID", "NAME");
-        }
-    });
-}
+
+
+

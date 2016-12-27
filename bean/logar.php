@@ -6,7 +6,7 @@
  * Time: 6:08 PM
  */
 include_once "../conexao/CallPgSQL.php";
-include_once "../modelo/User.php";
+include "../modelo/User.php";
 include_once "Session.php";
 
 if($_POST['intensao']=="login"){ logar();}
@@ -15,6 +15,7 @@ if($_POST['intensao']=="logOut"){ logOut(); }
 if($_POST['intensao']=="changePwd"){ changePwd(); }
 if($_POST['intensao']=="getImageUser"){ loadImgUser(); }
 if($_POST['intensao']=="getDataUser"){ getDataUser(); }
+if($_POST['intensao']=="sendfeeback"){ sendfeeback(); }
 
 function logar(){
     $call = new CallPgSQL();
@@ -31,27 +32,34 @@ function logar(){
             file_put_contents("../resources/img/userImg/" . $img, pg_unescape_bytea($values["PHOTO"]));
         }
 
+        include "utilizador.php";
+
         $user = new User();
         $user->setNome($values["NAME"])
-        ->setApelido($values["SURNAME"])
-        ->setId($values["ID"])
-        ->setIdLogin($values["ID LOGIN"])
-        ->setIdPerfil($values["ID PERFIL"])
-        ->setIdAgencia($values["ID AGENCIA"])
-        ->setAgencia($values["AGENCIA"])
-        ->setEstado($values["STATE"])
-        ->setEstadoNome($values["STATE NAME"])
-        ->setPerfil($values["PERFIL"])
-        ->setSenha($_POST['pwd'])
-        ->setFoto($values["PHOTO"])
-        ->setFotoLogo((($values["PHOTO"] == null) ? "./resources/img/user.png" :"./resources/img/userImg/".$img));
+            ->setApelido($values["SURNAME"])
+            ->setId($values["ID"])
+            ->setIdLogin($values["ID LOGIN"])
+            ->setIdPerfil($values["ID PERFIL"])
+            ->setIdAgencia($values["ID AGENCIA"])
+            ->setAgencia($values["AGENCIA"])
+            ->setEstado($values["STATE"])
+            ->setEstadoNome($values["STATE NAME"])
+            ->setPerfil($values["PERFIL"])
+            ->setMenu(loadMenuUser($values["ID"]))
+            ->setSenha($_POST['pwd'])
+            ->setFoto($values["PHOTO"])
+            ->setFotoLogo((($values["PHOTO"] == null) ? "./resources/img/user.png" :"./resources/img/userImg/".$img));
 
         Session::newSession(Session::USER,$user);
 
         $pNome = explode(" ",$user->getNome());
         $j = json_encode(array("result"=>true,
                                 "state"=>(int)Session::getUserLogado()->getEstado(),
-                                "nome"=>$pNome[0]
+                                "nome"=>$pNome[0],
+                                "pageUser" => (count(Session::getUserLogado()->getMenu()) > 0
+                                    ? Session::getUserLogado()->getMenu()[0]
+                                    : null
+                                )
                               )); die($j);
     }
     else{ $j = json_encode(array("result"=>(boolean)$values, $values)); die($j); }
@@ -71,7 +79,12 @@ function redinirSenha(){
         Session::getUserLogado()->setEstado(1);
         $j = json_encode(array("result" => true,
                                 "msg"=>md5(Session::getUserLogado()->getId()),
-                                "state" => (int)Session::getUserLogado()->getEstado()));
+                                "state" => (int)Session::getUserLogado()->getEstado(),
+                                "pageUser" => (count(Session::getUserLogado()->getMenu()) > 0
+                                    ? Session::getUserLogado()->getMenu()[0]
+                                    : null
+                                )
+        ));
         die($j);
     }else{
         $j = json_encode(array("result" => false,
@@ -129,11 +142,23 @@ function getDataUser(){
     {
         $nome =  Session::getUserLogado()->getNome();
         $apelido = Session::getUserLogado()->getApelido();
-        die(json_encode(array("result" => true,
-                              "user_name_complete" =>  $nome." ". (($nome == $apelido) ? "" : $apelido),
-                              "user_logo" => Session::getUserLogado()->getFotoLogo())));
+        die(
+            json_encode(
+                array(
+                    "result" => true,
+                    "user_name_complete" =>  $nome." ". (($nome == $apelido) ? "" : $apelido),
+                    "user_logo" => Session::getUserLogado()->getFotoLogo(),
+                    "user_agency" => Session::getUserLogado()->getAgencia(),
+                    "user_perfil" => Session::getUserLogado()->getPerfil()
+                )
+            )
+        );
     }
     else
         die(json_encode(array("result" => false)));
+
+}
+
+function sendfeeback(){
 
 }

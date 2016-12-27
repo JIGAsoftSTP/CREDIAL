@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<title>Document</title>
 	<link rel="stylesheet" href="./resources/css/geralStyle.css">
-	<link rel="stylesheet" href="./resources/css/reports.css">
+	<link rel="stylesheet" href="./resources/css/report.css">
 </head>
 <body id="p2">
 	<?php include 'includes/menu.php'; ?> 
@@ -12,7 +12,7 @@
 		<div class="content-w-lateral">
 			<aside class="">
 				<i class="icon-menu"></i>
-				<ul class="multiple" id="secondary-menu"></ul>				
+				<ul class="single" id="secondary-menu"></ul>				
 			</aside>
 			<article class="article-report ">
 				<div class="content">
@@ -27,34 +27,36 @@
 						</span>
 						
 					</div>
-					<div class="report-content">
+					<div class="report-content" >
 						<!-- ALL PAGE HERE! -->
+
 					</div>
 
 				</div>
 
 				<div class="filter-report xpert-form float">
 					<nav class="ctrls">
+						<i class="x-icon-ok"></i>
+						<span>
 						<i class="icon-pushpin pin"></i>
 						<i class="icon-arrow-right2 hide-filter"></i>
+						</span>
 					</nav>
+					<div class="periodic show">
+						
+						<div class="prd-enabled">
+							<input type="text" class="is-datepicker" placeholder="Data Inicial" id="report-inicial-date">
+							<input type="text"class="is-datepicker" placeholder="Data Final" id="report-final-date">
+							<p id="yerC"><span></span></p>
+
+						</div>
+					</div>
 					<div class="add-section-filter">
 						<select name="" id="report-entities">
-							<option value="">(Selecione)</option>
-							<option value="100" identifier="agency" filter="Agência">Agência</option>
-							<option value="50" filter="Periodo">Periodo</option>
+							<!-- <option value="50" identifier="periodo" filter="Periodo">Periodo</option> -->
+                            <option value="">(Selecione)</option>
 						</select>
 						<b></b>
-						
-					</div>
-					<div class="periodic">
-						<nav><i class="icon-checkbox-unchecked"><span> Filtrar por periodo de tempo</span></i> <i class="icon-ctrl"></i></nav>
-
-						<div class="prd-enabled">
-							<input type="text" placeholder="Data Inicial">
-							<input type="text" placeholder="Data Final">
-							<p><span>5</span> em comparação</p>
-						</div>
 					</div>
 					<div class="filter-added">
 						<nav> Filtro selecionado<i class="icon-ctrl show"></i></nav>
@@ -65,13 +67,18 @@
 			</article>
 		</div>
 	</div>
+    <?php include "includes/process.html"; ?>
+
+
 </body>
+<script type="text/javascript" src="./resources/fw/pikaday/pikaday.js"></script>
 <script type="text/javascript" src="./resources/js/jQuery.js"></script>
+<script type="text/javascript" src="resources/js/table.js"></script>
 <script type="text/javascript" src="resources/js/geralScript.js"></script>
 <script type="text/javascript" src="resources/js/controller/logar.js"></script>
 <script type="text/javascript" src="./resources/js/controller/menu.js"></script>
-<script type="text/javascript" src="resources/js/table.js"></script>
-<script type="text/javascript" src="resources/js/reports.js"></script>
+<script type="text/javascript" src="resources/js/report.js"></script>
 <script type="text/javascript" src="resources/js/controller/geral.js"></script>
-<script type="text/javascript" src="resources/js/controller/report.js"></script>
+<script type="text/javascript" src="resources/js/reports/report.js"></script>
 </html>
+

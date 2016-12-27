@@ -96,7 +96,7 @@ function regCheque()
             dataType:"json",
             data:{"intention": "registrar cheque", "Cheque" : cheque},
             success:function (e) {
-                if(e.result["RESULT"] ==='true')
+                if(e.result["result"] ==='true')
                 {
                     callXpertAlert("Cheque registado com sucesso!", "checkmark", 8000);
                     $('.add-new-admin').find('input, select').val("");
@@ -104,7 +104,7 @@ function regCheque()
                     carregarCheques();
                 }
                 else
-                    callXpertAlert(e.result["MESSAGE"], "warning", 8000);
+                    callXpertAlert(e.result["message"], "warning", 8000);
             }
         });
     }

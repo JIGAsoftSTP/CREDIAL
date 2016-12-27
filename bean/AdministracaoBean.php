@@ -197,7 +197,15 @@
         $call->execute();
 
         $result = $call->getValors();
-        die(json_encode(array("result" =>$result)));
+
+        if($result["result"] == true){
+            $result["result"] = "true";
+            die(json_encode(array("result" => $result)));
+        }
+        else{
+            $result["result"] = "false";
+            die(json_encode(array("result" => $result)));
+        }
     }
 
     function siglas()
@@ -260,7 +268,7 @@
         $call->functionTable("funct_load_taxa", "*")
             ->addNumeric(Session::getUserLogado()->getId())
             ->addNumeric(Session::getUserLogado()->getIdAgencia())
-             ->addNumeric(-1);
+             ->addNumeric(1353);
         $call->execute();
 
         $arrayValues = array();
