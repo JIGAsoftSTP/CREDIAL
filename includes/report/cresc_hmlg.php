@@ -12,7 +12,7 @@
 
 		<div class="table-list">
 			<nav class="to-report">
-				<h2>Lista de...</h2>
+				<h2></h2>
 			</nav>
 			
 
@@ -21,12 +21,12 @@
 				<table id="table-report-growth" class="selectable" cellpadding="0" cellspacing="0">
 					<thead>
 						<tr>                    
-							<th grow="2">NIF</th>
-							<th grow="4">Cliente</th>
-							<th grow="2">Localidade</th>
+							<th grow="2" orderBy>NIF</th>
+							<th grow="5" orderBy>Cliente</th>
+							<th grow="2" orderBy>Localidade</th>
 							<th grow="2">Ano atual</th>
-							<th grow="2">Diferença</th>
-							<th grow="1">Resultado</th>
+							<th grow="2">Ano Passado</th>
+							<th grow="2" orderBy>Crescimento</th>
 						</tr>
 					</thead>
 					<tbody id="tabelaCresHCorpo">

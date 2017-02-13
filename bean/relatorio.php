@@ -27,7 +27,8 @@
         else if($_POST["reportName"] == "Dividas por Produto") relatorioDividaProduto();
         else if($_POST["reportName"] == "Cobranças") relatorioCobrancas();
         else if($_POST["reportName"] == "Cheques"){
-
+            if($_POST["chequeFiltro"] == 1) relatorioChequeEntrados();
+            else relatorioCheque_PorCobrar_Cobrados_Todos();
         }
     }
     function reportSearchFilter(){
@@ -111,7 +112,7 @@
     {
         $json = json_encode($_POST["jsonValue"]);
         $call = new CallPgSQL();
-        $call->functionTable("report.funct_rep_client_credito_somatorio", "*")
+        $call->functionTable("report.funct_rep_client_credito", "*")
             ->addString(Session::getUserLogado()->getId())
             ->addInt(Session::getUserLogado()->getIdAgencia())
             ->addDate($_POST["ReportFiler"]["dataInicio"])
@@ -147,7 +148,7 @@
     function relatorioCreditoContagem()
     {
         $call = new CallPgSQL();
-        $call->functionTable("report.funct_rep_client_credito_contagem", "*")
+        $call->functionTable("report.funct_rep_credito_concedido", "*")
             ->addString(Session::getUserLogado()->getId())
             ->addInt(Session::getUserLogado()->getIdAgencia())
             ->addDate($_POST["ReportFiler"]["dataInicio"])
@@ -185,7 +186,7 @@
     {
         $call = new CallPgSQL();
         $call->functionTable("report.funct_rep_cheques_distribuidos", "*")
-            ->addString(Session::getUserLogado()->getId())
+            ->addInt(Session::getUserLogado()->getId())
             ->addInt(Session::getUserLogado()->getIdAgencia())
             ->addDate($_POST["ReportFiler"]["dataInicio"])
             ->addDate($_POST["ReportFiler"]["dataFim"])

@@ -37,9 +37,9 @@
 							<table id="table-bank" cellpadding="0" cellspacing="0">
 								<thead>
 									<tr>                    
-										<th grow="15">Data</th>
-										<th grow="20">Débito</th>
-										<th grow="20">Crédito</th>
+										<th grow="15" orderBy>Data</th>
+										<th grow="20" orderBy>Débito</th>
+										<th grow="20" orderBy>Crédito</th>
 										<th grow="45">Designação</th>
 									</tr>
 								</thead>

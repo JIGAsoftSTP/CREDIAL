@@ -1,134 +1,157 @@
 
 /*################     CHEQUE  	#####################*/
-
+$('.filter-type-cheq li').click(function(event) {
+    $(this).addClass('active').siblings().removeClass('active');
+    if($(this).index() !== 0)
+        expandTable($(this).closest('.master-content').find('.x-table'), false, true);
+    else
+        expandTable($(this).closest('.master-content').find('.x-table'), false, false);
+});
 
 /*################     COBRANÇAS  	#####################*/
-$(function () {
+$('.test-expand').click(function(event) {
+    $(this).toggleClass('active');
+    expandTable($(this).closest('.master-content').find('.x-table'), true);
+});
 
-    $('.test-expand').click(function(event) {
-        expandTable($(this).closest('.master-content').find('.x-table'));
-    });
+
+$(function () {
+    sessionStorage.removeItem('filterReport');
+    data();
 
 
     $('.x-icon-ok').click(function() {
-        // alert($("#iframe-" + $('aside li.active').index()).contents().find('table').attr('id'));
          sendFilterReport();
+    });
+
+    $(".filter-type-cheq li").click(function () {
+        chequeFiltro = $(this).attr("id");
+       deleteContentDataStorage(sessionStorage, 'filterReport','state');
+        sendFilterReport();
     });
 
 });
 
+var chequeFiltro = 1;
 
 function sendFilterReport() {
 
+    if(validation1($(".reportDate"))){
+        if($(".report-P").attr('id') !== undefined)
+            dataReport(1);
+        else dataReport(0);
 
-    if($("#report-inicial-date").val() === "")
-        $("#report-inicial-date").addClass("empty");
-    else{
-        $("#report-inicial-date").removeClass("empty");
-        if($("#report-final-date").val() === "")
-            $("#report-final-date").addClass("empty");
-        else{
-            $("#report-final-date").removeClass("empty");
-
-            if($(".report-P").attr('id') !== undefined){
-                if($(".report-P").val() === "")
-                    $(".report-P").addClass("empty");
-                else{
-                    $(".report-P").removeClass("empty");
-                    dataReport(1);
-                }
-            }
-            else
-                dataReport(0);
-        }
     }
 }
 
 function reportGrowth(list)
 {
-
+    var isTotal;
     var table = $("#iframe-" + $('aside li.active').index()).contents().find('table').find('tbody');
     table.empty();
-    for(var i=0;i<list.length;i++)
-    {
+    for(var i=0;i<list.length;i++){
         var growth = list[i];
-        table.append('' +
-            '<tr><td >' + growth["NIF"] + '</td><td >' + growth["CLIENT NAME"]+" "+growth["CLIENT SURNAME"] + '</td>' +
-            '<td>'+growth["LOCALIDADE"]+'</td><td>'+growth["QUANTIDADE ANO"]+'</td>' +
-            '<td>'+growth["QUANTIDADE PASSADO"]+'</td>' +
-            '<td>'+growth["DIFERENCA"]+'</td></tr>');
+        isTotal = growth["NIF"].toUpperCase();
+        if(isTotal !== "TOTAL"){
+            table.append('' +
+                '<tr><td >' + growth["NIF"] + '</td><td >' + growth["CLIENT NAME"]+" "+growth["CLIENT SURNAME"] + '</td>' +
+                '<td>'+growth["LOCALIDADE"]+'</td><td>'+growth["QUANTIDADE ANO"]+'</td>' +
+                '<td>'+growth["QUANTIDADE PASSADO"]+'</td>' +
+                '<td>'+growth["DIFERENCA"]+'</td></tr>');
+        }
+
     }
-    tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table').attr("id"));
+    tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
 }
 
+// relatorio TAEG
 function reportTaeg(list)
 {
+    var isTotal;
     var table = $("#iframe-" + $('aside li.active').index()).contents().find('table').find('tbody');
     table.empty();
+
+    if(list.length >0){
+        $("#iframe-" + $('aside li.active').index()).contents().find('.first-section h1:eq(0) span').text(formattedString(list[list.length-1]["CREDITO VALUE"]));
+        $("#iframe-" + $('aside li.active').index()).contents().find('.first-section h1:eq(1) span').text(formattedString(list[list.length-2]["CREDITO VALUE"]));
+
+
+        $("#iframe-" + $('aside li.active').index()).contents().find('.second-section h1:eq(0) span').text(formattedString(list[list.length-1]["CREDITO TOTAL PAGAR MONTANTE DIVIDA"]));
+        $("#iframe-" + $('aside li.active').index()).contents().find('.second-section h1:eq(1) span').text(formattedString(list[list.length-1]["CREDITO TOTAL PAGAR MONTANTE DIVIDA"]));
+
+        $("#iframe-" + $('aside li.active').index()).contents().find('.third-section h1:eq(0) span').text(formattedString(list[list.length-1]["CREDITO TAEG"]));
+        $("#iframe-" + $('aside li.active').index()).contents().find('.third-section h1:eq(1) span').text(formattedString(list[list.length-2]["CREDITO TAEG"]));
+    }
+
     for(var i=0;i<list.length;i++)
     {
         var taeg = list[i];
-        table.append('' +
-            '<tr><td >' + taeg["NIF"] + '</td><td >' + taeg["NAME"]+" "+taeg["SURNAME"] + '</td>' +
-            '<td>'+taeg["CREDITO STATE"]+'</td><td>'+taeg["CREDITO VALUE"]+'</td>' +
-            '<td>'+taeg["CREDITO NUM DOSSCIER"]+'</td><td>'+taeg["CREDITO TOTAL PAGAR MONTANTE DIVIDA"]+'</td>' +
-            '<td>'+taeg["CREDITO TAEG"]+'</td><td>'+taeg["CREDITO INICIO"]+'</td>' +
-            '<td>'+taeg["CREDITO FINALIZAR"]+'</td></tr>');
+        isTotal = taeg["NIF"].toUpperCase();
+        if(isTotal !=="TOTAL"){
+            table.append('' +
+                '<tr><td >' + taeg["CREDITO NUM DOSSCIER"] + '</td><td >' + taeg["NIF"]+'</td>' +
+                '<td>'+taeg["NAME"]+" "+taeg["SURNAME"]+'</td><td>'+formattedString(taeg["CREDITO VALUE"])+'</td>' +
+                '<td>'+formattedString(taeg["CREDITO TOTAL PAGAR MONTANTE DIVIDA"])+'</td>' +
+                '<td>'+formattedString(taeg["CREDITO TAEG"])+'</td><td>'+formatDate(taeg["CREDITO INICIO"],2)+'</td>' +
+                '<td>'+formatDate(taeg["CREDITO FINALIZAR"],2)+'</td><td>'+taeg["CREDITO STATE"]+'</td></tr>');
+        }
     }
-    tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table').attr("id"));
+    tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
+
 }
 
 
 function reportChequeDistribuido(list) {
 
-    $("#tabela-cheque-corpo").empty();
-    for(var i=0;i<list.length;i++)
-    {   var table = document.getElementById("tabela-cheque-corpo");
-        var row = table.insertRow(table.childElementCount);
-        var taeg = list[i];
-        row.id = i;
+    var isTotal;
+    var table = $("#iframe-" + $('aside li.active').index()).contents().find('table').find('tbody');
+    table.empty();
 
-        var column0 = row.insertCell(0);
-        var column1 = row.insertCell(1);
-        var column2 = row.insertCell(2);
-        var column3 = row.insertCell(3);
-        var column4 = row.insertCell(4);
-        var column5 = row.insertCell(5);
-        var column6 = row.insertCell(6);
-        var column7 = row.insertCell(7);
-        var column8 = row.insertCell(8);
-
-        column0.innerHTML = taeg["NIF"];
-        column1.innerHTML = taeg["NAME"]+" "+taeg["SURNAME"];
-        column2.innerHTML = taeg["CREDITO STATE"];
-        column3.innerHTML = taeg["CREDITO VALUE"];
-        column4.innerHTML = taeg["CREDITO NUM DOSSCIER"];
-        column5.innerHTML = taeg["CREDITO TOTAL PAGAR MONTANTE DIVIDA"];
-        column6.innerHTML = taeg["CREDITO TAEG"];
-        column7.innerHTML = taeg["CREDITO INICIO"];
-        column8.innerHTML = taeg["CREDITO FINALIZAR"];
+    for(var i=0;i<list.length-1;i++)
+    {
+        var cheque = list[i];
+        table.append('' +
+            '<tr><td >' + formatDate(cheque["DATA"],2) + '</td><td >' + formattedString(cheque["DEBITO"])+'</td>' +
+            '<td>'+formattedString(cheque["CREDITO"])+'</td><td>'+cheque["BANCO SIGLA"]+"-"+cheque["BANCO NAME"]+'</td>' +
+            '<td>'+cheque["AGENCIA"]+'</td></tr>');
     }
-    tableEstructure($("#table-capital-taeg"));
+    tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
+
 }
 
 function dataReport(sub) {
+   var dados;
+    console.info(".....fase inicial...");
     if(sub === 0)
         var reportFilter = new ReportFiler($("#report-inicial-date").val(), $("#report-final-date").val(), null);
     else
     {
-        var reportFilter = new ReportFiler($("#report-inicial-date").val(), $("#report-final-date").val(), $(".report-P").val());
-        setDataStorage(sessionStorage, 'filterReport', "anoSub" , $(".report-P").val());
+        setDataStorage(sessionStorage, 'filterReport', "anoSub" , ($(".report-P").val() === "" ? "1" :$(".report-P").val()));
+        var reportFilter = new ReportFiler($("#report-inicial-date").val(), $("#report-final-date").val(),
+            ($(".report-P").val() === "" ? "1" :$(".report-P").val()));
     }
-    createFilterReport();
+    if($('.title-report').text() !== "Cheques"){
+        dados ={"intention": "report",
+            "ReportFiler": reportFilter,
+            "reportName": $('.title-report').text(),
+            "jsonValue": getDataStorage(sessionStorage,'filterReport')};
+    }
+    else{
+        if(chequeFiltro === 2)  setDataStorage(sessionStorage, "filterReport", 'state', "1");
+        else if(chequeFiltro === 3) setDataStorage(sessionStorage, "filterReport", 'state', "0");
+        dados ={"intention": "report",
+            "ReportFiler": reportFilter,
+            "reportName": $('.title-report').text(),
+            "chequeFiltro": chequeFiltro,
+            "jsonValue": getDataStorage(sessionStorage,'filterReport')};
+        console.info(".....fase final...");
+    }
 
     $.ajax({
         url: "bean/relatorio.php",
         type:"POST",
         dataType:"json",
-        data:{"intention": "report",
-            "ReportFiler": reportFilter,
-            "reportName": $('.title-report').text(),
-            "jsonValue": getDataStorage(sessionStorage,'filterReport')},
+        data: dados,
         success:function (e) {
             if($('.title-report').text() === "Clientes")
                 reportCustomer(e.result);
@@ -140,40 +163,100 @@ function dataReport(sub) {
                 reportCobrancas(e.result);
             else if($('.title-report').text() === "Capital / TAEG")
                 reportTaeg(e.result);
+            else if($('.title-report').text() === "Dividas por Produto")
+                relatorioDividaProduto(e.result);
+            else relatorioCheque(e.result);
         }
     });
 }
 
 function reportCustomer(list)
 {
+    var isTotal;
     var table = $("#iframe-" + $('aside li.active').index()).contents().find('table').find('tbody');
         table.empty();
     for(var i=0;i<list.length;i++)
     {
         var customer = list[i];
-        table.append('' +
-            '<tr><td >' + customer["NIF"] + '</td><td >' + customer["NAME"]+" "+customer["SURNAME"] + '</td>' +
-            '<td>'+customer["VALOR"]+'</td><td>'+customer["LOCAL TRABALHO"]+'</td></tr>');
+        var isTotal = customer["NIF"].toUpperCase();
+        if(isTotal !=="TOTAL"){
+            table.append('' +
+                '<tr><td >' + customer["NIF"] + '</td><td >' + customer["NAME"]+" "+customer["SURNAME"] + '</td>' +
+                '<td>'+customer["QUANTIDADE CREDITO"]+'</td><td>'+formattedString(customer["VALOR"])+'</td><td>'+customer["LOCAL TRABALHO"]+'</td></tr>');
+        }
+
     }
-    tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table').attr("id"));
+    tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
 }
 
+function relatorioCheque(list) {
+    if(chequeFiltro === 1) reportChequeDistribuido(list);
+    else relatorioChequeEstado(list);
+}
 
+function relatorioDividaProduto(list) {
+    var table = $("#iframe-" + $('aside li.active').index()).contents().find('table').find('tbody');
+    table.empty();
+    for(var i=0;i<list.length;i++)
+    {
+        var divida = list[i];
+        if(divida["NIF"].toUpperCase() !== "TOTAL"){
+        table.append('' +
+            '<tr><td >' + divida["NIF"] + '</td><td >' + divida["NAME"]+" "+divida["SURNAME"] + '</td>' +
+            '<td>'+formattedString(divida["CREDITO VALUE SOLICITADO"])+'</td><td>'+formattedString(divida["CREDITO TOTAL PAGAR MONTANTE"])+'</td>' +
+            '<td>'+formattedString(divida["CREDITO VALUE PAGO"])+'</td></tr>');
+        }
+    }
+    tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
+
+    if(list.length >1){
+        $("#iframe-" + $('aside li.active').index()).contents().find('.first-section h1:eq(0) span').text(formattedString(list[list.length-1]["CREDITO VALUE SOLICITADO"]));
+        $("#iframe-" + $('aside li.active').index()).contents().find('.first-section h1:eq(1) span').text(formattedString(list[list.length-1]["CREDITO VALUE SOLICITADO"]));
+
+        $("#iframe-" + $('aside li.active').index()).contents().find('.second-section h1:eq(0) span').text(formattedString(list[list.length-1]["CREDITO TOTAL PAGAR MONTANTE"]));
+        $("#iframe-" + $('aside li.active').index()).contents().find('.second-section h1:eq(1) span').text(formattedString(list[list.length-1]["CREDITO TOTAL PAGAR MONTANTE"]));
+
+        $("#iframe-" + $('aside li.active').index()).contents().find('.third-section h1:eq(0) span').text(formattedString(list[list.length-1]["CREDITO VALUE PAGO"]));
+        $("#iframe-" + $('aside li.active').index()).contents().find('.third-section h1:eq(1) span').text(formattedString(list[list.length-1]["CREDITO VALUE PAGO"]));
+    }
+}
+
+function relatorioChequeEstado(list) {
+    var table = $("#iframe-" + $('aside li.active').index()).contents().find('table').find('tbody');
+    table.empty();
+    for(var i=0;i<list.length;i++)
+    {
+        var cheque = list[i];
+        if(cheque["NIF"] !== "TOTAL" || cheque["NIF"] !=="total"){
+            table.append('' +
+                '<tr><td >' + cheque["NIF"] + '</td><td >' + cheque["NAME"]+" "+cheque["SURNAME"]+'</td>' +
+                '<td>'+cheque["PAGAMENTO NUM DOCUMENTO"]+'</td><td>'+cheque["VALOR CHEQUE REEMBOLSO"]+'</td><td>'+cheque["DATA DOCUMENTO PAGAMENTO PREVISTO DEPOSITO"]+'</td>' +
+                '<td>'+cheque["BANCO SIGLA"]+'</td><td>'+cheque["PAGAMENTO DATA ENDOSSADO"]+'</td></tr>');
+        }
+
+    }
+    tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
+}
 
 function reportCredit(list)
 {
+    var date, isTotal;
     var table = $("#iframe-" + $('aside li.active').index()).contents().find('table').find('tbody');
     table.empty();
     for(var i=0;i<list.length;i++)
     {
         var credit = list[i];
-        if(credit["NAME"] !== null){
+        isTotal = credit["NIF"].toUpperCase();
+        if(isTotal !== "TOTAL"){
+            date =formatDate(credit["DATA"],1);
             table.append('' +
-                '<tr><td >' + credit["NIF"] + '</td><td >' + credit["NAME"]+" "+credit["SURNAME"] + '</td>' +
-                '<td>'+credit["VALOR"]+'</td><td>'+credit["LOCAL TRABALHO"]+'</td></tr>');
+                '<tr><td >' + credit["NUM CREDITO DOSSCIER"] + '</td><td >' + formatDate(credit["DATA"],1)+'</td>' +
+                '<td>'+credit["NIF"]+'</td><td>'+credit["NAME"]+" "+credit["SURNAME"]+'</td><td>'+formattedString(credit["VALOR CREDITO"])+'</td>' +
+                '<td>'+formattedString(credit["TOTAL PAGAR MONTANTE DIVIDA"])+'</td><td>'+formattedString(credit["TAEG"])+'</td>' +
+                '<td>'+formatDate(credit["DATA INICIO"],2)+'</td><td>'+formatDate(credit["DATA FINALIZAR"],2)+'</td></tr>');
         }
     }
-    tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table').attr("id"));
+    tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
 
 }
 
@@ -186,16 +269,19 @@ var ReportFiler = function (dataI, dataF, periodo) {
 function reportCobrancas(list) {
     var table = $("#iframe-" + $('aside li.active').index()).contents().find('table').find('tbody');
     table.empty();
+    var isTotal;
     for (var i = 0; i < list.length; i++) {
         var cobranca = list[i];
-        table.append('' +
-            '<tr><td >' + cobranca["NIF"] + '</td><td >' + cobranca["NAME"] + " " + cobranca["SURNAME"] + '</td>' +
-            '<td>' + cobranca["VALOR REEMBOLSO"] + '</td><td>' + cobranca["NUM DOCUMENTO REAL"] + '</td>' +
-            '<td>' + cobranca["NUM DOCUMENTO PREVISTO"] + '</td><td>' + cobranca["DATA DOCUMENTO REAL"] + '</td>' +
-            '<td>' + cobranca["DATA DOCUMENTO PREVISTO"] + '</td></tr>');
-
+        isTotal = cobranca["NIF"].toUpperCase();
+        if(isTotal !=="TOTAL"){
+            table.append('' +
+                '<tr><td >' + cobranca["NIF"] + '</td><td >' + cobranca["NAME"] + " " + cobranca["SURNAME"] + '</td>' +
+                '<td>' + formattedString(cobranca["VALOR REEMBOLSO"]) + '</td><td>' + cobranca["NUM DOCUMENTO REAL"] + '</td>' +
+                '<td>' + cobranca["NUM DOCUMENTO PREVISTO"] + '</td><td>' + formatDate(cobranca["DATA DOCUMENTO REAL"],2) + '</td>' +
+                '<td>' + formatDate(cobranca["DATA DOCUMENTO PREVISTO"],2) + '</td></tr>');
+        }
     }
-    tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table').attr("id"));
+    tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
 }
 
 
@@ -212,5 +298,34 @@ function validViewField(arrayValues) {
                 return "NOME";
         }
     }
+}
+
+function data()
+{
+    var month, year, day;
+    var d = new Date();
+     month = d.getMonth()+1;
+     day = d.getDate();
+     year = d.getFullYear();
+     $("#report-inicial-date").val(day+"-"+d.getMonth()+"-"+year);
+     $("#report-final-date").val(day+"-"+month+"-"+year);
+    $('.x-icon-ok').trigger("click");
+}
+
+function formatDate(date, type) {
+    var newDate;
+    if(type === 1){
+       if(date !== null || date !=="null" || date!==""|| date!=="NULL"){
+            var data =date.substr(0,10);
+            newDate= data.substr(8,9)+"-"+data.substr(5,6)+"-"+data.substr(0,4);
+            return newDate.substr(3, 13);
+        }
+   }
+   else{
+        if(date !== null){
+            newDate = date.substr(8,9)+"-"+date.substr(5,6)+"-"+date.substr(0,4);
+            return newDate.substr(3, 13);
+        }
+   }
 }
 

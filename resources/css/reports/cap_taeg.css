@@ -9,7 +9,7 @@
 	margin-bottom: 2rem;
 }
 .true-report h1{
-	margin-bottom: 3rem;
+	/*margin-bottom: 3rem;*/
 	padding: 1rem;
 }
 .true-report section{
@@ -19,6 +19,7 @@
 	color: #FFF;
 }
 .true-report nav{
+	margin-top: 3rem;
 	text-align: center;
 	line-height: 2.5rem;
 	font-size: .97rem;

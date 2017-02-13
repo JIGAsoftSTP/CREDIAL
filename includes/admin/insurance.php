@@ -19,8 +19,8 @@
 					<table id="table-seguro" class="selectable" cellpadding="0" cellspacing="0">
 						<thead>
 							<tr>
-								<th grow="2">Valor</th>
-								<th grow="1">Estado</th>
+								<th grow="2" orderBy>Valor</th>
+								<th grow="1" orderBy>Estado</th>
 							</tr>
 						</thead>
 						<tbody id="tableInsurances"></tbody>

@@ -24,10 +24,10 @@
 				<thead>
 					<tr>                    
 						<th grow="1">Ações</th>
-						<th grow="1.5">NIF</th>
-						<th grow="5">Nome</th>
-						<th grow="1">Telemóvel</th>
-						<th grow="1">Créditos</th>
+						<th grow="1.5" orderBy>NIF</th>
+						<th grow="5" orderBy>Nome</th>
+						<th grow="1" orderBy>Telemóvel</th>
+						<th grow="1" orderBy>Créditos</th>
 					</tr>
 				</thead>
 				<tbody id="tableCliente">
@@ -65,7 +65,7 @@
 				<span value="26">Z</span>
 			</div>
 		</div>
-		<div class="add-new-form">
+		<div class="add-new-form" id="log-add-new-client">
 			<span class="close-add-client">x</span>
 			<div>
 				<div class="master xpert-form">
@@ -204,8 +204,8 @@
 										</select>
 										<input type="text" id="cred-data" placeholder="Data" class="is-datepicker input-2">
 										<input type="text" id="cred-dia" placeholder="Dias" class="input-2 integer">
-										<input type="text" id="cred-desco" value="0" placeholder="Desconto (10%-20%)" class="input-2 double">
-										<input type="text" id="cred-corr" value="0" placeholder="Correção" class="input-2 double formatNumber">
+										<input type="text" id="cred-desco" value="0" placeholder="Desconto (10%-20%)" title="Desconto (10%-20%)" class="input-2 double percent1020">
+										<input type="text" id="cred-corr" value="0" placeholder="Correção" title="Correção" class="input-2 double formatNumber">
 										<span><span class="xpert-toggle-2"><span class="active">A</span><span>B</span></span></span>
 										<button id="start-simulation" >Simulação <i class="icon-arrow-right2"></i></button>
 									</section>
@@ -402,16 +402,31 @@
 		</div>
 	</div>
 </section>
-	<script type="text/javascript" src="./resources/fw/pikaday/pikaday.js"></script>
+<section class="modalPage mp-confirm-simulation">
+    <div class="modalFrame">
+        <div class="modalContainer">
+            <p>Deseja realmente importar a simulaçao?</p>
+            <div class="bt-yes-no-cancel">
+                <button id="cred-simula-import">OK</button>
+                <button class="bt-no-option">Cancelar</button>
+            </div>
+            <div class="modal-header">
+                <b>Importar Simulaçao</b>
+                <span class="mp-close">X</span>
+            </div>
+        </div>
+    </div>
+</section>
+    <script type="text/javascript" src="./resources/fw/pikaday/pikaday.js"></script>
 <!-- <div class="xpert-alert notification"><i class="icon-notification"></i><span class="txt">Text here!</span> <span class="close">X</span></div> -->
 </body>
 <script type="text/javascript" src="./resources/js/jQuery.js"></script>
 <script type="text/javascript" src="resources/js/table.js"></script>
 <script type="text/javascript" src="resources/js/geralScript.js"></script>
+<script type="text/javascript" src="resources/js/controller/geral.js"></script>
 <script type="text/javascript" src="resources/js/controller/logar.js"></script>
 <script type="text/javascript" src="./resources/js/controller/menu.js"></script>
 <script type="text/javascript" src="resources/js/rclient.js"></script>
-<script type="text/javascript" src="resources/js/controller/geral.js"></script>
 <script type="text/javascript" src="resources/js/controller/forMask.js"></script>
 <script type="text/javascript" src="resources/js/controller/cliente.js"></script>
 <script type="text/javascript" src="resources/js/controller/simulacao.js"></script>

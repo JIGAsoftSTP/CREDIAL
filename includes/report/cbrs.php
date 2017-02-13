@@ -13,7 +13,7 @@
 
 		<div class="table-list">
 			<nav class="to-report">
-				<h2>Lista de clientes</h2>
+				<h2></h2>
 				<button class="test-expand bt-table-action">Vista Completa</button>
 			</nav>
 			
@@ -23,17 +23,17 @@
 				<table id="tabela-cobrancas" class="" cellpadding="0" cellspacing="0">
 					<thead>
 						<tr>                    
-							<th grow="1.5">NIF</th>
-							<th grow="5">Cliente</th>
-							<th grow="2">Valor Reembolso</th>
-							<th grow="2">Nº Doc. Real</th>
-							<th grow="0" grow2="2">Nº Doc. Previsto</th>
-							<th grow="1">Data Real</th>
-							<th grow="0" grow2="2">Data Prevista</th>
+
+							<th grow="1" orderBy>NIF</th>
+							<th grow="3.5" orderBy>Cliente</th>
+							<th grow="2" orderBy>Valor Reembolso</th>
+							<th grow="2" orderBy>Nº Doc. Real</th>
+							<th grow="2" orderBy>Nº Doc. Previsto</th>
+							<th grow="1" grow2="0">Data Real</th>
+							<th grow="1" grow2="0" >Data Prevista</th>
 						</tr>
 					</thead>
 					<tbody id="report-cobrancas-corpo">
-						<tr><td>Value here!</td><td>Value here!</td><td>Value here!</td><td>Value here!</td><td>Value here!</td><td>Value here!</td><td>Value here!</td></tr>
 					</tbody>
 				</table>
 			</div>

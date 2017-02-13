@@ -23,12 +23,12 @@
 				<table id="table-taxa" class="selectable" cellpadding="0" cellspacing="0">
 					<thead>
 						<tr>
-							<th grow="2">Taxa</th>
-							<th grow="1">Dias</th>
-							<th grow="4">Tipo Crédito</th>
-							<th grow="2">Data Inicio</th>
-							<th grow="2">Data Fim</th>
-							<th grow="3">Estado</th>
+							<th grow="2" orderBy>Taxa</th>
+							<th grow="1" orderBy>Dias</th>
+							<th grow="4" orderBy>Tipo Crédito</th>
+							<th grow="2" orderBy>Data Inicio</th>
+							<th grow="2" orderBy>Data Fim</th>
+							<th grow="3" orderBy>Estado</th>
 						</tr>
 					</thead>
 					<tbody id="tableTax"></tbody>

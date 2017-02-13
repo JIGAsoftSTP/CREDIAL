@@ -27,7 +27,10 @@ class Session
     {
         unset($_SESSION[$nomeSessao]);
     }
-    
+
+    /**
+     * @return User
+     */
     static function getUserLogado()
     {
         if(session_status() != PHP_SESSION_ACTIVE)

@@ -9,7 +9,7 @@
 <body id="p2">
 	<?php include 'includes/menu.php'; ?> 
 	<div class="content-body">
-		<div class="content-w-lateral">
+		<div class="content-w-lateral" id="ctt-ltl-report">
 			<aside class="">
 				<i class="icon-menu"></i>
 				<ul class="single" id="secondary-menu"></ul>				
@@ -34,19 +34,19 @@
 
 				</div>
 
-				<div class="filter-report xpert-form float">
+				<div id="log-rep-filter-form" class="filter-report xpert-form">
 					<nav class="ctrls">
 						<i class="x-icon-ok"></i>
 						<span>
-						<i class="icon-pushpin pin"></i>
-						<i class="icon-arrow-right2 hide-filter"></i>
+						<i id="log-rep-filter-pin" class="icon-pushpin pin"></i>
+						<i id="log-rep-filter-hide" class="icon-arrow-right2 hide-filter"></i>
 						</span>
 					</nav>
 					<div class="periodic show">
 						
 						<div class="prd-enabled">
-							<input type="text" class="is-datepicker" placeholder="Data Inicial" id="report-inicial-date">
-							<input type="text"class="is-datepicker" placeholder="Data Final" id="report-final-date">
+							<input type="text" class="is-datepicker reportDate" placeholder="Data Inicial" id="report-inicial-date">
+							<input type="text"class="is-datepicker reportDate" placeholder="Data Final" id="report-final-date">
 							<p id="yerC"><span></span></p>
 
 						</div>
@@ -75,10 +75,10 @@
 <script type="text/javascript" src="./resources/js/jQuery.js"></script>
 <script type="text/javascript" src="resources/js/table.js"></script>
 <script type="text/javascript" src="resources/js/geralScript.js"></script>
+<script type="text/javascript" src="resources/js/controller/geral.js"></script>
 <script type="text/javascript" src="resources/js/controller/logar.js"></script>
 <script type="text/javascript" src="./resources/js/controller/menu.js"></script>
 <script type="text/javascript" src="resources/js/report.js"></script>
-<script type="text/javascript" src="resources/js/controller/geral.js"></script>
 <script type="text/javascript" src="resources/js/reports/report.js"></script>
 </html>
 

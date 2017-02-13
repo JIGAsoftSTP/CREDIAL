@@ -11,23 +11,26 @@
 <body>
 	<div class="master-content">
 		<div class="true-report">
-			<section bkg="green">
-				<h1>STD<span>100 500 257 123 456.00</span></h1>
+			<section bkg="green" class="first-section">
+				<h1>STD Atual<span></span></h1>
+				<h1>STD Passado<span></span></h1>
 				<nav>Total Valor Crédito</nav>
 			</section>
-			<section bkg="red">
-				<h1>STD<span>123 456.00</span></h1>
+			<section bkg="red" class="second-section">
+				<h1>STD Atual<span></span></h1>
+				<h1>STD Passado<span></span></h1>
 				<nav>Total Montante em Dívida:</nav>
 			</section>
-			<section bkg="blue">
-				<h1>STD<span>123 456.00</span></h1>
+			<section bkg="blue" class="third-section">
+				<h1>STD Atual<span></span></h1>
+				<h1>STD Passado<span></span></h1>
 				<nav>Total TAEG</nav>
 			</section>
 
 		</div>
 		<div class="table-list">
 			<nav class="to-report">
-				<h2>Lista de ...</h2>
+				<h2></h2>
 			</nav>
 			
 
@@ -36,16 +39,15 @@
 				<table id="table-capital-taeg" class="selectable" cellpadding="0" cellspacing="0">
 					<thead>
 						<tr>                    
-							<th grow="2">NIF</th>
-							<th grow="2">Cliente</th>
-							<th grow="5">Nome</th>
-							<th grow="3">Estado Crédito</th>
-							<th grow="3">Valor Crédito</th>
-							<th grow="3">Nº Dossier</th>
-							<th grow="2">Pagamento Dívida</th>
-							<th grow="2">Crédito TAEG</th>
-							<th grow="2">Crédito Inicio</th>
-							<th grow="2">Crédito Finalizar</th>
+							<th grow="2" orderBy>Nº Dossier</th>
+							<th grow="1" orderBy>NIF</th>
+							<th grow="3.5" orderBy>Cliente</th>
+							<th grow="2" orderBy>Valor Crédito</th>
+							<th grow="2" orderBy>Montante Dívida</th>
+							<th grow="1.5" orderBy>Crédito TAEG</th>
+							<th grow="1">Data Inicio</th>
+							<th grow="1">Data Fim</th>
+							<th grow="1" orderBy>Estado Crédito</th>
 						</tr>
 					</thead>
 					<tbody id="tabela-taeg-corpo">

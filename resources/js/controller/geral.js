@@ -15,21 +15,22 @@ function loadComoBoxIDandValue(element, array, id, value) {
 }
 
 function loadComoBoxIDandValueReport(element, array) {
-  var id = $(".report-P").attr('id');
+  var existAnoSub = false;
+    if($(".report-P").attr('id') !== undefined) $(".report-P").remove();
+
     for (var x=0; x < array.length; x++){
         var lista = array[x];
-        if(lista["cod"] !== "anoSub"){
-            if(id !== undefined)
-                $(".report-P").remove();
-
+        if(lista["cod"] === "anoSub")
+            existAnoSub = true;
+       else
             element.append('<option value="'+ lista["contents"]["table"] +'" filter="'+ lista["name"] +'" identifier="'+lista["cod"]+'">'+lista["name"]+'</option>');
-        }
-        else
-            $(".prd-enabled").append('<input type="text" id="relatorio-periodo" class="report-P integer" maxlength="3" ' +
-                'onkeypress="numericNumbers(event)" placeholder="Periodo em Comparação"/>');
-
-
     }
+    if(existAnoSub && $(".report-P").attr('id') === undefined){
+        $(".prd-enabled").append('<input type="text" id="relatorio-periodo" class="report-P integer" maxlength="3" ' +
+            'onkeypress="numericNumbers(event)" placeholder="Periodo em Comparação"/>');
+        setDataStorage(sessionStorage, 'filterReport', "anoSub" , "1");
+    }
+    else $(".report-P").remove();
 }
 
 
@@ -135,6 +136,7 @@ User.prototype.disableMode = undefined;
 
 var USEREDITE = false;
 var CLIENTEEDITE = false;
+var DOCREDITO = false;
 /**
  *
  * @constructor ListUser
@@ -195,4 +197,9 @@ function numericNumbers(event) {
         (event.which != 0 && event.which != 8))) {
         event.preventDefault();
     }
+}
+
+function checkDate(str) {
+    var partes = str.split("-");
+    return new Date(partes[2], partes[1] - 1, partes[0]);
 }

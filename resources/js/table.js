@@ -18,9 +18,16 @@ function tableEstructure(myTable){
 
 		$(this).css('width', unitGrow * getGrow(head.eq(idx)) + 'px');
 	});
-	myTable.prepend('<span class="icon-magic-wand sh-rcrs"></span>')
+	myTable.prepend('<span class="icon-sigma sh-rcrs"></span>')
 	if(myTable.find('.rowCount').length !== 1)
 	myTable.append('<div class="table-resources rowCount"><span></span></div>')
+
+	myTable.find('th').each(function() {
+		if($(this).attr('orderBy') !== undefined){
+			if($(this).find('i').length < 1)
+			$(this).append('<i class="icon-sort-amount-asc"></i>');
+		}
+	});
 	
 }
 
@@ -35,7 +42,7 @@ $('.x-table').on('click','.selectable td', function(event) {
 	$(this).closest('.x-table').find('.table-resources').removeClass('show');
 });
 
-$('body').on('click','.x-table .sh-rcrs',function(event) {
+$('.x-table').on('click','.sh-rcrs',function(event) {
 	table = $(this).closest('.x-table');
 	setRowCount(table);
 	table.find('.table-resources').toggleClass('show');
@@ -45,8 +52,15 @@ function setRowCount(table){
 	rows = table.find('tbody tr').length;
 	table.find('.rowCount span').text(rows + (rows !== 1 ? ' registos': ' registo'));
 }
-function expandTable(myTable){
-	myTable.toggleClass('expand');
+function expandTable(myTable, toogle, expand){
+	if(toogle)
+		myTable.toggleClass('expand');
+	else{
+		if(expand)
+			myTable.addClass('expand');
+		else
+			myTable.removeClass('expand');
+	}
 	tableEstructure(myTable);
 }
 
@@ -59,3 +73,20 @@ function getGrow(column){
 		growAttr = growAttr2 === undefined ? growAttr : growAttr2; 
 	return parseInt(growAttr);
 }
+
+$('.x-table th i').click(function(){
+	$(this).toggleClass('icon-sort-amount-asc icon-sort-amount-desc');
+	var head = $(this).parent();
+    var table = head.parents('table').eq(0)
+    var rows = table.find('tr:gt(0)').toArray().sort(comparer(head.index()))
+    this.asc = !this.asc
+    if (!this.asc){rows = rows.reverse()}
+    for (var i = 0; i < rows.length; i++){table.append(rows[i])}
+});
+function comparer(index) {
+    return function(a, b) {
+        var valA = getCellValue(a, index), valB = getCellValue(b, index)
+        return $.isNumeric(unformatted(valA)) && $.isNumeric(unformatted(valB)) ? valA - valB : valA.localeCompare(valB)
+    }
+}
+function getCellValue(row, index){ return $(row).children('td').eq(index).html() }

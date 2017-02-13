@@ -33,6 +33,7 @@ Simulation.prototype.reembolsoPeriodo = 0;
 Simulation.prototype.dataTableAmortizacao = [];
 Simulation.prototype.valorAmotizado = 0;
 Simulation.prototype.idBank = 0;
+Simulation.prototype.idForRegBank = 0;
 Simulation.prototype.bankState = 0;
 
 var si = new Simulation();
@@ -40,6 +41,29 @@ var si = new Simulation();
  * @type {Array}
  */
 var banks = undefined;
+$("#cred-simula-import").click(function () {
+    $.ajax({
+        url: "./bean/simulation.php",
+        type: "POST",
+        data: {"intensao": "import-simulation", "simulation": si},
+        dataType: "json",
+        success: function (e) {
+            if (!e.result) {  callXpertAlert(e.return["MESSAGE"], new Mensage().cross, -1); }
+            else {
+                $(".mp-confirm-simulation").fadeOut();
+                callXpertAlert("<b>" + "Numero Dossier: </b>" + e.return["NUM DOSSIER"] + "<br>" +
+                    "<b>" + "Numero Cheque: </b>" + e.return["NUM CHEQUE"] + "<br>" +
+                    "<b>" + "Nome Banco: </b>" + e.return["BANCO NAME"] + "<br>" +
+                    "<b>" + "Sigla Banco: </b>" + e.return["BANCO SIGLA"], new Mensage().checkmark, -1);
+                var re = new refresh();
+                re.dataType = "CREDIT";
+                saveRefresh(re);
+                resetForm($(".mp-new-credit").fadeOut(800));
+            }
+        }
+    });
+});
+
 $("#start-simulation").click(function () {
     if(validarSimulacao($(".xpert-form .part-1 input, .xpert-form .part-1 select"))){
         var dt = {"intensao": "start-simulation", "value" : unformatted($("#cred-value").val()),"data" : $("#cred-data").val(), "dia":$("#cred-dia").val(),
@@ -277,9 +301,11 @@ $("#cred-cli-bank").change(loadChequeSimulacao);
 var sBank = undefined;
 function loadChequeSimulacao() {
     si.idBank = $("#cred-cli-bank").val();
-    $("#cred-cli-numDoc").val("0");
+    $("#cred-cli-numDoc").val("");
+    $("#cred-cli-numDoc-veiw").html("");
     sBank = getStateBankByID();
     si.bankState = ($("#cred-cli-bank").val() === "0") ? "0" :  sBank['STATE'];
+    si.idForRegBank = ($("#cred-cli-bank").val() === "0") ? "0" : sBank['ID_BANCO'];
     if(si.bankState !== "0" ) {
         $.ajax({
             url: "./bean/simulation.php",
@@ -306,9 +332,15 @@ function loadChequeSimulacao() {
             }
         });
     }else{
-        callXpertAlert("Banco "+sBank["NAME"]+" "+sBank["MESSAGE"], new Mensage().cross, 8000);
-        si.numeroCheque = undefined;
-        si.idCheque = undefined;
+        if($("#cred-cli-bank").val() != "0") {
+            callXpertAlert("Banco " + sBank["NAME"] + " " + sBank["MESSAGE"], new Mensage().cross, 8000);
+            si.numeroCheque = undefined;
+            si.idCheque = undefined;
+        }else{
+            callXpertAlert("Por favor, secione um banco valido!", new Mensage().cross, 8000);
+            si.numeroCheque = undefined;
+            si.idCheque = undefined;
+        }
     }
 }
 
@@ -319,22 +351,7 @@ $("#import-simulation").click(function () {
         si.idBank =  $("#cred-cli-bank").val();
         si.objectoTipoCredito =  $("#cred-tipoCred").val();
         si.objectoFontePagamento =  $("#cred-cli-fonRend").val();
-
-        $.ajax({
-            url: "./bean/simulation.php",
-            type: "POST",
-            data: {"intensao": "import-simulation", "simulation": si},
-            dataType: "json",
-            success: function (e) {
-                if (!e.result) {  callXpertAlert(e.return["MESSAGE"], new Mensage().cross, -1); }
-                else {
-                    callXpertAlert("<b>" + "Numero Dossier: </b>" + e.return["NUM DOSSIER"] + "<br>" +
-                                   "<b>" + "Numero Cheque: </b>" + e.return["NUM CHEQUE"] + "<br>" +
-                                   "<b>" + "Nome Banco: </b>" + e.return["BANCO NAME"] + "<br>" +
-                                   "<b>" + "Sigla Banco: </b>" + e.return["BANCO SIGLA"], new Mensage().checkmark, -1);
-                }
-            }
-        });
+        openModalFrame($('.mp-confirm-simulation'));
     }
 });
 
@@ -400,3 +417,10 @@ function getStateBankByID() {
     });
     return sBank;
 }
+
+$(".percent1020").change(function () {
+    var value = unformatted($(this).val());
+    if(value < 10 || value > 20){
+        $(this).val("0");
+    }
+});

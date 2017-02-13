@@ -1,9 +1,8 @@
 
 $('aside .single').on('click','li',function(event) {
 	$('.title-report').text($(this).text());
-	$(".prd-enabled").find("input").val("");
-    $("#yerC").html("");
 	CtrlMenu($(this), $('.report-content'));
+    reset();
     $.ajax({
         url: "bean/relatorio.php",
         type:"POST",
@@ -16,6 +15,7 @@ $('aside .single').on('click','li',function(event) {
 			$("#report-entities").empty();
 			$("#report-entities").append('<option value="">(Selecione)</option>');
 			loadComoBoxIDandValueReport($("#report-entities"), e.reportFilter);
+			data();
 		}
 
     });
@@ -23,12 +23,17 @@ $('aside .single').on('click','li',function(event) {
 
 
 $('.ctrls .hide-filter').click(function(event) {
-	if($('.filter-report').hasClass('float'))
+	if(!$('.filter-report').hasClass('fixed')){
 		$('.filter-report').addClass('hidden');
+		setAppLog($('.filter-report'), 'hidden');
+	}
 });
 $('.ctrls .pin').click(function(event) {
 	$(this).toggleClass('pinned');
-	$('.filter-report').toggleClass('float');
+	$('.filter-report').toggleClass('fixed');
+
+	setAppLog($(this), 'pinned');
+	setAppLog($('.filter-report'), 'fixed');
 });
 
 $('.add-section-filter select').change(function(event) {
@@ -45,13 +50,9 @@ $('.filter-added').on('click','.xClose',function(event) {
 	Ipt = $(this).parent().find('input');
 	myIdent = Ipt.attr('identifier');
   	myValue = "";
-  	// setDataStorage(sessionStorage, 'filterReport', myIdent , myValue);
+  	deleteContentDataStorage(sessionStorage, 'filterReport',myIdent);
 	$(this).closest('section').remove();
-
 });
-
-
-
 
 $('.periodic i:first').click(function(event) {
 	$(this).toggleClass('icon-checkbox-checked icon-checkbox-unchecked');
@@ -66,45 +67,44 @@ $('.filter-added .icon-ctrl').click(function(event) {
 	$(this).toggleClass('show');
 });
 
-$('.filter-added').on('change','datalist',function(){
-  	// _id = $(this).attr('id');
-});
-
 $('.callFilter').click(function(event) {
 	$('.filter-report').removeClass('hidden');
+	setAppLog($('.filter-report'), 'hidden');
 });
-
-//
-$('.x-icon-ok').click(function(event) {
-    sendFilterReport();
-});
-
-
 
 
 function filterConstruct(identifier, selected, filter){
 	var structure;
 	selected = selected.val();
+
 	if(!filterExists(filter).exist){
-		structure = '<section class="sec-added" filter="' + filter + '">' +
+			structure = '<section class="sec-added" filter="' + filter + '">' +
 		'<span class="xClose" title="Remover filtragem por '+ filter +'"><hr><hr></span>' +
 		'<span class="x-autocomplete">' +
-		'<input identifier="'+ identifier + '" list ="'+ selected +'" placeholder="' + filter + '">' +
-		'<datalist id="' + selected + '">' + returnListFilter(identifier, selected);+
+		'<input id="'+identifier+'" onchange="getId(identifier, selected)" class="dataListValue"  identifier="'+ identifier + '" list ="'+ selected +'" placeholder="' + filter + '">' +
+		'<datalist  id="' + selected + '">' + returnListFilter(identifier, selected);+
 		'</datalist>' +
 		'</span>' +
 		'</section>';
 		$('.filter-added').append(structure);
 		$("datalist#"+selected).prev().focus();
 	} else{
+
 		$('.filter-added section').eq(filterExists(filter).position)
 		.insertBefore($('.filter-added section').eq(0))
 		.find('input').focus();
 	}
+
 }
 
 
+function getId(identifer, selected) {
+	var idObject = $("#"+selected+" option[value='" + $('#'+identifer).val() + "']").attr('data-id');
 
+	if(idObject !== undefined && idObject !== ""){
+        setDataStorage(sessionStorage, 'filterReport', identifer, idObject);
+	}
+}
 
 
 function filterExists(filter){
@@ -132,7 +132,7 @@ function returnListFilter(identfier, listDB){
 			if(e.objeto.length >0){
 				desc = validViewField(e.objeto);
                 for(var i=0;i<e.objeto.length;i++){
-                    $("datalist#"+listDB).append('<option value="'+e.objeto[i][desc]+'" ></option>');
+                    $("datalist#"+listDB).append('<option data-id ="'+e.objeto[i]["ID"]+'" value="'+e.objeto[i][desc]+'"></option>');
                 }
 			}
 		}
@@ -143,20 +143,14 @@ function createFilterReport(){
 	$('.filter-added section').each(function() {
 		myIdent = $(this).find('input').attr('identifier');
 	  	myValue = $(this).find('input').val();
-        console.info("value "+myValue);
-        if(myValue !== "")
-	  		setDataStorage(sessionStorage, 'filterReport', myIdent , myValue);
 	});
 }
 
-function reset(){
-    $('.filter-added section').each(function() {
-        $(this).find('input').remove();
+function  reset() {
+    $('.filter-added section').each(function () {
+		$(this).remove();
     });
 }
-
-
-
 
 
 

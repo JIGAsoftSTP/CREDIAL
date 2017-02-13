@@ -112,3 +112,18 @@ function entityName(idEntity) {
         }
     }
 }
+
+/*setTimeout(function () { setWithEntity() }, 5000);
+
+function setWithEntity(){
+    var wth;
+    $('.entity-div .list').each(function() {
+        wth = 0;
+        $(this).find('div').each(function() {
+            wth = wth < $(this).width() ? $(this).width() : wth;
+        });
+        $(this).find('div').each(function() {
+            $(this).css('width', (wth + 10) + 'px');
+        });
+    });    
+}*/

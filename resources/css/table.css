@@ -9,6 +9,14 @@
 	cursor: pointer;
 	padding: 6px;
 }
+.x-table .sh-rcrs.icon-sigma{
+	font-size: .8rem;
+	opacity: 0;
+}
+.x-table:hover .sh-rcrs.icon-sigma{
+	opacity: 1;
+	color: #555;
+}
 .x-table .rowCount{
 	position: absolute;
 	line-height: 2.7rem;
@@ -71,8 +79,21 @@
 }
 .x-table th{
 	font-weight: normal;
-	white-space: nowrap;	
+/*	display: flex;
+	justify-content: space-between;
+	align-items: center;*/	
 } 
+.x-table th i{
+	display: inline-block;
+	margin-left: 3px;
+	color: #777;
+	opacity: 0;
+	cursor: pointer;
+	transform: translateY(3px);
+}
+.x-table th:hover > i{
+	opacity: 1;
+}
 .x-table tbody td{
 	line-height: 2.4em;	
 	font-weight: lighter;

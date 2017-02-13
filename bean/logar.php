@@ -149,7 +149,8 @@ function getDataUser(){
                     "user_name_complete" =>  $nome." ". (($nome == $apelido) ? "" : $apelido),
                     "user_logo" => Session::getUserLogado()->getFotoLogo(),
                     "user_agency" => Session::getUserLogado()->getAgencia(),
-                    "user_perfil" => Session::getUserLogado()->getPerfil()
+                    "user_perfil" => Session::getUserLogado()->getPerfil(),
+                    "user_nif" => Session::getUserLogado()->getId()
                 )
             )
         );
@@ -160,5 +161,15 @@ function getDataUser(){
 }
 
 function sendfeeback(){
-
+    include "../modelo/SendEmail.php";
+    $var = "Mensagem enviada de Credial SA por".Session::getUserLogado()->getNome()." ".Session::getUserLogado()->getAgencia()
+        ."<br><br>".$_POST["feed"]["text"]
+        ."<br><br>".$_POST["feed"]["mail"]
+        ."<br>Credial SA";
+    $se = new SendEmail();
+    $enviado = $se->Assunto("Credial ".($_POST["feed"]["type"] == "another") ? $_POST["feed"]["other"] : $_POST["feed"]["type"])
+        ->Texto($var)
+        ->Destino("jigasoft_stp@hotmail.com")
+        ->sendEmail();
+    die (json_encode(array("result" => ($enviado == true))));
 }

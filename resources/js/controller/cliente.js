@@ -64,7 +64,10 @@ function addLETRAS() {
 
 function addANO() {
     var data = new Date();
-     return [data.getFullYear()];
+    var anos = [];
+    for (var i= data.getFullYear(); i>= 2008; i-- )
+        anos[anos.length] = i;
+     return anos;
 }
 
 function addMES() {
@@ -94,9 +97,9 @@ function carregarCliente() {
         var cell4 = row.insertCell(3);
         var cell5 = row.insertCell(4);
 
-        cell1.innerHTML = "<i class='icon-credit-card' onclick='"+"credito("+ff+")' ></i>" +
-                        "<i class='icon-info' onclick='"+"inforCiente("+ff+")' ></i>" +
-                        "<i class='icon-pencil' onclick='"+"editCiente("+ff+")' ></i>";
+        cell1.innerHTML = "<i class='icon-credit-card' onclick='"+"credito("+ff+")'  title='Registo Crédito'></i>" +
+                        "<i class='icon-info' onclick='"+"inforCiente("+ff+")'  title='Mais Informaçõess'></i>" +
+                        "<i class='icon-pencil' onclick='"+"editCiente("+ff+")' title='Editar Cliente' ></i>";
         cell2.innerHTML = client['NIF'];
         cell3.innerHTML = client['NAME']+" "+client['SURNAME'];
         cell4.innerHTML = client['TELE'];
@@ -113,13 +116,7 @@ function carregarCliente() {
 }
 
 function credito(a, type) {
-    $("#cred-cli-nif").text((type !== undefined ?listSearchCLients[a]["NIF"]: clientes[clienteLetra][a]["NIF"])+" - ");
-    var lastName = (type !== undefined ?listSearchCLients[a]["SURNAME"]: clientes[clienteLetra][a]['SURNAME']).split(" ");
-    $("#cred-cli-comName").text((type !== undefined ?listSearchCLients[a]["NAME"]:clientes[clienteLetra][a]['NAME'])+" "+lastName[lastName.length-1]);
-    nifClient = type !== undefined ?listSearchCLients[a]["NIF"] : clientes[clienteLetra][a]["NIF"];
-    si.nifClient = nifClient;
-    openModalFrame($('.mp-new-credit'));
-    tableEstructure($('#table-liquid'));
+    clientIsCompleto(a, type);
 }
 
 var listCredito = [];
@@ -235,7 +232,10 @@ function regCliente() {
                 callXpertAlert('Novo Cliente adcionado com sucesso!', new Mensage().checkmark, 8000);
                 resetForm($(".add-new-form"));
                 $('.add-new-form').removeClass('show');
-                setTimeout(creditoNow, 800, scli)
+                setTimeout(creditoNow, 800, scli);
+                var re = new refresh();
+                re.dataType = "CLIENT";
+                saveRefresh(re);
             }else {
                 callXpertAlert(e.msg, new Mensage().cross, 8000);
             }
@@ -389,28 +389,42 @@ $("#table-client").on("dblclick","tr", function () {
 
 
 function getDadosCliente() {
+
+    $("#cli-dataNasc").val(clienteData["DATA NASCIMENTO"]).attr("disabled",true);
+    $("#cli-ar-ano").val((clienteData["TRADOSSIER ANO"] != null) ? clienteData["TRADOSSIER ANO"] : "0").attr("disabled",true);
+    $("#cli-ar-mes").val((clienteData["TRADOSSIER MES"] != null) ? clienteData["TRADOSSIER MES"] : "0").attr("disabled",true);
+    $("#cli-ar-let").val((clienteData["TRADOSSIER LETRA"] != null) ? clienteData["TRADOSSIER LETRA"] : "0").attr("disabled",true);
+    $("#cli-local").val((clienteData["LOCALIDADE ID"] != null) ? clienteData["LOCALIDADE ID"] : "0").attr("disabled",true);
+    $("#cli-ar-capa").val(clienteData["TRADOSSIER NUMERO DE CAPA"]).attr("disabled",true);
+
+    if(clienteData["TRADOSSIER ANO"] === null){ $("#cli-ar-ano").removeAttr("disabled"); }
+
+    if(clienteData["DATA NASCIMENTO"] == null){ $("#cli-dataNasc").removeAttr("disabled"); }
+
+    if(clienteData["TRADOSSIER MES"] == null){ $("#cli-ar-mes").removeAttr("disabled"); }
+
+    if(clienteData["TRADOSSIER LETRA"] == null){ $("#cli-ar-let").removeAttr("disabled"); }
+
+    if(clienteData["LOCALIDADE ID"] == null){ $("#cli-local").removeAttr("disabled"); }
+
+    if(clienteData["TRADOSSIER NUMERO DE CAPA"] == null){ $("#cli-ar-capa").removeAttr("disabled"); }
+
     $("#cli-nif").val(clienteData["NIF"]).attr("disabled",true);
     $("#cli-nome").val(clienteData["NAME"]).attr("disabled",true);
     $("#cli-sobNome").val(clienteData["SURNAME"]).attr("disabled",true);
-    $("#cli-dataNasc").val(clienteData["DATA NASCIMENTO"]).attr("disabled",true);
     $("#cli-sexo").val(clienteData["SEXO ID"]).attr("disabled",true);
+
     $("#cli-stateCivil").val(clienteData["ESTADO CIVIL ID"]);
     $("#cli-mora").val(clienteData["MORADA"]);
 
     $("#cli-prof").val(clienteData["PROFISSAO ID"]);
     $("#cli-salar").val(clienteData["CLIENTE SALARIO"]);
-    $("#cli-local").val(clienteData["LOCALIDADE ID"]);
     $("#cli-localTrab").val(clienteData["LOCAL TRABALHA ID"]);
 
     $("#cli-cont-telm").val(clienteData["TELE MOVEL"]);
     $("#cli-cont-telf").val(clienteData["TELE FIXO"]);
     $("#cli-cont-tels").val(clienteData["TELE SERVICO"]);
     $("#cli-email").val(clienteData["MAIL"]);
-
-    $("#cli-ar-ano").val((clienteData["TRADOSSIER ANO"] != null) ? clienteData["TRADOSSIER ANO"] : "0").attr("disabled",true);
-    $("#cli-ar-mes").val((clienteData["TRADOSSIER MES"] != null) ? clienteData["TRADOSSIER MES"] : "0").attr("disabled",true);
-    $("#cli-ar-let").val((clienteData["TRADOSSIER LETRA"] != null) ? clienteData["TRADOSSIER LETRA"] : "0").attr("disabled",true);
-    $("#cli-ar-capa").val((clienteData["TRADOSSIER NUMERO DE CAPA"] != null) ? clienteData["TRADOSSIER NUMERO DE CAPA"] : "0").attr("disabled",true);
 
     isNull($(".add-new-form select"));
 }
@@ -439,6 +453,9 @@ $("#cred-pay-bt").click(function () {
                     callXpertAlert("Novo pagamento registado sucesso!", new Mensage().checkmark, 8000);
                     $('#cred-pay-form').closest('.modalPage').fadeOut(300);
                     setTimeout(reloadPestacaoCreditdo, 700);
+                    var re = new refresh();
+                    re.dataType = "PAYMENT";
+                    saveRefresh(re);
                 }
             },
             beforeSend: function () {  $(".mp-loading").fadeIn(); },
@@ -507,7 +524,12 @@ function editeSelectedClient() {
         success: function (e) {
             if(e.result) {
                 callXpertAlert('O Cliente foi editado com sucesso!', new Mensage().checkmark, 8000);
-            }else {
+                var re = new refresh();
+                re.dataType = "CLIENT";
+                $('.add-new-form').removeClass('show');
+                saveRefresh(re);
+                if(DOCREDITO) setTimeout(creditoNow, 800, scli);
+            } else {
                 callXpertAlert(e.msg, new Mensage().cross, 8000);
             }
         },
@@ -515,4 +537,49 @@ function editeSelectedClient() {
         complete: function () { $(".mp-loading").fadeOut(); }
     });
 }
+
+function clientIsIncomple() {
+    var rt = clienteData["CLIENTE SALARIO"] === null
+        || clienteData["DATA NASCIMENTO"] === null
+        || clienteData["LOCALIDADE"] === null
+        || clienteData["TELE MOVEL"] === null
+        || clienteData["TRADOSSIER ANO"] === null
+        || clienteData["TRADOSSIER LETRA"] === null
+        || clienteData["TRADOSSIER MES"] ===  null
+        || clienteData["TRADOSSIER NUMERO DE CAPA"] === null
+        || clienteData["TRADOSSIER SEQUENCIA"] === null;
+    return  rt;
+}
+
+ function clientIsCompleto(b,type) {
+    $.ajax({
+        url: "./bean/cliente.php",
+        type: "POST",
+        data: {"intensao": "loadStatusClient", "nifCliente": (type !== undefined ? listSearchCLients[b]["NIF"] :clientes[clienteLetra][b]["NIF"]), fill : true},
+        dataType: "json",
+        success: function (e) {
+            clienteData = e.resultRealDataCliente;
+            if(clientIsIncomple()){
+                getDadosCliente();
+                CLIENTEEDITE = true;
+                DOCREDITO = true;
+                $('.add-new-form').toggleClass('show');
+                $('.add-new-form h1').text('Editar cliente');
+                $("#cli-reg").text('Editar cliente');
+                callXpertAlert('Cliente com dados incompletos<br>por favor atualize os dados!', new Mensage().warning, -1);
+            } else {
+                $("#cred-cli-nif").text((type !== undefined ?listSearchCLients[b]["NIF"]: clientes[clienteLetra][b]["NIF"])+" - ");
+                var lastName = (type !== undefined ?listSearchCLients[b]["SURNAME"]: clientes[clienteLetra][b]['SURNAME']).split(" ");
+                $("#cred-cli-comName").text((type !== undefined ?listSearchCLients[b]["NAME"]:clientes[clienteLetra][b]['NAME'])+" "+lastName[lastName.length-1]);
+                nifClient = type !== undefined ?listSearchCLients[b]["NIF"] : clientes[clienteLetra][b]["NIF"];
+                si.nifClient = nifClient;
+                openModalFrame($('.mp-new-credit'));
+                tableEstructure($('#table-liquid'));
+            }
+        },
+        beforeSend: function () {  $(".mp-loading").fadeIn(); },
+        complete: function () { $(".mp-loading").fadeOut();}
+    });
+ }
+
 

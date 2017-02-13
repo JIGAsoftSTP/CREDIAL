@@ -12,7 +12,7 @@
 
 		<div class="table-list">
 			<nav class="to-report">
-				<h2>Lista de clientes</h2>
+				<h2></h2>
 			</nav>
 			
 
@@ -21,11 +21,12 @@
 				<table id="table-report-client" class="" cellpadding="0" cellspacing="0">
 					<thead>
 						<tr>                    
-							<th grow="1.5">NIF</th>
-							<th grow="4">Cliente</th>
-							<th grow="2">Valor</th>
-							<th grow="3">Local Trabalho</th>
-						</tr>
+							<th grow="1.5" orderBy>NIF</th>
+							<th grow="4" orderBy>Cliente</th>
+							<th grow="1.5" orderBy>Quantidade</th>
+                            <th grow="2" orderBy>Valor</th>
+                            <th grow="3" orderBy>Local Trabalho</th>
+                        </tr>
 					</thead>
 					<tbody id="tableReportCustomerBody">
 					</tbody>

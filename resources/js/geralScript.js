@@ -4,8 +4,10 @@ setTitle($('input, select, textarea'));
 $('.content-feed select').click(function(event) {
     if($(this).val() === 'another')
         $('.another').removeClass('disabled')
+            .find("input").removeClass("_noObrigatory");
     else
         $('.another').addClass('disabled')
+            .find("input").addClass("_noObrigatory");
 });
 $('.xClose').click(function(event) {
     $(this).closest('section.modalPage').fadeOut(400);
@@ -19,6 +21,8 @@ $('.feedback-li').click(function(event) {
 $('header .pin').click(function(event) {
     $('.header-1').toggleClass('shrinked');
     $(this).toggleClass('unpin');
+    setAppLog($(this), 'unpin');
+    setAppLog($('.header-1'), 'shrinked');
 });
 
 $('.xpert-form select').change(function(event) {
@@ -31,11 +35,6 @@ $('.logout').click(function(event) {
 
 $('.chg-pwd').click(function(event) {
     openModalFrame($('.mp-change-pwd'));
-});
-
-$('.user-span').click(function(event) {
-    $('.menu-user').toggleClass('show');
-    // callXpertAlert('Adicionado', 'notification', 8000);
 });
 
 $('.xpert-toggle-2 span').click(function(event) {
@@ -122,6 +121,8 @@ $('.xpert-list').on( 'click','b', function(event) {
 
 $('.content-w-lateral .icon-menu').click(function(event) {
     $('.content-w-lateral').toggleClass('shrinked');
+    setAppLog($('.content-w-lateral'), 'shrinked');
+
 
     $(this).parent().addClass('show');
     $('.search-span2 input').focus();
@@ -370,6 +371,18 @@ function getDataStorage(_type, myObject){
     return $.parseJSON(typeData.getItem(myObject));
 
 }
+
+function deleteContentDataStorage(_type, myObject, myKey) {
+    typeData = _type === localStorage ? localStorage : sessionStorage;
+    var objectData = {};
+
+    if (typeData.getItem(myObject))
+        objectData = $.parseJSON(typeData.getItem(myObject));
+
+    delete objectData[myKey];
+    typeData.setItem(myObject, JSON.stringify(objectData));
+    console.log(getDataStorage(sessionStorage, myObject));
+}
 function limitString(element){
     element.on('keydown keyup', function(e){
     if ($(this).val() > 100 
@@ -381,4 +394,5 @@ function limitString(element){
     }
 });
 }
+
 

@@ -1,6 +1,20 @@
-	<header>
-		<i class="icon-pushpin pin"></i>
-		<nav class="header-1"><i class="logo">
+<?php
+function hasSession()
+{
+    include "modelo/User.php";
+    include "bean/Session.php";
+    $user = Session::getUserLogado()->getId();
+    if (!isset($user)) {
+        header("location:index.php");
+    }
+}
+
+hasSession();
+
+?>
+<header>
+		<i class="icon-pushpin pin" appLog id="log-menu-pin"></i>
+		<nav class="header-1" id="log-menu-header1"><i class="logo">
 			<h1>LOGO here!</h1></i> 
 			<div class="logged-user">
 				<nav class="photo default-user-img ph-bk"></nav>
@@ -71,7 +85,7 @@
 		</div>
 	</section>
 	<?php include "process.html"; ?>
-	<section class="modalPage mp-feedback" style="display: block" >
+	<section class="modalPage mp-feedback" >
 		<div class="modalFrame">
 			<div class="modalContainer">
 				<div class="left-panel">
@@ -89,7 +103,7 @@
 						<option value="another">Outro</option>
 					</select>
 					<section class="another flex-form input-total disabled">
-						<input type="text" id="cli-feed-other" class="input-total" placeholder="Especifique">
+						<input type="text" id="cli-feed-other" class="input-total _noObrigatory" placeholder="Especifique">
 					</section>
 					<textarea id="cli-feed-text" class="input-total"></textarea>
                     <button id="cli-feed-bt">Enviar</button>

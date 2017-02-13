@@ -12,7 +12,7 @@
 
 		<div class="table-list">
 			<nav class="to-report">
-				<h2>Lista de clientes</h2>
+				<h2></h2>
 			</nav>
 			
 
@@ -20,11 +20,16 @@
 			<div class="x-table table-client auto-width">
 				<table id="table-report-credit" class="" cellpadding="0" cellspacing="0">
 					<thead>
-						<tr>                    
-							<th grow="1">NIF</th>
-							<th grow="4">Cliente</th>
-							<th grow="2">Valor</th>
-							<th grow="2">Local Trabalho</th>
+						<tr>
+							<th grow="2" orderBy>Nº Dossier</th>
+							<th grow="1" orderBy>Data Registo</th>
+							<th grow="1" orderBy>NIF</th>
+							<th grow="4" orderBy>Cliente</th>
+							<th grow="2" orderBy>Valor Crédito</th>
+							<th grow="2" orderBy>Montante Dívida</th>
+							<th grow="1" orderBy>TAEG</th>
+							<th grow="1">Data Inicio</th>
+							<th grow="1">Data Fim</th>
 						</tr>
 					</thead>
 					<tbody id="table-report-credit-body">

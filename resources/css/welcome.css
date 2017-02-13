@@ -1,0 +1,23 @@
+body{
+	background: linear-gradient(90deg, #18BD9B 10%, #00B9A3 90%);
+	color: #FFF;
+	min-width: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+a{
+	text-align: center;
+	text-decoration: none;
+	margin: 3rem auto 0 auto;
+	display: block;
+	line-height: 3rem;
+	width: 100%;
+	max-width: 300px;
+	cursor: pointer;
+	font-size: 1rem;
+	border-radius: 3px;
+	font-weight: bold;
+	color: #00B9A3;
+	background: #FFF;
+}

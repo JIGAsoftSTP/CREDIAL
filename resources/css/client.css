@@ -856,3 +856,6 @@
 i.unchange{
 	color: #888 !important;
 }
+.mp-confirm-simulation{
+	z-index: 1001;
+}

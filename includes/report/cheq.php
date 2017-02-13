@@ -13,29 +13,50 @@
 	<div class="master-content">
 		
 		<ul class="filter-type-cheq">
-			<li type="entrados" class="bt-table-action active">Entrados</li>
-			<li type="porcobrar" class="bt-table-action">Por cobrar</li>
-			<li type="cobrados" class="bt-table-action">Cobrados</li>
-			<li class="bt-table-action">Todos</li>
+			<li type="entrados" class="bt-table-action active" id="1">Entrados</li>
+			<li type="porcobrar" class="bt-table-action" id="2">Por cobrar</li>
+			<li type="cobrados" class="bt-table-action" id="3">Cobrados</li>
+			<li class="bt-table-action" id="4">Todos</li>
 		</ul>
 		<div class="table-list">
 			<nav class="to-report">
-				<h2>Lista de cheques</h2>
+				<h2></h2>
 			</nav>
 			
 
 
 			<div class="x-table table-client auto-width">
 				<table id="tabela-relatorio-cheque" class="selectable" cellpadding="0" cellspacing="0">
-					<thead>
-						<tr>                    
-							<th grow="2">Ano Atual</th>
-							<th grow="2">Ano Passado</th>
-							<th grow="2">Diferença</th>
-							<th grow="1">Resultado</th>
-						</tr>
-					</thead>
-					<tbody id="tabela-cheque-corpo">
+                    <thead>
+                    <tr>
+                        <th grow="2" grow2="0">Data Registo</th>
+                        <th grow="2" grow2="0">Débito</th>
+                        <th grow="2" grow2="0">Crédito</th>
+                        <th grow="2" grow2="0">Banco</th>
+                        <th grow="1" grow2="0">Agência</th>
+
+                        <th grow="0" grow2="2">NIF</th>
+                        <th grow="0" grow2="2">Cliente</th>
+                        <th grow="0" grow2="2">Nº Doc. Pagamento</th>
+                        <th grow="0" grow2="2">Valor Cheque Reembolso</th>
+                        <th grow="0" grow2="1">Data Previsto</th>
+                        <th grow="0" grow2="1">Banco</th>
+                       <th grow="0" grow2="1">Data Endossado</th>
+                    </tr>
+                    </thead>
+
+<!--                    <thead>-->
+<!--                    <tr>-->
+<!--                        <th grow="2">NIF</th>-->
+<!--                        <th grow="2">Cliente</th>-->
+<!--                        <th grow="2">Nº Doc. Pagamento</th>-->
+<!--                        <th grow="2">Valor Cheque Reembolso</th>-->
+<!--                        <th grow="1">Data Previsto</th>-->
+<!--                        <th grow="1">Banco</th>-->
+<!--                        <th grow="1">Data Endossado</th>-->
+<!--                    </tr>-->
+<!--                    </thead>-->
+                    <tbody id="tabela-cheque-corpo">
 					</tbody>
 				</table>
 			</div>

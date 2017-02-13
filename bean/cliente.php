@@ -17,7 +17,7 @@ include "Session.php";
     if($_POST["intensao"] == "loadCreditoClient"){ loadCreditoClient(); }
     if($_POST["intensao"] == "efectuarPagamento"){ efectuarPagamento(); }
     if($_POST["intensao"] == "reloadPestacaoCreditdo"){ reloadPestacaoCreditdo(); }
-    if($_POST["intensao"] == "editeSelectedClient"){ regHistoricoClient(); }
+    if($_POST["intensao"] == "editeSelectedClient"){ changeClienteDataNasc(); }
 
     function listCliente(){
         $call = new CallPgSQL();
@@ -26,7 +26,7 @@ include "Session.php";
         $resut = array();
         $arrayList = str_split("*ABCDEFGHIJKLMNOPQRSTUVWXYZ");
         while ( $valor = $call->getValors()){
-            $letra = $valor["S_NAME"];
+            $letra = $valor["NAME"];
             $letra = str_split(strtoupper(str_replace(" ", "", $letra)));
             $letra = $letra[0];
             $cont = is_numeric(array_search($letra, $arrayList))
@@ -197,10 +197,27 @@ include "Session.php";
             ->addDate($_POST["pagamento"]["data"]);
         $call->execute();
         $return = $call->getValors();
-        if($return["result"]==true){ $j = json_encode(array("result"=>false,"msg"=>$return["message"])); die($j); }
-        else { $j = json_encode(array("result"=>true)); die($j); }
+        if($return["result"] == "f"){
+            $j = json_encode(array("result"=>false,"msg"=>$return["message"])); die($j);
+        }
+        else {
+            $j = json_encode(array("result"=>true, $return)); die($j);
+        }
     }
 
 function reloadPestacaoCreditdo(){
     die(json_encode(array("prestacao" => loadPrestacao($_POST['idCred']))));
+}
+
+function changeClienteDataNasc(){
+    $call = new CallPgSQL();
+    $call->functionTable("funct_change_client_data","*")
+        ->addString(Session::getUserLogado()->getId())
+        ->addNumeric(Session::getUserLogado()->getIdAgencia())
+        ->addString($_POST['nif'])
+        ->addDate($_POST['dataNasc']);
+    $call->execute();
+    $return = $call->getValors();
+//    if($return["result"] == "f"){ $j = json_encode(array("result"=>false,"msg"=>$return["message"])); die($j);}
+    regDossier();
 }

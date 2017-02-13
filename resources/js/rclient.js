@@ -10,15 +10,19 @@
 
     $('.new-client, .close-add-client, .table-client .icon-pencil').click(function(event) {
         $('.add-new-form').toggleClass('show');
+        setAppLog($('.add-new-form'), 'show');
         if ($(this).hasClass('icon-pencil')) {
-            $('.add-new-form h1').text('Editar cliente')
+            $('.add-new-form h1').text('Editar cliente');
             $("#cli-reg").text('Editar cliente');
         }
         else {
             CLIENTEEDITE = false;
-            $('.add-new-form h1').text('Adicionar cliente')
+            $('.add-new-form h1').text('Adicionar cliente');
             $("#cli-reg").text('Adicionar cliente');
+            $(".add-new-form").find("input, select").removeAttr("disabled");
+            resetForm($(".add-new-form"));
         }
+        DOCREDITO = false;
     });
 
     $('.search-span input').focusin(function(event) {

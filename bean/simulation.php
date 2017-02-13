@@ -96,7 +96,7 @@ function importSimulation(){
     $result = $call->getValors();
 
     if($result["RESULT"] != "true"){
-        die(json_encode(array("result" => false, "return" => $result["RESULT"], Session::getUserLogado()->getIdAgencia())));
+        die(json_encode(array("result" => false, "return" => $result["RESULT"])));
     }
 
     regPagamento($result['ID CREDITO']);
@@ -125,7 +125,7 @@ function regPagamento($idCredito){
         $result = $call->getValors();
 
         if ($result["RESULT"] != "true") {
-            die(json_encode(array("result" => false, "return" => $result["RESULT"], $_POST["simulation"]["dataTableAmortizacao"] )));
+            die(json_encode(array("result" => false, "return" => $result["RESULT"])));
         }
     }
     regGarantia($idCredito);
@@ -144,7 +144,7 @@ function regGarantia($idCredito){
         $call->execute();
         $result = $call->getValors();
         if($result["RESULT"] != "true"){
-            die(json_encode(array("result" => false, "return" => $result["RESULT"]), $call->listParam));
+            die(json_encode(array("result" => false, "return" => $result["RESULT"])));
         }
     }
     regDocumento($idCredito);
@@ -175,11 +175,11 @@ function finalizeRegCredito($idCredito){
         ->addString(Session::getUserLogado()->getId())
         ->addNumeric(Session::getUserLogado()->getIdAgencia())
         ->addNumeric($idCredito)
-        ->addNumeric($_POST["simulation"]["idBank"])
+        ->addNumeric($_POST["simulation"]["idForRegBank"])
         ->addNumeric(count($_POST["simulation"]["listDocu"]))
         ->addNumeric(count($_POST["simulation"]["listGara"]));
     $call->execute();
-    -
+
     $result = $call->getValors();
     if($result["RESULT"] == true)
         die(json_encode(array("result" => true, "return" => $result,$idCredito)));

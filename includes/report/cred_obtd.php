@@ -12,7 +12,7 @@
 
 		<div class="table-list">
 			<nav class="to-report">
-				<h2>Lista de clientes</h2>
+				<h2></h2>
 			</nav>
 			
 

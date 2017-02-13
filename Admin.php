@@ -10,7 +10,7 @@
 <body id="p3">
 <?php include 'includes/menu.php'; ?>
 <div class="content-body">
-    <div class="content-w-lateral">
+    <div class="content-w-lateral" id="ctt-ltl-admin">
         <aside>
             <i class="icon-menu"></i>
             <ul class="single" id="secondary-menu">
@@ -26,6 +26,7 @@
 <script type="text/javascript" src="./resources/js/jQuery.js"></script>
 <script type="text/javascript" src="resources/js/table.js"></script>
 <script type="text/javascript" src="resources/js/geralScript.js"></script>
+<script type="text/javascript" src="resources/js/controller/geral.js"></script>
 <script type="text/javascript" src="resources/js/controller/logar.js"></script>
 <script type="text/javascript" src="./resources/js/controller/menu.js"></script>
 <!--<script type="text/javascript" src="resources/js/jQuery.js"></script>-->
