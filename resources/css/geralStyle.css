@@ -579,6 +579,7 @@ header .pin.unpin{
 	position: relative;
 	border: 1px #ddd solid;
 	font-size: .92rem;
+	/*z-index: 15;*/
 }
 .xpert-list .x-content{
 	max-height: 84px;
@@ -631,6 +632,7 @@ header .pin.unpin{
 .xpert-list ul li{
 	line-height: 1.7rem;
 	cursor: pointer;
+	
 }
 .xpert-list ul li:hover{
 	background: #fafafa;
@@ -765,13 +767,16 @@ header .pin.unpin{
 	border-top-left-radius: 3px;
 	border-top-right-radius: 3px;
 	border-bottom: 1px #eee solid;
+	z-index: 10;
 }
 .modal-header span{
 	cursor: pointer;
-	font: 16px 'Gill Sans MT';
 	color: #555;
 }
-
+.modal-header span:before{
+	content: "\2716";
+	color: red;
+}
 .bt-yes-no-cancel{
 	justify-content: center;
 }

@@ -11,6 +11,7 @@
 	<?php include 'includes/menu.php'; ?> 
 	<div class="content-body">
 		<span class="new-client">+</span>
+		<span class="new-simulation"><i class="icon-shift"></i></span>
 		<span class="search-span"><input type="text" id="client-search" placeholder="Faça sua pesquisa aqui...">
 			<span id="span-type-search-client">
 				<i class="icon-newspaper" title="NIF" id="nifS"></i>
@@ -184,17 +185,29 @@
 					</div>
 				</div>
 			</div>
-			<section class="modalPage mp-new-credit" style="display: none;">
+			<section class="modalPage mp-new-credit" style="display: block;">
 				<div class="modalFrame">
 					<div class="modalContainer">
+						<div class="select-client flex-form xpert-form">
+							<div>
+								<section>
+									<input type="text" id="" value="" placeholder="NIF do cliente" class="input-3">
+									<span>Name here!</span>								
+								</section>
+								<b>Concluir</b>
+							</div>
+						</div>
 						<div class="master-add-customer">
 							<div class="xpert-form">
 								<!-- <h1>Client Name here!</span></h1> -->
 								<div class="div-total">
 									<section class="flex-form part-1">
 										<span class="name-client">
-											<b id="cred-cli-nif">1258 - </b>
-											<span id="cred-cli-comName">Customer Name and Surname here!</span>
+											<span>
+												<b id="cred-cli-nif"></b>
+												<span id="cred-cli-comName">Cliente não selecionado</span>
+											</span>
+											<b class="define-client">editar</b>
 										</span>
 										<span class="xpert-is-wl span-v input-total">
 											Valor: <input type="text" id="cred-value" class="input-total formatNumber double init-value">
@@ -276,31 +289,42 @@
 										<select id="cred-cli-modaPag" class="input-total" title="Modalidade pgto.">
 											<option value="0">(Modalidade pagamento)</option>
 										</select>
-										<p class="input-total">
+										<!-- <p class="input-total">
 											Garantia
 											<div class="xpert-list input-total">
 												<div class="x-content" id="cred-cli-list-garaValue">
 													<span class="add-more-item">+</span>
 												</div>
 												<span class="list-items">
-													<ul id="cred-cli-list-gara">
-										<!--<li id="id1"><span><i class="icon-checkbox-unchecked"></i><span class="list-name">Garantia 1</span></span><b>0</b></li>
-										<li id="id2"><span><i class="icon-checkbox-unchecked"></i><span class="list-name">Garantia 2</span></span><b>0</b></li>-->
-									</ul>
-								</span>
-							</div>							
-						</p>
-						<p class="input-total">
-							Documentos
-							<div class="xpert-list input-total">
-								<div class="x-content" id="cred-cli-list-docuValue">
-									<span class="add-more-item">+</span>
-								</div>
-								<span class="list-items">
-									<ul id="cred-cli-list-docu"></ul>
-								</span>
-							</div>							
-						</p>
+												<ul id="cred-cli-list-gara">
+												</ul>
+												</span>
+											</div>							
+										</p>
+										<p class="input-total">
+											Documentos
+											<div class="xpert-list input-total">
+												<div class="x-content" id="cred-cli-list-docuValue">
+													<span class="add-more-item">+</span>
+												</div>
+												<span class="list-items">
+													<ul id="cred-cli-list-docu"></ul>
+												</span>
+											</div>							
+										</p> -->
+										
+											<div class="x-list input-total">
+												
+												<input size="0" datalist="list" list="browsers">
+												<datalist id="browsers">
+												  <option value="Internet Explorer">
+												  <option value="Firefox">
+												  <option value="Google Chrome">
+												  <option value="Opera">
+												  <option value="Safari">
+												</datalist>
+											</div>									
+										
 					</div>
 					<h1 class="total-val">A pagar: <br><b id="cred-totalPagar">0,00</b></h1>
 				</span>
@@ -310,7 +334,7 @@
 		</div>
 		<div class="modal-header">
 			<b>Novo crédito</b>
-			<span class="mp-close">X</span>
+			<span class="mp-close"></span>
 		</div>
 	</div>
 </div>
@@ -359,7 +383,7 @@
 
 			<div class="modal-header">
 				<b>Informações sobre cliente</b>
-				<span class="mp-close">X</span>
+				<span class="mp-close"></span>
 			</div>
 		</div>
 	</div>
@@ -397,27 +421,27 @@
 			</div>
 			<div class="modal-header">
 				<b>Efetuar pagamento</b>
-				<span class="mp-close">X</span>
+				<span class="mp-close"></span>
 			</div>
 		</div>
 	</div>
 </section>
 <section class="modalPage mp-confirm-simulation">
-    <div class="modalFrame">
-        <div class="modalContainer">
-            <p>Deseja realmente importar a simulaçao?</p>
-            <div class="bt-yes-no-cancel">
-                <button id="cred-simula-import">OK</button>
-                <button class="bt-no-option">Cancelar</button>
-            </div>
-            <div class="modal-header">
-                <b>Importar Simulaçao</b>
-                <span class="mp-close">X</span>
-            </div>
-        </div>
-    </div>
+	<div class="modalFrame">
+		<div class="modalContainer">
+			<p>Deseja realmente importar a simulaçao?</p>
+			<div class="bt-yes-no-cancel">
+				<button id="cred-simula-import">OK</button>
+				<button class="bt-no-option">Cancelar</button>
+			</div>
+			<div class="modal-header">
+				<b>Importar Simulaçao</b>
+				<span class="mp-close"></span>
+			</div>
+		</div>
+	</div>
 </section>
-    <script type="text/javascript" src="./resources/fw/pikaday/pikaday.js"></script>
+<script type="text/javascript" src="./resources/fw/pikaday/pikaday.js"></script>
 <!-- <div class="xpert-alert notification"><i class="icon-notification"></i><span class="txt">Text here!</span> <span class="close">X</span></div> -->
 </body>
 <script type="text/javascript" src="./resources/js/jQuery.js"></script>

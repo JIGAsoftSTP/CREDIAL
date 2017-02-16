@@ -66,10 +66,11 @@
 .search-span i{
 	cursor: pointer;
 }
-.content-body .new-client{
+.content-body .new-client,
+.content-body .new-simulation{
 	position: absolute;
-	top: 4%;
-	left: 2%;
+	bottom: 2rem;
+	right: 2rem;
 	display: inline-block;
 	width: 50px;
 	line-height: 47px;
@@ -82,6 +83,14 @@
 	cursor: pointer;
 	box-shadow: 1px 0 20px 0 #bbb;
 	font-weight: bold;
+	z-index: 10;
+}
+.content-body .new-simulation{
+	bottom: 6rem;
+	background: #5FBC4D;
+	font-size: 1.1rem;
+	display: inline-block;
+	line-height: 50px;
 }
 .new-client:hover{
 	background: #4387fd;
@@ -530,9 +539,11 @@
 }
 
 /*############################################*/
-
+.mp-new-credit{
+}
 .mp-new-credit .modalContainer{
 	max-width: 1200px;
+	overflow: hidden;
 }
 
 .mp-new-credit .xpert-form{
@@ -546,7 +557,9 @@
 .detail-table ul,
 .about-customer,
 .about-customer .total-val,
-.about-customer .special-ipt{
+.about-customer .special-ipt,
+.div-total .name-client,
+.select-client div{
 	display: flex;
 }
 .part-2 ul,
@@ -554,17 +567,64 @@
 .detail-table ul,
 .about-customer,
 .about-customer .total-val,
-.special-ipt{
+.special-ipt,
+.div-total .name-client,
+.select-client div{
 	justify-content: space-between;
+}
+.select-client{
+	position: absolute;
+	top: -4.5rem;
+	left: 0;
+	width: 100%;
+	background: #FFF;
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+	opacity: 0;
+	z-index: 1;
+}
+.select-client.show{
+	top: 2rem;
+	opacity: 1;
+}
+.select-client div{
+	width: 100%;
+	padding: 2rem;
+	align-items: center;
+}
+.select-client input{
+	margin-bottom: 0 !important;
+	margin-right: 2rem;
+}
+.select-client b{
+	border: none;
+	padding: 8px 1rem;
+	border-radius: 3px;
+	background: #4387FD;
+	font-size: .9rem;
+	color: #FFF;
+	cursor: pointer;
+}
+.select-client section{
+	width: 100%;
 }
 .div-total{
 	position: relative;
 }
 .div-total .name-client{
+	align-items: center;
 	position: absolute;
 	top: 0;
 	font-size: .95rem;
 	color: #00B9A3;
+	width: 100%;
+	max-width: 320px;
+}
+.div-total .name-client .define-client{
+	font-size: .9rem;
+	font-weight: lighter;
+	text-decoration: underline;
+	cursor: pointer;
+	color: #4387FD;
 }
 .mp-new-credit .part-1{
 	flex-shrink: 0;
