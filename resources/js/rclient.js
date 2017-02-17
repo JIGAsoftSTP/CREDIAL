@@ -161,6 +161,19 @@ $('.x-list').on('click','i',function(event) {
     $('.item-descript textarea').attr('placeholder', 'Descrição de '+ $(this).parent().text())
 });
 
+$('.x-list').on('mouseenter','span',function(event) {
+    diff = $(this).parent().width() - $(this).width();
+    if(diff < 60){
+        $(this).css('margin-left', (diff - 60) +'px');
+    }
+});
+$('.x-list').on('mouseleave','span',function(event) {
+    diff = $(this).parent().width() - $(this).width();
+    if(diff < 60){
+        $(this).css('margin-left', '0');
+    }
+});
+
 $('.x-list').on('click','b',function(event) {
    $('.item-descript small').click();
 });

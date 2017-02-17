@@ -32,6 +32,9 @@ input::-webkit-calendar-picker-indicator {
 ::-webkit-scrollbar-thumb {
     background: #00B9A3; 
 }
+::-webkit-scrollbar:horizontal{
+	height: 5px;
+}
 
 body .no-transition{
 	transition: none !important;
@@ -695,6 +698,7 @@ header .pin.unpin{
 	background: #FFF;
 	display: flex;
 	flex-wrap: wrap;
+	overflow-x: hidden;
 }
 .x-list span{
 	font-size: .9rem;
