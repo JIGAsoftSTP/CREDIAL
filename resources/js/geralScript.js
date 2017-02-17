@@ -84,7 +84,7 @@ $('input[datalist="list"]').keyup(function(event){
         $(this).css('width', '5px');
     }
 });
-$('input[datalist="list"]').keyup(function(event){    
+$('input[datalist="list"]').keydown(function(event){    
     if(event.which == 8 && $(this).val() == ""){
         $(this).prev().remove();
     }
