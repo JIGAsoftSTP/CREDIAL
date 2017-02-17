@@ -296,61 +296,29 @@
 										<select id="cred-cli-modaPag" class="input-total" title="Modalidade pgto.">
 											<option value="0">(Modalidade pagamento)</option>
 										</select>
-										<!-- <p class="input-total">
-											Garantia
-											<div class="xpert-list input-total">
-												<div class="x-content" id="cred-cli-list-garaValue">
-													<span class="add-more-item">+</span>
-												</div>
-												<span class="list-items">
-												<ul id="cred-cli-list-gara">
-												</ul>
-												</span>
-											</div>							
+										<p class="mabott">
+											Garântia
+											<div class="x-list input-total">
+												
+												<input datalist="list" list="cred-cli-list-gara">
+												<datalist id="cred-cli-list-gara">
+												</datalist>
+											</div>
 										</p>
-										<p class="input-total">
+										<p>
 											Documentos
-											<div class="xpert-list input-total">
-												<div class="x-content" id="cred-cli-list-docuValue">
-													<span class="add-more-item">+</span>
-												</div>
-												<span class="list-items">
-													<ul id="cred-cli-list-docu"></ul>
-												</span>
-											</div>							
-										</p> -->
-											<p class="mabott">
-												Garântia
-												<div class="x-list input-total">
-													
-													<input datalist="list" list="cred-cli-list-gara">
-													<datalist id="cred-cli-list-gara">
-													  <option value="Internet Explorer">
-													  <option value="Firefox">
-													  <option value="Google Chrome">
-													  <option value="Opera">
-													  <option value="Safari">
-													</datalist>
-												</div>
-											</p>
-												Documentos
-												<div class="x-list input-total">
-													
-													<input datalist="list" list="cred-cli-list-docu">
-													<datalist id="cred-cli-list-docu">
-													  <!--<option value="Internet Explorer">
-													  <option value="Firefox">
-													  <option value="Google Chrome">
-													  <option value="Opera">
-													  <option value="Safari">-->
-													</datalist>
-												</div>
-											</p>
-										</div>
+											<div class="x-list input-total">
+												
+												<input datalist="list" list="cred-cli-list-docu">
+												<datalist id="cred-cli-list-docu">
+												</datalist>
+											</div>
+										</p>
+									</div>
 				</span>
 				<div class="bottom-part">
 					<h1 class="total-val">A pagar: <br><b id="cred-totalPagar">0,00</b></h1>
-				<button id="import-simulation">Concluir Operação</button>
+					<button id="import-simulation">Concluir Operação</button>
 				</div>
 			</div>
 		</div>
