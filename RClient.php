@@ -319,18 +319,33 @@
 												</span>
 											</div>							
 										</p> -->
-										
-											<div class="x-list input-total">
-												
-												<input datalist="list" list="browsers">
-												<datalist id="browsers">
-												  <option value="Internet Explorer">
-												  <option value="Firefox">
-												  <option value="Google Chrome">
-												  <option value="Opera">
-												  <option value="Safari">
-												</datalist>
-											</div>
+											<p class="mabott">
+												Garântia
+												<div class="x-list input-total">
+													
+													<input datalist="list" list="browsers">
+													<datalist id="browsers">
+													  <option value="Internet Explorer">
+													  <option value="Firefox">
+													  <option value="Google Chrome">
+													  <option value="Opera">
+													  <option value="Safari">
+													</datalist>
+												</div>
+											</p>
+												Documentos
+												<div class="x-list input-total">
+													
+													<input datalist="list" list="browsers">
+													<datalist id="browsers">
+													  <option value="Internet Explorer">
+													  <option value="Firefox">
+													  <option value="Google Chrome">
+													  <option value="Opera">
+													  <option value="Safari">
+													</datalist>
+												</div>
+											</p>
 										</div>
 				</span>
 				<div class="bottom-part">
