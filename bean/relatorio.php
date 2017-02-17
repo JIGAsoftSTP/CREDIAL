@@ -20,13 +20,13 @@
 
     function report()
     {
-        if($_POST["reportName"] == "Clientes") relatorioCreditoSomatorio();
-        else if($_POST["reportName"] == "Crescimento Homologo") relatorioCrescimentoHomologo();
-        else if($_POST["reportName"] == "Creditos Concedidos") relatorioCreditoContagem();
-        else if($_POST["reportName"] == "Capital / TAEG") relatorioDivida_taeg();
-        else if($_POST["reportName"] == "Dividas por Produto") relatorioDividaProduto();
-        else if($_POST["reportName"] == "Cobranças") relatorioCobrancas();
-        else if($_POST["reportName"] == "Cheques"){
+        if($_POST["reportName"] == "rep.cliente") relatorioCreditoSomatorio();
+        else if($_POST["reportName"] == "rep.cresHomo") relatorioCrescimentoHomologo();
+        else if($_POST["reportName"] == "rep.credConc") relatorioCreditoContagem();
+        else if($_POST["reportName"] == "rep.capiTAEG") relatorioDivida_taeg();
+        else if($_POST["reportName"] == "rep.diviProd") relatorioDividaProduto();
+        else if($_POST["reportName"] == "rep.cobranca") relatorioCobrancas();
+        else if($_POST["reportName"] == "rep.cheques"){
             if($_POST["chequeFiltro"] == 1) relatorioChequeEntrados();
             else relatorioCheque_PorCobrar_Cobrados_Todos();
         }

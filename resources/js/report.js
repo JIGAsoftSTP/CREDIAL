@@ -8,7 +8,7 @@ $('aside .single').on('click','li',function(event) {
         type:"POST",
         dataType:"json",
         data:{"intention" : "load report filters",
-            "reportName": $(this).text()},
+            "reportName": $('#secondary-menu li.active').attr('id')},
         success:function (e)
 		{
             sessionStorage.removeItem('filterReport');

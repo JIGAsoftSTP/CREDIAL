@@ -45,7 +45,7 @@ loadMenuUserLogado();
 
 var isFirstADM = true;
 function loadSubMenuSecondaryADM(menus) {
-   var mn = '<li urldata="'+menus['LINK']+'" '+((isFirstADM) ? 'class="active"' : '' )+'>' +
+   var mn = '<li id="'+menus['COD']+'" urldata="'+menus['LINK']+'" '+((isFirstADM) ? 'class="active"' : '' )+'>' +
     '<i class="'+menus["ICON"]+'"></i>' +
     '<span>'+menus['NAME']+'</span>' +
     '</li>';
