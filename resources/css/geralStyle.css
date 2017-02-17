@@ -44,8 +44,8 @@ body,
 .flex-form,
 .xpert-is-wl,
 .content-w-lateral,
-.xpert-list div.item-list,
-.xpert-list ul li,
+/*.xpert-list div.item-list,
+.xpert-list ul li,*/
 
 .modalFrame,
 .alert nav,
@@ -63,10 +63,10 @@ body,
 .header-1,
 .header-2,
 .header-2 ul,
-.xpert-list div.item-list,
+/*.xpert-list div.item-list,*/
 .alert nav,
 .modal-header,
-.xpert-list ul li,
+/*.xpert-list ul li,*/
 .content-w-lateral .multiple nav{
 	justify-content: space-between;
 }
@@ -574,12 +574,11 @@ header .pin.unpin{
 	border-top-right-radius: 3px;
 	border-bottom-right-radius: 3px;
 }
-
+/*
 .xpert-list{
 	position: relative;
 	border: 1px #ddd solid;
 	font-size: .92rem;
-	/*z-index: 15;*/
 }
 .xpert-list .x-content{
 	max-height: 84px;
@@ -632,7 +631,7 @@ header .pin.unpin{
 .xpert-list ul li{
 	line-height: 1.7rem;
 	cursor: pointer;
-	
+
 }
 .xpert-list ul li:hover{
 	background: #fafafa;
@@ -654,7 +653,6 @@ header .pin.unpin{
 	line-height: 1.4rem;
 	height: 1.6rem;
 	padding: 0 5px 0 10px;
-	/*margin-bottom: 5px;*/
 	color: #444;
 	cursor: pointer;
 	position: relative;
@@ -689,7 +687,81 @@ header .pin.unpin{
 }
 .xpert-list b.show{
 	display: block;
+}*/
+.x-list{
+	border: 1px #ddd solid;
+	padding: 5px;
+	padding-bottom: 0;
+	background: #FFF;
+	display: flex;
+	flex-wrap: wrap;
 }
+.x-list span{
+	font-size: .9rem;
+	padding: 5px 5px 5px 1rem;
+	background: #f5f5f5;
+	border-radius: 
+	border-radius: 3px;
+	border: 1px #eee solid;
+	margin-bottom: 5px;
+	margin-right: 5px;
+	white-space: nowrap;
+}
+.x-list input{
+	min-width: 5px;
+	width: 0;
+	max-width: 100%;
+	border: none;
+	margin-bottom: 5px;
+}
+.x-list .sltd-item{
+
+}
+.x-list i:before{
+	
+	margin: 0 5px;
+	height: 14px;
+	width: 14px;
+	border-radius: 50%;
+	text-align: center;
+	cursor: pointer;
+	color: #fff;
+	background: #4387FD;
+	content: "i";
+	font:  italic bold 12px 'Times New Roman';
+}
+.x-list i,
+.x-list b{
+	opacity: 0;
+	max-width: 0;
+}
+.x-list i{
+	opacity: 0;
+	max-width: 0;
+}
+.x-list b{
+	display: inline-block;
+	margin-left: 0;
+	cursor: pointer;
+	opacity: 0;
+}
+.x-list b:before{
+	content: "\2716";
+	color: #888;
+	font-size: .75rem;
+}
+.x-list span:hover i{
+	margin-left: .6rem;
+}
+.x-list span:hover i:before{
+	display: inline-block;
+}
+.x-list span:hover i,
+.x-list span:hover b{
+	opacity: 1;
+	max-width: 100px;
+}
+
 
 /*################### MODAL FRAME #################*/
 
@@ -1078,3 +1150,4 @@ nav.ph-bk{
   -webkit-animation-name: rubberBand;
   animation-name: rubberBand;
 }
+

@@ -194,7 +194,10 @@
 									<input type="text" id="" value="" placeholder="NIF do cliente" class="input-3">
 									<span>Name here!</span>								
 								</section>
-								<b>Concluir</b>
+								<a>
+									<b>Concluir</b>
+									<small>Cancelar</small>
+								</a>
 							</div>
 						</div>
 						<div class="master-add-customer">
@@ -272,6 +275,10 @@
 								</div>
 							</div>
 							<div class="xpert-form  about-customer">
+								<div class="item-descript xpert-form flex-form">
+									<textarea name="" placeholder="Descrição" class="input-total"></textarea>
+									<small>Cancelar</small>
+								</div>
 								<span>
 									<h2>O cliente</h2>
 									<div class="flex-form" id="cred-form-cli">
@@ -315,7 +322,7 @@
 										
 											<div class="x-list input-total">
 												
-												<input size="0" datalist="list" list="browsers">
+												<input datalist="list" list="browsers">
 												<datalist id="browsers">
 												  <option value="Internet Explorer">
 												  <option value="Firefox">
@@ -323,13 +330,13 @@
 												  <option value="Opera">
 												  <option value="Safari">
 												</datalist>
-											</div>									
-										
-					</div>
-					<h1 class="total-val">A pagar: <br><b id="cred-totalPagar">0,00</b></h1>
+											</div>
+										</div>
 				</span>
-
+				<div class="bottom-part">
+					<h1 class="total-val">A pagar: <br><b id="cred-totalPagar">0,00</b></h1>
 				<button id="import-simulation">Concluir Operação</button>
+				</div>
 			</div>
 		</div>
 		<div class="modal-header">

@@ -47,7 +47,7 @@ $('.master.xpert-form').on('keydown','input, select', function(event) {
         console.log(isLast);
         section.prev().addClass('shrink');
         section.next().removeClass('shrink');
-        
+
             /*if(($(this).parent().index() + 1) === leng){
             }*/
         }
@@ -149,4 +149,22 @@ $('.select-client b').click(function(event) {
         $('#cred-cli-nif').text(nif);
         $('#cred-cli-comName').text(name);
         prt.parent().removeClass('show');
+});
+
+$('.item-descript small').click(function(event) {
+    $(this).closest('.item-descript').removeClass('show');
+});
+
+
+$('.x-list').on('click','i',function(event) {
+    $('.item-descript').addClass('show').focus();
+    $('.item-descript textarea').attr('placeholder', 'Descrição de '+ $(this).parent().text())
+});
+
+$('.x-list').on('click','b',function(event) {
+   $('.item-descript small').click();
+});
+
+$('.select-client small').click(function(event) {
+    $(this).closest('.select-client').removeClass('show');
 });
