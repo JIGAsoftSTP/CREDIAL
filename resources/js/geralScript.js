@@ -69,6 +69,7 @@ $('.x-list').on('mouseleave','span',function(event) {
     setTimeout(function(){
       el.removeClass('hovered');
     }, 2000);
+    event.stopPropagation()
 })
 
 ;$('.x-list').on('click','b',function(event) {

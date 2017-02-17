@@ -182,6 +182,7 @@ $('.x-list').on('click','i',function(event) {
             'placeholder':'Descrição de '+ txt, 
             'id-opt':ident
         });
+    event.stopPropagation();
 });
 
 $('.x-list').on('mouseenter','span',function(event) {
@@ -204,6 +205,12 @@ $('.x-list').on('click','b',function(event) {
 $('.select-client small').click(function(event) {
     $(this).closest('.select-client').removeClass('show');
 });
+
+
+$('.about-customer').click(function(event){    
+    $('.item-descript').removeClass('show');
+});
+
 
 function setDescription(ident, desc){
     var flag = true;

@@ -325,11 +325,11 @@
 													
 													<input datalist="list" list="cred-cli-list-gara">
 													<datalist id="cred-cli-list-gara">
-													  <!--<option value="Internet Explorer">
+													  <option value="Internet Explorer">
 													  <option value="Firefox">
 													  <option value="Google Chrome">
 													  <option value="Opera">
-													  <option value="Safari">-->
+													  <option value="Safari">
 													</datalist>
 												</div>
 											</p>
