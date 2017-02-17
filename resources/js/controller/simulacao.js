@@ -147,6 +147,9 @@ function loadDataSimulation() {
             loadComoBoxIDandValue($("#cred-cli-modaPag"), e.fontepagamentos, "ID", "DESC");
             loadComoBoxIDandValue($("#cred-cli-fonRend"), e.tipopagamentos, "ID", "DESC");
 
+            // loadComoBoxIDandValue($("#cred-cli-list-docu"), e.tipodocumentos, "ID", "DESC");
+            // loadComoBoxIDandValue($("#cred-cli-list-gara"), e.garantias, "ID", "DESC");
+
             loadDcomentOrGarrant($("#cred-cli-list-docu"),e.tipodocumentos,"ID","DESC");
             loadDcomentOrGarrant($("#cred-cli-list-gara"),e.garantias,"ID","DESC");
         }
@@ -238,9 +241,9 @@ $("#cred-edit-table-amor").click(function () {
 function loadDcomentOrGarrant(element,array,id,value) {
     for (var x = 0; x < array.length; x++) {
         var lis =array[x];
-        var idv = "'#simula-list-id-"+lis[id]+"'";
+        // console.info(lis);
         var id_id = "simula-list-id-"+lis[id];
-        element.append('<li id="'+id_id+'" onclick="check('+idv+')"><span><i class="icon-checkbox-unchecked"></i><span class="list-name">'+lis[value]+'</span></span> <b>0</b></li>')
+        element.append('<option id="'+id_id+'" value="'+lis[value]+'"></option>');
     }
 }
 
@@ -424,3 +427,22 @@ $(".percent1020").change(function () {
         $(this).val("0");
     }
 });
+
+$("#cred-sh-nif").keyup(function (e) {
+    var isFind = false;
+    if($(this).val().length === 9){
+        for (var cc = 1; cc < 27; cc++){
+            console.log(cc+" -- "+clientes[cc].length);
+            for (var cl = 0; cl < clientes[cc].length; cl++){
+                if (clientes[cc][cl]["NIF"] === $(this).val()){
+                    var lastName = (clientes[cc][cl]["SURNAME"]).split(" ");
+                    $("#cred-sh-name").text(clientes[cc][cl]["NAME"]+" "+lastName[lastName.length -1]);
+                    isFind = true;
+                    break;
+                }
+            }
+            if(isFind) {break;}
+        }
+    }
+});
+

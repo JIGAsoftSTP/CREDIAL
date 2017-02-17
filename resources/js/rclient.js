@@ -143,12 +143,11 @@ $('.define-client').click(function(event) {
 });
 
 $('.select-client b').click(function(event) {
-    prt = $(this).parent();
-        nif = prt.find('input').val();
-        name = prt.find('span').text();
+        nif = $('#cred-sh-nif').val();
+        name = $('#cred-sh-name').text();
         $('#cred-cli-nif').text(nif);
         $('#cred-cli-comName').text(name);
-        prt.parent().removeClass('show');
+        $(this).closest('.select-client').removeClass('show');
 });
 
 $('.item-descript small').click(function(event) {

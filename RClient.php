@@ -191,8 +191,8 @@
 						<div class="select-client flex-form xpert-form">
 							<div>
 								<section>
-									<input type="text" id="" value="" placeholder="NIF do cliente" class="input-3">
-									<span>Name here!</span>								
+									<input type="text" id="cred-sh-nif" placeholder="NIF do cliente" class="input-3">
+									<span id="cred-sh-name">Name here!</span>
 								</section>
 								<a>
 									<b>Concluir</b>
@@ -323,26 +323,26 @@
 												Garântia
 												<div class="x-list input-total">
 													
-													<input datalist="list" list="browsers">
-													<datalist id="browsers">
-													  <option value="Internet Explorer">
+													<input datalist="list" list="cred-cli-list-gara">
+													<datalist id="cred-cli-list-gara">
+													  <!--<option value="Internet Explorer">
 													  <option value="Firefox">
 													  <option value="Google Chrome">
 													  <option value="Opera">
-													  <option value="Safari">
+													  <option value="Safari">-->
 													</datalist>
 												</div>
 											</p>
 												Documentos
 												<div class="x-list input-total">
 													
-													<input datalist="list" list="browsers">
-													<datalist id="browsers">
-													  <option value="Internet Explorer">
+													<input datalist="list" list="cred-cli-list-docu">
+													<datalist id="cred-cli-list-docu">
+													  <!--<option value="Internet Explorer">
 													  <option value="Firefox">
 													  <option value="Google Chrome">
 													  <option value="Opera">
-													  <option value="Safari">
+													  <option value="Safari">-->
 													</datalist>
 												</div>
 											</p>
