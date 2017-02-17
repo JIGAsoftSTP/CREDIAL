@@ -57,7 +57,21 @@ $('body').on('click','.xpert-alert .close',  function(event) {
 $('.x-list').click(function(event) {
     $(this).find('input').focus();
 });
-$('.x-list').on('click','b',function(event) {
+
+
+
+$('.x-list').on('mouseenter','span',function(event) {
+    $(this).addClass('hovered');
+})
+
+$('.x-list').on('mouseleave','span',function(event) {
+    var el = $(this);
+    setTimeout(function(){
+      el.removeClass('hovered');
+    }, 2000);
+})
+
+;$('.x-list').on('click','b',function(event) {
     $(this).parent().remove();
 });
 
@@ -111,17 +125,19 @@ $('.content-w-lateral .icon-menu').click(function(event) {
 // function resizeInput() {
 //     $(this).attr('size', $(this).val().length);
 // }
+var globaal = 0;
 
 function verifyDataList(ipt){
     var arrayData = {};
     ipt.next().find('option').each(function() {
         if($(this).val() == ipt.val()){
-            arrayData['id'] = $(this).attr('id');
+            globaal++;
+            arrayData['id'] = $(this).attr('id') + globaal;
             arrayData['valOpt'] = $(this).val();
             return false;
         }
     });
-    return arrayData != {} ? arrayData : false;
+    return arrayData['id']  != undefined ? arrayData : false;
 }
 
 

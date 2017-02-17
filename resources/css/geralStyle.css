@@ -754,14 +754,14 @@ header .pin.unpin{
 	color: #888;
 	font-size: .75rem;
 }
-.x-list span:hover i{
+.x-list span.hovered i{
 	margin-left: .6rem;
 }
-.x-list span:hover i:before{
+.x-list span.hovered i:before{
 	display: inline-block;
 }
-.x-list span:hover i,
-.x-list span:hover b{
+.x-list span.hovered i,
+.x-list span.hovered b{
 	opacity: 1;
 	max-width: 100px;
 }
@@ -1155,3 +1155,10 @@ nav.ph-bk{
   animation-name: rubberBand;
 }
 
+.select option[state="good"] { /* value not val */
+    color: #00C853;
+}
+
+select option[value="bad"] { /* value not val */
+    color: #777;
+}
