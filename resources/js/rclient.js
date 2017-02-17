@@ -155,10 +155,34 @@ $('.item-descript small').click(function(event) {
     $(this).closest('.item-descript').removeClass('show');
 });
 
+$('.item-descript textarea').click(function(event) {
+    $(this).removeAttr('readonly');
+    $(this).closest('.item-descript').removeClass('visualize');    
+});
+$('.item-descript textarea').keydown(function(event) {
+    if (event.keyCode == 13 && !event.shiftKey){
+        setDescription($(this).attr('id-opt'), $(this).val());
+        $('.item-descript').removeClass('show');
+        $(this).val("");
+    }
+});
 
 $('.x-list').on('click','i',function(event) {
-    $('.item-descript').addClass('show').focus();
-    $('.item-descript textarea').attr('placeholder', 'Descrição de '+ $(this).parent().text())
+    txt = $(this).parent().text();
+    ident = $(this).parent().attr('id-opt');
+    descript = $(this).parent().attr('description');
+    $('.item-descript').addClass('show');
+    $('.item-descript textarea').val(descript).attr('readonly', 'readonly');
+    if(descript != "")
+        $('.item-descript').addClass('visualize');
+    else{
+        $('.item-descript').removeClass('visualize');
+        $('.item-descript textarea').removeAttr('readonly').focus();
+    }
+    $('.item-descript textarea').attr({
+            'placeholder':'Descrição de '+ txt, 
+            'id-opt':ident
+        });
 });
 
 $('.x-list').on('mouseenter','span',function(event) {
@@ -181,3 +205,17 @@ $('.x-list').on('click','b',function(event) {
 $('.select-client small').click(function(event) {
     $(this).closest('.select-client').removeClass('show');
 });
+
+function setDescription(ident, desc){
+    var flag = true;
+    $('.x-list').each(function() {
+        $(this).find('span').each(function() {
+            if($(this).attr('id-opt') == ident){
+                $(this).attr('description', desc);
+                flag = false;
+                return flag;
+            }
+        });
+        return flag;
+    });
+}

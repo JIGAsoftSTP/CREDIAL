@@ -754,6 +754,12 @@
 	max-height: 0;
 	overflow: hidden;
 }
+.item-descript.visualize textarea{
+	border-color: transparent;
+}
+.item-descript.visualize small{
+	opacity: 0;
+}
 .item-descript.show{
 	max-height: 500px;
 	transform: translateY(0);

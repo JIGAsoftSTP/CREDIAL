@@ -77,8 +77,8 @@ $('input[datalist="list"]').on('input', function(event){
 });
 
 $('input[datalist="list"]').keyup(function(event){      
-    if(event.which == 13 && verifyDataList($(this))){
-        var newList = '<span class="sltd-item">'+ $(this).val() +'<i></i><b></b></span>';
+    if(event.which == 13 && verifyDataList($(this)) !== false){
+        var newList = '<span id-opt="'+ verifyDataList($(this))['id'] +'" description="">'+ verifyDataList($(this))['valOpt'] +'<i></i><b></b></span>';
         prt.find('input').before(newList);
         $(this).val("");
         $(this).css('width', '5px');
@@ -113,15 +113,15 @@ $('.content-w-lateral .icon-menu').click(function(event) {
 // }
 
 function verifyDataList(ipt){
-    vl = ipt.val();
-    var valid = false;
+    var arrayData = {};
     ipt.next().find('option').each(function() {
-        if($(this).val() == vl){
-            valid = true;
+        if($(this).val() == ipt.val()){
+            arrayData['id'] = $(this).attr('id');
+            arrayData['valOpt'] = $(this).val();
             return false;
         }
     });
-    return valid;
+    return arrayData != {} ? arrayData : false;
 }
 
 

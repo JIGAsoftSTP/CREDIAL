@@ -325,11 +325,11 @@
 													
 													<input datalist="list" list="browsers">
 													<datalist id="browsers">
-													  <option value="Internet Exploredfgmnsdrmrseyiuhuigfyfyugugir">
-													  <option value="Firefox">
-													  <option value="Google Chrome">
-													  <option value="Opera">
-													  <option value="Safari">
+													  <option id="1" value="Internet Exploredfgmnsdrmrseyiuhuigfyfyugugir">
+													  <option  id="2" value="Firefox">
+													  <option  id="3" value="Google Chrome">
+													  <option  id="4" value="Opera">
+													  <option  id="5" value="Safari">
 													</datalist>
 												</div>
 											</p>
