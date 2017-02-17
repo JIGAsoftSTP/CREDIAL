@@ -56,7 +56,7 @@
 <script type="text/javascript" src="../../resources/js/jQuery.js"></script>
 <script type="text/javascript" src="../../resources/js/table.js"></script>
 <script type="text/javascript" src="../../resources/js/geralScript.js"></script>
-<script type="text/javascript" src="../../resources/js/report/reports.js"></script>
+<script type="text/javascript" src="../../resources/js/reports/report.js"></script>
 </html>
 
 
