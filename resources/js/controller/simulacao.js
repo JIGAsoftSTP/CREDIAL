@@ -57,6 +57,7 @@ $("#cred-simula-import").click(function () {
                     "<b>" + "Sigla Banco: </b>" + e.return["BANCO SIGLA"], new Mensage().checkmark, -1);
                 var re = new refresh();
                 re.dataType = "CREDIT";
+                si = new Simulation();
                 saveRefresh(re);
                 resetForm($(".mp-new-credit").fadeOut(800));
             }
@@ -241,7 +242,6 @@ $("#cred-edit-table-amor").click(function () {
 function loadDcomentOrGarrant(element,array,id,value) {
     for (var x = 0; x < array.length; x++) {
         var lis =array[x];
-        // console.info(lis);
         var id_id = "simula-list-id-"+lis[id];
         element.append('<option id="'+id_id+'" value="'+lis[value]+'"></option>');
     }
@@ -348,8 +348,7 @@ function loadChequeSimulacao() {
 }
 
 $("#import-simulation").click(function () {
-    if (validarSimulacao($("#cred-form-cli input, #cred-form-cli select")) && checkIsValid() && testTableAmortizacao() && testlistDocGar()) {
-
+    if (si.nifClient != "" && validarSimulacao($("#cred-form-cli input, #cred-form-cli select")) && checkIsValid() && testTableAmortizacao() && testlistDocGar()) {
         si.numeroCheque =  $("#cred-cli-numDoc-veiw").html()+$("#cred-cli-numDoc").val();
         si.idBank =  $("#cred-cli-bank").val();
         si.objectoTipoCredito =  $("#cred-tipoCred").val();
