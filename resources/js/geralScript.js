@@ -67,7 +67,7 @@ $('.x-list').on('mouseenter','span',function(event) {
 $('.x-list').on('mouseleave','span',function(event) {
     var el = $(this);
     setTimeout(function(){
-      el.removeClass('hovered');
+        el.removeClass('hovered');
     }, 2000);
     event.stopPropagation()
 })
@@ -84,14 +84,14 @@ $('input[datalist="list"]').on('keypress', function (e) {
     }
 });
 
-$('input[datalist="list"]').on('input', function(event){  
-    prt = $(this).parent(); 
+$('input[datalist="list"]').on('input', function(event){
+    prt = $(this).parent();
     $('<a id="width">').append( $(this).val() ).appendTo($(this).parent());
     $(this).width( $('#width').width());
     $('#width').remove();
 });
 
-$('input[datalist="list"]').keyup(function(event){      
+$('input[datalist="list"]').keyup(function(event){
     if(event.which == 13 && verifyDataList($(this)) !== false){
         var newList = '<span id-opt="'+ verifyDataList($(this))['id'] +'" description="">'+ verifyDataList($(this))['valOpt'] +'<i></i><b></b></span>';
         prt.find('input').before(newList);
@@ -99,7 +99,7 @@ $('input[datalist="list"]').keyup(function(event){
         $(this).css('width', '5px');
     }
 });
-$('input[datalist="list"]').keydown(function(event){    
+$('input[datalist="list"]').keydown(function(event){
     if(event.which == 8 && $(this).val() == ""){
         $(this).prev().remove();
     }
@@ -133,7 +133,7 @@ function verifyDataList(ipt){
     ipt.next().find('option').each(function() {
         if($(this).val() == ipt.val()){
             globaal++;
-            arrayData['id'] = $(this).attr('id') + globaal;
+            arrayData['id'] = $(this).attr('id') +'-'+ globaal;
             arrayData['valOpt'] = $(this).val();
             return false;
         }
@@ -169,7 +169,7 @@ function XpertListItem(li){
     var list = li.closest('.xpert-list');
     var lst = list.find('.add-more-item');
     var qtt = li.find('b');
-    var qttNum = parseInt(qtt.text()); 
+    var qttNum = parseInt(qtt.text());
     var i = li.find('i');
     var realId = li.attr("id").split("-")[3]; // para pegar a ultima posição do id separado com '-'
     lst.before('<div class="item-list"><span value="'+realId+'">'
@@ -187,14 +187,14 @@ function XpertListItem(li){
     }
 
     /*else{
-        list.find('span').each(function(index, el) {
-            var me = $(this);
-            if( me.attr("value") === li.attr("id")){
-                me.closest('.item-list').remove();
-            }
-        });
-    }
-    i.toggleClass(' icon-checkbox-unchecked icon-checkbox-checked');*/
+     list.find('span').each(function(index, el) {
+     var me = $(this);
+     if( me.attr("value") === li.attr("id")){
+     me.closest('.item-list').remove();
+     }
+     });
+     }
+     i.toggleClass(' icon-checkbox-unchecked icon-checkbox-checked');*/
 }
 
 function XpertToggle(tgID , initialState, initialTxt){
@@ -207,8 +207,8 @@ function XpertToggleCtrl(tgID, txtON, txtOFF){
     if(tgID.find('.bar').hasClass('on'))
         tgID.find('.text').text(txtOFF);
     else
-        tgID.find('.text').text(txtON);        
-    
+        tgID.find('.text').text(txtON);
+
     tgID.find('.bar').toggleClass('on off');
 }
 
@@ -293,7 +293,7 @@ function setTitle(element){
             $(this).attr('title', $(this).attr('placeholder'));
         else
             $(this).attr('title', $(this).find('option').eq(0).text());
-        
+
     });
 
 }
@@ -304,9 +304,9 @@ $('.integer').keypress(function (event) {
 
     if ((event.which != 44 || $(this).val().indexOf('/') != -1) &&
         ((event.which < 48 || event.which > 57) &&
-            (event.which != 0 && event.which != 8))) {
+        (event.which != 0 && event.which != 8))) {
         event.preventDefault();
-}
+    }
 
 });
 
@@ -316,18 +316,18 @@ $('.double').keypress(function (event) {
 
     if ((event.which != 44 || $(this).val().indexOf(',') != -1) &&
         ((event.which < 48 || event.which > 57) &&
-            (event.which != 0 && event.which != 8))) {
+        (event.which != 0 && event.which != 8))) {
         event.preventDefault();
-}
+    }
 
-var text = $(this).val();
+    var text = $(this).val();
 
-if ((text.indexOf(',') != -1) &&
-    (text.substring(text.indexOf(',')).length > 2) &&
-    (event.which != 0 && event.which != 8) &&
-    ($(this)[0].selectionStart >= text.length - 2)) {
-    event.preventDefault();
-}
+    if ((text.indexOf(',') != -1) &&
+        (text.substring(text.indexOf(',')).length > 2) &&
+        (event.which != 0 && event.which != 8) &&
+        ($(this)[0].selectionStart >= text.length - 2)) {
+        event.preventDefault();
+    }
 });
 
 function resetForm(form){
@@ -350,10 +350,10 @@ function setDatePicker(){
     i = 0;
     $('.is-datepicker').each(function(index, el) {
         new Pikaday(
-        {
-            field: $('.is-datepicker')[i],
-            firstDay: 1,
-        });
+            {
+                field: $('.is-datepicker')[i],
+                firstDay: 1,
+            });
         i++;
     });
 }
@@ -375,7 +375,7 @@ function setDataStorage(_type, myObject, myKey, myValue){
 
 function getDataStorage(_type, myObject){
     typeData = _type === localStorage ? localStorage : sessionStorage;
-    
+
     return $.parseJSON(typeData.getItem(myObject));
 
 }
@@ -393,14 +393,12 @@ function deleteContentDataStorage(_type, myObject, myKey) {
 }
 function limitString(element){
     element.on('keydown keyup', function(e){
-    if ($(this).val() > 100 
-        && e.keyCode != 46 // delete
-        && e.keyCode != 8 // backspace
-       ) {
-       e.preventDefault();
-       $(this).val(100);
-    }
-});
+        if ($(this).val() > 100
+            && e.keyCode != 46 // delete
+            && e.keyCode != 8 // backspace
+        ) {
+            e.preventDefault();
+            $(this).val(100);
+        }
+    });
 }
-
-

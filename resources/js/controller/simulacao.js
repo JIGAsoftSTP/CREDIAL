@@ -242,7 +242,7 @@ $("#cred-edit-table-amor").click(function () {
 function loadDcomentOrGarrant(element,array,id,value) {
     for (var x = 0; x < array.length; x++) {
         var lis =array[x];
-        var id_id = "simula-list-id-"+lis[id];
+        var id_id = "simulaListId-"+lis[id];
         element.append('<option id="'+id_id+'" value="'+lis[value]+'"></option>');
     }
 }
@@ -274,27 +274,19 @@ function searchElement(obj, _title) {
     comoList = [];
     var reValue = true;
     obj.find("span").each(function () {
-        if( !$(this).hasClass("delete-item-list") && $(this).attr("value") != undefined){
-            var cb = new ComoBox();
-            cb.id = $(this).attr("value");
-            var input = $(this).parent("div.item-list").find("input:text");
-            cb.value = input.val();
-
-            var div = $(this).parent("div.item-list");
-            comoList[comoList.length] = cb;
-
-            if (isEmpty(input)) {
-                div.css("borderColor", "red");
-                input.addClass("empty");
-                callXpertAlert("Por Favor, adicione a descrição "+_title+"!", new Mensage().warning, 8000);
-                reValue = false;
-                return false;
-            }
-            else{
-                div.css("borderColor", "");
-                input.removeClass("empty");
-            }
+        if( $(this).attr("description") != "") {
+             var cb = new ComoBox();
+                cb.value = $(this).attr("description");
+                var id = $(this).attr("id-opt").split("-");
+                cb.id = id[1];
+                comoList[comoList.length] = cb;
+            $(this).css("borderColor", "");
+        } else {
+            $(this).css("borderColor", "red");
+            callXpertAlert("Por Favor, adicione a descrição "+_title+"!", new Mensage().warning, 8000);
+            reValue = false;
         }
+
     });
     return reValue;
 }
@@ -439,14 +431,14 @@ var FindCliente = function () {
 var cliFind = new FindCliente();
 $("#cred-sh-nif").keyup(function (e) {
     cliFind.isFind = false;
-    if($(this).val().length === 9){
+    if( $(this).val().length === 9 || e.keyCode === 13 ){
         for (var cc = 1; cc < 27; cc++){
             for (var cl = 0; cl < clientes[cc].length; cl++){
-                if (clientes[cc][cl]["NIF"] === $(this).val()){
+                if ( clientes[cc][cl]["NIF"].$$($(this).val().trim()) ){
                     cliFind.fullName = clientes[cc][cl]["NAME"]+" "+clientes[cc][cl]["SURNAME"];
                     var lastName = (clientes[cc][cl]["SURNAME"]).split(" ");
                     cliFind.name = clientes[cc][cl]["NAME"]+" "+(lastName[lastName.length-1]);
-                    cliFind.nif = $(this).val();
+                    cliFind.nif = clientes[cc][cl]["NIF"];
                     $("#cred-sh-name").text(cliFind.fullName);
                     cliFind.isFind = true;
                     break;
