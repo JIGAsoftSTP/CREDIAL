@@ -5,6 +5,10 @@
 	<link rel="stylesheet" href="../../resources/css/geralStyle.css">
 	<link rel="stylesheet" href="../../resources/css/admin/entity.css">
 	<link rel="stylesheet" href="../../resources/css/admin.css">
+    <script type="text/javascript" src="../../resources/fw/js/angular-route.js"></script>
+    <script type="text/javascript" src="../../resources/fw/js/angular-route.js"></script>
+    <script type="text/javascript" src="../../resources/js/controller/routeController.js"></script>
+
 
 </head>
 <body>

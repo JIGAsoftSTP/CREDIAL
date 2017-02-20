@@ -1,15 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
     <link rel="stylesheet" href="./resources/css/geralStyle.css">
     <!--	<link rel="stylesheet" href="./resources/css/xMenu.css">-->
     <link rel="stylesheet" href="./resources/css/admin.css">
+    <script type="text/javascript" src="resources/fw/js/angular.min.js"></script>
+    <script type="text/javascript" src="resources/js/controller/routeController.js"></script>
+    <script type="text/javascript" src="resources/fw/js/angular-route.js"></script>
 </head>
-<body id="p3">
+<body id="p3" >
 <?php include 'includes/menu.php'; ?>
-<div class="content-body">
+<div class="content-body" ng-controller="adminController">
     <div class="content-w-lateral" id="ctt-ltl-admin">
         <aside>
             <i class="icon-menu"></i>

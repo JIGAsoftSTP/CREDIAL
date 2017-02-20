@@ -29,13 +29,13 @@
 				<table id="tabela-relatorio-cheque" class="selectable" cellpadding="0" cellspacing="0">
                     <thead>
                     <tr>
-                        <th grow="2" grow2="0">Data Registo</th>
+                        <th grow="1" grow2="0">Data Registo</th>
                         <th grow="2" grow2="0">Débito</th>
                         <th grow="2" grow2="0">Crédito</th>
                         <th grow="2" grow2="0">Banco</th>
                         <th grow="1" grow2="0">Agência</th>
 
-                        <th grow="0" grow2="2">NIF</th>
+                        <th grow="0" grow2="1">NIF</th>
                         <th grow="0" grow2="2">Cliente</th>
                         <th grow="0" grow2="2">Nº Doc. Pagamento</th>
                         <th grow="0" grow2="2">Valor Cheque Reembolso</th>

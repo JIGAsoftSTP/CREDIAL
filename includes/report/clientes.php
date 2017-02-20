@@ -18,7 +18,7 @@
 
 
 			<div class="x-table table-client auto-width">
-				<table id="table-report-client" class="" cellpadding="0" cellspacing="0">
+				<table id="table-report-client" class="" cellpadding="0" cellspacing="0" >
 					<thead>
 						<tr>                    
 							<th grow="1.5" orderBy>NIF</th>
@@ -41,6 +41,8 @@
 <script type="text/javascript" src="../../resources/js/table.js"></script>
 <script type="text/javascript" src="../../resources/js/geralScript.js"></script>
 <script type="text/javascript" src="../../resources/js/reports/report.js"></script>
+<script type="text/javascript" src="../../resources/fw/js/angular.min.js"></script>
+
 <script type="text/javascript" src=""></script>
 
 </html>

@@ -27,7 +27,7 @@ function loadComoBoxIDandValueReport(element, array) {
     }
     if(existAnoSub && $(".report-P").attr('id') === undefined){
         $(".prd-enabled").append('<input type="text" id="relatorio-periodo" class="report-P integer" maxlength="3" ' +
-            'onkeypress="numericNumbers(event)" placeholder="Periodo em Comparação"/>');
+            'onkeypress="numericNumbers(event)" placeholder="Periodo em Comparação" value="1"/>');
         setDataStorage(sessionStorage, 'filterReport', "anoSub" , "1");
     }
     else $(".report-P").remove();

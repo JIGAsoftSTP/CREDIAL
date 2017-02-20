@@ -8,7 +8,7 @@ $('aside .single').on('click','li',function(event) {
         type:"POST",
         dataType:"json",
         data:{"intention" : "load report filters",
-            "reportName": $('#secondary-menu li.active').attr('id')},
+            "reportName":  $('#secondary-menu li.active').attr('id')},
         success:function (e)
 		{
             sessionStorage.removeItem('filterReport');
@@ -16,7 +16,12 @@ $('aside .single').on('click','li',function(event) {
 			$("#report-entities").append('<option value="">(Selecione)</option>');
 			loadComoBoxIDandValueReport($("#report-entities"), e.reportFilter);
 			data();
-		}
+			if( $('#secondary-menu li.active').attr('id') === TypeReport.CHEQUE)
+                $("#iframe-" + $('aside li.active').index()).contents().find(".filter-type-cheq li.active").trigger("click");
+		},
+		error:function (e) {
+			console.info(e);
+        }
 
     });
 });
