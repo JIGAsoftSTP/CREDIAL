@@ -427,21 +427,33 @@ $(".percent1020").change(function () {
     }
 });
 
+var FindCliente = function () {
+    this.name = undefined;
+    this.nif = undefined;
+    this.fullName = undefined;
+    this.isFind = false;
+};
+/***
+ * @type {FindCliente}
+ */
+var cliFind = new FindCliente();
 $("#cred-sh-nif").keyup(function (e) {
-    var isFind = false;
+    cliFind.isFind = false;
     if($(this).val().length === 9){
         for (var cc = 1; cc < 27; cc++){
-            console.log(cc+" -- "+clientes[cc].length);
             for (var cl = 0; cl < clientes[cc].length; cl++){
                 if (clientes[cc][cl]["NIF"] === $(this).val()){
+                    cliFind.fullName = clientes[cc][cl]["NAME"]+" "+clientes[cc][cl]["SURNAME"];
                     var lastName = (clientes[cc][cl]["SURNAME"]).split(" ");
-                    $("#cred-sh-name").text(clientes[cc][cl]["NAME"]+" "+lastName[lastName.length -1]);
-                    isFind = true;
+                    cliFind.name = clientes[cc][cl]["NAME"]+" "+(lastName[lastName.length-1]);
+                    cliFind.nif = $(this).val();
+                    $("#cred-sh-name").text(cliFind.fullName);
+                    cliFind.isFind = true;
                     break;
                 }
             }
-            if(isFind) {break;}
+            if(cliFind.isFind) {break;}
         }
-    }
+    }else{ $("#cred-sh-name").text(""); }
 });
 

@@ -143,12 +143,12 @@ $('.define-client').click(function(event) {
 });
 
 $('.select-client b').click(function(event) {
-        nif = $('#cred-sh-nif').val();
-        si.nifClient = nif;
-        name = $('#cred-sh-name').text();
-        $('#cred-cli-nif').text(nif);
-        $('#cred-cli-comName').text(name);
+    if(cliFind.isFind) {
+        si.nifClient = cliFind.nif;
+        $('#cred-cli-nif').text(cliFind.nif);
+        $('#cred-cli-comName').text(cliFind.name);
         $(this).closest('.select-client').removeClass('show');
+    }
 });
 
 $('.item-descript small').click(function(event) {

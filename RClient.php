@@ -191,8 +191,8 @@
 						<div class="select-client flex-form xpert-form">
 							<div>
 								<section>
-									<input type="text" id="cred-sh-nif" placeholder="NIF do cliente" class="input-3">
-									<span id="cred-sh-name">Name here!</span>
+									<input type="text" id="cred-sh-nif" maxlength="9" placeholder="NIF do cliente" class="input-3">
+									<span id="cred-sh-name"></span>
 								</section>
 								<a>
 									<b>Concluir</b>
