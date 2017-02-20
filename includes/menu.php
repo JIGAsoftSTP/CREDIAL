@@ -57,7 +57,7 @@ hasSession();
 				</div>
 				<div class="modal-header">
 					<b>Terminar sessão</b>
-					<span class="mp-close">X</span>
+					<span class="mp-close"></span>
 				</div>
 			</div>
 		</div>
@@ -79,7 +79,7 @@ hasSession();
 				</div>
 				<div class="modal-header">
 					<b>Alterar senha</b>
-					<span class="mp-close">X</span>
+					<span class="mp-close"></span>
 				</div>
 			</div>
 		</div>

@@ -87,6 +87,18 @@ $('.mp-menu-user .default').on("click","i",function(event) {
 $('.filter li').click(function(event) {
      filterUser($(this));
 });
+$('.search input').keyup(function(event) {
+    var secs = $('.list-user').find('section');
+    var txtipt = $(this).val().toLowerCase();
+    secs.each(function() {
+        if($(this).text().toLowerCase().indexOf(txtipt) === -1){
+            $(this).css('display', 'none');
+        } else{
+            $(this).css('display', 'block');
+
+        }
+    });
+});
 
 /*###################### AGENCY ##############*/
 

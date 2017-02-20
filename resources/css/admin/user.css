@@ -153,3 +153,29 @@
 	margin: 0 35% 1rem 0;
 	cursor: pointer;
 }
+
+.search{
+	border: 1px #ddd solid;
+	border-radius: 40px;
+	position: relative;
+
+}
+.search input{
+	border: none;
+	padding: 7px 1rem;
+	background: transparent;
+	width: 100%;
+	border-radius: 40px;
+	min-width: 200px;
+}
+.search input:focus{
+	background: #FFF;
+}
+.search i{
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	font-size: .8rem;	
+	z-index: 1;
+	right: 1rem;
+}

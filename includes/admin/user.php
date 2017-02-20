@@ -17,6 +17,7 @@
 				<li type="Inativo">Inativos</li>
 				<li class="active">Todos</li>
 			</ul>
+			<span class="search"><input type="" name=""><i class="icon-search"></i></span>
 			<span class="add-more default">+</span>
 		</nav>
 		<div class="second">
