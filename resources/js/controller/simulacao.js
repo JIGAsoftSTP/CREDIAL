@@ -280,13 +280,13 @@ function searchElement(obj, _title) {
                 var id = $(this).attr("id-opt").split("-");
                 cb.id = id[1];
                 comoList[comoList.length] = cb;
-            $(this).css("borderColor", "");
+            hasClassTo($(this), "good", "bad");
         } else {
-            $(this).css("borderColor", "red");
+            hasClassTo($(this), "bad", "good");
             callXpertAlert("Por Favor, adicione a descrição "+_title+"!", new Mensage().warning, 8000);
             reValue = false;
+            return false;
         }
-
     });
     return reValue;
 }
@@ -448,4 +448,9 @@ $("#cred-sh-nif").keyup(function (e) {
         }
     }else{ $("#cred-sh-name").text(""); }
 });
+
+function hasClassTo(span, classNameAdd, classNameRemove) {
+    if ( span.hasClass(classNameRemove) ){ span.removeClass(classNameRemove)}
+    if ( !span.hasClass(classNameAdd) ){ span.addClass(classNameAdd); }
+}
 
