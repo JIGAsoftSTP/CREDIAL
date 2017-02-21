@@ -151,6 +151,10 @@ $('.select-client b').click(function(event) {
     }
 });
 
+$('.item-descript').click(function(event) {
+    event.stopPropagation();   
+});
+
 $('.item-descript small').click(function(event) {
     $(this).closest('.item-descript').removeClass('show');
 });

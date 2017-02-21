@@ -14,6 +14,8 @@ $('.test-expand').click(function(event) {
     expandTable($(this).closest('.master-content').find('.x-table'), true);
 });
 
+var chequeFiltro = 1;
+
 
 $(function () {
     sessionStorage.removeItem('filterReport');
@@ -24,23 +26,24 @@ $(function () {
          sendFilterReport();
     });
 
-    $(".filter-type-cheq li").click(function () {
-        chequeFiltro = $(this).attr("id");
-       deleteContentDataStorage(sessionStorage, 'filterReport','state');
-        sendFilterReport();
+    $('#secondary-menu li.active').click(function () {
+       if($(this).attr("id") === 2)
+           setDataStorage(sessionStorage, 'filterReport', "state", "1");
+       else if($(this).attr("id") === 3)
+           setDataStorage(sessionStorage, "filterReport", "state", "0");
     });
-
 });
 
-var chequeFiltro = 1;
-
 function sendFilterReport() {
+
+    if($('#secondary-menu li.active').attr('id') ===  TypeReport.CHEQUE){
+       chequeFiltro = $("#iframe-" + $('aside li.active').index()).contents().find(".filter-type-cheq li.active").attr("id");
+    }
 
     if(validation1($(".reportDate"))){
         if($(".report-P").attr('id') !== undefined)
             dataReport(1);
         else dataReport(0);
-
     }
 }
 
@@ -86,8 +89,7 @@ function reportTaeg(list)
     for(var i=0;i<list.length;i++)
     {
         var taeg = list[i];
-        isTotal = taeg["NIF"].toUpperCase();
-        if(isTotal !=="TOTAL"){
+        if(taeg["NIF"].toUpperCase() !=="TOTAL"){
             table.append('' +
                 '<tr><td >' + taeg["CREDITO NUM DOSSCIER"] + '</td><td >' + taeg["NIF"]+'</td>' +
                 '<td>'+taeg["NAME"]+" "+taeg["SURNAME"]+'</td><td>'+formattedString(taeg["CREDITO VALUE"])+'</td>' +
@@ -102,7 +104,6 @@ function reportTaeg(list)
 
 
 function reportChequeDistribuido(list) {
-
     var isTotal;
     var table = $("#iframe-" + $('aside li.active').index()).contents().find('table').find('tbody');
     table.empty();
@@ -122,7 +123,6 @@ function reportChequeDistribuido(list) {
 function dataReport(sub) {
    var dados;
    var activeReport = $('#secondary-menu li.active').attr('id');
-    console.info(".....fase inicial...");
     if(sub === 0)
         var reportFilter = new ReportFiler($("#report-inicial-date").val(), $("#report-final-date").val(), null);
     else
@@ -131,21 +131,19 @@ function dataReport(sub) {
         var reportFilter = new ReportFiler($("#report-inicial-date").val(), $("#report-final-date").val(),
             ($(".report-P").val() === "" ? "1" :$(".report-P").val()));
     }
-    if($('.title-report').text() !== "Cheques"){
+    if($('#secondary-menu li.active').attr('id') !==  TypeReport.CHEQUE){
         dados ={"intention": "report",
             "ReportFiler": reportFilter,
             "reportName": $('#secondary-menu li.active').attr('id'),
             "jsonValue": getDataStorage(sessionStorage,'filterReport')};
     }
     else{
-        if(chequeFiltro === 2)  setDataStorage(sessionStorage, "filterReport", 'state', "1");
-        else if(chequeFiltro === 3) setDataStorage(sessionStorage, "filterReport", 'state', "0");
+
         dados ={"intention": "report",
             "ReportFiler": reportFilter,
             "reportName": $('#secondary-menu li.active').attr('id'),
             "chequeFiltro": chequeFiltro,
             "jsonValue": getDataStorage(sessionStorage,'filterReport')};
-        console.info(".....fase final...");
     }
 
     $.ajax({
@@ -153,19 +151,16 @@ function dataReport(sub) {
         type:"POST",
         dataType:"json",
         data: dados,
+        error:function (e) {
+            console.info(e);
+        },
         success:function (e) {
-            if(activeReport === TypeReport.CLIENTES)
-                reportCustomer(e.result);
-            else if(activeReport === TypeReport.CRESCIMENTO_HOMOLOGO)
-                reportGrowth(e.result);
-            else if(activeReport === TypeReport.CREDITO_CONCEDIDO)
-                reportCredit(e.result);
-            else if(activeReport === TypeReport.COBRANCA)
-                reportCobrancas(e.result);
-            else if(activeReport === TypeReport.CAPITAL_TAEG)
-                reportTaeg(e.result);
-            else if(activeReport === TypeReport.DIVIDA_PRODUTO)
-                relatorioDividaProduto(e.result);
+            if(activeReport === TypeReport.CLIENTES) reportCustomer(e.result);
+            else if(activeReport === TypeReport.CRESCIMENTO_HOMOLOGO) reportGrowth(e.result);
+            else if(activeReport === TypeReport.CREDITO_CONCEDIDO) reportCredit(e.result);
+            else if(activeReport === TypeReport.COBRANCA) reportCobrancas(e.result);
+            else if(activeReport === TypeReport.CAPITAL_TAEG) reportTaeg(e.result);
+            else if(activeReport === TypeReport.DIVIDA_PRODUTO) relatorioDividaProduto(e.result);
             else relatorioCheque(e.result);
         }
     });
@@ -191,11 +186,17 @@ function reportCustomer(list)
 }
 
 function relatorioCheque(list) {
-    if(chequeFiltro === 1) reportChequeDistribuido(list);
-    else relatorioChequeEstado(list);
+
+    if(chequeFiltro === "1"){
+        reportChequeDistribuido(list);
+    }
+    else{
+        relatorioChequeEstado(list);
+    }
 }
 
 function relatorioDividaProduto(list) {
+
     var table = $("#iframe-" + $('aside li.active').index()).contents().find('table').find('tbody');
     table.empty();
     for(var i=0;i<list.length;i++)
@@ -225,16 +226,17 @@ function relatorioDividaProduto(list) {
 function relatorioChequeEstado(list) {
     var table = $("#iframe-" + $('aside li.active').index()).contents().find('table').find('tbody');
     table.empty();
+
     for(var i=0;i<list.length;i++)
     {
         var cheque = list[i];
-        if(cheque["NIF"] !== "TOTAL" || cheque["NIF"] !=="total"){
+        if(cheque["NIF"].toUpperCase() !== "TOTAL"){
             table.append('' +
-                '<tr><td >' + cheque["NIF"] + '</td><td >' + cheque["NAME"]+" "+cheque["SURNAME"]+'</td>' +
-                '<td>'+cheque["PAGAMENTO NUM DOCUMENTO"]+'</td><td>'+cheque["VALOR CHEQUE REEMBOLSO"]+'</td><td>'+cheque["DATA DOCUMENTO PAGAMENTO PREVISTO DEPOSITO"]+'</td>' +
-                '<td>'+cheque["BANCO SIGLA"]+'</td><td>'+cheque["PAGAMENTO DATA ENDOSSADO"]+'</td></tr>');
+                '<tr><td></td><td ></td><td></td><td></td><td></td>' +
+                '<td>'+cheque["NIF"]+'</td><td>'+cheque["NAME"]+" "+cheque["SURNAME"]+'</td><td>'+cheque["PAGAMENTO NUM DOCUMENTO"]+'</td><td>'
+                +cheque["VALOR CHEQUE REEMBOLSO"]+'</td><td>'+formatDate(cheque["DATA DOCUMENTO PAGAMENTO PREVISTO DEPOSITO"],2)+'' +
+                '</td><td>'+cheque["BANCO SIGLA"]+'</td><td>'+verifyEmpty(cheque["PAGAMENTO DATA ENDOSSADO"])+'</td></tr>');
         }
-
     }
     tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
 }
@@ -316,7 +318,6 @@ function data()
 
 function formatDate(date, type) {
     var newDate;
-    console.info("data "+date);
     if(type === 1){
        if(date !== null || date !=="null" || date!==""|| date!=="NULL"){
             var data =date.substr(0,10);
@@ -333,6 +334,11 @@ function formatDate(date, type) {
 
 }
 
+function verifyEmpty(_value)
+{
+    if(_value === null) return "";
+    else return formatDate(_value,2);
+}
 
 var TypeReport = {"CLIENTES" : "rep.cliente", "CRESCIMENTO_HOMOLOGO" : "rep.cresHomo", "CREDITO_CONCEDIDO": "rep.credConc",
     "COBRANCA": "rep.cobranca",  "CAPITAL_TAEG": "rep.capiTAEG", "DIVIDA_PRODUTO": "rep.diviProd", "CHEQUE" : "rep.cheques" };

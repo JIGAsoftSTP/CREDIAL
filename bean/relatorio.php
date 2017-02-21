@@ -34,12 +34,12 @@
     function reportSearchFilter(){
         $reportName = $_POST["reportName"];
 
-        if($reportName == "Clientes") $reportName = "funct_rep_client_credito_somatorio";
-        else if($reportName == "Crescimento Homologo") $reportName = "funct_rep_client_crescimento_homologo";
-        else if($reportName == "Creditos Concedidos") $reportName = "funct_rep_client_credito_contagem";
-        else if($reportName == "Cobranças") $reportName = "funct_rep_cobranca";
-        else if($reportName == "Capital / TAEG") $reportName = "funct_rep_divida_capital_taeg";
-        else if($reportName == "Dividas por Produto") $reportName = "funct_rep_dividas_produtos";
+        if($reportName == "rep.cliente") $reportName = "funct_rep_client_credito_somatorio";
+        else if($reportName == "rep.cresHomo") $reportName = "funct_rep_client_crescimento_homologo";
+        else if($reportName == "rep.credConc") $reportName = "funct_rep_client_credito_contagem";
+        else if($reportName == "rep.cobranca") $reportName = "funct_rep_cobranca";
+        else if($reportName == "rep.capiTAEG") $reportName = "funct_rep_divida_capital_taeg";
+        else if($reportName == "rep.diviProd") $reportName = "funct_rep_dividas_produtos";
         else $reportName = "funct_rep_cheques_distribuidos";
 
         $call= new CallPgSQL();
