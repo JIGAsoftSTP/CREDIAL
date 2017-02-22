@@ -151,6 +151,9 @@ function dataReport(sub) {
         type:"POST",
         dataType:"json",
         data: dados,
+        beforeSend: function () {  $(".mp-loading").fadeIn(); },
+        complete: function () {
+            $(".mp-loading").fadeOut();},
         error:function (e) {
             console.info(e);
         },
@@ -311,8 +314,12 @@ function data()
      month = d.getMonth()+1;
      day = d.getDate();
      year = d.getFullYear();
-     $("#report-inicial-date").val(day+"-"+d.getMonth()+"-"+year);
-     $("#report-final-date").val(day+"-"+month+"-"+year);
+     if(isEmpty($("#report-inicial-date, #report-final-date")))
+     {
+         $("#report-inicial-date").val(day+"-"+d.getMonth()+"-"+year);
+         $("#report-final-date").val(day+"-"+month+"-"+year);
+     }
+
     $('.x-icon-ok').trigger("click");
 }
 
