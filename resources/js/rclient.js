@@ -217,6 +217,11 @@ $('.about-customer').click(function(event){
 });
 
 
+$('.x-list-select').on('mouseup', 'li', function(event) {
+    loadChequeSimulacao();
+});
+
+
 function setDescription(ident, desc){
     var flag = true;
     $('.x-list').each(function() {
