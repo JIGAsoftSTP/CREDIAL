@@ -24,6 +24,16 @@
 			<div class="container">
 				<div class="list-user">
 				</div>
+				<div class="log-user">
+					<div class="content">	
+						<ul class="user-names">
+							
+						</ul>
+						<div class="list-logs">
+							
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 		<div class="add-new-admin xpert-form">
