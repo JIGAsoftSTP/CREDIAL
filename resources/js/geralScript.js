@@ -106,6 +106,17 @@ $('input[datalist="list"]').keydown(function(event){
 });
 
 
+$('.x-list-select input').click(function(event) {
+    $(this).next().addClass('show');
+    
+});
+$('.x-list-select li').mouseup(function(event) {
+    $(this).closest('.x-list-select').find('input').val($(this).text());
+    $(this).parent().removeClass('show');
+    
+});
+
+
 /*########      CONTROL LATERAL MENU        ####################*/
 
 $('.content-w-lateral .icon-menu').click(function(event) {
