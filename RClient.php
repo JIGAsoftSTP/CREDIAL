@@ -286,8 +286,8 @@
 										<div class="x-list-select input-total">
 											<input type="text"  id="" placeholder="Banco" title="" class="input-total" readonly>
 											<ul>
-												<li status="good">jhbkjn</li>
-												<li status="bad">jhbkjn</li>
+												<li id="jygi" status="good">jhbkjn</li>
+												<li id="jkbhk" status="bad">jhbkjn</li>
 											</ul>
 										</div>
 										<div class="special-ipt">

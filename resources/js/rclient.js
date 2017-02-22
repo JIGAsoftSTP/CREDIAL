@@ -213,7 +213,7 @@ $('.select-client small').click(function(event) {
 
 
 $('.about-customer').click(function(event){    
-    $('.item-descript').removeClass('show');
+    $('.item-descript, .x-list-select ul').removeClass('show');
 });
 
 
