@@ -101,10 +101,7 @@ $("#start-simulation").click(function () {
                     si.valorDesconto = Number($("#cred-desco").val()).dc();
                     si.taeg = Number(e.return['TAXA COM DESCONTO']).dc();
                     si.idTaxa = Number(e.return['ID TAXA INFERIOR']).dc();
-
-                    $("#cred-cli-bank").html('<option value="0">(Banco)</option>');
-                    banks = e.banks;
-                    loadComoBoxIDandValue($("#cred-cli-bank"), e.banks, "ID", "SIGLA");
+                    addBancoCheque($("#cred-cli-bank-list"), e.banks);
 
                     // "ID TAXA INFERIOR":"51"
                     bluiderTablePestacao();
@@ -452,5 +449,21 @@ $("#cred-sh-nif").keyup(function (e) {
 function hasClassTo(span, classNameAdd, classNameRemove) {
     if ( span.hasClass(classNameRemove) ){ span.removeClass(classNameRemove)}
     if ( !span.hasClass(classNameAdd) ){ span.addClass(classNameAdd); }
+}
+
+/**
+ *
+ * @param op
+ * @param banks {Array}
+ */
+function addBancoCheque(op, banks){
+    for (var i = 0; i < banks.length; i++){
+        var idbank = banks[i]["ID"];
+        op.append("<li id="+idbank+" status="+getStats(idbank)+">"+banks[i]["SIGLA"]+"</li>");
+    }
+}
+
+function getStats(id) {
+    return (Number(id) > 0) ? "good" : "bad";
 }
 

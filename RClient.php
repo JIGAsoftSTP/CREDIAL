@@ -284,11 +284,8 @@
 									<h2>O cliente</h2>
 									<div class="flex-form" id="cred-form-cli">
 										<div class="x-list-select input-total">
-											<input type="text"  id="" placeholder="Banco" title="" class="input-total" readonly>
-											<ul>
-												<li id="jygi" status="good">jhbkjn</li>
-												<li id="jkbhk" status="bad">jhbkjn</li>
-											</ul>
+											<input type="text"  id="cred-cli-bank" placeholder="Banco" title="Banco" class="input-total" readonly>
+											<ul id="cred-cli-bank-list"></ul>
 										</div>
 										<div class="special-ipt">
 											<span placeholder="Nº Doc. p/ pgto" id="cred-cli-numDoc-veiw" ></span>
