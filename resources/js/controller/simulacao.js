@@ -110,7 +110,7 @@ $("#start-simulation").click(function () {
                     callXpertAlert(e.return['MESSAGE'], new Mensage().cross, 8000);
                     $('section .part-2 b').text("0,0");
                     $("#cred-totalPagar").text("0,0");
-                    $("#cred-cli-bank").html('<option value="0">(Banco)</option>');
+                    // $("#cred-cli-bank").html('<option value="0">(Banco)</option>');
 
                     si.dataTableAmortizacao = [];
 
@@ -292,12 +292,12 @@ $("#cred-cli-bank").change(loadChequeSimulacao);
 
 var sBank = undefined;
 function loadChequeSimulacao() {
-    si.idBank = $("#cred-cli-bank").val();
+    si.idBank = $("#cred-cli-bank").attr("newid");
     $("#cred-cli-numDoc").val("");
     $("#cred-cli-numDoc-veiw").html("");
     sBank = getStateBankByID();
-    si.bankState = ($("#cred-cli-bank").val() === "0") ? "0" :  sBank['STATE'];
-    si.idForRegBank = ($("#cred-cli-bank").val() === "0") ? "0" : sBank['ID_BANCO'];
+    si.bankState = ($("#cred-cli-bank").attr("newid") === "0") ? "0" :  sBank['STATE'];
+    si.idForRegBank = ($("#cred-cli-bank").attr("newid") === "0") ? "0" : sBank['ID_BANCO'];
     if(si.bankState !== "0" ) {
         $.ajax({
             url: "./bean/simulation.php",
@@ -324,7 +324,7 @@ function loadChequeSimulacao() {
             }
         });
     }else{
-        if($("#cred-cli-bank").val() != "0") {
+        if($("#cred-cli-bank").attr("newid") != "0") {
             callXpertAlert("Banco " + sBank["NAME"] + " " + sBank["MESSAGE"], new Mensage().cross, 8000);
             si.numeroCheque = undefined;
             si.idCheque = undefined;
@@ -339,7 +339,7 @@ function loadChequeSimulacao() {
 $("#import-simulation").click(function () {
     if (si.nifClient != "" && validarSimulacao($("#cred-form-cli input, #cred-form-cli select")) && checkIsValid() && testTableAmortizacao() && testlistDocGar()) {
         si.numeroCheque =  $("#cred-cli-numDoc-veiw").html()+$("#cred-cli-numDoc").val();
-        si.idBank =  $("#cred-cli-bank").val();
+        si.idBank =  $("#cred-cli-bank").attr("newid");
         si.objectoTipoCredito =  $("#cred-tipoCred").val();
         si.objectoFontePagamento =  $("#cred-cli-fonRend").val();
         openModalFrame($('.mp-confirm-simulation'));
