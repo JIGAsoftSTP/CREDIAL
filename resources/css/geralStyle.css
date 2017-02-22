@@ -658,8 +658,8 @@ header .pin.unpin{
 	max-width: 100px;
 }
 
-.x-list-select input{
-	
+.x-list-select{
+	position: relative;
 }
 .x-list-select ul{
 	position: absolute;
@@ -686,7 +686,7 @@ header .pin.unpin{
 	padding: 0 1rem;
 }
 .x-list-select li[status = "good"]{
-	color: #222;
+	color: #5FBC4D;
 }
 .x-list-select li[status = "bad"]{
 	color: tomato;
@@ -694,11 +694,8 @@ header .pin.unpin{
 .x-list-select  li:hover{
 	background: #f5f5f5;
 	padding-left: 2rem;
+	color: #222;
 }
-.x-list-select  li[status="good"]:hover{
-	color: #4387FD;
-}
-
 /*################### MODAL FRAME #################*/
 
 /*<section class="modalPage mp-new-credit">

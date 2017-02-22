@@ -283,9 +283,13 @@
 								<span>
 									<h2>O cliente</h2>
 									<div class="flex-form" id="cred-form-cli">
-										<select id="cred-cli-bank" class="input-total" title="Banco">
-											<option value="0">(Banco)</option>
-										</select>
+										<div class="x-list-select input-total">
+											<input type="text"  id="" placeholder="Banco" title="" class="input-total" readonly>
+											<ul>
+												<li status="good">jhbkjn</li>
+												<li status="bad">jhbkjn</li>
+											</ul>
+										</div>
 										<div class="special-ipt">
 											<span placeholder="Nº Doc. p/ pgto" id="cred-cli-numDoc-veiw" ></span>
 											<input type="text"  id="cred-cli-numDoc" placeholder="Nº Doc. p/ pgto" title="Número documento" class="integer" maxlength="3">
