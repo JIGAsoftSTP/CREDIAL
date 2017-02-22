@@ -111,7 +111,7 @@ $('.x-list-select input').click(function(event) {
     event.stopPropagation();
     
 });
-$('.x-list-select li').mouseup(function(event) {
+$('.x-list-select').on('mouseup', 'li', function(event) {
     $(this).closest('.x-list-select').find('input').val($(this).text());
     $(this).closest('.x-list-select').find('input').attr('newid', $(this).attr('id'));
     $(this).parent().removeClass('show');
