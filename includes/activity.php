@@ -84,7 +84,7 @@
 					</section>
 				</div>
 			</div>
-			<div class="div-statitcs">
+			<div class="div-statitcs show">
 				<span class="x-close"></span>
 				<div class="det-tabs">
 					<nav class="total-added">
