@@ -186,7 +186,7 @@
 					</div>
 				</div>
 			</div>
-			<section class="modalPage mp-new-credit" style="display: block;">
+			<section class="modalPage mp-new-credit">
 				<div class="modalFrame">
 					<div class="modalContainer">
 						<div class="select-client flex-form xpert-form">
@@ -416,6 +416,47 @@
 		</div>
 	</div>
 </section>
+    <section class="modalPage mp-liquidar-full" id="cred-pay-form-full">
+        <div class="modalFrame">
+            <div class="modalContainer">
+                <div class="content">
+                    <p class="type-font">
+                        <i class="icon-checkbox-unchecked" id="cred-pay-dife">
+                            <label>Fonte de pagamento diferente</label>
+                        </i>
+                    </p>
+                    <div class="secDiv xpert-form" >
+                        <section class="sec-same flex-form ">
+                            <p>
+                                <label>Inical</label>
+                                <label>12522555</label>
+                            </p>
+                            <p>
+                                <label>Pago</label>
+                                <label>12522555</label>
+                            </p>
+                            <p>
+                                <label>Valor Recalculado</label>
+                                <label>12522555</label>
+                            </p>
+                            <p>
+                                <label>Diferença</label>
+                                <label>12522555</label>
+                            </p>
+                        </section>
+                    </div>
+                </div>
+                <div class="bt-yes-no-cancel">
+                    <button id="cred-pay-bt-full">OK</button>
+                    <button class="bt-no-option">Cancelar</button>
+                </div>
+                <div class="modal-header">
+                    <b>Efetuar pagamento</b>
+                    <span class="mp-close"></span>
+                </div>
+            </div>
+        </div>
+    </section>
 <section class="modalPage mp-confirm-simulation">
 	<div class="modalFrame">
 		<div class="modalContainer">
