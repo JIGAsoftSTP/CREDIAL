@@ -219,7 +219,7 @@ header .pin.unpin{
 .header-1.shrinked{
 	max-height: 0;
 	overflow: hidden;
-	transition: all .5s;
+	transition: none;
 }
 .header-1 .logo{
 	margin-left: 2.5rem;

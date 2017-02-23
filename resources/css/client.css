@@ -81,7 +81,7 @@
 	text-align: center;
 	font-size: 1.5rem;
 	cursor: pointer;
-	box-shadow: 1px 0 20px 0 #bbb;
+	box-shadow: 1px 2px 2px 1px rgba(0,0,0,.2);
 	font-weight: bold;
 	z-index: 10;
 }
@@ -92,13 +92,16 @@
 	display: inline-block;
 	line-height: 50px;
 }
+.new-client:hover,
+.new-simulation:hover{
+	box-shadow: none;
+}
+
 .new-client:hover{
 	background: #4387fd;
-	box-shadow: none;
 }
 .table-client{
 	flex-grow: 1;
-	/*height: 100px;*/
 	width: 100%;
 	background: #fff;
 	max-width: 1000px;
@@ -110,11 +113,6 @@
 	font-size: .97rem;
 }
 .content-body .alphabet{
-	/*padding: 5px 0;*/
-	/*max-width: 1000px;
-	width: 100%;
-	align-self: flex-start;
-	margin: auto;*/
 	position: absolute;
 	font-size: .97rem;
 	left: 0;
@@ -135,18 +133,6 @@
 	line-height: 2rem;
 	margin-bottom: 7px;
 	color: #f5f5f5;
-	/*display: inline-block;
-	width: 2.5rem;
-	line-height: 1.6rem;
-	text-align: center;
-	background: #FFF;
-	border-radius: 0 0 3px 3px;
-	border-right: 1px #cdcdcd solid;
-	border-bottom: 1px #cdcdcd solid;
-	cursor: pointer;
-	font-size: .8rem;
-	font-weight: bold;
-	color: #555;*/
 }
 
 .alphabet span:hover{
