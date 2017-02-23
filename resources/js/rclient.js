@@ -212,7 +212,7 @@ $('.select-client small').click(function(event) {
 });
 
 
-$('.about-customer').click(function(event){    
+$('.mp-new-credit .modalContainer').click(function(event){    
     $('.item-descript, .x-list-select ul').removeClass('show');
 });
 
