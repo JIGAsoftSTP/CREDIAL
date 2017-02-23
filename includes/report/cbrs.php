@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="../../resources/css/geralStyle.css">
+	<link rel="stylesheet" href="../../resources/css/reports/report-all.css">
 	<link rel="stylesheet" href="../../resources/css/report.css">
 	<link rel="stylesheet" href="../../resources/css/reports/report.css">
 	<link rel="stylesheet" href="../../resources/css/reports/cbrs.css">

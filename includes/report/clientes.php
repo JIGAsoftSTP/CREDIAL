@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="../../resources/css/geralStyle.css">
+	<link rel="stylesheet" href="../../resources/css/reports/report-all.css">
 	<link rel="stylesheet" href="../../resources/css/report.css">
 	
 	
@@ -32,6 +33,16 @@
 					</tbody>
 				</table>
 			</div>
+			<!-- <div class="sum-parts">
+				<section>
+					<h1>Value here!</h1>
+					<span>Description here!</span>
+				</section>
+				<section>
+					<h1>Value here!</h1>
+					<span>Description here!</span>
+				</section>
+			</div> -->
 		</div>
 	</div>
 

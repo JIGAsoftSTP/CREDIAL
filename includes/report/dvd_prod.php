@@ -5,6 +5,7 @@
 	<link rel="stylesheet" href="../../resources/css/geralStyle.css">
 	<link rel="stylesheet" href="../../resources/css/report.css">
 	<link rel="stylesheet" href="../../resources/css/reports/cap_taeg.css">
+	<link rel="stylesheet" href="../../resources/css/reports/report-all.css">
 	
 	
 </head>

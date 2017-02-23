@@ -23,28 +23,28 @@ $(function () {
 
 
     $('.x-icon-ok').click(function() {
-         sendFilterReport();
-    });
+       sendFilterReport();
+   });
 
     $('#secondary-menu li.active').click(function () {
-       if($(this).attr("id") === 2)
-           setDataStorage(sessionStorage, 'filterReport', "state", "1");
-       else if($(this).attr("id") === 3)
-           setDataStorage(sessionStorage, "filterReport", "state", "0");
-    });
+     if($(this).attr("id") === 2)
+         setDataStorage(sessionStorage, 'filterReport', "state", "1");
+     else if($(this).attr("id") === 3)
+         setDataStorage(sessionStorage, "filterReport", "state", "0");
+ });
 });
 
 function sendFilterReport() {
 
     if($('#secondary-menu li.active').attr('id') ===  TypeReport.CHEQUE){
-       chequeFiltro = $("#iframe-" + $('aside li.active').index()).contents().find(".filter-type-cheq li.active").attr("id");
-    }
+     chequeFiltro = $("#iframe-" + $('aside li.active').index()).contents().find(".filter-type-cheq li.active").attr("id");
+ }
 
-    if(validation1($(".reportDate"))){
-        if($(".report-P").attr('id') !== undefined)
-            dataReport(1);
-        else dataReport(0);
-    }
+ if(validation1($(".reportDate"))){
+    if($(".report-P").attr('id') !== undefined)
+        dataReport(1);
+    else dataReport(0);
+}
 }
 
 function reportGrowth(list)
@@ -121,39 +121,39 @@ function reportChequeDistribuido(list) {
 }
 
 function dataReport(sub) {
-   var dados;
-   var activeReport = $('#secondary-menu li.active').attr('id');
-    if(sub === 0)
-        var reportFilter = new ReportFiler($("#report-inicial-date").val(), $("#report-final-date").val(), null);
-    else
-    {
-        setDataStorage(sessionStorage, 'filterReport', "anoSub" , ($(".report-P").val() === "" ? "1" :$(".report-P").val()));
-        var reportFilter = new ReportFiler($("#report-inicial-date").val(), $("#report-final-date").val(),
-            ($(".report-P").val() === "" ? "1" :$(".report-P").val()));
-    }
-    if($('#secondary-menu li.active').attr('id') !==  TypeReport.CHEQUE){
-        dados ={"intention": "report",
-            "ReportFiler": reportFilter,
-            "reportName": $('#secondary-menu li.active').attr('id'),
-            "jsonValue": getDataStorage(sessionStorage,'filterReport')};
-    }
-    else{
+ var dados;
+ var activeReport = $('#secondary-menu li.active').attr('id');
+ if(sub === 0)
+    var reportFilter = new ReportFiler($("#report-inicial-date").val(), $("#report-final-date").val(), null);
+else
+{
+    setDataStorage(sessionStorage, 'filterReport', "anoSub" , ($(".report-P").val() === "" ? "1" :$(".report-P").val()));
+    var reportFilter = new ReportFiler($("#report-inicial-date").val(), $("#report-final-date").val(),
+        ($(".report-P").val() === "" ? "1" :$(".report-P").val()));
+}
+if($('#secondary-menu li.active').attr('id') !==  TypeReport.CHEQUE){
+    dados ={"intention": "report",
+    "ReportFiler": reportFilter,
+    "reportName": $('#secondary-menu li.active').attr('id'),
+    "jsonValue": getDataStorage(sessionStorage,'filterReport')};
+}
+else{
 
-        dados ={"intention": "report",
-            "ReportFiler": reportFilter,
-            "reportName": $('#secondary-menu li.active').attr('id'),
-            "chequeFiltro": chequeFiltro,
-            "jsonValue": getDataStorage(sessionStorage,'filterReport')};
-    }
+    dados ={"intention": "report",
+    "ReportFiler": reportFilter,
+    "reportName": $('#secondary-menu li.active').attr('id'),
+    "chequeFiltro": chequeFiltro,
+    "jsonValue": getDataStorage(sessionStorage,'filterReport')};
+}
 
-    $.ajax({
-        url: "bean/relatorio.php",
-        type:"POST",
-        dataType:"json",
-        data: dados,
-        beforeSend: function () {  $(".mp-loading").fadeIn(); },
-        complete: function () {
-            $(".mp-loading").fadeOut();},
+$.ajax({
+    url: "bean/relatorio.php",
+    type:"POST",
+    dataType:"json",
+    data: dados,
+    beforeSend: function () {  $(".mp-loading").fadeIn(); },
+    complete: function () {
+        $(".mp-loading").fadeOut();},
         error:function (e) {
             console.info(e);
         },
@@ -173,7 +173,7 @@ function reportCustomer(list)
 {
     var isTotal;
     var table = $("#iframe-" + $('aside li.active').index()).contents().find('table').find('tbody');
-        table.empty();
+    table.empty();
     for(var i=0;i<list.length;i++)
     {
         var customer = list[i];
@@ -206,10 +206,10 @@ function relatorioDividaProduto(list) {
     {
         var divida = list[i];
         if(divida["NIF"].toUpperCase() !== "TOTAL"){
-        table.append('' +
-            '<tr><td >' + divida["NIF"] + '</td><td >' + divida["NAME"]+" "+divida["SURNAME"] + '</td>' +
-            '<td>'+formattedString(divida["CREDITO VALUE SOLICITADO"])+'</td><td>'+formattedString(divida["CREDITO TOTAL PAGAR MONTANTE"])+'</td>' +
-            '<td>'+formattedString(divida["CREDITO VALUE PAGO"])+'</td></tr>');
+            table.append('' +
+                '<tr><td >' + divida["NIF"] + '</td><td >' + divida["NAME"]+" "+divida["SURNAME"] + '</td>' +
+                '<td>'+formattedString(divida["CREDITO VALUE SOLICITADO"])+'</td><td>'+formattedString(divida["CREDITO TOTAL PAGAR MONTANTE"])+'</td>' +
+                '<td>'+formattedString(divida["CREDITO VALUE PAGO"])+'</td></tr>');
         }
     }
     tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
@@ -311,33 +311,33 @@ function data()
 {
     var month, year, day;
     var d = new Date();
-     month = d.getMonth()+1;
-     day = d.getDate();
-     year = d.getFullYear();
-     if(isEmpty($("#report-inicial-date, #report-final-date")))
-     {
-         $("#report-inicial-date").val(day+"-"+d.getMonth()+"-"+year);
-         $("#report-final-date").val(day+"-"+month+"-"+year);
-     }
+    month = d.getMonth()+1;
+    day = d.getDate();
+    year = d.getFullYear();
+    if(isEmpty($("#report-inicial-date, #report-final-date")))
+    {
+       $("#report-inicial-date").val(day+"-"+d.getMonth()+"-"+year);
+       $("#report-final-date").val(day+"-"+month+"-"+year);
+   }
 
-    $('.x-icon-ok').trigger("click");
+   $('.x-icon-ok').trigger("click");
 }
 
 function formatDate(date, type) {
     var newDate;
     if(type === 1){
-       if(date !== null || date !=="null" || date!==""|| date!=="NULL"){
-            var data =date.substr(0,10);
-            newDate= data.substr(8,9)+"-"+data.substr(5,6)+"-"+data.substr(0,4);
-            return newDate.substr(3, 13);
-        }
-   }
-   else{
-        if(date !== null){
-            newDate = date.substr(8,9)+"-"+date.substr(5,6)+"-"+date.substr(0,4);
-            return newDate.substr(3, 13);
-        }
-   }
+     if(date !== null || date !=="null" || date!==""|| date!=="NULL"){
+        var data =date.substr(0,10);
+        newDate= data.substr(8,9)+"-"+data.substr(5,6)+"-"+data.substr(0,4);
+        return newDate.substr(3, 13);
+    }
+}
+else{
+    if(date !== null){
+        newDate = date.substr(8,9)+"-"+date.substr(5,6)+"-"+date.substr(0,4);
+        return newDate.substr(3, 13);
+    }
+}
 
 }
 
@@ -348,5 +348,23 @@ function verifyEmpty(_value)
 }
 
 var TypeReport = {"CLIENTES" : "rep.cliente", "CRESCIMENTO_HOMOLOGO" : "rep.cresHomo", "CREDITO_CONCEDIDO": "rep.credConc",
-    "COBRANCA": "rep.cobranca",  "CAPITAL_TAEG": "rep.capiTAEG", "DIVIDA_PRODUTO": "rep.diviProd", "CHEQUE" : "rep.cheques" };
+"COBRANCA": "rep.cobranca",  "CAPITAL_TAEG": "rep.capiTAEG", "DIVIDA_PRODUTO": "rep.diviProd", "CHEQUE" : "rep.cheques" };
 Object.freeze(TypeReport);
+
+
+
+autoSumTable();
+function autoSumTable(array){
+    array = {'khbk':'13546', 'erh3ebn':'254646'}
+    xTbl = $('.master-content .x-table');
+    $('<div class="sum-parts"></div>').insertAfter(xTbl)
+    for (var key in array) {
+         var value = data[key];
+         $('.sum-parts').append(
+            '<section>'+
+            '<h1>'+ array[key] +'</h1>'+
+            '<span>'+ key +'</span>'+
+            '</section>'
+            )
+     }
+}
