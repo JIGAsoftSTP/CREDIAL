@@ -24,6 +24,8 @@ $('aside .single').on('click','li',function(event) {
         }
 
     });
+    header = $('.header-report');
+    $(this).attr('id') == 'rel.acti' ? header.hide(200) : header.show(200);
 });
 
 
