@@ -9,14 +9,13 @@
 	
 </head>
 <body>
+
 	<div class="master-content">
 
 		<div class="table-list">
 			<nav class="to-report">
 				<h2></h2>
 			</nav>
-			
-
 
 			<div class="x-table table-client auto-width">
 				<table id="table-report-client" class="" cellpadding="0" cellspacing="0" >
@@ -32,6 +31,7 @@
 					<tbody id="tableReportCustomerBody">
 					</tbody>
 				</table>
+
 			</div>
 			<!-- <div class="sum-parts">
 				<section>
@@ -53,7 +53,7 @@
 <script type="text/javascript" src="../../resources/js/geralScript.js"></script>
 <script type="text/javascript" src="../../resources/js/reports/report.js"></script>
 <script type="text/javascript" src="../../resources/fw/js/angular.min.js"></script>
-
+<script type="text/javascript" src="../../resources/js/xMenu.js"></script>
 <script type="text/javascript" src=""></script>
 
 </html>

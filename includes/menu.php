@@ -84,7 +84,7 @@ hasSession();
 			</div>
 		</div>
 	</section>
-	<?php include "process.html"; ?>
+<!--        include "process.html"; -->
 	<section class="modalPage mp-feedback" >
 		<div class="modalFrame">
 			<div class="modalContainer">

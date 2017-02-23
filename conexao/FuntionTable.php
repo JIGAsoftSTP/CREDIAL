@@ -125,6 +125,7 @@ class FuntionTable
     function addJson($value){
 //        $this->addParam(TYPE::JSON, "'".$value."''");
         $this->addParam(TYPE::JSON, $value);
+        return $this;
     }
 
     function addDouble($value){
