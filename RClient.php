@@ -186,7 +186,7 @@
 					</div>
 				</div>
 			</div>
-			<section class="modalPage mp-new-credit" style="display: block;">
+			<section class="modalPage mp-new-credit">
 				<div class="modalFrame">
 					<div class="modalContainer">
 						<div class="select-client flex-form xpert-form">
