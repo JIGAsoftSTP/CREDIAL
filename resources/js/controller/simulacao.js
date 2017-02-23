@@ -101,6 +101,7 @@ $("#start-simulation").click(function () {
                     si.valorDesconto = Number($("#cred-desco").val()).dc();
                     si.taeg = Number(e.return['TAXA COM DESCONTO']).dc();
                     si.idTaxa = Number(e.return['ID TAXA INFERIOR']).dc();
+                    banks = e.banks;
                     addBancoCheque($("#cred-cli-bank-list"), e.banks);
 
                     // "ID TAXA INFERIOR":"51"
@@ -337,7 +338,7 @@ function loadChequeSimulacao() {
 }
 
 $("#import-simulation").click(function () {
-    if (si.nifClient != "" && validarSimulacao($("#cred-form-cli input, #cred-form-cli select")) && checkIsValid() && testTableAmortizacao() && testlistDocGar()) {
+    if ( hasNif() && validarSimulacao($("#cred-form-cli input, #cred-form-cli select")) && checkIsValid() && testTableAmortizacao() && testlistDocGar()) {
         si.numeroCheque =  $("#cred-cli-numDoc-veiw").html()+$("#cred-cli-numDoc").val();
         si.idBank =  $("#cred-cli-bank").attr("newid");
         si.objectoTipoCredito =  $("#cred-tipoCred").val();
@@ -345,6 +346,14 @@ $("#import-simulation").click(function () {
         openModalFrame($('.mp-confirm-simulation'));
     }
 });
+
+function hasNif() {
+    if (si.nifClient === ""){
+        callXpertAlert("Por favor, selecione um Cliente!", new Mensage().cross, 8000);
+        return false;
+    }
+    return true;
+}
 
 function testTableAmortizacao() {
     if(si.dataTableAmortizacao.length==0) {

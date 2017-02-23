@@ -90,6 +90,7 @@
         $result = $call->getValors();
         $js = json_encode(array("entity" =>$result));
         die($js);
+
     }
 
     function disableObject()
@@ -104,4 +105,5 @@
         $result = $call->getValors();
         $js = json_encode(array("resultado" =>$result));
         die($js);
+
     }
