@@ -37,6 +37,11 @@
 	overflow: hidden;
 	border-radius: 20px;
 }
+.search-span i.icon-search{
+	color: #aaa !important;
+	font-size: .85rem;
+	transform: translate(-3px, 2px);
+}
 .search-span span:hover{
 	padding: 5px 10px;
 	width: auto;
@@ -58,7 +63,7 @@
 .search-span input{
 	flex-grow: 1;
 	font-size: 1.3rem;
-	padding: .3rem 0;
+	padding: .3rem 0 .3rem .5rem;
 	border: none;
 	background: transparent;
 	font-weight: lighter;
@@ -146,7 +151,7 @@
 .content-body .add-new-form{
 	position: absolute;
 	top: 0;
-	left: -100%;
+	left: -550px;
 	background: #fff;
 	max-width: 500px;
 	box-shadow: 1px 0 20px 0 #bbb;
