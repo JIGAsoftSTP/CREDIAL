@@ -33,6 +33,22 @@ function loadComoBoxIDandValueReport(element, array) {
     else $(".report-P").remove();
 }
 
+function regUserActivity(url, contentKey, operation, jsonContent, level )
+{
+    $.ajax
+    ({
+        url: url,
+        Type:"POST",
+        dataType:"json",
+        data:{"intention":"reg_activity", "content key": contentKey,
+              "operation" : operation, "jsonContent": jsonContent,
+                "level": level},
+        success:function(e){
+
+        }
+    });
+}
+
 
 
 
@@ -203,3 +219,7 @@ function checkDate(str) {
     var partes = str.split("-");
     return new Date(partes[2], partes[1] - 1, partes[0]);
 }
+
+var LevelActivity = {"ELIMINAÇÃO" : 0, "Desativação" : 1, "Atualização": 2,
+    "Criação": 3,  "Visualização": 4, "Outros": undefined };
+Object.freeze(LevelActivity);

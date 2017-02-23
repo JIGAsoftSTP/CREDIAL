@@ -11,6 +11,8 @@ $(function () {
 });
 
 var address = "../../bean/user.php";
+var activityAdress = "../../bean/activity.php";
+var activity = undefined;
 function loadObjectType() {
 
     $.ajax({
@@ -21,6 +23,7 @@ function loadObjectType() {
         success: function (e) {
             loadComoBoxIDandValue($("#adminEntity"), e.objeto ,"ID", "NAME");
             entidades = e.objeto;
+            activities = e.objeto;
             for(var i =0;i<e.objeto.length;i++)
             {
                 $(".containerEntidades").append('<div class="entity-div"> ' +
@@ -52,13 +55,15 @@ function loadObjectValues(id)
         data: {"intention": "loadDataObject", "object_id":id},
         dataType: "json",
         success: function (e) {
+            entities = e.objeto;
+            activity = e.objeto[e.objeto.length-1]["idCredito"];
             $("#"+id).closest('.entity-div').find('.list').empty();
             for(var i =0;i<e.objeto.length;i++)
             {
                 $("#"+id).closest('.entity-div').find('.list').append('<div id="objectData'+e.objeto[i]["idCredito"]+'"><span  class="objectData'+e.objeto[i]["idCredito"]+'">'+e.objeto[i]["DESCRICAO"]+'</span><span class="delete objectData'+e.objeto[i]["idCredito"]+'" onclick="disableObject('+e.objeto[i]["idCredito"]+')">X</span></div>'+
                     '</nav> ');
             }
-
+            regUserActivity(activityAdress, activity,"REGISTOU UMA NOVA ENTIDADE", getDataStorage(localStorage,"activity" ), LevelActivity.Criação);
         }
     });
 }
@@ -83,6 +88,8 @@ function disableObject(idObject) {
 function addNewEntity() {
     if($("#ADMINENTITY").val() !== "" && $("#txtEntity").val() !== "")
     {
+        setDataStorage(localStorage, "activity", "entity", $("#txtEntity").val());
+        setDataStorage(localStorage, "activity", "idTypeEntity", $("#adminEntity").val());
         $.ajax({
             url:address,
             type:"POST",
@@ -113,6 +120,7 @@ function entityName(idEntity) {
     }
 }
 
+getDataStorage()
 /*setTimeout(function () { setWithEntity() }, 5000);
 
 function setWithEntity(){
