@@ -11,9 +11,9 @@ include_once "../modelo/User.php";
         $call = new CallPgSQL();
         $call->functionTable("funct_reg_activity","*")
             ->addNumeric(Session::getUserLogado()->getIdLogin())
-            ->addNumeric($_POST["content key"])
+            ->addNumeric(($_POST["contentKey"] == -1 ? null : $_POST["contentKey"]))
             ->addString($_POST["operation"])
-            ->addJson($_POST["jsonContent"])
+            ->addJson(($_POST["jsonContent"] == -1 ? null : $_POST["jsonContent"]))
             ->addInt($_POST["level"]);
         $call->execute();
 
