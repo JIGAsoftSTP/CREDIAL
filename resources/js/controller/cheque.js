@@ -33,6 +33,7 @@ $(function () {
                         callXpertAlert("Registo de Cheque restaurado com sucesso!", "checkmark", 8000);
                         $(".mp-reset-cheq").fadeOut();
                         carregarCheques();
+                        regUserActivity(chequeActivityAdress, -1, "Restaurou um Cheque", -1, LevelActivity.Atualização);
                     }
                     else
                         callXpertAlert(e.result["message"], "warning", 8000);
@@ -68,6 +69,7 @@ var chequeUrl = "../../bean/AdministracaoBean.php";
 var listaCheques = [];
 var indiceChequeAnular = undefined;
 var listaChequesRestaurar = [];
+var chequeActivityAdress = "../../bean/activity.php";
 var Cheque = function(){};
 Cheque.prototype.conta = undefined;
 Cheque.prototype.agencia = undefined;
@@ -102,6 +104,7 @@ function regCheque()
                     $('.add-new-admin').find('input, select').val("");
                     $('.add-new-admin').find('input, select').css("border", "");
                     carregarCheques();
+                    regUserActivity(chequeActivityAdress, -1, "Registou um novo Cheque", -1, LevelActivity.Criação);
                 }
                 else
                     callXpertAlert(e.result["message"], "warning", 8000);
@@ -122,6 +125,8 @@ function loadChequeData() {
             loadComoBoxIDandValue($("#chequeAgencia"), e.agencias ,"ID", "NOME");
         }
     });
+
+    regUserActivity(chequeActivityAdress, -1, "Visualizou o menu Cheque", -1, LevelActivity.Visualização);
 }
 
 function carregarCheques() {
@@ -229,6 +234,7 @@ function anularCheque() {
                 $(".mp-cancel-cheq").fadeOut();
                 callXpertAlert("Cheque anulado com sucesso!", "checkmark", 8000);
                 carregarCheques();
+                regUserActivity(chequeActivityAdress, -1, "Anulou um Cheque", -1, LevelActivity.Desativação);
 
             }
             else
