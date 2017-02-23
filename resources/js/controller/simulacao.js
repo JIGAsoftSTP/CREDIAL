@@ -468,11 +468,12 @@ function hasClassTo(span, classNameAdd, classNameRemove) {
 function addBancoCheque(op, banks){
     for (var i = 0; i < banks.length; i++){
         var idbank = banks[i]["ID"];
-        op.append("<li id="+idbank+" status="+getStats(idbank)+">"+banks[i]["SIGLA"]+"</li>");
+        var state = banks[i]["STATE"];
+        op.append("<li id="+idbank+" status="+getStats(state)+">"+banks[i]["NAME"]+"</li>");
     }
 }
 
-function getStats(id) {
-    return (Number(id) > 0) ? "good" : "bad";
+function getStats(state) {
+    return (Number(state) != 0) ? "good" : "bad";
 }
 
