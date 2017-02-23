@@ -38,9 +38,9 @@ function regUserActivity(url, contentKey, operation, jsonContent, level )
     $.ajax
     ({
         url: url,
-        Type:"POST",
+        type:"POST",
         dataType:"json",
-        data:{"intention":"reg_activity", "content key": contentKey,
+        data:{"intention":"reg_activity", "contentKey": contentKey,
               "operation" : operation, "jsonContent": jsonContent,
                 "level": level},
         success:function(e){
