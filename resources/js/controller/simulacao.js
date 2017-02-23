@@ -349,7 +349,7 @@ $("#import-simulation").click(function () {
 
 function hasNif() {
     if (si.nifClient === ""){
-        callXpertAlert("Por favor, secione um Cliente!", new Mensage().cross, 8000);
+        callXpertAlert("Por favor, selecione um Cliente!", new Mensage().cross, 8000);
         return false;
     }
     return true;
