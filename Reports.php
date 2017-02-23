@@ -10,13 +10,16 @@
 <body id="p2">
 	<?php include 'includes/menu.php'; ?> 
 	<div class="content-body" >
+
 		<div class="content-w-lateral" id="ctt-ltl-report">
 			<aside class="">
 				<i class="icon-menu"></i>
 				<ul class="single" id="secondary-menu"></ul>				
 			</aside>
 			<article class="article-report ">
+
 				<div class="content">
+
 					<div class="header-report">
 						<h1 class="title-report" >Clientes</h1>
 						<span class="funtionality">
@@ -30,6 +33,7 @@
 					</div>
 					<div class="report-content"  >
 						<!-- ALL PAGE HERE! -->
+
 
 					</div>
 
@@ -62,15 +66,12 @@
 					</div>
 					<div class="filter-added">
 						<nav> Filtro selecionado<i class="icon-ctrl show"></i></nav>
-
-						
 					</div>
 				</div>
-			</article>
-		</div>
-	</div>
-    <?php include "includes/process.html"; ?>
 
+			</article>
+            <?php include "includes/process.html"; ?>
+	</div>
 
 </body>
 <script type="text/javascript" src="./resources/fw/pikaday/pikaday.js"></script>

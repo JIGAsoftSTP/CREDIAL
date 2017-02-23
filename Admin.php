@@ -6,9 +6,7 @@
     <link rel="stylesheet" href="./resources/css/geralStyle.css">
     <!--	<link rel="stylesheet" href="./resources/css/xMenu.css">-->
     <link rel="stylesheet" href="./resources/css/admin.css">
-    <script type="text/javascript" src="resources/fw/js/angular.min.js"></script>
-    <script type="text/javascript" src="resources/js/controller/routeController.js"></script>
-    <script type="text/javascript" src="resources/fw/js/angular-route.js"></script>
+
 </head>
 <body id="p3" >
 <?php include 'includes/menu.php'; ?>

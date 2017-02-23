@@ -7,7 +7,6 @@
 	<link rel="stylesheet" href="./resources/css/fonts.css">
 	<link rel="stylesheet" href="./resources/css/index.css">
     <script type="text/javascript" src="resources/fw/js/angular.min.js"></script>
-    <script type="text/javascript" src="resources/fw/js/angular-route.js"></script>
 </head>
 <body>
 	<div class="udf">

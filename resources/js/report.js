@@ -9,6 +9,9 @@ $('aside .single').on('click','li',function(event) {
         dataType:"json",
         data:{"intention" : "load report filters",
             "reportName":  $('#secondary-menu li.active').attr('id')},
+        beforeSend: function () {  $(".mp-loading").fadeIn(); },
+        complete: function () {
+            $(".mp-loading").fadeOut();},
         success:function (e)
 		{
             sessionStorage.removeItem('filterReport');
