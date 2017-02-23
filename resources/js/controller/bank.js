@@ -2,6 +2,8 @@
  * Created by Helcio on 12/17/2016.
  */
 $(function(){
+
+    regUserActivity(bankActivityAddress, -1, "Visualizou o menu Banco", -1, LevelActivity.Visualização);
     carregarSiglas();
 
     $("#btBankActions").click(function () {
@@ -17,6 +19,7 @@ $(function(){
 });
 
 var bankAddress = "../../bean/AdministracaoBean.php";
+var bankActivityAddress = "../../bean/activity.php";
 
 var listBanks = [];
 var listMoviments = [];
@@ -171,6 +174,7 @@ function bankTransfer() {
                                 $("#movimentDesc").val("");
                                 $("#movimentDesc").css("border", "");
                                 callXpertAlert("Transferência efetuada com sucesso!", "checkmark", 8000);
+                                regUserActivity(bankActivityAddress, -1, "Realizou uma Transferência Bancária", -1, LevelActivity.Criação);
                             }
                             else
                                 callXpertAlert(e.result["MESSAGE"], 'warning', 8000);
@@ -205,6 +209,7 @@ function makeCreditDebit() {
                     callXpertAlert("Operação efetuada com sucesso!", "checkmark", 8000);
                     $('.debitCreditField').val("");
                     $('.debitCreditField').css("border", "");
+                    regUserActivity(bankActivityAddress, -1, "Realizou uma Operação de Débito/Crédito", -1, LevelActivity.Criação);
                     carregarSiglas();
                 }
                 else
@@ -271,6 +276,7 @@ function regBank()
             {
                 if(e.resultado["result"] === "true")
                 {
+                    regUserActivity(bankActivityAddress, -1, "Registou um novo Banco", -1, LevelActivity.Criação);
                     callXpertAlert('Banco registado com sucesso!', 'checkmark', 8000);
                     $('.add-new-bank').find('input').val("");
                     $('.add-new-bank').find('input').css("border", "");
@@ -326,6 +332,7 @@ function regBankAccount()
                                 $('.add-account').find('input, select').css("border", "");
                                 $("#bk-conta-descricao").val("");
                                 $("#bk-conta-descricao").css("border", "");
+                                regUserActivity(bankActivityAddress, -1, "Registou uma nova Conta Banco", -1, LevelActivity.Criação);
                                 carregarSiglas();
                             }
                             else
