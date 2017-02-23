@@ -74,7 +74,15 @@ $('.x-table').on('click','i',function(event) {
 
 
 /* ############## USER  ###########*/
-
+$('.master-content.adm-user').on('click','.add-more, i.icon-pencil', function(event) {
+    bt = $('#gest-user-add');
+    if($(this).hasClass('icon-pencil')){
+        bt.text('Editar')
+    } else{
+        bt.text('Adicionar')
+        
+    }
+});
 $('.add-new-user p').click(function(event) {
      openModalFrame($('.mp-menu-user'));
 });

@@ -1,12 +1,14 @@
 body{
 	height: 100vh;
-	background: #EDEFF5;
+	background: #F3F7FA;
+	padding-left: 2rem;
 }
 .log-user i.icon-search{
 	font-size: .9rem;
 }
 .log-user{
 	height: 100%;
+	padding-top: 1rem;
 }
 .log-user .content,
 .log-user .arend,
@@ -35,7 +37,7 @@ body{
 	min-width: 250px;
 	padding: 1rem;
 	background: #FFF;
-	margin-right: 5%;
+	margin-right: 3%;
 	position: relative;
 }
 .list-user-log .m-search{
@@ -43,11 +45,11 @@ body{
 	top: 0;
 	right: 0;
 	font-size: 1rem;
-	border-bottom: 2px transparent solid;
+	border-bottom: 2px #eee solid;
 	min-width: 220px;
 }
 .list-user-log .m-search.focus{
-	border-bottom:  2px solid #5093E1;
+	border-color: #5093E1;
 }
 .m-search input{
 	border: none;
@@ -84,17 +86,21 @@ body{
 }
 .list-user-log ul li.active{
 	font-weight: normal;
+	padding-left: 0;
 }
 
 
 .log-user .arend{
 	flex-grow: 1;
 }
+.arend .little-det{
+	padding-right: 2rem;
+}
 .arend .super-search{
 	width: 100%;
 	border: 1px #ddd solid;
 	border-radius: 4px;
-	padding: 0 1rem;
+	padding: 0 1rem ;
 	margin-bottom: 1rem;
 	position: relative;
 	z-index: 1;
@@ -130,7 +136,7 @@ body{
 .log-user .list-logs{
 	border-top: 1px #ddd solid;
 	margin-top: 2rem;
-	padding-top: 1rem;
+	padding: 1rem 2rem 0 0;
 	overflow: auto;
 }
 .list-logs section{
@@ -186,6 +192,7 @@ body{
 .log-user .div-statitcs{
 	position: absolute;
 	min-width: 320px;
+	top: 0;
 	right: -340px;
 	height: 100%;
 	background: #FFF;
@@ -193,6 +200,7 @@ body{
 	padding: 2rem 1.5rem 0 1.5rem;
 	overflow: auto;
 	z-index: 20;
+	padding-bottom: 1rem;
 }
 .div-statitcs.show{
 	right: 0;

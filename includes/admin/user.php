@@ -68,7 +68,7 @@
 				</div>
 				<div class="modal-header">
 					<b>Menus de acesso</b>
-					<span class="mp-close">X</span>
+					<span class="mp-close"></span>
 				</div>
 			</div>
 		</div>
