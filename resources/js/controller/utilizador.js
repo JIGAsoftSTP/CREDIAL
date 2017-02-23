@@ -1,8 +1,10 @@
 /**
  * Created by ahmedjorge on 10/27/16.
  */
+
 $("#add-ph-user").change(function (e)
 {
+
     if(!window.File || !window.FileReader || !window.FileList || !window.Blob)
     { return ; }
 
@@ -35,7 +37,11 @@ $("#add-ph-user").change(function (e)
 
 });
 
+
 var imageUser = undefined;
+var userActivityAddress = "../../bean/activity.php";
+
+regUserActivity(userActivityAddress, -1, "Visualizou o menu Utilizador", -1, LevelActivity.Visualização);
 function regUser() {
 
     if(isValideParanRegUser()) {
@@ -61,6 +67,7 @@ function regUser() {
                     callXpertAlert("Novo utilizador registado com sucesso!", new Mensage().checkmark, 10000);
                     $(".add-new-user").find("input:text").val("");
                     $(".add-new-user").find("select").val("0");
+                    regUserActivity(userActivityAddress, -1, "Registou um novo Utilizador", -1, LevelActivity.Criação);
                     var css = {"background":"content-box #444 url('../../resources/img/user.png') no-repeat"
                         ,"background-position":"center"
                         ,"background-size":"cover"};
@@ -88,7 +95,7 @@ function isValideParanRegUser() {
 
 function alertForAddImagem() {
     if(imageUser == undefined){
-        callXpertAlert('Por favor, carrege uma Imagem!', new Mensage().cross, 10000);
+        callXpertAlert('Por favor, carregue uma Imagem!', new Mensage().cross, 10000);
         return false;
     }
     else return true;
@@ -236,7 +243,15 @@ function disibleUser() {
         data: {intensao:"disibleUSER", USER : user},
         success: function (data) {
             if (data.result) {
-                callXpertAlert(user.nome+" "+user.apelido+" foi " +((user.disableMode === "F") ? " Redifinido " : " Desativado ")+" com sucesso!", new Mensage().checkmark, 10000);
+
+                if(user.disableMode === "F"){
+                    callXpertAlert("Palavra-Passe foi redifinida com sucesso! ", new Mensage().checkmark, 10000);
+                    regUserActivity(userActivityAddress, -1, "Redifiniu a palavra-passe do Utilizador", -1, LevelActivity.Atualização);
+                }
+                else{
+                    callXpertAlert("Utilizador foi desativado com sucesso! ", new Mensage().checkmark, 10000);
+                    regUserActivity(userActivityAddress, -1, "Desativou o Utilizador", -1, LevelActivity.Atualização);
+                }
                 setTimeout(loadListClient,4000,true);
             }
             else {
@@ -334,7 +349,7 @@ function editeClient() {
             nivel: areChengeNivel()
         };
         if(!change.menu&&!change.agencia&&!change.nivel&&!change.names){
-            callXpertAlert("Nenhuma alteraçao foi etuada!", new Mensage().warning, 10000);
+            callXpertAlert("Nenhuma alteração foi efetuada!", new Mensage().warning, 10000);
             return false;
         }
         $.ajax({
@@ -345,6 +360,7 @@ function editeClient() {
             success: function (data) {
                 if (data.result) {
                     callXpertAlert("O Utilizador foi editado com sucesso!", new Mensage().checkmark, 10000);
+                    regUserActivity(userActivityAddress, -1, "Atualizou Informações do Utilizador", -1, LevelActivity.Atualização);
                     resetForm($(".add-new-admin"));
                     resetForm($(".mp-menu-user"));
                     var css = {"background":"content-box #444 url('../../resources/img/user.png') no-repeat"

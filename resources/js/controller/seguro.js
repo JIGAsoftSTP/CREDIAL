@@ -4,6 +4,7 @@
 
 $(function () {
 
+    regUserActivity(securityActivityAddress, -1, "Visualizou o menu Seguros", -1, LevelActivity.Visualização);
     loadInsurance();
     $("#btAddInsurance").click(function () {
         regInsurance();
@@ -11,7 +12,7 @@ $(function () {
 });
 
 var securityAddress = "../../bean/AdministracaoBean.php";
-
+var securityActivityAddress = "../../bean/activity.php";
 function regInsurance() {
     if($("#txtInsurance").val() !== '')
     {
@@ -27,6 +28,7 @@ function regInsurance() {
                     callXpertAlert("Seguro adicionado com sucesso!", "checkmark", 8000);
                     $('.add-new-admin').find('input').val("");
                     $('.add-new-admin').find('input').css("border", "");
+                    regUserActivity(securityActivityAddress, -1, "Registou um novo Seguro", -1, LevelActivity.Criação);
                 }
                 else
                     callXpertAlert(e.result["MESSAGE"], "warning", 8000);
@@ -61,6 +63,8 @@ function loadInsurance() {
                 column1.innerHTML =insurance["ESTADO"];
             }
             tableEstructure($("#table-seguro"));
+
         }
+
     });
 }
