@@ -179,3 +179,26 @@
 	z-index: 1;
 	right: 1rem;
 }
+
+/*##########################################*/
+
+.log-user{
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: #FFF;
+	width: 100%;
+	z-index: 50;
+}
+.log-user ul{
+	width: 240px;
+	background: #ddd;
+}
+.log-user ul li{
+	line-height: 2.4rem;
+	border-bottom: 1px #333 solid;
+	
+}
+.log-user .content{
+	display: flex;
+}

@@ -5,7 +5,7 @@
 	<link rel="stylesheet" href="../../resources/css/geralStyle.css">
 	<link rel="stylesheet" href="../../resources/css/admin/user.css">
 	<link rel="stylesheet" href="../../resources/css/admin.css">
-    <link rel="stylesheet" href="../../resources/css/xMenu.css">
+	<link rel="stylesheet" href="../../resources/css/xMenu.css">
 </head>
 <body>
 	<div class="master-content adm-user">
@@ -23,16 +23,6 @@
 		<div class="second">
 			<div class="container">
 				<div class="list-user">
-				</div>
-				<div class="log-user">
-					<div class="content">	
-						<ul class="user-names">
-							
-						</ul>
-						<div class="list-logs">
-							
-						</div>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -54,6 +44,7 @@
 			<button id="gest-user-add" >Adicionar</button>
 		</div>
 	</div>
+	
 	<section class="modalPage mp-menu-user" >
 		<div class="modalFrame">
 			<div class="modalContainer">
@@ -64,7 +55,7 @@
 							<b>+</b>
 						</div>
 						<div id="gest-user-type">
-<!--							<i value="1" class="icon-radio-checked2"><span> Operador</span></i>-->
+							<!--							<i value="1" class="icon-radio-checked2"><span> Operador</span></i>-->
 						</div>
 					</div>
 					<ul class="XpertTreeMenu" id="menuAccessUser">
@@ -82,7 +73,7 @@
 			</div>
 		</div>
 	</section>
-    <?php include "../process.html"; ?>
+	<?php include "../process.html"; ?>
 </body>
 <script type="text/javascript" src="../../resources/js/jQuery.js"></script>
 <script type="text/javascript" src="../../resources/js/geralScript.js"></script>

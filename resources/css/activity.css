@@ -1,0 +1,243 @@
+body{
+	height: 100vh;
+	background: #EDEFF5;
+}
+.log-user i.icon-search{
+	font-size: .9rem;
+}
+.log-user{
+	height: 100%;
+}
+.log-user .content,
+.log-user .arend,
+.arend .super-search,
+.arend .det-tabs,
+.list-logs section .detail,
+.div-statitcs section span{
+	display: flex;
+}
+.arend .det-tabs,
+.div-statitcs .ctt-rgtds,
+.div-statitcs section span{
+	justify-content: space-between;
+}
+.list-logs section .detail,
+.div-statitcs section span{
+	align-items: center;
+}
+.log-user .arend{
+	flex-direction: column;
+}
+.log-user .content{
+	height: 100%;
+}
+.log-user .list-user-log{
+	min-width: 250px;
+	padding: 1rem;
+	background: #FFF;
+	margin-right: 5%;
+	position: relative;
+}
+.list-user-log .m-search{
+	position: relative;
+	top: 0;
+	right: 0;
+	font-size: 1rem;
+	border-bottom: 2px transparent solid;
+	min-width: 220px;
+}
+.list-user-log .m-search.focus{
+	border-bottom:  2px solid #5093E1;
+}
+.m-search input{
+	border: none;
+	width: 100%;
+	padding-left: 1.5rem;
+}
+.m-search i{
+	position: absolute;
+	left: 0;
+	top: 0;
+	color: #aaa;
+}
+.m-search.focus i{
+	color: #5093E1;
+}
+
+.list-user-log ul{
+	margin-top: 2rem;
+	overflow: auto;
+}
+.list-user-log ul li{
+	line-height: 2rem;
+	cursor: pointer;
+	margin-bottom: 5px;
+	text-transform: capitalize;
+	font-weight: lighter;
+	color: #555;
+	font-size: .95rem;
+}
+.list-user-log ul li:hover,
+.list-user-log ul li.active{
+	color: #5093E1;
+	padding-left: 1rem;
+}
+.list-user-log ul li.active{
+	font-weight: normal;
+}
+
+
+.log-user .arend{
+	flex-grow: 1;
+}
+.arend .super-search{
+	width: 100%;
+	border: 1px #ddd solid;
+	border-radius: 4px;
+	padding: 0 1rem;
+	margin-bottom: 1rem;
+	position: relative;
+	z-index: 1;
+}
+.arend .super-search.focus{
+	background: #FFF;
+}
+
+.super-search *{
+	border: none;
+	background: transparent;
+}
+.super-search i{
+	transform: translateY(30%);
+	z-index: -1;
+}
+.super-search input{
+	flex-grow: 1;
+	padding: .7rem 0 .7rem 1rem;
+	border-right: 1px #ddd solid;
+}
+.super-search select{
+	width: 8rem;
+}
+.arend .view-m-det{
+	color: #5093E1;
+}
+.arend .view-m-det:hover{
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.log-user .list-logs{
+	border-top: 1px #ddd solid;
+	margin-top: 2rem;
+	padding-top: 1rem;
+	overflow: auto;
+}
+.list-logs section{
+	margin-bottom: 1.5rem;
+}
+.list-logs section .hour{
+	font-weight: lighter;
+	color: #555;
+}
+.list-logs section .detail{
+	position: relative;
+	background: #FFF;
+	padding-left: 1.5rem;
+	margin-top: 5px;
+	box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.14);
+}
+.list-logs section i{
+	font-size: .8rem;
+	border-radius: 50%;
+	width: 40px;
+	line-height: 40px;
+	text-align: center;
+	color: #FFF;
+	margin-right: 1.5rem;
+}
+.list-logs section .detail > span{
+	border-left: 1px #eee solid;
+	padding: 1rem 0 1rem 1rem;
+}
+.list-logs section i.edit{
+	background: #3367D6;
+}.list-logs section i.remove{
+	background: tomato;
+}.list-logs section i.create{
+	background: #50C14E;
+}.list-logs section i.view{
+	background: #9A59B5;
+	font-size: 1rem;
+}
+.list-logs section .detail *{
+	display: block;
+}
+.list-logs section .description{
+	margin: .8rem 0 .6rem 0;
+}
+.list-logs section small{
+	color: #5093E1;
+}
+.list-logs section small:hover{
+	text-decoration: underline;
+	cursor: pointer;
+}
+.log-user .div-statitcs{
+	position: absolute;
+	min-width: 320px;
+	right: -340px;
+	height: 100%;
+	background: #FFF;
+	box-shadow: -30px 0 30px -30px rgba(0,0,0,.2);
+	padding: 2rem 1.5rem 0 1.5rem;
+	overflow: auto;
+	z-index: 20;
+}
+.div-statitcs.show{
+	right: 0;
+}
+.div-statitcs .x-close{
+	cursor: pointer;
+}
+.div-statitcs .det-tabs{
+	padding: 1rem 0;
+}
+.det-tabs h3{
+	font-size: 1.5rem;
+	margin-bottom: .8rem;
+}
+.det-tabs nav{
+	padding: 1rem;
+	color: #FFF;
+	margin-bottom: .5rem;
+}
+.det-tabs nav.total-added{
+	background: #50C14E;
+}
+.det-tabs nav.total-edited{
+	background: #3367D6;
+}
+.det-tabs nav.total-removed{
+	background: tomato;
+}
+
+.det-tabs nav b{
+	font-size: .9rem;
+}
+.div-statitcs section{
+	padding: 1rem ;
+	margin-top: 1rem;
+	background: #f5f5f5;
+	color: #777;
+}
+.div-statitcs section span{
+	margin-bottom: .7rem;
+}
+.div-statitcs section i{
+	font-size: 1.7rem;
+	color: #999;
+}
+.div-statitcs section h1{
+	font-size: 2rem;
+}

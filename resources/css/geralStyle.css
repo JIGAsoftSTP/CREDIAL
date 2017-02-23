@@ -781,6 +781,7 @@ header .pin.unpin{
 	cursor: pointer;
 	color: #555;
 }
+
 .modal-header span:before{
 	content: "\2716";
 	color: red;
@@ -906,6 +907,17 @@ header .pin.unpin{
 .xClose hr:last-child{
 	transform: rotate(-45deg);
 	margin-top: -2px;
+}
+.x-close{
+	position: absolute;
+	right: 2rem;
+	top: 1rem;
+}
+.x-close:before{
+	position: absolute;
+	content: "\2716";
+	color: red;
+
 }
 
 i.icon-checkbox-checked{
