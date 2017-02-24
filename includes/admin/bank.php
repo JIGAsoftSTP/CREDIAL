@@ -94,7 +94,7 @@
 				</section>
 
 				<section class="add-account">
-					<select name="" class="input-total listBanks" id="bk-conta-nome">
+					<select name="" class="input-total" id="bk-conta-nome">
 						<option value="0">(Banco)</option>
 					</select>
                     <input type="text" placeholder="Código Agência" class="input-total integer" maxlength="4" id="bk-conta-agencia" />

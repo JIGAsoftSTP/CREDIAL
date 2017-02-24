@@ -30,7 +30,7 @@ $(function () {
 
     $(".filter-type-cheq li").click(function ()
     {
-        
+
     });
 
 });
@@ -389,9 +389,6 @@ function autoSumTable(array)
      }
 }
 function sumTable(array){
-
-    if(array === null) array = {};
-
 
     $("#iframe-" + $('aside li.active').index()).contents().find('.sum-parts').remove();
     xTbl = $("#iframe-" + $('aside li.active').index()).contents().find('.master-content .x-table');
