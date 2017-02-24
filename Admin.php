@@ -2,7 +2,7 @@
 <html lang="en" >
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>Administração</title>
     <link rel="stylesheet" href="./resources/css/geralStyle.css">
     <!--	<link rel="stylesheet" href="./resources/css/xMenu.css">-->
     <link rel="stylesheet" href="./resources/css/admin.css">

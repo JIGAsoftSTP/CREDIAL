@@ -26,14 +26,3 @@ $('.view-m-det').add('.div-statitcs .x-close').click(function(event) {
 	$('.div-statitcs').toggleClass('show');
 });
 
-function advSearch(ipt, _items){
-	var txtipt = ipt.val().toLowerCase();
-	_items.each(function() {
-		if($(this).text().toLowerCase().indexOf(txtipt) === -1){
-			$(this).css('display', 'none');
-		} else{
-			$(this).css('display', 'block');
-
-		}
-	});
-}

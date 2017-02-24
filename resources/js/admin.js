@@ -92,20 +92,12 @@ $('.mp-menu-user .default').on("click","i",function(event) {
     $(this).siblings().removeClass('icon-radio-checked2').addClass('icon-radio-unchecked');
 });
 
+$('.search input').keyup(function(event) {
+    advSearch($(this), $('.list-user section'))
+});
 $('.filter li').click(function(event) {
      filterUser($(this));
-});
-$('.search input').keyup(function(event) {
-    var secs = $('.list-user').find('section');
-    var txtipt = $(this).val().toLowerCase();
-    secs.each(function() {
-        if($(this).text().toLowerCase().indexOf(txtipt) === -1){
-            $(this).css('display', 'none');
-        } else{
-            $(this).css('display', 'block');
-
-        }
-    });
+     // advSearch($('.search input'), $('.list-user section'))
 });
 
 /*###################### AGENCY ##############*/
@@ -144,11 +136,11 @@ function filterUser(el){
     el.addClass('active').siblings().removeClass('active');
     typeAttr = el.attr('type');
     users = $('.list-user section');
-    users.removeClass('hidden')
+    users.css('display', 'block');
     if( typeAttr !== undefined)
         users.each(function(index, el) {
             if (typeAttr !== $(this).attr('status'))
-                $(this).addClass('hidden');
+                $(this).css('display', 'none');
         });
     
 }

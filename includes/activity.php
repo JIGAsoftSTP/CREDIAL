@@ -119,5 +119,6 @@
 	</div>
 </body>
 <script src="../resources/js/jQuery.js"></script>
+<script src="../resources/js/geralScript.js"></script>
 <script src="../resources/js/activity.js"></script>
 </html>
