@@ -1,0 +1,38 @@
+.list-warr > section{
+	background: #FFF;
+	padding: 1rem;
+	box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.14);
+}
+.list-warr .first{
+	font-size: .95rem;
+	cursor: pointer;
+}
+.list-warr .first b{
+	display: flex;
+	justify-content: space-between;
+	color: #00B9A3;
+}
+.list-warr .first small{
+	font-weight: lighter;
+	text-decoration: underline;
+	color: #3398DC;
+}
+.list-warr h3{
+	margin-top: 10px;
+	color: #777;
+}
+.list-warr h4{
+	color: #666;
+}
+.list-warr .more{
+	background: #f9f9f9;
+	max-height: 0;
+	overflow: hidden;
+	font-weight: lighter;
+}
+.list-warr .more.show{
+	padding: 1rem;
+	border-top: 1px;
+	margin-top: 1rem;
+	max-height: 100vh;
+}
