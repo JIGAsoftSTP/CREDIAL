@@ -451,7 +451,7 @@
                     <button class="bt-no-option">Cancelar</button>
                 </div>
                 <div class="modal-header">
-                    <b>Efetuar pagamento</b>
+                    <b>Efetuar pagamento antecepado</b>
                     <span class="mp-close"></span>
                 </div>
             </div>
