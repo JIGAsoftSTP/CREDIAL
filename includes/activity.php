@@ -37,51 +37,51 @@
 				</div>
 				
 				<div class="list-logs">
-					<section>
-						<span class="hour">17:20</span>
-						<div class="detail">
-							<i class="icon-pencil edit"></i>
-							<span>
-								<span class="date">12-12-2017</span>
-								<span class="description">dnerjmnerjm</span>
-								<small>Mais detalhes</small>
-							</span>
-						</div>
-					</section>
-					<section>
-						<span class="hour">17:20</span>
-						<div class="detail">
-							<i class="icon-plus create"></i>
-							<span>
-								<span class="date">12-12-2017</span>
-								<span class="description">dnerjmnerjm</span>
-								<small>Mais detalhes</small>
-							</span>
-						</div>
-					</section>
-					<section>
-						<span class="hour">17:20</span>
-						<div class="detail">
-							<i class="icon-minus remove"></i>
-							<span>
-								<span class="date">12-12-2017</span>
-								<span class="description">dnerjmnerjm</span>
-								<small>Mais detalhes</small>
-							</span>
-						</div>
-					</section>
-					
-					<section>
-						<span class="hour">17:20</span>
-						<div class="detail">
-							<i class="icon-eye view"></i>
-							<span>
-								<span class="date">12-12-2017</span>
-								<span class="description">dnerjmnerjm</span>
-								<small>Mais detalhes</small>
-							</span>
-						</div>
-					</section>
+<!--					<section>-->
+<!--						<span class="hour">17:20</span>-->
+<!--						<div class="detail">-->
+<!--							<i class="icon-pencil edit"></i>-->
+<!--							<span>-->
+<!--								<span class="date">12-12-2017</span>-->
+<!--								<span class="description">dnerjmnerjm</span>-->
+<!--								<small>Mais detalhes</small>-->
+<!--							</span>-->
+<!--						</div>-->
+<!--					</section>-->
+<!--					<section>-->
+<!--						<span class="hour">17:20</span>-->
+<!--						<div class="detail">-->
+<!--							<i class="icon-plus create"></i>-->
+<!--							<span>-->
+<!--								<span class="date">12-12-2017</span>-->
+<!--								<span class="description">dnerjmnerjm</span>-->
+<!--								<small>Mais detalhes</small>-->
+<!--							</span>-->
+<!--						</div>-->
+<!--					</section>-->
+<!--					<section>-->
+<!--						<span class="hour">17:20</span>-->
+<!--						<div class="detail">-->
+<!--							<i class="icon-minus remove"></i>-->
+<!--							<span>-->
+<!--								<span class="date">12-12-2017</span>-->
+<!--								<span class="description">dnerjmnerjm</span>-->
+<!--								<small>Mais detalhes</small>-->
+<!--							</span>-->
+<!--						</div>-->
+<!--					</section>-->
+<!--					-->
+<!--					<section>-->
+<!--						<span class="hour">17:20</span>-->
+<!--						<div class="detail">-->
+<!--							<i class="icon-eye view"></i>-->
+<!--							<span>-->
+<!--								<span class="date">12-12-2017</span>-->
+<!--								<span class="description">dnerjmnerjm</span>-->
+<!--								<small>Mais detalhes</small>-->
+<!--							</span>-->
+<!--						</div>-->
+<!--					</section>-->
 				</div>
 			</div>
 			<div class="div-statitcs show">
@@ -119,6 +119,7 @@
 	</div>
 </body>
 <script src="../resources/js/jQuery.js"></script>
+<script src="../resources/js/controller/activity.js"></script>
 <script src="../resources/js/geralScript.js"></script>
-<script src="../resources/js/activity.js"></script>
+
 </html>
