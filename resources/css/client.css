@@ -981,3 +981,18 @@ i.unchange{
 .mp-liquidar-full nav label:last-child{
 	font-weight: bold;
 }
+
+.bt-full-payment{
+	display: block;
+	max-width: 230px;
+	border: none;
+	margin: auto;
+	padding: .95rem 2rem;
+	border-radius: 4px;
+	color: #FFF;
+	margin-top: 1rem;
+	background: #4285f4;
+	font-weight: bold;
+	font-size: .95rem;
+	cursor: pointer;
+}

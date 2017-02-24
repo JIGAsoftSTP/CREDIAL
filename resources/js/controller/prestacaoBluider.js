@@ -56,6 +56,7 @@ var PrestacaoBluider = function () {
             '<div class="primary"><b>Dossier nº '+this.nunDossierCredito+'</b> <b>'+this.totalCreditoAPagar+'</b></div> ' +
             '<div class="secondary"><small>Efetuado em '+this.dataInicioCredito+'</small> <b><small>'+ numCrediText +'</small></b> <small>Data fim crédito: '+this.dataFimCredito+'</small></div>' +
             '</nav> ' +
+            (this.idState !== 0 ? '<button class="bt-full-payment">Pagamento Antecipado</button>' : '') +
             '<nav class="more-details"> ' +
             '<hr> ' +
             '<span class="state"></span> ' +
