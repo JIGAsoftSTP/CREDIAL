@@ -1,7 +1,26 @@
+.bd-warr{
+	padding-top: 2rem;
+	height: 100vh;
+}
+.bd-warr .arend{
+	display: flex;
+	flex-direction: column;
+}
+.list-warr{
+	flex-grow: 1;
+	padding-right: 2rem;
+	overflow: auto;
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	flex-wrap: wrap;
+}
 .list-warr > section{
+	width: 48.5%;
 	background: #FFF;
 	padding: 1rem;
 	box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.14);
+	margin-bottom: 1rem;
 }
 .list-warr .first{
 	font-size: .95rem;
@@ -23,6 +42,11 @@
 }
 .list-warr h4{
 	color: #666;
+}
+.list-warr p{
+	font-size: .94rem;
+	margin-top: 5px;
+	line-height: 1.6rem;
 }
 .list-warr .more{
 	background: #f9f9f9;
