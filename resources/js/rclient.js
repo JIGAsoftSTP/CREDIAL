@@ -240,3 +240,7 @@ $('.mp-liquidar-full .type-font i').click(function(event) {
     $(this).toggleClass('icon-checkbox-unchecked icon-checkbox-checked');
     $('.mp-liquidar-full .dffrent').toggleClass('show');
 });
+
+$('.list-history').on('click', '.bt-full-payment',function(event) {
+    openModalFrame($('.mp-liquidar-full'));
+});
