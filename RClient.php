@@ -425,12 +425,14 @@
                             <span>Fonte de pagamento diferente</span>
                         </i>
                     </p>
+                    <div class="flex-form xpert-form" >
+                        <input type="text" placeholder="Data" id="" class="input-total date-liquida is-datepicker" >
+                    </div>
                     <div class="dffrent flex-form xpert-form">
                     	<input type="text" id="" placeholder="Nº Documento" class="input-total" >
 						<select id="" class="input-total" title="Banco" >
 							<option value="0">(Banco)</option>
-						</select>			
-						<input type="text" placeholder="Data" id="" class="input-total date-liquida is-datepicker">
+						</select>
                     </div>
                     <div class="secDiv xpert-form" >
                         <section class="sec-same">
