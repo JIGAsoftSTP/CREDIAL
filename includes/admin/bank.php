@@ -25,8 +25,8 @@
 			<div class="abas">
 				<div class="content">
 					<div class="list-bank">
-						<h3>Siglas</h3>
-						<ul class="siglas">
+						<h3>Contas</h3>
+						<ul class="contas">
 
 						</ul>
 					</div>

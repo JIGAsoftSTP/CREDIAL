@@ -33,16 +33,7 @@
 				</table>
 
 			</div>
-			<!-- <div class="sum-parts">
-				<section>
-					<h1>Value here!</h1>
-					<span>Description here!</span>
-				</section>
-				<section>
-					<h1>Value here!</h1>
-					<span>Description here!</span>
-				</section>
-			</div> -->
+
 		</div>
 	</div>
 
@@ -51,6 +42,7 @@
 <script type="text/javascript" src="../../resources/js/jQuery.js"></script>
 <script type="text/javascript" src="../../resources/js/table.js"></script>
 <script type="text/javascript" src="../../resources/js/geralScript.js"></script>
+<script type="text/javascript" src="../../resources/js/controller/geral.js"></script>
 <script type="text/javascript" src="../../resources/js/reports/report.js"></script>
 <script type="text/javascript" src="../../resources/fw/js/angular.min.js"></script>
 <script type="text/javascript" src="../../resources/js/xMenu.js"></script>

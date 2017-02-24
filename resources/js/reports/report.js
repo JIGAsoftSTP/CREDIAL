@@ -15,6 +15,8 @@ $('.test-expand').click(function(event) {
 });
 
 var chequeFiltro = 1;
+var listLastValues = {};
+var listReportData = [];
 
 
 $(function () {
@@ -37,8 +39,8 @@ $(function () {
 function sendFilterReport() {
 
     if($('#secondary-menu li.active').attr('id') ===  TypeReport.CHEQUE){
-     chequeFiltro = $("#iframe-" + $('aside li.active').index()).contents().find(".filter-type-cheq li.active").attr("id");
- }
+         chequeFiltro = $("#iframe-" + $('aside li.active').index()).contents().find(".filter-type-cheq li.active").attr("id");
+    }
 
  if(validation1($(".reportDate"))){
     if($(".report-P").attr('id') !== undefined)
@@ -49,21 +51,20 @@ function sendFilterReport() {
 
 function reportGrowth(list)
 {
-    var isTotal;
     var table = $("#iframe-" + $('aside li.active').index()).contents().find('table').find('tbody');
     table.empty();
-    for(var i=0;i<list.length;i++){
+    for(var i=0;i<list.length-1;i++){
         var growth = list[i];
-        isTotal = growth["NIF"].toUpperCase();
-        if(isTotal !== "TOTAL"){
-            table.append('' +
-                '<tr><td >' + growth["NIF"] + '</td><td >' + growth["CLIENT NAME"]+" "+growth["CLIENT SURNAME"] + '</td>' +
-                '<td>'+growth["LOCALIDADE"]+'</td><td>'+growth["QUANTIDADE ANO"]+'</td>' +
-                '<td>'+growth["QUANTIDADE PASSADO"]+'</td>' +
-                '<td>'+growth["DIFERENCA"]+'</td></tr>');
-        }
+        table.append('' +
+            '<tr><td >' + growth["NIF"] + '</td><td >' + growth["CLIENT NAME"]+" "+growth["CLIENT SURNAME"] + '</td>' +
+            '<td>'+growth["LOCALIDADE"]+'</td><td>'+growth["QUANTIDADE ANO"]+'</td>' +
+            '<td>'+growth["QUANTIDADE PASSADO"]+'</td>' +
+            '<td>'+growth["DIFERENCA"]+'</td></tr>');
 
     }
+    listLastValues = {"Ano Atual": list[list.length-1]["QUANTIDADE ANO"], "Ano Passado" : list[list.length-1]["QUANTIDADE PASSADO"],
+            "Crescimento" : list[list.length-1]["DIFERENCA"]};
+    sumTable(listLastValues);
     tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
 }
 
@@ -172,20 +173,24 @@ $.ajax({
 function reportCustomer(list)
 {
     var isTotal;
+    var totalQuantity = 0;
+    listReportData = list;
     var table = $("#iframe-" + $('aside li.active').index()).contents().find('table').find('tbody');
     table.empty();
-    for(var i=0;i<list.length;i++)
+    for(var i=0;i<list.length-1;i++)
     {
         var customer = list[i];
         var isTotal = customer["NIF"].toUpperCase();
-        if(isTotal !=="TOTAL"){
             table.append('' +
                 '<tr><td >' + customer["NIF"] + '</td><td >' + customer["NAME"]+" "+customer["SURNAME"] + '</td>' +
                 '<td>'+customer["QUANTIDADE CREDITO"]+'</td><td>'+formattedString(customer["VALOR"])+'</td><td>'+customer["LOCAL TRABALHO"]+'</td></tr>');
-        }
-
+            totalQuantity  += Number(customer["QUANTIDADE CREDITO"]);
     }
-    tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
+
+     listLastValues  = {"Quantidade" : totalQuantity, "Valor" : formattedString((list[list.length-1]["VALOR"]))};
+     tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
+     sumTable(listLastValues);
+
 }
 
 function relatorioCheque(list) {
@@ -254,7 +259,6 @@ function reportCredit(list)
         var credit = list[i];
         isTotal = credit["NIF"].toUpperCase();
         if(isTotal !== "TOTAL"){
-            console.info("data de credito "+credit["DATA"]);
             date =formatDate(credit["DATA"],1);
             table.append('' +
                 '<tr><td >' + credit["NUM CREDITO DOSSCIER"] + '</td><td >' + formatDate(credit["DATA"],1)+'</td>' +
@@ -263,6 +267,9 @@ function reportCredit(list)
                 '<td>'+formatDate(credit["DATA INICIO"],2)+'</td><td>'+formatDate(credit["DATA FINALIZAR"],2)+'</td></tr>');
         }
     }
+    listLastValues = {"Valor Crédito" : formattedString(list[list.length-1]["VALOR CREDITO"]), "Montante Dívida" : formattedString(list[list.length-1]["TOTAL PAGAR MONTANTE DIVIDA"]),
+            "TAEG" : formattedString(list[list.length-1]["TAEG"])};
+    sumTable(listLastValues);
     tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
 
 }
@@ -352,15 +359,28 @@ var TypeReport = {"CLIENTES" : "rep.cliente", "CRESCIMENTO_HOMOLOGO" : "rep.cres
 Object.freeze(TypeReport);
 
 
-
-autoSumTable();
-function autoSumTable(array){
-    array = {'khbk':'13546', 'erh3ebn':'254646'}
+function autoSumTable(array)
+{
     xTbl = $('.master-content .x-table');
-    $('<div class="sum-parts"></div>').insertAfter(xTbl)
+    $('<div class="sum-parts"></div>').insertAfter(xTbl);
     for (var key in array) {
          var value = data[key];
+        console.info("entrou no for value "+array[key]);
          $('.sum-parts').append(
+            '<section>'+
+            '<h1>'+ array[key] +'</h1>'+
+            '<span>'+ key +'</span>'+
+            '</section>'
+            )
+     }
+}
+function sumTable(array){
+    xTbl = $("#iframe-" + $('aside li.active').index()).contents().find('.master-content .x-table');
+    $('<div class="sum-parts"></div>').insertAfter(xTbl);
+    for (var key in array) {
+         var value = data[key];
+        console.info("entrou no for value "+array[key]);
+        $("#iframe-" + $('aside li.active').index()).contents().find('.sum-parts').append(
             '<section>'+
             '<h1>'+ array[key] +'</h1>'+
             '<span>'+ key +'</span>'+

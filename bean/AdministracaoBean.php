@@ -27,8 +27,8 @@
         case "agency adm":
             loadAgencyAdm();
             break;
-        case "siglas":
-            siglas();
+        case "contas":
+            contas();
             break;
         case "regBank":
             registrarBanco();
@@ -208,10 +208,10 @@
         }
     }
 
-    function siglas()
+    function contas()
     {
         $call = new CallPgSQL();
-        $call->selects("ver_bank", "*");
+        $call->selects("ver_conta", "*");
         $call->execute();
         $values = array();
 
@@ -219,7 +219,7 @@
         {
             $values[count($values)] = $row;
         }
-        die(json_encode(array("siglas" =>$values)));
+        die(json_encode(array("contas" =>$values)));
 
     }
     function carregarLocalidades()

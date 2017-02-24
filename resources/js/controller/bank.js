@@ -4,7 +4,7 @@
 $(function(){
 
     regUserActivity(bankActivityAddress, -1, "Visualizou o menu Banco", -1, LevelActivity.Visualização);
-    carregarSiglas();
+    carregarContas();
 
     $("#btBankActions").click(function () {
         if($(".xpert-form .head h2").html() === 'Banco')
@@ -58,27 +58,27 @@ function loadBankData()
         }
     });
 }
-function carregarSiglas()
+function carregarContas()
 {
     $.ajax
     ({
         url: bankAddress,
         type:"POST",
         dataType:"json",
-        data:{"intention": "siglas"},
+        data:{"intention": "contas"},
         beforeSend: function () {  $(".mp-loading").fadeIn(); },
         complete: function () {
             $(".mp-loading").fadeOut();
         },
         success:function (e)
         {
-            listBanks = e.siglas;
-            loadComoBoxIDandValue($(".listBanks"), e.siglas ,"ID", "NAME");
-            $(".siglas").append('<li class="active">'+e.siglas[0]["SIGLA"]+'</li>');
+             listBanks = e.contas;
+            loadComoBoxIDandValue($(".listBanks"), e.contas ,"ID", "NAME");
+            $(".contas").append('<li class="active">'+e.contas[0]["DESCRICAO"]+'</li>');
             loadBankMoviment(0);
-            for(var i = 1;i<e.siglas.length;i++)
+            for(var i = 1;i<e.contas.length;i++)
             {
-                $(".siglas").append('<li onclick=loadBankMoviment('+i+')>'+e.siglas[i]["SIGLA"]+'</li>');
+                $(".contas").append('<li onclick=loadBankMoviment('+i+')>'+e.contas[i]["DESCRICAO"]+'</li>');
             }
         }
     });

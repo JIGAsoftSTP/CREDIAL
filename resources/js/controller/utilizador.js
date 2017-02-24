@@ -67,7 +67,7 @@ function regUser() {
                     callXpertAlert("Novo utilizador registado com sucesso!", new Mensage().checkmark, 10000);
                     $(".add-new-user").find("input:text").val("");
                     $(".add-new-user").find("select").val("0");
-                    regUserActivity(userActivityAddress, -1, "Registou um novo Utilizador", -1, LevelActivity.Criação);
+                    regUserActivity(userActivityAddress, -1, "Registou um novo Utilizador", -1, LevelActivity.CRIACAO);
                     var css = {"background":"content-box #444 url('../../resources/img/user.png') no-repeat"
                         ,"background-position":"center"
                         ,"background-size":"cover"};
@@ -246,11 +246,11 @@ function disibleUser() {
 
                 if(user.disableMode === "F"){
                     callXpertAlert("Palavra-Passe foi redifinida com sucesso! ", new Mensage().checkmark, 10000);
-                    regUserActivity(userActivityAddress, -1, "Redifiniu a palavra-passe do Utilizador", -1, LevelActivity.Atualização);
+                    regUserActivity(userActivityAddress, -1, "Redifiniu a palavra-passe do Utilizador", -1, LevelActivity.ATUALIZACAO);
                 }
                 else{
                     callXpertAlert("Utilizador foi desativado com sucesso! ", new Mensage().checkmark, 10000);
-                    regUserActivity(userActivityAddress, -1, "Desativou o Utilizador", -1, LevelActivity.Atualização);
+                    regUserActivity(userActivityAddress, -1, "Desativou o Utilizador", -1, LevelActivity.ATUALIZACAO);
                 }
                 setTimeout(loadListClient,4000,true);
             }
@@ -360,7 +360,7 @@ function editeClient() {
             success: function (data) {
                 if (data.result) {
                     callXpertAlert("O Utilizador foi editado com sucesso!", new Mensage().checkmark, 10000);
-                    regUserActivity(userActivityAddress, -1, "Atualizou Informações do Utilizador", -1, LevelActivity.Atualização);
+                    regUserActivity(userActivityAddress, -1, "Atualizou Informações do Utilizador", -1, LevelActivity.ATUALIZACAO);
                     resetForm($(".add-new-admin"));
                     resetForm($(".mp-menu-user"));
                     var css = {"background":"content-box #444 url('../../resources/img/user.png') no-repeat"
