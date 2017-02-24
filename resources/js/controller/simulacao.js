@@ -298,7 +298,7 @@ function loadChequeSimulacao() {
     $("#cred-cli-numDoc-veiw").html("");
     sBank = getStateBankByID();
     si.bankState = ($("#cred-cli-bank").attr("newid") === "0") ? "0" :  sBank['STATE'];
-    si.idForRegBank = ($("#cred-cli-bank").attr("newid") === "0") ? "0" : sBank['ID_BANCO'];
+    si.idForRegBank = ($("#cred-cli-bank").attr("newid") === "0") ? "0" : sBank['ID'];
     if(si.bankState !== "0" ) {
         $.ajax({
             url: "./bean/simulation.php",
