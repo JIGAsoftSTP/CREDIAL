@@ -400,7 +400,7 @@
 					<section class="sec-another flex-form">
 						<span>
 							<p class="input-total"><i class="icon-checkbox-unchecked" id="cred-pay-fazea" > <label>Pagamento Faseado</label></i> </p>
-							<p class="input-total"><i class="icon-checkbox-unchecked" id="cred-pay-desco"> <label>Desconto</label></i> </p>
+							
 						</span>
 					</section>
 				</div>
@@ -422,27 +422,34 @@
                 <div class="content">
                     <p class="type-font">
                         <i class="icon-checkbox-unchecked" id="cred-pay-dife">
-                            <label>Fonte de pagamento diferente</label>
+                            <span>Fonte de pagamento diferente</span>
                         </i>
                     </p>
+                    <div class="dffrent flex-form xpert-form">
+                    	<input type="text" id="" placeholder="Nº Documento" class="input-total" >
+						<select id="" class="input-total" title="Banco" >
+							<option value="0">(Banco)</option>
+						</select>			
+						<input type="text" placeholder="Data" id="" class="input-total date-liquida is-datepicker">
+                    </div>
                     <div class="secDiv xpert-form" >
-                        <section class="sec-same flex-form ">
-                            <p>
-                                <label>Inical</label>
+                        <section class="sec-same">
+                            <nav>
+                                <label>Inicial</label>
                                 <label>12522555</label>
-                            </p>
-                            <p>
+                            </nav>
+                            <nav>
                                 <label>Pago</label>
                                 <label>12522555</label>
-                            </p>
-                            <p>
-                                <label>Valor Recalculado</label>
+                            </nav>
+                            <nav>
+                                <label>Recalculado</label>
                                 <label>12522555</label>
-                            </p>
-                            <p>
+                            </nav>
+                            <nav>
                                 <label>Diferença</label>
                                 <label>12522555</label>
-                            </p>
+                            </nav>
                         </section>
                     </div>
                 </div>
@@ -451,7 +458,7 @@
                     <button class="bt-no-option">Cancelar</button>
                 </div>
                 <div class="modal-header">
-                    <b>Efetuar pagamento antecepado</b>
+                    <b>Efetuar pagamento antecipado</b>
                     <span class="mp-close"></span>
                 </div>
             </div>

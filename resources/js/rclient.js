@@ -235,3 +235,8 @@ function setDescription(ident, desc){
         return flag;
     });
 }
+
+$('.mp-liquidar-full .type-font i').click(function(event) {
+    $(this).toggleClass('icon-checkbox-unchecked icon-checkbox-checked');
+    $('.mp-liquidar-full .dffrent').toggleClass('show');
+});

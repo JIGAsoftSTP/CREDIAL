@@ -951,3 +951,33 @@ i.unchange{
 .mp-confirm-simulation{
 	z-index: 1001;
 }
+
+.mp-liquidar-full .content{
+	padding: 1rem;
+	max-width: 320px;
+}
+.mp-liquidar-full .type-font{
+	margin-bottom: 1rem;
+	text-align: center;
+}
+.mp-liquidar-full .type-font i{
+	cursor: pointer;
+}
+.mp-liquidar-full .dffrent{
+	max-height: 0;
+	overflow: hidden;
+}
+.mp-liquidar-full .dffrent.show{
+	max-height: 500px;
+	padding-top: 1rem;
+
+}
+.mp-liquidar-full nav{
+	line-height: 2.5rem;
+	display: flex;
+	justify-content: space-between;
+	border-bottom: 1px #eee solid;
+}
+.mp-liquidar-full nav label:last-child{
+	font-weight: bold;
+}
