@@ -31,8 +31,8 @@ $('.search-span input').focusin(function(event) {
     $('.search-span').removeClass('is-focused');
 });
 
-$('.search-span i').click(function(event) {
-    $(this).insertBefore($('.search-span i:first-child'));
+$('.search-span span i').click(function(event) {
+    $(this).insertBefore($('.search-span span i:first-child'));
     $('.search-span input').focus();
 });
 

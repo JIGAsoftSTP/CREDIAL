@@ -257,6 +257,7 @@
 	width: 100%;
 	padding: 1rem;
 	overflow: auto;
+	z-index: 50;
 	/*display: none;*/
 }
 .history-selected.show{
