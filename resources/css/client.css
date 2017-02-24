@@ -736,6 +736,7 @@
 	position: relative;
 	max-height: 85vh;
 	overflow: auto;
+	overflow-x: hidden;
 }
 .about-customer .item-descript{
 	width: 100%;
