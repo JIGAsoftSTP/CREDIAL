@@ -220,6 +220,6 @@ function checkDate(str) {
     return new Date(partes[2], partes[1] - 1, partes[0]);
 }
 
-var LevelActivity = {"ELIMINAÇÃO" : 0, "Desativação" : 1, "Atualização": 2,
-    "Criação": 3,  "Visualização": 4, "Outros": undefined };
+var LevelActivity = {"ELIMINACAO" : 0, "DESATIVACAO" : 1, "ATUALIZACAO": 2,
+    "CRIACAO": 3,  "VISUALIZACAO": 4, "OUTROS": undefined };
 Object.freeze(LevelActivity);

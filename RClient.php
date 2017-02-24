@@ -416,7 +416,7 @@
 		</div>
 	</div>
 </section>
-    <section class="modalPage mp-liquidar-full" id="cred-pay-form-full">
+    <section class="modalPage mp-liquidar-full" id="cred-pay-form-full" style="display: block">
         <div class="modalFrame">
             <div class="modalContainer">
                 <div class="content">
@@ -451,7 +451,7 @@
                     <button class="bt-no-option">Cancelar</button>
                 </div>
                 <div class="modal-header">
-                    <b>Efetuar pagamento</b>
+                    <b>Efetuar pagamento antecepado</b>
                     <span class="mp-close"></span>
                 </div>
             </div>

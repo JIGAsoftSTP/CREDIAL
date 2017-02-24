@@ -192,12 +192,12 @@ function loadDataCredForForm() {
 
     valorPorPago = (reembloso-valorPago).dc();
     if(state === 0){
-        $("#cred-pay-bank").val(prestacaoS["BANCO PREVISTO ID"]);
+        $("#cred-pay-bank").val(prestacaoS["CONTA PREVISTO ID"]);
         $("#cred-pay-value-rest").html(formattedString("0"));
         $("#cred-pay-value").val(formattedString(valorPorPago.rp()));
         $("#cred-pay-doc").val(prestacaoS["DOCUMENTO PAGAMENTO"]);
     }else{
-        $("#cred-pay-bank").val(prestacaoS["BANCO REAL ID"]);
+        $("#cred-pay-bank").val(prestacaoS["CONTA REAL ID"]);
         $("#cred-pay-value-rest").html(formattedString(valorPorPago.rp()));
         $("#cred-pay-value").val("");
         $("#cred-pay-doc").val("");
@@ -242,7 +242,7 @@ $("#cred-pay-dife").click(function () {
                 $("#cred-pay-bank").val("0").removeAttr("disabled");
             } else {
                 $("#cred-pay-doc").val(prestacaoS["DOCUMENTO PAGAMENTO"]).attr("disabled", true);
-                $("#cred-pay-bank").val(prestacaoS["BANCO PREVISTO ID"]).attr("disabled", true);
+                $("#cred-pay-bank").val(prestacaoS["CONTA PREVISTO ID"]).attr("disabled", true);
                 $("#cred-pay-fazea").addClass("icon-checkbox-checked").removeClass("icon-checkbox-unchecked").click();
             }
             isNull($("#cred-pay-bank"));

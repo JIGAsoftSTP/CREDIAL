@@ -15,6 +15,8 @@ $('.test-expand').click(function(event) {
 });
 
 var chequeFiltro = 1;
+var listLastValues = {};
+var listReportData = [];
 
 
 $(function () {
@@ -26,19 +28,18 @@ $(function () {
        sendFilterReport();
    });
 
-    $('#secondary-menu li.active').click(function () {
-     if($(this).attr("id") === 2)
-         setDataStorage(sessionStorage, 'filterReport', "state", "1");
-     else if($(this).attr("id") === 3)
-         setDataStorage(sessionStorage, "filterReport", "state", "0");
- });
+    $(".filter-type-cheq li").click(function ()
+    {
+
+    });
+
 });
 
 function sendFilterReport() {
 
     if($('#secondary-menu li.active').attr('id') ===  TypeReport.CHEQUE){
-     chequeFiltro = $("#iframe-" + $('aside li.active').index()).contents().find(".filter-type-cheq li.active").attr("id");
- }
+         chequeFiltro = $("#iframe-" + $('aside li.active').index()).contents().find(".filter-type-cheq li.active").attr("id");
+    }
 
  if(validation1($(".reportDate"))){
     if($(".report-P").attr('id') !== undefined)
@@ -49,21 +50,20 @@ function sendFilterReport() {
 
 function reportGrowth(list)
 {
-    var isTotal;
     var table = $("#iframe-" + $('aside li.active').index()).contents().find('table').find('tbody');
     table.empty();
-    for(var i=0;i<list.length;i++){
+    for(var i=0;i<list.length-1;i++){
         var growth = list[i];
-        isTotal = growth["NIF"].toUpperCase();
-        if(isTotal !== "TOTAL"){
-            table.append('' +
-                '<tr><td >' + growth["NIF"] + '</td><td >' + growth["CLIENT NAME"]+" "+growth["CLIENT SURNAME"] + '</td>' +
-                '<td>'+growth["LOCALIDADE"]+'</td><td>'+growth["QUANTIDADE ANO"]+'</td>' +
-                '<td>'+growth["QUANTIDADE PASSADO"]+'</td>' +
-                '<td>'+growth["DIFERENCA"]+'</td></tr>');
-        }
+        table.append('' +
+            '<tr><td >' + growth["NIF"] + '</td><td >' + growth["CLIENT NAME"]+" "+growth["CLIENT SURNAME"] + '</td>' +
+            '<td>'+growth["LOCALIDADE"]+'</td><td>'+growth["QUANTIDADE ANO"]+'</td>' +
+            '<td>'+growth["QUANTIDADE PASSADO"]+'</td>' +
+            '<td>'+growth["DIFERENCA"]+'</td></tr>');
 
     }
+    listLastValues = {"Ano Atual": list[list.length-1]["QUANTIDADE ANO"], "Ano Passado" : list[list.length-1]["QUANTIDADE PASSADO"],
+            "Crescimento" : list[list.length-1]["DIFERENCA"]};
+    sumTable(listLastValues);
     tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
 }
 
@@ -75,15 +75,15 @@ function reportTaeg(list)
     table.empty();
 
     if(list.length >0){
-        $("#iframe-" + $('aside li.active').index()).contents().find('.first-section h1:eq(0) span').text(formattedString(list[list.length-1]["CREDITO VALUE"]));
-        $("#iframe-" + $('aside li.active').index()).contents().find('.first-section h1:eq(1) span').text(formattedString(list[list.length-2]["CREDITO VALUE"]));
+        $("#iframe-" + $('aside li.active').index()).contents().find('.first-section h1:eq(0) span').text(formattedString(list[list.length-2]["CREDITO VALUE"]));
+        $("#iframe-" + $('aside li.active').index()).contents().find('.first-section h1:eq(1) span').text(formattedString(list[list.length-1]["CREDITO VALUE"]));
 
 
-        $("#iframe-" + $('aside li.active').index()).contents().find('.second-section h1:eq(0) span').text(formattedString(list[list.length-1]["CREDITO TOTAL PAGAR MONTANTE DIVIDA"]));
+        $("#iframe-" + $('aside li.active').index()).contents().find('.second-section h1:eq(0) span').text(formattedString(list[list.length-2]["CREDITO TOTAL PAGAR MONTANTE DIVIDA"]));
         $("#iframe-" + $('aside li.active').index()).contents().find('.second-section h1:eq(1) span').text(formattedString(list[list.length-1]["CREDITO TOTAL PAGAR MONTANTE DIVIDA"]));
 
-        $("#iframe-" + $('aside li.active').index()).contents().find('.third-section h1:eq(0) span').text(formattedString(list[list.length-1]["CREDITO TAEG"]));
-        $("#iframe-" + $('aside li.active').index()).contents().find('.third-section h1:eq(1) span').text(formattedString(list[list.length-2]["CREDITO TAEG"]));
+        $("#iframe-" + $('aside li.active').index()).contents().find('.third-section h1:eq(0) span').text(formattedString(list[list.length-2]["CREDITO TAEG"]));
+        $("#iframe-" + $('aside li.active').index()).contents().find('.third-section h1:eq(1) span').text(formattedString(list[list.length-1]["CREDITO TAEG"]));
     }
 
     for(var i=0;i<list.length;i++)
@@ -120,80 +120,97 @@ function reportChequeDistribuido(list) {
 
 }
 
-function dataReport(sub) {
- var dados;
- var activeReport = $('#secondary-menu li.active').attr('id');
- if(sub === 0)
-    var reportFilter = new ReportFiler($("#report-inicial-date").val(), $("#report-final-date").val(), null);
-else
-{
-    setDataStorage(sessionStorage, 'filterReport', "anoSub" , ($(".report-P").val() === "" ? "1" :$(".report-P").val()));
-    var reportFilter = new ReportFiler($("#report-inicial-date").val(), $("#report-final-date").val(),
-        ($(".report-P").val() === "" ? "1" :$(".report-P").val()));
-}
-if($('#secondary-menu li.active').attr('id') !==  TypeReport.CHEQUE){
-    dados ={"intention": "report",
-    "ReportFiler": reportFilter,
-    "reportName": $('#secondary-menu li.active').attr('id'),
-    "jsonValue": getDataStorage(sessionStorage,'filterReport')};
-}
-else{
-
-    dados ={"intention": "report",
-    "ReportFiler": reportFilter,
-    "reportName": $('#secondary-menu li.active').attr('id'),
-    "chequeFiltro": chequeFiltro,
-    "jsonValue": getDataStorage(sessionStorage,'filterReport')};
-}
-
-$.ajax({
-    url: "bean/relatorio.php",
-    type:"POST",
-    dataType:"json",
-    data: dados,
-    beforeSend: function () {  $(".mp-loading").fadeIn(); },
-    complete: function () {
-        $(".mp-loading").fadeOut();},
-        error:function (e) {
-            console.info(e);
-        },
-        success:function (e) {
-            if(activeReport === TypeReport.CLIENTES) reportCustomer(e.result);
-            else if(activeReport === TypeReport.CRESCIMENTO_HOMOLOGO) reportGrowth(e.result);
-            else if(activeReport === TypeReport.CREDITO_CONCEDIDO) reportCredit(e.result);
-            else if(activeReport === TypeReport.COBRANCA) reportCobrancas(e.result);
-            else if(activeReport === TypeReport.CAPITAL_TAEG) reportTaeg(e.result);
-            else if(activeReport === TypeReport.DIVIDA_PRODUTO) relatorioDividaProduto(e.result);
-            else relatorioCheque(e.result);
+    function dataReport(sub)
+    {
+         var dados;
+         var activeReport = $('#secondary-menu li.active').attr('id');
+         if(sub === 0)
+            var reportFilter = new ReportFiler($("#report-inicial-date").val(), $("#report-final-date").val(), null);
+        else
+        {
+            setDataStorage(sessionStorage, 'filterReport', "anoSub" , ($(".report-P").val() === "" ? "1" :$(".report-P").val()));
+            var reportFilter = new ReportFiler($("#report-inicial-date").val(), $("#report-final-date").val(),
+                ($(".report-P").val() === "" ? "1" :$(".report-P").val()));
         }
-    });
-}
+        if($('#secondary-menu li.active').attr('id') !==  TypeReport.CHEQUE){
+            dados ={"intention": "report",
+            "ReportFiler": reportFilter,
+            "reportName": $('#secondary-menu li.active').attr('id'),
+            "jsonValue": getDataStorage(sessionStorage,'filterReport')};
+        }
+        else
+        {
+            if(chequeFiltro === "2")
+                setDataStorage(sessionStorage, 'filterReport', "state", "1");
+            else if(chequeFiltro === "3"){
+                setDataStorage(sessionStorage, "filterReport", "state", "0");
+            }
+
+            dados ={"intention": "report",
+            "ReportFiler": reportFilter,
+            "reportName": $('#secondary-menu li.active').attr('id'),
+            "chequeFiltro": chequeFiltro,
+            "jsonValue": getDataStorage(sessionStorage,'filterReport')};
+        }
+
+        $.ajax({
+            url: "bean/relatorio.php",
+            type:"POST",
+            dataType:"json",
+            data: dados,
+            beforeSend: function () {  $(".mp-loading").fadeIn(); },
+            complete: function () {
+                $(".mp-loading").fadeOut();},
+                error:function (e) {
+                    console.info(e);
+                },
+                success:function (e) {
+                    if(activeReport === TypeReport.CLIENTES) reportCustomer(e.result);
+                    else if(activeReport === TypeReport.CRESCIMENTO_HOMOLOGO) reportGrowth(e.result);
+                    else if(activeReport === TypeReport.CREDITO_CONCEDIDO) reportCredit(e.result);
+                    else if(activeReport === TypeReport.COBRANCA) reportCobrancas(e.result);
+                    else if(activeReport === TypeReport.CAPITAL_TAEG) reportTaeg(e.result);
+                    else if(activeReport === TypeReport.DIVIDA_PRODUTO) relatorioDividaProduto(e.result);
+                    else relatorioCheque(e.result);
+                }
+            });
+    }
 
 function reportCustomer(list)
 {
     var isTotal;
+    var totalQuantity = 0;
+    listReportData = list;
     var table = $("#iframe-" + $('aside li.active').index()).contents().find('table').find('tbody');
     table.empty();
-    for(var i=0;i<list.length;i++)
+    for(var i=0;i<list.length-1;i++)
     {
         var customer = list[i];
         var isTotal = customer["NIF"].toUpperCase();
-        if(isTotal !=="TOTAL"){
             table.append('' +
                 '<tr><td >' + customer["NIF"] + '</td><td >' + customer["NAME"]+" "+customer["SURNAME"] + '</td>' +
                 '<td>'+customer["QUANTIDADE CREDITO"]+'</td><td>'+formattedString(customer["VALOR"])+'</td><td>'+customer["LOCAL TRABALHO"]+'</td></tr>');
-        }
-
+            totalQuantity  += Number(customer["QUANTIDADE CREDITO"]);
     }
-    tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
+
+     listLastValues  = {"Quantidade" : totalQuantity, "Valor" : formattedString((list[list.length-1]["VALOR"]))};
+     tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
+      sumTable(listLastValues);
+
 }
 
 function relatorioCheque(list) {
 
-    if(chequeFiltro === "1"){
+    if(chequeFiltro === "1")
+    {
+        listLastValues = {"Débito": formattedString(list[list.length-1]["DEBITO"]), "Crédito": formattedString(list[list.length-1]["CREDITO"])};
+        sumTable(listLastValues);
         reportChequeDistribuido(list);
     }
-    else{
+    else
+    {
+        listLastValues = {"Valor Cheque Reembolso": formattedString(list[list.length-1]["VALOR CHEQUE REEMBOLSO"])};
+        sumTable(listLastValues);
         relatorioChequeEstado(list);
     }
 }
@@ -215,13 +232,13 @@ function relatorioDividaProduto(list) {
     tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
 
     if(list.length >1){
-        $("#iframe-" + $('aside li.active').index()).contents().find('.first-section h1:eq(0) span').text(formattedString(list[list.length-1]["CREDITO VALUE SOLICITADO"]));
+        $("#iframe-" + $('aside li.active').index()).contents().find('.first-section h1:eq(0) span').text(formattedString(list[list.length-2]["CREDITO VALUE SOLICITADO"]));
         $("#iframe-" + $('aside li.active').index()).contents().find('.first-section h1:eq(1) span').text(formattedString(list[list.length-1]["CREDITO VALUE SOLICITADO"]));
 
-        $("#iframe-" + $('aside li.active').index()).contents().find('.second-section h1:eq(0) span').text(formattedString(list[list.length-1]["CREDITO TOTAL PAGAR MONTANTE"]));
+        $("#iframe-" + $('aside li.active').index()).contents().find('.second-section h1:eq(0) span').text(formattedString(list[list.length-2]["CREDITO TOTAL PAGAR MONTANTE"]));
         $("#iframe-" + $('aside li.active').index()).contents().find('.second-section h1:eq(1) span').text(formattedString(list[list.length-1]["CREDITO TOTAL PAGAR MONTANTE"]));
 
-        $("#iframe-" + $('aside li.active').index()).contents().find('.third-section h1:eq(0) span').text(formattedString(list[list.length-1]["CREDITO VALUE PAGO"]));
+        $("#iframe-" + $('aside li.active').index()).contents().find('.third-section h1:eq(0) span').text(formattedString(list[list.length-2]["CREDITO VALUE PAGO"]));
         $("#iframe-" + $('aside li.active').index()).contents().find('.third-section h1:eq(1) span').text(formattedString(list[list.length-1]["CREDITO VALUE PAGO"]));
     }
 }
@@ -230,16 +247,15 @@ function relatorioChequeEstado(list) {
     var table = $("#iframe-" + $('aside li.active').index()).contents().find('table').find('tbody');
     table.empty();
 
-    for(var i=0;i<list.length;i++)
+    for(var i=0;i<list.length-1;i++)
     {
         var cheque = list[i];
-        if(cheque["NIF"].toUpperCase() !== "TOTAL"){
-            table.append('' +
+        table.append('' +
                 '<tr><td></td><td ></td><td></td><td></td><td></td>' +
                 '<td>'+cheque["NIF"]+'</td><td>'+cheque["NAME"]+" "+cheque["SURNAME"]+'</td><td>'+cheque["PAGAMENTO NUM DOCUMENTO"]+'</td><td>'
-                +cheque["VALOR CHEQUE REEMBOLSO"]+'</td><td>'+formatDate(cheque["DATA DOCUMENTO PAGAMENTO PREVISTO DEPOSITO"],2)+'' +
+                +formattedString(cheque["VALOR CHEQUE REEMBOLSO"])+'</td><td>'+formatDate(cheque["DATA DOCUMENTO PAGAMENTO PREVISTO DEPOSITO"],2)+'' +
                 '</td><td>'+cheque["BANCO SIGLA"]+'</td><td>'+verifyEmpty(cheque["PAGAMENTO DATA ENDOSSADO"])+'</td></tr>');
-        }
+
     }
     tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
 }
@@ -254,7 +270,6 @@ function reportCredit(list)
         var credit = list[i];
         isTotal = credit["NIF"].toUpperCase();
         if(isTotal !== "TOTAL"){
-            console.info("data de credito "+credit["DATA"]);
             date =formatDate(credit["DATA"],1);
             table.append('' +
                 '<tr><td >' + credit["NUM CREDITO DOSSCIER"] + '</td><td >' + formatDate(credit["DATA"],1)+'</td>' +
@@ -263,6 +278,9 @@ function reportCredit(list)
                 '<td>'+formatDate(credit["DATA INICIO"],2)+'</td><td>'+formatDate(credit["DATA FINALIZAR"],2)+'</td></tr>');
         }
     }
+    listLastValues = {"Valor Crédito" : formattedString(list[list.length-1]["VALOR CREDITO"]), "Montante Dívida" : formattedString(list[list.length-1]["TOTAL PAGAR MONTANTE DIVIDA"]),
+            "TAEG" : formattedString(list[list.length-1]["TAEG"])};
+    sumTable(listLastValues);
     tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
 
 }
@@ -288,6 +306,9 @@ function reportCobrancas(list) {
                 '<td>' + formatDate(cobranca["DATA DOCUMENTO PREVISTO"],2) + '</td></tr>');
         }
     }
+    listLastValues = {"Valor Reembolso em Relação ao Ano em Comparação" : formattedString(list[list.length-1]["VALOR REEMBOLSO"]),
+        "Valor Reembolso em Relação Ano Atual" : formattedString(list[list.length-2]["VALOR REEMBOLSO"])};
+    sumTable(listLastValues);
     tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
 }
 
@@ -352,15 +373,31 @@ var TypeReport = {"CLIENTES" : "rep.cliente", "CRESCIMENTO_HOMOLOGO" : "rep.cres
 Object.freeze(TypeReport);
 
 
-
-autoSumTable();
-function autoSumTable(array){
-    array = {'khbk':'13546', 'erh3ebn':'254646'}
+function autoSumTable(array)
+{
     xTbl = $('.master-content .x-table');
-    $('<div class="sum-parts"></div>').insertAfter(xTbl)
+    $('<div class="sum-parts"></div>').insertAfter(xTbl);
     for (var key in array) {
          var value = data[key];
+        console.info("entrou no for value "+array[key]);
          $('.sum-parts').append(
+            '<section>'+
+            '<h1>'+ array[key] +'</h1>'+
+            '<span>'+ key +'</span>'+
+            '</section>'
+            )
+     }
+}
+function sumTable(array){
+
+    $("#iframe-" + $('aside li.active').index()).contents().find('.sum-parts').remove();
+    xTbl = $("#iframe-" + $('aside li.active').index()).contents().find('.master-content .x-table');
+    $('<div class="sum-parts"></div>').insertAfter(xTbl);
+
+    for (var key in array) {
+         var value = data[key];
+        console.info("entrou no for value "+array[key]);
+        $("#iframe-" + $('aside li.active').index()).contents().find('.sum-parts').append(
             '<section>'+
             '<h1>'+ array[key] +'</h1>'+
             '<span>'+ key +'</span>'+

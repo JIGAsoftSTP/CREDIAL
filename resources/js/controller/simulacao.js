@@ -139,8 +139,8 @@ function loadDataSimulation() {
         success: function (e) {
             loadComoBoxIDandValue($("#cred-tipoCred"), e.tipocreditos, "ID", "DESC");
 
-            loadComoBoxIDandValue($("#cred-tab-amor-banco"), e.banks, "ID", "SIGLA");
-            loadComoBoxIDandValue($("#cred-pay-bank"), e.banks, "ID", "SIGLA");
+            loadComoBoxIDandValue($("#cred-tab-amor-banco"), e.banks, "ID", "DESCRICAO");
+            loadComoBoxIDandValue($("#cred-pay-bank"), e.banks, "ID", "DESCRICAO");
             loadComoBoxIDandValue($("#cred-tab-amor-tipoPagamento"), e.fontepagamentos, "ID", "DESC");
 
             loadComoBoxIDandValue($("#cred-cli-modaPag"), e.fontepagamentos, "ID", "DESC");
@@ -298,7 +298,7 @@ function loadChequeSimulacao() {
     $("#cred-cli-numDoc-veiw").html("");
     sBank = getStateBankByID();
     si.bankState = ($("#cred-cli-bank").attr("newid") === "0") ? "0" :  sBank['STATE'];
-    si.idForRegBank = ($("#cred-cli-bank").attr("newid") === "0") ? "0" : sBank['ID_BANCO'];
+    si.idForRegBank = ($("#cred-cli-bank").attr("newid") === "0") ? "0" : sBank['ID'];
     if(si.bankState !== "0" ) {
         $.ajax({
             url: "./bean/simulation.php",
@@ -466,6 +466,7 @@ function hasClassTo(span, classNameAdd, classNameRemove) {
  * @param banks {Array}
  */
 function addBancoCheque(op, banks){
+    op.empty();
     for (var i = 0; i < banks.length; i++){
         var idbank = banks[i]["ID"];
         var state = banks[i]["STATE"];

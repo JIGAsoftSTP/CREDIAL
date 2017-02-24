@@ -17,7 +17,7 @@ if($_POST['intensao']=="import-simulation"){ importSimulation(); }
 
 function loadDadosForDoSimulation(){
     $call = new CallPgSQL();
-    $banks = $call->loadDados("ver_bank","\"ID\"","\"SIGLA\"");
+    $banks = $call->loadDados("ver_conta","\"ID\"","\"DESCRICAO\"");
     $fontepagamentos = $call->loadDados("ver_fontepagamento","\"ID\"","\"DESC\"");
     $garantias = $call->loadDados("ver_garantia","\"ID\"","\"DESC\"");
     $tipodocumentos = $call->loadDados("ver_tipodocumento","\"ID\"","\"DESC\"");
@@ -124,8 +124,8 @@ function regPagamento($idCredito){
         $call->execute();
         $result = $call->getValors();
 
-        if ($result["RESULT"] != "true") {
-            die(json_encode(array("result" => false, "return" => $result["RESULT"])));
+        if ($result["result"] != true ) {
+            die(json_encode(array("result" => false, "return" => $result["result"])));
         }
     }
     regGarantia($idCredito);

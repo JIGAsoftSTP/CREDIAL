@@ -25,8 +25,8 @@
 			<div class="abas">
 				<div class="content">
 					<div class="list-bank">
-						<h3>Siglas</h3>
-						<ul class="siglas">
+						<h3>Contas</h3>
+						<ul class="contas">
 
 						</ul>
 					</div>
@@ -94,7 +94,7 @@
 				</section>
 
 				<section class="add-account">
-					<select name="" class="input-total listBanks" id="bk-conta-nome">
+					<select name="" class="input-total" id="bk-conta-nome">
 						<option value="0">(Banco)</option>
 					</select>
                     <input type="text" placeholder="Código Agência" class="input-total integer" maxlength="4" id="bk-conta-agencia" />

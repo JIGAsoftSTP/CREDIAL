@@ -4,7 +4,7 @@
 
 $(function () {
 
-    regUserActivity(agencyActivityAddress, -1, "Visualizou o menu Agência", -1, LevelActivity.Visualização);
+    regUserActivity(agencyActivityAddress, -1, "Visualizou o menu Agência", -1, LevelActivity.VISUALIZACAO);
    carregarLocalidade();
     loadAgencyAdm();
     $("#addAgency").click(function () {
@@ -38,7 +38,7 @@ function addAgency()
             {
                 if(e.result["RESULT"] === 'true')
                 {
-                    regUserActivity(agencyActivityAddress, -1, "Registou uma nova Agência", -1, LevelActivity.Criação);
+                    regUserActivity(agencyActivityAddress, -1, "Registou uma nova Agência", -1, LevelActivity.CRIACAO);
                     callXpertAlert("Agência "+agency.nome+" adicionado com sucesso!", "checkmark", 8000);
                     $('.add-new-admin').find('input, select, textarea').val("");
                     $('.add-new-admin').find('input, select, textarea').css("border", "");

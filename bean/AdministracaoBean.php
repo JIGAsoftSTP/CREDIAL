@@ -27,8 +27,8 @@
         case "agency adm":
             loadAgencyAdm();
             break;
-        case "siglas":
-            siglas();
+        case "contas":
+            contas();
             break;
         case "regBank":
             registrarBanco();
@@ -208,18 +208,28 @@
         }
     }
 
-    function siglas()
+    function contas()
     {
+        $contas = array();
+        $bancos = array();
+
         $call = new CallPgSQL();
-        $call->selects("ver_bank", "*");
+        $call->selects("ver_conta", "*");
         $call->execute();
-        $values = array();
 
         while($row = $call->getValors())
         {
-            $values[count($values)] = $row;
+            $contas[count($contas)] = $row;
         }
-        die(json_encode(array("siglas" =>$values)));
+
+        $call->selects("ver_bank", "*");
+        $call->execute();
+
+        while($row = $call->getValors())
+        {
+            $bancos[count($bancos)] = $row;
+        }
+        die(json_encode(array("contas" =>$contas, "bancos" =>$bancos)));
 
     }
     function carregarLocalidades()
@@ -343,7 +353,8 @@ function loadInsurance()
             ->addString($_POST["Movimentation"]["desc"]);
         $call->execute();
         $result = $call->getValors();
-        die(json_encode(array("result" =>$result)));
+
+        die(json_encode(array("result" => $result)));
 
     }
 

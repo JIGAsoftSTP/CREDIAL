@@ -39,7 +39,7 @@ function loadObjectType() {
                 loadObjectValues(e.objeto[i]["ID"]);
 
             }
-            regUserActivity(activityAdress, -1, "Visualizou o menu Entidades", -1, LevelActivity.Visualização);
+            regUserActivity(activityAdress, -1, "Visualizou o menu Entidades", -1, LevelActivity.VISUALIZACAO);
         }
     });
 }
@@ -82,7 +82,7 @@ function disableObject(idObject) {
             {
                 callXpertAlert("Entidade removida com sucesso!", 'checkmark', 8000);
                 $("#objectData"+idObject).remove();
-                regUserActivity(activityAdress, -1, "Eliminou uma Entidade", -1, LevelActivity.ELIMINAÇÃO);
+                regUserActivity(activityAdress, -1, "Eliminou uma Entidade", -1, LevelActivity.ELIMINACAO);
             }
             else
                 callXpertAlert(e.resultado["message"], 'warning', 8000);
@@ -105,7 +105,7 @@ function addNewEntity() {
                     callXpertAlert(entityName($("#adminEntity").val())+" adicionado!", 'checkmark', 8000);
                     $("#txtEntity").val("");
                     $("#adminEntity").val("");
-                    regUserActivity(activityAdress, -1,"Registou uma nova Entidade", -1, LevelActivity.Criação);
+                    regUserActivity(activityAdress, -1,"Registou uma nova Entidade", -1, LevelActivity.CRIACAO);
                 }
                 else
                     callXpertAlert(e.entity["MESSAGE"], 'warning', 8000);
