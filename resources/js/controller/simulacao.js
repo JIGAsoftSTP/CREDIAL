@@ -50,6 +50,9 @@ $("#cred-simula-import").click(function () {
         success: function (e) {
             if (!e.result) {  callXpertAlert(e.return["MESSAGE"], new Mensage().cross, -1); }
             else {
+
+                regUserActivity("./bean/activity.php", e.return["NUM DOSSIER"] , "Registrou novo Cretido!", JSON.stringify(e.return), LevelActivity.CRIACAO );
+
                 $(".mp-confirm-simulation").fadeOut();
                 callXpertAlert("<b>" + "Numero Dossier: </b>" + e.return["NUM DOSSIER"] + "<br>" +
                     "<b>" + "Numero Cheque: </b>" + e.return["NUM CHEQUE"] + "<br>" +
@@ -106,6 +109,9 @@ $("#start-simulation").click(function () {
 
                     // "ID TAXA INFERIOR":"51"
                     bluiderTablePestacao();
+
+                    regUserActivity("./bean/activity.php", -1 , "Efetou uma simulaçao!", JSON.stringify(si), LevelActivity.OUTROS );
+
                 }
                 else {
                     callXpertAlert(e.return['MESSAGE'], new Mensage().cross, 8000);
@@ -344,6 +350,7 @@ $("#import-simulation").click(function () {
         si.objectoTipoCredito =  $("#cred-tipoCred").val();
         si.objectoFontePagamento =  $("#cred-cli-fonRend").val();
         openModalFrame($('.mp-confirm-simulation'));
+        regUserActivity("./bean/activity.php", -1 , "Carregou o botao de Comcluir a simulaçao!", -1, LevelActivity.OUTROS );
     }
 });
 
@@ -477,4 +484,3 @@ function addBancoCheque(op, banks){
 function getStats(state) {
     return (Number(state) != 0) ? "good" : "bad";
 }
-

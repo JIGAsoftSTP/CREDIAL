@@ -41,7 +41,7 @@ $("#add-ph-user").change(function (e)
 var imageUser = undefined;
 var userActivityAddress = "../../bean/activity.php";
 
-regUserActivity(userActivityAddress, -1, "Visualizou o menu Utilizador", -1, LevelActivity.Visualização);
+regUserActivity(userActivityAddress, -1, "Visualizou o menu Utilizador", -1, LevelActivity.VISUALIZACAO);
 function regUser() {
 
     if(isValideParanRegUser()) {

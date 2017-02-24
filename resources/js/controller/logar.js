@@ -96,6 +96,9 @@ function changePwd() {
             dataType: "json",
             success: function (e) {
                 if(e.result) {
+
+                    regUserActivity("./bean/activity.php", -1 , "Alterou a sua senha!", -1, LevelActivity.VISUALIZACAO );
+
                     callXpertAlert('A senha foi alterada com sucessso!', new Mensage().checkmark, 10000);
                     resetForm($(".mp-change-pwd"));
                     $("#changePwd").closest(".bt-no-option").click();
