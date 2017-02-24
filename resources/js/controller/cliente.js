@@ -3,6 +3,8 @@
  */
 
 $(function () {
+    regUserActivity("./bean/activity.php", -1 , "Visualizou a pagina de cliente e creditos!", -1, LevelActivity.VISUALIZACAO );
+
     listarCliente();
     loadComoBox($("#cli-ar-ano"),addANO());
     loadComoBox($("#cli-ar-mes"),addMES());
@@ -143,12 +145,15 @@ function inforCiente(b, type, fill) {
                 else
                     setTimeout(showAmortizacao, 800,idCredSeleted, iPrestacao, false);
                 reShowDataClient = false;
+                //regUserActivity("./bean/activity.php", b , "Selecionou o Historico do cliente!", -1, LevelActivity.VISUALIZACAO );
             }
             else {
                 $('.add-new-form').toggleClass('show');
                 $('.add-new-form h1').text('Editar cliente');
                 $("#cli-reg").text('Editar cliente');
                 getDadosCliente();
+
+                regUserActivity("./bean/activity.php", -1 , "Selecionou Cliente para ver as prestaçoes do credito!", -1, LevelActivity.VISUALIZACAO );
             }
         },
         beforeSend: function () {  $(".mp-loading").fadeIn(); },
@@ -179,10 +184,7 @@ function loadOutherData() {
         }
     });
 }
-/**
- *
- * @type {undefined}
- */
+
 var scli = undefined;
 function getDataClienteInForm(intensao) {
     scli = {
@@ -236,6 +238,7 @@ function regCliente() {
                 var re = new refresh();
                 re.dataType = "CLIENT";
                 saveRefresh(re);
+                regUserActivity("./bean/activity.php", scli.nif , "Novo cliente registrado com sucesso", JSON.stringify(scli), LevelActivity.CRIACAO );
             }else {
                 callXpertAlert(e.msg, new Mensage().cross, 8000);
             }
@@ -306,6 +309,8 @@ function loadCreditoCliente(_idCreito, jk,_asClassShow) {
 }
 
 function showDataCliente(){
+    regUserActivity("./bean/activity.php", clienteData["NIF"] , "Visualizou dados de cliente "+clienteData["NAME"]+" "+clienteData["SURNAME"], JSON.stringify(clienteData), LevelActivity.VISUALIZACAO );
+
     $("#inf-cli-geral-nif").text(clienteData["NIF"]);
     $("#inf-cli-geral-nome").text(clienteData["NAME"]+" "+clienteData["SURNAME"]);
     $("#inf-cli-geral-dataNasc").text(clienteData["DATA NASCIMENTO"]);
@@ -330,6 +335,8 @@ function showDataCliente(){
 }
 
 function listCreditoCliente(_type) {
+
+    regUserActivity("./bean/activity.php", clienteData["NIF"] , "Selecionou mais informaçoes sobre credito cliente", JSON.stringify(clienteData), LevelActivity.VISUALIZACAO );
 
     $("#inf-cli-ano").text("Cliente desde " + clienteShortData["DATA REGISTRO"]+((Number(clienteShortData["IDADE NA EMPRESA"]) > 1) ? " - Há " + clienteShortData["IDADE NA EMPRESA"] + " Anos" : "" ));
     // $("#inf-cred-lqA").text(clienteShortData["ATRAZADO"]);
@@ -528,6 +535,9 @@ function editeSelectedClient() {
                 re.dataType = "CLIENT";
                 $('.add-new-form').removeClass('show');
                 saveRefresh(re);
+
+                regUserActivity("./bean/activity.php", scli.nif , "Concluio a Ediçao de Cliente!", JSON.stringify(scli), LevelActivity.ATUALIZACAO );
+
                 if(DOCREDITO) setTimeout(creditoNow, 800, scli);
             } else {
                 callXpertAlert(e.msg, new Mensage().cross, 8000);
@@ -539,7 +549,7 @@ function editeSelectedClient() {
 }
 
 function clientIsIncomple() {
-    var rt = clienteData["CLIENTE SALARIO"] === null
+    var rt = (clienteData["CLIENTE SALARIO"] === null
         || clienteData["DATA NASCIMENTO"] === null
         || clienteData["LOCALIDADE"] === null
         || clienteData["TELE MOVEL"] === null
@@ -547,7 +557,7 @@ function clientIsIncomple() {
         || clienteData["TRADOSSIER LETRA"] === null
         || clienteData["TRADOSSIER MES"] ===  null
         || clienteData["TRADOSSIER NUMERO DE CAPA"] === null
-        || clienteData["TRADOSSIER SEQUENCIA"] === null;
+        || clienteData["TRADOSSIER SEQUENCIA"] === null);
     return  rt;
 }
 
@@ -575,6 +585,8 @@ function clientIsIncomple() {
                 si.nifClient = nifClient;
                 openModalFrame($('.mp-new-credit'));
                 tableEstructure($('#table-liquid'));
+
+                regUserActivity("./bean/activity.php", -1 , "Selecionou Cliente para efectuar credito!", -1, LevelActivity.VISUALIZACAO );
        /*     }
         },
         beforeSend: function () {  $(".mp-loading").fadeIn(); },

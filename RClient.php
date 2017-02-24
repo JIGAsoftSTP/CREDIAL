@@ -482,7 +482,6 @@
 <script type="text/javascript" src="resources/js/controller/logar.js"></script>
 <script type="text/javascript" src="./resources/js/controller/menu.js"></script>
 <script type="text/javascript" src="resources/js/rclient.js"></script>
-<script type="text/javascript" src="resources/js/controller/forMask.js"></script>
 <script type="text/javascript" src="resources/js/controller/cliente.js"></script>
 <script type="text/javascript" src="resources/js/controller/simulacao.js"></script>
 <script type="text/javascript" src="resources/js/controller/prestacaoBluider.js"></script>

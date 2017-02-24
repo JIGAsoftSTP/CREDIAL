@@ -3,7 +3,7 @@
  */
 $(function(){
 
-    regUserActivity(bankActivityAddress, -1, "Visualizou o menu Banco", -1, LevelActivity.Visualização);
+    regUserActivity(bankActivityAddress, -1, "Visualizou o menu Banco", -1, LevelActivity.VISUALIZACAO);
     carregarContas();
 
     $("#btBankActions").click(function () {

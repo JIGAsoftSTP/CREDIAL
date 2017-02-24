@@ -207,6 +207,15 @@ if(!Number.prototype.rp){
     }
 }
 
+/*if(!Object.prototype.POb){
+    /!**
+     * @constructor parser Object
+     *!/
+    Object.prototype.POb = function () {
+        return JSON.stringify(this);
+    }
+}*/
+
 function numericNumbers(event) {
     if ((event.which != 44 || $(this).val().indexOf(',') != -1) &&
         ((event.which < 48 || event.which > 57) &&
