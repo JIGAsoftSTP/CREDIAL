@@ -5,6 +5,7 @@ include "Session.php";
 include_once "../modelo/User.php";
 
     if($_POST["intention"] == "reg_activity") regActivity();
+   else if($_POST["intention"] == "loadActivities") loadActivities();
 
     function regActivity()
     {
@@ -19,6 +20,20 @@ include_once "../modelo/User.php";
 
         $result = $call->getValors();
         die(json_encode(array("result activity registration" => $result)));
+    }
+
+    function loadActivities()
+    {
+        $call = new CallPgSQL();
+        $call->functionTable("report.funct_load_activity", "*")
+            ->addString(Session::getUserLogado()->getId());
+        $call->execute();
+        $arrayValues = array();
+        while($result = $call->getValors())
+        {
+            $arrayValues[count($arrayValues)] = $result;
+        }
+        die(json_encode(array("result" =>$arrayValues)));
     }
 
 

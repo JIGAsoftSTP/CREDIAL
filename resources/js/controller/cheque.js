@@ -104,7 +104,7 @@ function regCheque()
                     $('.add-new-admin').find('input, select').val("");
                     $('.add-new-admin').find('input, select').css("border", "");
                     carregarCheques();
-                    regUserActivity(chequeActivityAdress, -1, "Registou um novo Cheque", -1, LevelActivity.CRIACAO);
+                    regUserActivity(chequeActivityAdress, -1, "Registou um novo Cheque", JSON.stringify(cheque), LevelActivity.CRIACAO);
                 }
                 else
                     callXpertAlert(e.result["message"], "warning", 8000);
@@ -222,6 +222,7 @@ function anularChequeIndice(id)
 }
 
 function anularCheque() {
+    var Cheque = {"idCheque": listaCheques[indiceChequeAnular]["ID"]};
     $.ajax({
         url: chequeUrl,
         type:"POST",
@@ -234,7 +235,7 @@ function anularCheque() {
                 $(".mp-cancel-cheq").fadeOut();
                 callXpertAlert("Cheque anulado com sucesso!", "checkmark", 8000);
                 carregarCheques();
-                regUserActivity(chequeActivityAdress, -1, "Anulou um Cheque", -1, LevelActivity.DESATIVACAO);
+                regUserActivity(chequeActivityAdress, -1, "Anulou um Cheque", JSON.stringify(Cheque), LevelActivity.DESATIVACAO);
 
             }
             else

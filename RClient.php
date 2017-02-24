@@ -2,7 +2,7 @@
 <html lang="pt-br" >
 <head>
 	<meta charset="UTF-8">
-	<title>Document</title>
+	<title>Crédito</title>
 	<link rel="stylesheet" href="./resources/css/geralStyle.css">
 	<link rel="stylesheet" href="./resources/css/client.css">
 </head>
