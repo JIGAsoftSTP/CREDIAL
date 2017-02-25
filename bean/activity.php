@@ -38,7 +38,7 @@ include_once "../modelo/User.php";
         $call = new CallPgSQL();
         $call->functionTable("report.funct_rep_activity", "*")
             ->addString($_POST["user"])
-            ->addJson(($_POST["filter"] == -1 ? null : json_encode($activity)));
+            ->addJsonb(($_POST["filter"] == -1 ? null : json_encode($activity)));
         $call->execute();
         $arrayValues = array();
         while($result = $call->getValors())
