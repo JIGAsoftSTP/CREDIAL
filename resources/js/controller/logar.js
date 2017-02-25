@@ -48,6 +48,7 @@ $("#confirme").click(function () {
                 if(e.result){
                     if(e.pageUser !== null) {
                         window.location = "includes/welcome.html";
+                        regUserActivity(loginActivityAddress, -1, "Redifiniu a sua palavra-passe!", -1, LevelActivity.ATUALIZACAO);
                         sessionStorage.setItem("hasBeenActiveNow", e.pageUser["LINK"] );
                     }else{
                         $(".mp-change-pwd").fadeOut(800);
