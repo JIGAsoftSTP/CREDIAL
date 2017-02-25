@@ -6,6 +6,9 @@ $(function ()
 {
     loadUser();
 
+    $("#searchActivity").keyup(function () {
+
+    });
     $("#activitySearch-user").keyup(function () {
         advSearch($(this), $(".user-names li"));
     });
@@ -20,14 +23,14 @@ $(function ()
 
     $("#reportActivity-initialDate").change(function () {
 
-        if($(this).val() !== "" &&
+        if($("#reportActivity-initialDate").val() !== "" &&
             $("#reportActivity-finalDate").val() !== "")
         {
-            loadUserActivities(1);
+            loadUserActivities(1, selectedUser);
         }
     });
 
-    $("#reportActivity-finalDate").click(function () {
+    $("#reportActivity-finalDate").change(function () {
         $("#reportActivity-initialDate").trigger("change");
     });
 });

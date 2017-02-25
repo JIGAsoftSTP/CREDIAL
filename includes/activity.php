@@ -25,7 +25,7 @@
 				<div class="little-det">
 					<span class="super-search focus">
 						<i class="icon-search"></i>
-						<input type="text" placeholder="Pesquise aqui...">
+						<input type="text" placeholder="Pesquise aqui..." id="searchActivity">
                         <input type="text" class="is-datepicker reportActivityDate" id="reportActivity-initialDate" placeholder="Data Inicial">
                         <input type="text" class="is-datepicker reportActivityDate" id="reportActivity-finalDate" placeholder="Data Final">
 						<select id="filterActivity">
