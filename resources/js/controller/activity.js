@@ -60,7 +60,7 @@ function loadUserActivities(filter, user)
         success:function (e)
         {
             activities = e.result;
-            loadAllActivities();
+            filterActivity();
         }
     });
 }
@@ -258,4 +258,9 @@ function selectUser(index, component)
 
     loadUserActivities(-1, selectedUser);
 
+}
+
+function showMoreActivityInfo()
+{
+    $(".div-statitcs").addClass("show");
 }
