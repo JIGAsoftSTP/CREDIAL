@@ -83,6 +83,17 @@ body{
 	color: #555;
 	font-size: .95rem;
 }
+.list-user-log ul li:after{
+    content: "";
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 5px;
+    right: 3px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
 .list-user-log ul li:hover,
 .list-user-log ul li.active{
 	color: #5093E1;
@@ -92,7 +103,15 @@ body{
 	font-weight: normal;
 	padding-left: 0;
 }
-
+.list-user-log ul li[state="0"]{
+	background: #F65177;
+}
+.list-user-log ul li[state="1"]{
+	background: #50C14E;
+}
+.list-user-log ul li[state="2"]{
+	background: #ddd;
+}
 
 .log-user .arend{
 	flex-grow: 1;
