@@ -33,6 +33,7 @@
 							<option value="2">Adicionados</option>
 							<option value="1">Editados</option>
 							<option value="0">Removidos</option>
+							<option value="3">Visualizados</option>
 						</select>
 					</span>
 					<span class="view-m-det">Estatísticas</span>
@@ -42,7 +43,7 @@
 				<div class="list-logs">
 				</div>
 			</div>
-			<div class="div-statitcs show">
+			<div class="div-statitcs">
 				<span class="x-close"></span>
 				<div class="det-tabs">
 					<nav class="total-added">
@@ -58,16 +59,16 @@
 						<b>Itens removidos</b>
 					</nav>
 				</div>
-				<section>
+				<section id="contratoDesc">
 					<span>
-						<h1>45</h1>
+						<h1 id="totalCreditos"></h1>
 						<i class="icon-profile"></i>
 					</span>
-					<p>Contratos registados</p>
+					<p ></p>
 				</section>
 				<section>
 					<span>
-						<h1>45 <small>minutos</small></h1>
+						<h1><small>minutos</small></h1>
 						<i class="icon-stopwatch"></i>
 					</span>
 					<p>Tempo médio de atividades</p>
@@ -79,8 +80,9 @@
     <script type="text/javascript" src="../resources/fw/pikaday/pikaday.js"></script>
 </body>
 <script src="../resources/js/jQuery.js"></script>
-<script src="../resources/js/controller/activity.js"></script>
 <script src="../resources/js/controller/geral.js"></script>
 <script src="../resources/js/geralScript.js"></script>
+<script src="../resources/js/activity.js"></script>
+<script src="../resources/js/controller/activity.js"></script>
 
 </html>

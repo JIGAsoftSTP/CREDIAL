@@ -2,6 +2,7 @@
  * Created by ahmedjorge on 9/25/16.
  */
 loadDataUser();
+registerLoginActivity();
 $("#logar").click(function () {
     var pwd = $("#pwd").val();
     var user = $("#user").val();
@@ -16,8 +17,9 @@ $("#logar").click(function () {
                 if(e.state === 1) {
                     if(e.pageUser !== null) {
                         window.location = e.pageUser["LINK"];
+                        regUserActivity(loginActivityAddress, -1, "Acessou a aplicação", -1, LevelActivity.VISUALIZACAO);
                     }else{
-                        callXpertAlert('Utilizador sem previlegio, contante o administrador!', new Mensage().warning, 10000);
+                        callXpertAlert('Utilizador sem privilégio, contacte o administrador!', new Mensage().warning, 10000);
                     }
                 }
                 else if(e.state=== 2) {
@@ -32,6 +34,7 @@ $("#logar").click(function () {
         }
     });
 });
+
 /*warning;checkmark;cross;notification*/
 $("#confirme").click(function () {
     if(isValid($("#pwd1"),$("#pwd2"))){
@@ -45,6 +48,7 @@ $("#confirme").click(function () {
                 if(e.result){
                     if(e.pageUser !== null) {
                         window.location = "includes/welcome.html";
+                        regUserActivity(loginActivityAddress, -1, "Redifiniu a sua palavra-passe!", -1, LevelActivity.ATUALIZACAO);
                         sessionStorage.setItem("hasBeenActiveNow", e.pageUser["LINK"] );
                     }else{
                         $(".mp-change-pwd").fadeOut(800);
@@ -60,6 +64,7 @@ $("#confirme").click(function () {
     }
 });
 
+var loginActivityAddress = "bean/activity";
 $("#pwd1").keyup(function () {
     isValid($("#pwd1"),$("#pwd2"));
 });
@@ -97,7 +102,7 @@ function changePwd() {
             success: function (e) {
                 if(e.result) {
 
-                    regUserActivity("./bean/activity.php", -1 , "Alterou a sua senha!", -1, LevelActivity.VISUALIZACAO );
+                    regUserActivity(loginActivityAddress, -1 , "Alterou a sua senha!", -1, LevelActivity.VISUALIZACAO );
 
                     callXpertAlert('A senha foi alterada com sucessso!', new Mensage().checkmark, 10000);
                     resetForm($(".mp-change-pwd"));
@@ -120,12 +125,17 @@ function logOut() {
         dataType: "json",
         success: function (e) {
             window.location = "./index.php";
+            regUserActivity("./bean/activity.php", -1 , "Um determinado utilizador terminou a sessão", -1, LevelActivity.ATUALIZACAO );
         }
     });
 }
 
+function registerLoginActivity() {
+    regUserActivity(loginActivityAddress, -1, "Visualizou a pagina de Login", -1, LevelActivity.VISUALIZACAO);
+}
 $(document).ready(function (e) {
-    if (sessionStorage.getItem("hasBeenActiveNow") !== null)
+    registerLoginActivity();
+   if (sessionStorage.getItem("hasBeenActiveNow") !== null)
         $("#wel-link").attr("href", "../"+sessionStorage.getItem("hasBeenActiveNow") );
     sessionStorage.removeItem("hasBeenActiveNow");
 });

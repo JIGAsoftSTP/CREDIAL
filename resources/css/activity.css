@@ -39,6 +39,8 @@ body{
 	background: #FFF;
 	margin-right: 3%;
 	position: relative;
+	display: flex;
+	flex-direction: column;
 }
 .list-user-log .m-search{
 	position: relative;
@@ -68,6 +70,8 @@ body{
 
 .list-user-log ul{
 	margin-top: 2rem;
+	overflow: auto;
+	flex-grow: 1;
 	overflow: auto;
 }
 .list-user-log ul li{
@@ -123,7 +127,7 @@ body{
 	border-right: 1px #ddd solid;
 }
 .super-search input:nth-child(2){
-	flex-grow: 2;
+	flex-grow: 3;
 }
 .super-search select{
 	width: 8rem;
@@ -144,6 +148,7 @@ body{
 }
 .list-logs section{
 	margin-bottom: 1.5rem;
+	color: #444;
 }
 .list-logs section .hour{
 	font-weight: lighter;

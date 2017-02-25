@@ -157,7 +157,7 @@ var Prestacao =  function () {
 
 function showAmortizacao(id, jk, show) {
 
-    regUserActivity("./bean/activity.php", id , "Selecionou Credito, para ver as prestaçoes do credito!", -1, LevelActivity.VISUALIZACAO );
+    regUserActivity("./bean/activity.php", id , "Selecionou Crédito, para ver as prestações do crédito!", -1, LevelActivity.VISUALIZACAO );
 
     loadCreditoCliente(id,jk, (show === undefined) ? $("#pret-"+id).parent().find('.more-details').hasClass("show") : show);
     $("#pret-"+id).parent().find('.more-details').toggleClass('show');
@@ -179,7 +179,7 @@ function pagamentoPestacao(i) {
     prestacaoS = listPrestacao[i];
     if (prestacaoS["STATE COD"] !== "0") {
         loadDataCredForForm();
-        regUserActivity("./bean/activity.php", prestacaoS["ID"] , "Selecionou Prestaçao de um credito", JSON.stringify(prestacaoS), LevelActivity.VISUALIZACAO );
+        regUserActivity("./bean/activity.php", prestacaoS["ID"] , "Selecionou Prestação de um crédito", JSON.stringify(prestacaoS), LevelActivity.VISUALIZACAO );
     }
 }
 

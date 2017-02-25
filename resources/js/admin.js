@@ -100,6 +100,10 @@ $('.filter li').click(function(event) {
      // advSearch($('.search input'), $('.list-user section'))
 });
 
+$('.new-photo').click(function(event) {
+     openInNewTab('https://www.pixect.com/pt/');
+});
+
 /*###################### AGENCY ##############*/
 
 $('.agency').on('click','.funcs',function(event) {
@@ -143,4 +147,9 @@ function filterUser(el){
                 $(this).css('display', 'none');
         });
     
+}
+
+function openInNewTab(url) {
+  var win = window.open(url, '_blank');
+  win.focus();
 }

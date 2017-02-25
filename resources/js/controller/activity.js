@@ -41,6 +41,7 @@ $(function ()
   var userActivities = [];
   var selectedUser = undefined;
   var index = 0;
+  var dataAnterior = "";
 
 function loadUserActivities(filter, user)
 {
@@ -67,7 +68,11 @@ function loadUserActivities(filter, user)
 
 function loadAllActivities()
 {
-    var itensAdicionados = 0, itensEditados = 0, itensRemovidos = 0;
+    var itensAdicionados = 0, itensEditados = 0,
+        itensRemovidos = 0, creditosRegistados = 0;
+
+    dataAnterior = "";
+
     $(".list-logs").empty();
 
     for(var i =0;i<activities.length;i++)
@@ -77,14 +82,14 @@ function loadAllActivities()
         {
             itensEditados +=1;
             $(".list-logs").append('' +
-                '<h3>'+formatActivityDate(activity["date"], 1)+'</h3>' +
+                '<h3>'+groupByDate(formatActivityDate(activity["date"], 1))+'</h3>' +
                 '<section> '+
                 ' <span class="hour">'+formatActivityDate(activity["date"], 2)+'</span>'+
                 '<div class="detail">'+
                 '  <i class="icon-pencil edit"></i>'+
                 ' <span>' +
                 '<span class="description">'+activity["activity"]+'</span>'+
-                ' <small>Mais detalhes</small>'+
+                ' <small onclick="showMoreActivityInfo()">Mais detalhes</small>'+
                 ' </span>'+
                 ' </div>'+
                 ' </section>'
@@ -94,32 +99,35 @@ function loadAllActivities()
         {
             itensAdicionados +=1;
             $(".list-logs").append('' +
-                '<h3>'+formatActivityDate(activity["date"], 1)+'</h3>'+
+                '<h3>'+groupByDate(formatActivityDate(activity["date"], 1))+'</h3>'+
                 '<section> '+
                 ' <span class="hour">'+formatActivityDate(activity["date"], 2)+'</span> '+
                 '<div class="detail">'+
                 '  <i class="icon-plus create"></i> '+
                 ' <span>'+
                 '<span class="description">'+activity["activity"]+'</span>'+
-                ' <small>Mais detalhes</small> '+
+                ' <small onclick="showMoreActivityInfo()">Mais detalhes</small> '+
                 ' </span> '+
                 ' </div> '+
                 ' </section>'
             );
+
+            if(activity["activity"].$$("Registou novo Crédito com o Dossier"))
+                creditosRegistados++;
         }
         else if(activity["levelkey"] === LevelActivity.DESATIVACAO ||
             activity["levelkey"] === LevelActivity.ELIMINACAO)
         {
             itensRemovidos +=1;
             $(".list-logs").append('' +
-                '<h3>'+formatActivityDate(activity["date"], 1)+'</h3>'+
+                '<h3>'+groupByDate(formatActivityDate(activity["date"], 1))+'</h3>'+
                 '<section> '+
                 ' <span class="hour">'+formatActivityDate(activity["date"], 2)+'</span> '+
                 '<div class="detail">'+
                 '  <i class="icon-minus remove"></i> '+
                 ' <span>'+
                 '<span class="description">'+activity["activity"]+'</span> '+
-                ' <small>Mais detalhes</small> '+
+                ' <small onclick="showMoreActivityInfo()">Mais detalhes</small> '+
                 ' </span> '+
                 ' </div> '+
                 ' </section>'
@@ -128,14 +136,14 @@ function loadAllActivities()
         else if(activity["levelkey"] === LevelActivity.VISUALIZACAO)
         {
             $(".list-logs").append('' +
-                '<h3>'+formatActivityDate(activity["date"], 1)+'</h3>'+
+                '<h3>'+groupByDate(formatActivityDate(activity["date"], 1))+'</h3>'+
                 '<section> '+
                 ' <span class="hour">'+formatActivityDate(activity["date"], 2)+'</span> '+
                 '<div class="detail">'+
                 '  <i class="icon-eye view"></i> '+
                 ' <span>'+
                 '<span class="description">'+activity["activity"]+'</span> '+
-                ' <small>Mais detalhes</small> '+
+                ' <small onclick="showMoreActivityInfo()">Mais detalhes</small> '+
                 ' </span> '+
                 ' </div> '+
                 ' </section>'
@@ -146,6 +154,17 @@ function loadAllActivities()
     $(".total-added h3").html(itensAdicionados);
     $(".total-edited h3").html(itensEditados);
     $(".total-removed h3").html(itensRemovidos);
+    $("#totalCreditos").html(creditosRegistados);
+    if(creditosRegistados === 1)
+    {
+        $("#contratoDesc p").html("Contrato registado");
+        $("#totalCreditos").html(creditosRegistados);
+    }
+    else if(creditosRegistados >1)
+    {
+        $("#contratoDesc").html("Contratos registados");
+        $("#totalCreditos p").html(creditosRegistados);
+    }
 
 }
 
@@ -162,7 +181,11 @@ function formatActivityDate(date,type)
 function filterActivity()
 {
     $(".list-logs").empty();
-    var itensAdicionados = 0, itensEditados = 0, itensRemovidos = 0;
+    var itensAdicionados = 0, itensEditados = 0, op = 0,
+        itensRemovidos = 0, creditosRegistados = 0;
+
+    dataAnterior = "";
+
     for(var i =0;i<activities.length;i++)
     {
         var activity = activities[i];
@@ -171,32 +194,35 @@ function filterActivity()
         {
             itensAdicionados++;
             $(".list-logs").append('' +
-                '<h3>'+formatActivityDate(activity["date"], 1)+'</h3>'+
+                '<h3>'+groupByDate(formatActivityDate(activity["date"], 1))+'</h3>'+
                 '<section> '+
                 ' <span class="hour">'+formatActivityDate(activity["date"], 2)+'</span> '+
                 '<div class="detail">'+
                 '  <i class="icon-plus create"></i> '+
                 ' <span>'+
                 '<span class="description">'+activity["activity"]+'</span>'+
-                ' <small>Mais detalhes</small> '+
+                ' <small onclick="showMoreActivityInfo()">Mais detalhes</small> '+
                 ' </span> '+
                 ' </div> '+
                 ' </section>'
             );
+
+            if(activity["activity"].$$("Registou novo Crédito com o Dossier"))
+                creditosRegistados++;
         }
         else if($("#filterActivity").val() === LevelActivity.ATUALIZACAO &&
             activity["levelkey"] === LevelActivity.ATUALIZACAO)
         {
             itensEditados++;
             $(".list-logs").append('' +
-                '<h3>'+formatActivityDate(activity["date"], 1)+'</h3>' +
+                '<h3 >'+groupByDate(formatActivityDate(activity["date"], 1))+'</h3>' +
                 '<section> '+
                 ' <span class="hour">'+formatActivityDate(activity["date"], 2)+'</span>'+
                 '<div class="detail">'+
                 '  <i class="icon-pencil edit"></i>'+
                 ' <span>' +
                 '<span class="description">'+activity["activity"]+'</span>'+
-                ' <small>Mais detalhes</small>'+
+                ' <small onclick="showMoreActivityInfo()">Mais detalhes</small>'+
                 ' </span>'+
                 ' </div>'+
                 ' </section>'
@@ -207,14 +233,31 @@ function filterActivity()
         {
             itensRemovidos++;
             $(".list-logs").append('' +
-                '<h3>'+formatActivityDate(activity["date"], 1)+'</h3>'+
+                '<h3>'+groupByDate(formatActivityDate(activity["date"], 1))+'</h3>'+
                 '<section> '+
                 ' <span class="hour">'+formatActivityDate(activity["date"], 2)+'</span> '+
                 '<div class="detail">'+
                 '  <i class="icon-minus remove"></i> '+
                 ' <span>'+
                 '<span class="description">'+activity["activity"]+'</span> '+
-                ' <small>Mais detalhes</small> '+
+                ' <small onclick="showMoreActivityInfo()">Mais detalhes</small> '+
+                ' </span> '+
+                ' </div> '+
+                ' </section>'
+            );
+        } else if($("#filterActivity").val() === LevelActivity.VISUALIZACAO &&
+            activity["levelkey"] === LevelActivity.VISUALIZACAO)
+        {
+            itensRemovidos++;
+            $(".list-logs").append('' +
+                '<h3>'+groupByDate(formatActivityDate(activity["date"], 1))+'</h3>'+
+                '<section> '+
+                ' <span class="hour">'+formatActivityDate(activity["date"], 2)+'</span> '+
+                '<div class="detail">'+
+                '  <i class="icon-eye view"></i> '+
+                ' <span>'+
+                '<span class="description">'+activity["activity"]+'</span> '+
+                ' <small onclick="showMoreActivityInfo()">Mais detalhes</small> '+
                 ' </span> '+
                 ' </div> '+
                 ' </section>'
@@ -223,13 +266,25 @@ function filterActivity()
         else if($("#filterActivity").val() === LevelActivity.OUTROS)
         {
             loadAllActivities();
+            op = 1;
         }
 
-        if($("#filterActivity").val() !== LevelActivity.OUTROS)
+        if(op === 0)
         {
             $(".total-added h3").html(itensAdicionados);
             $(".total-edited h3").html(itensEditados);
             $(".total-removed h3").html(itensRemovidos);
+            if(creditosRegistados === 1)
+            {
+                $("#contratoDesc p").html("Contrato registado");
+                $("#totalCreditos").html(creditosRegistados);
+            }
+            else if(creditosRegistados >1)
+            {
+                $("#contratoDesc").html("Contratos registados");
+                $("#totalCreditos p").html(creditosRegistados);
+            }
+
         }
     }
 }
@@ -249,9 +304,19 @@ function loadUser()
             for(var i = 0;i<userActivities.length;i++)
             {
                 if(i === 0)
-                    $(".user-names").append('<li onclick="selectUser('+i+', $(this))" class="active"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+" "+userActivities[i]["surname"]+'</li>');
+                {
+                    if(userActivities[i]["name"] === userActivities[i]["surname"])
+                        $(".user-names").append('<li onclick="selectUser('+i+', $(this))" class="active"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+'</li>');
+                    else
+                        $(".user-names").append('<li onclick="selectUser('+i+', $(this))" class="active" id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+" "+userActivities[i]["surname"]+'</li>');
+                }
                 else
-                    $(".user-names").append('<li onclick="selectUser('+i+', $(this))" id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+" "+userActivities[i]["surname"]+'</li>');
+                {
+                    if(userActivities[i]["name"] === userActivities[i]["surname"])
+                        $(".user-names").append('<li onclick="selectUser('+i+', $(this))" id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+'</li>');
+                    else
+                        $(".user-names").append('<li onclick="selectUser('+i+', $(this))" id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+" "+userActivities[i]["surname"]+'</li>');
+                }
             }
             selectedUser = userActivities[0]["id"];
             loadUserActivities(-1, userActivities[0]["id"]);
@@ -273,4 +338,14 @@ function selectUser(index, component)
 function showMoreActivityInfo()
 {
     $(".div-statitcs").addClass("show");
+}
+
+function groupByDate(date)
+{
+    if(dataAnterior === date)
+        return "";
+    else {
+        dataAnterior = date;
+        return date;
+    }
 }
