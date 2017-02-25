@@ -31,7 +31,10 @@
 			<div class="flex-form add-new-user">
 				<div class="adm-ph-user default-user-img">
 					<input type="file" id="add-ph-user">
-					<nav><label for="add-ph-user" class="icon-camera"></label></nav>
+					<nav><label for="add-ph-user" class="icon-image"></label></nav>
+				</div>
+				<div class="new-photo input-total">
+					<i class="icon-camera"><span> Tirar uma foto</span></i>
 				</div>
 				<input type="text" id="gest-user-nif" maxlength="9" placeholder="NIF" class="input-total integer">
 				<input type="text" id="gest-user-nome" placeholder="Nome" class="input-2">
@@ -55,11 +58,11 @@
 							<b>+</b>
 						</div>
 						<div id="gest-user-type">
-							<!--							<i value="1" class="icon-radio-checked2"><span> Operador</span></i>-->
+							
 						</div>
 					</div>
 					<ul class="XpertTreeMenu" id="menuAccessUser">
-						<!--<li fix≃"true" id="1" level="0" idfrw="1"><nav><span>Crédito</span></nav></li>-->
+						
 					</ul>
 				</div>
 				<div class="bt-yes-no-cancel">

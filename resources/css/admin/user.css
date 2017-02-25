@@ -124,7 +124,23 @@
 	cursor: pointer;
 }
 
+.new-photo{
+	margin: 1rem 0;
+	color: #666;
+	text-align: center;
+	border-top: 2px transparent solid;
+	border-bottom: 2px transparent solid;
+	line-height: 2rem;
+	cursor: pointer;
+}
+.new-photo:hover{
+	border-color: #EEE;
+}
 
+.new-photo:hover{
+	color: #4285f4;
+	text-decoration: underline;
+}
 .mp-menu-user .content{
 	display: flex;
 }
