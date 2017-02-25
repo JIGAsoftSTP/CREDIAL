@@ -112,7 +112,7 @@ function loadAllActivities()
                 ' </section>'
             );
 
-            if(activity["activity"] === "Registrou novo Cretido!")
+            if(activity["activity"].$$("Registou novo Crédito com o Dossier"))
                 creditosRegistados++;
         }
         else if(activity["levelkey"] === LevelActivity.DESATIVACAO ||
@@ -207,7 +207,7 @@ function filterActivity()
                 ' </section>'
             );
 
-            if(activity["activity"] === "Registou novo Crédito!")
+            if(activity["activity"].$$("Registou novo Crédito com o Dossier"))
                 creditosRegistados++;
         }
         else if($("#filterActivity").val() === LevelActivity.ATUALIZACAO &&
