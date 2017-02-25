@@ -82,11 +82,12 @@ body{
 	font-weight: lighter;
 	color: #555;
 	font-size: .95rem;
+	position: relative;
 }
 .list-user-log ul li:after{
     content: "";
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
     margin-right: 5px;
     right: 3px;
@@ -103,13 +104,13 @@ body{
 	font-weight: normal;
 	padding-left: 0;
 }
-.list-user-log ul li[state="0"]{
+.list-user-log ul li[state="0"]:after{
 	background: #F65177;
 }
-.list-user-log ul li[state="1"]{
+.list-user-log ul li[state="1"]:after{
 	background: #50C14E;
 }
-.list-user-log ul li[state="2"]{
+.list-user-log ul li[state="2"]:after{
 	background: #ddd;
 }
 
