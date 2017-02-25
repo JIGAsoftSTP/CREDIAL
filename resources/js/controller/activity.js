@@ -230,7 +230,10 @@ function loadUser()
             userActivities = e.result;
             for(var i = 0;i<userActivities.length;i++)
             {
-                $(".user-names").append('<li id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+" "+userActivities[i]["surname"]+'</li>');
+                if(i === 0)
+                    $(".user-names").append('<li class="active"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+" "+userActivities[i]["surname"]+'</li>');
+                else
+                    $(".user-names").append('<li id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+" "+userActivities[i]["surname"]+'</li>');
             }
             loadUserActivities(-1, userActivities[0]["id"]);
 
