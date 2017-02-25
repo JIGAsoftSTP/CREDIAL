@@ -59,12 +59,12 @@
 						<b>Itens removidos</b>
 					</nav>
 				</div>
-				<section>
+				<section id="contratoDesc">
 					<span>
 						<h1 id="totalCreditos"></h1>
 						<i class="icon-profile"></i>
 					</span>
-					<p>Contratos registados</p>
+					<p ></p>
 				</section>
 				<section>
 					<span>

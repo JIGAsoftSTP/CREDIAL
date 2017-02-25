@@ -155,6 +155,16 @@ function loadAllActivities()
     $(".total-edited h3").html(itensEditados);
     $(".total-removed h3").html(itensRemovidos);
     $("#totalCreditos").html(creditosRegistados);
+    if(creditosRegistados === 1)
+    {
+        $("#contratoDesc p").html("Contrato registado");
+        $("#totalCreditos").html(creditosRegistados);
+    }
+    else if(creditosRegistados >1)
+    {
+        $("#contratoDesc").html("Contratos registados");
+        $("#totalCreditos p").html(creditosRegistados);
+    }
 
 }
 
@@ -264,7 +274,17 @@ function filterActivity()
             $(".total-added h3").html(itensAdicionados);
             $(".total-edited h3").html(itensEditados);
             $(".total-removed h3").html(itensRemovidos);
-            $("#totalCreditos").html(creditosRegistados);
+            if(creditosRegistados === 1)
+            {
+                $("#contratoDesc p").html("Contrato registado");
+                $("#totalCreditos").html(creditosRegistados);
+            }
+            else if(creditosRegistados >1)
+            {
+                $("#contratoDesc").html("Contratos registados");
+                $("#totalCreditos p").html(creditosRegistados);
+            }
+
         }
     }
 }
