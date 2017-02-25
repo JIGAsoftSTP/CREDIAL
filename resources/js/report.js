@@ -92,7 +92,7 @@ function filterConstruct(identifier, selected, filter){
 		'<span class="xClose" title="Remover filtragem por '+ filter +'"><hr><hr></span>' +
 		'<span class="x-autocomplete">' +
 		'<input id="'+identifier+'" onchange="getId(identifier, selected)" class="dataListValue"  identifier="'+ identifier + '" list ="'+ selected +'" placeholder="' + filter + '">' +
-		'<datalist  id="' + selected + '">' + returnListFilter(identifier, selected);+
+		'<datalist  id="' + selected + '">' + returnListFilter(identifier, selected)+
 		'</datalist>' +
 		'</span>' +
 		'</section>';

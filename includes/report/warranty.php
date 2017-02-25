@@ -10,7 +10,7 @@
 </head>
 <body class="bd-warr">
 	<div class="arend">
-		<div class="little-det">
+		<!--<div class="little-det">
 			<span class="super-search focus">
 				<i class="icon-search"></i>
 				<input type="" name="">
@@ -20,9 +20,9 @@
 					<option value="0">Cliente</option>
 				</select>
 			</span>
-		</div>
+		</div>-->
 		<div class="list-warr">
-			<section>
+			<!--<section>
 				<div class="first">
 					<b><span>Crédito nº <span>68468</span></span> <small>Mais detalhes</small></b>
 					<h3>Customer Name here!</h3>
@@ -54,7 +54,7 @@
 					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
 				</div>
 			</section>
-		
+		-->
 		</div>
 	</div>
 
