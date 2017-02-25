@@ -28,7 +28,7 @@ function loadCredit(){
 function loadInformationByCredit(){
     $call = new CallPgSQL();
     $call->functionTable("report.funct_rep_credits_garrantia","*")
-        ->addNumeric(Session::getUserLogado()->getId())
+        ->addString(Session::getUserLogado()->getId())
         ->addNumeric($_POST["id"])
         ->addJsonb(null);
     $call->execute();
@@ -38,8 +38,8 @@ function loadInformationByCredit(){
         $information[count($information)] = $value;
     }
 
-    $call->functionTable("report.funct_rep_credits_garrantia","*")
-        ->addNumeric(Session::getUserLogado()->getId())
+    $call->functionTable("report.funct_rep_credits_documents","*")
+        ->addString(Session::getUserLogado()->getId())
         ->addNumeric($_POST["id"])
         ->addJsonb(null);
     $call->execute();

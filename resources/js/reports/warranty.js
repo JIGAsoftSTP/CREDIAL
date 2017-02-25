@@ -18,13 +18,13 @@ var CreditoBluider = function () {
     this.listaCredito = [];
     this.getCreditos = function () {
         var rt = "";
-        for (var ig = 0; ig < this.listaCredito.length; ig++){
+        for (var ig = 0; ig < this.listaCredito.length; ig++) {
             rt += '<section>' +
-                    '<div class="first">' +
-                        '<b><span>Crédito nº <span>'+this.listaCredito[ig].number+'</span></span><small id-id="'+ig+'">Mais detalhes</small></b>' +
-                        '<h3>'+this.listaCredito[ig].clienteNome+'</h3>' +
-                    '</div>' +
-                    '<div class="more" id="'+ig+'" ></div>' +
+                '<div class="first">' +
+                '<b><span>Crédito nº <span>' + this.listaCredito[ig].number + '</span></span><small id-id="' + ig + '">Mais detalhes</small></b>' +
+                '<h3>' + this.listaCredito[ig].clienteNome + '</h3>' +
+                '</div>' +
+                '<div class="more" id="' + ig + '" ></div>' +
                 '</section>';
         }
         return rt;
@@ -35,26 +35,45 @@ var CreditoBluider = function () {
      */
     this.getListInformationCredit = function (iClient) {
         var rt = "";
+        var isAdd = [];
         /**
          * @type {Credito}
          */
         var Creditoe = this.listaCredito[iClient];
-        for (var ig = 0; ig < Creditoe.listaInformacao.length; ig++ ){
+        for (var ig = 0; ig < Creditoe.listaInformacao.length; ig++) {
             var infor = Creditoe.listaInformacao[ig];
-            rt +=
-                '<h4>'+infor.tipo+' - '+infor.name+'</h4>' +
-                '<p>'+infor.value+'</p>';
+            rt += ((fistOfType(infor.tipo)) ? "h4"+infor.tipo+"h4" : '') +
+                '<h4>' + infor.name + '</h4>' +
+                '<p>' + infor.value + '</p>'
+                + (nextIsOtherType(ig, Creditoe.listaInformacao) ? '<hr>' : '');
+            console.log(nextIsOtherType(ig, Creditoe.listaInformacao));
         }
-        $("#"+iClient).html(rt);
+        $("#" + iClient).html(rt);
+
+        function fistOfType(type) {
+            if (isAdd[type] == undefined) {
+                isAdd[type] = true;
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        /**
+         * @param i {Number}
+         * @param info {[Information]}
+         */
+        function nextIsOtherType(i, info) { return (info.length > i+1 && info[i].tipo != info[(i + 1)].tipo); }
     };
 
-    /**
-     * @param GarClient {Credito}
-     */
-    this.addCredito = function (GarClient) {
-        this.listaCredito[this.listaCredito.length] = GarClient;
-    }
+        /**
+         * @param GarClient {Credito}
+         */
+        this.addCredito = function (GarClient) {
+            this.listaCredito[this.listaCredito.length] = GarClient;
+        };
 };
+
 
 var Credito = function () {
     this.cheque = undefined;
@@ -99,8 +118,9 @@ function loadDataToPage() {
         dataType: "json",
         success: function (e) {
             for (var f=0; (f < e.credits.length && f != 199) ; f++){
-                var Creditoe = new Credito();
                 var credits = e.credits[f];
+
+                var Creditoe = new Credito();
                 Creditoe.cheque = credits["cheque"];
                 Creditoe.id = credits["id"];
                 Creditoe.name = credits["name"];
@@ -134,15 +154,17 @@ function getInformationCredit(i,credit) {
         success: function (e) {
             for (var f=0; (f < e.information.length && f != 199) ; f++){
                 var info = e.information[f];
+
                 var newInfo = new Information();
-                newInfo.id = info["ID"];
-                newInfo.tipo = info["tipo"];
+                newInfo.id = info["id"];
+                newInfo.tipo = info["type"];
+
                 if (newInfo.tipo == "Garrantia") {
-                    newInfo.name = info["GARRANTIA"];
-                    newInfo.value = info["GARRANTIAVALUE"];
+                    newInfo.name = info["garrantia"];
+                    newInfo.value = info["garrantiavalue"];
                 } else {
-                    newInfo.name = info["DOCUMENT"];
-                    newInfo.value = info["DOCUMENTVALUE"];
+                    newInfo.name = info["document"];
+                    newInfo.value = info["documentvalue"];
                 }
                 credit.addInformation(newInfo);
             }
