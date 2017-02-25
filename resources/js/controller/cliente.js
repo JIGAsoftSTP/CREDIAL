@@ -458,6 +458,7 @@ $("#cred-pay-bt").click(function () {
                 if (e.result != true) {  callXpertAlert(e.msg, new Mensage().cross, -1); }
                 else {
                     callXpertAlert("Novo pagamento registado sucesso!", new Mensage().checkmark, 8000);
+                    regUserActivity("./bean/activity.php", -1 , "Efetuou um novo Pagamento!", JSON.stringify(paga), LevelActivity.CRIACAO );
                     $('#cred-pay-form').closest('.modalPage').fadeOut(300);
                     setTimeout(reloadPestacaoCreditdo, 700);
                     var re = new refresh();

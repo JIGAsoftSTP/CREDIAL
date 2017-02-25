@@ -51,7 +51,7 @@ $("#cred-simula-import").click(function () {
             if (!e.result) {  callXpertAlert(e.return["MESSAGE"], new Mensage().cross, -1); }
             else {
 
-                regUserActivity("./bean/activity.php", e.return["NUM DOSSIER"] , "Registou novo Crédito!", JSON.stringify(e.return), LevelActivity.CRIACAO );
+                regUserActivity("./bean/activity.php", e.return["NUM DOSSIER"] , "Registou novo Crédito com o Dossier "+e.return["NUM DOSSIER"], JSON.stringify(e.return), LevelActivity.CRIACAO );
 
                 $(".mp-confirm-simulation").fadeOut();
                 callXpertAlert("<b>" + "Numero Dossier: </b>" + e.return["NUM DOSSIER"] + "<br>" +
@@ -110,7 +110,7 @@ $("#start-simulation").click(function () {
                     // "ID TAXA INFERIOR":"51"
                     bluiderTablePestacao();
 
-                    regUserActivity("./bean/activity.php", -1 , "Efetuou uma simulaçao!", JSON.stringify(si), LevelActivity.OUTROS );
+                    regUserActivity("./bean/activity.php", -1 , "Efetuou uma simulação!", JSON.stringify(si), LevelActivity.OUTROS );
 
                 }
                 else {
@@ -350,7 +350,7 @@ $("#import-simulation").click(function () {
         si.objectoTipoCredito =  $("#cred-tipoCred").val();
         si.objectoFontePagamento =  $("#cred-cli-fonRend").val();
         openModalFrame($('.mp-confirm-simulation'));
-        regUserActivity("./bean/activity.php", -1 , "Carregou o botao de Comcluir a simulaçao!", -1, LevelActivity.OUTROS );
+        regUserActivity("./bean/activity.php", -1 , "Carregou o botão de Concluir a simulação!", -1, LevelActivity.OUTROS );
     }
 });
 
