@@ -43,7 +43,7 @@
 				<div class="list-logs">
 				</div>
 			</div>
-			<div class="div-statitcs show">
+			<div class="div-statitcs">
 				<span class="x-close"></span>
 				<div class="det-tabs">
 					<nav class="total-added">
@@ -80,8 +80,9 @@
     <script type="text/javascript" src="../resources/fw/pikaday/pikaday.js"></script>
 </body>
 <script src="../resources/js/jQuery.js"></script>
-<script src="../resources/js/controller/activity.js"></script>
 <script src="../resources/js/controller/geral.js"></script>
 <script src="../resources/js/geralScript.js"></script>
+<script src="../resources/js/activity.js"></script>
+<script src="../resources/js/controller/activity.js"></script>
 
 </html>
