@@ -338,7 +338,7 @@ function selectUser(index, component)
 
 function showMoreActivityInfo()
 {
-    $(".div-statitcs").addClass("show");
+    
 }
 
 function groupByDate(date)
