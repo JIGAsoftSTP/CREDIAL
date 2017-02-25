@@ -68,7 +68,7 @@
 				</section>
 				<section>
 					<span>
-						<h1>45 <small>minutos</small></h1>
+						<h1><small>minutos</small></h1>
 						<i class="icon-stopwatch"></i>
 					</span>
 					<p>Tempo médio de atividades</p>

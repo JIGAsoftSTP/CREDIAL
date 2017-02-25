@@ -189,7 +189,7 @@ function filterActivity()
                 ' </section>'
             );
 
-            if(activity["activity"] === "Registrou novo Cretido!")
+            if(activity["activity"] === "Registou novo Crédito!")
                 creditosRegistados++;
         }
         else if($("#filterActivity").val() === LevelActivity.ATUALIZACAO &&
@@ -197,7 +197,7 @@ function filterActivity()
         {
             itensEditados++;
             $(".list-logs").append('' +
-                '<h3 style="margin-left: 4rem;">'+formatActivityDate(activity["date"], 1)+'</h3>' +
+                '<h3 style="margin-left: 10px;">'+formatActivityDate(activity["date"], 1)+'</h3>' +
                 '<section> '+
                 ' <span class="hour">'+formatActivityDate(activity["date"], 2)+'</span>'+
                 '<div class="detail">'+
@@ -276,9 +276,19 @@ function loadUser()
             for(var i = 0;i<userActivities.length;i++)
             {
                 if(i === 0)
-                    $(".user-names").append('<li onclick="selectUser('+i+', $(this))" class="active"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+" "+userActivities[i]["surname"]+'</li>');
+                {
+                    if(userActivities[i]["name"] === userActivities[i]["surname"])
+                        $(".user-names").append('<li onclick="selectUser('+i+', $(this))" class="active"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+'</li>');
+                    else
+                        $(".user-names").append('<li onclick="selectUser('+i+', $(this))" class="active" id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+" "+userActivities[i]["surname"]+'</li>');
+                }
                 else
-                    $(".user-names").append('<li onclick="selectUser('+i+', $(this))" id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+" "+userActivities[i]["surname"]+'</li>');
+                {
+                    if(userActivities[i]["name"] === userActivities[i]["surname"])
+                        $(".user-names").append('<li onclick="selectUser('+i+', $(this))" id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+'</li>');
+                    else
+                        $(".user-names").append('<li onclick="selectUser('+i+', $(this))" id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+" "+userActivities[i]["surname"]+'</li>');
+                }
             }
             selectedUser = userActivities[0]["id"];
             loadUserActivities(-1, userActivities[0]["id"]);

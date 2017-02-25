@@ -51,7 +51,7 @@ $("#cred-simula-import").click(function () {
             if (!e.result) {  callXpertAlert(e.return["MESSAGE"], new Mensage().cross, -1); }
             else {
 
-                regUserActivity("./bean/activity.php", e.return["NUM DOSSIER"] , "Registrou novo Cretido!", JSON.stringify(e.return), LevelActivity.CRIACAO );
+                regUserActivity("./bean/activity.php", e.return["NUM DOSSIER"] , "Registou novo Crédito!", JSON.stringify(e.return), LevelActivity.CRIACAO );
 
                 $(".mp-confirm-simulation").fadeOut();
                 callXpertAlert("<b>" + "Numero Dossier: </b>" + e.return["NUM DOSSIER"] + "<br>" +
