@@ -3,7 +3,7 @@
  */
 
 $(function () {
-    regUserActivity("./bean/activity.php", -1 , "Visualizou a pagina de cliente e creditos!", -1, LevelActivity.VISUALIZACAO );
+    regUserActivity("./bean/activity.php", -1 , "Visualizou a pagina de cliente e créditos!", -1, LevelActivity.VISUALIZACAO );
 
     listarCliente();
     loadComoBox($("#cli-ar-ano"),addANO());
@@ -153,7 +153,7 @@ function inforCiente(b, type, fill) {
                 $("#cli-reg").text('Editar cliente');
                 getDadosCliente();
 
-                regUserActivity("./bean/activity.php", -1 , "Selecionou Cliente para ver as prestaçoes do credito!", -1, LevelActivity.VISUALIZACAO );
+                regUserActivity("./bean/activity.php", -1 , "Selecionou Cliente para ver as Prestações do Crédito!", -1, LevelActivity.VISUALIZACAO );
             }
         },
         beforeSend: function () {  $(".mp-loading").fadeIn(); },
@@ -238,7 +238,7 @@ function regCliente() {
                 var re = new refresh();
                 re.dataType = "CLIENT";
                 saveRefresh(re);
-                regUserActivity("./bean/activity.php", scli.nif , "Novo cliente registrado com sucesso", JSON.stringify(scli), LevelActivity.CRIACAO );
+                regUserActivity("./bean/activity.php", scli.nif , "Registou um novo cliente", JSON.stringify(scli), LevelActivity.CRIACAO );
             }else {
                 callXpertAlert(e.msg, new Mensage().cross, 8000);
             }
@@ -309,7 +309,7 @@ function loadCreditoCliente(_idCreito, jk,_asClassShow) {
 }
 
 function showDataCliente(){
-    regUserActivity("./bean/activity.php", clienteData["NIF"] , "Visualizou dados de cliente "+clienteData["NAME"]+" "+clienteData["SURNAME"], JSON.stringify(clienteData), LevelActivity.VISUALIZACAO );
+    regUserActivity("./bean/activity.php", clienteData["NIF"] , "Visualizou dados do(a) cliente "+clienteData["NAME"]+" "+clienteData["SURNAME"], JSON.stringify(clienteData), LevelActivity.VISUALIZACAO );
 
     $("#inf-cli-geral-nif").text(clienteData["NIF"]);
     $("#inf-cli-geral-nome").text(clienteData["NAME"]+" "+clienteData["SURNAME"]);
@@ -336,7 +336,7 @@ function showDataCliente(){
 
 function listCreditoCliente(_type) {
 
-    regUserActivity("./bean/activity.php", clienteData["NIF"] , "Selecionou mais informaçoes sobre credito cliente", JSON.stringify(clienteData), LevelActivity.VISUALIZACAO );
+    regUserActivity("./bean/activity.php", clienteData["NIF"] , "Selecionou mais informações sobre crédito do(a) cliente", JSON.stringify(clienteData), LevelActivity.VISUALIZACAO );
 
     $("#inf-cli-ano").text("Cliente desde " + clienteShortData["DATA REGISTRO"]+((Number(clienteShortData["IDADE NA EMPRESA"]) > 1) ? " - Há " + clienteShortData["IDADE NA EMPRESA"] + " Anos" : "" ));
     // $("#inf-cred-lqA").text(clienteShortData["ATRAZADO"]);
@@ -536,7 +536,7 @@ function editeSelectedClient() {
                 $('.add-new-form').removeClass('show');
                 saveRefresh(re);
 
-                regUserActivity("./bean/activity.php", scli.nif , "Concluio a Ediçao de Cliente!", JSON.stringify(scli), LevelActivity.ATUALIZACAO );
+                regUserActivity("./bean/activity.php", scli.nif , "Atualizou informações do(a) cliente!", JSON.stringify(scli), LevelActivity.ATUALIZACAO );
 
                 if(DOCREDITO) setTimeout(creditoNow, 800, scli);
             } else {
@@ -586,7 +586,7 @@ function clientIsIncomple() {
                 openModalFrame($('.mp-new-credit'));
                 tableEstructure($('#table-liquid'));
 
-                regUserActivity("./bean/activity.php", -1 , "Selecionou Cliente para efectuar credito!", -1, LevelActivity.VISUALIZACAO );
+                regUserActivity("./bean/activity.php", -1 , "Selecionou Cliente para efectuar crédito!", -1, LevelActivity.VISUALIZACAO );
        /*     }
         },
         beforeSend: function () {  $(".mp-loading").fadeIn(); },
