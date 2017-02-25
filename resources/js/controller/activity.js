@@ -27,6 +27,14 @@ $(function ()
         if($("#reportActivity-initialDate").val() !== "" &&
             $("#reportActivity-finalDate").val() !== "")
         {
+            $("#reportActivity-initialDate").val(alterFormatDate($("#reportActivity-initialDate").val() ));
+            $("#reportActivity-finalDate").val(alterFormatDate($("#reportActivity-finalDate").val()));
+
+            activityData = new ActivityData();
+            activityData.dateinicio =   $("#reportActivity-initialDate").val();
+            activityData.datefim = $("#reportActivity-finalDate").val();
+            activityData.loadmod = "date";
+
             loadUserActivities(1, selectedUser);
         }
     });
@@ -42,7 +50,12 @@ $(function ()
   var selectedUser = undefined;
   var index = 0;
   var dataAnterior = "";
+ var activityData = null;
 
+  var ActivityData = function () {};
+  ActivityData.prototype.dateinicio = undefined;
+  ActivityData.prototype.datefim = undefined;
+  ActivityData.prototype.loadmod = undefined;
 function loadUserActivities(filter, user)
 {
 
@@ -53,8 +66,7 @@ function loadUserActivities(filter, user)
         data: {"intention" : "loadActivities",
                 "user" : user,
             "filter" : filter,
-            "dataInicio" :  $("#reportActivity-initialDate").val(),
-              "dataFim" : $("#reportActivity-finalDate").val()},
+            "jsonContent" : JSON.stringify(activityData)},
         beforeSend: function () {  $(".mp-loading").fadeIn(); },
         complete: function () {
             $(".mp-loading").fadeOut();},
@@ -377,4 +389,11 @@ function groupByDate(date)
         dataAnterior = date;
         return date;
     }
+}
+
+function alterFormatDate(date)
+{
+    var newDate = date.split("-");
+    newDate = $.makeArray(newDate);
+    return newDate[2]+"-"+newDate[1]+"-"+newDate[0];
 }

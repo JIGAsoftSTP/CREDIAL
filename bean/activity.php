@@ -1,7 +1,6 @@
 <?php
 include "../conexao/CallPgSQL.php";
 include "../modelo/Imagem.php";
-include "../modelo/Activity.php";
 include "Session.php";
 include_once "../modelo/User.php";
 
@@ -26,19 +25,10 @@ include_once "../modelo/User.php";
 
     function loadActivities()
     {
-        $activity = new Activity();
-
-        if($_POST["dataInicio"] !="" &&
-            $_POST["dataFim"] != "")
-        {
-            $activity->setDatainicio($_POST["dataInicio"]);
-            $activity->setDatafim($_POST["dataFim"]);
-            $activity->setLoadmod("date");
-        }
         $call = new CallPgSQL();
         $call->functionTable("report.funct_rep_activity", "*")
             ->addString($_POST["user"])
-            ->addJsonb(($_POST["filter"] == -1 ? null : json_encode($activity)));
+            ->addJsonb(($_POST["filter"] == -1 ? null : $_POST["jsonContent"]));
         $call->execute();
         $arrayValues = array();
         while($result = $call->getValors())
