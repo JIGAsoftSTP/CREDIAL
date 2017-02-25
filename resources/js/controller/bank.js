@@ -75,11 +75,11 @@ function carregarContas()
              listBanks = e.contas;
             loadComoBoxIDandValue($(".listBanks"), e.contas ,"ID", "NOME BANCO");
             loadComoBoxIDandValue($("#bk-conta-nome"), e.bancos ,"ID", "NAME");
-            $(".contas").append('<li class="active">'+e.contas[0]["DESCRICAO"]+'</li>');
+            $(".contas").append('<ul class="siglas"><li class="active">'+e.contas[0]["DESCRICAO"]+'</li></ul>');
             loadBankMoviment(0);
             for(var i = 1;i<e.contas.length;i++)
             {
-                $(".contas").append('<li onclick=loadBankMoviment('+i+')>'+e.contas[i]["DESCRICAO"]+'</li>');
+                $(".contas").append('<ul class="siglas"><li onclick=loadBankMoviment('+i+')>'+e.contas[i]["DESCRICAO"]+'</li></ul>');
             }
         }
     });
