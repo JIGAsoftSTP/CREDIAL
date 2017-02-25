@@ -6,6 +6,7 @@ $(function ()
 {
     loadUser();
 
+
     $("#searchActivity").keyup(function () {
 
     });
@@ -39,6 +40,7 @@ $(function ()
   var activities = [];
   var userActivities = [];
   var selectedUser = undefined;
+  var index = 0;
 
 function loadUserActivities(filter, user)
 {
@@ -164,7 +166,7 @@ function filterActivity()
     {
         var activity = activities[i];
         if($("#filterActivity").val() === LevelActivity.CRIACAO &&
-            activity === LevelActivity.CRIACAO)
+            activity["levelkey"] === LevelActivity.CRIACAO)
         {
             $(".list-logs").append('' +
                 '<h3>'+formatActivityDate(activity["date"], 1)+'</h3>'+
@@ -181,7 +183,7 @@ function filterActivity()
             );
         }
         else if($("#filterActivity").val() === LevelActivity.ATUALIZACAO &&
-            activity === LevelActivity.ATUALIZACAO)
+            activity["levelkey"] === LevelActivity.ATUALIZACAO)
         {
             $(".list-logs").append('' +
                 '<h3>'+formatActivityDate(activity["date"], 1)+'</h3>' +
@@ -198,7 +200,7 @@ function filterActivity()
             );
         }
         else if($("#filterActivity").val() === LevelActivity.ELIMINACAO &&
-            activity === LevelActivity.ELIMINACAO)
+            activity["levelkey"] === LevelActivity.ELIMINACAO)
         {
 
             $(".list-logs").append('' +
@@ -237,13 +239,23 @@ function loadUser()
             for(var i = 0;i<userActivities.length;i++)
             {
                 if(i === 0)
-                    $(".user-names").append('<li class="active"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+" "+userActivities[i]["surname"]+'</li>');
+                    $(".user-names").append('<li onclick="selectUser('+i+', $(this))" class="active"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+" "+userActivities[i]["surname"]+'</li>');
                 else
-                    $(".user-names").append('<li id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+" "+userActivities[i]["surname"]+'</li>');
+                    $(".user-names").append('<li onclick="selectUser('+i+', $(this))" id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+" "+userActivities[i]["surname"]+'</li>');
             }
             selectedUser = userActivities[0]["id"];
             loadUserActivities(-1, userActivities[0]["id"]);
 
         }
     });
+}
+
+function selectUser(index, component)
+{
+    $(".user-names li.active").removeClass('active');
+    $(component).closest('li').addClass('active');
+    selectedUser = userActivities[index]["id"];
+
+    loadUserActivities(-1, selectedUser);
+
 }

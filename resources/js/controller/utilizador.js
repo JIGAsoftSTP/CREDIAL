@@ -246,11 +246,11 @@ function disibleUser() {
 
                 if(user.disableMode === "F"){
                     callXpertAlert("Palavra-Passe foi redifinida com sucesso! ", new Mensage().checkmark, 10000);
-                    regUserActivity(userActivityAddress, -1, "Redifiniu a palavra-passe do Utilizador", -1, LevelActivity.ATUALIZACAO);
+                    regUserActivity(userActivityAddress, -1, "Redifiniu a palavra-passe do Utilizador "+user.nome+" "+user.apelido, -1, LevelActivity.ATUALIZACAO);
                 }
                 else{
                     callXpertAlert("Utilizador foi desativado com sucesso! ", new Mensage().checkmark, 10000);
-                    regUserActivity(userActivityAddress, -1, "Desativou o Utilizador", -1, LevelActivity.ATUALIZACAO);
+                    regUserActivity(userActivityAddress, -1, "Desativou o Utilizador "+user.nome+" "+user.apelido, -1, LevelActivity.ATUALIZACAO);
                 }
                 setTimeout(loadListClient,4000,true);
             }
