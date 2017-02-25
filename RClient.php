@@ -416,7 +416,7 @@
 		</div>
 	</div>
 </section>
-    <section class="modalPage mp-liquidar-full" id="cred-pay-form-full" style="display: block">
+    <section class="modalPage mp-liquidar-full" id="cred-pay-form-full" >
         <div class="modalFrame">
             <div class="modalContainer">
                 <div class="content">
