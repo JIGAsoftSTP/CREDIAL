@@ -42,7 +42,7 @@ var CreditoBluider = function () {
         var Creditoe = this.listaCredito[iClient];
         for (var ig = 0; ig < Creditoe.listaInformacao.length; ig++) {
             var infor = Creditoe.listaInformacao[ig];
-            rt += ((fistOfType(infor.tipo)) ? "h4"+infor.tipo+"h4" : '') +
+            rt += ((fistOfType(infor.tipo)) ? "<h4>"+infor.tipo+"<h4></h4>" : '') +
                 '<h4>' + infor.name + '</h4>' +
                 '<p>' + infor.value + '</p>'
                 + (nextIsOtherType(ig, Creditoe.listaInformacao) ? '<hr>' : '');
