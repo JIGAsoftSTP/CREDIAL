@@ -70,7 +70,7 @@
 				</div>
 
 			</article>
-            <?php include "includes/process.html"; ?>
+
 	</div>
 
 </body>

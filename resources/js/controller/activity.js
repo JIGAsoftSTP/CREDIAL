@@ -338,7 +338,7 @@ function selectUser(index, component)
 
 function showMoreActivityInfo()
 {
-    
+
 }
 
 function groupByDate(date)

@@ -76,7 +76,7 @@
 			</div>
 		</div>
 	</div>
-
+    <?php include "process.html"; ?>
     <script type="text/javascript" src="../resources/fw/pikaday/pikaday.js"></script>
 </body>
 <script src="../resources/js/jQuery.js"></script>
