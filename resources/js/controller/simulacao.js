@@ -110,7 +110,7 @@ $("#start-simulation").click(function () {
                     // "ID TAXA INFERIOR":"51"
                     bluiderTablePestacao();
 
-                    regUserActivity("./bean/activity.php", -1 , "Efetou uma simulaçao!", JSON.stringify(si), LevelActivity.OUTROS );
+                    regUserActivity("./bean/activity.php", -1 , "Efetuou uma simulaçao!", JSON.stringify(si), LevelActivity.OUTROS );
 
                 }
                 else {

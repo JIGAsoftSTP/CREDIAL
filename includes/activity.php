@@ -5,30 +5,33 @@
 	<title></title>
 	<link rel="stylesheet" href="../resources/css/geralStyle.css">
 	<link rel="stylesheet" href="../resources/css/activity.css">
+	<link rel="stylesheet" href="../resources/fw/pikaday/pikaday.css">
+
 </head>
 <body>
 	<div class="log-user">
 		<div class="content">	
 			<div class="list-user-log">
-				<span class="m-search focus"><input type="" name=""><i class="icon-search"></i></span>
+				<span class="m-search focus">
+                    <input type="text" placeholder="Funcionário">
+
+                    <i class="icon-search"></i>
+                </span>
 				<ul class="user-names">
 
-					<li>serbnwern</li>
-					<li>serbnwern</li>
-					<li>serbnwern</li>
-					<li>serbnwern</li>
-					
 				</ul>
 			</div>
 			<div class="arend">
 				<div class="little-det">
 					<span class="super-search focus">
 						<i class="icon-search"></i>
-						<input type="" name="">
-						<select>
-							<option value="0">Todos</option>
-							<option value="0">Adicionados</option>
-							<option value="0">Editados</option>
+						<input type="text" placeholder="Pesquise aqui...">
+                        <input type="text" class="is-datepicker reportActivityDate" id="reportActivity-initialDate" placeholder="Data Inicial">
+                        <input type="text" class="is-datepicker reportActivityDate" id="reportActivity-finalDate" placeholder="Data Final">
+						<select id="filterActivity">
+							<option value="4">Todos</option>
+							<option value="2">Adicionados</option>
+							<option value="1">Editados</option>
 							<option value="0">Removidos</option>
 						</select>
 					</span>
@@ -37,66 +40,21 @@
 				</div>
 				
 				<div class="list-logs">
-<!--					<section>-->
-<!--						<span class="hour">17:20</span>-->
-<!--						<div class="detail">-->
-<!--							<i class="icon-pencil edit"></i>-->
-<!--							<span>-->
-<!--								<span class="date">12-12-2017</span>-->
-<!--								<span class="description">dnerjmnerjm</span>-->
-<!--								<small>Mais detalhes</small>-->
-<!--							</span>-->
-<!--						</div>-->
-<!--					</section>-->
-<!--					<section>-->
-<!--						<span class="hour">17:20</span>-->
-<!--						<div class="detail">-->
-<!--							<i class="icon-plus create"></i>-->
-<!--							<span>-->
-<!--								<span class="date">12-12-2017</span>-->
-<!--								<span class="description">dnerjmnerjm</span>-->
-<!--								<small>Mais detalhes</small>-->
-<!--							</span>-->
-<!--						</div>-->
-<!--					</section>-->
-<!--					<section>-->
-<!--						<span class="hour">17:20</span>-->
-<!--						<div class="detail">-->
-<!--							<i class="icon-minus remove"></i>-->
-<!--							<span>-->
-<!--								<span class="date">12-12-2017</span>-->
-<!--								<span class="description">dnerjmnerjm</span>-->
-<!--								<small>Mais detalhes</small>-->
-<!--							</span>-->
-<!--						</div>-->
-<!--					</section>-->
-<!--					-->
-<!--					<section>-->
-<!--						<span class="hour">17:20</span>-->
-<!--						<div class="detail">-->
-<!--							<i class="icon-eye view"></i>-->
-<!--							<span>-->
-<!--								<span class="date">12-12-2017</span>-->
-<!--								<span class="description">dnerjmnerjm</span>-->
-<!--								<small>Mais detalhes</small>-->
-<!--							</span>-->
-<!--						</div>-->
-<!--					</section>-->
 				</div>
 			</div>
 			<div class="div-statitcs show">
 				<span class="x-close"></span>
 				<div class="det-tabs">
 					<nav class="total-added">
-						<h3>385468</h3>
+						<h3></h3>
 						<b>Itens adicionados</b>
 					</nav>
 					<nav class="total-edited">
-						<h3>385468</h3>
+						<h3></h3>
 						<b>Itens editados</b>
 					</nav>
 					<nav class="total-removed">
-						<h3>385468</h3>
+						<h3></h3>
 						<b>Itens removidos</b>
 					</nav>
 				</div>
@@ -117,9 +75,12 @@
 			</div>
 		</div>
 	</div>
+
+    <script type="text/javascript" src="../resources/fw/pikaday/pikaday.js"></script>
 </body>
 <script src="../resources/js/jQuery.js"></script>
 <script src="../resources/js/controller/activity.js"></script>
+<script src="../resources/js/controller/geral.js"></script>
 <script src="../resources/js/geralScript.js"></script>
 
 </html>

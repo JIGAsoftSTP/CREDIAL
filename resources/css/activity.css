@@ -122,6 +122,9 @@ body{
 	padding: .7rem 0 .7rem 1rem;
 	border-right: 1px #ddd solid;
 }
+.super-search input:nth-child(2){
+	flex-grow: 2;
+}
 .super-search select{
 	width: 8rem;
 }
