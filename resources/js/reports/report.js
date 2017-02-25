@@ -373,21 +373,6 @@ var TypeReport = {"CLIENTES" : "rep.cliente", "CRESCIMENTO_HOMOLOGO" : "rep.cres
 Object.freeze(TypeReport);
 
 
-function autoSumTable(array)
-{
-    xTbl = $('.master-content .x-table');
-    $('<div class="sum-parts"></div>').insertAfter(xTbl);
-    for (var key in array) {
-         var value = data[key];
-        console.info("entrou no for value "+array[key]);
-         $('.sum-parts').append(
-            '<section>'+
-            '<h1>'+ array[key] +'</h1>'+
-            '<span>'+ key +'</span>'+
-            '</section>'
-            )
-     }
-}
 function sumTable(array){
 
     $("#iframe-" + $('aside li.active').index()).contents().find('.sum-parts').remove();
@@ -396,7 +381,6 @@ function sumTable(array){
 
     for (var key in array) {
          var value = data[key];
-        console.info("entrou no for value "+array[key]);
         $("#iframe-" + $('aside li.active').index()).contents().find('.sum-parts').append(
             '<section>'+
             '<h1>'+ array[key] +'</h1>'+
