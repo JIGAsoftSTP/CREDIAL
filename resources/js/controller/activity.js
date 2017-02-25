@@ -84,7 +84,7 @@ function loadAllActivities()
                 '  <i class="icon-pencil edit"></i>'+
                 ' <span>' +
                 '<span class="description">'+activity["activity"]+'</span>'+
-                ' <small>Mais detalhes</small>'+
+                ' <small onclick="showMoreActivityInfo()">Mais detalhes</small>'+
                 ' </span>'+
                 ' </div>'+
                 ' </section>'
@@ -101,7 +101,7 @@ function loadAllActivities()
                 '  <i class="icon-plus create"></i> '+
                 ' <span>'+
                 '<span class="description">'+activity["activity"]+'</span>'+
-                ' <small>Mais detalhes</small> '+
+                ' <small onclick="showMoreActivityInfo()">Mais detalhes</small> '+
                 ' </span> '+
                 ' </div> '+
                 ' </section>'
@@ -119,7 +119,7 @@ function loadAllActivities()
                 '  <i class="icon-minus remove"></i> '+
                 ' <span>'+
                 '<span class="description">'+activity["activity"]+'</span> '+
-                ' <small>Mais detalhes</small> '+
+                ' <small onclick="showMoreActivityInfo()">Mais detalhes</small> '+
                 ' </span> '+
                 ' </div> '+
                 ' </section>'
@@ -135,7 +135,7 @@ function loadAllActivities()
                 '  <i class="icon-eye view"></i> '+
                 ' <span>'+
                 '<span class="description">'+activity["activity"]+'</span> '+
-                ' <small>Mais detalhes</small> '+
+                ' <small onclick="showMoreActivityInfo()">Mais detalhes</small> '+
                 ' </span> '+
                 ' </div> '+
                 ' </section>'
@@ -178,7 +178,7 @@ function filterActivity()
                 '  <i class="icon-plus create"></i> '+
                 ' <span>'+
                 '<span class="description">'+activity["activity"]+'</span>'+
-                ' <small>Mais detalhes</small> '+
+                ' <small onclick="showMoreActivityInfo()">Mais detalhes</small> '+
                 ' </span> '+
                 ' </div> '+
                 ' </section>'
@@ -189,14 +189,14 @@ function filterActivity()
         {
             itensEditados++;
             $(".list-logs").append('' +
-                '<h3>'+formatActivityDate(activity["date"], 1)+'</h3>' +
+                '<h3 style="margin-left: 4rem;">'+formatActivityDate(activity["date"], 1)+'</h3>' +
                 '<section> '+
                 ' <span class="hour">'+formatActivityDate(activity["date"], 2)+'</span>'+
                 '<div class="detail">'+
                 '  <i class="icon-pencil edit"></i>'+
                 ' <span>' +
                 '<span class="description">'+activity["activity"]+'</span>'+
-                ' <small>Mais detalhes</small>'+
+                ' <small onclick="showMoreActivityInfo()">Mais detalhes</small>'+
                 ' </span>'+
                 ' </div>'+
                 ' </section>'
@@ -214,7 +214,24 @@ function filterActivity()
                 '  <i class="icon-minus remove"></i> '+
                 ' <span>'+
                 '<span class="description">'+activity["activity"]+'</span> '+
-                ' <small>Mais detalhes</small> '+
+                ' <small onclick="showMoreActivityInfo()">Mais detalhes</small> '+
+                ' </span> '+
+                ' </div> '+
+                ' </section>'
+            );
+        } else if($("#filterActivity").val() === LevelActivity.VISUALIZACAO &&
+            activity["levelkey"] === LevelActivity.VISUALIZACAO)
+        {
+            itensRemovidos++;
+            $(".list-logs").append('' +
+                '<h3>'+formatActivityDate(activity["date"], 1)+'</h3>'+
+                '<section> '+
+                ' <span class="hour">'+formatActivityDate(activity["date"], 2)+'</span> '+
+                '<div class="detail">'+
+                '  <i class="icon-eye view"></i> '+
+                ' <span>'+
+                '<span class="description">'+activity["activity"]+'</span> '+
+                ' <small onclick="showMoreActivityInfo()">Mais detalhes</small> '+
                 ' </span> '+
                 ' </div> '+
                 ' </section>'

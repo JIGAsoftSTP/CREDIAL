@@ -33,6 +33,7 @@
 							<option value="2">Adicionados</option>
 							<option value="1">Editados</option>
 							<option value="0">Removidos</option>
+							<option value="3">Visualizados</option>
 						</select>
 					</span>
 					<span class="view-m-det">Estatísticas</span>
