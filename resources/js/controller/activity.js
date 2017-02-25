@@ -41,6 +41,7 @@ $(function ()
   var userActivities = [];
   var selectedUser = undefined;
   var index = 0;
+  var dataAnterior = "";
 
 function loadUserActivities(filter, user)
 {
@@ -67,7 +68,11 @@ function loadUserActivities(filter, user)
 
 function loadAllActivities()
 {
-    var itensAdicionados = 0, itensEditados = 0, itensRemovidos = 0, creditosRegistados = 0;
+    var itensAdicionados = 0, itensEditados = 0,
+        itensRemovidos = 0, creditosRegistados = 0;
+
+    dataAnterior = "";
+
     $(".list-logs").empty();
 
     for(var i =0;i<activities.length;i++)
@@ -77,7 +82,7 @@ function loadAllActivities()
         {
             itensEditados +=1;
             $(".list-logs").append('' +
-                '<h3>'+formatActivityDate(activity["date"], 1)+'</h3>' +
+                '<h3>'+groupByDate(formatActivityDate(activity["date"], 1))+'</h3>' +
                 '<section> '+
                 ' <span class="hour">'+formatActivityDate(activity["date"], 2)+'</span>'+
                 '<div class="detail">'+
@@ -94,7 +99,7 @@ function loadAllActivities()
         {
             itensAdicionados +=1;
             $(".list-logs").append('' +
-                '<h3>'+formatActivityDate(activity["date"], 1)+'</h3>'+
+                '<h3>'+groupByDate(formatActivityDate(activity["date"], 1))+'</h3>'+
                 '<section> '+
                 ' <span class="hour">'+formatActivityDate(activity["date"], 2)+'</span> '+
                 '<div class="detail">'+
@@ -115,7 +120,7 @@ function loadAllActivities()
         {
             itensRemovidos +=1;
             $(".list-logs").append('' +
-                '<h3>'+formatActivityDate(activity["date"], 1)+'</h3>'+
+                '<h3>'+groupByDate(formatActivityDate(activity["date"], 1))+'</h3>'+
                 '<section> '+
                 ' <span class="hour">'+formatActivityDate(activity["date"], 2)+'</span> '+
                 '<div class="detail">'+
@@ -131,7 +136,7 @@ function loadAllActivities()
         else if(activity["levelkey"] === LevelActivity.VISUALIZACAO)
         {
             $(".list-logs").append('' +
-                '<h3>'+formatActivityDate(activity["date"], 1)+'</h3>'+
+                '<h3>'+groupByDate(formatActivityDate(activity["date"], 1))+'</h3>'+
                 '<section> '+
                 ' <span class="hour">'+formatActivityDate(activity["date"], 2)+'</span> '+
                 '<div class="detail">'+
@@ -166,8 +171,11 @@ function formatActivityDate(date,type)
 function filterActivity()
 {
     $(".list-logs").empty();
-    var op =0;
-    var itensAdicionados = 0, itensEditados = 0, itensRemovidos = 0, creditosRegistados = 0;
+    var itensAdicionados = 0, itensEditados = 0, op = 0,
+        itensRemovidos = 0, creditosRegistados = 0;
+
+    dataAnterior = "";
+
     for(var i =0;i<activities.length;i++)
     {
         var activity = activities[i];
@@ -176,7 +184,7 @@ function filterActivity()
         {
             itensAdicionados++;
             $(".list-logs").append('' +
-                '<h3>'+formatActivityDate(activity["date"], 1)+'</h3>'+
+                '<h3>'+groupByDate(formatActivityDate(activity["date"], 1))+'</h3>'+
                 '<section> '+
                 ' <span class="hour">'+formatActivityDate(activity["date"], 2)+'</span> '+
                 '<div class="detail">'+
@@ -197,7 +205,7 @@ function filterActivity()
         {
             itensEditados++;
             $(".list-logs").append('' +
-                '<h3 style="margin-left: 10px;">'+formatActivityDate(activity["date"], 1)+'</h3>' +
+                '<h3 >'+groupByDate(formatActivityDate(activity["date"], 1))+'</h3>' +
                 '<section> '+
                 ' <span class="hour">'+formatActivityDate(activity["date"], 2)+'</span>'+
                 '<div class="detail">'+
@@ -215,7 +223,7 @@ function filterActivity()
         {
             itensRemovidos++;
             $(".list-logs").append('' +
-                '<h3>'+formatActivityDate(activity["date"], 1)+'</h3>'+
+                '<h3>'+groupByDate(formatActivityDate(activity["date"], 1))+'</h3>'+
                 '<section> '+
                 ' <span class="hour">'+formatActivityDate(activity["date"], 2)+'</span> '+
                 '<div class="detail">'+
@@ -232,7 +240,7 @@ function filterActivity()
         {
             itensRemovidos++;
             $(".list-logs").append('' +
-                '<h3>'+formatActivityDate(activity["date"], 1)+'</h3>'+
+                '<h3>'+groupByDate(formatActivityDate(activity["date"], 1))+'</h3>'+
                 '<section> '+
                 ' <span class="hour">'+formatActivityDate(activity["date"], 2)+'</span> '+
                 '<div class="detail">'+
@@ -310,4 +318,14 @@ function selectUser(index, component)
 function showMoreActivityInfo()
 {
     $(".div-statitcs").addClass("show");
+}
+
+function groupByDate(date)
+{
+    if(dataAnterior === date)
+        return "";
+    else {
+        dataAnterior = date;
+        return date;
+    }
 }
