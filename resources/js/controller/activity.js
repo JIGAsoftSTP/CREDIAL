@@ -67,7 +67,7 @@ function loadUserActivities(filter, user)
 
 function loadAllActivities()
 {
-    var itensAdicionados = 0, itensEditados = 0, itensRemovidos = 0;
+    var itensAdicionados = 0, itensEditados = 0, itensRemovidos = 0, creditosRegistados = 0;
     $(".list-logs").empty();
 
     for(var i =0;i<activities.length;i++)
@@ -106,6 +106,9 @@ function loadAllActivities()
                 ' </div> '+
                 ' </section>'
             );
+
+            if(activity["activity"] === "Registrou novo Cretido!")
+                creditosRegistados++;
         }
         else if(activity["levelkey"] === LevelActivity.DESATIVACAO ||
             activity["levelkey"] === LevelActivity.ELIMINACAO)
@@ -146,6 +149,7 @@ function loadAllActivities()
     $(".total-added h3").html(itensAdicionados);
     $(".total-edited h3").html(itensEditados);
     $(".total-removed h3").html(itensRemovidos);
+    $("#totalCreditos").html(creditosRegistados);
 
 }
 
@@ -162,7 +166,8 @@ function formatActivityDate(date,type)
 function filterActivity()
 {
     $(".list-logs").empty();
-    var itensAdicionados = 0, itensEditados = 0, itensRemovidos = 0;
+    var op =0;
+    var itensAdicionados = 0, itensEditados = 0, itensRemovidos = 0, creditosRegistados = 0;
     for(var i =0;i<activities.length;i++)
     {
         var activity = activities[i];
@@ -183,6 +188,9 @@ function filterActivity()
                 ' </div> '+
                 ' </section>'
             );
+
+            if(activity["activity"] === "Registrou novo Cretido!")
+                creditosRegistados++;
         }
         else if($("#filterActivity").val() === LevelActivity.ATUALIZACAO &&
             activity["levelkey"] === LevelActivity.ATUALIZACAO)
@@ -240,13 +248,15 @@ function filterActivity()
         else if($("#filterActivity").val() === LevelActivity.OUTROS)
         {
             loadAllActivities();
+            op = 1;
         }
 
-        if($("#filterActivity").val() !== LevelActivity.OUTROS)
+        if(op === 0)
         {
             $(".total-added h3").html(itensAdicionados);
             $(".total-edited h3").html(itensEditados);
             $(".total-removed h3").html(itensRemovidos);
+            $("#totalCreditos").html(creditosRegistados);
         }
     }
 }

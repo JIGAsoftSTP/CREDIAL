@@ -61,7 +61,7 @@
 				</div>
 				<section>
 					<span>
-						<h1>45</h1>
+						<h1 id="totalCreditos"></h1>
 						<i class="icon-profile"></i>
 					</span>
 					<p>Contratos registados</p>
