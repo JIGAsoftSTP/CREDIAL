@@ -39,7 +39,8 @@ body{
 	background: #FFF;
 	margin-right: 3%;
 	position: relative;
-	overflow: auto;
+	display: flex;
+	flex-direction: column;
 }
 .list-user-log .m-search{
 	position: relative;
@@ -69,6 +70,8 @@ body{
 
 .list-user-log ul{
 	margin-top: 2rem;
+	overflow: auto;
+	flex-grow: 1;
 	overflow: auto;
 }
 .list-user-log ul li{
