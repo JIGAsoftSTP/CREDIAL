@@ -372,8 +372,21 @@ function selectUser(index, component)
     $(component).closest('li').addClass('active');
     selectedUser = userActivities[index]["id"];
 
-    loadUserActivities(-1, selectedUser);
+    if($("#reportActivity-initialDate").val() !== "" &&
+        $("#reportActivity-finalDate").val() !== "")
+    {
+        $("#reportActivity-initialDate").val(alterFormatDate($("#reportActivity-initialDate").val() ));
+        $("#reportActivity-finalDate").val(alterFormatDate($("#reportActivity-finalDate").val()));
 
+        activityData = new ActivityData();
+        activityData.dateinicio =   $("#reportActivity-initialDate").val();
+        activityData.datefim = $("#reportActivity-finalDate").val();
+        activityData.loadmod = "date";
+
+        loadUserActivities(1, selectedUser);
+    }
+    else
+        loadUserActivities(-1, selectedUser);
 }
 
 function showMoreActivityInfo()
