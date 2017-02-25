@@ -29,4 +29,5 @@ class TYPE
     const TEXT_ARRAY="::TEXT[]";
     const BOOLEAN_ARRAY="::BOOLEAN[]";
     const JSON = "::JSON";
+    const JSONB = "::JSONB";
 }
