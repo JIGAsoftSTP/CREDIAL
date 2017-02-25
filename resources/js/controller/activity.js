@@ -155,14 +155,14 @@ function loadAllActivities()
     $(".total-edited h3").html(itensEditados);
     $(".total-removed h3").html(itensRemovidos);
     $("#totalCreditos").html(creditosRegistados);
-    if(creditosRegistados === 1)
+    if(creditosRegistados <= 1)
     {
         $("#contratoDesc p").html("Contrato registado");
-        $("#totalCreditos").html(creditosRegistados);
+        $("#iframe-" + $('aside li.active').index()).contents().find("#totalCreditos").html(creditosRegistados);
     }
-    else if(creditosRegistados >1)
+    else
     {
-        $("#contratoDesc").html("Contratos registados");
+        $("#contratoDesc p").html("Contratos registados");
         $("#totalCreditos p").html(creditosRegistados);
     }
 
@@ -274,14 +274,15 @@ function filterActivity()
             $(".total-added h3").html(itensAdicionados);
             $(".total-edited h3").html(itensEditados);
             $(".total-removed h3").html(itensRemovidos);
-            if(creditosRegistados === 1)
+
+            if(creditosRegistados <= 1)
             {
                 $("#contratoDesc p").html("Contrato registado");
                 $("#totalCreditos").html(creditosRegistados);
             }
-            else if(creditosRegistados >1)
+            else
             {
-                $("#contratoDesc").html("Contratos registados");
+                $("#contratoDesc p").html("Contratos registados");
                 $("#totalCreditos p").html(creditosRegistados);
             }
 
@@ -337,7 +338,7 @@ function selectUser(index, component)
 
 function showMoreActivityInfo()
 {
-    $(".div-statitcs").addClass("show");
+
 }
 
 function groupByDate(date)

@@ -1,13 +1,13 @@
 isNull($('.xpert-form select'));
-setTitle($('input, select, textarea'));
+// setTitle($('input, select, textarea'));
 
 $('.content-feed select').click(function(event) {
     if($(this).val() === 'another')
         $('.another').removeClass('disabled')
-            .find("input").removeClass("_noObrigatory");
+    .find("input").removeClass("_noObrigatory");
     else
         $('.another').addClass('disabled')
-            .find("input").addClass("_noObrigatory");
+    .find("input").addClass("_noObrigatory");
 });
 $('.xClose').click(function(event) {
     $(this).closest('section.modalPage').fadeOut(400);
@@ -130,7 +130,22 @@ $('.content-w-lateral .icon-menu').click(function(event) {
 });
 
 
+$('body').on('mousemove', '.xpert-form input, .xpert-form select', function(event) {
+    me = $(this);
+    if(!me.parent().hasClass('xTittle')){
+        me_wth = me.width();
+        var plhd = $(this)[0]["localName"] === "select" ? me.find('option:first').text() : me.attr('placeholder');
+        if(plhd !== undefined)
+            $(this).wrap('<xTittle class="xTittle" content = "'+ plhd +'" style="width: '+ me_wth +'"></xTittle>');
+    }
+});
 
+$('body').on('mouseleave', '.xpert-form input, .xpert-form select', function(event) {
+    if($(this).parent()[0]["localName"] === "xtittle"){
+        $(this).insertAfter($(this).parent());
+        $(this).prev().remove();
+    }
+});
 
 // $('input[datalist="list"]').keyp(resizeInput).each(resizeInput);
 
@@ -207,9 +222,9 @@ function XpertListItem(li){
      });
      }
      i.toggleClass(' icon-checkbox-unchecked icon-checkbox-checked');*/
-}
+ }
 
-function XpertToggle(tgID , initialState, initialTxt){
+ function XpertToggle(tgID , initialState, initialTxt){
 
     tgID.find('.bar').addClass(initialState);
     tgID.find('.text').text(initialTxt);
@@ -316,9 +331,9 @@ $('.integer').keypress(function (event) {
 
     if ((event.which != 44 || $(this).val().indexOf('/') != -1) &&
         ((event.which < 48 || event.which > 57) &&
-        (event.which != 0 && event.which != 8))) {
+            (event.which != 0 && event.which != 8))) {
         event.preventDefault();
-    }
+}
 
 });
 
@@ -328,18 +343,18 @@ $('.double').keypress(function (event) {
 
     if ((event.which != 44 || $(this).val().indexOf(',') != -1) &&
         ((event.which < 48 || event.which > 57) &&
-        (event.which != 0 && event.which != 8))) {
+            (event.which != 0 && event.which != 8))) {
         event.preventDefault();
-    }
+}
 
-    var text = $(this).val();
+var text = $(this).val();
 
-    if ((text.indexOf(',') != -1) &&
-        (text.substring(text.indexOf(',')).length > 2) &&
-        (event.which != 0 && event.which != 8) &&
-        ($(this)[0].selectionStart >= text.length - 2)) {
-        event.preventDefault();
-    }
+if ((text.indexOf(',') != -1) &&
+    (text.substring(text.indexOf(',')).length > 2) &&
+    (event.which != 0 && event.which != 8) &&
+    ($(this)[0].selectionStart >= text.length - 2)) {
+    event.preventDefault();
+}
 });
 
 function resetForm(form){
@@ -362,10 +377,10 @@ function setDatePicker(){
     i = 0;
     $('.is-datepicker').each(function(index, el) {
         new Pikaday(
-            {
-                field: $('.is-datepicker')[i],
-                firstDay: 1,
-            });
+        {
+            field: $('.is-datepicker')[i],
+            firstDay: 1,
+        });
         i++;
     });
 }
@@ -408,11 +423,11 @@ function limitString(element){
         if ($(this).val() > 100
             && e.keyCode != 46 // delete
             && e.keyCode != 8 // backspace
-        ) {
+            ) {
             e.preventDefault();
-            $(this).val(100);
-        }
-    });
+        $(this).val(100);
+    }
+});
 }
 
 function advSearch(ipt, _items){
@@ -426,3 +441,4 @@ function advSearch(ipt, _items){
         }
     });
 }
+

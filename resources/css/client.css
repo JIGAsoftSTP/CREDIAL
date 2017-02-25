@@ -174,9 +174,9 @@
 .add-new-form .master{
 	flex-grow: 1;
 }
-.add-new-form section{
+/*.add-new-form section{
 	overflow: hidden;
-}
+}*/
 .add-new-form h1{
 	/*font-weight: lighter;*/
 	font-size: 1.5rem;
