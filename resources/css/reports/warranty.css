@@ -46,11 +46,12 @@
 }
 .list-warr h4{
 	color: #666;
+	margin-top: 1rem;
 }
 .list-warr p{
 	font-size: .94rem;
 	margin-top: 5px;
-	line-height: 1.6rem;
+	line-height: 1.4rem;
 }
 .list-warr .more{
 	background: #f9f9f9;
