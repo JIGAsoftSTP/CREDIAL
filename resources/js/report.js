@@ -18,6 +18,8 @@ $('aside .single').on('click','li',function(event) {
 			$("#report-entities").empty();
 			$("#report-entities").append('<option value="">(Selecione)</option>');
 			loadComoBoxIDandValueReport($("#report-entities"), e.reportFilter);
+			regUserActivity(reportActivityAddress, -1, "Visualizou a pagina de Relatório de "+$('.title-report').text(),
+			-1, LevelActivity.VISUALIZACAO);
 			data();
 			if( $('#secondary-menu li.active').attr('id') === TypeReport.CHEQUE)
                 $("#iframe-" + $('aside li.active').index()).contents().find(".filter-type-cheq li.active").trigger("click");
@@ -31,6 +33,7 @@ $('aside .single').on('click','li',function(event) {
     $(this).attr('id') == 'rel.acti' ? header.hide(200) : header.show(200);
 });
 
+var reportActivityAddress = "bean/activity.php";
 
 $('.ctrls .hide-filter').click(function(event) {
 	if(!$('.filter-report').hasClass('fixed')){
@@ -145,6 +148,8 @@ function returnListFilter(identfier, listDB){
                     $("datalist#"+listDB).append('<option data-id ="'+e.objeto[i]["ID"]+'" value="'+e.objeto[i][desc]+'"></option>');
                 }
 			}
+            registerLoginActivity(reportActivityAddress, -1, "Adicionou filtros de pesquisa no Relatório de "+$('.title-report').text(),
+                -1, LevelActivity.ATUALIZACAO);
 		}
 	});
 }

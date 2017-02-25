@@ -10,3 +10,8 @@ $('.mp-change-pwd input').keyup(function (event) {
     	$('#confirme').trigger('click');
     }
 });
+registerLoginActivity();
+
+function registerLoginActivity() {
+    regUserActivity("bean/activity.php", -1, "Visualizou a pagina de Login", -1, LevelActivity.VISUALIZACAO);
+}

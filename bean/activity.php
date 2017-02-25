@@ -36,7 +36,7 @@ include_once "../modelo/User.php";
             $activity->setLoadmod("date");
         }
         $call = new CallPgSQL();
-        $call->functionTable("funct_load_activity", "*")
+        $call->functionTable("report.funct_rep_activity", "*")
             ->addString($_POST["user"])
             ->addJson(($_POST["filter"] == -1 ? null : json_encode($activity)));
         $call->execute();

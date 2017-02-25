@@ -36,7 +36,7 @@ $(function ()
     });
 });
 
-  var address = "../bean/activity.php";
+  var address = "../../bean/activity.php";
   var activities = [];
   var userActivities = [];
   var selectedUser = undefined;
