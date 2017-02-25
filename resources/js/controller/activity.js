@@ -162,12 +162,14 @@ function formatActivityDate(date,type)
 function filterActivity()
 {
     $(".list-logs").empty();
+    var itensAdicionados = 0, itensEditados = 0, itensRemovidos = 0;
     for(var i =0;i<activities.length;i++)
     {
         var activity = activities[i];
         if($("#filterActivity").val() === LevelActivity.CRIACAO &&
             activity["levelkey"] === LevelActivity.CRIACAO)
         {
+            itensAdicionados++;
             $(".list-logs").append('' +
                 '<h3>'+formatActivityDate(activity["date"], 1)+'</h3>'+
                 '<section> '+
@@ -185,6 +187,7 @@ function filterActivity()
         else if($("#filterActivity").val() === LevelActivity.ATUALIZACAO &&
             activity["levelkey"] === LevelActivity.ATUALIZACAO)
         {
+            itensEditados++;
             $(".list-logs").append('' +
                 '<h3>'+formatActivityDate(activity["date"], 1)+'</h3>' +
                 '<section> '+
@@ -202,7 +205,7 @@ function filterActivity()
         else if($("#filterActivity").val() === LevelActivity.ELIMINACAO &&
             activity["levelkey"] === LevelActivity.ELIMINACAO)
         {
-
+            itensRemovidos++;
             $(".list-logs").append('' +
                 '<h3>'+formatActivityDate(activity["date"], 1)+'</h3>'+
                 '<section> '+
@@ -220,6 +223,13 @@ function filterActivity()
         else if($("#filterActivity").val() === LevelActivity.OUTROS)
         {
             loadAllActivities();
+        }
+
+        if($("#filterActivity").val() !== LevelActivity.OUTROS)
+        {
+            $(".total-added h3").html(itensAdicionados);
+            $(".total-edited h3").html(itensEditados);
+            $(".total-removed h3").html(itensRemovidos);
         }
     }
 }
