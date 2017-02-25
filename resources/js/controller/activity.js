@@ -309,20 +309,20 @@ function loadUser()
                     if(userActivities[i]["name"] === userActivities[i]["surname"])
                     {
                         if(userActivities[i]["state"] === UserState.INATIVO)
-                             $(".user-names").append('<li onclick="selectUser('+i+', $(this))" class="active" attr="state-0"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+'</li>');
+                             $(".user-names").append('<li onclick="selectUser('+i+', $(this))" class="active" state="0"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+'</li>');
                         else if(userActivities[i]["state"] === UserState.ATIVO)
-                            $(".user-names").append('<li onclick="selectUser('+i+', $(this))" class="active" attr="state-1"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+'</li>');
+                            $(".user-names").append('<li onclick="selectUser('+i+', $(this))" class="active" state="1"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+'</li>');
                         else
-                            $(".user-names").append('<li onclick="selectUser('+i+', $(this))" class="active" attr="state-2"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+'</li>');
+                            $(".user-names").append('<li onclick="selectUser('+i+', $(this))" class="active" state-"2"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+'</li>');
                     }
                     else
                     {
                         if(userActivities[i]["state"] === UserState.INATIVO)
-                            $(".user-names").append('<li onclick="selectUser('+i+', $(this))" class="active" attr="state-0"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+" "+userActivities[i]["surname"]+'</li>');
+                            $(".user-names").append('<li onclick="selectUser('+i+', $(this))" class="active" state="0"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+" "+userActivities[i]["surname"]+'</li>');
                         else if(userActivities[i]["state"] === UserState.ATIVO)
-                            $(".user-names").append('<li onclick="selectUser('+i+', $(this))" class="active" attr="state-1"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+" "+userActivities[i]["surname"]+'</li>');
+                            $(".user-names").append('<li onclick="selectUser('+i+', $(this))" class="active" state="1"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+" "+userActivities[i]["surname"]+'</li>');
                         else
-                            $(".user-names").append('<li onclick="selectUser('+i+', $(this))" class="active" attr="state-2"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+" "+userActivities[i]["surname"]+'</li>');
+                            $(".user-names").append('<li onclick="selectUser('+i+', $(this))" class="active" state="2"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+" "+userActivities[i]["surname"]+'</li>');
                     }
                 }
                 else
@@ -330,20 +330,20 @@ function loadUser()
                     if(userActivities[i]["name"] === userActivities[i]["surname"])
                     {
                         if(userActivities[i]["state"] === UserState.INATIVO)
-                            $(".user-names").append('<li onclick="selectUser('+i+', $(this))"  attr="state-0"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+'</li>');
+                            $(".user-names").append('<li onclick="selectUser('+i+', $(this))"  state="0"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+'</li>');
                         else if(userActivities[i]["state"] === UserState.ATIVO)
-                            $(".user-names").append('<li onclick="selectUser('+i+', $(this))"  attr="state-1"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+'</li>');
+                            $(".user-names").append('<li onclick="selectUser('+i+', $(this))"  state="1"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+'</li>');
                         else
-                            $(".user-names").append('<li onclick="selectUser('+i+', $(this))"  attr="state-2"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+'</li>');
+                            $(".user-names").append('<li onclick="selectUser('+i+', $(this))"  state="2"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+'</li>');
                     }
                     else
                     {
                         if(userActivities[i]["state"] === UserState.INATIVO)
-                            $(".user-names").append('<li onclick="selectUser('+i+', $(this))" attr="state-0"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+" "+userActivities[i]["surname"]+'</li>');
+                            $(".user-names").append('<li onclick="selectUser('+i+', $(this))" state="0"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+" "+userActivities[i]["surname"]+'</li>');
                         else if(userActivities[i]["state"] === UserState.ATIVO)
-                            $(".user-names").append('<li onclick="selectUser('+i+', $(this))"  attr="state-1"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+" "+userActivities[i]["surname"]+'</li>');
+                            $(".user-names").append('<li onclick="selectUser('+i+', $(this))"  state="1"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+" "+userActivities[i]["surname"]+'</li>');
                         else
-                            $(".user-names").append('<li onclick="selectUser('+i+', $(this))"  attr="state-2"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+" "+userActivities[i]["surname"]+'</li>');
+                            $(".user-names").append('<li onclick="selectUser('+i+', $(this))"  state="2"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+" "+userActivities[i]["surname"]+'</li>');
                     }
                 }
             }
