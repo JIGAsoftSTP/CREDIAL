@@ -2,7 +2,6 @@
  * Created by ahmedjorge on 9/25/16.
  */
 loadDataUser();
-registerLoginActivity();
 $("#logar").click(function () {
     var pwd = $("#pwd").val();
     var user = $("#user").val();
@@ -130,11 +129,8 @@ function logOut() {
     });
 }
 
-function registerLoginActivity() {
-    regUserActivity(loginActivityAddress, -1, "Visualizou a pagina de Login", -1, LevelActivity.VISUALIZACAO);
-}
+
 $(document).ready(function (e) {
-    registerLoginActivity();
    if (sessionStorage.getItem("hasBeenActiveNow") !== null)
         $("#wel-link").attr("href", "../"+sessionStorage.getItem("hasBeenActiveNow") );
     sessionStorage.removeItem("hasBeenActiveNow");

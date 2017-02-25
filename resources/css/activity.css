@@ -34,7 +34,7 @@ body{
 	height: 100%;
 }
 .log-user .list-user-log{
-	min-width: 250px;
+	min-width: 270px;
 	padding: 1rem;
 	background: #FFF;
 	margin-right: 3%;
@@ -82,6 +82,18 @@ body{
 	font-weight: lighter;
 	color: #555;
 	font-size: .95rem;
+	position: relative;
+}
+.list-user-log ul li:after{
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 5px;
+    right: 3px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
 }
 .list-user-log ul li:hover,
 .list-user-log ul li.active{
@@ -92,7 +104,15 @@ body{
 	font-weight: normal;
 	padding-left: 0;
 }
-
+.list-user-log ul li[state="0"]:after{
+	background: tomato;
+}
+.list-user-log ul li[state="1"]:after{
+	background: #50C14E;
+}
+.list-user-log ul li[state="2"]:after{
+	background: #ddd;
+}
 
 .log-user .arend{
 	flex-grow: 1;

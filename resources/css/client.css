@@ -759,7 +759,7 @@
 .item-descript.show{
 	max-height: 500px;
 	transform: translateY(0);
-	padding: 1.5rem 1rem;
+	padding: 2rem 1rem 1.5rem 1rem;
 }
 .item-descript textarea{
 	height: 90px;

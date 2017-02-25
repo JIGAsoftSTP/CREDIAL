@@ -27,6 +27,14 @@ $(function ()
         if($("#reportActivity-initialDate").val() !== "" &&
             $("#reportActivity-finalDate").val() !== "")
         {
+            $("#reportActivity-initialDate").val(alterFormatDate($("#reportActivity-initialDate").val() ));
+            $("#reportActivity-finalDate").val(alterFormatDate($("#reportActivity-finalDate").val()));
+
+            activityData = new ActivityData();
+            activityData.dateinicio =   $("#reportActivity-initialDate").val();
+            activityData.datefim = $("#reportActivity-finalDate").val();
+            activityData.loadmod = "date";
+
             loadUserActivities(1, selectedUser);
         }
     });
@@ -36,13 +44,18 @@ $(function ()
     });
 });
 
-  var address = "../bean/activity.php";
+  var address = "../../bean/activity.php";
   var activities = [];
   var userActivities = [];
   var selectedUser = undefined;
   var index = 0;
   var dataAnterior = "";
+ var activityData = null;
 
+  var ActivityData = function () {};
+  ActivityData.prototype.dateinicio = undefined;
+  ActivityData.prototype.datefim = undefined;
+  ActivityData.prototype.loadmod = undefined;
 function loadUserActivities(filter, user)
 {
 
@@ -53,8 +66,7 @@ function loadUserActivities(filter, user)
         data: {"intention" : "loadActivities",
                 "user" : user,
             "filter" : filter,
-            "dataInicio" :  $("#reportActivity-initialDate").val(),
-              "dataFim" : $("#reportActivity-finalDate").val()},
+            "jsonContent" : JSON.stringify(activityData)},
         beforeSend: function () {  $(".mp-loading").fadeIn(); },
         complete: function () {
             $(".mp-loading").fadeOut();},
@@ -307,16 +319,44 @@ function loadUser()
                 if(i === 0)
                 {
                     if(userActivities[i]["name"] === userActivities[i]["surname"])
-                        $(".user-names").append('<li onclick="selectUser('+i+', $(this))" class="active"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+'</li>');
+                    {
+                        if(userActivities[i]["state"] === UserState.INATIVO)
+                             $(".user-names").append('<li onclick="selectUser('+i+', $(this))" class="active" state="0"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+'</li>');
+                        else if(userActivities[i]["state"] === UserState.ATIVO)
+                            $(".user-names").append('<li onclick="selectUser('+i+', $(this))" class="active" state="1"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+'</li>');
+                        else
+                            $(".user-names").append('<li onclick="selectUser('+i+', $(this))" class="active" state-"2"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+'</li>');
+                    }
                     else
-                        $(".user-names").append('<li onclick="selectUser('+i+', $(this))" class="active" id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+" "+userActivities[i]["surname"]+'</li>');
+                    {
+                        if(userActivities[i]["state"] === UserState.INATIVO)
+                            $(".user-names").append('<li onclick="selectUser('+i+', $(this))" class="active" state="0"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+" "+userActivities[i]["surname"]+'</li>');
+                        else if(userActivities[i]["state"] === UserState.ATIVO)
+                            $(".user-names").append('<li onclick="selectUser('+i+', $(this))" class="active" state="1"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+" "+userActivities[i]["surname"]+'</li>');
+                        else
+                            $(".user-names").append('<li onclick="selectUser('+i+', $(this))" class="active" state="2"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+" "+userActivities[i]["surname"]+'</li>');
+                    }
                 }
                 else
                 {
                     if(userActivities[i]["name"] === userActivities[i]["surname"])
-                        $(".user-names").append('<li onclick="selectUser('+i+', $(this))" id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+'</li>');
+                    {
+                        if(userActivities[i]["state"] === UserState.INATIVO)
+                            $(".user-names").append('<li onclick="selectUser('+i+', $(this))"  state="0"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+'</li>');
+                        else if(userActivities[i]["state"] === UserState.ATIVO)
+                            $(".user-names").append('<li onclick="selectUser('+i+', $(this))"  state="1"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+'</li>');
+                        else
+                            $(".user-names").append('<li onclick="selectUser('+i+', $(this))"  state="2"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+'</li>');
+                    }
                     else
-                        $(".user-names").append('<li onclick="selectUser('+i+', $(this))" id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+" "+userActivities[i]["surname"]+'</li>');
+                    {
+                        if(userActivities[i]["state"] === UserState.INATIVO)
+                            $(".user-names").append('<li onclick="selectUser('+i+', $(this))" state="0"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+" "+userActivities[i]["surname"]+'</li>');
+                        else if(userActivities[i]["state"] === UserState.ATIVO)
+                            $(".user-names").append('<li onclick="selectUser('+i+', $(this))"  state="1"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+" "+userActivities[i]["surname"]+'</li>');
+                        else
+                            $(".user-names").append('<li onclick="selectUser('+i+', $(this))"  state="2"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+" "+userActivities[i]["surname"]+'</li>');
+                    }
                 }
             }
             selectedUser = userActivities[0]["id"];
@@ -332,8 +372,21 @@ function selectUser(index, component)
     $(component).closest('li').addClass('active');
     selectedUser = userActivities[index]["id"];
 
-    loadUserActivities(-1, selectedUser);
+    if($("#reportActivity-initialDate").val() !== "" &&
+        $("#reportActivity-finalDate").val() !== "")
+    {
+        $("#reportActivity-initialDate").val(alterFormatDate($("#reportActivity-initialDate").val() ));
+        $("#reportActivity-finalDate").val(alterFormatDate($("#reportActivity-finalDate").val()));
 
+        activityData = new ActivityData();
+        activityData.dateinicio =   $("#reportActivity-initialDate").val();
+        activityData.datefim = $("#reportActivity-finalDate").val();
+        activityData.loadmod = "date";
+
+        loadUserActivities(1, selectedUser);
+    }
+    else
+        loadUserActivities(-1, selectedUser);
 }
 
 function showMoreActivityInfo()
@@ -349,4 +402,11 @@ function groupByDate(date)
         dataAnterior = date;
         return date;
     }
+}
+
+function alterFormatDate(date)
+{
+    var newDate = date.split("-");
+    newDate = $.makeArray(newDate);
+    return newDate[2]+"-"+newDate[1]+"-"+newDate[0];
 }

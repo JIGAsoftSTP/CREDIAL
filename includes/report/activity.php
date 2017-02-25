@@ -3,9 +3,9 @@
 <head>
 	<meta charset="utf-8">
 	<title></title>
-	<link rel="stylesheet" href="../resources/css/geralStyle.css">
-	<link rel="stylesheet" href="../resources/css/activity.css">
-	<link rel="stylesheet" href="../resources/fw/pikaday/pikaday.css">
+	<link rel="stylesheet" href="../../resources/css/geralStyle.css">
+	<link rel="stylesheet" href="../../resources/css/activity.css">
+	<link rel="stylesheet" href="../../resources/fw/pikaday/pikaday.css">
 
 </head>
 <body>
@@ -76,13 +76,13 @@
 			</div>
 		</div>
 	</div>
-    <?php include "process.html"; ?>
-    <script type="text/javascript" src="../resources/fw/pikaday/pikaday.js"></script>
+    <?php include "../process.html"; ?>
+    <script type="text/javascript" src="../../resources/fw/pikaday/pikaday.js"></script>
 </body>
-<script src="../resources/js/jQuery.js"></script>
-<script src="../resources/js/controller/geral.js"></script>
-<script src="../resources/js/geralScript.js"></script>
-<script src="../resources/js/activity.js"></script>
-<script src="../resources/js/controller/activity.js"></script>
+<script src="../../resources/js/jQuery.js"></script>
+<script src="../../resources/js/controller/geral.js"></script>
+<script src="../../resources/js/geralScript.js"></script>
+<script src="../../resources/js/activity.js"></script>
+<script src="../../resources/js/controller/activity.js"></script>
 
 </html>
