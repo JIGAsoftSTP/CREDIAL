@@ -6,6 +6,9 @@ $(function ()
 {
     loadUser();
 
+    $("#activitySearch-user").keyup(function () {
+        advSearch($(this), $(".user-names li"));
+    });
     $("#filterActivity").change(function()
     {
         filterActivity();
@@ -20,7 +23,6 @@ $(function ()
         if($(this).val() !== "" &&
             $("#reportActivity-finalDate").val() !== "")
         {
-
             loadUserActivities(1);
         }
     });
@@ -33,6 +35,7 @@ $(function ()
   var address = "../bean/activity.php";
   var activities = [];
   var userActivities = [];
+  var selectedUser = undefined;
 
 function loadUserActivities(filter, user)
 {
@@ -235,6 +238,7 @@ function loadUser()
                 else
                     $(".user-names").append('<li id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+" "+userActivities[i]["surname"]+'</li>');
             }
+            selectedUser = userActivities[0]["id"];
             loadUserActivities(-1, userActivities[0]["id"]);
 
         }

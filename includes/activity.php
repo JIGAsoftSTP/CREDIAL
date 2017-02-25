@@ -13,7 +13,7 @@
 		<div class="content">	
 			<div class="list-user-log">
 				<span class="m-search focus">
-                    <input type="text" placeholder="Funcionário">
+                    <input type="text" placeholder="Funcionário" id="activitySearch-user">
 
                     <i class="icon-search"></i>
                 </span>
