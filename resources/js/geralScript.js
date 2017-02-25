@@ -1,5 +1,4 @@
 isNull($('.xpert-form select'));
-// setTitle($('input, select, textarea'));
 
 $('.content-feed select').click(function(event) {
     if($(this).val() === 'another')
@@ -130,17 +129,17 @@ $('.content-w-lateral .icon-menu').click(function(event) {
 });
 
 
-$('body').on('mousemove', '.xpert-form input, .xpert-form select', function(event) {
+$('body').on('mousemove', '.xpert-form input, .xpert-form select, .xpert-form textarea', function(event) {
     me = $(this);
     if(!me.parent().hasClass('xTittle')){
-        me_wth = me.width();
+        me_wth = me.css('width');
         var plhd = $(this)[0]["localName"] === "select" ? me.find('option:first').text() : me.attr('placeholder');
         if(plhd !== undefined)
             $(this).wrap('<xTittle class="xTittle" content = "'+ plhd +'" style="width: '+ me_wth +'"></xTittle>');
     }
 });
 
-$('body').on('mouseleave', '.xpert-form input, .xpert-form select', function(event) {
+$('body').on('mouseleave', '.xpert-form input, .xpert-form select, .xpert-form textarea', function(event) {
     if($(this).parent()[0]["localName"] === "xtittle"){
         $(this).insertAfter($(this).parent());
         $(this).prev().remove();
