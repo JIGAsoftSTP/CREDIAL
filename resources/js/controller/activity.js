@@ -15,7 +15,7 @@ $(function ()
     });
     $("#filterActivity").change(function()
     {
-        filterActivity();
+        filterActivity(250);
     });
 
     $(".x-close").click(function () {
@@ -48,9 +48,13 @@ $(function ()
   var activities = [];
   var userActivities = [];
   var selectedUser = undefined;
-  var index = 0;
+  var size = 0;
   var dataAnterior = "";
- var activityData = null;
+  var activityData = null;
+  var activityInterval = undefined;
+  var totalRecords = undefined;
+  var itensAdicionados = 0, itensEditados = 0, op = 0,
+    itensRemovidos = 0, creditosRegistados = 0;
 
   var ActivityData = function () {};
   ActivityData.prototype.dateinicio = undefined;
@@ -67,116 +71,76 @@ function loadUserActivities(filter, user)
                 "user" : user,
             "filter" : filter,
             "jsonContent" : JSON.stringify(activityData)},
-        // beforeSend: function () {  $(".mp-loading").fadeIn(); },
+        beforeSend: function () {  $(".mp-loading").fadeIn(); },
+        complete: function () { $(".mp-loading").fadeOut();},
         success:function (e)
         {
-            // $(".mp-loading").fadeOut();
             activities = e.result;
-            filterActivity();
+            filterActivity(250);
         }
     });
 }
 
-function loadAllActivities()
+function loadAllActivities(time)
 {
     var itensAdicionados = 0, itensEditados = 0,
         itensRemovidos = 0, creditosRegistados = 0;
-
+     totalRecords = activities.length;
+    activityInterval = undefined;
+    size = 0;
     dataAnterior = "";
 
-    $(".list-logs").empty();
-
-    for(var i =0;i<activities.length;i++)
+    if(totalRecords >0)
     {
-        var activity = activities[i];
-        if(activity["levelkey"] === LevelActivity.ATUALIZACAO)
+        activityInterval = setInterval(function ()
         {
-            itensEditados +=1;
-            $(".list-logs").append('' +
-                '<h3>'+groupByDate(formatActivityDate(activity["date"], 1))+'</h3>' +
-                '<section> '+
-                ' <span class="hour">'+formatActivityDate(activity["date"], 2)+'</span>'+
-                '<div class="detail">'+
-                '  <i class="icon-pencil edit"></i>'+
-                ' <span>' +
-                '<span class="description">'+activity["activity"]+'</span>'+
-                ' <small onclick="showMoreActivityInfo()">Mais detalhes</small>'+
-                ' </span>'+
-                ' </div>'+
-                ' </section>'
-            );
-        }
-        else if(activity["levelkey"] === LevelActivity.CRIACAO)
-        {
-            itensAdicionados +=1;
-            $(".list-logs").append('' +
-                '<h3>'+groupByDate(formatActivityDate(activity["date"], 1))+'</h3>'+
-                '<section> '+
-                ' <span class="hour">'+formatActivityDate(activity["date"], 2)+'</span> '+
-                '<div class="detail">'+
-                '  <i class="icon-plus create"></i> '+
-                ' <span>'+
-                '<span class="description">'+activity["activity"]+'</span>'+
-                ' <small onclick="showMoreActivityInfo()">Mais detalhes</small> '+
-                ' </span> '+
-                ' </div> '+
-                ' </section>'
-            );
+            var activity = activities[size];
+            if(activity["levelkey"] === LevelActivity.ATUALIZACAO)
+            {
+                itensEditados +=1;
+                showActivity(activity, LevelActivity.ATUALIZACAO);
+            }
+            else if(activity["levelkey"] === LevelActivity.CRIACAO)
+            {
+                itensAdicionados +=1;
+                showActivity(activity, LevelActivity.CRIACAO);
 
-            if(activity["activity"].$$("Registou novo Crédito com o Dossier"))
-                creditosRegistados++;
-        }
-        else if(activity["levelkey"] === LevelActivity.DESATIVACAO ||
-            activity["levelkey"] === LevelActivity.ELIMINACAO)
-        {
-            itensRemovidos +=1;
-            $(".list-logs").append('' +
-                '<h3>'+groupByDate(formatActivityDate(activity["date"], 1))+'</h3>'+
-                '<section> '+
-                ' <span class="hour">'+formatActivityDate(activity["date"], 2)+'</span> '+
-                '<div class="detail">'+
-                '  <i class="icon-minus remove"></i> '+
-                ' <span>'+
-                '<span class="description">'+activity["activity"]+'</span> '+
-                ' <small onclick="showMoreActivityInfo()">Mais detalhes</small> '+
-                ' </span> '+
-                ' </div> '+
-                ' </section>'
-            );
-        }
-        else if(activity["levelkey"] === LevelActivity.VISUALIZACAO)
-        {
-            $(".list-logs").append('' +
-                '<h3>'+groupByDate(formatActivityDate(activity["date"], 1))+'</h3>'+
-                '<section> '+
-                ' <span class="hour">'+formatActivityDate(activity["date"], 2)+'</span> '+
-                '<div class="detail">'+
-                '  <i class="icon-eye view"></i> '+
-                ' <span>'+
-                '<span class="description">'+activity["activity"]+'</span> '+
-                ' <small onclick="showMoreActivityInfo()">Mais detalhes</small> '+
-                ' </span> '+
-                ' </div> '+
-                ' </section>'
-            );
-        }
-    }
+                if(activity["activity"].$$("Registou novo Crédito com o Dossier"))
+                    creditosRegistados++;
+            }
+            else if(activity["levelkey"] === LevelActivity.DESATIVACAO ||
+                activity["levelkey"] === LevelActivity.ELIMINACAO)
+            {
+                itensRemovidos +=1;
+                showActivity(activity, LevelActivity.ELIMINACAO);
+            }
+            else if(activity["levelkey"] === LevelActivity.VISUALIZACAO)
+            {
+                showActivity(activity, LevelActivity.VISUALIZACAO);
+            }
+            size++;
 
-    $(".total-added h3").html(itensAdicionados);
-    $(".total-edited h3").html(itensEditados);
-    $(".total-removed h3").html(itensRemovidos);
-    $("#totalCreditos").html(creditosRegistados);
-    if(creditosRegistados <= 1)
-    {
-        $("#contratoDesc p").html("Contrato registado");
-        $("#iframe-" + $('aside li.active').index()).contents().find("#totalCreditos").html(creditosRegistados);
+            $(".total-added h3").html(itensAdicionados);
+            $(".total-edited h3").html(itensEditados);
+            $(".total-removed h3").html(itensRemovidos);
+            $("#totalCreditos").html(creditosRegistados);
+            if(creditosRegistados <= 1)
+            {
+                $("#contratoDesc p").html("Contrato registado");
+                $("#iframe-" + $('aside li.active').index()).contents().find("#totalCreditos").html(creditosRegistados);
+            }
+            else
+            {
+                $("#contratoDesc p").html("Contratos registados");
+                $("#totalCreditos p").html(creditosRegistados);
+            }
+            size++;
+            if(size === totalRecords)
+            {
+                clearInterval(activityInterval);
+            }
+        }, time);
     }
-    else
-    {
-        $("#contratoDesc p").html("Contratos registados");
-        $("#totalCreditos p").html(creditosRegistados);
-    }
-
 }
 
 function formatActivityDate(date,type)
@@ -189,99 +153,68 @@ function formatActivityDate(date,type)
         return newDate[2].substring(3, 8);
 }
 
-function filterActivity()
+function filterActivity(time)
 {
     $(".list-logs").empty();
-    var itensAdicionados = 0, itensEditados = 0, op = 0,
-        itensRemovidos = 0, creditosRegistados = 0;
-
+    totalRecords = activities.length;
     dataAnterior = "";
+    itensRemovidos = 0;
+    itensAdicionados = 0;
+    itensEditados = 0;
+    size = 0;
 
-    for(var i =0;i<activities.length;i++)
+    clearInterval(activityInterval);
+    if(totalRecords >0)
     {
-        var activity = activities[i];
-        if($("#filterActivity").val() === LevelActivity.CRIACAO &&
-            activity["levelkey"] === LevelActivity.CRIACAO)
+        activityInterval = setInterval(function ()
         {
-            itensAdicionados++;
-            $(".list-logs").append('' +
-                '<h3>'+groupByDate(formatActivityDate(activity["date"], 1))+'</h3>'+
-                '<section> '+
-                ' <span class="hour">'+formatActivityDate(activity["date"], 2)+'</span> '+
-                '<div class="detail">'+
-                '  <i class="icon-plus create"></i> '+
-                ' <span>'+
-                '<span class="description">'+activity["activity"]+'</span>'+
-                ' <small onclick="showMoreActivityInfo()">Mais detalhes</small> '+
-                ' </span> '+
-                ' </div> '+
-                ' </section>'
-            );
+            var activity = activities[size];
+            if($("#filterActivity").val() === LevelActivity.CRIACAO &&
+                activity["levelkey"] === LevelActivity.CRIACAO)
+            {
+                itensAdicionados++;
+                showActivity(activity, LevelActivity.CRIACAO);
 
-            if(activity["activity"].$$("Registou novo Crédito com o Dossier"))
-                creditosRegistados++;
-        }
-        else if($("#filterActivity").val() === LevelActivity.ATUALIZACAO &&
-            activity["levelkey"] === LevelActivity.ATUALIZACAO)
-        {
-            itensEditados++;
-            $(".list-logs").append('' +
-                '<h3 >'+groupByDate(formatActivityDate(activity["date"], 1))+'</h3>' +
-                '<section> '+
-                ' <span class="hour">'+formatActivityDate(activity["date"], 2)+'</span>'+
-                '<div class="detail">'+
-                '  <i class="icon-pencil edit"></i>'+
-                ' <span>' +
-                '<span class="description">'+activity["activity"]+'</span>'+
-                ' <small onclick="showMoreActivityInfo()">Mais detalhes</small>'+
-                ' </span>'+
-                ' </div>'+
-                ' </section>'
-            );
-        }
-        else if($("#filterActivity").val() === LevelActivity.ELIMINACAO &&
-            activity["levelkey"] === LevelActivity.ELIMINACAO)
-        {
-            itensRemovidos++;
-            $(".list-logs").append('' +
-                '<h3>'+groupByDate(formatActivityDate(activity["date"], 1))+'</h3>'+
-                '<section> '+
-                ' <span class="hour">'+formatActivityDate(activity["date"], 2)+'</span> '+
-                '<div class="detail">'+
-                '  <i class="icon-minus remove"></i> '+
-                ' <span>'+
-                '<span class="description">'+activity["activity"]+'</span> '+
-                ' <small onclick="showMoreActivityInfo()">Mais detalhes</small> '+
-                ' </span> '+
-                ' </div> '+
-                ' </section>'
-            );
-        } else if($("#filterActivity").val() === LevelActivity.VISUALIZACAO &&
-            activity["levelkey"] === LevelActivity.VISUALIZACAO)
-        {
-            itensRemovidos++;
-            $(".list-logs").append('' +
-                '<h3>'+groupByDate(formatActivityDate(activity["date"], 1))+'</h3>'+
-                '<section> '+
-                ' <span class="hour">'+formatActivityDate(activity["date"], 2)+'</span> '+
-                '<div class="detail">'+
-                '  <i class="icon-eye view"></i> '+
-                ' <span>'+
-                '<span class="description">'+activity["activity"]+'</span> '+
-                ' <small onclick="showMoreActivityInfo()">Mais detalhes</small> '+
-                ' </span> '+
-                ' </div> '+
-                ' </section>'
-            );
-        }
-        else if($("#filterActivity").val() === LevelActivity.OUTROS)
-        {
-            loadAllActivities();
-            op = 1;
-        }
+                if(activity["activity"].$$("Registou novo Crédito com o Dossier")) creditosRegistados++;
+            }
+            else if($("#filterActivity").val() === LevelActivity.ATUALIZACAO &&
+                activity["levelkey"] === LevelActivity.ATUALIZACAO)
+            {
+                itensEditados++;
+               showActivity(activity, LevelActivity.ATUALIZACAO);
+            }
+            else if($("#filterActivity").val() === LevelActivity.ELIMINACAO &&
+                activity["levelkey"] === LevelActivity.ELIMINACAO)
+            {
+                itensRemovidos++;
+                showActivity(activity, LevelActivity.ELIMINACAO);
+            } else if($("#filterActivity").val() === LevelActivity.VISUALIZACAO &&
+                activity["levelkey"] === LevelActivity.VISUALIZACAO)
+            {
+                itensRemovidos++;
+               showActivity(activity, LevelActivity.VISUALIZACAO);
+            }
+            else if($("#filterActivity").val() === LevelActivity.TODOS)
+            {
+                if(activity["levelkey"] === LevelActivity.CRIACAO)
+                {
+                    itensAdicionados++;
+                    showActivity(activity, LevelActivity.CRIACAO);
+                }
+                else if(activity["levelkey"] === LevelActivity.ATUALIZACAO)
+                {
+                    itensEditados++;
+                    showActivity(activity, LevelActivity.ATUALIZACAO);
+                }
+                else if(activity["levelkey"] === LevelActivity.VISUALIZACAO) showActivity(activity, LevelActivity.VISUALIZACAO);
+                else if(activity["levelkey"] === LevelActivity.ELIMINACAO)
+                {
+                    itensRemovidos++;
+                    showActivity(activity, LevelActivity.ELIMINACAO);
+                }
+            }
+            size++;
 
-        if(op === 0)
-        {
             $(".total-added h3").html(itensAdicionados);
             $(".total-edited h3").html(itensEditados);
             $(".total-removed h3").html(itensRemovidos);
@@ -297,8 +230,10 @@ function filterActivity()
                 $("#totalCreditos p").html(creditosRegistados);
             }
 
-        }
+            if(size === totalRecords) clearInterval(activityInterval);
+        }, time);
     }
+
 }
 
 
@@ -411,3 +346,28 @@ function alterFormatDate(date)
     return newDate[2]+"-"+newDate[1]+"-"+newDate[0];
 }
 
+
+function showActivity(value, filter)
+{
+    var classIcon;
+
+    if(filter === LevelActivity.ATUALIZACAO) classIcon ="icon-pencil edit";
+    else if(filter === LevelActivity.CRIACAO) classIcon = "icon-plus create";
+    else if(filter === LevelActivity.VISUALIZACAO) classIcon ="icon-eye view";
+    else if(filter === LevelActivity.ELIMINACAO) classIcon ="icon-minus remove";
+
+
+    $(".list-logs").append('' +
+        '<h3>'+groupByDate(formatActivityDate(value["date"], 1))+'</h3>'+
+        '<section> '+
+        ' <span class="hour">'+formatActivityDate(value["date"], 2)+'</span> '+
+        '<div class="detail">'+
+        '  <i class="'+classIcon+'"></i> '+
+        ' <span>'+
+        '<span class="description">'+value["activity"]+'</span> '+
+        ' <small onclick="showMoreActivityInfo()">Mais detalhes</small> '+
+        ' </span> '+
+        ' </div> '+
+        ' </section>'
+    );
+}

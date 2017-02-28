@@ -75,18 +75,20 @@ function carregarContas()
              listBanks = e.contas;
             loadComoBoxIDandValue($(".listBanks"), e.contas ,"ID", "DESCRICAO");
             loadComoBoxIDandValue($("#bk-conta-nome"), e.bancos ,"ID", "NAME");
-            $(".contas").append('<li class="active">'+e.contas[0]["DESCRICAO"]+'</li>');
+            $(".contas").append('<li class="active" onclick="loadBankMoviment('+i+', $(this))" >'+e.contas[0]["DESCRICAO"]+'</li>');
             loadBankMoviment(0);
             for(var i = 1;i<e.contas.length;i++)
             {
-                $(".contas").append('<li onclick=loadBankMoviment('+i+')>'+e.contas[i]["DESCRICAO"]+'</li>');
+                $(".contas").append('<li onclick="loadBankMoviment('+i+', $(this))" >'+e.contas[i]["DESCRICAO"]+'</li>');
             }
         }
     });
 }
 
-function loadBankMoviment(position)
+function loadBankMoviment(position, component)
 {
+    $("contas li.active").removeClass("active");
+    $(component).closest("li").addClass("active");
 
     $.ajax
     ({
@@ -96,14 +98,17 @@ function loadBankMoviment(position)
         data:{"intention": "bank moviment", "bank" : listBanks[position]["ID"]},
         success:function (e)
         {
+
             listMoviments = [];
             listMoviments = e.result;
-            $("#bankMovimentName").html(listBanks[position]["NAME"]);
+            $("#bankMovimentName").html(listBanks[position]["NOME BANCO"]);
             $("#tableBankMoviments").empty();
-            $(".good").html(listBanks[position]["SALDO"]);
 
 
-            if(Number(listBanks[position]["banco_saldo"])<Number(listBanks[position]["banco_saldominimo"])){
+            $(".good").html(listBanks[position]["saldo"]);
+
+            console.info("saldo "+listBanks[position]["saldo"]);
+            if(Number(listBanks[position]["saldo"])<Number(listBanks[position]["saldominimo"])){
                 $(".sald").removeClass("good");
                 $(".sald").addClass("bad");
             }

@@ -29,7 +29,7 @@
                         <input type="text" class="is-datepicker reportActivityDate" id="reportActivity-initialDate" placeholder="Data Inicial">
                         <input type="text" class="is-datepicker reportActivityDate" id="reportActivity-finalDate" placeholder="Data Final">
 						<select id="filterActivity">
-							<option value="4">Todos</option>
+							<option value="5">Todos</option>
 							<option value="2">Adicionados</option>
 							<option value="1">Editados</option>
 							<option value="0">Removidos</option>
