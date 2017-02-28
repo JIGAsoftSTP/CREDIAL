@@ -67,11 +67,10 @@ function loadUserActivities(filter, user)
                 "user" : user,
             "filter" : filter,
             "jsonContent" : JSON.stringify(activityData)},
-        beforeSend: function () {  $(".mp-loading").fadeIn(); },
-        complete: function () {
-            $(".mp-loading").fadeOut();},
+        // beforeSend: function () {  $(".mp-loading").fadeIn(); },
         success:function (e)
         {
+            // $(".mp-loading").fadeOut();
             activities = e.result;
             filterActivity();
         }
@@ -375,13 +374,14 @@ function selectUser(index, component)
     if($("#reportActivity-initialDate").val() !== "" &&
         $("#reportActivity-finalDate").val() !== "")
     {
-        $("#reportActivity-initialDate").val(alterFormatDate($("#reportActivity-initialDate").val() ));
-        $("#reportActivity-finalDate").val(alterFormatDate($("#reportActivity-finalDate").val()));
 
         activityData = new ActivityData();
         activityData.dateinicio =   $("#reportActivity-initialDate").val();
         activityData.datefim = $("#reportActivity-finalDate").val();
         activityData.loadmod = "date";
+
+        $("#reportActivity-initialDate").val(alterFormatDate($("#reportActivity-initialDate").val() ));
+        $("#reportActivity-finalDate").val(alterFormatDate($("#reportActivity-finalDate").val()));
 
         loadUserActivities(1, selectedUser);
     }
@@ -410,3 +410,4 @@ function alterFormatDate(date)
     newDate = $.makeArray(newDate);
     return newDate[2]+"-"+newDate[1]+"-"+newDate[0];
 }
+
