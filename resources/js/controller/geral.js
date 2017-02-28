@@ -246,7 +246,7 @@ function checkDate(str) {
 }
 
 var LevelActivity = {"ELIMINACAO" : "0", "DESATIVACAO" : "0", "ATUALIZACAO": "1",
-    "CRIACAO": "2",  "VISUALIZACAO": "3", "OUTROS": "4" };
+    "CRIACAO": "2",  "VISUALIZACAO": "3", "OUTROS": "4" , "TODOS" : "5"};
 Object.freeze(LevelActivity);
 
 var UserState = {"ATIVO": "1", "INATIVO": "0", "ATIVO": "1", "PRE_ATIVO": "2" };
