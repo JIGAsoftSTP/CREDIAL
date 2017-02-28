@@ -1,3 +1,16 @@
+<?php
+function hasSession()
+{
+    include "modelo/User.php";
+    include "bean/Session.php";
+    $user = Session::getUserLogado()->getId();
+    if (isset($user)) {
+        $menu = Session::getUserLogado()->getMenu();
+        if(count($menu) > 0) header("location:".$menu[0]["LINK"]);
+    }
+}
+hasSession();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

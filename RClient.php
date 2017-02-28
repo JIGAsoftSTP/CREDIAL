@@ -421,42 +421,45 @@
             <div class="modalContainer">
                 <div class="content">
                     <p class="type-font">
-                        <i class="icon-checkbox-unchecked" id="cred-pay-dife">
+                        <i class="icon-checkbox-unchecked" id="full-pay-dife">
                             <span>Fonte de pagamento diferente</span>
                         </i>
                     </p>
                     <div class="flex-form xpert-form" >
-                        <input type="text" placeholder="Data" id="" class="input-total date-liquida is-datepicker" >
+                        <input type="text" placeholder="Data" id="full-pay-data" class="input-total date-liquida is-datepicker" >
                     </div>
                     <div class="dffrent flex-form xpert-form">
-                    	<input type="text" id="" placeholder="Nº Documento" class="input-total" >
-						<select id="" class="input-total" title="Banco" >
+                    	<input type="text" id="full-pay-numDoc" placeholder="Nº Documento" class="input-total" >
+						<select id="full-pay-bank" class="input-total" title="Banco" >
 							<option value="0">(Banco)</option>
 						</select>
+                        <input type="text" id="full-pay-desco" value="0" placeholder="Desconto (10%-20%)" title="Desconto (10%-20%)" class="input-2 double percent1020">
+                        <input type="text" id="full-pay-corr" value="0" placeholder="Correção" title="Correção" class="input-2 double formatNumber">
+                        <span><span class="xpert-toggle-2"><span class="active">A</span><span>B</span></span></span>
                     </div>
                     <div class="secDiv xpert-form" >
                         <section class="sec-same">
                             <nav>
                                 <label>Inicial</label>
-                                <label>12522555</label>
+                                <label id="full-pay-start">12522555</label>
                             </nav>
                             <nav>
                                 <label>Pago</label>
-                                <label>12522555</label>
+                                <label id="full-pay-pago">12522555</label>
                             </nav>
                             <nav>
                                 <label>Recalculado</label>
-                                <label>12522555</label>
+                                <label id="full-pay-recal">12522555</label>
                             </nav>
                             <nav>
                                 <label>Diferença</label>
-                                <label>12522555</label>
+                                <label id="full-pay-dife">12522555</label>
                             </nav>
                         </section>
                     </div>
                 </div>
                 <div class="bt-yes-no-cancel">
-                    <button id="cred-pay-bt-full">OK</button>
+                    <button id="full-pay-bt">OK</button>
                     <button class="bt-no-option">Cancelar</button>
                 </div>
                 <div class="modal-header">

@@ -21,7 +21,8 @@ include "Session.php";
 
     function listCliente(){
         $call = new CallPgSQL();
-        $call->selects("ver_client_simple", "*");
+        $call->selects("ver_client_simple", "*")
+            ->finilize("order by","desc","\"QUANTIDADE DE CREDITO\"");
         $call->execute();
         $resut = array();
         $arrayList = str_split("*ABCDEFGHIJKLMNOPQRSTUVWXYZ");
@@ -218,6 +219,5 @@ function changeClienteDataNasc(){
         ->addDate($_POST['dataNasc']);
     $call->execute();
     $return = $call->getValors();
-//    if($return["result"] == "f"){ $j = json_encode(array("result"=>false,"msg"=>$return["message"])); die($j);}
     regDossier();
 }

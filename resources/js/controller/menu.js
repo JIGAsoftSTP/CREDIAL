@@ -3,9 +3,9 @@
  */
 /**
  *
- * @param user {User}
+ * @param user {Array}
  */
-var menusText = undefined;
+var menusUser = undefined;
 function loadMenuUserLogado(){
     $.ajax({
         url:"./bean/utilizador.php",
@@ -36,7 +36,7 @@ function loadMenuUserLogado(){
                //     ul.appendChild(li);
                // }
            }
-            menusText = menus;
+            menusUser = menus;
             $('.single').find("li").eq(0).trigger('click');
         }
     });
@@ -76,3 +76,17 @@ $('.single').on("click", "li", function(event) {
     CtrlMenu($(this), $('.article-admin'));
     event.stopPropagation();
 });
+
+/***
+ * @param cod {String}
+ */
+function containMenu(cod) {
+    var exist = false;
+    menusUser.forEach(function (menu) {
+        if (menu["COD"] == cod) {
+            exist = true;
+            return true;
+        }
+    });
+    return exist;
+}

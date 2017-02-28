@@ -73,7 +73,7 @@ function regUser() {
                         ,"background-size":"cover"};
                     $(".adm-ph-user").css(css);
                     imageUser = undefined;
-                    setTimeout(loadListClient,4000,true);
+                    setTimeout(loadListUser,4000,true);
                 }
                 else {
                     callXpertAlert(data.return["MESSAGE"], new Mensage().cross, 10000);
@@ -115,39 +115,21 @@ function alertForSelectMenu() {
     }
     else return true;
 }
-var listUser = undefined;
+var listUser = new ListUser();
+var dataUserActive = undefined;
+var dataOtherUser = undefined;
 var listMenus = undefined;
-function loadListClient(at) {
-     listUser = new ListUser();
+function loadListUser(at) {
     $.ajax({
         url: "../../bean/utilizador.php",
         type: "POST",
         data: {"intensao": "loadDataUser"},
         dataType: "json",
         success: function (e) {
-            for (var u = 0; u < e.return.length; u++) {
-                var us = new User();
-                us.nome = e.return[u]["NAME"];
-                us.apelido = ((us.nome == e.return[u]["SURNAME"]) ? "" : e.return[u]["SURNAME"]);
-                us.id = e.return[u]["NIF"];
-                us.idAgencia = e.return[u]["AGENCIA ID"];
-                us.agencia = e.return[u]["AGENCIA"];
-                us.nif = e.return[u]["NIF"];
-                us.nivel = e.return[u]["PERFIL"];
-                us.estado = e.return[u]["STATE"];
-                us.img = e.return[u]["PHOTO"];
-                us.idNivel = e.return[u]["PERFIL ID"];
-                us.menu = e.return[u]["MENU"];
-                listUser.addUser(us);
-            }
-            listUser.bluider();
-            $(".list-user").empty().append(listUser.getList());
-            for (var ui = 0; ui < listUser.list.length; ui++) {
-                var css = {"background":"content-box #444 url('../."+listUser.list[ui].img+"') no-repeat"
-                    ,"background-position":"center"
-                    ,"background-size":"cover"};
-                $(".default-user-img-"+listUser.list[ui].id).css(css);
-            }
+            dataUserActive = e.userActive;
+            dataOtherUser = e.otherUser;
+            listUser = new ListUser();
+            $(".list-user").empty();
             $('.filter li.active').click();
             if(at === undefined) {
                 listMenus = e.listMenu;
@@ -161,12 +143,13 @@ function loadListClient(at) {
             $(".mp-loading").fadeOut();
             if(at !== undefined)
                 callXpertAlert("Lista de Utilizador actualizada", new Mensage().notification, 10000);
+                transformDataUserToUser(dataUserActive,"Active", 500);
         }
     });
 }
 
 // $("#section-user").click(function () {
-    loadListClient();
+    loadListUser();
 // });
 
 var listMenuSelect = [];
@@ -182,16 +165,19 @@ function getSelectMenu() {
  * @type {User}
  */
 var user = undefined;
+
 $(".list-user").on("click", "i.icon-undo2", function () {
-    user =  listUser.list[$(this).closest("section").attr("item")];
+    clearInterval(addInterUser);
+    user =  getSelectedUser.call(this);
     user.disableMode = "F";
     disibleUser();
 })
     .on("click", "i.icon-pencil", function () {
+        clearInterval(addInterUser);
         resetForm($(".add-new-admin"));
         // resetForm($(".mp-menu-user"));
         USEREDITE = true;
-        user =  listUser.list[$(this).closest("section").attr("item")];
+        user = getSelectedUser.call(this);
         $("#gest-user-nif").val(user.nif).attr("disabled",true);
         $("#gest-user-nome").val(user.nome);
         $("#gest-user-apelido").val(user.apelido);
@@ -230,7 +216,8 @@ $(".list-user").on("click", "i.icon-undo2", function () {
         addNewItem($(this).closest('section').find('h4'));
     })
     .on("click", "i.icon-lock", function () {
-        user =  listUser.list[$(this).closest("section").attr("item")];
+        clearInterval(addInterUser);
+        user =  getSelectedUser.call(this);
         user.disableMode = "B";
         disibleUser();
     });
@@ -252,7 +239,7 @@ function disibleUser() {
                     callXpertAlert("Utilizador foi desativado com sucesso! ", new Mensage().checkmark, 10000);
                     regUserActivity(userActivityAddress, -1, "Desativou o Utilizador "+user.nome+" "+user.apelido, -1, LevelActivity.ATUALIZACAO);
                 }
-                setTimeout(loadListClient,4000,true);
+                setTimeout(loadListUser,4000,true);
             }
             else {
                 callXpertAlert(data.return["MESSAGE"], new Mensage().cross, 10000);
@@ -302,7 +289,8 @@ $("#gest-user-type").on("click","i", function () {
         data: {intensao:"loadMENU-Perfil", perfil : $(this).attr("value")},
         success: function (data) {
             var menu = data.MENU;
-            resetForm($(".mp-menu-user"));
+            //resetForm($(".mp-menu-user"));
+            disableAllCheck();
             setTimeout(function () {
                 for (var v = 0; v < menu.length; v++){
                     seletedMenuUser(menu[v]['ID']);
@@ -346,9 +334,13 @@ function editeClient() {
             menu : areChangeMenu(),
             names: areChangeNames(),
             agencia: areChageAgencia(),
-            nivel: areChengeNivel()
+            nivel: areChengeNivel(),
+            avatar: areChengeAvatar()
         };
-        if(!change.menu&&!change.agencia&&!change.nivel&&!change.names){
+
+        console.log(change);
+
+        if(!change.menu&&!change.agencia&&!change.nivel&&!change.names&&!change.avatar){
             callXpertAlert("Nenhuma alteração foi efetuada!", new Mensage().warning, 10000);
             return false;
         }
@@ -369,7 +361,7 @@ function editeClient() {
                     $(".adm-ph-user").css(css);
                     imageUser = undefined;
                     $('.add-new-admin .closeIt').click();
-                    setTimeout(loadListClient,4000,true);
+                    setTimeout(loadListUser,4000,true);
                 }
                 else {
                     callXpertAlert(data.message, new Mensage().cross, 10000);
@@ -409,10 +401,72 @@ function areChengeNivel() {
     return userChange.idNivel != user.idNivel;
 }
 
+function areChengeAvatar() {
+    return userChange.img != ("."+user.img);
+}
+
 function openFatherHaveSonSelected() {
     $(".XpertTreeMenu").find('.isFather').each(function () {
         if ($(this).hasClass("checked")) {
             $(this).find('.icon-ctrl').click();
         }
     });
+}
+
+var totalDataUser = undefined;
+/**
+ *
+ * @type {Number}
+ */
+var iDataUser = 0;
+/**
+ * @type {*}
+ */
+var addInterUser = undefined;
+
+/**
+ *
+ * @param data {[*]}
+ * @param type {String}
+ * @param time {Number}
+ */
+function transformDataUserToUser(data, type, time) {
+    iDataUser = 0;
+    totalDataUser = data.length;
+    if (totalDataUser > 0) {
+        addInterUser = setInterval(function () {
+            var us = new User();
+            us.nome = data[iDataUser]["NAME"];
+            us.apelido = ((us.nome == data[iDataUser]["SURNAME"]) ? "" : data[iDataUser]["SURNAME"]);
+            us.id = data[iDataUser]["NIF"];
+            us.idAgencia = data[iDataUser]["AGENCIA ID"];
+            us.agencia = data[iDataUser]["AGENCIA"];
+            us.nif = data[iDataUser]["NIF"];
+            us.nivel = data[iDataUser]["PERFIL"];
+            us.estado = data[iDataUser]["STATE"];
+            us.img = data[iDataUser]["PHOTO"];
+            us.idNivel = data[iDataUser]["PERFIL ID"];
+            us.menu = data[iDataUser]["MENU"];
+            if (type == "Active") {
+                listUser.addUser(us);
+                listUser.bluiderActive(iDataUser);
+            } else {
+                listUser.addOtherUser(us);
+                listUser.bluiderOther(iDataUser);
+            }
+            iDataUser++;
+            if (iDataUser == totalDataUser) {
+                clearInterval(addInterUser);
+                if (type == "Active") {
+                    transformDataUserToUser(dataOtherUser, "Other", 250);
+                }
+            }
+        }, time);
+    }
+}
+
+function getSelectedUser() {
+    return (($(this).closest("section").attr("status") == "Ativo")
+        ? listUser.listActive[$(this).closest("section").attr("item")]
+        : listUser.listOther[$(this).closest("section").attr("item")]);
 }

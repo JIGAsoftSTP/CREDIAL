@@ -21,7 +21,7 @@ $(function () {
             searchClient();
     }).keyup(function () {
         if($(this).val() === ""){
-            carregarCliente();
+            carregarCliente(-100000000000);
         }
     })
 });
@@ -47,7 +47,9 @@ function listarCliente() {
         dataType: "json",
         success: function (e) {
             clientes = e.data;
-            carregarCliente();
+        },beforeSend: function () {  $(".mp-loading").fadeIn(); },
+        complete: function () { $(".mp-loading").fadeOut();
+            carregarCliente(-100000000000);
         }
     });
 }
@@ -75,23 +77,27 @@ function addANO() {
 function addMES() {
     return ['01','02','03','04','05','06','07','08','09','10','11','12'];
 }
-
-function carregarCliente() {
-    var carregou = false;
+/**
+ * @type {*}
+ */
+var inteClient = undefined;
+function carregarCliente(time) {
+    if(inteClient!=undefined) {clearInterval(inteClient);}
     clienteSearch = false;
-    // addTable += (per/100*clientes.length);
     addTable = (clientes[clienteLetra] != undefined) ? clientes[clienteLetra].length : 0;
     $('#tableCliente').empty();
-    i = 0;
-    for (var ff = i; ff < addTable ; ff++) {
+    var ff = 0;
+    if(addTable > 0)
+     inteClient = setInterval(function () {
         var client = clientes[clienteLetra][ff];
         var table = document.getElementById("tableCliente");
         var row = table.insertRow(table.childElementCount);
 
         row.id = ff;
 
-
-        row.onclick = function () { $(this).addClass('selected') .siblings().removeClass('selected'); };
+        row.onclick = function () {
+            $(this).addClass('selected').siblings().removeClass('selected');
+        };
 
         var cell1 = row.insertCell(0);
         var cell2 = row.insertCell(1);
@@ -99,21 +105,20 @@ function carregarCliente() {
         var cell4 = row.insertCell(3);
         var cell5 = row.insertCell(4);
 
-        cell1.innerHTML = "<i class='icon-credit-card' onclick='"+"credito("+ff+")'  title='Registo Crédito'></i>" +
-                        "<i class='icon-info' onclick='"+"inforCiente("+ff+")'  title='Mais Informaçõess'></i>" +
-                        "<i class='icon-pencil' onclick='"+"editCiente("+ff+")' title='Editar Cliente' ></i>";
+        cell1.innerHTML = "<i class='icon-credit-card' onclick='" + "credito(" + ff + ")'  title='Registo Crédito'></i>" +
+            "<i class='icon-info' onclick='" + "inforCiente(" + ff + ")'  title='Mais Informaçõess'></i>" +
+            "<i class='icon-pencil' onclick='" + "editCiente(" + ff + ")' title='Editar Cliente' ></i>";
         cell2.innerHTML = client['NIF'];
-        cell3.innerHTML = client['NAME']+" "+client['SURNAME'];
+        cell3.innerHTML = client['NAME'] + " " + client['SURNAME'];
         cell4.innerHTML = client['TELE'];
         cell5.innerHTML = client['QUANTIDADE DE CREDITO'];
-        carregou = true;
-        // lastI = ff;
-    }
-    // i = lastI+1;
-    if(carregou) {
+        ff++;
         tableEstructure($('.x-table.table-client'));
-        setRowCount($('.x-table.table-client'));
-    }
+        if (ff == addTable) {
+            setRowCount($('.x-table.table-client'));
+            clearInterval(inteClient);
+        }
+    }, time);
 
 }
 
@@ -161,11 +166,15 @@ function inforCiente(b, type, fill) {
     });
 }
 function editCiente(c, type) {
-    CLIENTEEDITE = true;
-   if(type === undefined)
-      inforCiente(c, undefined, true);
-   else
-       inforCiente(c, 2, true);
+    // if(containMenu("cre.EdCl")) {
+        CLIENTEEDITE = true;
+        if (type === undefined)
+            inforCiente(c, undefined, true);
+        else
+            inforCiente(c, 2, true);
+    // } else{
+    //     callXpertAlert("Infelizmente nao tens permiçao para efectuar o ediçao de Cliente!", new Mensage().warning, 8000);
+    // }
 }
 
 // loadOuther
@@ -223,27 +232,31 @@ function creditoNow(dt) {
 }
 
 function regCliente() {
-    getDataClienteInForm("regCliente");
-    $.ajax({
-        url: "./bean/cliente.php",
-        type: "POST",
-        data: scli,
-        dataType: "json",
-        success: function (e) {
-            if(e.result){
-                callXpertAlert('Novo Cliente adcionado com sucesso!', new Mensage().checkmark, 8000);
-                resetForm($(".add-new-form"));
-                $('.add-new-form').removeClass('show');
-                setTimeout(creditoNow, 800, scli);
-                var re = new refresh();
-                re.dataType = "CLIENT";
-                saveRefresh(re);
-                regUserActivity("./bean/activity.php", scli.nif , "Registou um novo cliente", JSON.stringify(scli), LevelActivity.CRIACAO );
-            }else {
-                callXpertAlert(e.msg, new Mensage().cross, 8000);
+    if(containMenu("cre.regCli")) {
+        getDataClienteInForm("regCliente");
+        $.ajax({
+            url: "./bean/cliente.php",
+            type: "POST",
+            data: scli,
+            dataType: "json",
+            success: function (e) {
+                if (e.result) {
+                    callXpertAlert('Novo Cliente adcionado com sucesso!', new Mensage().checkmark, 8000);
+                    resetForm($(".add-new-form"));
+                    $('.add-new-form').removeClass('show');
+                    setTimeout(creditoNow, 800, scli);
+                    var re = new refresh();
+                    re.dataType = "CLIENT";
+                    saveRefresh(re);
+                    regUserActivity("./bean/activity.php", scli.nif, "Registou um novo cliente", JSON.stringify(scli), LevelActivity.CRIACAO);
+                } else {
+                    callXpertAlert(e.msg, new Mensage().cross, 8000);
+                }
             }
-        }
-    });
+        });
+    }else{
+        callXpertAlert("Infelizmente nao tens permiçao para efectuar o registo de Cliente!", new Mensage().warning, 8000);
+    }
 }
 
 $("#cli-reg").click(function () {
@@ -387,7 +400,7 @@ $(".show-cred").click(function () {
 
 $("div.alphabet").on("click","span",function () {
     clienteLetra = Number($(this).attr("value"));
-    carregarCliente();
+    carregarCliente(-100000000000);
 });
 
 $("#table-client").on("dblclick","tr", function () {
@@ -475,6 +488,7 @@ $("#cred-pay-bt").click(function () {
 var clienteSearch = false;
 function searchClient()
 {
+    if(inteClient!=undefined) {clearInterval(inteClient);}
     var value = $("#client-search").val();
     value = value.toUpperCase();
     $.ajax({
@@ -523,30 +537,38 @@ function reloadPestacaoCreditdo() {
 }
 
 function editeSelectedClient() {
-    getDataClienteInForm("editeSelectedClient");
-    $.ajax({
-        url: "./bean/cliente.php",
-        type: "POST",
-        data: scli,
-        dataType: "json",
-        success: function (e) {
-            if(e.result) {
-                callXpertAlert('O Cliente foi editado com sucesso!', new Mensage().checkmark, 8000);
-                var re = new refresh();
-                re.dataType = "CLIENT";
-                $('.add-new-form').removeClass('show');
-                saveRefresh(re);
+    if(containMenu("cre.EdiCli")) {
+        getDataClienteInForm("editeSelectedClient");
+        $.ajax({
+            url: "./bean/cliente.php",
+            type: "POST",
+            data: scli,
+            dataType: "json",
+            success: function (e) {
+                if (e.result) {
+                    callXpertAlert('O Cliente foi editado com sucesso!', new Mensage().checkmark, 8000);
+                    var re = new refresh();
+                    re.dataType = "CLIENT";
+                    $('.add-new-form').removeClass('show');
+                    saveRefresh(re);
 
-                regUserActivity("./bean/activity.php", scli.nif , "Atualizou informações do(a) cliente!", JSON.stringify(scli), LevelActivity.ATUALIZACAO );
+                    regUserActivity("./bean/activity.php", scli.nif, "Atualizou informações do(a) cliente!", JSON.stringify(scli), LevelActivity.ATUALIZACAO);
 
-                if(DOCREDITO) setTimeout(creditoNow, 800, scli);
-            } else {
-                callXpertAlert(e.msg, new Mensage().cross, 8000);
+                    if (DOCREDITO) setTimeout(creditoNow, 800, scli);
+                } else {
+                    callXpertAlert(e.msg, new Mensage().cross, 8000);
+                }
+            },
+            beforeSend: function () {
+                $(".mp-loading").fadeIn();
+            },
+            complete: function () {
+                $(".mp-loading").fadeOut();
             }
-        },
-        beforeSend: function () {  $(".mp-loading").fadeIn(); },
-        complete: function () { $(".mp-loading").fadeOut(); }
-    });
+        });
+    }else{
+        callXpertAlert("Infelizmente nao tens permiçao para efectuar o ediçao de Cliente!", new Mensage().warning, 8000);
+    }
 }
 
 function clientIsIncomple() {

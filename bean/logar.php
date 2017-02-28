@@ -67,7 +67,6 @@ function logar(){
 }
 
 function redinirSenha(){
-//    session_start();
     $call = new CallPgSQL();
     $call->functionTable("funct_activate_user","*")
         ->addString(Session::getUserLogado()->getId())
@@ -101,7 +100,6 @@ function logOut(){
 }
 
 function changePwd(){
-//    session_start();
     $call = new CallPgSQL();
     $call->functionTable("funct_change_pwd","*")
         ->addString(Session::getUserLogado()->getId())

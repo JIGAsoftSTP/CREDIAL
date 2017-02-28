@@ -344,13 +344,18 @@ function loadChequeSimulacao() {
 }
 
 $("#import-simulation").click(function () {
-    if ( hasNif() && validarSimulacao($("#cred-form-cli input, #cred-form-cli select")) && checkIsValid() && testTableAmortizacao() && testlistDocGar()) {
-        si.numeroCheque =  $("#cred-cli-numDoc-veiw").html()+$("#cred-cli-numDoc").val();
-        si.idBank =  $("#cred-cli-bank").attr("newid");
-        si.objectoTipoCredito =  $("#cred-tipoCred").val();
-        si.objectoFontePagamento =  $("#cred-cli-fonRend").val();
-        openModalFrame($('.mp-confirm-simulation'));
-        regUserActivity("./bean/activity.php", -1 , "Carregou o botão de Concluir a simulação!", -1, LevelActivity.OUTROS );
+    if (containMenu("cre.regCre")) {
+        if (hasNif() && validarSimulacao($("#cred-form-cli input, #cred-form-cli select")) && checkIsValid() && testTableAmortizacao() && testlistDocGar()) {
+            si.numeroCheque = $("#cred-cli-numDoc-veiw").html() + $("#cred-cli-numDoc").val();
+            si.idBank = $("#cred-cli-bank").attr("newid");
+            si.objectoTipoCredito = $("#cred-tipoCred").val();
+            si.objectoFontePagamento = $("#cred-cli-fonRend").val();
+            openModalFrame($('.mp-confirm-simulation'));
+            regUserActivity("./bean/activity.php", -1, "Carregou o botão de Concluir a simulação!", -1, LevelActivity.OUTROS);
+        }
+    }
+    else {
+        callXpertAlert("Infelizmente nao tens permiçao para efectuar o registro de Credito!", new Mensage().warning, 8000);
     }
 });
 

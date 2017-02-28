@@ -158,42 +158,66 @@ var DOCREDITO = false;
  * @constructor ListUser
  */
 var ListUser =  function () {
-    this.list = [];
-    this.listContainer = "";
-};
+    /**
+     *
+     * @type {[User]}
+     */
+    this.listActive = [];
+    this.listOther = [];
 
-/**
- *
- * @param user {User}
- */
-ListUser.prototype.addUser = function (user) {
-    if(user.nif != undefined)
-        this.list[this.list.length] = user;
-};
-ListUser.prototype.bluider = function () {
-    for(var k = 0; k < this.list.length; k++)
-    this.listContainer += '<section item="'+k+'" status="'+ this.list[k].estado +'">' +
-        '<span>'+ ((this.list[k].estado === "Pre-Ativo") ? '' : '<i class="icon-undo2" title="Redefinir senha"></i>')+'<i class="icon-pencil" title="Editar"></i><i class="icon-calendar" title="Atividades"></i>'+((this.list[k].estado != "Inativo") ? '<i class="icon-lock" title="Bloquear utilizador"></i>' : '' )+'</span>' +
-        '<div>' +
-        '<nav class="default-user-img-'+this.list[k].nif+'"></nav>' +
-        '<h4>'+this.list[k].nome+' '+this.list[k].apelido+'</h4>' +
-        '<p>NIF: '+this.list[k].nif+'</p>' +
-        '<p>'+this.list[k].nivel+' na agência '+this.list[k].agencia+'</p>' +
-        '</div>' +
-        '</section>';
-};
+    /**
+     *
+     * @param user {User}
+     */
+    this.addUser = function (user) {
+        this.listActive[this.listActive.length] = user;
+    };
 
-/**
- *
- * @returns {string|*|string}
- */
-ListUser.prototype.getList = function () {
-    return this.listContainer;
-};
+    /**
+     * @param user {User}
+     */
+    this.addOtherUser = function (user) {
+        this.listOther[this.listOther.length] = user;
+    };
 
-// function foo(...args) {
-//     console.log(args);
-// }
+    /**
+     * @param k {Number}
+     */
+    this.bluiderActive = function (k) {
+        this.appendUser(this.listActive[k], k);
+    };
+
+    /**
+     * @param user {User}
+     */
+    this.appendUser = function (user, k) {
+        var content = '<section item="' + k + '" status="' + user.estado + '">' +
+            '<span>' + ((user.estado === "Pre-Ativo") ? '' : '<i class="icon-undo2" title="Redefinir senha"></i>') + '<i class="icon-pencil" title="Editar"></i><!--<i class="icon-calendar" title="Atividades"></i>-->' + ((user.estado != "Inativo") ? '<i class="icon-lock" title="Bloquear utilizador"></i>' : '' ) + '</span>' +
+            '<div>' +
+            '<nav class="default-user-img-' + user.nif + '"></nav>' +
+            '<h4>' + user.nome + ' ' + user.apelido + '</h4>' +
+            '<p>NIF: ' + user.nif + '</p>' +
+            '<p>' + user.nivel + ' na agência ' + user.agencia + '</p>' +
+            '</div>' +
+            '</section>';
+        $(".list-user").append(content);
+        var css = {
+            "background": "content-box #444 url('../." + user.img + "') no-repeat"
+            , "background-position": "center"
+            , "background-size": "cover"
+        };
+        $(".default-user-img-" + user.id).css(css);
+    };
+
+
+    /**
+     * @param k {Number}
+     */
+    this.bluiderOther = function (k) {
+        this.appendUser(this.listOther[k], k);
+    };
+
+};
 
 if(!Number.prototype.dc){
     Number.prototype.dc = function () {
@@ -207,14 +231,6 @@ if(!Number.prototype.rp){
     }
 }
 
-/*if(!Object.prototype.POb){
-    /!**
-     * @constructor parser Object
-     *!/
-    Object.prototype.POb = function () {
-        return JSON.stringify(this);
-    }
-}*/
 
 function numericNumbers(event) {
     if ((event.which != 44 || $(this).val().indexOf(',') != -1) &&

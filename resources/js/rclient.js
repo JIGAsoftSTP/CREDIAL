@@ -9,20 +9,24 @@ $('.header-tittle').click(function(event) {
 });
 
 $('.new-client, .close-add-client, .table-client .icon-pencil').click(function(event) {
-    $('.add-new-form').toggleClass('show');
-    setAppLog($('.add-new-form'), 'show');
-    if ($(this).hasClass('icon-pencil')) {
-        $('.add-new-form h1').text('Editar cliente');
-        $("#cli-reg").text('Editar cliente');
-    }
-    else {
-        CLIENTEEDITE = false;
-        $('.add-new-form h1').text('Adicionar cliente');
-        $("#cli-reg").text('Adicionar cliente');
-        $(".add-new-form").find("input, select").removeAttr("disabled");
-        resetForm($(".add-new-form"));
-    }
-    DOCREDITO = false;
+    // if (containMenu("cre.clie")) {
+        $('.add-new-form').toggleClass('show');
+        setAppLog($('.add-new-form'), 'show');
+        if ($(this).hasClass('icon-pencil')) {
+            $('.add-new-form h1').text('Editar cliente');
+            $("#cli-reg").text('Editar cliente');
+        }
+        else {
+            CLIENTEEDITE = false;
+            $('.add-new-form h1').text('Adicionar cliente');
+            $("#cli-reg").text('Adicionar cliente');
+            $(".add-new-form").find("input, select").removeAttr("disabled");
+            resetForm($(".add-new-form"));
+        }
+        DOCREDITO = false;
+    // } else{
+    //     callXpertAlert("Infelizmente nao tens permiçao para efectuar o registro de Cliente!", new Mensage().warning, 8000);
+    // }
 });
 
 $('.search-span input').focusin(function(event) {
@@ -135,7 +139,11 @@ function CtrlFormLiquidar(state){
 }
 
 $('.new-simulation').click(function(event) {
-    openModalFrame($('.mp-new-credit'));
+    // if (containMenu("cre.regCre")){
+        openModalFrame($('.mp-new-credit'));
+    // }else{
+    //     callXpertAlert("Infelizmente nao tens permiçao para efectuar o registro de Cliente!", new Mensage().warning, 8000);
+    // }
 });
 
 $('.define-client').click(function(event) {

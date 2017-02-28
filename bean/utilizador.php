@@ -99,24 +99,45 @@ function loadDataUser(){
         ->addString(Session::getUserLogado()->getId())
         ->addNumeric(Session::getUserLogado()->getIdAgencia());
     $call->execute();
-    $result = array();
+    $userActive = array();
+    $otherUser = array();
     while ($values = $call->getValors()) {
-        if ($values["PHOTO"] != null) {
-            $img = md5($values["NIF"]) /*. ".png"*/;
-            file_put_contents("../resources/img/userImg/" . $img, pg_unescape_bytea($values["PHOTO"]));
-            $values["PHOTO"] = "./resources/img/userImg/" . $img;
-        }
-        else{
-            $values["PHOTO"] = "./resources/img/user.png";
-        }
-        $values["MENU"] = loadMenuUser($values["NIF"]);
-        $result[count($result)] = $values;
-    }
+        $values = addLocalPhoto($values);
+        if($values["STATE"] == "Ativo")
+            $userActive[count($userActive)] = $values;
+        else
+            $otherUser[count($otherUser)] = $values;
+    }  
     $agencias = $call->loadDados("ver_agencia", "\"ID\"", "\"NOME\"");
-
     $typesUser = $call->loadDados("ver_type_user", "\"ID\"","\"NAME\"");
 
-    die (json_encode(array("return" => $result, "listMenu" => getListMenu(), "agencias" => $agencias, "typesUser" => $typesUser)));
+    die(json_encode(
+            array("userActive" => $userActive,
+                "otherUser" => $otherUser,
+                "listMenu" => getListMenu(),
+                "agencias" => $agencias,
+                "typesUser" => $typesUser
+            )
+        )
+    );
+}
+
+/**
+ * @param $values
+ * @return mixed
+ */
+function addLocalPhoto($values)
+{
+    if ($values["PHOTO"] != null) {
+        $img = md5($values["NIF"]) /*. ".png"*/
+        ;
+        file_put_contents("../resources/img/userImg/" . $img, pg_unescape_bytea($values["PHOTO"]));
+        $values["PHOTO"] = "./resources/img/userImg/" . $img;
+    } else {
+        $values["PHOTO"] = "./resources/img/user.png";
+    }
+    $values["MENU"] = loadMenuUser($values["NIF"]);
+    return $values;
 }
 
 function disableUser(){
