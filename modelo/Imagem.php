@@ -5,6 +5,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+include "../resources/fw/resize/image.php";
+use \Eventviva\ImageResize;
 /**
  * Description of Imagem
  *
@@ -149,5 +151,19 @@ class Imagem {
             }
         }*/
     }
+
+    /**
+     * @param $file
+     * @param $size
+     * @return string
+     */
+    public static function reside($file, $size){
+        $image = new ImageResize($file);
+        $image->resizeToWidth($size);
+        $fileName = $file . $size;
+        $image->save($fileName);
+        return $fileName;
+    }
+
 }
  

@@ -42,7 +42,9 @@ function regUser(){
         ->addString($_POST["usersurname"])
         ->addString(null)
         ->addDate(null)
-        ->addFile($_POST["photofile"]);
+        ->addFile($_POST["photofile"])
+        ->addFileReside($_POST["photofile"], 250)
+        ->addFileReside($_POST["photofile"], 125);
     $call->execute();
     $result = $call->getValors();
     if($result["RESULT"] != "true")
@@ -102,7 +104,7 @@ function loadDataUser(){
     $userActive = array();
     $otherUser = array();
     while ($values = $call->getValors()) {
-        $values = addLocalPhoto($values);
+        $values = addLocalPhotoSimple($values);
         if($values["STATE"] == "Ativo")
             $userActive[count($userActive)] = $values;
         else
@@ -136,6 +138,16 @@ function addLocalPhoto($values)
     } else {
         $values["PHOTO"] = "./resources/img/user.png";
     }
+    $values["MENU"] = loadMenuUser($values["NIF"]);
+    return $values;
+}
+
+/**
+ * @param $values
+ * @return mixed
+ */
+function addLocalPhotoSimple($values){
+    $values["PHOTO"] = "./resources/img/user.png";
     $values["MENU"] = loadMenuUser($values["NIF"]);
     return $values;
 }

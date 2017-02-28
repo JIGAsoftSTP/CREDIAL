@@ -123,13 +123,11 @@ class FuntionTable
     }
 
     function addJson($value){
-//        $this->addParam(TYPE::JSON, "'".$value."''");
         $this->addParam(TYPE::JSON, $value);
         return $this;
     }
 
     function addJsonb($value){
-//        $this->addParam(TYPE::JSON, "'".$value."''");
         $this->addParam(TYPE::JSONB, $value);
         return $this;
     }
@@ -187,6 +185,19 @@ class FuntionTable
         return $this;
     }
 
+    /**
+     * @param $file string
+     * @param $size integer
+     * @return $this
+     */
+    function addFileReside($file, $size){
+        $newFile = Imagem::reside($file, $size);
+        $value = file_get_contents($newFile);
+        $filebd = pg_escape_bytea($this->call->getCon(),$value);
+        $this->addParam(TYPE::BYTEA,$filebd);
+        return $this;
+    }
+
     function addBool($value){
         $aux = ($value)? 'true' : 'false';
         $this->addParam(TYPE::BOOLEAN, $aux);
@@ -213,22 +224,6 @@ class FuntionTable
         return $this;
     }
 
-//    function addDateArray($value, $format = "dd-MM-yyyy")
-//    {
-//        $q = count($this->call->listParam);
-//        $this->call->listParam[$q] = $value;
-//        $q = count($this->call->listParam);
-//        $this->call->listParam[$q] = $format;
-//        $q = count($this->call->listParam);
-//        if(count($this->call->listParam) == 2)
-//        {
-//            $this->call->sql.="(to_Date($".($q-1).", $".($q)."))";
-//        }else{
-//            $this->call->sql= substr($this->call->sql,0,strlen($this->call->sql)-1).", to_Date($".($q-1).", $".($q)."))";
-//        }
-//        return $this;
-//    }
-
     function addTimeStampArray($value){
         $this->addParam(TYPE::TIMESTAMP_ARRAY,$this->arrayToArrayPG($value));
         return $this;
@@ -248,19 +243,6 @@ class FuntionTable
         $this->addParam("",$this->arrayToArrayPG($value));
         return $this;
     }
-
-//    function addFileArray($file){
-//        $value = file_get_contents($file);
-//        $filebd = pg_escape_bytea($this->call->getCon(),$value);
-//        $this->addParam(TYPE::BYTEA_ARRAY,$filebd);
-//        return $this;
-//    }
-
-//    function addBoolArray($value){
-//        $aux = ($value)? 'true' : 'false';
-//        $this->addParam(TYPE::BOOLEAN_ARRAY, $aux);
-//        return $this;
-//    }
 
     /**
      * @param $value array
