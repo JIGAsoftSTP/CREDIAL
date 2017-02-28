@@ -31,25 +31,34 @@ include_once "../modelo/User.php";
             ->addJsonb(($_POST["filter"] == -1 ? null : $_POST["jsonContent"]));
         $call->execute();
         $arrayValues = array();
+
         while($result = $call->getValors())
         {
             $arrayValues[count($arrayValues)] = $result;
+            json_encode(array("result" =>$arrayValues));
         }
         die(json_encode(array("result" =>$arrayValues)));
     }
 
     function loadUsers()
     {
+        $total = 0;
         $call = new CallPgSQL();
         $call->selects("ver_simple_user", "*");
         $call->execute();
+
         $values = array();
+//
         while($row = $call->getValors())
         {
             $values[count($values)] = $row;
+            json_encode(array("result" =>$values));
+
         }
-        die(json_encode(array("result" =>$values)));
+        die( json_encode(array("result" =>$values)));
     }
+
+
 
 
 

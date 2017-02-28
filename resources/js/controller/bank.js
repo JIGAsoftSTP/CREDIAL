@@ -73,7 +73,7 @@ function carregarContas()
         success:function (e)
         {
              listBanks = e.contas;
-            loadComoBoxIDandValue($(".listBanks"), e.contas ,"ID", "NOME BANCO");
+            loadComoBoxIDandValue($(".listBanks"), e.contas ,"ID", "DESCRICAO");
             loadComoBoxIDandValue($("#bk-conta-nome"), e.bancos ,"ID", "NAME");
             $(".contas").append('<li class="active">'+e.contas[0]["DESCRICAO"]+'</li>');
             loadBankMoviment(0);
@@ -262,14 +262,12 @@ function regBank()
 {
     if($("#bancoNome").val() !== "" &&
         $("#bancoSigla").val() !=="" &&
-        $("#bancoCodigoBancario").val() !== "" &&
-        $("#bk-contaSaldoMinimo").val() !== "")
+        $("#bancoCodigoBancario").val() !== "" )
     {
         var banco = new Banco();
         banco.nome = $("#bancoNome").val();
         banco.sigla = $("#bancoSigla").val();
         banco.codigoConta = $("#bancoCodigoBancario").val();
-        banco.saldoMinimo= unformatted($("#bk-contaSaldoMinimo").val());
 
         $.ajax({
             url: bankAddress,
@@ -316,34 +314,43 @@ function regBankAccount()
                 else
                 {
                     $("#bk-conta-descricao").removeClass("empty");
-
-                    var banco = new Banco();
-                    banco.nome = $("#bk-conta-nome").val();
-                    banco.codigoAgencia = $("#bk-conta-agencia").val();
-                    banco.codigoConta = $("#bk-conta-conta").val();
-                    banco.descricao = $("#bk-conta-descricao").val();
-
-                    $.ajax({
-                        url: bankAddress,
-                        type:"POST",
-                        dataType:"json",
-                        async: false,
-                        data:{"intention": "add bank account", "bank" : banco},
-                        success:function (e) {
-                            if(e.resultado["result"] === "true")
-                            {
-                                callXpertAlert('Conta Banco registado com sucesso!', 'checkmark', 8000);
-                                $('.add-account').find('input, select').val("");
-                                $('.add-account').find('input, select').css("border", "");
-                                $("#bk-conta-descricao").val("");
-                                $("#bk-conta-descricao").css("border", "");
-                                regUserActivity(bankActivityAddress, -1, "Registou uma nova Conta Banco", JSON.stringify(banco), LevelActivity.CRIACAO);
-                                carregarContas();
+                    if($("#bk-contaSaldoMinimo").val() === "")
+                        $("#bk-contaSaldoMinimo").addClass("empty");
+                    else
+                    {
+                        $("#bk-contaSaldoMinimo").removeClass("empty");
+                        var banco = new Banco();
+                        banco.nome = $("#bk-conta-nome").val();
+                        banco.codigoAgencia = $("#bk-conta-agencia").val();
+                        banco.codigoConta = $("#bk-conta-conta").val();
+                        banco.descricao = $("#bk-conta-descricao").val();
+                        banco.saldoMinimo = unformatted($("#bk-contaSaldoMinimo").val());
+                        $.ajax({
+                            url: bankAddress,
+                            type:"POST",
+                            dataType:"json",
+                            async: false,
+                            data:{"intention": "add bank account", "bank" : banco},
+                            success:function (e) {
+                                if(e.resultado["result"] === "true")
+                                {
+                                    callXpertAlert('Conta Banco registado com sucesso!', 'checkmark', 8000);
+                                    $('.add-account').find('input, select').val("");
+                                    $('.add-account').find('input, select').css("border", "");
+                                    $("#bk-conta-descricao").val("");
+                                    $("#bk-conta-descricao").css("border", "");
+                                    regUserActivity(bankActivityAddress, -1, "Registou uma nova Conta Banco", JSON.stringify(banco), LevelActivity.CRIACAO);
+                                    carregarContas();
+                                }
+                                else
+                                    callXpertAlert(e.resultado["message"], 'warning', 8000);
                             }
-                            else
-                                callXpertAlert(e.resultado["message"], 'warning', 8000);
-                        }
-                    });
+                        });
+
+
+
+                    }
+
                 }
             }
         }

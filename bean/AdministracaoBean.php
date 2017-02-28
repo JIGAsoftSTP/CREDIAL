@@ -132,8 +132,7 @@
             ->addNumeric(Session::getUserLogado()->getIdAgencia())
             ->addString($_POST["Banco"]["sigla"])
             ->addString($_POST["Banco"]["nome"])
-            ->addString($_POST["Banco"]["codigoConta"])
-            ->addDouble($_POST["Banco"]["saldoMinimo"]);
+            ->addString($_POST["Banco"]["codigoConta"]);
         $call->execute();
 
         $result = $call->getValors();
@@ -157,7 +156,8 @@
             ->addNumeric($_POST["bank"]["nome"])
             ->addString($_POST["bank"]["codigoConta"])
             ->addString($_POST["bank"]["codigoAgencia"])
-            ->addString($_POST["bank"]["descricao"]);
+            ->addString($_POST["bank"]["descricao"])
+            ->addDouble($_POST["bank"]["saldoMinimo"]);
         $call->execute();
         $result = $call->getValors();
 
