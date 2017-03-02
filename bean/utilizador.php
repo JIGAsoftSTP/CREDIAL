@@ -232,7 +232,9 @@ function changeUserData(){
         ->addString($_POST['USER']['nome'])
         ->addString($_POST['USER']['apelido'])
         ->addNumeric($_POST['USER']['idNivel'])
-        ->addFile($_POST['USER']['img']);
+        ->addFile($_POST['USER']['img'])
+        ->addFileReside($_POST['USER']['img'], 250)
+        ->addFileReside($_POST['USER']['img'], 125);
     $call->execute();
 
     $result = $call->getValors();
@@ -241,7 +243,7 @@ function changeUserData(){
 }
 
 function alterUser(){
-    if($_POST["change"]['names'] || $_POST["change"]['nivel'] ) { changeUserData(); };
+    if($_POST["change"]['names'] || $_POST["change"]['nivel'] || $_POST["change"]["avatar"] ) { changeUserData(); };
     if($_POST["change"]['agencia']) {
         $_POST["nif"] = $_POST['USER']["nif"];
         $_POST['idAgencia'] = $_POST['USER']["idAgencia"];
