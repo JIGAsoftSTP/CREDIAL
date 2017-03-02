@@ -642,7 +642,6 @@ var payfull = new FullPay();
 var payfullData = undefined;
 
 function getDadosPayFull() {
-    payfull.type = ( !$("#full-pay-dife-che").hasClass("icon-checkbox-checked") ? "S" : "D" );
     if(payfull.idCred == undefined) {
         payfull.idCred = $(this).attr("l-id");
         payfull.bank = -1;
@@ -667,18 +666,20 @@ function getDadosPayFull() {
         data: {intensao: "regPavementFull", payFull : payfull},
         dataType: "json",
         success: function (e) {
-            payfullData = e.return;
-            payfull.paydValue = payfullData.creditpago;
-            payfull.reValue = payfullData.valuerecalculated;
-            payfull.difenceValue = payfullData.valuerecalculated;
-            payfull.startValue = payfullData.creditvalue;
+            if(e.result) {
+                payfullData = e.return;
+                payfull.paydValue = payfullData.creditpago;
+                payfull.reValue = payfullData.valuerecalculated;
+                payfull.difenceValue = payfullData.valuerecalculated;
+                payfull.startValue = payfullData.creditvalue;
 
-            $("#full-pay-dife").html(formattedString(Number(payfull.difenceValue).dc().rp()));
-            $("#full-pay-start").html(formattedString(Number(payfull.startValue).dc().rp()));
-            $("#full-pay-recal").html(formattedString(Number(payfull.reValue).dc().rp()));
-            $("#full-pay-pago").html(formattedString(Number(payfull.paydValue).dc().rp()));
+                $("#full-pay-dife").html(formattedString(Number(payfull.difenceValue).dc().rp()));
+                $("#full-pay-start").html(formattedString(Number(payfull.startValue).dc().rp()));
+                $("#full-pay-recal").html(formattedString(Number(payfull.reValue).dc().rp()));
+                $("#full-pay-pago").html(formattedString(Number(payfull.paydValue).dc().rp()));
 
-            openModalFrame($('.mp-liquidar-full'));
+                openModalFrame($('.mp-liquidar-full'));
+            } else { callXpertAlert(e.msg, new Mensage().cross, 8000); }
         },
         beforeSend: function () { $(".mp-loading").fadeIn(); },
         complete: function () { $(".mp-loading").fadeOut(); }
@@ -688,15 +689,33 @@ function getDadosPayFull() {
 $(".changeValuePayFull").change(function () { getDadosPayFull(); });
 
 $("#full-pay-bt").click(function () {
-    payfull.bank = $("#full-pay-bank").val();
-    payfull.doc = $("#full-pay-numDoc").val();
+
+    if($("#full-pay-dife-che").hasClass("icon-checkbox-checked")){
+        if(!validation1($("#full-pay-bank, #full-pay-numDoc")))
+            return false;
+        payfull.bank = $("#full-pay-bank").val();
+        payfull.doc = $("#full-pay-numDoc").val();
+    }else{
+        payfull.bank = "null";
+        payfull.doc = "null";
+    }
+    payfull.type = ( !$("#full-pay-dife-che").hasClass("icon-checkbox-checked") ? "S" : "D" );
+
     $.ajax({
         url: "./bean/cliente.php",
         type: "POST",
         data: {intensao: "regPayFullNow", payFull : payfull},
         dataType: "json",
         success: function (e) {
-            console.log(e);
+            if(e.result) {
+                $('.mp-liquidar-full').closest('.modalPage').fadeOut(300);
+                callXpertAlert('Novo pagamento registado com sucesso!', new Mensage().checkmark, 8000);
+                setTimeout(reloadPestacaoCreditdo, 700);
+                var re = new refresh();
+                re.dataType = "PAYMENT";
+                saveRefresh(re);
+            }
+            else { callXpertAlert(e.msg, new Mensage().cross, 8000); }
         },
         beforeSend: function () { $(".mp-loading").fadeIn(); },
         complete: function () { $(".mp-loading").fadeOut(); }
