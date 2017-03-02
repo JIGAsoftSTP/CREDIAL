@@ -19,6 +19,7 @@ if($_POST["intensao"] ==  "disibleUSER" ) {disableUser();}
 if($_POST["intensao"] ==  "loadMENU-USER-log" ) { loadMenuUserlogado(); }
 if($_POST["intensao"] ==  "loadMENU-Perfil" ) { loadMenuPerfil(); }
 if($_POST["intensao"] ==  "alter-user" ) { alteruser(); }
+if($_POST["intensao"] ==  "loadImage-Perfil" ) { getPhotoUser(); }
 
 function carregarImagem()
 {
@@ -126,20 +127,18 @@ function loadDataUser(){
 
 /**
  * @param $values
- * @return mixed
+ * @return string
  */
 function addLocalPhoto($values)
 {
-    if ($values["PHOTO"] != null) {
-        $img = md5($values["NIF"]) /*. ".png"*/
-        ;
-        file_put_contents("../resources/img/userImg/" . $img, pg_unescape_bytea($values["PHOTO"]));
-        $values["PHOTO"] = "./resources/img/userImg/" . $img;
+    if ($values["funct_load_user_image"] != null) {
+        $img = md5($_POST['USER']["nif"]);
+        file_put_contents("../resources/img/userImg/" . $img, pg_unescape_bytea($values["funct_load_user_image"]));
+        $values["funct_load_user_image"] = "./resources/img/userImg/" . $img;
     } else {
-        $values["PHOTO"] = "./resources/img/user.png";
+        $values["funct_load_user_image"] = "./resources/img/user.png";
     }
-    $values["MENU"] = loadMenuUser($values["NIF"]);
-    return $values;
+    return $values["funct_load_user_image"];
 }
 
 /**
@@ -250,4 +249,17 @@ function alterUser(){
     }
     if($_POST["change"]['menu']) { changeMenuUser(); }
     die (json_encode(array("result" => true)));
+}
+
+function getPhotoUser(){
+    $call = new CallPgSQL();
+    $call->functionTable("funct_load_user_image","*")
+        ->addString(Session::getUserLogado()->getId())
+        ->addInt(Session::getUserLogado()->getIdAgencia())
+        ->addString($_POST['USER']["nif"])
+        ->addString($_POST['USER']["typeImage"]);
+    $call->execute();
+    $result = $call->getValors();
+    if($call->getNumRow() > 0)
+    die(json_encode(array("img" => addLocalPhoto($result))));
 }

@@ -144,6 +144,11 @@ User.prototype.idNivel = undefined;
 User.prototype.img = undefined;
 User.prototype.estado = undefined;
 /**
+ * @type {String} {IMAGE, IMAGE-TINY, IMAGE-SMALL}
+ */
+User.prototype.typeImage = undefined;
+
+/**
  *
  * @type {Array}
  */
@@ -207,6 +212,8 @@ var ListUser =  function () {
             , "background-size": "cover"
         };
         $(".default-user-img-" + user.id).css(css);
+
+        setTimeout(getImageUser,1500, user);
     };
 
 

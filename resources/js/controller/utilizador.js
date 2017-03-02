@@ -173,7 +173,6 @@ $(".list-user").on("click", "i.icon-undo2", function () {
     disibleUser();
 })
     .on("click", "i.icon-pencil", function () {
-        clearInterval(addInterUser);
         resetForm($(".add-new-admin"));
         // resetForm($(".mp-menu-user"));
         USEREDITE = true;
@@ -322,6 +321,9 @@ function thisMenuHaveSon(id, menu) {
 var userChange = new User();
 function editeClient() {
     if(isValideParanRegUser()) {
+
+        clearInterval(addInterUser);
+
         userChange.nif = user.nif;
         userChange.nome = $("#gest-user-nome").val();
         userChange.apelido =  $("#gest-user-apelido").val();
@@ -337,8 +339,6 @@ function editeClient() {
             nivel: areChengeNivel(),
             avatar: areChengeAvatar()
         };
-
-        console.log(change);
 
         if(!change.menu&&!change.agencia&&!change.nivel&&!change.names&&!change.avatar){
             callXpertAlert("Nenhuma alteração foi efetuada!", new Mensage().warning, 10000);
@@ -447,6 +447,7 @@ function transformDataUserToUser(data, type, time) {
             us.img = data[iDataUser]["PHOTO"];
             us.idNivel = data[iDataUser]["PERFIL ID"];
             us.menu = data[iDataUser]["MENU"];
+            us.typeImage = "IMAGE-TINY";
             if (type == "Active") {
                 listUser.addUser(us);
                 listUser.bluiderActive(iDataUser);
@@ -469,4 +470,25 @@ function getSelectedUser() {
     return (($(this).closest("section").attr("status") == "Ativo")
         ? listUser.listActive[$(this).closest("section").attr("item")]
         : listUser.listOther[$(this).closest("section").attr("item")]);
+}
+
+/**
+ * @param user {User}
+ */
+function getImageUser(user) {
+    $.ajax({
+        url:"../../bean/utilizador.php",
+        type:"POST",
+        dataType: "json",
+        data: {intensao : "loadImage-Perfil", USER : user},
+        success: function (data) {
+            user.img = data.img;
+            var css = {
+                "background": "content-box #444 url('../." + user.img + "') no-repeat"
+                , "background-position": "center"
+                , "background-size": "cover"
+            };
+            $(".default-user-img-" + user.id).css(css);
+        }
+    });
 }
