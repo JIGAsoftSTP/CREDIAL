@@ -61,5 +61,6 @@
 </body>
 <script type="text/javascript" src="../../resources/js/jQuery.js"></script>
 <script type="text/javascript" src="../../resources/js/geralScript.js"></script>
+<script type="text/javascript" src="../../resources/js/reports/report.js"></script>
 <script type="text/javascript" src="../../resources/js/reports/warranty.js"></script>
 </html>

@@ -1107,27 +1107,11 @@ select option[value="bad"] { /* value not val */
     color: #777;
 }
 
-xTittle{
+xtitle{
 	/*width: 100%;*/
-	position: relative;
-	margin-bottom: -1px;
-}
-xTittle:before,
-xTittle:after{
 	position: absolute;
-}
-xTittle:before{
-	content: "";
-	width: 0;
-	height: 0;
-	left: .5rem;
-	border-right: 5px transparent solid;
-	border-left: 5px transparent solid;
-	border-top: 5px rgba(0,0,0,.85) solid;
-}
-xTittle:after{
-	content: attr(content);
 	left: 0;
+	top: 0;
 	white-space: nowrap;
 	font-size: .8rem;
 	line-height: 2rem;
@@ -1135,11 +1119,22 @@ xTittle:after{
 	color: #f5f5f5;
 	padding: 0 1rem;
 	border-radius: 2px;
-	transform: translateY(-100%);
-	z-index: 10;
+	z-index: 500000;
 }
-xTittle input,
-xTittle select,
-xTittle textarea{
-	width: 100% !important;
+xtitle.hidden{
+	opacity: 0;
+}
+xtitle:before,
+xtitle:after{
+	position: absolute;
+}
+xtitle:before{
+	content: "";
+	width: 0;
+	height: 0;
+	left: .5rem;
+	border-right: 5px transparent solid;
+	border-left: 5px transparent solid;
+	border-top: 5px rgba(0,0,0,.85) solid;
+	top: 100%;
 }

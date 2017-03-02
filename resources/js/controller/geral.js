@@ -23,7 +23,13 @@ function loadComoBoxIDandValueReport(element, array) {
         if(lista["cod"] === "anoSub")
             existAnoSub = true;
        else
-            element.append('<option value="'+ lista["contents"]["table"] +'" filter="'+ lista["name"] +'" identifier="'+lista["cod"]+'">'+lista["name"]+'</option>');
+        {
+            if(lista["type"] !== "5")
+                 element.append('<option value="'+ lista["contents"]["table"] +'" filter="'+ lista["name"] +'" identifier="'+lista["cod"]+'">'+lista["name"]+'</option>');
+            else
+                element.append('<option value="'+ lista["name"] +'" filter="'+ lista["name"] +'" identifier="'+lista["cod"]+'">'+lista["name"]+'</option>');
+        }
+
     }
     if(existAnoSub && $(".report-P").attr('id') === undefined){
         $(".prd-enabled").append('<input type="text" id="relatorio-periodo" class="report-P integer" maxlength="3" ' +

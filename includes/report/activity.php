@@ -76,6 +76,22 @@
 			</div>
 		</div>
 	</div>
+
+    <div class="modalPage" style="display: block;">
+
+        <div class="modalFrame">
+            <div class="modalContainer">
+
+                <p>
+                    <span class="mykey"></span>
+                </p>  <p>
+                    <span class="mykey"></span>
+                    <span class="myVal"></span>
+                </p>
+            </div>
+        </div>
+
+    </div>
     <?php include "../process.html"; ?>
     <script type="text/javascript" src="../../resources/fw/pikaday/pikaday.js"></script>
 </body>

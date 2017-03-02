@@ -15,7 +15,7 @@ $(function ()
     });
     $("#filterActivity").change(function()
     {
-        filterActivity(250);
+        filterLoadedActivity();
     });
 
     $(".x-close").click(function () {
@@ -151,6 +151,83 @@ function formatActivityDate(date,type)
         return newDate[2].substring(0, 2)+"-"+newDate[1]+"-"+newDate[0];
     else
         return newDate[2].substring(3, 8);
+}
+
+
+function filterLoadedActivity()
+{
+    $(".list-logs").empty();
+    dataAnterior = "";
+    itensRemovidos = 0;
+    itensAdicionados = 0;
+    itensEditados = 0;
+
+    clearInterval(activityInterval); // stop the timer
+
+    for(var i =0;i<activities.length;i++)
+    {
+        var activity = activities[i];
+        if($("#filterActivity").val() === LevelActivity.CRIACAO &&
+            activity["levelkey"] === LevelActivity.CRIACAO)
+        {
+            itensAdicionados++;
+            showActivity(activity, LevelActivity.CRIACAO);
+
+            if(activity["activity"].$$("Registou novo Crédito com o Dossier")) creditosRegistados++;
+        }
+        else if($("#filterActivity").val() === LevelActivity.ATUALIZACAO &&
+            activity["levelkey"] === LevelActivity.ATUALIZACAO)
+        {
+            itensEditados++;
+            showActivity(activity, LevelActivity.ATUALIZACAO);
+        }
+        else if($("#filterActivity").val() === LevelActivity.ELIMINACAO &&
+            activity["levelkey"] === LevelActivity.ELIMINACAO)
+        {
+            itensRemovidos++;
+            showActivity(activity, LevelActivity.ELIMINACAO);
+        } else if($("#filterActivity").val() === LevelActivity.VISUALIZACAO &&
+            activity["levelkey"] === LevelActivity.VISUALIZACAO)
+        {
+            itensRemovidos++;
+            showActivity(activity, LevelActivity.VISUALIZACAO);
+        }
+        else if($("#filterActivity").val() === LevelActivity.TODOS)
+        {
+            if(activity["levelkey"] === LevelActivity.CRIACAO)
+            {
+                itensAdicionados++;
+                showActivity(activity, LevelActivity.CRIACAO);
+            }
+            else if(activity["levelkey"] === LevelActivity.ATUALIZACAO)
+            {
+                itensEditados++;
+                showActivity(activity, LevelActivity.ATUALIZACAO);
+            }
+            else if(activity["levelkey"] === LevelActivity.VISUALIZACAO) showActivity(activity, LevelActivity.VISUALIZACAO);
+            else if(activity["levelkey"] === LevelActivity.ELIMINACAO)
+            {
+                itensRemovidos++;
+                showActivity(activity, LevelActivity.ELIMINACAO);
+            }
+        }
+    }
+
+
+    $(".total-added h3").html(itensAdicionados);
+    $(".total-edited h3").html(itensEditados);
+    $(".total-removed h3").html(itensRemovidos);
+
+    if(creditosRegistados <= 1)
+    {
+        $("#contratoDesc p").html("Contrato registado");
+        $("#totalCreditos").html(creditosRegistados);
+    }
+    else
+    {
+        $("#contratoDesc p").html("Contratos registados");
+        $("#totalCreditos p").html(creditosRegistados);
+    }
 }
 
 function filterActivity(time)
@@ -371,3 +448,22 @@ function showActivity(value, filter)
         ' </section>'
     );
 }
+
+
+
+function moreeDetailsActivity()
+{
+    for(var i =0;i<activities.length;i++)
+    {
+        var activity = activities[i];
+
+        if(activity["activity"] === TypeActivity.REGISTO_CLIENTE)
+        {
+
+        }
+    }
+}
+
+
+var TypeActivity = {"REGISTO_CLIENTE" : "Novo cliente registrado com sucesso", "SIMULACAO" : "Efetuou uma simulaçao!"};
+Object.freeze(TypeActivity);

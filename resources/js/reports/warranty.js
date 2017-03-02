@@ -1,4 +1,4 @@
-loadDataToPage();
+ loadDataToPage();
 
 $('.list-warr').on("click", ".first small", function (event) {
     me = $(this).closest('section');

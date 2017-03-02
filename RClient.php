@@ -214,12 +214,12 @@
 											<b class="define-client">editar</b>
 										</span>
 										<span class="xpert-is-wl span-v input-total">
-											Valor: <input type="text" id="cred-value" class="input-total formatNumber double init-value">
+											Valor: <input type="text" placehold="Valor" id="cred-value" class="input-total formatNumber double init-value">
 										</span>
 										<select id="cred-tipoCred" class="input-total">
 											<option value="0">(Tipo de Crédito)</option>
 										</select>
-										<input type="text" id="cred-data" placeholder="Data" class="is-datepicker input-2">
+										<input type="text" id="cred-data" placeholder="Data" maxdate="true" default="true" class="is-datepicker input-2">
 										<input type="text" id="cred-dia" placeholder="Dias" class="input-2 integer">
 										<input type="text" id="cred-desco" value="0" placeholder="Desconto (10%-20%)" title="Desconto (10%-20%)" class="input-2 double percent1020">
 										<input type="text" id="cred-corr" value="0" placeholder="Correção" title="Correção" class="input-2 double formatNumber">
@@ -416,7 +416,7 @@
 		</div>
 	</div>
 </section>
-    <section class="modalPage mp-liquidar-full" id="cred-pay-form-full" >
+    <section class="modalPage mp-liquidar-full" id="cred-pay-form-full" style="display: block;">
         <div class="modalFrame">
             <div class="modalContainer">
                 <div class="content">

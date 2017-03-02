@@ -17,12 +17,14 @@ $('aside .single').on('click','li',function(event) {
             sessionStorage.removeItem('filterReport');
 			$("#report-entities").empty();
 			$("#report-entities").append('<option value="">(Selecione)</option>');
-			loadComoBoxIDandValueReport($("#report-entities"), e.reportFilter);
-			regUserActivity(reportActivityAddress, -1, "Visualizou a pagina de Relatório de "+$('.title-report').text(),
-			-1, LevelActivity.VISUALIZACAO);
-			data();
-			if( $('#secondary-menu li.active').attr('id') === TypeReport.CHEQUE)
-                $("#iframe-" + $('aside li.active').index()).contents().find(".filter-type-cheq li.active").trigger("click");
+
+            regUserActivity(reportActivityAddress, -1, "Visualizou a pagina de Relatório de "+$('.title-report').text(),
+                -1, LevelActivity.VISUALIZACAO);
+                loadComoBoxIDandValueReport($("#report-entities"), e.reportFilter);
+                data();
+                if( $('#secondary-menu li.active').attr('id') === TypeReport.CHEQUE)
+                    $("#iframe-" + $('aside li.active').index()).contents().find(".filter-type-cheq li.active").trigger("click");
+
 		},
 		error:function (e) {
 			console.info(e);
@@ -114,9 +116,19 @@ function filterConstruct(identifier, selected, filter){
 function getId(identifer, selected) {
 	var idObject = $("#"+selected+" option[value='" + $('#'+identifer).val() + "']").attr('data-id');
 
-	if(idObject !== undefined && idObject !== ""){
-        setDataStorage(sessionStorage, 'filterReport', identifer, idObject);
+    if( $('#secondary-menu li.active').attr('id') !== "rep.gara")
+	{
+        if(idObject !== undefined && idObject !== ""){
+            setDataStorage(sessionStorage, 'filterReport', identifer, idObject);
+        }
 	}
+	else
+	{
+        console.info("value "+$("#"+identifer).val());
+		if($("#"+identifer).val() !== "")
+           setDataStorage(sessionStorage, 'filterReport', identifer, $("#"+identifer).val() );
+	}
+
 }
 
 
@@ -135,23 +147,30 @@ function filterExists(filter){
 
 function returnListFilter(identfier, listDB){
 	var desc;
-	$.ajax({
-		url: "bean/relatorio.php",
-		type:"POST",
-		dataType:"json",
-		data:{"intention" : "load report object",
-			"object" : listDB},
-		success:function (e) {
-			if(e.objeto.length >0){
-				desc = validViewField(e.objeto);
-                for(var i=0;i<e.objeto.length;i++){
-                    $("datalist#"+listDB).append('<option data-id ="'+e.objeto[i]["ID"]+'" value="'+e.objeto[i][desc]+'"></option>');
+
+	if( $('#secondary-menu li.active').attr('id') !== "rep.gara")
+	{
+        $.ajax({
+            url: "bean/relatorio.php",
+            type:"POST",
+            dataType:"json",
+            data:{"intention" : "load report object",
+                "object" : listDB},
+            success:function (e) {
+                if(e.objeto.length >0){
+                    desc = validViewField(e.objeto);
+                    for(var i=0;i<e.objeto.length;i++){
+                        $("datalist#"+listDB).append('<option data-id ="'+e.objeto[i]["ID"]+'" value="'+e.objeto[i][desc]+'"></option>');
+                    }
                 }
-			}
-            registerLoginActivity(reportActivityAddress, -1, "Adicionou filtros de pesquisa no Relatório de "+$('.title-report').text(),
-                -1, LevelActivity.ATUALIZACAO);
-		}
-	});
+                regUserActivity(reportActivityAddress, -1, "Adicionou filtros de pesquisa no Relatório de "+$('.title-report').text(),
+                    -1, LevelActivity.ATUALIZACAO);
+            }
+        });
+	}
+	else
+        $("datalist#"+listDB).empty();
+
 }
 
 function createFilterReport(){

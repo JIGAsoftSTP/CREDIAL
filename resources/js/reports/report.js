@@ -25,7 +25,12 @@ $(function () {
 
 
     $('.x-icon-ok').click(function() {
-       sendFilterReport();
+
+         if( $('#secondary-menu li.active').attr('id') !== "rep.gara")
+            sendFilterReport();
+         else
+             loadDataToPage();
+
    });
 
     $(".filter-type-cheq li").click(function ()
@@ -390,4 +395,20 @@ function sumTable(array){
             '</section>'
             )
      }
+}
+
+
+function loadDataToPage() {
+    $.ajax({
+        url: "../../bean/relInformationCredit.php",
+        type: "POST",
+        data: {intensao: "loadListCredits", filter: getDataStorage(sessionStorage,'filterReport')},
+        dataType: "json",
+        success: function (e) {
+            dataCredit = e.credits;
+        }, beforeSend: function () {  $(".mp-loading").fadeIn(); },
+        complete: function () { $(".mp-loading").fadeOut();
+            transformDataToCredito(dataCredit, 250);
+        }
+    });
 }

@@ -129,21 +129,26 @@ $('.content-w-lateral .icon-menu').click(function(event) {
 });
 
 
-$('body').on('mousemove', '.xpert-form input, .xpert-form select, .xpert-form textarea', function(event) {
-    me = $(this);
-    if(!me.parent().hasClass('xTittle')){
-        me_wth = me.css('width');
-        var plhd = $(this)[0]["localName"] === "select" ? me.find('option:first').text() : me.attr('placeholder');
-        if(plhd !== undefined)
-            $(this).wrap('<xTittle class="xTittle" content = "'+ plhd +'" style="width: '+ me_wth +'"></xTittle>');
+$('body').on('mouseenter', '.xpert-form input, .xpert-form select, .xpert-form textarea', function(event) {
+    var me = $(this);
+    var text = me[0]["localName"] === "select" ? me.find('option:first').text() : me.attr('placeholder') !== undefined ? me.attr('placeholder') : me.attr('placehold');
+    var tag = $('body').find('xtitle');
+    tag.removeClass('hidden');
+    if(tag.length < 1) {
+
+        console.log('just created')
     }
+    else {
+        tag.text(text);
+        console.log('already created')
+    }
+    tag.offset({ top: (me.offset().top - 38), left: me.offset().left});
 });
 
+
 $('body').on('mouseleave', '.xpert-form input, .xpert-form select, .xpert-form textarea', function(event) {
-    if($(this).parent()[0]["localName"] === "xtittle"){
-        $(this).insertAfter($(this).parent());
-        $(this).prev().remove();
-    }
+    var tag = $('body').find('xtitle');
+    tag.addClass('hidden');
 });
 
 // $('input[datalist="list"]').keyp(resizeInput).each(resizeInput);
@@ -152,6 +157,11 @@ $('body').on('mouseleave', '.xpert-form input, .xpert-form select, .xpert-form t
 // function resizeInput() {
 //     $(this).attr('size', $(this).val().length);
 // }
+
+function startApp() {
+    // $('body').append('<xtitle>'+ text +'</xtitle>');
+}
+
 var globaal = 0;
 
 function verifyDataList(ipt){
@@ -375,10 +385,16 @@ setDatePicker();
 function setDatePicker(){
     i = 0;
     $('.is-datepicker').each(function(index, el) {
+        var me = $(this);
+        me.attr('readonly','readonly');
+
         new Pikaday(
         {
-            field: $('.is-datepicker')[i],
-            firstDay: 1,
+            field : $('.is-datepicker')[i],
+            setDefaultDate : me.attr('default') === 'true' ? true : false,
+            defaultDate : me.attr('default') === 'true' ? new Date() : "",
+            firstDay : 1,
+            maxDate : me.attr('maxdate') ? new Date() : ""
         });
         i++;
     });
