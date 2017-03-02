@@ -421,21 +421,21 @@
             <div class="modalContainer">
                 <div class="content">
                     <p class="type-font">
-                        <i class="icon-checkbox-unchecked" id="full-pay-dife">
+                        <i class="icon-checkbox-unchecked" id="full-pay-dife-che">
                             <span>Fonte de pagamento diferente</span>
                         </i>
                     </p>
                     <div class="flex-form xpert-form" >
-                        <input type="text" placeholder="Data" id="full-pay-data" class="input-total date-liquida is-datepicker" >
+                        <input type="text" placeholder="Data" id="full-pay-data" class="input-total date-liquida is-datepicker changeValuePayFull" >
                     </div>
                     <div class="dffrent flex-form xpert-form">
                     	<input type="text" id="full-pay-numDoc" placeholder="Nº Documento" class="input-total" >
 						<select id="full-pay-bank" class="input-total" title="Banco" >
 							<option value="0">(Banco)</option>
 						</select>
-                        <input type="text" id="full-pay-desco" value="0" placeholder="Desconto (10%-20%)" title="Desconto (10%-20%)" class="input-2 double percent1020">
-                        <input type="text" id="full-pay-corr" value="0" placeholder="Correção" title="Correção" class="input-2 double formatNumber">
-                        <span><span class="xpert-toggle-2"><span class="active">A</span><span>B</span></span></span>
+                        <input type="text" id="full-pay-desco" value="0" placeholder="Desconto (10%-20%)" title="Desconto (10%-20%)" class="input-2 double percent1020 changeValuePayFull">
+                        <input type="text" id="full-pay-corr" value="0" placeholder="Correção" title="Correção" class="input-2 double formatNumber changeValuePayFull">
+                        <span id="full-pay-op"><span class="xpert-toggle-2" ><span class="active">A</span><span>B</span></span></span>
                     </div>
                     <div class="secDiv xpert-form" >
                         <section class="sec-same">

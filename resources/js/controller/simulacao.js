@@ -137,6 +137,7 @@ $("#start-simulation").click(function () {
 });
 
 function loadDataSimulation() {
+    $("#cred-data").val(getStringDate());
     $.ajax({
         url: "./bean/simulation.php",
         type: "POST",
@@ -147,6 +148,7 @@ function loadDataSimulation() {
 
             loadComoBoxIDandValue($("#cred-tab-amor-banco"), e.banks, "ID", "DESCRICAO");
             loadComoBoxIDandValue($("#cred-pay-bank"), e.banks, "ID", "DESCRICAO");
+            loadComoBoxIDandValue($("#full-pay-bank"), e.banks, "ID", "DESCRICAO");
             loadComoBoxIDandValue($("#cred-tab-amor-tipoPagamento"), e.fontepagamentos, "ID", "DESC");
 
             loadComoBoxIDandValue($("#cred-cli-modaPag"), e.fontepagamentos, "ID", "DESC");

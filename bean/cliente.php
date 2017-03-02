@@ -18,11 +18,13 @@ include "Session.php";
     if($_POST["intensao"] == "efectuarPagamento"){ efectuarPagamento(); }
     if($_POST["intensao"] == "reloadPestacaoCreditdo"){ reloadPestacaoCreditdo(); }
     if($_POST["intensao"] == "editeSelectedClient"){ changeClienteDataNasc(); }
+    if($_POST["intensao"] == "regPavementFull"){ regPavementFull(); }
+    if($_POST["intensao"] == "regPayFullNow"){ regPayFullNow(); }
 
     function listCliente(){
         $call = new CallPgSQL();
-        $call->selects("ver_client_simple", "*")
-            ->finilize("order by","desc","\"QUANTIDADE DE CREDITO\"");
+        $call->selects("ver_client_simple", "*");
+//            ->finilize("order by","desc","\"QUANTIDADE DE CREDITO\"");
         $call->execute();
         $resut = array();
         $arrayList = str_split("*ABCDEFGHIJKLMNOPQRSTUVWXYZ");
@@ -221,3 +223,110 @@ function changeClienteDataNasc(){
     $return = $call->getValors();
     regDossier();
 }
+
+function regPavementFull(){
+    $call = new CallPgSQL();
+    $call->functionTable("funct_load_simulacao_recalculate","*")
+        ->addString(Session::getUserLogado()->getId())
+        ->addNumeric(Session::getUserLogado()->getIdAgencia())
+        ->addNumeric($_POST["payFull"]["idCred"])
+        ->addDate($_POST["payFull"]["data"])
+        ->addDouble($_POST["payFull"]["desconto"])
+        ->addDouble($_POST["payFull"]["corecao"])
+        ->addChar($_POST["payFull"]["opcao"]);
+    $call->execute();
+    $result = $call->getValors();
+    if($result["result"] == true) die(json_encode(array("result" => true, "return" => $result)));
+    else die(json_encode(array("result" => false, "return" => $result)));
+}
+
+
+function regPayFullNow(){
+      $call = new CallPgSQL();
+      $call->functionTable("funct_pay_credito_now","*")
+          ->addString(Session::getUserLogado()->getId())
+          ->addString(Session::getUserLogado()->getIdAgencia())
+          ->addString($_POST["payFull"]["idCred"])
+          ->addString($_POST["payFull"]["doc"])
+          ->addNumeric($_POST["payFull"]["bank"])
+          ->addString($_POST["payFull"]["type"])
+          ->addDate($_POST["payFull"]["data"])
+          ->addDouble($_POST["payFull"]["desconto"])
+          ->addDouble($_POST["payFull"]["corecao"])
+          ->addChar($_POST["payFull"]["opcao"]);
+      $call->execute();
+    $result = $call->getValors();
+    if($result["result"] == true) die(json_encode(array("result" => true)));
+    else die(json_encode(array("result" => false, "return" => $result)));
+}
+
+
+//var UserState = {"ATIVO": "1", "INATIVO": "0", "PRE_ATIVO": "2" };
+//Object.freeze(UserState);
+//
+//if(!Date.prototype.getDatePt){
+//    Date.prototype.getDatePt = function () {
+//        return (((this.getDate()+"").length == 1) ? "0"+this.getDate() : this.getDate() )
+//            +"-"+((((this.getMonth()+1)+"").length == 1) ? "0"+(this.getMonth()+1) : (this.getMonth()+1))
+//            +"-"+this.getUTCFullYear();
+//    }
+//}
+//
+//function getStringDate() {
+//    return new Date().getDatePt();
+//}
+
+
+//<section class="modalPage mp-liquidar-full" id="cred-pay-form-full" >
+//        <div class="modalFrame">
+//            <div class="modalContainer">
+//                <div class="content">
+//                    <p class="type-font">
+//                        <i class="icon-checkbox-unchecked" id="full-pay-dife-che">
+//                            <span>Fonte de pagamento diferente</span>
+//                        </i>
+//                    </p>
+//                    <div class="flex-form xpert-form" >
+//                        <input type="text" placeholder="Data" id="full-pay-data" class="input-total date-liquida is-datepicker changeValuePayFull" >
+//                    </div>
+//                    <div class="dffrent flex-form xpert-form">
+//                    	<input type="text" id="full-pay-numDoc" placeholder="Nº Documento" class="input-total" >
+//						<select id="full-pay-bank" class="input-total" title="Banco" >
+//							<option value="0">(Banco)</option>
+//						</select>
+//                        <input type="text" id="full-pay-desco" value="0" placeholder="Desconto (10%-20%)" title="Desconto (10%-20%)" class="input-2 double percent1020 changeValuePayFull">
+//                        <input type="text" id="full-pay-corr" value="0" placeholder="Correção" title="Correção" class="input-2 double formatNumber changeValuePayFull">
+//                        <span id="full-pay-op"><span class="xpert-toggle-2" ><span class="active">A</span><span>B</span></span></span>
+//                    </div>
+//                    <div class="secDiv xpert-form" >
+//                        <section class="sec-same">
+//                            <nav>
+//                                <label>Inicial</label>
+//                                <label id="full-pay-start">12522555</label>
+//                            </nav>
+//                            <nav>
+//                                <label>Pago</label>
+//                                <label id="full-pay-pago">12522555</label>
+//                            </nav>
+//                            <nav>
+//                                <label>Recalculado</label>
+//                                <label id="full-pay-recal">12522555</label>
+//                            </nav>
+//                            <nav>
+//                                <label>Diferença</label>
+//                                <label id="full-pay-dife">12522555</label>
+//                            </nav>
+//                        </section>
+//                    </div>
+//                </div>
+//                <div class="bt-yes-no-cancel">
+//                    <button id="full-pay-bt">OK</button>
+//                    <button class="bt-no-option">Cancelar</button>
+//                </div>
+//                <div class="modal-header">
+//                    <b>Efetuar pagamento antecipado</b>
+//                    <span class="mp-close"></span>
+//                </div>
+//            </div>
+//        </div>
+//    </section>

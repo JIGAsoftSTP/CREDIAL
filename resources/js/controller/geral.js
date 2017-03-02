@@ -262,5 +262,17 @@ var LevelActivity = {"ELIMINACAO" : "0", "DESATIVACAO" : "0", "ATUALIZACAO": "1"
     "CRIACAO": "2",  "VISUALIZACAO": "3", "OUTROS": "4" , "TODOS" : "5"};
 Object.freeze(LevelActivity);
 
-var UserState = {"ATIVO": "1", "INATIVO": "0", "ATIVO": "1", "PRE_ATIVO": "2" };
+var UserState = {"ATIVO": "1", "INATIVO": "0", "PRE_ATIVO": "2" };
 Object.freeze(UserState);
+
+if(!Date.prototype.getDatePt){
+    Date.prototype.getDatePt = function () {
+        return (((this.getDate()+"").length == 1) ? "0"+this.getDate() : this.getDate() )
+            +"-"+((((this.getMonth()+1)+"").length == 1) ? "0"+(this.getMonth()+1) : (this.getMonth()+1))
+            +"-"+this.getUTCFullYear();
+    }
+}
+
+function getStringDate() {
+    return new Date().getDatePt();
+}

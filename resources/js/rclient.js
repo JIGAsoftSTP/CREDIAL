@@ -250,5 +250,5 @@ $('.mp-liquidar-full .type-font i').click(function(event) {
 });
 
 $('.list-history').on('click', '.bt-full-payment',function(event) {
-    openModalFrame($('.mp-liquidar-full'));
+    getDadosPayFull.call(this)
 });
