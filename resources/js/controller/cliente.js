@@ -111,7 +111,28 @@ function carregarCliente(time) {
         cell2.innerHTML = client['NIF'];
         cell3.innerHTML = client['NAME'] + " " + client['SURNAME'];
         cell4.innerHTML = client['TELE'];
-        cell5.innerHTML = client['QUANTIDADE DE CREDITO'];
+
+         var span1 = document.createElement("span");
+         span1.setAttribute("class","total");
+         var spanText1 = document.createTextNode(client['QUANTIDADE DE CREDITO']);
+         span1.appendChild(spanText1);
+
+         var span2 = document.createElement("span");
+         span2.setAttribute("class","payed");
+         var spanText2 = document.createTextNode(client['creditopay']);
+         span2.appendChild(spanText2);
+
+         var porPagar = Number(client['QUANTIDADE DE CREDITO'])-Number(client['creditopay']);
+         var span3 = document.createElement("span");
+         span3.setAttribute("class","doubt");
+         var spanText3 = document.createTextNode(porPagar);
+         span3.appendChild(spanText3);
+
+         cell5.appendChild(span1);
+         cell5.appendChild(span2);
+         cell5.appendChild(span3);
+         cell5.setAttribute("class","col-credit");
+
         ff++;
         tableEstructure($('.x-table.table-client'));
         if (ff == addTable) {
@@ -521,7 +542,28 @@ function searchClient()
                 cell2.innerHTML = client['NIF'];
                 cell3.innerHTML = client['NAME']+" "+client['SURNAME'];
                 cell4.innerHTML = client['TELE'];
-                cell5.innerHTML = client['QUANTIDADE DE CREDITO'];
+
+                var span1 = document.createElement("span");
+                span1.setAttribute("class","total");
+                var spanText1 = document.createTextNode(client['QUANTIDADE DE CREDITO']);
+                span1.appendChild(spanText1);
+
+                var span2 = document.createElement("span");
+                span2.setAttribute("class","payed");
+                var spanText2 = document.createTextNode(client['creditopay']);
+                span2.appendChild(spanText2);
+
+                var porPagar = Number(client['QUANTIDADE DE CREDITO'])-Number(client['creditopay']);
+                var span3 = document.createElement("span");
+                span3.setAttribute("class","doubt");
+                var spanText3 = document.createTextNode(porPagar);
+                span3.appendChild(spanText3);
+
+                cell5.appendChild(span1);
+                cell5.appendChild(span2);
+                cell5.appendChild(span3);
+                cell5.setAttribute("class","col-credit");
+
                 carregou = true;
                 // lastI = ff;
             }
@@ -709,7 +751,8 @@ $("#full-pay-bt").click(function () {
         success: function (e) {
             if(e.result) {
                 $('.mp-liquidar-full').closest('.modalPage').fadeOut(300);
-                callXpertAlert('Novo pagamento registado com sucesso!', new Mensage().checkmark, 8000);
+                callXpertAlert('Novo pagamento antecipado registado com sucesso!', new Mensage().checkmark, 8000);
+                regUserActivity("./bean/activity.php", -1 , "Efetuou um novo antecipado Pagamento!", JSON.stringify(payfull), LevelActivity.CRIACAO );
                 setTimeout(reloadPestacaoCreditdo, 700);
                 var re = new refresh();
                 re.dataType = "PAYMENT";
