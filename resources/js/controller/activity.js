@@ -401,10 +401,7 @@ function selectUser(index, component)
         loadUserActivities(-1, selectedUser);
 }
 
-function showMoreActivityInfo()
-{
 
-}
 
 function groupByDate(date)
 {
@@ -426,11 +423,15 @@ function alterFormatDate(date)
 
 function showActivity(value, filter)
 {
-    var classIcon;
+    var classIcon, view ="Mais detalhes";
 
     if(filter === LevelActivity.ATUALIZACAO) classIcon ="icon-pencil edit";
     else if(filter === LevelActivity.CRIACAO) classIcon = "icon-plus create";
-    else if(filter === LevelActivity.VISUALIZACAO) classIcon ="icon-eye view";
+    else if(filter === LevelActivity.VISUALIZACAO)
+    {
+        classIcon ="icon-eye view";
+        view ="";
+    }
     else if(filter === LevelActivity.ELIMINACAO) classIcon ="icon-minus remove";
 
 
@@ -442,7 +443,7 @@ function showActivity(value, filter)
         '  <i class="'+classIcon+'"></i> '+
         ' <span>'+
         '<span class="description">'+value["activity"]+'</span> '+
-        ' <small onclick="showMoreActivityInfo()">Mais detalhes</small> '+
+        ' <small onclick="showMoreDetailsActivity('+value["activity"]+')">'+view+'</small> '+
         ' </span> '+
         ' </div> '+
         ' </section>'
@@ -451,17 +452,20 @@ function showActivity(value, filter)
 
 
 
-function moreeDetailsActivity()
+function showMoreDetailsActivity(activitySelected)
 {
-    for(var i =0;i<activities.length;i++)
-    {
-        var activity = activities[i];
+    var details;
 
-        if(activity["activity"] === TypeActivity.REGISTO_CLIENTE)
-        {
+    details = '<p>'+
+                     '<span class="mykey">'+activitySelected["data"][""]+'</span>'+
+                '</p>'+
+                '<p>'+
+                     '<span class="mykey"></span>'+
+                     '<span class="myVal"></span>'+
+                '</p>';
+    $(".modalContainer").append(details);
 
-        }
-    }
+
 }
 
 

@@ -16,7 +16,7 @@ function loadCredit(){
     $call = new CallPgSQL();
     $call->functionTable("report.funct_rep_credits_filter","*")
         ->addString(Session::getUserLogado()->getId())
-        ->addJsonb(null);
+        ->addJsonb(($_POST["filter"] == "" ? null : json_encode($_POST["filter"])));
     $call->execute();
     $credits = array();
     while ($value = $call->getValors()){

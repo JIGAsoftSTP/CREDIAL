@@ -133,14 +133,12 @@ $('body').on('mouseenter', '.xpert-form input, .xpert-form select, .xpert-form t
     var me = $(this);
     var text = me[0]["localName"] === "select" ? me.find('option:first').text() : me.attr('placeholder') !== undefined ? me.attr('placeholder') : me.attr('placehold');
     var tag = $('body').find('xtitle');
-    tag.removeClass('hidden');
+    tag.addClass('show');
     if(tag.length < 1) {
-
-        console.log('just created')
+        $('body').append('<xtitle>'+ text +'</xtitle>');
     }
     else {
         tag.text(text);
-        console.log('already created')
     }
     tag.offset({ top: (me.offset().top - 38), left: me.offset().left});
 });
@@ -148,7 +146,7 @@ $('body').on('mouseenter', '.xpert-form input, .xpert-form select, .xpert-form t
 
 $('body').on('mouseleave', '.xpert-form input, .xpert-form select, .xpert-form textarea', function(event) {
     var tag = $('body').find('xtitle');
-    tag.addClass('hidden');
+    tag.removeClass('show');
 });
 
 // $('input[datalist="list"]').keyp(resizeInput).each(resizeInput);
@@ -157,9 +155,9 @@ $('body').on('mouseleave', '.xpert-form input, .xpert-form select, .xpert-form t
 // function resizeInput() {
 //     $(this).attr('size', $(this).val().length);
 // }
-
+startApp();
 function startApp() {
-    // $('body').append('<xtitle>'+ text +'</xtitle>');
+     $('body').append('<xtitle></xtitle>');
 }
 
 var globaal = 0;

@@ -47,7 +47,7 @@ function regUserActivity(url, contentKey, operation, jsonContent, level )
         type:"POST",
         dataType:"json",
         data:{"intention":"reg_activity", "contentKey": contentKey,
-              "operation" : operation, "jsonContent": jsonContent,
+              "operation" : operation, "jsonContent": "content:"+jsonContent,
                 "level": level},
         success:function(e){
 

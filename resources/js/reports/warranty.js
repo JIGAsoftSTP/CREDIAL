@@ -1,6 +1,6 @@
- loadDataToPage();
 
-$('.list-warr').on("click", ".first small", function (event) {
+$('.list-warr').on("click", ".first small", function (event)
+{
     me = $(this).closest('section');
     var ig = Number($(this).attr("id-id"));
     if (!me.hasClass("show")) {
@@ -13,6 +13,10 @@ $('.list-warr').on("click", ".first small", function (event) {
     } else {
         $("#" + ig).empty();
     }
+});
+$(".execute").click(function () {
+    loadDataToPage();
+
 });
 
 var CreditoBluider = function () {
@@ -28,7 +32,7 @@ var CreditoBluider = function () {
     this.bluiderCreditos = function (credito, ig) {
         var rt = '<section>' +
             '<div class="first">' +
-            '<b><span>Crédito nº <span>' + credito.number + '</span></span><small id-id="' + ig + '">Mais detalhes</small></b>' +
+            '<b><span>Crédito nº <span>' + credito.number + '</span></span><small   id-id="' + ig + '">Mais detalhes</small></b>' +
             '<h3>' + credito.clienteNome + '</h3>' +
             '</div>' +
             '<div class="more" id="' + ig + '" ></div>' +
@@ -81,6 +85,7 @@ var CreditoBluider = function () {
         this.listaCredito[this.listaCredito.length] = GarClient;
     };
 };
+
 
 
 var Credito = function () {
@@ -183,6 +188,7 @@ var creditInte = undefined;
 function transformDataToCredito(data, time) {
     iData = 0;
     totalData = data.length;
+    clearInterval(creditInte);
     if(totalData > 0)
     creditInte = setInterval(function () {
         var credits = data[iData];
@@ -202,6 +208,7 @@ function transformDataToCredito(data, time) {
         creditBluider.addCredito(Creditoe);
         creditBluider.bluiderCreditos(Creditoe, iData);
         iData ++;
-        if(iData == totalData) { clearInterval(creditInte)}
+        if(iData === totalData) { clearInterval(creditInte)}
     }, time);
 }
+

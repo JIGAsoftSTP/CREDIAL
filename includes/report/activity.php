@@ -77,14 +77,15 @@
 		</div>
 	</div>
 
-    <div class="modalPage" style="display: block;">
+    <div class="modalPage" >
 
         <div class="modalFrame">
             <div class="modalContainer">
 
                 <p>
                     <span class="mykey"></span>
-                </p>  <p>
+                </p>
+                <p>
                     <span class="mykey"></span>
                     <span class="myVal"></span>
                 </p>
