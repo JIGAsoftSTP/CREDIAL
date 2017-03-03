@@ -35,6 +35,7 @@ $('aside .single').on('click','li',function(event) {
     $(this).attr('id') == 'rel.acti' ? header.hide(200) : header.show(200);
 });
 
+var typeReport = undefined;
 var reportActivityAddress = "bean/activity.php";
 
 $('.ctrls .hide-filter').click(function(event) {

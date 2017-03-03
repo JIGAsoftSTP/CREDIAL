@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="../../resources/css/reports/warranty.css">
 </head>
 <body class="bd-warr">
+   <div class="execute" />
 	<div class="arend">
 		<!--<div class="little-det">
 			<span class="super-search focus">
@@ -57,7 +58,10 @@
 		-->
 		</div>
 	</div>
+
     <?php include "../process.html"; ?>
+
+
 </body>
 <script type="text/javascript" src="../../resources/js/jQuery.js"></script>
 <script type="text/javascript" src="../../resources/js/geralScript.js"></script>

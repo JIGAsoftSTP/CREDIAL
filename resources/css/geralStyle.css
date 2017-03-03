@@ -1120,9 +1120,10 @@ xtitle{
 	padding: 0 1rem;
 	border-radius: 2px;
 	z-index: 500000;
-}
-xtitle.hidden{
 	opacity: 0;
+}
+xtitle.show{
+	opacity: 1;
 }
 xtitle:before,
 xtitle:after{

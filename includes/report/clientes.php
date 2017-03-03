@@ -36,7 +36,7 @@
 
 		</div>
 	</div>
-
+    <?php include "../process.html"; ?>
 </body>
 <script type="text/javascript" src="../../resources/fw/pikaday/pikaday.js"></script>
 <script type="text/javascript" src="../../resources/js/jQuery.js"></script>
