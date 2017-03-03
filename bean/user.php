@@ -15,9 +15,7 @@
 
     switch ($_POST["intention"])
     {
-        case "loadDataAdmin":
-            carregarDadosUtilizador();
-            break;
+
         case "loadObject":
             loadTypeObjeto();
             break;
@@ -30,18 +28,6 @@
         case "disable object":
             disableObject();
             break;
-    }
-
-    function carregarDadosUtilizador()
-    {
-        $call = new CallPgSQL();
-        $agencias = $call->loadDados("ver_agencia", "\"ID\"", "\"NOME\"");
-        $localidades = $call->loadDados("ver_localidade", "\"ID\"", "\"DESC\"");
-        $j = json_encode(array("agencias"=>$agencias,
-                            "bancos"=>$bancos,
-                            "localidades"=>$localidades));
-        die($j);
-
     }
 
 
