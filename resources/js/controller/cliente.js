@@ -684,6 +684,7 @@ var payfull = new FullPay();
 var payfullData = undefined;
 
 function getDadosPayFull() {
+    iPrestacao = $(this).attr("jk");
     if(payfull.idCred == undefined) {
         payfull.idCred = $(this).attr("l-id");
         payfull.bank = -1;
