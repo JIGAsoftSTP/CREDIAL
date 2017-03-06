@@ -14,7 +14,7 @@ $('.list-warr').on("click", ".first small", function (event)
         $("#" + ig).empty();
     }
 });
-$(".execute").click(function () {
+$("#labelWarranty").click(function () {
     loadDataToPage();
 
 });
@@ -136,7 +136,8 @@ function loadDataToPage() {
            dataCredit = e.credits;
         }, beforeSend: function () {  $(".mp-loading").fadeIn(); },
         complete: function () { $(".mp-loading").fadeOut();
-            transformDataToCredito(dataCredit, 250);
+            $(".list-warr").empty();
+        transformDataToCredito(dataCredit, 250);
         }
     });
 }
