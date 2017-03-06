@@ -239,7 +239,7 @@ function doRefresh() {
                }
            }
        });
-   }, 2000)
+   }, 2000);
 }
 var res = undefined;
 function saveRefresh(re) {
