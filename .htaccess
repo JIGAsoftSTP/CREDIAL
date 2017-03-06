@@ -1,5 +1,5 @@
-ErrorDocument 404 http://credial/redirect/404.html
-ErrorDocument 403 http://credial/redirect/403.html
+#ErrorDocument 404 http://credial/redirect/404.html
+#ErrorDocument 403 http://credial/redirect/403.html
 ErrorDocument 500 http://credial/redirect/500.html
 
 
