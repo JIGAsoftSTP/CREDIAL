@@ -226,18 +226,20 @@ refresh.prototype.dataType = null;
 
 
 function doRefresh() {
-    var re = sessionStorage.getItem("refresh");
-    $.ajax({
-        url: "./bean/refreshDataBD.php",
-        type: "POST",
-        data: {"intensao": "refresh", re : re},
-        dataType: "json",
-        success: function (e) {
-            if(e.result) {
-                sessionStorage.removeItem("refresh");
-            }
-        }
-    });
+   setTimeout(function () {
+       var re = sessionStorage.getItem("refresh");
+       $.ajax({
+           url: "./bean/refreshDataBD.php",
+           type: "POST",
+           data: {"intensao": "refresh", re : re},
+           dataType: "json",
+           success: function (e) {
+               if(e.result) {
+                   sessionStorage.removeItem("refresh");
+               }
+           }
+       });
+   }, 2000)
 }
 var res = undefined;
 function saveRefresh(re) {

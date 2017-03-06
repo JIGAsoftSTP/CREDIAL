@@ -13,8 +13,9 @@ function refreshData(){
     $bd = new  CallPgSQL();
     $res =  json_decode($_POST["re"]);
     foreach ($res->list as $re) {
-        $bd->functionTable("funct_refres_materialized_views","*")
-            ->addOther($re->dataType);
+        $bd->functionTable("credial.funct_refresh_materialized_views","*")
+            ->addString($re->dataType);
+        $bd->execute();
     }
     $j = json_encode(array("result"=>true)); die($j);
 }
