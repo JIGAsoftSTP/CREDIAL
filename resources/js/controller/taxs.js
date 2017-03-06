@@ -130,5 +130,5 @@ function loadTax()
     tableEstructure($("#table-taxa"));
      setRowCount($(".x-table"));
 
-    regUserActivity(taxActivityAdress, -1, "Visualizou o menu Taxa", -1, LevelActivity.VISUALIZACAO);
+    regUserActivity(taxActivityAdress, -1, "Visualizou Taxa da Administração", -1, LevelActivity.VISUALIZACAO);
 }

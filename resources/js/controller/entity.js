@@ -40,7 +40,7 @@ function loadObjectType() {
                 loadObjectValues(e.objeto[i]["ID"]);
 
             }
-            regUserActivity(activityAdress, -1, "Visualizou o menu Entidades", -1, LevelActivity.VISUALIZACAO);
+            regUserActivity(activityAdress, -1, "Visualizou Entidades da Administração", -1, LevelActivity.VISUALIZACAO);
         }
     });
 }

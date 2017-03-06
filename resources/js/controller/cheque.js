@@ -136,7 +136,7 @@ function loadChequeData() {
         }
     });
 
-    regUserActivity(chequeActivityAdress, -1, "Visualizou o menu Cheque", -1, LevelActivity.VISUALIZACAO);
+    regUserActivity(chequeActivityAdress, -1, "Visualizou Cheque da Administração", -1, LevelActivity.VISUALIZACAO);
 }
 
 function carregarCheques() {

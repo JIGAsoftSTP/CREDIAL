@@ -3,7 +3,7 @@
  */
 
 $(function () {
-    regUserActivity("./bean/activity.php", -1 , "Visualizou a pagina de cliente e créditos!", -1, LevelActivity.VISUALIZACAO );
+    regUserActivity("./bean/activity.php", -1 , "Visualizou a página de cliente e créditos!", -1, LevelActivity.VISUALIZACAO );
 
     listarCliente();
     loadComoBox($("#cli-ar-ano"),addANO());

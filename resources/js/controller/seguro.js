@@ -4,7 +4,7 @@
 
 $(function () {
 
-    regUserActivity(securityActivityAddress, -1, "Visualizou o menu Seguros", -1, LevelActivity.VISUALIZACAO);
+    regUserActivity(securityActivityAddress, -1, "Visualizou Seguros da Administração", -1, LevelActivity.VISUALIZACAO);
     loadInsurance();
     $("#btAddInsurance").click(function () {
         regInsurance();

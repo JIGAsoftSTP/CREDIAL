@@ -43,7 +43,7 @@ var userActivityAddress = "../../bean/activity.php";
 var addUserActivity = undefined;
 
 
-regUserActivity(userActivityAddress, -1, "Visualizou o menu Utilizador", -1, LevelActivity.VISUALIZACAO);
+regUserActivity(userActivityAddress, -1, "Visualizou Utilizadores", -1, LevelActivity.VISUALIZACAO);
 function regUser() {
 
     if(isValideParanRegUser()) {
@@ -361,7 +361,7 @@ function editeClient() {
             success: function (data) {
                 if (data.result) {
                     callXpertAlert("O Utilizador foi editado com sucesso!", new Mensage().checkmark, 10000);
-                    regUserActivity(userActivityAddress, -1, "Atualizou Informações do Utilizador", -1, LevelActivity.ATUALIZACAO);
+                    regUserActivity(userActivityAddress, -1, "Atualizou Informações do Utilizador com nif "+$("#gest-user-nif").val(), -1, LevelActivity.ATUALIZACAO);
                     resetForm($(".add-new-admin"));
                     resetForm($(".mp-menu-user"));
                     var css = {"background":"content-box #444 url('../../resources/img/user.png') no-repeat"

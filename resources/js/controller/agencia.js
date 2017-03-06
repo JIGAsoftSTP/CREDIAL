@@ -4,7 +4,7 @@
 
 $(function () {
 
-    regUserActivity(agencyActivityAddress, -1, "Visualizou o menu Agência", -1, LevelActivity.VISUALIZACAO);
+    regUserActivity(agencyActivityAddress, -1, "Visualizou Agência da Administração", -1, LevelActivity.VISUALIZACAO);
    carregarLocalidade();
     loadAgencyAdm();
     $("#addAgency").click(function () {
@@ -15,6 +15,7 @@ $(function () {
 var agencyUrl ="../../bean/AdministracaoBean.php";
 var agencyActivityAddress ="../../bean/activity.php";
 var agencyActivity = undefined;
+
 var Agency = function(){};
 Agency.prototype.nome;
 Agency.prototype.localidade;
