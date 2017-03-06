@@ -359,7 +359,7 @@ function showActivity(value, filter)
 function showMoreDetailsActivity(activitySelected)
 {
     jsonValue = null;
-    $(".modalContainer").empty();
+    $(".modalContainer .content").empty();
     activitySelected = activitySelected.closest('div').find('.description').text();
 
     for(var i = 0;i<activities.length;i++) {
@@ -387,14 +387,11 @@ function showMoreDetailsActivity(activitySelected)
 function showDetails(_key, _value)
 {
     var details;
-    details = '<p>'+
-        '<span class="mykey"></span>'+
-        '</p>'+
-        '<p>'+
-        '<span class="mykey">'+_key+':</span>'+
+    details ='<nav>'+
+        '<span class="mykey">'+_key+'</span>'+
         '<span class="myVal">'+_value+'</span>'+
-        '</p>';
-    $(".mp-mf-activity .modalContainer").append(details);
+        '</nav>';
+    $(".mp-mf-activity .content").append(details);
 
 }
 

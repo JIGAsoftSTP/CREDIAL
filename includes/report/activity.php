@@ -77,22 +77,23 @@
 		</div>
 	</div>
 
-    <div class="modalPage mp-mf-activity" >
 
+
+    <section class="modalPage mp-mf-activity">
         <div class="modalFrame">
             <div class="modalContainer">
+                <div class="content">
 
-                <p>
-                    <span class="mykey"></span>
-                </p>
-                <p>
-                    <span class="mykey"></span>
-                    <span class="myVal"></span>
-                </p>
+                </div>
+
+                <div class="modal-header">
+                    <b>Mais detalhes</b>
+                    <span class="mp-close"></span>
+                </div>
             </div>
         </div>
+    </section>
 
-    </div>
     <?php include "../process.html"; ?>
     <script type="text/javascript" src="../../resources/fw/pikaday/pikaday.js"></script>
 </body>
