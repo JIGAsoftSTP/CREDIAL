@@ -18,7 +18,7 @@ $('aside .single').on('click','li',function(event) {
 			$("#report-entities").empty();
 			$("#report-entities").append('<option value="">(Selecione)</option>');
 
-            regUserActivity(reportActivityAddress, -1, "Visualizou a pagina de Relatório de "+$('.title-report').text(),
+            regUserActivity(reportActivityAddress, -1, "Visualizou a página de Relatório de "+$('.title-report').text(),
                 -1, LevelActivity.VISUALIZACAO);
                 loadComoBoxIDandValueReport($("#report-entities"), e.reportFilter);
                 data();

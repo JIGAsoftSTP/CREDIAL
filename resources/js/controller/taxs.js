@@ -30,6 +30,7 @@ $(function(){
 var taxAdress = "../../bean/AdministracaoBean.php";
 var taxActivityAdress = "../../bean/activity.php";
 var taxs = [];
+var taxActivity = undefined;
 
 var Taxa = function () {};
 Taxa.prototype.valorTaxa = undefined;
@@ -73,6 +74,10 @@ function addtax() {
         taxa.dias = $("#taxaDias").val();
         taxa.tipoCredito = $("#taxaTipoCredito").val();
 
+        taxActivity = {"Tipo de Crédito": $("#taxaTipoCredito :selected").text(),
+            "Valor da Taxa": $("#txtTaxa").val(),
+            "Número de Dias": $("#taxaDias").val()};
+
         $.ajax({
             url:taxAdress,
             type:"POST",
@@ -85,7 +90,7 @@ function addtax() {
                     callXpertAlert("Taxa registado com sucesso!", "checkmark", 8000);
                     $('.flex-form').find('input, select').val("");
                     $('.flex-form').find('input, select').css("border", "");
-                    regUserActivity(taxActivityAdress, -1, "Registou uma nova Taxa", -1, LevelActivity.CRIACAO);
+                    regUserActivity(taxActivityAdress, -1, "Registou uma nova Taxa", JSON.stringify(taxActivity), LevelActivity.CRIACAO);
                 }
                 else
                     callXpertAlert(e.resultado["MESSAGE"], "warning", 8000);
@@ -93,8 +98,6 @@ function addtax() {
         });
     }
 }
-
-
 
 function loadTax()
 {
@@ -127,5 +130,5 @@ function loadTax()
     tableEstructure($("#table-taxa"));
      setRowCount($(".x-table"));
 
-    regUserActivity(taxActivityAdress, -1, "Visualizou o menu Taxa", -1, LevelActivity.VISUALIZACAO);
+    regUserActivity(taxActivityAdress, -1, "Visualizou Taxa da Administração", -1, LevelActivity.VISUALIZACAO);
 }

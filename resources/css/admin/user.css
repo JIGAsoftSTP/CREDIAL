@@ -39,8 +39,8 @@
 
 .list-user section{
 	text-align: center;
-	width: 32%;
-	min-width: 300px;
+	max-widh: 400px;
+	min-width: 340px;
 	margin: 0 .5% 1% ;
 	background: #fff;
 	padding: 15px;
@@ -191,7 +191,7 @@
 	position: absolute;
 	top: 50%;
 	transform: translateY(-50%);
-	font-size: .8rem;	
+	font-size: .8rem;
 	z-index: 1;
 	right: 1rem;
 }
@@ -213,7 +213,7 @@
 .log-user ul li{
 	line-height: 2.4rem;
 	border-bottom: 1px #333 solid;
-	
+
 }
 .log-user .content{
 	display: flex;

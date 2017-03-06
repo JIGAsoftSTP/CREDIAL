@@ -2,20 +2,16 @@
  * Created by Helcio on 2/23/2017.
  */
 
-$(function ()
-{
+$(document).ready(function() {
+
     loadUser();
 
-
-    $("#searchActivity").keyup(function () {
-
-    });
     $("#activitySearch-user").keyup(function () {
         advSearch($(this), $(".user-names li"));
     });
     $("#filterActivity").change(function()
     {
-        filterLoadedActivity();
+        filterLoaded();
     });
 
     $(".x-close").click(function () {
@@ -53,6 +49,7 @@ $(function ()
   var activityData = null;
   var activityInterval = undefined;
   var totalRecords = undefined;
+  var jsonValue = undefined;
   var itensAdicionados = 0, itensEditados = 0, op = 0,
     itensRemovidos = 0, creditosRegistados = 0;
 
@@ -60,6 +57,8 @@ $(function ()
   ActivityData.prototype.dateinicio = undefined;
   ActivityData.prototype.datefim = undefined;
   ActivityData.prototype.loadmod = undefined;
+
+
 function loadUserActivities(filter, user)
 {
 
@@ -81,68 +80,6 @@ function loadUserActivities(filter, user)
     });
 }
 
-function loadAllActivities(time)
-{
-    var itensAdicionados = 0, itensEditados = 0,
-        itensRemovidos = 0, creditosRegistados = 0;
-     totalRecords = activities.length;
-    activityInterval = undefined;
-    size = 0;
-    dataAnterior = "";
-
-    if(totalRecords >0)
-    {
-        activityInterval = setInterval(function ()
-        {
-            var activity = activities[size];
-            if(activity["levelkey"] === LevelActivity.ATUALIZACAO)
-            {
-                itensEditados +=1;
-                showActivity(activity, LevelActivity.ATUALIZACAO);
-            }
-            else if(activity["levelkey"] === LevelActivity.CRIACAO)
-            {
-                itensAdicionados +=1;
-                showActivity(activity, LevelActivity.CRIACAO);
-
-                if(activity["activity"].$$("Registou novo Crédito com o Dossier"))
-                    creditosRegistados++;
-            }
-            else if(activity["levelkey"] === LevelActivity.DESATIVACAO ||
-                activity["levelkey"] === LevelActivity.ELIMINACAO)
-            {
-                itensRemovidos +=1;
-                showActivity(activity, LevelActivity.ELIMINACAO);
-            }
-            else if(activity["levelkey"] === LevelActivity.VISUALIZACAO)
-            {
-                showActivity(activity, LevelActivity.VISUALIZACAO);
-            }
-            size++;
-
-            $(".total-added h3").html(itensAdicionados);
-            $(".total-edited h3").html(itensEditados);
-            $(".total-removed h3").html(itensRemovidos);
-            $("#totalCreditos").html(creditosRegistados);
-            if(creditosRegistados <= 1)
-            {
-                $("#contratoDesc p").html("Contrato registado");
-                $("#iframe-" + $('aside li.active').index()).contents().find("#totalCreditos").html(creditosRegistados);
-            }
-            else
-            {
-                $("#contratoDesc p").html("Contratos registados");
-                $("#totalCreditos p").html(creditosRegistados);
-            }
-            size++;
-            if(size === totalRecords)
-            {
-                clearInterval(activityInterval);
-            }
-        }, time);
-    }
-}
-
 function formatActivityDate(date,type)
 {
     var newDate = date.split("-");
@@ -151,83 +88,6 @@ function formatActivityDate(date,type)
         return newDate[2].substring(0, 2)+"-"+newDate[1]+"-"+newDate[0];
     else
         return newDate[2].substring(3, 8);
-}
-
-
-function filterLoadedActivity()
-{
-    $(".list-logs").empty();
-    dataAnterior = "";
-    itensRemovidos = 0;
-    itensAdicionados = 0;
-    itensEditados = 0;
-
-    clearInterval(activityInterval); // stop the timer
-
-    for(var i =0;i<activities.length;i++)
-    {
-        var activity = activities[i];
-        if($("#filterActivity").val() === LevelActivity.CRIACAO &&
-            activity["levelkey"] === LevelActivity.CRIACAO)
-        {
-            itensAdicionados++;
-            showActivity(activity, LevelActivity.CRIACAO);
-
-            if(activity["activity"].$$("Registou novo Crédito com o Dossier")) creditosRegistados++;
-        }
-        else if($("#filterActivity").val() === LevelActivity.ATUALIZACAO &&
-            activity["levelkey"] === LevelActivity.ATUALIZACAO)
-        {
-            itensEditados++;
-            showActivity(activity, LevelActivity.ATUALIZACAO);
-        }
-        else if($("#filterActivity").val() === LevelActivity.ELIMINACAO &&
-            activity["levelkey"] === LevelActivity.ELIMINACAO)
-        {
-            itensRemovidos++;
-            showActivity(activity, LevelActivity.ELIMINACAO);
-        } else if($("#filterActivity").val() === LevelActivity.VISUALIZACAO &&
-            activity["levelkey"] === LevelActivity.VISUALIZACAO)
-        {
-            itensRemovidos++;
-            showActivity(activity, LevelActivity.VISUALIZACAO);
-        }
-        else if($("#filterActivity").val() === LevelActivity.TODOS)
-        {
-            if(activity["levelkey"] === LevelActivity.CRIACAO)
-            {
-                itensAdicionados++;
-                showActivity(activity, LevelActivity.CRIACAO);
-            }
-            else if(activity["levelkey"] === LevelActivity.ATUALIZACAO)
-            {
-                itensEditados++;
-                showActivity(activity, LevelActivity.ATUALIZACAO);
-            }
-            else if(activity["levelkey"] === LevelActivity.VISUALIZACAO) showActivity(activity, LevelActivity.VISUALIZACAO);
-            else if(activity["levelkey"] === LevelActivity.ELIMINACAO)
-            {
-                itensRemovidos++;
-                showActivity(activity, LevelActivity.ELIMINACAO);
-            }
-        }
-    }
-
-
-    $(".total-added h3").html(itensAdicionados);
-    $(".total-edited h3").html(itensEditados);
-    $(".total-removed h3").html(itensRemovidos);
-
-    if(creditosRegistados <= 1)
-    {
-        $("#contratoDesc p").html("Contrato registado");
-        $("#totalCreditos").html(creditosRegistados);
-    }
-    else
-    {
-        $("#contratoDesc p").html("Contratos registados");
-        $("#totalCreditos p").html(creditosRegistados);
-    }
 }
 
 function filterActivity(time)
@@ -306,13 +166,50 @@ function filterActivity(time)
                 $("#contratoDesc p").html("Contratos registados");
                 $("#totalCreditos p").html(creditosRegistados);
             }
-
             if(size === totalRecords) clearInterval(activityInterval);
         }, time);
     }
 
 }
 
+function filterLoaded()
+{
+    $(".list-logs").empty();
+    for(var i =0;i<activities.length;i++)
+    {
+        var activity = activities[i];
+        if($("#filterActivity").val() === LevelActivity.CRIACAO &&
+            activity["levelkey"] === LevelActivity.CRIACAO)
+        {
+            showActivity(activity, LevelActivity.CRIACAO);
+        }
+        else if($("#filterActivity").val() === LevelActivity.ATUALIZACAO &&
+            activity["levelkey"] === LevelActivity.ATUALIZACAO)
+        {
+            showActivity(activity, LevelActivity.ATUALIZACAO);
+        }
+        else if($("#filterActivity").val() === LevelActivity.ELIMINACAO &&
+            activity["levelkey"] === LevelActivity.ELIMINACAO)
+        {
+            showActivity(activity, LevelActivity.ELIMINACAO);
+        } else if($("#filterActivity").val() === LevelActivity.VISUALIZACAO &&
+            activity["levelkey"] === LevelActivity.VISUALIZACAO)
+        {
+            showActivity(activity, LevelActivity.VISUALIZACAO);
+        }
+        else if($("#filterActivity").val() === LevelActivity.TODOS)
+        {
+            if(activity["levelkey"] === LevelActivity.CRIACAO)
+                showActivity(activity, LevelActivity.CRIACAO);
+            else if(activity["levelkey"] === LevelActivity.ATUALIZACAO)
+                showActivity(activity, LevelActivity.ATUALIZACAO);
+            else if(activity["levelkey"] === LevelActivity.VISUALIZACAO)
+                showActivity(activity, LevelActivity.VISUALIZACAO);
+            else if(activity["levelkey"] === LevelActivity.ELIMINACAO)
+                showActivity(activity, LevelActivity.ELIMINACAO);
+        }
+    }
+}
 
 function loadUser()
 {
@@ -394,7 +291,6 @@ function selectUser(index, component)
 
         $("#reportActivity-initialDate").val(alterFormatDate($("#reportActivity-initialDate").val() ));
         $("#reportActivity-finalDate").val(alterFormatDate($("#reportActivity-finalDate").val()));
-
         loadUserActivities(1, selectedUser);
     }
     else
@@ -423,7 +319,15 @@ function alterFormatDate(date)
 
 function showActivity(value, filter)
 {
-    var classIcon, view ="Mais detalhes";
+    var classIcon, view ="";
+
+    if(filter !== LevelActivity.VISUALIZACAO &&
+        filter !== LevelActivity.OUTROS && value["data"] !== null)
+    {
+       if(value["data"].$$("{"))
+           view ="Mais detalhes";
+    }
+
 
     if(filter === LevelActivity.ATUALIZACAO) classIcon ="icon-pencil edit";
     else if(filter === LevelActivity.CRIACAO) classIcon = "icon-plus create";
@@ -443,7 +347,7 @@ function showActivity(value, filter)
         '  <i class="'+classIcon+'"></i> '+
         ' <span>'+
         '<span class="description">'+value["activity"]+'</span> '+
-        ' <small onclick="showMoreDetailsActivity('+value["activity"]+')">'+view+'</small> '+
+        ' <small onclick="showMoreDetailsActivity($(this))" >'+view+'</small> '+
         ' </span> '+
         ' </div> '+
         ' </section>'
@@ -454,17 +358,40 @@ function showActivity(value, filter)
 
 function showMoreDetailsActivity(activitySelected)
 {
+    jsonValue = null;
+    $(".modalContainer .content").empty();
+    activitySelected = activitySelected.closest('div').find('.description').text();
+
+    for(var i = 0;i<activities.length;i++) {
+        var activity = activities[i];
+
+        if (activity["activity"] === activitySelected) {  // Somente as atividades que não forem de visualização e outros podem ter mais detalhes.
+                jsonValue = activity["data"];
+                jsonValue = jsonValue.replace(/[\\]/g, '').substring(1, jsonValue.replace(/[\\]/g, '').length - 1);
+                jsonValue = jsonValue.replace("content:", "");
+                jsonValue = JSON.parse(jsonValue);
+                break;
+        }
+    }
+
+    if(jsonValue !== null)
+    {
+        $.each(jsonValue, function (key, value) {
+            showDetails(key, value);
+        });
+        openModalFrame($('.mp-mf-activity'));
+    }
+}
+
+
+function showDetails(_key, _value)
+{
     var details;
-
-    details = '<p>'+
-                     '<span class="mykey">'+activitySelected["data"][""]+'</span>'+
-                '</p>'+
-                '<p>'+
-                     '<span class="mykey"></span>'+
-                     '<span class="myVal"></span>'+
-                '</p>';
-    $(".modalContainer").append(details);
-
+    details ='<nav>'+
+        '<span class="mykey">'+_key+'</span>'+
+        '<span class="myVal">'+_value+'</span>'+
+        '</nav>';
+    $(".mp-mf-activity .content").append(details);
 
 }
 

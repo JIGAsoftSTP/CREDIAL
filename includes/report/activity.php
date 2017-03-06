@@ -26,7 +26,7 @@
 					<span class="super-search focus">
 						<i class="icon-search"></i>
 						<input type="text" placeholder="Pesquise aqui..." id="searchActivity">
-                        <input type="text" class="is-datepicker reportActivityDate" id="reportActivity-initialDate" placeholder="Data Inicial">
+                        <input type="text" class="is-datepicker reportActivityDate"  id="reportActivity-initialDate" placeholder="Data Inicial">
                         <input type="text" class="is-datepicker reportActivityDate" id="reportActivity-finalDate" placeholder="Data Final">
 						<select id="filterActivity">
 							<option value="5">Todos</option>
@@ -77,22 +77,23 @@
 		</div>
 	</div>
 
-    <div class="modalPage" >
 
+
+    <section class="modalPage mp-mf-activity">
         <div class="modalFrame">
             <div class="modalContainer">
+                <div class="content">
 
-                <p>
-                    <span class="mykey"></span>
-                </p>
-                <p>
-                    <span class="mykey"></span>
-                    <span class="myVal"></span>
-                </p>
+                </div>
+
+                <div class="modal-header">
+                    <b>Mais detalhes</b>
+                    <span class="mp-close"></span>
+                </div>
             </div>
         </div>
+    </section>
 
-    </div>
     <?php include "../process.html"; ?>
     <script type="text/javascript" src="../../resources/fw/pikaday/pikaday.js"></script>
 </body>

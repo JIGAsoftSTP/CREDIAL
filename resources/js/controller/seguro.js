@@ -4,7 +4,7 @@
 
 $(function () {
 
-    regUserActivity(securityActivityAddress, -1, "Visualizou o menu Seguros", -1, LevelActivity.VISUALIZACAO);
+    regUserActivity(securityActivityAddress, -1, "Visualizou Seguros da Administração", -1, LevelActivity.VISUALIZACAO);
     loadInsurance();
     $("#btAddInsurance").click(function () {
         regInsurance();
@@ -13,9 +13,12 @@ $(function () {
 
 var securityAddress = "../../bean/AdministracaoBean.php";
 var securityActivityAddress = "../../bean/activity.php";
+var insuranceActivity = undefined;
+
 function regInsurance() {
     if($("#txtInsurance").val() !== '')
     {
+        insuranceActivity = {"Valor" : $("#txtInsurance").val()};
         $.ajax({
             url: securityAddress,
             type:"POST",
@@ -28,7 +31,8 @@ function regInsurance() {
                     callXpertAlert("Seguro adicionado com sucesso!", "checkmark", 8000);
                     $('.add-new-admin').find('input').val("");
                     $('.add-new-admin').find('input').css("border", "");
-                    regUserActivity(securityActivityAddress, -1, "Registou um novo Seguro", -1, LevelActivity.CRIACAO);
+                    regUserActivity(securityActivityAddress, -1, "Registou um novo Seguro",
+                        JSON.stringify(insuranceActivity), LevelActivity.CRIACAO);
                 }
                 else
                     callXpertAlert(e.result["MESSAGE"], "warning", 8000);

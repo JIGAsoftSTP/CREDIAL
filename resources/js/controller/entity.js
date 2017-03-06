@@ -12,7 +12,10 @@ $(function () {
 
 var address = "../../bean/user.php";
 var activityAdress = "../../bean/activity.php";
+var entityActivity = undefined;
+var entidades =[];
 var activity = undefined;
+
 function loadObjectType() {
 
     $.ajax({
@@ -22,8 +25,6 @@ function loadObjectType() {
         dataType: "json",
         success: function (e) {
             loadComoBoxIDandValue($("#adminEntity"), e.objeto ,"ID", "NAME");
-            entidades = e.objeto;
-            activities = e.objeto;
             for(var i =0;i<e.objeto.length;i++)
             {
                 $(".containerEntidades").append('<div class="entity-div"> ' +
@@ -39,7 +40,7 @@ function loadObjectType() {
                 loadObjectValues(e.objeto[i]["ID"]);
 
             }
-            regUserActivity(activityAdress, -1, "Visualizou o menu Entidades", -1, LevelActivity.VISUALIZACAO);
+            regUserActivity(activityAdress, -1, "Visualizou Entidades da Administração", -1, LevelActivity.VISUALIZACAO);
         }
     });
 }
@@ -56,33 +57,36 @@ function loadObjectValues(id, type)
         data: {"intention": "loadDataObject", "object_id":id},
         dataType: "json",
         success: function (e) {
-            entities = e.objeto;
             activity = e.objeto[e.objeto.length-1]["idCredito"];
+            entidades = e.objeto;
             $("#"+id).closest('.entity-div').find('.list').empty();
             for(var i =0;i<e.objeto.length;i++)
             {
-                $("#"+id).closest('.entity-div').find('.list').append('<div id="objectData'+e.objeto[i]["idCredito"]+'"><span  class="objectData'+e.objeto[i]["idCredito"]+'">'+e.objeto[i]["DESCRICAO"]+'</span><span class="delete objectData'+e.objeto[i]["idCredito"]+'" onclick="disableObject('+e.objeto[i]["idCredito"]+')">X</span></div>'+
+                $("#"+id).closest('.entity-div').find('.list').append('<div id="objectData'+e.objeto[i]["idCredito"]+'">' +
+                    '<span  class="objectData desc'+e.objeto[i]["idCredito"]+'">'+e.objeto[i]["DESCRICAO"]+'</span>' +
+                    '<span class="delete objectData'+e.objeto[i]["idCredito"]+'" onclick="disableObject('+e.objeto[i]["idCredito"]+')">X</span></div>'+
                     '</nav> ');
             }
 
         }
     });
 }
-function disableObject(idObject) {
+function disableObject(idObjeto) {
 
-    setDataStorage(localStorage, "activity", "entidade", idObject);
+    var selectedEntity;
 
     $.ajax({
         url:address,
-        data:{"intention": "disable object", "idObject": idObject},
+        data:{"intention": "disable object", "idObject": idObjeto},
         type:"POST",
         dataType:"json",
         success:function (e) {
             if(e.resultado["result"] === "true")
             {
                 callXpertAlert("Entidade removida com sucesso!", 'checkmark', 8000);
-                $("#objectData"+idObject).remove();
-                regUserActivity(activityAdress, -1, "Eliminou uma Entidade", -1, LevelActivity.ELIMINACAO);
+                selectedEntity = $(".desc"+idObjeto).text();
+                $("#objectData"+ idObjeto).remove();
+                regUserActivity(activityAdress, -1, "Eliminou a Entidade "+selectedEntity, -1, LevelActivity.ELIMINACAO);
             }
             else
                 callXpertAlert(e.resultado["message"], 'warning', 8000);
@@ -91,7 +95,9 @@ function disableObject(idObject) {
 }
 
 function addNewEntity() {
-    if($("#ADMINENTITY").val() !== "" && $("#txtEntity").val() !== "")
+
+    if($("#adminEntity").val() !== "" &&
+        $("#txtEntity").val() !== "")
     {
         $.ajax({
             url:address,
@@ -102,10 +108,11 @@ function addNewEntity() {
                 if(e.entity["RESULT"] === "true")
                 {
                     loadObjectValues($("#adminEntity").val());
+                    setEntityActivity();
                     callXpertAlert(entityName($("#adminEntity").val())+" adicionado!", 'checkmark', 8000);
                     $("#txtEntity").val("");
                     $("#adminEntity").val("");
-                    regUserActivity(activityAdress, -1,"Registou uma nova Entidade", -1, LevelActivity.CRIACAO);
+                    regUserActivity(activityAdress, -1,"Registou uma nova Entidade",JSON.stringify(entityActivity) , LevelActivity.CRIACAO);
                 }
                 else
                     callXpertAlert(e.entity["MESSAGE"], 'warning', 8000);
@@ -114,6 +121,11 @@ function addNewEntity() {
     }
 }
 
+function setEntityActivity()
+{
+    entityActivity = {"Entidade" : $("#txtEntity").val(),
+        "Tipo de Entidade" : $("#adminEntity :selected").text()};
+}
 
 function entityName(idEntity) {
     for(var i =0;i<entidades.length;i++)

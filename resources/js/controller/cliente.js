@@ -3,7 +3,7 @@
  */
 
 $(function () {
-    regUserActivity("./bean/activity.php", -1 , "Visualizou a pagina de cliente e créditos!", -1, LevelActivity.VISUALIZACAO );
+    regUserActivity("./bean/activity.php", -1 , "Visualizou a página de cliente e créditos!", -1, LevelActivity.VISUALIZACAO );
 
     listarCliente();
     loadComoBox($("#cli-ar-ano"),addANO());
@@ -35,7 +35,8 @@ var mCount = 5;
 var addTable = 0;
 var clienteData = undefined;
 var clienteLetra = 1;
-var typeSearch = "NIF";
+var typeSearch = "Todos";
+var addCustomerActivity = undefined;
 
 var clientes = [];
 var listSearchCLients = [];
@@ -215,6 +216,16 @@ function loadOutherData() {
     });
 }
 
+function setAddCustomerActivity()
+{
+    addCustomerActivity = {"NIF":  $("#cli-nif").val(), "Cliente":  $("#cli-nome").val()+" "+$("#cli-sobNome").val(),
+        "Data de Nascimento": $("#cli-dataNasc").val(), "Sexo": $("#cli-sexo :selected").text(),
+    "Estado Civil": $("#cli-stateCivil :selected").text(), "Morada":  $("#cli-mora").val(),
+    "Email": $("#cli-email").val(), "Profissão": $("#cli-prof :selected").text(), "Salário": $("#cli-salar").val(),
+    "Localidade" : $("#cli-local :selected").text(), "Local de Trabalho": $("#cli-localTrab :selected").text(),
+    "Telefone":  $("#cli-cont-telf").val(), "Serviço":  $("#cli-cont-tels").val(), "Ano":  $("#cli-ar-ano").val(),
+    "Mês":  $("#cli-ar-mes").val(), "Letra":  $("#cli-ar-let").val(), "Capa": $("#cli-ar-capa").val()};
+}
 var scli = undefined;
 function getDataClienteInForm(intensao) {
     scli = {
@@ -255,6 +266,8 @@ function creditoNow(dt) {
 function regCliente() {
     if(containMenu("cre.regCli")) {
         getDataClienteInForm("regCliente");
+        setAddCustomerActivity();
+
         $.ajax({
             url: "./bean/cliente.php",
             type: "POST",
@@ -262,21 +275,23 @@ function regCliente() {
             dataType: "json",
             success: function (e) {
                 if (e.result) {
-                    callXpertAlert('Novo Cliente adcionado com sucesso!', new Mensage().checkmark, 8000);
+                    callXpertAlert('Cliente registado com sucesso!', new Mensage().checkmark, 8000);
                     resetForm($(".add-new-form"));
                     $('.add-new-form').removeClass('show');
                     setTimeout(creditoNow, 800, scli);
                     var re = new refresh();
                     re.dataType = "CLIENT";
                     saveRefresh(re);
-                    regUserActivity("./bean/activity.php", scli.nif, "Registou um novo cliente", JSON.stringify(scli), LevelActivity.CRIACAO);
+
+                    regUserActivity("./bean/activity.php", -1, "Registou um novo Cliente",
+                        JSON.stringify(addCustomerActivity), LevelActivity.CRIACAO);
                 } else {
                     callXpertAlert(e.msg, new Mensage().cross, 8000);
                 }
             }
         });
     }else{
-        callXpertAlert("Infelizmente nao tens permiçao para efectuar o registo de Cliente!", new Mensage().warning, 8000);
+        callXpertAlert("Infelizmente, não tens permissão para efetuar o registo de Cliente!", new Mensage().warning, 8000);
     }
 }
 
@@ -286,7 +301,7 @@ $("#cli-reg").click(function () {
         else { editeSelectedClient(); }
     }
     else{
-        callXpertAlert('Por favor preencha os campos obrigatório!', 'warning', 8000);
+        callXpertAlert('Por favor, Preencha os Campos Obrigatórios!', 'warning', 8000);
     }
 });
 
@@ -343,7 +358,7 @@ function loadCreditoCliente(_idCreito, jk,_asClassShow) {
 }
 
 function showDataCliente(){
-    regUserActivity("./bean/activity.php", clienteData["NIF"] , "Visualizou dados do(a) cliente "+clienteData["NAME"]+" "+clienteData["SURNAME"], JSON.stringify(clienteData), LevelActivity.VISUALIZACAO );
+    regUserActivity("./bean/activity.php", clienteData["NIF"] , "Visualizou dados do(a) cliente "+clienteData["NAME"]+" "+clienteData["SURNAME"], -1, LevelActivity.VISUALIZACAO );
 
     $("#inf-cli-geral-nif").text(clienteData["NIF"]);
     $("#inf-cli-geral-nome").text(clienteData["NAME"]+" "+clienteData["SURNAME"]);
@@ -370,7 +385,8 @@ function showDataCliente(){
 
 function listCreditoCliente(_type) {
 
-    regUserActivity("./bean/activity.php", clienteData["NIF"] , "Selecionou mais informações sobre crédito do(a) cliente", JSON.stringify(clienteData), LevelActivity.VISUALIZACAO );
+    regUserActivity("./bean/activity.php", -1 ,
+        "Selecionou mais informações sobre crédito do(a) cliente com NIF: "+clienteData["NIF"], -1, LevelActivity.VISUALIZACAO );
 
     $("#inf-cli-ano").text("Cliente desde " + clienteShortData["DATA REGISTRO"]+((Number(clienteShortData["IDADE NA EMPRESA"]) > 1) ? " - Há " + clienteShortData["IDADE NA EMPRESA"] + " Anos" : "" ));
     // $("#inf-cred-lqA").text(clienteShortData["ATRAZADO"]);
@@ -471,6 +487,7 @@ function getDadosCliente() {
 }
 
 $("#cred-pay-bt").click(function () {
+    var paymentActivity, typePayment;
     if(validation1($("#cred-pay-form input, #cred-pay-form select"))){
 
         var paga = new Pagamento();
@@ -483,6 +500,14 @@ $("#cred-pay-bt").click(function () {
         paga.value = unformatted($("#cred-pay-value").val());
         paga.doc = $("#cred-pay-doc").val();
 
+         typePayment = ( !$("#cred-pay-dife").hasClass("icon-checkbox-checked") ? "Semelhante"
+            : (!$("#cred-pay-fazea").hasClass("icon-checkbox-checked") ? "Diferente"
+                : "Faseado") );
+
+        paymentActivity = {"Data": paga.data, "Banco": $("#cred-pay-bank :selected").text(), "Valor":  $("#cred-pay-value").val(),
+        "Número de Documento": paga.doc, "Tipo de Pagamento": typePayment };
+
+
         $.ajax({
             url: "./bean/cliente.php",
             type: "POST",
@@ -492,7 +517,7 @@ $("#cred-pay-bt").click(function () {
                 if (e.result != true) {  callXpertAlert(e.msg, new Mensage().cross, -1); }
                 else {
                     callXpertAlert("Novo pagamento registado sucesso!", new Mensage().checkmark, 8000);
-                    regUserActivity("./bean/activity.php", -1 , "Efetuou um novo Pagamento!", JSON.stringify(paga), LevelActivity.CRIACAO );
+                    regUserActivity("./bean/activity.php", -1 , "Efetuou um novo Pagamento!", JSON.stringify(paymentActivity), LevelActivity.CRIACAO );
                     $('#cred-pay-form').closest('.modalPage').fadeOut(300);
                     setTimeout(reloadPestacaoCreditdo, 700);
                     var re = new refresh();
@@ -609,7 +634,7 @@ function editeSelectedClient() {
             }
         });
     }else{
-        callXpertAlert("Infelizmente nao tens permiçao para efectuar o ediçao de Cliente!", new Mensage().warning, 8000);
+        callXpertAlert("Infelizmente nao tens permissão para efetuar a edição dos dados do(a) cliente!", new Mensage().warning, 8000);
     }
 }
 
@@ -651,7 +676,7 @@ function clientIsIncomple() {
                 openModalFrame($('.mp-new-credit'));
                 tableEstructure($('#table-liquid'));
 
-                regUserActivity("./bean/activity.php", -1 , "Selecionou Cliente para efectuar crédito!", -1, LevelActivity.VISUALIZACAO );
+                regUserActivity("./bean/activity.php", -1 , "Selecionou Cliente para efetuar crédito!", -1, LevelActivity.VISUALIZACAO );
        /*     }
         },
         beforeSend: function () {  $(".mp-loading").fadeIn(); },
@@ -733,6 +758,7 @@ $(".changeValuePayFull").change(function () { getDadosPayFull(); });
 
 $("#full-pay-bt").click(function () {
 
+    var fullPaymentActivity;
     if($("#full-pay-dife-che").hasClass("icon-checkbox-checked")){
         if(!validation1($("#full-pay-bank, #full-pay-numDoc")))
             return false;
@@ -744,6 +770,16 @@ $("#full-pay-bt").click(function () {
     }
     payfull.type = ( !$("#full-pay-dife-che").hasClass("icon-checkbox-checked") ? "S" : "D" );
 
+     if(payfull.bank !== "null")
+     {
+         fullPaymentActivity = {"Banco":  $("#full-pay-bank :selected").text(), "Número de Documento": payfull.doc,
+         "Tipo de Pagamento": (!$("#full-pay-dife-che").hasClass("icon-checkbox-checked") ? "Semelhante" : "Diferente" ) };
+     }
+     else
+         fullPaymentActivity = {"Tipo de Pagamento": (!$("#full-pay-dife-che").hasClass("icon-checkbox-checked") ? "Semelhante" : "Diferente" ) };
+
+
+
     $.ajax({
         url: "./bean/cliente.php",
         type: "POST",
@@ -753,7 +789,8 @@ $("#full-pay-bt").click(function () {
             if(e.result) {
                 $('.mp-liquidar-full').closest('.modalPage').fadeOut(300);
                 callXpertAlert('Novo pagamento antecipado registado com sucesso!', new Mensage().checkmark, 8000);
-                regUserActivity("./bean/activity.php", -1 , "Efetuou um novo antecipado Pagamento!", JSON.stringify(payfull), LevelActivity.CRIACAO );
+                regUserActivity("./bean/activity.php", -1 , "Pagamento antecipado registado com sucesso!",
+                    JSON.stringify(fullPaymentActivity), LevelActivity.CRIACAO );
                 setTimeout(reloadPestacaoCreditdo, 700);
                 var re = new refresh();
                 re.dataType = "PAYMENT";

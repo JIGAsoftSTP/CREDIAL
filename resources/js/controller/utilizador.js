@@ -40,8 +40,10 @@ $("#add-ph-user").change(function (e)
 
 var imageUser = undefined;
 var userActivityAddress = "../../bean/activity.php";
+var addUserActivity = undefined;
 
-regUserActivity(userActivityAddress, -1, "Visualizou o menu Utilizador", -1, LevelActivity.VISUALIZACAO);
+
+regUserActivity(userActivityAddress, -1, "Visualizou Utilizadores", -1, LevelActivity.VISUALIZACAO);
 function regUser() {
 
     if(isValideParanRegUser()) {
@@ -53,6 +55,11 @@ function regUser() {
         formDataReg.append("usersurname", $("#gest-user-apelido").val());
         formDataReg.append("idAgencia", $("#gest-user-agencia").val());
         formDataReg.append("typeperfil", $("#gest-user-type").find("i.icon-radio-checked2").attr("value"));
+
+        addUserActivity = {"NIF":  $("#gest-user-nif").val(), "Nome": $("#gest-user-nome").val(),
+        "Apelido" : $("#gest-user-apelido").val(), "Agência" : $("#gest-user-agencia :selected").text()};
+
+
         for (var o =0; o< listMenuSelect.length; o++)
             formDataReg.append("menu[]",listMenuSelect[o]);
         $.ajax({
@@ -67,7 +74,8 @@ function regUser() {
                     callXpertAlert("Novo utilizador registado com sucesso!", new Mensage().checkmark, 10000);
                     $(".add-new-user").find("input:text").val("");
                     $(".add-new-user").find("select").val("0");
-                    regUserActivity(userActivityAddress, -1, "Registou um novo Utilizador", -1, LevelActivity.CRIACAO);
+                    regUserActivity(userActivityAddress, -1, "Registou um novo Utilizador",
+                        JSON.stringify(addUserActivity), LevelActivity.CRIACAO);
                     var css = {"background":"content-box #444 url('../../resources/img/user.png') no-repeat"
                         ,"background-position":"center"
                         ,"background-size":"cover"};
@@ -222,6 +230,7 @@ $(".list-user").on("click", "i.icon-undo2", function () {
     });
 
 function disibleUser() {
+
     $.ajax({
         url:"../../bean/utilizador.php",
         type:"POST",
@@ -352,7 +361,7 @@ function editeClient() {
             success: function (data) {
                 if (data.result) {
                     callXpertAlert("O Utilizador foi editado com sucesso!", new Mensage().checkmark, 10000);
-                    regUserActivity(userActivityAddress, -1, "Atualizou Informações do Utilizador", -1, LevelActivity.ATUALIZACAO);
+                    regUserActivity(userActivityAddress, -1, "Atualizou Informações do Utilizador com nif "+$("#gest-user-nif").val(), -1, LevelActivity.ATUALIZACAO);
                     resetForm($(".add-new-admin"));
                     resetForm($(".mp-menu-user"));
                     var css = {"background":"content-box #444 url('../../resources/img/user.png') no-repeat"

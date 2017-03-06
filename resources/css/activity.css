@@ -85,15 +85,15 @@ body{
 	position: relative;
 }
 .list-user-log ul li:after{
-    content: "";
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    margin-right: 5px;
-    right: 3px;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+	content: "";
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	margin-right: 5px;
+	right: 3px;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
 }
 .list-user-log ul li:hover,
 .list-user-log ul li.active{
@@ -197,13 +197,13 @@ body{
 .list-logs section i.edit{
 	background: #3367D6;
 }.list-logs section i.remove{
-	background: tomato;
-}.list-logs section i.create{
-	background: #50C14E;
-}.list-logs section i.view{
-	background: #9A59B5;
-	font-size: 1rem;
-}
+	 background: tomato;
+ }.list-logs section i.create{
+	  background: #50C14E;
+  }.list-logs section i.view{
+	   background: #9A59B5;
+	   font-size: 1rem;
+   }
 .list-logs section .detail *{
 	display: block;
 }
@@ -276,4 +276,27 @@ body{
 }
 .div-statitcs section h1{
 	font-size: 2rem;
+}
+
+.mp-mf-activity .content{
+	max-height: 85vh;
+	overflow: auto;
+	padding: 1rem 2rem;
+}
+.mp-mf-activity nav{
+	line-height: 2.4rem;
+	border-bottom: 1px #f2f2f2 solid;
+}
+.mp-mf-activity .mykey{
+	font-weight: bold;
+	font-size: .9rem;
+	display: inline-block;
+	min-width: 200px;
+}
+.mp-mf-activity .myVal{
+	display: inline-block;
+	margin-left: 2rem;
+}
+.mp-mf-activity .myVal:before{
+	content: ": ";
 }

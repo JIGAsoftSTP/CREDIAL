@@ -70,6 +70,8 @@ var listaCheques = [];
 var indiceChequeAnular = undefined;
 var listaChequesRestaurar = [];
 var chequeActivityAdress = "../../bean/activity.php";
+var chequeActivity = undefined;
+
 var Cheque = function(){};
 Cheque.prototype.conta = undefined;
 Cheque.prototype.agencia = undefined;
@@ -77,6 +79,12 @@ Cheque.prototype.sequenciaInicial = undefined;
 Cheque.prototype.sequenciaFinal = undefined;
 Cheque.prototype.totalCheque = undefined;
 
+function setChequeActivity() {
+
+    chequeActivity = {"Agência" : $("#chequeAgencia :selected").text(), "Conta" : $("#chequeContas :selected").text(),
+    "Sequência Inicial" :$("#sequenciaFimCheque").val(), "Sequência Final": $("#sequenciaFimCheque").val(),
+    "Total de Cheques" : $("#totalFolhas").val()};
+}
 
 function regCheque()
 {
@@ -92,6 +100,8 @@ function regCheque()
         cheque.sequenciaFinal =  $("#sequenciaFimCheque").val();
         cheque.totalCheque =  $("#totalFolhas").val();
 
+         setChequeActivity();
+
         $.ajax({
             url: chequeUrl,
             type:"POST",
@@ -104,7 +114,7 @@ function regCheque()
                     $('.add-new-admin').find('input, select').val("");
                     $('.add-new-admin').find('input, select').css("border", "");
                     carregarCheques();
-                    regUserActivity(chequeActivityAdress, -1, "Registou um novo Cheque", JSON.stringify(cheque), LevelActivity.CRIACAO);
+                    regUserActivity(chequeActivityAdress, -1, "Registou um novo Cheque", JSON.stringify(chequeActivity), LevelActivity.CRIACAO);
                 }
                 else
                     callXpertAlert(e.result["message"], "warning", 8000);
@@ -126,7 +136,7 @@ function loadChequeData() {
         }
     });
 
-    regUserActivity(chequeActivityAdress, -1, "Visualizou o menu Cheque", -1, LevelActivity.VISUALIZACAO);
+    regUserActivity(chequeActivityAdress, -1, "Visualizou Cheque da Administração", -1, LevelActivity.VISUALIZACAO);
 }
 
 function carregarCheques() {
@@ -222,7 +232,11 @@ function anularChequeIndice(id)
 }
 
 function anularCheque() {
-    var Cheque = {"idCheque": listaCheques[indiceChequeAnular]["ID"]};
+
+    var anularChequeAtividade = {"Sequência Inicial": listaCheques[indiceChequeAnular]["INICIO"],
+        "Sequência Final":  listaCheques[indiceChequeAnular]["FIM"],
+    "Total de Cheques": listaCheques[indiceChequeAnular]["TOTAL"]};
+
     $.ajax({
         url: chequeUrl,
         type:"POST",
@@ -235,7 +249,7 @@ function anularCheque() {
                 $(".mp-cancel-cheq").fadeOut();
                 callXpertAlert("Cheque anulado com sucesso!", "checkmark", 8000);
                 carregarCheques();
-                regUserActivity(chequeActivityAdress, -1, "Anulou um Cheque", JSON.stringify(Cheque), LevelActivity.DESATIVACAO);
+                regUserActivity(chequeActivityAdress, -1, "Anulou um Cheque", JSON.stringify(anularChequeAtividade), LevelActivity.DESATIVACAO);
 
             }
             else

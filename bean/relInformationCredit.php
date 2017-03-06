@@ -13,6 +13,7 @@ if($_POST["intensao"] == "loadListCredits"){ loadCredit(); }
 if($_POST["intensao"] == "loadListInformationCredit"){ loadInformationByCredit(); }
 
 function loadCredit(){
+
     $call = new CallPgSQL();
     $call->functionTable("report.funct_rep_credits_filter","*")
         ->addString(Session::getUserLogado()->getId())
