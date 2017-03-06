@@ -35,7 +35,7 @@ var mCount = 5;
 var addTable = 0;
 var clienteData = undefined;
 var clienteLetra = 1;
-var typeSearch = "NIF";
+var typeSearch = "Todos";
 var addCustomerActivity = undefined;
 
 var clientes = [];
