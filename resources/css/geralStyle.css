@@ -926,7 +926,7 @@ i.icon-checkbox-checked{
 
 nav.ph-bk{
 	border-radius: 50%;
-	background-position: center;
+	background-position: center !important;
 	background-size: cover;
 }
 

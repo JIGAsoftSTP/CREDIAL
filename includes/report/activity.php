@@ -3,6 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<title></title>
+	<script type="text/javascript" src="../../resources/js/admission.js"></script>
 	<link rel="stylesheet" href="../../resources/css/geralStyle.css">
 	<link rel="stylesheet" href="../../resources/css/activity.css">
 	<link rel="stylesheet" href="../../resources/fw/pikaday/pikaday.css">
