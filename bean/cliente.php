@@ -236,8 +236,8 @@ function regPavementFull(){
         ->addChar($_POST["payFull"]["opcao"]);
     $call->execute();
     $result = $call->getValors();
-    if($result["result"] == true) die(json_encode(array("result" => true, "return" => $result)));
-    else die(json_encode(array("result" => false, "msg" => $result["result"]["message"])));
+    if($result["result"] != "f") die(json_encode(array("result" => true, "return" => $result)));
+    else die(json_encode(array("result" => false, "msg" => $result["message"])));
 }
 
 
@@ -256,6 +256,6 @@ function regPayFullNow(){
           ->addChar($_POST["payFull"]["opcao"]);
       $call->execute();
     $result = $call->getValors();
-    if($result["result"] == true) die(json_encode(array("result" => true)));
-    else die(json_encode(array("result" => false, "msg" => $result["result"]["message"])));
+    if($result["result"] != "f") die(json_encode(array("result" => true)));
+    else die(json_encode(array("result" => false, "msg" => $result["message"])));
 }
