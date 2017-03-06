@@ -124,8 +124,10 @@ var Information = function () {
 
 var creditBluider = new CreditoBluider();
 var dataCredit = undefined;
+
+
 function loadDataToPage() {
-    $.ajax({
+   $.ajax({
         url: "../../bean/relInformationCredit.php",
         type: "POST",
         data: {intensao: "loadListCredits", filter: getDataStorage(sessionStorage,'filterReport')},

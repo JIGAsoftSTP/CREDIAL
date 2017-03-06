@@ -276,3 +276,10 @@ if(!Date.prototype.getDatePt){
 function getStringDate() {
     return new Date().getDatePt();
 }
+
+function alterFormatDate(date)
+{
+    var newDate = date.split("-");
+    newDate = $.makeArray(newDate);
+    return newDate[2]+"-"+newDate[1]+"-"+newDate[0];
+}

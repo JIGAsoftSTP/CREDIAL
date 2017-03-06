@@ -136,6 +136,7 @@
         $call->execute();
 
         $result = $call->getValors();
+
         if($result["result"] == true){
             $result["result"] = "true";
             die(json_encode(array("resultado" => $result)));
@@ -197,15 +198,8 @@
         $call->execute();
 
         $result = $call->getValors();
+        die(json_encode(array("result" => $result)));
 
-        if($result["result"] == true){
-            $result["result"] = "true";
-            die(json_encode(array("result" => $result)));
-        }
-        else{
-            $result["result"] = "false";
-            die(json_encode(array("result" => $result)));
-        }
     }
 
     function contas()

@@ -42,6 +42,7 @@ var si = new Simulation();
  */
 var banks = undefined;
 $("#cred-simula-import").click(function () {
+   var creditoRegisto;
     $.ajax({
         url: "./bean/simulation.php",
         type: "POST",
@@ -50,8 +51,10 @@ $("#cred-simula-import").click(function () {
         success: function (e) {
             if (!e.result) {  callXpertAlert(e.return["MESSAGE"], new Mensage().cross, -1); }
             else {
-
-                regUserActivity("./bean/activity.php", e.return["NUM DOSSIER"] , "Registou novo Crédito com o Dossier "+e.return["NUM DOSSIER"], JSON.stringify(e.return), LevelActivity.CRIACAO );
+                creditoRegisto = {"Número de Dossier" : e.return["NUM DOSSIER"], "Número de Cheque" : e.return["NUM CHEQUE"],
+                "Banco" :e.return["BANCO NAME"], "Sigla do Banco" :  e.return["BANCO SIGLA"]};
+                regUserActivity("./bean/activity.php", e.return["NUM DOSSIER"] ,
+                    "Registou novo Crédito com o Dossier "+e.return["NUM DOSSIER"], JSON.stringify(creditoRegisto), LevelActivity.CRIACAO );
 
                 $(".mp-confirm-simulation").fadeOut();
                 callXpertAlert("<b>" + "Numero Dossier: </b>" + e.return["NUM DOSSIER"] + "<br>" +

@@ -619,7 +619,8 @@ function editeSelectedClient() {
                     $('.add-new-form').removeClass('show');
                     saveRefresh(re);
 
-                    regUserActivity("./bean/activity.php", scli.nif, "Atualizou informações do(a) cliente!", JSON.stringify(scli), LevelActivity.ATUALIZACAO);
+                    regUserActivity("./bean/activity.php", scli.nif, "Atualizou informações do(a) cliente "+
+                        scli.nome+" "+scli.apelido, -1, LevelActivity.ATUALIZACAO);
 
                     if (DOCREDITO) setTimeout(creditoNow, 800, scli);
                 } else {
@@ -634,7 +635,7 @@ function editeSelectedClient() {
             }
         });
     }else{
-        callXpertAlert("Infelizmente nao tens permissão para efetuar a edição dos dados do(a) cliente!", new Mensage().warning, 8000);
+        callXpertAlert("Infelizmente não tens permissão para efetuar a edição dos dados do(a) cliente!", new Mensage().warning, 8000);
     }
 }
 

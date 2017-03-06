@@ -309,12 +309,6 @@ function groupByDate(date)
     }
 }
 
-function alterFormatDate(date)
-{
-    var newDate = date.split("-");
-    newDate = $.makeArray(newDate);
-    return newDate[2]+"-"+newDate[1]+"-"+newDate[0];
-}
 
 
 function showActivity(value, filter)

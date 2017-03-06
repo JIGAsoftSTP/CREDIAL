@@ -34,7 +34,14 @@ $(function () {
          if( $('#secondary-menu li.active').attr('id') !== "rep.gara")
             sendFilterReport();
          else if($('#secondary-menu li.active').attr('id') === "rep.gara")
+         {
+             setDataStorage(sessionStorage, "filterReport", "date-inicio", ($("#report-inicial-date").val() === "" ? "" :
+                 alterFormatDate($("#report-inicial-date").val())));
+             setDataStorage(sessionStorage, "filterReport", "date-fim", ($("#report-final-date").val() === "" ? "" :
+                 alterFormatDate($("#report-final-date").val())));
              $("#iframe-" + $('aside li.active').index()).contents().find('.execute').trigger('click');
+         }
+
    });
 });
 
