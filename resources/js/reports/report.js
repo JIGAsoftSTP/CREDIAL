@@ -39,7 +39,7 @@ $(function () {
                  alterFormatDate($("#report-inicial-date").val())));
              setDataStorage(sessionStorage, "filterReport", "date-fim", ($("#report-final-date").val() === "" ? "" :
                  alterFormatDate($("#report-final-date").val())));
-             $("#iframe-" + $('aside li.active').index()).contents().find('.execute').trigger('click');
+             $("#iframe-" + $('aside li.active').index()).contents().find('#labelWarranty').trigger('click');
          }
 
    });
