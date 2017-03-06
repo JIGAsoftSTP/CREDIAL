@@ -204,7 +204,7 @@ function reportChequeDistribuido(list) {
                     console.info(e);
                 },
                 success:function (e) {
-                    regUserActivity("bean/activity", -1, "Visualizou dados do Relatório de "+$('.title-report').text(),
+                    regUserActivity("bean/activity.php", -1, "Visualizou dados do Relatório de "+$('.title-report').text(),
                         -1, LevelActivity.VISUALIZACAO);
                     if(activeReport === TypeReport.CLIENTES) reportCustomer(e.result);
                     else if(activeReport === TypeReport.CRESCIMENTO_HOMOLOGO) reportGrowth(e.result);
