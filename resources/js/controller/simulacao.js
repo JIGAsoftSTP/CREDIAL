@@ -357,7 +357,7 @@ $("#import-simulation").click(function () {
         }
     }
     else {
-        callXpertAlert("Infelizmente nao tens permiçao para efectuar o registro de Credito!", new Mensage().warning, 8000);
+        callXpertAlert("Infelizmente nao tens permissão para efetuar o registro de Crédito!", new Mensage().warning, 8000);
     }
 });
 
@@ -375,7 +375,7 @@ function testTableAmortizacao() {
         return false;
     }
     if(!tableIsPriencida()){
-        callXpertAlert("Tabela de Amortização, incorretamente Prienhida!", new Mensage().warning, 8000);
+        callXpertAlert("Tabela de Amortização, incorretamente Preenchida!", new Mensage().warning, 8000);
         return false;
     }
     return true;

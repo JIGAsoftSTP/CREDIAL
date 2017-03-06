@@ -26,7 +26,7 @@
 					<span class="super-search focus">
 						<i class="icon-search"></i>
 						<input type="text" placeholder="Pesquise aqui..." id="searchActivity">
-                        <input type="text" class="is-datepicker reportActivityDate" id="reportActivity-initialDate" placeholder="Data Inicial">
+                        <input type="text" class="is-datepicker reportActivityDate"  id="reportActivity-initialDate" placeholder="Data Inicial">
                         <input type="text" class="is-datepicker reportActivityDate" id="reportActivity-finalDate" placeholder="Data Final">
 						<select id="filterActivity">
 							<option value="5">Todos</option>
@@ -77,7 +77,7 @@
 		</div>
 	</div>
 
-    <div class="modalPage" >
+    <div class="modalPage mp-mf-activity" >
 
         <div class="modalFrame">
             <div class="modalContainer">

@@ -23,6 +23,10 @@ var bankActivityAddress = "../../bean/activity.php";
 
 var listBanks = [];
 var listMoviments = [];
+var bankRegisterActivity = undefined;
+var bankTransferActivity = undefined;
+var bankAccountActivity = undefined;
+var bankDebitCreditActivity = undefined;
 var value;
 var Movimentation = function () {};
 Movimentation.prototype.bankFrom;
@@ -44,7 +48,31 @@ DebitCredit.prototype.value = undefined;
 DebitCredit.prototype.bank = undefined;
 DebitCredit.prototype.typeOperation = undefined;
 
+function setRegBankActivity()
+{
+    bankRegisterActivity = {"Banco" : $("#bancoNome").val(), "Sigla" : $("#bancoSigla").val(),
+    "Código da Conta": $("#bancoCodigoBancario").val()};
+}
 
+function setBankTransferActivity() {
+    bankTransferActivity = {"Retirado do Banco" : $("#bankMovimentFrom :selected").text(),
+    "Adicionado no Banco" : $("#bankMovimentTo :selected").text(),
+     "Valor" :  $("#movimentValue").val(),
+    "Descrição" : $("#movimentDesc").val()};
+}
+
+function setBankAccountActivity() {
+    bankAccountActivity = {"Banco": $("#bk-conta-nome :selected").text(),
+    "Código da Agência" :$("#bk-conta-agencia").val(), "Código da Conta" : $("#bk-conta-conta").val(),
+    "Saldo Mínimo" :$("#bk-contaSaldoMinimo").val(), "Descrição" : $("#bk-conta-descricao").val() };
+}
+
+function setDebitCreditActivity() {
+
+    bankDebitCreditActivity = {"Número de Documento" : $("#debitCreditDoc").val(), "Valor": $("#debitCreditValue").val(),
+    "Banco" : $("#debitCreditBank :selected").text(), "Tipo de Operação" : $(".bar .text").html()};
+
+}
 function loadBankData()
 {
     $.ajax({
@@ -164,6 +192,8 @@ function bankTransfer() {
                     movimentation.value = unformatted($("#movimentValue").val());
                     movimentation.desc = $("#movimentDesc").val();
 
+                  setBankTransferActivity();
+
                     $.ajax({
                         url: bankAddress,
                         type:"POST",
@@ -175,9 +205,8 @@ function bankTransfer() {
                             if(e.result["RESULT"] ==='true')
                             {
                                 carregarContas();
-                                regUserActivity(bankActivityAddress, -1,"Efetuou Transferência Bancária do banco "+
-                                    $("#bankMovimentFrom :selected").text()+" para o banco "+$("#bankMovimentTo :selected").text(),
-                                    JSON.stringify(movimentation), LevelActivity.CRIACAO);
+                                regUserActivity(bankActivityAddress, -1,"Efetuou Transferência Bancária",
+                                    JSON.stringify(bankTransferActivity), LevelActivity.CRIACAO);
 
                                 $('.add-mov').find('input, select').val("");
                                 $('.add-mov').find('input, select').css("border", "");
@@ -196,6 +225,7 @@ function bankTransfer() {
     }
 }
 
+
 function makeCreditDebit() {
 
     if(debitCreditCheckFields() === true)
@@ -205,6 +235,8 @@ function makeCreditDebit() {
         debitCredit.value = unformatted($("#debitCreditValue").val());
         debitCredit.bank = $("#debitCreditBank").val();
         debitCredit.typeOperation = $(".bar .text").html();
+
+        setDebitCreditActivity();
 
         $.ajax({
             url: bankAddress,
@@ -218,7 +250,8 @@ function makeCreditDebit() {
                     callXpertAlert("Operação efetuada com sucesso!", "checkmark", 8000);
                     $('.debitCreditField').val("");
                     $('.debitCreditField').css("border", "");
-                    regUserActivity(bankActivityAddress, -1, "Realizou uma Operação de Débito/Crédito", JSON.stringify(debitCredit), LevelActivity.CRIACAO);
+                    regUserActivity(bankActivityAddress, -1, "Realizou uma Operação de Débito/Crédito",
+                        JSON.stringify(bankDebitCreditActivity), LevelActivity.CRIACAO);
                     carregarContas();
 
                 }
@@ -273,6 +306,7 @@ function regBank()
         banco.nome = $("#bancoNome").val();
         banco.sigla = $("#bancoSigla").val();
         banco.codigoConta = $("#bancoCodigoBancario").val();
+        setRegBankActivity();
 
         $.ajax({
             url: bankAddress,
@@ -284,7 +318,8 @@ function regBank()
             {
                 if(e.resultado["result"] === "true")
                 {
-                    regUserActivity(bankActivityAddress, -1, "Registou um novo Banco", JSON.stringify(banco), LevelActivity.CRIACAO);
+
+                    regUserActivity(bankActivityAddress, -1, "Registou um novo Banco", JSON.stringify(bankRegisterActivity), LevelActivity.CRIACAO);
                     callXpertAlert('Banco registado com sucesso!', 'checkmark', 8000);
                     $('.add-new-bank').find('input').val("");
                     $('.add-new-bank').find('input').css("border", "");
@@ -330,6 +365,9 @@ function regBankAccount()
                         banco.codigoConta = $("#bk-conta-conta").val();
                         banco.descricao = $("#bk-conta-descricao").val();
                         banco.saldoMinimo = unformatted($("#bk-contaSaldoMinimo").val());
+
+                        setBankAccountActivity();
+
                         $.ajax({
                             url: bankAddress,
                             type:"POST",
@@ -344,11 +382,11 @@ function regBankAccount()
                                     $('.add-account').find('input, select').css("border", "");
                                     $("#bk-conta-descricao").val("");
                                     $("#bk-conta-descricao").css("border", "");
-                                    regUserActivity(bankActivityAddress, -1, "Registou uma nova Conta Banco", JSON.stringify(banco), LevelActivity.CRIACAO);
+                                    regUserActivity(bankActivityAddress, -1, "Registou uma nova Conta Banco",
+                                        JSON.stringify(bankAccountActivity), LevelActivity.CRIACAO);
                                     carregarContas();
                                 }
-                                else
-                                    callXpertAlert(e.resultado["message"], 'warning', 8000);
+                                else callXpertAlert(e.resultado["message"], 'warning', 8000);
                             }
                         });
 

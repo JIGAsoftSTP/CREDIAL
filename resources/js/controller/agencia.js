@@ -14,6 +14,7 @@ $(function () {
 
 var agencyUrl ="../../bean/AdministracaoBean.php";
 var agencyActivityAddress ="../../bean/activity.php";
+var agencyActivity = undefined;
 var Agency = function(){};
 Agency.prototype.nome;
 Agency.prototype.localidade;
@@ -26,6 +27,8 @@ function addAgency()
 {
     if($("#agenciaNome").val() !== '' && $("#agenciaLocalidade").val() !== '')
     {
+        agencyActivity = {"Nome" : $("#agenciaNome").val(), "Localidade" : $("#agenciaLocalidade :selected").text()};
+
         agency.nome = $("#agenciaNome").val();
         agency.localidade = $("#agenciaLocalidade").val();
 
@@ -38,7 +41,7 @@ function addAgency()
             {
                 if(e.result["RESULT"] === 'true')
                 {
-                    regUserActivity(agencyActivityAddress, -1, "Registou uma nova Agência", -1, LevelActivity.CRIACAO);
+                    regUserActivity(agencyActivityAddress, -1, "Registou uma nova Agência", JSON.stringify(agencyActivity), LevelActivity.CRIACAO);
                     callXpertAlert("Agência "+agency.nome+" adicionado com sucesso!", "checkmark", 8000);
                     $('.add-new-admin').find('input, select, textarea').val("");
                     $('.add-new-admin').find('input, select, textarea').css("border", "");

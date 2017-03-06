@@ -50,7 +50,7 @@ $('.bank .add-more').click(function(event) {
     $('.bank .menu-bank li').eq(0).click();
 });
 
-$('.bank').on('click','.siglas li', function(event) {
+$('.bank').on('click','.contas li', function(event) {
     var idx = $(this).index();
     $(this).addClass('active').siblings().removeClass('active');
 
