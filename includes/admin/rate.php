@@ -2,6 +2,7 @@
 <html lang="pt">
 <head>
 	<meta charset="UTF-8">
+	<script type="text/javascript" src="../../resources/js/admission.js"></script>
 	<link rel="stylesheet" href="../../resources/css/geralStyle.css">
 	<link rel="stylesheet" href="../../resources/css/admin/insurate.css">
 	<link rel="stylesheet" href="../../resources/css/admin.css">
