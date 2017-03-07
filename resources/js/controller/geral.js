@@ -148,11 +148,9 @@ User.prototype.idAgencia = undefined;
 User.prototype.nivel = undefined;
 User.prototype.idNivel = undefined;
 User.prototype.img = undefined;
+User.prototype.imgSmall = undefined;
+User.prototype.imgTiny = undefined;
 User.prototype.estado = undefined;
-/**
- * @type {String} {IMAGE, IMAGE-TINY, IMAGE-SMALL}
- */
-User.prototype.typeImage = undefined;
 
 /**
  *
@@ -283,3 +281,5 @@ function alterFormatDate(date)
     newDate = $.makeArray(newDate);
     return newDate[2]+"-"+newDate[1]+"-"+newDate[0];
 }
+
+

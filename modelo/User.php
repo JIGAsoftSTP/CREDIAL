@@ -15,6 +15,8 @@ class User
     private $Agencia;
     private $foto;
     private $fotoLogo;
+    private $fotoLogoSmall;
+    private $fotoLogoTiny;
     private $senha;
     private $senhaConfirme;
     private $menu;
@@ -101,6 +103,42 @@ class User
     public function setFotoLogo($fotoLogo)
     {
         $this->fotoLogo = $fotoLogo;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFotoLogoSmall()
+    {
+        return $this->fotoLogoSmall;
+    }
+
+    /**
+     * @param mixed $fotoLogoSmall
+     * @return User
+     */
+    public function setFotoLogoSmall($fotoLogoSmall)
+    {
+        $this->fotoLogoSmall = $fotoLogoSmall;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFotoLogoTiny()
+    {
+        return $this->fotoLogoTiny;
+    }
+
+    /**
+     * @param mixed $fotoLogoTiny
+     * @return User
+     */
+    public function setFotoLogoTiny($fotoLogoTiny)
+    {
+        $this->fotoLogoTiny = $fotoLogoTiny;
         return $this;
     }
 

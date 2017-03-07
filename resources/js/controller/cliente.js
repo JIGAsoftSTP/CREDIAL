@@ -19,12 +19,14 @@ $(function () {
 
     $("#client-search").keypress(function (e) {
         if (e.keyCode === 13) {
-            searchClient();
+            functionSearch = searchClient();
+            carregarCliente(true, functionSearch);
             hasSearched = true;
         }
     }).keyup(function () {
         if ($(this).val() === "") {
-            carregarCliente(true);
+            functionSearch = undefined;
+            carregarCliente(true, functionSearch);
             hasSearched = false;
         }
     })
@@ -32,15 +34,15 @@ $(function () {
 
 var i = 0;
 var lastI = 0;
-var per = 1;
-var ant = 0;
-var nCount = 0;
-var mCount = 5;
 var addTable = 0;
 var clienteData = undefined;
 var clienteLetra = 1;
 var typeSearch = "Todos";
 var addCustomerActivity = undefined;
+/**
+ * @type {*}
+ */
+var functionSearch = undefined;
 
 var clientes = [];
 var listSearchCLients = [];
@@ -54,13 +56,13 @@ function listarCliente() {
             clientes = e.data;
         },beforeSend: function () {  $(".mp-loading").fadeIn(); },
         complete: function () { $(".mp-loading").fadeOut();
-            carregarCliente(true);
+            carregarCliente(true, functionSearch);
         }
     });
 }
 $("#tableCliente").scroll(function () {
-        if(!hasSearched && $(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
-            carregarCliente(false);
+        if($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
+            carregarCliente(false, functionSearch);
         }
 });
 
@@ -83,67 +85,72 @@ function addMES() {
 }
 /**
  * @param empty {boolean}
+ * @param functions {function}
  */
-function carregarCliente(empty) {
-    clienteSearch = false;
-    addTable = (clientes[clienteLetra] != undefined) ? clientes[clienteLetra].length : 0;
-    if(empty) {
-        $('#tableCliente').empty();
-        lastI = 0;
+function carregarCliente(empty, functions) {
+    if(functions == undefined) {
+        clienteSearch = false;
+        addTable = (clientes[clienteLetra] != undefined) ? clientes[clienteLetra].length : 0;
+        if (empty) {
+            $('#tableCliente').empty();
+            lastI = 0;
+        }
+
+        var add = 0;
+        lastI++;
+        for (var ff = lastI; (ff < addTable && add < 100); ff++) {
+            var client = clientes[clienteLetra][ff];
+            var table = document.getElementById("tableCliente");
+            var row = table.insertRow(table.childElementCount);
+
+            row.id = ff;
+
+            row.onclick = function () {
+                $(this).addClass('selected').siblings().removeClass('selected');
+            };
+
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            var cell4 = row.insertCell(3);
+            var cell5 = row.insertCell(4);
+
+            cell1.innerHTML = "<i class='icon-credit-card' onclick='" + "credito(" + ff + ")'  title='Registo Crédito'></i>" +
+                "<i class='icon-info' onclick='" + "inforCiente(" + ff + ")'  title='Mais Informaçõess'></i>" +
+                "<i class='icon-pencil' onclick='" + "editCiente(" + ff + ")' title='Editar Cliente' ></i>";
+            cell2.innerHTML = client['NIF'];
+            cell3.innerHTML = client['NAME'] + " " + client['SURNAME'];
+            cell4.innerHTML = client['TELE'];
+
+            var span1 = document.createElement("span");
+            span1.setAttribute("class", "total");
+            var spanText1 = document.createTextNode(client['QUANTIDADE DE CREDITO']);
+            span1.appendChild(spanText1);
+
+            var span2 = document.createElement("span");
+            span2.setAttribute("class", "payed");
+            var spanText2 = document.createTextNode(client['creditopay']);
+            span2.appendChild(spanText2);
+
+            var porPagar = Number(client['QUANTIDADE DE CREDITO']) - Number(client['creditopay']);
+            var span3 = document.createElement("span");
+            span3.setAttribute("class", "doubt");
+            var spanText3 = document.createTextNode(porPagar);
+            span3.appendChild(spanText3);
+
+            cell5.appendChild(span1);
+            cell5.appendChild(span2);
+            cell5.appendChild(span3);
+            cell5.setAttribute("class", "col-credit");
+
+            add++;
+            lastI = ff;
+        }
+        tableEstructure($('.x-table.table-client'));
+        setRowCount($('.x-table.table-client'));
+    } else{
+        functions();
     }
-
-    var add = 0; lastI++;
-    for (var ff = lastI; (ff < addTable && add < 100); ff++)
-    {
-        var client = clientes[clienteLetra][ff];
-        var table = document.getElementById("tableCliente");
-        var row = table.insertRow(table.childElementCount);
-
-        row.id = ff;
-
-        row.onclick = function () {
-            $(this).addClass('selected').siblings().removeClass('selected');
-        };
-
-        var cell1 = row.insertCell(0);
-        var cell2 = row.insertCell(1);
-        var cell3 = row.insertCell(2);
-        var cell4 = row.insertCell(3);
-        var cell5 = row.insertCell(4);
-
-        cell1.innerHTML = "<i class='icon-credit-card' onclick='" + "credito(" + ff + ")'  title='Registo Crédito'></i>" +
-            "<i class='icon-info' onclick='" + "inforCiente(" + ff + ")'  title='Mais Informaçõess'></i>" +
-            "<i class='icon-pencil' onclick='" + "editCiente(" + ff + ")' title='Editar Cliente' ></i>";
-        cell2.innerHTML = client['NIF'];
-        cell3.innerHTML = client['NAME'] + " " + client['SURNAME'];
-        cell4.innerHTML = client['TELE'];
-
-         var span1 = document.createElement("span");
-         span1.setAttribute("class","total");
-         var spanText1 = document.createTextNode(client['QUANTIDADE DE CREDITO']);
-         span1.appendChild(spanText1);
-
-         var span2 = document.createElement("span");
-         span2.setAttribute("class","payed");
-         var spanText2 = document.createTextNode(client['creditopay']);
-         span2.appendChild(spanText2);
-
-         var porPagar = Number(client['QUANTIDADE DE CREDITO'])-Number(client['creditopay']);
-         var span3 = document.createElement("span");
-         span3.setAttribute("class","doubt");
-         var spanText3 = document.createTextNode(porPagar);
-         span3.appendChild(spanText3);
-
-         cell5.appendChild(span1);
-         cell5.appendChild(span2);
-         cell5.appendChild(span3);
-         cell5.setAttribute("class","col-credit");
-
-         add++;
-         lastI = ff;
-    }
-    tableEstructure($('.x-table.table-client'));
-    setRowCount($('.x-table.table-client'));
 }
 
 function credito(a, type) {
@@ -544,59 +551,64 @@ function searchClient()
        dataType: "json",
        data:{"intensao" : "search client", "search" : typeSearch, "valueSearch": value},
         success:function (e) {
-            listSearchCLients = e.data;
-
             $('#tableCliente').empty();
-            clienteSearch = true;
-            for (var i = 0; i< listSearchCLients.length ; i++) {
-                var client = listSearchCLients[i];
-                var table = document.getElementById("tableCliente");
-                var row = table.insertRow(table.childElementCount);
-
-                row.id = i;
-                row.onclick = function () { $(this).addClass('selected') .siblings().removeClass('selected'); };
-
-                var cell1 = row.insertCell(0);
-                var cell2 = row.insertCell(1);
-                var cell3 = row.insertCell(2);
-                var cell4 = row.insertCell(3);
-                var cell5 = row.insertCell(4);
-
-                cell1.innerHTML = "<i class='icon-credit-card' onclick='"+"credito("+i+", 2)' ></i>" +
-                    "<i class='icon-info' onclick='"+"inforCiente("+i+", 2)' ></i>" +
-                    "<i class='icon-pencil' onclick='"+"editCiente("+i+", 2)' ></i>";
-                cell2.innerHTML = client['NIF'];
-                cell3.innerHTML = client['NAME']+" "+client['SURNAME'];
-                cell4.innerHTML = client['TELE'];
-
-                var span1 = document.createElement("span");
-                span1.setAttribute("class","total");
-                var spanText1 = document.createTextNode(client['QUANTIDADE DE CREDITO']);
-                span1.appendChild(spanText1);
-
-                var span2 = document.createElement("span");
-                span2.setAttribute("class","payed");
-                var spanText2 = document.createTextNode(client['creditopay']);
-                span2.appendChild(spanText2);
-
-                var porPagar = Number(client['QUANTIDADE DE CREDITO'])-Number(client['creditopay']);
-                var span3 = document.createElement("span");
-                span3.setAttribute("class","doubt");
-                var spanText3 = document.createTextNode(porPagar);
-                span3.appendChild(spanText3);
-
-                cell5.appendChild(span1);
-                cell5.appendChild(span2);
-                cell5.appendChild(span3);
-                cell5.setAttribute("class","col-credit");
-
-                carregou = true;
-                // lastI = ff;
-            }
-            tableEstructure($('.x-table.table-client'));
-            setRowCount($('.x-table.table-client'));
+            lastI = 0;
+            listSearchCLients = e.data;
+            functionSearch = loadDataSearch();
+            loadDataSearch();
         }
     });
+}
+
+function loadDataSearch() {
+    clienteSearch = true;
+    var add = 0;
+    for (var i = lastI; i< listSearchCLients.length && add < 100 ; i++) {
+        var client = listSearchCLients[i];
+        var table = document.getElementById("tableCliente");
+        var row = table.insertRow(table.childElementCount);
+
+        row.id = i;
+        row.onclick = function () { $(this).addClass('selected') .siblings().removeClass('selected'); };
+
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        var cell4 = row.insertCell(3);
+        var cell5 = row.insertCell(4);
+
+        cell1.innerHTML = "<i class='icon-credit-card' onclick='"+"credito("+i+", 2)' ></i>" +
+            "<i class='icon-info' onclick='"+"inforCiente("+i+", 2)' ></i>" +
+            "<i class='icon-pencil' onclick='"+"editCiente("+i+", 2)' ></i>";
+        cell2.innerHTML = client['NIF'];
+        cell3.innerHTML = client['NAME']+" "+client['SURNAME'];
+        cell4.innerHTML = client['TELE'];
+
+        var span1 = document.createElement("span");
+        span1.setAttribute("class","total");
+        var spanText1 = document.createTextNode(client['QUANTIDADE DE CREDITO']);
+        span1.appendChild(spanText1);
+
+        var span2 = document.createElement("span");
+        span2.setAttribute("class","payed");
+        var spanText2 = document.createTextNode(client['creditopay']);
+        span2.appendChild(spanText2);
+
+        var porPagar = Number(client['QUANTIDADE DE CREDITO'])-Number(client['creditopay']);
+        var span3 = document.createElement("span");
+        span3.setAttribute("class","doubt");
+        var spanText3 = document.createTextNode(porPagar);
+        span3.appendChild(spanText3);
+
+        cell5.appendChild(span1);
+        cell5.appendChild(span2);
+        cell5.appendChild(span3);
+        cell5.setAttribute("class","col-credit");
+        add++;
+        lastI = i;
+    }
+    tableEstructure($('.x-table.table-client'));
+    setRowCount($('.x-table.table-client'));
 }
 
 function reloadPestacaoCreditdo() {

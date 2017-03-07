@@ -6,7 +6,7 @@
  * Time: 11:19 PM
  */
 include "../modelo/Imagem.php";
-if($_POST['intensao']!="login") {
+if($_POST['intensao']!="login" && $_POST['intensao']!="getImageUser") {
     include "../modelo/User.php";
     include "../conexao/CallPgSQL.php";
     include "Session.php";
@@ -127,14 +127,17 @@ function loadDataUser(){
 
 /**
  * @param $values
+ * @param $type string
  * @return string
  */
-function addLocalPhoto($values)
+function addLocalPhoto($values, $type = null)
 {
+
     if ($values["funct_load_user_image"] != null) {
         $img = md5($_POST['USER']["nif"]);
-        file_put_contents("../resources/img/userImg/" . $img, pg_unescape_bytea($values["funct_load_user_image"]));
-        $values["funct_load_user_image"] = "./resources/img/userImg/" . $img;
+        file_put_contents("../resources/img/userImg/" . $img.(($type == null) ? "" : "-".$type), pg_unescape_bytea($values["funct_load_user_image"]));
+        $values["funct_load_user_image"] = "./resources/img/userImg/" .$img.(($type == null) ? "" : "-".$type);
+        chmod("../resources/img/userImg/".$img.(($type == null) ? "" : "-".$type), 0777);
     } else {
         $values["funct_load_user_image"] = "./resources/img/user.png";
     }
@@ -253,15 +256,43 @@ function alterUser(){
     die (json_encode(array("result" => true)));
 }
 
-function getPhotoUser(){
+/**
+ * @param bool $onlyJSON bool
+ * @return string {img,imgSmall,imgTiny}
+ */
+function getPhotoUser($onlyJSON = false){
+//    {IMAGE, IMAGE-TINY, IMAGE-SMALL}
+
     $call = new CallPgSQL();
     $call->functionTable("funct_load_user_image","*")
         ->addString(Session::getUserLogado()->getId())
         ->addInt(Session::getUserLogado()->getIdAgencia())
         ->addString($_POST['USER']["nif"])
-        ->addString($_POST['USER']["typeImage"]);
+        ->addString("IMAGE");
     $call->execute();
-    $result = $call->getValors();
-    if($call->getNumRow() > 0)
-    die(json_encode(array("img" => addLocalPhoto($result))));
+    $img = $call->getValors();
+
+    $call->functionTable("funct_load_user_image","*")
+        ->addString(Session::getUserLogado()->getId())
+        ->addInt(Session::getUserLogado()->getIdAgencia())
+        ->addString($_POST['USER']["nif"])
+        ->addString("IMAGE-SMALL");
+    $call->execute();
+    $imgSmall = $call->getValors();
+
+    $call->functionTable("funct_load_user_image","*")
+        ->addString(Session::getUserLogado()->getId())
+        ->addInt(Session::getUserLogado()->getIdAgencia())
+        ->addString($_POST['USER']["nif"])
+        ->addString("IMAGE-TINY");
+    $call->execute();
+    $imgTiny = $call->getValors();
+
+    $json = json_encode(array( "img" => addLocalPhoto($img),
+        "imgSmall" => addLocalPhoto($imgSmall,"Smaill"),
+        "imgTiny" => addLocalPhoto($imgTiny, "Tiny")
+    ));
+
+    if($onlyJSON)  {return json_decode($json); }
+    else { die($json); }
 }

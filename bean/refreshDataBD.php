@@ -14,7 +14,7 @@ function refreshData(){
     $res =  json_decode($_POST["re"]);
     foreach ($res->list as $re) {
         $bd->functionTable("credial.funct_refresh_materialized_views","*")
-            ->addString($re->dataType);
+            ->addString(null);
         $bd->execute();
     }
     $j = json_encode(array("result"=>true)); die($j);

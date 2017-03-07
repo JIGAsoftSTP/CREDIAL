@@ -51,6 +51,7 @@ class Imagem {
                 $this->caminnoCompletoNewFile =  $this->repositorio.$this->newFileName;
                 $this->caminnoCompletoNewFileView = $this->repositorioView.$this->newFileName;
                 move_uploaded_file($this->tmp, $this->caminnoCompletoNewFile);
+                chmod($this->caminnoCompletoNewFile, 0777);
             }
             else { echo(json_encode(array("img"=>"./resources/img/user.png"))); }
         }
@@ -143,13 +144,13 @@ class Imagem {
     }
 
     public function deleteAllFileInDirectory(){
-//        $user = Session::getUserLogado()->getId();
-        /*foreach (scandir($this->getRepositorio()) as $file)
+        $user = Session::getUserLogado()->getId();
+        foreach (scandir($this->getRepositorio()) as $file)
         {
             if(is_file($this->getRepositorio()."/".$file) && !strpos($file."",md5($user) )){
                 unlink($this->getRepositorio()."/".$file);
             }
-        }*/
+        }
     }
 
     /**
@@ -162,8 +163,8 @@ class Imagem {
         $image->resizeToWidth($size);
         $fileName = $file . $size;
         $image->save($fileName);
+        chmod($fileName, 0777);
         return $fileName;
     }
-
 }
  

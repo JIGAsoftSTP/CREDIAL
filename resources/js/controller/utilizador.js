@@ -456,7 +456,7 @@ function transformDataUserToUser(data, type, time) {
             us.img = data[iDataUser]["PHOTO"];
             us.idNivel = data[iDataUser]["PERFIL ID"];
             us.menu = data[iDataUser]["MENU"];
-            us.typeImage = "IMAGE-TINY";
+
             if (type == "Active") {
                 listUser.addUser(us);
                 listUser.bluiderActive(iDataUser);
@@ -465,10 +465,17 @@ function transformDataUserToUser(data, type, time) {
                 listUser.bluiderOther(iDataUser);
             }
             iDataUser++;
+
             if (iDataUser == totalDataUser) {
                 clearInterval(addInterUser);
                 if (type == "Active") {
                     transformDataUserToUser(dataOtherUser, "Other", 250);
+                }
+                else {
+                    $('.filter li.active').click();
+                    if (!isEmpty($('.search input'))) {
+                        $('.search input').keyup();
+                    }
                 }
             }
         }, time);
@@ -492,6 +499,8 @@ function getImageUser(user) {
         data: {intensao : "loadImage-Perfil", USER : user},
         success: function (data) {
             user.img = data.img;
+            user.imgSmall = data.imgSmall;
+            user.imgTiny = data.imgTiny;
             var css = {
                 "background": "content-box #444 url('../." + user.img + "') no-repeat"
                 , "background-position": "center"

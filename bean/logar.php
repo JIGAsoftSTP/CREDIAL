@@ -26,13 +26,14 @@ function logar(){
 
     $values = $call->getValors();
     if ($values["RESULT"] == "true") {
-        $img = "";
-        if($values["PHOTO"] != null) {
-            $img = md5($values["ID"]) /*. ".png"*/;
-            file_put_contents("../resources/img/userImg/" . $img, pg_unescape_bytea($values["PHOTO"]));
-        }
 
         include "utilizador.php";
+        $_POST['USER']["nif"] = $_POST["user"];
+
+        /**
+         * @var $img object
+         */
+        $img = getPhotoUser(true);
 
         $user = new User();
         $user->setNome($values["NAME"])
@@ -48,7 +49,9 @@ function logar(){
             ->setMenu(loadMenuUser($values["ID"]))
             ->setSenha($_POST['pwd'])
             ->setFoto($values["PHOTO"])
-            ->setFotoLogo((($values["PHOTO"] == null) ? "./resources/img/user.png" :"./resources/img/userImg/".$img));
+            ->setFotoLogo($img->img)
+            ->setFotoLogoSmall($img->imgSmall)
+            ->setFotoLogoTiny($img->imgTiny);
 
         Session::newSession(Session::USER,$user);
 
@@ -118,20 +121,9 @@ function changePwd(){
 }
 
 function loadImgUser(){
-    $call = new CallPgSQL();
-    $call->selects("\"user\"","user_photo")
-        ->addCodition("user_id",$_POST["user_id"],"=");
-    $call->execute();
-    if($call->getNumRow() == 1) {
-        $rs = $call->getValors();
-        if($rs["user_photo"] != null ){
-            $img = md5($_POST["user_id"]) /*. ".png"*/;
-            file_put_contents("../resources/img/userImg/" . $img, pg_unescape_bytea($rs["user_photo"]));
-            die(json_encode(array("img" => "./resources/img/userImg/" . $img)));
-        }
-        die(json_encode(array("img" => "./resources/img/user.png")));
-    }
-    else{ echo json_encode(array("img"=>"./resources/img/user.png")); }
+    include "utilizador.php";
+    $_POST['USER']["nif"] = $_POST["user_id"];
+    getPhotoUser();
 }
 
 function getDataUser(){
@@ -146,6 +138,8 @@ function getDataUser(){
                     "result" => true,
                     "user_name_complete" =>  $nome." ". (($nome == $apelido) ? "" : $apelido),
                     "user_logo" => Session::getUserLogado()->getFotoLogo(),
+                    "user_logoSmall" => Session::getUserLogado()->getFotoLogoSmall(),
+                    "user_logoTiny" => Session::getUserLogado()->getFotoLogoTiny(),
                     "user_agency" => Session::getUserLogado()->getAgencia(),
                     "user_perfil" => Session::getUserLogado()->getPerfil(),
                     "user_nif" => Session::getUserLogado()->getId()

@@ -175,14 +175,20 @@ function loadDataUser() {
             dataType: "json",
             success: function (e) {
                 if(e.result) {
-                    $(".default-user-img").css({
-                        'background': 'content-box #444 url(' + e.user_logo + ') no-repeat',
+                    $(".photo.default-user-img").css({
+                        'background': 'content-box #444 url(' + e.user_logoTiny + ') no-repeat',
                         'backgroundSize': 'cover'
                     });
+
+                    $(".photo2.default-user-img").css({
+                        'background': 'content-box #444 url(' + e.user_logoSmall + ') no-repeat',
+                        'backgroundSize': 'cover'
+                    });
+
                     $(".aut-user-login-name").text(e.user_name_complete);
                     $("#menu-ag-user").text(e.user_perfil+" na "+e.user_agency);
                     appLog = e.user_nif;
-                     window.onpaint = getAppLog();
+                    window.onpaint = getAppLog();
                 }
             }
         });
