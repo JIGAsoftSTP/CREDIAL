@@ -389,6 +389,10 @@ function showDetails(_key, _value)
 
 }
 
+function determineAverageTime()
+{
+
+}
 
 var TypeActivity = {"REGISTO_CLIENTE" : "Novo cliente registrado com sucesso", "SIMULACAO" : "Efetuou uma simulaçao!"};
 Object.freeze(TypeActivity);
