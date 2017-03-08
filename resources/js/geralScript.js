@@ -49,7 +49,10 @@ $('body').on('click','.xpert-alert .close',  function(event) {
 });
 
 
-
+$(document).on('keyup', function(event) {
+    if(event.which === 27)
+        $('.modalPage').fadeOut(300);
+});
 
 /* Xpert List Items Events*/
 
