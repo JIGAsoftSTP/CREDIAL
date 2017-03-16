@@ -69,9 +69,7 @@ $("#enter-bt").click(function () {
             data: {intensao : "saveDataEnterprise", enter : enter},
             success: function (data) {
                 if (data.return) {
-
-                }else{
-
+                    callXpertAlert("Os dados da Empresa foram Atualidados com sucesso!", new Mensage().checkmark, 8000);
                 }
             }
         });

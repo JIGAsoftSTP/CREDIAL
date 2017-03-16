@@ -272,6 +272,7 @@ function getPhotoUser($onlyJSON = false){
     $call->execute();
     $img = $call->getValors();
 
+    $call = new CallPgSQL();
     $call->functionTable("funct_load_user_image","*")
         ->addString(Session::getUserLogado()->getId())
         ->addInt(Session::getUserLogado()->getIdAgencia())
@@ -280,6 +281,7 @@ function getPhotoUser($onlyJSON = false){
     $call->execute();
     $imgSmall = $call->getValors();
 
+    $call = new CallPgSQL();
     $call->functionTable("funct_load_user_image","*")
         ->addString(Session::getUserLogado()->getId())
         ->addInt(Session::getUserLogado()->getIdAgencia())
