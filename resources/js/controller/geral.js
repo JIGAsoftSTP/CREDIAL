@@ -217,7 +217,7 @@ var ListUser =  function () {
         };
         $(".default-user-img-" + user.id).css(css);
 
-        setTimeout(getImageUser,1500, user);
+        setTimeout(getImageUser,3500, user);
     };
 
 
