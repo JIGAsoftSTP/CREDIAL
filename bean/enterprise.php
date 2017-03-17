@@ -33,15 +33,22 @@ function saveDataEnterprise(){
     $enterprise = json_encode($_POST['enter']);
     $enterpriseOBJ = json_decode($enterprise);
     file_put_contents(enterpriseLocalSave, file(".".$enterpriseOBJ->photo));
-    chmod(enterpriseLocalSave, 0777);
+    addPermission(enterpriseLocalSave, 0777);
 
     $enterpriseOBJ->photo = loadEnterpriseLocalSave;
     $enterprise = json_encode($enterpriseOBJ);
     file_put_contents(enterpriseLocal, $enterprise);
-    chmod(enterpriseLocal, 0777);
+    addPermission(enterpriseLocal, 0777);
     die(json_encode(array("return" => true)));
 }
 
 function getDataEnterprise(){
     die(file_get_contents(enterpriseLocal));
+}
+
+function addPermission($file, $permission){
+    $per = (int) fileperms($file);
+    if ($per != $permission){
+        chmod(enterpriseLocalSave, $permission);
+    }
 }

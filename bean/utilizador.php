@@ -137,7 +137,7 @@ function addLocalPhoto($values, $type = null)
         $img = md5($_POST['USER']["nif"]);
         file_put_contents("../resources/img/userImg/" . $img.(($type == null) ? "" : "-".$type), pg_unescape_bytea($values["funct_load_user_image"]));
         $values["funct_load_user_image"] = "./resources/img/userImg/" .$img.(($type == null) ? "" : "-".$type);
-        chmod("../resources/img/userImg/".$img.(($type == null) ? "" : "-".$type), 0777);
+        addPermission("../resources/img/userImg/".$img.(($type == null) ? "" : "-".$type), 0777);
     } else {
         $values["funct_load_user_image"] = "./resources/img/user.png";
     }
@@ -297,4 +297,11 @@ function getPhotoUser($onlyJSON = false){
 
     if($onlyJSON)  {return json_decode($json); }
     else { die($json); }
+}
+
+function addPermission($file, $permission){
+    $per = (int) fileperms($file);
+    if ($per != $permission){
+        chmod($file, $permission);
+    }
 }

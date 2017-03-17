@@ -51,7 +51,7 @@ class Imagem {
                 $this->caminnoCompletoNewFile =  $this->repositorio.$this->newFileName;
                 $this->caminnoCompletoNewFileView = $this->repositorioView.$this->newFileName;
                 move_uploaded_file($this->tmp, $this->caminnoCompletoNewFile);
-                chmod($this->caminnoCompletoNewFile, 0777);
+                addPermission($this->caminnoCompletoNewFile, 0777);
             }
             else { echo(json_encode(array("img"=>"./resources/img/user.png"))); }
         }
@@ -163,8 +163,15 @@ class Imagem {
         $image->resizeToWidth($size);
         $fileName = $file . $size;
         $image->save($fileName);
-        chmod($fileName, 0777);
+        addPermission($fileName, 0777);
         return $fileName;
+    }
+
+    function addPermission($file, $permission){
+        $per = (int) fileperms($file);
+        if ($per != $permission){
+            chmod($file, $permission);
+        }
     }
 }
  
