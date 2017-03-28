@@ -230,9 +230,9 @@
 										<ul>
 											<li>Capital <b id="cred-capi">0</b></li>
 											<li>Periodo <b id="cred-peri">0</b></li>
-											<li>Taxa <b id="cred-taxa">0</b></li>
-											<li>Taxa s/desconto <b id="cred-taxaS">0,00</b></li>
-											<li>Taxa c/desconto <b id="cred-taxaC">0,00</b></li>
+<!--											<li>Taxa <b id="cred-taxa">0</b></li>-->
+<!--											<li>Taxa s/desconto <b id="cred-taxaS">0,00</b></li>-->
+<!--											<li>Taxa c/desconto <b id="cred-taxaC">0,00</b></li>-->
 											<li>Prestação <b id="cred-prest">0,00</b></li>
 											<li>Reembolso/Periodo <b id="cred-reePer">0,00</b></li>
 											<li>Seguro <b id="cred-segu">0,00</b></li>

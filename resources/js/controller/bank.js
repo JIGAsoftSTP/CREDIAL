@@ -133,7 +133,7 @@ function loadBankMoviment(position, component)
             $("#tableBankMoviments").empty();
 
 
-            $(".good").html(listBanks[position]["saldo"]);
+            $(".good").html(formattedString(Number(listBanks[position]["saldo"]).dc().rp()));
 
             console.info("saldo "+listBanks[position]["saldo"]);
             if(Number(listBanks[position]["saldo"])<Number(listBanks[position]["saldominimo"])){

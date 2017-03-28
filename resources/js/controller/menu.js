@@ -6,6 +6,9 @@
  * @param user {Array}
  */
 var menusUser = undefined;
+
+loadlogoEnterprise();
+
 function loadMenuUserLogado(){
     $.ajax({
         url:"./bean/utilizador.php",
@@ -18,7 +21,7 @@ function loadMenuUserLogado(){
             var menus = data.MENU;
             // var idSuper = getUrlParameter("id");
            for (var gg =0; gg < menus.length; gg++){
-               if(menus[gg]["LEVEL"] == "0")
+               if(menus[gg]["LEVEL"] === "0")
                $("#principal-menu").append('<li id="pri-'+menus[gg]['ID']+'" '+((gg === 0) ? 'class="active-menu"' : '' )+'><a href="'+menus[gg]['LINK']+'" id="m'+(menus[gg]['ID'])+'">'+menus[gg]['NAME']+'</a></li>');
 
                if(menus[gg]["SUPER.ID"] === seletedMenu+""){
@@ -39,6 +42,12 @@ function loadMenuUserLogado(){
             menusUser = menus;
             $('.single').find("li").eq(0).trigger('click');
         }
+    });
+}
+
+function loadlogoEnterprise() {
+    $("#logo-enterprise").css({
+        'backgroundSize': 'cover'
     });
 }
 loadMenuUserLogado();

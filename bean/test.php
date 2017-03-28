@@ -122,3 +122,9 @@ function carregarCliente(time) {
 }
 
 */
+
+$ddjddj = "jfjfjf";
+
+
+
+echo $ddjddj;

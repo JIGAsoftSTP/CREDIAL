@@ -88,11 +88,11 @@ $("#start-simulation").click(function () {
             dataType: "json",
             success: function (e) {
                 if (e.result) {
-                    $("#cred-taxa").text(Number(e.return['TAXA']).dc().rp());
+                    // $("#cred-taxa").text(Number(e.return['TAXA']).dc().rp());
                     $("#cred-peri").text(e.return['PERIODO']);
                     $("#cred-capi").text(formattedString(Number(e.return['CAPITAL']).dc().rp()));
-                    $("#cred-taxaS").text(formattedString(Number(e.return['TAXA SEM DESCONTO']).dc().rp()));
-                    $("#cred-taxaC").text(formattedString(Number(e.return['TAXA COM DESCONTO']).dc().rp()));
+                    // $("#cred-taxaS").text(formattedString(Number(e.return['TAXA SEM DESCONTO']).dc().rp()));
+                    // $("#cred-taxaC").text(formattedString(Number(e.return['TAXA COM DESCONTO']).dc().rp()));
                     $("#cred-totalPagar").text(formattedString(Number(e.return['TOTAL PAGAR']).dc().rp()));
                     $("#cred-prest").text(formattedString(Number(e.return['PRESTACAO']).dc().rp()));
                     $("#cred-reePer").text(formattedString(Number(e.return['REEMBOLSO/PRESTACAO']).dc().rp()));

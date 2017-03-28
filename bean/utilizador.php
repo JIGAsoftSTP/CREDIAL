@@ -300,8 +300,8 @@ function getPhotoUser($onlyJSON = false){
 }
 
 function addPermission($file, $permission){
-    $per = (int) fileperms($file);
-    if ($per != $permission){
-        chmod($file, $permission);
-    }
+//    $per = (int) fileperms($file);
+//    if ($per != $permission){
+//        chmod($file, $permission);
+//    }
 }

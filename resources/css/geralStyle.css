@@ -224,6 +224,10 @@ header .pin.unpin{
 .header-1 .logo{
 	margin-left: 2.5rem;
 }
+.header-1 img{
+	max-height: 50px;
+
+}
 .header-1 .logged-user{
 	position: relative;	
 	overflow: hidden;

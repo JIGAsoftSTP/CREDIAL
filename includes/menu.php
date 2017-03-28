@@ -14,10 +14,10 @@ hasSession();
 ?>
 <header>
 		<i class="icon-pushpin pin" appLog id="log-menu-pin"></i>
-		<nav class="header-1" id="log-menu-header1"><i class="logo">
-			<h1>LOGO here!</h1></i> 
+		<nav class="header-1" id="log-menu-header1">
+            <i class="logo"><img src="./resources/img/enterprise" id="logo-enterprise" alt="LOGO"></i>
 			<div class="logged-user">
-				<nav class="photo default-user-img ph-bk"></nav>
+				<nav class="photo default-user-img ph-bk" ></nav>
 				<ul>
 					<nav class="photo2 default-user-img ph-bk"></nav>
 					<p><span class="aut-user-login-name username"></span></p>

@@ -56,7 +56,7 @@ $("#logo-ipt").change(function (e)
 });
 
 $("#enter-bt").click(function () {
-    if(validation1($(".xpert-form input")) && enter.photo != undefined){
+    if(validation1($(".xpert-form input")) && enter.photo !== undefined){
         enter.mail = $("#enter-mail").val();
         enter.name = $("#enter-name").val();
         enter.telefone = $("#enter-tel").val();
@@ -69,7 +69,7 @@ $("#enter-bt").click(function () {
             data: {intensao : "saveDataEnterprise", enter : enter},
             success: function (data) {
                 if (data.return) {
-                    callXpertAlert("Os dados da Empresa foram Atualidados com sucesso!", new Mensage().checkmark, 8000);
+                    callXpertAlert("Os dados da Empresa foram Atualizados com sucesso!", new Mensage().checkmark, 8000);
                 }
             }
         });

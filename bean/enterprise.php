@@ -47,8 +47,8 @@ function getDataEnterprise(){
 }
 
 function addPermission($file, $permission){
-    $per = (int) fileperms($file);
-    if ($per != $permission){
-        chmod(enterpriseLocalSave, $permission);
-    }
+//    $per = (int) fileperms($file);
+//    if ($per != $permission){
+//        chmod(enterpriseLocalSave, $permission);
+//    }
 }
