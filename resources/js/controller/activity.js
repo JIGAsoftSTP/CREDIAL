@@ -213,6 +213,7 @@ function filterLoaded()
 
 function loadUser()
 {
+    var userName;
     $.ajax({
         url: address,
         type:"POST",
@@ -224,47 +225,33 @@ function loadUser()
             userActivities = e.result;
             for(var i = 0;i<userActivities.length;i++)
             {
+                if(userActivities[i]["surname"] === null ||
+                    userActivities[i]["surname"] === userActivities[i]["name"])
+                {
+                    userName = userActivities[i]["name"];
+                }
+                else
+                    userName = userActivities[i]["name"]+" "+userActivities[i]["surname"];
+
+
                 if(i === 0)
                 {
-                    if(userActivities[i]["name"] === userActivities[i]["surname"])
-                    {
                         if(userActivities[i]["state"] === UserState.INATIVO)
-                             $(".user-names").append('<li onclick="selectUser('+i+', $(this))" class="active" state="0"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+'</li>');
+                             $(".user-names").append('<li onclick="selectUser('+i+', $(this))" class="active" state="0"  id="'+userActivities[i]["id"]+'">'+userName+'</li>');
                         else if(userActivities[i]["state"] === UserState.ATIVO)
-                            $(".user-names").append('<li onclick="selectUser('+i+', $(this))" class="active" state="1"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+'</li>');
+                            $(".user-names").append('<li onclick="selectUser('+i+', $(this))" class="active" state="1"  id="'+userActivities[i]["id"]+'">'+userName+'</li>');
                         else
-                            $(".user-names").append('<li onclick="selectUser('+i+', $(this))" class="active" state-"2"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+'</li>');
-                    }
-                    else
-                    {
-                        if(userActivities[i]["state"] === UserState.INATIVO)
-                            $(".user-names").append('<li onclick="selectUser('+i+', $(this))" class="active" state="0"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+" "+userActivities[i]["surname"]+'</li>');
-                        else if(userActivities[i]["state"] === UserState.ATIVO)
-                            $(".user-names").append('<li onclick="selectUser('+i+', $(this))" class="active" state="1"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+" "+userActivities[i]["surname"]+'</li>');
-                        else
-                            $(".user-names").append('<li onclick="selectUser('+i+', $(this))" class="active" state="2"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+" "+userActivities[i]["surname"]+'</li>');
-                    }
+                            $(".user-names").append('<li onclick="selectUser('+i+', $(this))" class="active" state-"2"  id="'+userActivities[i]["id"]+'">'+userName+'</li>');
                 }
                 else
                 {
-                    if(userActivities[i]["name"] === userActivities[i]["surname"])
-                    {
-                        if(userActivities[i]["state"] === UserState.INATIVO)
-                            $(".user-names").append('<li onclick="selectUser('+i+', $(this))"  state="0"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+'</li>');
-                        else if(userActivities[i]["state"] === UserState.ATIVO)
-                            $(".user-names").append('<li onclick="selectUser('+i+', $(this))"  state="1"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+'</li>');
-                        else
-                            $(".user-names").append('<li onclick="selectUser('+i+', $(this))"  state="2"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+'</li>');
-                    }
+                    if(userActivities[i]["state"] === UserState.INATIVO)
+                        $(".user-names").append('<li onclick="selectUser('+i+', $(this))" state="0"  id="'+userActivities[i]["id"]+'">'+userName+'</li>');
+                    else if(userActivities[i]["state"] === UserState.ATIVO)
+                        $(".user-names").append('<li onclick="selectUser('+i+', $(this))"  state="1"  id="'+userActivities[i]["id"]+'">'+userName+'</li>');
                     else
-                    {
-                        if(userActivities[i]["state"] === UserState.INATIVO)
-                            $(".user-names").append('<li onclick="selectUser('+i+', $(this))" state="0"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+" "+userActivities[i]["surname"]+'</li>');
-                        else if(userActivities[i]["state"] === UserState.ATIVO)
-                            $(".user-names").append('<li onclick="selectUser('+i+', $(this))"  state="1"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+" "+userActivities[i]["surname"]+'</li>');
-                        else
-                            $(".user-names").append('<li onclick="selectUser('+i+', $(this))"  state="2"  id="'+userActivities[i]["id"]+'">'+userActivities[i]["name"]+" "+userActivities[i]["surname"]+'</li>');
-                    }
+                        $(".user-names").append('<li onclick="selectUser('+i+', $(this))"  state="2"  id="'+userActivities[i]["id"]+'">'+userName+'</li>');
+
                 }
             }
             selectedUser = userActivities[0]["id"];
