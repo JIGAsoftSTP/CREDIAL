@@ -67,13 +67,13 @@
 					</span>
 					<p ></p>
 				</section>
-				<section>
-					<span>
-						<h1><small>minutos</small></h1>
-						<i class="icon-stopwatch"></i>
-					</span>
-					<p>Tempo médio de atividades</p>
-				</section>
+<!--				<section>-->
+<!--					<span>-->
+<!--						<h1><small>minutos</small></h1>-->
+<!--						<i class="icon-stopwatch"></i>-->
+<!--					</span>-->
+<!--					<p>Tempo médio de atividades</p>-->
+<!--				</section>-->
 			</div>
 		</div>
 	</div>
