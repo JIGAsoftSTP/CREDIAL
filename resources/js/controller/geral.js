@@ -244,9 +244,9 @@ if(!Number.prototype.rp){
 
 
 function numericNumbers(event) {
-    if ((event.which != 44 || $(this).val().indexOf(',') != -1) &&
+    if ((event.which !== 44 || $(this).val().indexOf(',') !== -1) &&
         ((event.which < 48 || event.which > 57) &&
-        (event.which != 0 && event.which != 8))) {
+        (event.which !== 0 && event.which !== 8))) {
         event.preventDefault();
     }
 }
@@ -265,8 +265,8 @@ Object.freeze(UserState);
 
 if(!Date.prototype.getDatePt){
     Date.prototype.getDatePt = function () {
-        return (((this.getDate()+"").length == 1) ? "0"+this.getDate() : this.getDate() )
-            +"-"+((((this.getMonth()+1)+"").length == 1) ? "0"+(this.getMonth()+1) : (this.getMonth()+1))
+        return (((this.getDate()+"").length === 1) ? "0"+this.getDate() : this.getDate() )
+            +"-"+((((this.getMonth()+1)+"").length === 1) ? "0"+(this.getMonth()+1) : (this.getMonth()+1))
             +"-"+this.getUTCFullYear();
     }
 }
@@ -280,6 +280,21 @@ function alterFormatDate(date)
     var newDate = date.split("-");
     newDate = $.makeArray(newDate);
     return newDate[2]+"-"+newDate[1]+"-"+newDate[0];
+}
+
+var ExportData = function () {
+    this.type = undefined;
+    this.name = undefined;
+    this.data = undefined;
+};
+
+/**
+ * @type {ExportData}
+ */
+var dataExport = new ExportData();
+
+function getNameReport(name) {
+    dataExport.name = name;
 }
 
 

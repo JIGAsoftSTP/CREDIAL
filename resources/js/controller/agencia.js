@@ -111,7 +111,7 @@ function loadUserAgency(indice) {
             $(".agencyFunc li").empty();
             for(var i=0;i<e.result.length;i++)
             {
-                if(e.result[i]["NAME"] === e.result[i]["SURNAME"])
+                if(e.result[i]["SURNAME"] ===null || e.result[i]["NAME"] === e.result[i]["SURNAME"])
                     $(".agencyFunc").append('<li><img src='+e.result[i]["PHOTO"]+' alt="" width="200">'+e.result[i]["NAME"]+'</li>');
                 else
                     $(".agencyFunc").append('<li><img src='+e.result[i]["PHOTO"]+' alt="" width="200">'+e.result[i]["NAME"]+" "+e.result[i]["SURNAME"]+'</li>');

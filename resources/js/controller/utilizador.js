@@ -28,8 +28,7 @@ $("#add-ph-user").change(function (e)
             var css = {"background":"content-box #444 url('"+'../.'+data.img+"') no-repeat"
                 ,"background-position":"center"
                 ,"background-size":"cover"};
-            $(".adm-ph-user").css(css);
-            $(".adm-ph-user").removeClass("default-user-img");
+            $(".adm-ph-user").css(css).removeClass("default-user-img");
             imageUser = "."+data.img;
 
         }
@@ -285,7 +284,7 @@ $("#gest-user-menu-change").click(function () {
 
 function loadTypeUser(typeUser) {
     for(var r = 0; r < typeUser.length; r++){
-        $("#gest-user-type").append('<i value="'+typeUser[r]['ID']+'" class="icon-radio-'+((r==0) ? "checked2" : "unchecked")+'"><span> '+typeUser[r]['NAME']+'</span></i>');
+        $("#gest-user-type").append('<i value="'+typeUser[r]['ID']+'" class="icon-radio-'+((r===0) ? "checked2" : "unchecked")+'"><span> '+typeUser[r]['NAME']+'</span></i>');
     }
 }
 
@@ -399,19 +398,19 @@ function areChangeMenu() {
 }
 
 function areChangeNames() {
-    return user.nome+user.apelido != userChange.nome+userChange.apelido;
+    return user.nome+user.apelido !== userChange.nome+userChange.apelido;
 }
 
 function areChageAgencia() {
-    return user.idAgencia != userChange.idAgencia;
+    return user.idAgencia !== userChange.idAgencia;
 }
 
 function areChengeNivel() {
-    return userChange.idNivel != user.idNivel;
+    return userChange.idNivel !== user.idNivel;
 }
 
 function areChengeAvatar() {
-    return userChange.img != ("."+user.img);
+    return userChange.img !== ("."+user.img);
 }
 
 function openFatherHaveSonSelected() {
@@ -446,7 +445,7 @@ function transformDataUserToUser(data, type, time) {
         addInterUser = setInterval(function () {
             var us = new User();
             us.nome = data[iDataUser]["NAME"];
-            us.apelido = ((us.nome == data[iDataUser]["SURNAME"]) ? "" : data[iDataUser]["SURNAME"]);
+            us.apelido = ((data[iDataUser]["SURNAME"] === null) ? "" : ((us.nome === data[iDataUser]["SURNAME"]) ? " " : data[iDataUser]["SURNAME"]));
             us.id = data[iDataUser]["NIF"];
             us.idAgencia = data[iDataUser]["AGENCIA ID"];
             us.agencia = data[iDataUser]["AGENCIA"];
@@ -457,7 +456,7 @@ function transformDataUserToUser(data, type, time) {
             us.idNivel = data[iDataUser]["PERFIL ID"];
             us.menu = data[iDataUser]["MENU"];
 
-            if (type == "Active") {
+            if (type === "Active") {
                 listUser.addUser(us);
                 listUser.bluiderActive(iDataUser);
             } else {
@@ -466,9 +465,9 @@ function transformDataUserToUser(data, type, time) {
             }
             iDataUser++;
 
-            if (iDataUser == totalDataUser) {
+            if (iDataUser === totalDataUser) {
                 clearInterval(addInterUser);
-                if (type == "Active") {
+                if (type === "Active") {
                     transformDataUserToUser(dataOtherUser, "Other", 250);
                 }
                 else {
@@ -483,7 +482,7 @@ function transformDataUserToUser(data, type, time) {
 }
 
 function getSelectedUser() {
-    return (($(this).closest("section").attr("status") == "Ativo")
+    return (($(this).closest("section").attr("status") === "Ativo")
         ? listUser.listActive[$(this).closest("section").attr("item")]
         : listUser.listOther[$(this).closest("section").attr("item")]);
 }

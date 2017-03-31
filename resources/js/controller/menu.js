@@ -54,13 +54,15 @@ loadMenuUserLogado();
 
 var isFirstADM = true;
 function loadSubMenuSecondaryADM(menus) {
-   var mn = '<li id="'+menus['COD']+'" urldata="'+menus['LINK']+'" '+((isFirstADM) ? 'class="active"' : '' )+'>' +
+   var mn = '<li id="'+menus['COD']+'" ' +
+       ' onclick="getNameReport(\''+menus['NAME']+'\')" urldata="'+menus['LINK']+'" '+((isFirstADM) ? 'class="active"' : '' )+'>' +
     '<i class="'+menus["ICON"]+'"></i>' +
     '<span>'+menus['NAME']+'</span>' +
     '</li>';
    $("#secondary-menu").append(mn);
     isFirstADM = false;
 }
+
 
 var isFirstReport = true;
 function loadSubMenuSecondaryReport(menus) {

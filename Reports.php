@@ -25,7 +25,7 @@
 						<span class="funtionality">
 
 							<i class="icon-file-pdf" title="Exportar para PDF"></i>
-							<i class="icon-file-excel" title="Exportar para Excel"></i>
+							<i class="icon-file-excel"  title="Exportar para Excel"></i>
 							<separator></separator>
 							<i class="icon-filter callFilter"></i>
 						</span>
@@ -72,6 +72,7 @@
 			</article>
 
 	</div>
+        <label id="exportData"></label>
 </body>
 <script type="text/javascript" src="./resources/fw/pikaday/pikaday.js"></script>
 <script type="text/javascript" src="./resources/js/jQuery.js"></script>

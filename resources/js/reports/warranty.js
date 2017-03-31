@@ -4,7 +4,7 @@ $('.list-warr').on("click", ".first small", function (event)
     me = $(this).closest('section');
     var ig = Number($(this).attr("id-id"));
     if (!me.hasClass("show")) {
-        if (creditBluider.listaCredito[ig].listaInformacao.length == 0) {
+        if (creditBluider.listaCredito[ig].listaInformacao.length === 0) {
             getInformationCredit(ig, creditBluider.listaCredito[ig], me);
         }
         else {
@@ -61,7 +61,7 @@ var CreditoBluider = function () {
         $("#" + iClient).html(rt);
         section.find('.more').toggleClass('show');
         function fistOfType(type) {
-            if (isAdd[type] == undefined) {
+            if (isAdd[type] === undefined) {
                 isAdd[type] = true;
                 return true;
             } else {
@@ -74,7 +74,7 @@ var CreditoBluider = function () {
          * @param info {[Information]}
          */
         function nextIsOtherType(i, info) {
-            return (info.length > i + 1 && info[i].tipo != info[(i + 1)].tipo);
+            return (info.length > i + 1 && info[i].tipo !== info[(i + 1)].tipo);
         }
     };
 
@@ -154,14 +154,14 @@ function getInformationCredit(i, credit, section) {
         data: {intensao: "loadListInformationCredit", id: credit.id, filter : getDataStorage(sessionStorage,'filterReport')},
         dataType: "json",
         success: function (e) {
-            for (var f=0; (f < e.information.length && f != 199) ; f++){
+            for (var f=0; (f < e.information.length && f !== 199) ; f++){
                 var info = e.information[f];
 
                 var newInfo = new Information();
                 newInfo.id = info["id"];
                 newInfo.tipo = info["type"];
 
-                if (newInfo.tipo == "Garrantia") {
+                if (newInfo.tipo === "Garrantia") {
                     newInfo.name = info["garrantia"];
                     newInfo.value = info["garrantiavalue"];
                 } else {
@@ -190,7 +190,7 @@ var creditInte = undefined;
  */
 function transformDataToCredito(data, time) {
     iData = 0;
-    totalData = data.length;
+    totalData = (data !== undefined) ? data.length: 0;
     clearInterval(creditInte);
     if(totalData > 0)
     creditInte = setInterval(function () {
@@ -206,7 +206,7 @@ function transformDataToCredito(data, time) {
         Creditoe.surname = credits["surname"];
         Creditoe.totalpagar = credits["totalpagar"];
         Creditoe.value = credits["value"];
-        Creditoe.clienteNome = (Creditoe.name+" "+((Creditoe.surname == Creditoe.name)
+        Creditoe.clienteNome = (Creditoe.name+" "+((Creditoe.surname === Creditoe.name)
             ? "" : Creditoe.surname ));
         creditBluider.addCredito(Creditoe);
         creditBluider.bluiderCreditos(Creditoe, iData);

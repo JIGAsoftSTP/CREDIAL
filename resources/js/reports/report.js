@@ -213,6 +213,9 @@ function reportChequeDistribuido(list) {
                     else if(activeReport === TypeReport.CAPITAL_TAEG) reportTaeg(e.result);
                     else if(activeReport === TypeReport.DIVIDA_PRODUTO) relatorioDividaProduto(e.result);
                     else relatorioCheque(e.result);
+
+                    dataExport.data = e.result;
+                    dataExport.type = activeReport;
                 }
             });
     }
@@ -460,3 +463,15 @@ function sumTable(array){
      }
 }
 
+
+$(".icon-file-excel").click(function () {
+        $.ajax({
+            url: "./bean/ExportReport.php",
+            type: "POST",
+            data: {"intensao": "exportExcel", report : dataExport},
+            dataType: "json",
+            success: function (e) {
+
+            }
+        });
+});
