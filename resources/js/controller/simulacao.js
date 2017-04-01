@@ -88,11 +88,11 @@ $("#start-simulation").click(function () {
             dataType: "json",
             success: function (e) {
                 if (e.result) {
-                    // $("#cred-taxa").text(Number(e.return['TAXA']).dc().rp());
+                   /* $("#cred-taxa").text(Number(e.return['TAXA']).dc().rp());*/
                     $("#cred-peri").text(e.return['PERIODO']);
                     $("#cred-capi").text(formattedString(Number(e.return['CAPITAL']).dc().rp()));
-                    // $("#cred-taxaS").text(formattedString(Number(e.return['TAXA SEM DESCONTO']).dc().rp()));
-                    // $("#cred-taxaC").text(formattedString(Number(e.return['TAXA COM DESCONTO']).dc().rp()));
+                   /*  $("#cred-taxaS").text(formattedString(Number(e.return['TAXA SEM DESCONTO']).dc().rp()));
+                    $("#cred-taxaC").text(formattedString(Number(e.return['TAXA COM DESCONTO']).dc().rp()));*/
                     $("#cred-totalPagar").text(formattedString(Number(e.return['TOTAL PAGAR']).dc().rp()));
                     $("#cred-prest").text(formattedString(Number(e.return['PRESTACAO']).dc().rp()));
                     $("#cred-reePer").text(formattedString(Number(e.return['REEMBOLSO/PRESTACAO']).dc().rp()));
@@ -110,7 +110,7 @@ $("#start-simulation").click(function () {
                     banks = e.banks;
                     addBancoCheque($("#cred-cli-bank-list"), e.banks);
 
-                    // "ID TAXA INFERIOR":"51"
+                    /*"ID TAXA INFERIOR":"51"*/
                     bluiderTablePestacao();
 
                     regUserActivity("./bean/activity.php", -1 , "Efetuou uma simulação!", JSON.stringify(si), LevelActivity.OUTROS );
@@ -120,7 +120,7 @@ $("#start-simulation").click(function () {
                     callXpertAlert(e.return['MESSAGE'], new Mensage().cross, 8000);
                     $('section .part-2 b').text("0,0");
                     $("#cred-totalPagar").text("0,0");
-                    // $("#cred-cli-bank").html('<option value="0">(Banco)</option>');
+                    /*$("#cred-cli-bank").html('<option value="0">(Banco)</option>');*/
 
                     si.dataTableAmortizacao = [];
 
@@ -157,8 +157,8 @@ function loadDataSimulation() {
             loadComoBoxIDandValue($("#cred-cli-modaPag"), e.fontepagamentos, "ID", "DESC");
             loadComoBoxIDandValue($("#cred-cli-fonRend"), e.tipopagamentos, "ID", "DESC");
 
-            // loadComoBoxIDandValue($("#cred-cli-list-docu"), e.tipodocumentos, "ID", "DESC");
-            // loadComoBoxIDandValue($("#cred-cli-list-gara"), e.garantias, "ID", "DESC");
+            /*loadComoBoxIDandValue($("#cred-cli-list-docu"), e.tipodocumentos, "ID", "DESC");
+            loadComoBoxIDandValue($("#cred-cli-list-gara"), e.garantias, "ID", "DESC");*/
 
             loadDcomentOrGarrant($("#cred-cli-list-docu"),e.tipodocumentos,"ID","DESC");
             loadDcomentOrGarrant($("#cred-cli-list-gara"),e.garantias,"ID","DESC");

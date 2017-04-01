@@ -1,4 +1,6 @@
 
+loadDataToPage();
+
 $('.list-warr').on("click", ".first small", function (event)
 {
     me = $(this).closest('section');
@@ -16,7 +18,6 @@ $('.list-warr').on("click", ".first small", function (event)
 });
 $("#labelWarranty").click(function () {
     loadDataToPage();
-
 });
 
 var CreditoBluider = function () {

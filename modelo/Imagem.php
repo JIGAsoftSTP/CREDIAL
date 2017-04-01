@@ -47,7 +47,7 @@ class Imagem {
             {
                 $this->deleteAllFileInDirectory();
 //                session_start();
-                $this->newFileName = md5(Session::getUserLogado()->getId())."-".md5(time().date("d-m-y h:M:s")).$this->extensao;
+                $this->newFileName = md5(Session::getUserLogado()->getId())."-".md5(time().date("d-m-y h:i:s")).$this->extensao;
                 $this->caminnoCompletoNewFile =  $this->repositorio.$this->newFileName;
                 $this->caminnoCompletoNewFileView = $this->repositorioView.$this->newFileName;
                 move_uploaded_file($this->tmp, $this->caminnoCompletoNewFile);

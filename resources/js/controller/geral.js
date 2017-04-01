@@ -286,6 +286,10 @@ var ExportData = function () {
     this.type = undefined;
     this.name = undefined;
     this.data = undefined;
+
+    this.haveData = function () {
+        return (this.data !== undefined || $.isArray(this.data));
+    };
 };
 
 /**
