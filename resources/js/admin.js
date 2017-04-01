@@ -13,6 +13,7 @@ $('.search-span2 input').focusout(function(event) {
 
 $('.add-new-admin .closeIt').click(function(event) {
 	$(this).closest('.add-new-admin').removeClass('show');
+	bankAccountOp = 1;
 });
 
 $('.add-new-admin button').click(function(event) {

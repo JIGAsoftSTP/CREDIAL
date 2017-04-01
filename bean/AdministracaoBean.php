@@ -78,6 +78,12 @@
         case "localidades":
             carregarLocalidades();
             break;
+        case "load-account-data-update":
+            loadAcountDataUpdate();
+            break;
+        case "update-bank-account":
+            updateBankAccount();
+            break;
     }
 
 
@@ -132,7 +138,7 @@
             ->addNumeric(Session::getUserLogado()->getIdAgencia())
             ->addString($_POST["Banco"]["sigla"])
             ->addString($_POST["Banco"]["nome"])
-            ->addString($_POST["Banco"]["codigoConta"]);
+            ->addString(null);
         $call->execute();
 
         $result = $call->getValors();
@@ -349,7 +355,6 @@ function loadInsurance()
         $result = $call->getValors();
 
         die(json_encode(array("result" => $result)));
-
     }
 
     function makeDebitCredit()
@@ -471,4 +476,53 @@ function loadInsurance()
             $result["result"] = "false";
             die(json_encode(array("result" => $result)));
         }
+    }
+
+    function loadAcountDataUpdate()
+    {
+        $call = new CallPgSQL();
+        $call->functionTable("funct_load_conta", "*")
+            ->addString(Session::getUserLogado()->getId())
+            ->addNumeric(Session::getUserLogado()->getIdAgencia())
+            ->addNumeric($_POST["id-account"]);
+        $call->execute();
+
+        $arrayValues = array();
+        while($result = $call->getValors())
+        {
+            $arrayValues[count($arrayValues)] = $result;
+        }
+        die(json_encode(array("result" =>$arrayValues)));
+    }
+
+    function updateBankAccount()
+    {
+        $call = new CallPgSQL();
+        $call->functionTable("funct_change_conta", "*")
+            ->addString(Session::getUserLogado()->getId())
+            ->addNumeric(Session::getUserLogado()->getIdAgencia())
+            ->addNumeric($_POST["id-account"])
+            ->addNumeric($_POST["bank"]["nome"])
+            ->addString($_POST["bank"]["codigoConta"])
+            ->addString($_POST["bank"]["codigoAgencia"])
+            ->addString($_POST["bank"]["descricao"])
+            ->addDouble($_POST["bank"]["saldoMinimo"]);
+        $call->execute();
+        $result = $call->getValors();
+
+        if($result["result"] == true){
+            $result["result"] = "true";
+            die(json_encode(array("resultado" => $result)));
+        }
+        else{
+            $result["result"] = "false";
+            die(json_encode(array("resultado" => $result)));
+        }
+
+
+
+
+
+
+
     }

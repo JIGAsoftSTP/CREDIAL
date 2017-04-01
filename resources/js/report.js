@@ -115,7 +115,7 @@ function filterConstruct(identifier, selected, filter){
 
 
 function getId(identifer, selected) {
-	var idObject = $("#"+selected+" option[value='" + $('#'+identifer).val() + "']").attr('data-id');
+	var idObject = $('#'+selected+" option[value='" + $('#'+identifer).val() + "']").attr('data-id');
 
     if( $('#secondary-menu li.active').attr('id') !== "rep.gara")
 	{

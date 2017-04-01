@@ -109,7 +109,7 @@ function addNewEntity() {
                 {
                     loadObjectValues($("#adminEntity").val());
                     setEntityActivity();
-                    callXpertAlert(entityName($("#adminEntity").val())+" adicionado!", 'checkmark', 8000);
+                    callXpertAlert($("#adminEntity :selected").text()+" adicionado!", 'checkmark', 8000);
                     $("#txtEntity").val("");
                     $("#adminEntity").val("");
                     regUserActivity(activityAdress, -1,"Registou uma nova Entidade",JSON.stringify(entityActivity) , LevelActivity.CRIACAO);
@@ -127,15 +127,6 @@ function setEntityActivity()
         "Tipo de Entidade" : $("#adminEntity :selected").text()};
 }
 
-function entityName(idEntity) {
-    for(var i =0;i<entidades.length;i++)
-    {
-        if(entidades[i]["ID"] == idEntity)
-        {
-            return entidades[i]["NAME"];
-        }
-    }
-}
 
 getDataStorage()
 /*setTimeout(function () { setWithEntity() }, 5000);

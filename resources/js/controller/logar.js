@@ -6,37 +6,39 @@ $("#logar").click(function () {
     var pwd = $("#pwd").val();
     var user = $("#user").val();
     if (pwd != "" && user != "")
-    $.ajax({
-        url: "./bean/logar.php",
-        type: "POST",
-        data: {"intensao": "login", "user": user, "pwd": pwd},
-        dataType: "json",
-        success: function (e) {
-            if(e.result){
-                if(e.state === 1) {
-                    if(e.pageUser !== null) {
-                        window.location = e.pageUser["LINK"];
-                        regUserActivity(loginActivityAddress, -1, "Acessou a aplicação", -1, LevelActivity.VISUALIZACAO);
-                    }else{
-                        callXpertAlert('Utilizador sem privilégio, contacte o administrador!', new Mensage().warning, 10000);
+        $.ajax({
+            url: "./bean/logar.php",
+            type: "POST",
+            data: {"intensao": "login", "user": user, "pwd": pwd},
+            dataType: "json",
+            success: function (e) {
+                if (e.result) {
+                    if (e.state === 1) {
+                        if (e.pageUser !== null) {
+                            window.location = e.pageUser["LINK"];
+                            regUserActivity(loginActivityAddress, -1, "Acessou a aplicação", -1, LevelActivity.VISUALIZACAO);
+                        } else {
+                            callXpertAlert('Utilizador sem privilégio, contacte o administrador!', new Mensage().warning, 10000);
+                        }
                     }
+                    else if (e.state === 2) {
+                        $("b#nome").text(e.nome);
+                        $(".mp-change-pwd").fadeIn();
+                        $('#pwd1').focus();
+                    }
+                    else
+                        callXpertAlert('Acesso Negado!', new Mensage().cross, 10000);
                 }
-                else if(e.state=== 2) {
-                    $("b#nome").text(e.nome);
-                    $(".mp-change-pwd").fadeIn();
-                    $('#pwd1').focus();
+                else {
+                    callXpertAlert('Senha ou Usuario incorreto!', new Mensage().warning, 10000);
                 }
-                else
-                    callXpertAlert('Acesso Negado!', new Mensage().cross, 10000);
             }
-            else { callXpertAlert('Senha ou Usuario incorreto!', new Mensage().warning, 10000); }
-        }
-    });
+        });
 });
 
 /*warning;checkmark;cross;notification*/
 $("#confirme").click(function () {
-    if(isValid($("#pwd1"),$("#pwd2"))){
+    if (isValid($("#pwd1"), $("#pwd2"))) {
         var pwd = $("#pwd1").val();
         $.ajax({
             url: "./bean/logar.php",
@@ -44,64 +46,68 @@ $("#confirme").click(function () {
             data: {"intensao": "redinirSenha", "pwd": pwd},
             dataType: "json",
             success: function (e) {
-                if(e.result){
-                    if(e.pageUser !== null) {
+                if (e.result) {
+                    if (e.pageUser !== null) {
                         window.location = "includes/welcome.html";
                         regUserActivity(loginActivityAddress, -1, "Redifiniu a sua palavra-passe!", -1, LevelActivity.ATUALIZACAO);
-                        sessionStorage.setItem("hasBeenActiveNow", e.pageUser["LINK"] );
-                    }else{
+                        sessionStorage.setItem("hasBeenActiveNow", e.pageUser["LINK"]);
+                    } else {
                         $(".mp-change-pwd").fadeOut(800);
                         callXpertAlert('Utilizador Sem previlegio, contante o administrador!', new Mensage().warning, 10000);
                     }
                 }
-                else { callXpertAlert(e.msg, new Mensage().warning, 10000); }
+                else {
+                    callXpertAlert(e.msg, new Mensage().warning, 10000);
+                }
             }
         });
     }
-    else{
+    else {
         callXpertAlert('As senhas não coincidem!', new Mensage().warning, 10000);
     }
 });
 
 var loginActivityAddress = "bean/activity";
 $("#pwd1").keyup(function () {
-    isValid($("#pwd1"),$("#pwd2"));
+    isValid($("#pwd1"), $("#pwd2"));
 });
 
 $("#pwd2").keyup(function () {
-    isValid($("#pwd1"),$("#pwd2"));
+    isValid($("#pwd1"), $("#pwd2"));
 });
 
-function isValid(pwd1,pwd2) {
+function isValid(pwd1, pwd2) {
     if (pwd1.val() === pwd2.val()) {
-        var css = {color:"",borderColor:""};
+        var css = {color: "", borderColor: ""};
         pwd2.css(css);
         pwd1.css(css);
         return true;
     }
     else if (pwd1.val() !== "" && pwd2.val() !== "") {
-        var css = {color:"red",borderColor:"red"};
+        var css = {color: "red", borderColor: "red"};
         pwd1.css(css);
         pwd2.css(css);
         return false;
     }
-    else {return false;}
+    else {
+        return false;
+    }
 
 }
 
 $("#changePwd").click(changePwd);
 
 function changePwd() {
-    if(isValid($("#pwdN1"), $("#pwdN2")) && $("#pwdAT").val()!=="" ){
+    if (isValid($("#pwdN1"), $("#pwdN2")) && $("#pwdAT").val() !== "") {
         $.ajax({
             url: "./bean/logar.php",
             type: "POST",
-            data: {"intensao": "changePwd","pwdOld":$("#pwdAT").val(),"pwdNew":$("#pwdN1").val()},
+            data: {"intensao": "changePwd", "pwdOld": $("#pwdAT").val(), "pwdNew": $("#pwdN1").val()},
             dataType: "json",
             success: function (e) {
-                if(e.result) {
+                if (e.result) {
 
-                    regUserActivity(loginActivityAddress, -1 , "Alterou a sua senha!", -1, LevelActivity.VISUALIZACAO );
+                    regUserActivity(loginActivityAddress, -1, "Alterou a sua senha!", -1, LevelActivity.VISUALIZACAO);
 
                     callXpertAlert('A senha foi alterada com sucessso!', new Mensage().checkmark, 10000);
                     resetForm($(".mp-change-pwd"));
@@ -124,16 +130,18 @@ function logOut() {
         dataType: "json",
         success: function (e) {
             window.location = "./index.php";
-            regUserActivity("./bean/activity.php", -1 , "Um determinado utilizador terminou a sessão", -1, LevelActivity.ATUALIZACAO );
+            regUserActivity("./bean/activity.php", -1, "Um determinado utilizador terminou a sessão", -1, LevelActivity.ATUALIZACAO);
         }
     });
 }
 
 
 $(document).ready(function (e) {
-   if (sessionStorage.getItem("hasBeenActiveNow") !== null)
-        $("#wel-link").attr("href", "../"+sessionStorage.getItem("hasBeenActiveNow") );
-    sessionStorage.removeItem("hasBeenActiveNow");
+    if (sessionStorage.getItem("hasBeenActiveNow") !== null) {
+        $("#wel-link").attr("href", "../" + sessionStorage.getItem("hasBeenActiveNow")).on('click', function () {
+            sessionStorage.removeItem("hasBeenActiveNow");
+        });
+    }
 });
 
 
@@ -155,26 +163,28 @@ $("#user").keyup(function () {
     $.ajax({
         url: "./bean/logar.php",
         type: "POST",
-        data: {"intensao": "getImageUser","user_id":$(this).val()},
+        data: {"intensao": "getImageUser", "user_id": $(this).val()},
         dataType: "json",
         success: function (e) {
-            $(".photo").css({'background':'content-box #444 url('+e.img+') no-repeat',
+            $(".photo").css({
+                'background': 'content-box #444 url(' + e.img + ') no-repeat',
                 'backgroundPosition': 'center',
-                'backgroundSize': 'cover'});
+                'backgroundSize': 'cover'
+            });
         }
     });
 });
 // user-name-complete
 function loadDataUser() {
-    var l = location+"";
-    if(!l.$$("welcome"))
+    var l = location + "";
+    if (!l.$$("welcome"))
         $.ajax({
             url: "./bean/logar.php",
             type: "POST",
             data: {"intensao": "getDataUser"},
             dataType: "json",
             success: function (e) {
-                if(e.result) {
+                if (e.result) {
                     $(".photo.default-user-img").css({
                         'background': 'content-box #444 url(' + e.user_logoTiny + ') no-repeat',
                         'backgroundSize': 'cover'
@@ -186,7 +196,7 @@ function loadDataUser() {
                     });
 
                     $(".aut-user-login-name").text(e.user_name_complete);
-                    $("#menu-ag-user").text(e.user_perfil+" na "+e.user_agency);
+                    $("#menu-ag-user").text(e.user_perfil + " na " + e.user_agency);
                     appLog = e.user_nif;
                     window.onpaint = getAppLog();
                 }
@@ -194,15 +204,15 @@ function loadDataUser() {
         });
 }
 
-var feedback = function () {};
+var feedback = function () {
+};
 feedback.prototype.type = undefined;
 feedback.prototype.text = undefined;
 feedback.prototype.other = undefined;
 feedback.prototype.mail = undefined;
 
 $("#cli-feed-bt").click(function () {
-    if(validation1($(".content-feed input, .content-feed textarea, .content-feed select")))
-    {
+    if (validation1($(".content-feed input, .content-feed textarea, .content-feed select"))) {
         var feed = new feedback();
         feed.mail = $("#cli-feed-mail").val();
         feed.text = $("#cli-feed-text").val();
@@ -211,10 +221,10 @@ $("#cli-feed-bt").click(function () {
         $.ajax({
             url: "./bean/logar.php",
             type: "POST",
-            data: {"intensao": "sendfeeback", feed : feed},
+            data: {"intensao": "sendfeeback", feed: feed},
             dataType: "json",
             success: function (e) {
-                if(e.result) {
+                if (e.result) {
                     callXpertAlert('A sua mensagem foi enviada com sucesso!', new Mensage().checkmark, 80000);
                     resetForm($(".mp-feedback").fadeOut(300));
                 }
@@ -223,7 +233,8 @@ $("#cli-feed-bt").click(function () {
     }
 });
 
-var refresh = function () {};
+var refresh = function () {
+};
 /**
  * @type {string}
  * @variation {CLIENT,PAYMENT,CREDIT}
@@ -232,33 +243,33 @@ refresh.prototype.dataType = null;
 
 
 function doRefresh() {
-   setTimeout(function () {
-       var re = sessionStorage.getItem("refresh");
-       $.ajax({
-           url: "./bean/refreshDataBD.php",
-           type: "POST",
-           data: {"intensao": "refresh", re : re},
-           dataType: "json",
-           success: function (e) {
-               if(e.result) {
-                   sessionStorage.removeItem("refresh");
-               }
-           }
-       });
-   }, 2000);
+    setTimeout(function () {
+        var re = sessionStorage.getItem("refresh");
+        $.ajax({
+            url: "./bean/refreshDataBD.php",
+            type: "POST",
+            data: {"intensao": "refresh", re: re},
+            dataType: "json",
+            success: function (e) {
+                if (e.result) {
+                    sessionStorage.removeItem("refresh");
+                }
+            }
+        });
+    }, 2000);
 }
 var res = undefined;
 function saveRefresh(re) {
     if (sessionStorage.getItem("refresh") == null) {
         res = {};
-        res.list=[re];
+        res.list = [re];
         sessionStorage.setItem("refresh", JSON.stringify(res));
     }
     else {
         res = $.parseJSON(sessionStorage.getItem("refresh"));
         var list = res.list;
         list[list.length] = re;
-        res.list=list;
+        res.list = list;
         sessionStorage.setItem("refresh", JSON.stringify(res));
     }
     doRefresh();
@@ -266,15 +277,15 @@ function saveRefresh(re) {
 
 if (sessionStorage.getItem("refresh") !== null) doRefresh();
 
-function getAppLog(){
+function getAppLog() {
     logData = getDataStorage(localStorage, 'user-' + appLog);
-        for (var key in logData) {
-            if(logData[key] !== "")
+    for (var key in logData) {
+        if (logData[key] !== "")
             $('#' + key).addClass(logData[key])
     }
 }
-function setAppLog(element, classLog){
+function setAppLog(element, classLog) {
     idLog = element.attr('id');
-    hasClass = element.hasClass(classLog);    
+    hasClass = element.hasClass(classLog);
     setDataStorage(localStorage, 'user-' + appLog, idLog, hasClass ? classLog : "");
 }

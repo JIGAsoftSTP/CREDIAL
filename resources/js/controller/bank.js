@@ -16,18 +16,27 @@ $(function(){
         else
             makeCreditDebit();
     });
+
+    $("#tableBankMoviments").scroll(function () {
+        if($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
+            loadMoviments();
+        }
+    });
+
+
 });
 
 var bankAddress = "../../bean/AdministracaoBean.php";
 var bankActivityAddress = "../../bean/activity.php";
-
+var bankAccountOp = 1; // 1- registar, 2 - atualizar
 var listBanks = [];
 var listMoviments = [];
 var bankRegisterActivity = undefined;
 var bankTransferActivity = undefined;
 var bankAccountActivity = undefined;
 var bankDebitCreditActivity = undefined;
-var value;
+var bankAccountMsg = undefined;
+var value, index = 0, added = 0, clique = 0;
 var Movimentation = function () {};
 Movimentation.prototype.bankFrom;
 Movimentation.prototype.bankTo;
@@ -47,11 +56,11 @@ DebitCredit.prototype.numDoc = undefined;
 DebitCredit.prototype.value = undefined;
 DebitCredit.prototype.bank = undefined;
 DebitCredit.prototype.typeOperation = undefined;
+var idAccountUpdate = 0;
 
 function setRegBankActivity()
 {
-    bankRegisterActivity = {"Banco" : $("#bancoNome").val(), "Sigla" : $("#bancoSigla").val(),
-    "Código da Conta": $("#bancoCodigoBancario").val()};
+    bankRegisterActivity = {"Banco" : $("#bancoNome").val(), "Sigla" : $("#bancoSigla").val()};
 }
 
 function setBankTransferActivity() {
@@ -63,7 +72,7 @@ function setBankTransferActivity() {
 
 function setBankAccountActivity() {
     bankAccountActivity = {"Banco": $("#bk-conta-nome :selected").text(),
-    "Código da Agência" :$("#bk-conta-agencia").val(), "Código da Conta" : $("#bk-conta-conta").val(),
+    "Código Interbancário" :$("#bk-conta-agencia").val(), "Código da Conta" : $("#bk-conta-conta").val(),
     "Saldo Mínimo" :$("#bk-contaSaldoMinimo").val(), "Descrição" : $("#bk-conta-descricao").val() };
 }
 
@@ -88,6 +97,7 @@ function loadBankData()
 }
 function carregarContas()
 {
+    var acounts = "";
     $.ajax
     ({
         url: bankAddress,
@@ -95,38 +105,84 @@ function carregarContas()
         dataType:"json",
         data:{"intention": "contas"},
         beforeSend: function () {  $(".mp-loading").fadeIn(); },
-        complete: function () {
-            $(".mp-loading").fadeOut();
-        },
+        complete: function () {$(".mp-loading").fadeOut();},
         success:function (e)
         {
              listBanks = e.contas;
             loadComoBoxIDandValue($(".listBanks"), e.contas ,"ID", "DESCRICAO");
             loadComoBoxIDandValue($("#bk-conta-nome"), e.bancos ,"ID", "NAME");
-            $(".contas").append('<li class="active" onclick="loadBankMoviment('+i+', $(this))" >'+e.contas[0]["DESCRICAO"]+'</li>');
-            loadBankMoviment(0);
-            for(var i = 1;i<e.contas.length;i++)
+
+            $(".contas").empty();
+            if(e.contas.length >0)
             {
-                $(".contas").append('<li onclick="loadBankMoviment('+i+', $(this))" >'+e.contas[i]["DESCRICAO"]+'</li>');
+                $(".contas").append('<li class="active" onclick="loadBankMoviment(0, $(this))">'+e.contas[0]["DESCRICAO"]+'</li>');
+                for(var i = 1;i<e.contas.length;i++)
+                    acounts +='<li onclick="loadBankMoviment('+i+', $(this))" >'+e.contas[i]["DESCRICAO"]+'</li>';
+
+                $(".contas").append(acounts);
+                loadBankMoviment(0);
             }
         }
     });
 }
 
+
+
+function loadDataUpdateAccount(accountIndex)
+{
+    $.ajax
+    ({
+        url: bankAddress,
+        type: "POST",
+        dataType: "json",
+        data: {"intention": "load-account-data-update", "id-account": listBanks[accountIndex]["ID"]},
+        beforeSend: function () {$(".mp-loading").fadeIn();},
+        complete: function () {$(".mp-loading").fadeOut();},
+        success: function (e) {
+
+            idAccountUpdate = e.result[0]["conta_id"];
+            $("#bk-conta-nome").val(e.result[0]["conta_banco_id"]);
+            console.info(e.result[0]["conta_age_id"]);
+            $("#bk-conta-agencia").val(e.result[0]["conta_agenciacod"]);
+             $("#bk-conta-conta").val(e.result[0]["conta_numero"]);
+             $("#bk-conta-descricao").val(e.result[0]["conta_desc"]);
+            $("#bk-contaSaldoMinimo").val(e.result[0]["conta_saldominimo"]);
+
+             bankAccountOp = 2;
+            $('.bank .menu-bank li').trigger("click");
+        }
+    });
+}
 function loadBankMoviment(position, component)
 {
     $("contas li.active").removeClass("active");
     $(component).closest("li").addClass("active");
 
+    if(bankAccountMsg === undefined)
+    {
+        if(listBanks[position]["NOME BANCO"] === $("#bankMovimentName").html())
+            loadDataUpdateAccount(position);
+        else
+            sendRequestBankMoviment(position);
+    }
+    else
+    {
+        bankAccountMsg = undefined;
+        sendRequestBankMoviment(position);
+    }
+}
+
+function sendRequestBankMoviment(position) {
     $.ajax
     ({
         url: bankAddress,
         type:"POST",
         dataType:"json",
         data:{"intention": "bank moviment", "bank" : listBanks[position]["ID"]},
+        beforeSend: function () {  $(".mp-loading").fadeIn();},
+        complete: function () {$(".mp-loading").fadeOut();},
         success:function (e)
         {
-
             listMoviments = [];
             listMoviments = e.result;
             $("#bankMovimentName").html(listBanks[position]["NOME BANCO"]);
@@ -135,7 +191,6 @@ function loadBankMoviment(position, component)
 
             $(".good").html(formattedString(Number(listBanks[position]["saldo"]).dc().rp()));
 
-            console.info("saldo "+listBanks[position]["saldo"]);
             if(Number(listBanks[position]["saldo"])<Number(listBanks[position]["saldominimo"])){
                 $(".sald").removeClass("good");
                 $(".sald").addClass("bad");
@@ -144,28 +199,35 @@ function loadBankMoviment(position, component)
                 $(".sald").removeClass("bad");
                 $(".sald").addClass("good");
             }
-
-            for(var i=0;i<listMoviments.length;i++)
-            {   var table = document.getElementById("tableBankMoviments");
-                var row = table.insertRow(table.childElementCount);
-                var moviments = e.result[i];
-                row.id = i;
-
-                var column0 = row.insertCell(0);
-                var column1 = row.insertCell(1);
-                var column2 = row.insertCell(2);
-                var column3 = row.insertCell(3);
-
-                column0.innerHTML = moviments["DATA"];
-                column1.innerHTML = moviments["DEBITO"];
-                column2.innerHTML = moviments["CREDITO"];
-                column3.innerHTML = moviments["LIBELE"];
-            }
-            tableEstructure($(".x-table"));
+            index = 0;
+            loadMoviments()
         }
     });
 }
+function loadMoviments()
+{
+    added = 0;
+    for(var i =index;(i < listMoviments.length && added<50);i++)
+    {
+        var table = document.getElementById("tableBankMoviments");
+        var row = table.insertRow(table.childElementCount);
+        var moviments = listMoviments[i];
 
+        var column0 = row.insertCell(0);
+        var column1 = row.insertCell(1);
+        var column2 = row.insertCell(2);
+        var column3 = row.insertCell(3);
+
+        column0.innerHTML = moviments["DATA"];
+        column1.innerHTML = moviments["DEBITO"];
+        column2.innerHTML = moviments["CREDITO"];
+        column3.innerHTML = moviments["LIBELE"];
+        index = i;
+        added++;
+    }
+
+    tableEstructure($(".x-table"));
+}
 function bankTransfer() {
 
     if($("#bankMovimentFrom").val() === "")
@@ -204,6 +266,7 @@ function bankTransfer() {
                             console.log(e.result["RESULT"]);
                             if(e.result["RESULT"] ==='true')
                             {
+                                bankAccountMsg = "done";
                                 carregarContas();
                                 regUserActivity(bankActivityAddress, -1,"Efetuou Transferência Bancária",
                                     JSON.stringify(bankTransferActivity), LevelActivity.CRIACAO);
@@ -247,6 +310,7 @@ function makeCreditDebit() {
             {
                 if(e.result["result"] ==='true')
                 {
+                    bankAccountMsg = "done";
                     callXpertAlert("Operação efetuada com sucesso!", "checkmark", 8000);
                     $('.debitCreditField').val("");
                     $('.debitCreditField').css("border", "");
@@ -305,7 +369,6 @@ function regBank()
         var banco = new Banco();
         banco.nome = $("#bancoNome").val();
         banco.sigla = $("#bancoSigla").val();
-        banco.codigoConta = $("#bancoCodigoBancario").val();
         setRegBankActivity();
 
         $.ajax({
@@ -318,7 +381,7 @@ function regBank()
             {
                 if(e.resultado["result"] === "true")
                 {
-
+                    bankAccountMsg = "done";
                     regUserActivity(bankActivityAddress, -1, "Registou um novo Banco", JSON.stringify(bankRegisterActivity), LevelActivity.CRIACAO);
                     callXpertAlert('Banco registado com sucesso!', 'checkmark', 8000);
                     $('.add-new-bank').find('input').val("");
@@ -373,18 +436,21 @@ function regBankAccount()
                             type:"POST",
                             dataType:"json",
                             async: false,
-                            data:{"intention": "add bank account", "bank" : banco},
+                            data:{"intention":(bankAccountOp ===1 ? "add bank account" : "update-bank-account"),
+                                "bank" : banco, "id-account" : idAccountUpdate },
                             success:function (e) {
                                 if(e.resultado["result"] === "true")
                                 {
-                                    callXpertAlert('Conta Banco registado com sucesso!', 'checkmark', 8000);
+                                    bankAccountMsg = "done";
+                                    callXpertAlert((bankAccountOp === 1 ? 'Conta Banco registado com sucesso!' : "Conta Banco atualizado com sucesso!"), 'checkmark', 8000);
                                     $('.add-account').find('input, select').val("");
                                     $('.add-account').find('input, select').css("border", "");
                                     $("#bk-conta-descricao").val("");
                                     $("#bk-conta-descricao").css("border", "");
-                                    regUserActivity(bankActivityAddress, -1, "Registou uma nova Conta Banco",
+                                    regUserActivity(bankActivityAddress, -1, (bankAccountOp === 1 ?"Registou uma nova Conta Banco" : "Alterou informações da Conta Banco"),
                                         JSON.stringify(bankAccountActivity), LevelActivity.CRIACAO);
                                     carregarContas();
+                                    bankAccountOp = 1;
                                 }
                                 else callXpertAlert(e.resultado["message"], 'warning', 8000);
                             }

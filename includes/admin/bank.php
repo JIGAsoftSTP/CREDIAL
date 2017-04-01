@@ -60,7 +60,6 @@
 				<section class="add-new-bank active">
 					<input type="text" placeholder="Sigla" class="input-total" id="bancoSigla" />
 					<input type="text" placeholder="Nome" class="input-total" id="bancoNome" />
-					<input type="text" placeholder="Código Bancário" class="input-total integer" id="bancoCodigoBancario" maxlength="4" />
 				</section>
 				<section class="add-mov">
 					<span class="with-info">
@@ -97,7 +96,7 @@
 					<select name="" class="input-total" id="bk-conta-nome">
 						<option value="0">(Banco)</option>
 					</select>
-                    <input type="text" placeholder="Código Agência" class="input-total integer" maxlength="4" id="bk-conta-agencia" />
+                    <input type="text" placeholder="Código Interbancário" class="input-total integer" maxlength="10" id="bk-conta-agencia" />
 					<input type="text" placeholder="Conta" class="input-total integer" maxlength="11" id="bk-conta-conta" />
                     <input type="text" placeholder="Saldo Mínimo" class="input-total formatNumber double" maxlength="11" id="bk-contaSaldoMinimo" />
 					<textarea name="" placeholder="Descrição" class="input-total" id="bk-conta-descricao"></textarea>
