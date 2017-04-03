@@ -96,7 +96,7 @@ $("#start-simulation").click(function () {
                     $("#cred-totalPagar").text(formattedString(Number(e.return['TOTAL PAGAR']).dc().rp()));
                    /* $("#cred-prest").text(formattedString(Number(e.return['PRESTACAO']).dc().rp()));*/
                     $("#cred-reePer").text(formattedString(Number(e.return['REEMBOLSO/PRESTACAO']).dc().rp()));
-                    // $("#cred-segu").text(formattedString(Number(e.return['SEGURO']).dc().rp()));
+                    /*$("#cred-segu").text(formattedString(Number(e.return['SEGURO']).dc().rp()));*/
 
                     si.numSemanaMes = Number(e.return["NUMERO SEMANA MES"]);
                     si.dia = Number($("#cred-dia").val());
