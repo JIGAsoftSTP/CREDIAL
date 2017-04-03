@@ -88,9 +88,9 @@ function addMES() {
  * @param functions {function}
  */
 function carregarCliente(empty, functions) {
-    if(functions == undefined) {
+    if(functions === undefined) {
         clienteSearch = false;
-        addTable = (clientes[clienteLetra] != undefined) ? clientes[clienteLetra].length : 0;
+        addTable = (clientes[clienteLetra] !== undefined) ? clientes[clienteLetra].length : 0;
         if (empty) {
             $('#tableCliente').empty();
             lastI = 0;
@@ -170,7 +170,7 @@ function inforCiente(b, type, fill) {
         dataType: "json",
         success: function (e) {
             clienteData = e.resultRealDataCliente;
-            if(fill == undefined) {
+            if(fill === undefined) {
                 listCredito = e.resultCredito;
                 clienteShortData = e.resultClient;
                 listCreditoCliente("-1");
@@ -357,7 +357,7 @@ function loadCreditoCliente(_idCreito, jk,_asClassShow) {
             pre.reembolso(listPrestacao[h]["REEMBOLSO"])
                 .prestacaoPaga(listPrestacao[h]["PRESTACAO PAGA"])
                 .estado(listPrestacao[h]["STATE"])
-                .dataEndosse((listPrestacao[h]["DATA ENDOSSADO"] == null) ? " ---------------- " : listPrestacao[h]["DATA ENDOSSADO"])
+                .dataEndosse((listPrestacao[h]["DATA ENDOSSADO"] === null) ? " ---------------- " : listPrestacao[h]["DATA ENDOSSADO"])
                 .dataEmissao(listPrestacao[h]["DATA EMISAO"])
                 .addAmortizacao();
         }
@@ -567,7 +567,7 @@ function searchClient()
             lastI = 0;
             listSearchCLients = e.data;
             functionSearch = loadDataSearch();
-            loadDataSearch();
+            // loadDataSearch();
         }
     });
 }

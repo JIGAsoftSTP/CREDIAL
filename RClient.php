@@ -15,10 +15,11 @@
 		<span class="new-simulation"><i class="icon-shift"></i></span>
 		<span class="search-span"><i class="icon-search"></i><input type="text" id="client-search" placeholder="Faça sua pesquisa aqui...">
 			<span id="span-type-search-client">
+                	<i class="icon-search" title="Todos"></i>
 				<i class="icon-newspaper" title="NIF" id="nifS"></i>
 				<i class="icon-file-text2" title="Nº documento"></i>
 				<i class="icon-coin-dollar" title="Garantia"></i>
-				<i class="icon-search" title="Todos"></i>
+
 			</span>
 		</span>
 		<div class="table-client x-table">
