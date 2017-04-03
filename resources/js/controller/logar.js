@@ -5,7 +5,7 @@ loadDataUser();
 $("#logar").click(function () {
     var pwd = $("#pwd").val();
     var user = $("#user").val();
-    if (pwd != "" && user != "")
+    if (pwd !== "" && user !== "")
         $.ajax({
             url: "./bean/logar.php",
             type: "POST",
@@ -77,14 +77,15 @@ $("#pwd2").keyup(function () {
 });
 
 function isValid(pwd1, pwd2) {
+    var css = undefined;
     if (pwd1.val() === pwd2.val()) {
-        var css = {color: "", borderColor: ""};
+        css = {color: "", borderColor: ""};
         pwd2.css(css);
         pwd1.css(css);
         return true;
     }
     else if (pwd1.val() !== "" && pwd2.val() !== "") {
-        var css = {color: "red", borderColor: "red"};
+        css = {color: "red", borderColor: "red"};
         pwd1.css(css);
         pwd2.css(css);
         return false;
@@ -260,7 +261,7 @@ function doRefresh() {
 }
 var res = undefined;
 function saveRefresh(re) {
-    if (sessionStorage.getItem("refresh") == null) {
+    if (sessionStorage.getItem("refresh") === null) {
         res = {};
         res.list = [re];
         sessionStorage.setItem("refresh", JSON.stringify(res));

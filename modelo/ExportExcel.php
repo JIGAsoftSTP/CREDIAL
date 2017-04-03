@@ -7,12 +7,10 @@
  * Time: 5:24 PM
  */
 include "../resources/fw/PHPExcel/PHPExcel.php";
+
 class ExportExcel
 {
-    /**
-     * @var array
-     */
-    private $listSome;
+    const SHOW = "SHOW", HIDE = "HIDE";
 
     /**
      * @var string
@@ -40,14 +38,29 @@ class ExportExcel
     private $row = 1;
 
     /**
-     * @param array $listSome
-     * @return $this
+     * @var array
      */
-    public function setListSome(array $listSome)
-    {
-        $this->listSome = $listSome;
-        return $this;
-    }
+    private $listParam = array();
+
+    /**
+     * @var array
+     */
+    private $listRename = array();
+
+    /**
+     * @var array
+     */
+    private $listParamSome = array();
+
+    /**
+     * @var array
+     */
+    private $listValueSome = array();
+
+    /**
+     * @var array
+     */
+    private $joinParam = array();
 
     /**
      * @param string $name
@@ -70,9 +83,54 @@ class ExportExcel
     }
 
     /**
+     * @param string $typeParam
+     * @param array $listParam
+     * @return $this
+     */
+    public function setListParam(string $typeParam, ... $listParam)
+    {
+        $this->listParam[$typeParam] = $listParam;
+        return $this;
+    }
+
+    /**
+     * @param $param string
+     * @param $rename string
+     * @return $this
+     * @internal param array $listRename
+     */
+    public function setListRename($param, $rename)
+    {
+        $this->listRename[$param] = $rename;
+        return $this;
+    }
+
+    /**
+     * @param array $listParamSome
+     * @return $this
+     */
+    public function setListParamSome(... $listParamSome)
+    {
+        $this->listParamSome = $listParamSome;
+        return $this;
+    }
+
+    /**
+     * @param string $joinName
+     * @param array $joinParam
+     * @return $this
+     */
+    public function setJoinParam(string $joinName, ... $joinParam)
+    {
+        $this->joinParam [] = $joinParam;
+        $this->listRename["join-" . (count($this->joinParam) - 1)] = $joinName;
+        return $this;
+    }
+
+    /**
      * @param array $data
      */
-    public function export(array  $data )
+    public function export(array $data)
     {
         $this->data = $data;
         $enterpriseLocal = "../resources/json/enterprise.json";
@@ -86,7 +144,7 @@ class ExportExcel
             ->setLastModifiedBy($enterprise->name)
             ->setTitle($this->name)
             ->setSubject($this->name)
-            ->setDescription($this->name ."\n".$enterprise->mail)
+            ->setDescription($this->name . "\n" . $enterprise->mail)
             ->setKeywords($this->name);
 
         $excel->setActiveSheetIndex(0);
@@ -109,42 +167,67 @@ class ExportExcel
         $excel->getActiveSheet()->mergeCells("A3:E3");
         $excel->getActiveSheet()->mergeCells("A4:E4");
 
-        $excel->getActiveSheet()->setCellValue("A1",$enterprise->name);
-        $excel->getActiveSheet()->setCellValue("A2",$enterprise->nif);
-        $excel->getActiveSheet()->setCellValue("A3",$enterprise->telefone);
-        $excel->getActiveSheet()->setCellValue("A4",$enterprise->mail);
+        $excel->getActiveSheet()->setCellValue("A1", $enterprise->name);
+        $excel->getActiveSheet()->setCellValue("A2", $enterprise->nif);
+        $excel->getActiveSheet()->setCellValue("A3", $enterprise->telefone);
+        $excel->getActiveSheet()->setCellValue("A4", $enterprise->mail);
 
         $this->row = 6;
 
         $this->getAllTitle();
 
-        for($if=0; $if < count($this->listKey); $if++){
-            $key = $this->getLetraColuna($if) . $this->row;
-            $value = $this->listKey[$if];
-            $excel->getActiveSheet()->getStyle($key)->getFont()->setBold(true);
-            $excel->getActiveSheet()->setCellValue($key, $value);
+
+        /***
+         * Add list Title
+         */
+        $add = 0;
+        for ($if = 0; $if < count($this->listKey); $if++) {
+            if ($this->showOrHideParam($this->listKey[$if]) == ExportExcel::SHOW) {
+                $key = $this->getLetraColuna($add) . $this->row;
+                $value = $this->listKey[$if];
+                $excel->getActiveSheet()->getStyle($key)->getFont()->setBold(true);
+                $excel->getActiveSheet()->setCellValue($key, $this->paramHasRename($this->getJoinTitle($value)));
+                $add++;
+            }
         }
 
         $this->row++;
-
-        foreach ($this->data as  $lineReport){
-            for($if=0; $if < count($this->listKey); $if++){
-
-                $letra = $this->getLetraColuna($if);
-                $key = $letra . $this->row;
-                $value = (array_key_exists($this->listKey[$if],$lineReport)) ? $lineReport[$this->listKey[$if]] : "";
-                $excel->getActiveSheet()->setCellValue($key, $value);
-                $excel->getActiveSheet()->getColumnDimension($letra)->setAutoSize(true);
+        $add = 0;
+        foreach ($this->data as $lineReport) {
+            for ($if = 0; $if < count($this->listKey); $if++) {
+                if ($this->showOrHideParam($this->listKey[$if]) == ExportExcel::SHOW) {
+                    $letra = $this->getLetraColuna($add);
+                    $key = $letra . $this->row;
+                    $value = $this->joinParam($this->listKey[$if], $lineReport);
+                    $excel->getActiveSheet()->setCellValue($key, $value);
+                    $excel->getActiveSheet()->getColumnDimension($letra)->setAutoSize(true);
+                    $add++;
+                }
+                $this->someParam($this->listKey[$if], $lineReport);
             }
+            $add = 0;
             $this->row++;
+        }
+
+        $add =0;
+        foreach ($this->listValueSome as $keySome => $total){
+            if ($this->showOrHideParam($keySome) == ExportExcel::SHOW) {
+                $letra = $this->getLetraColuna($add);
+                $key = $letra . $this->row;
+                $excel->getActiveSheet()->setCellValue($key, $total);
+                $excel->getActiveSheet()->getColumnDimension($letra)->setAutoSize(true);
+                $excel->getActiveSheet()->getStyle($key)->getFont()->setBold(true);
+                $excel->getActiveSheet()->getStyle($key)->getFont()->getColor()->setRGB("e78f08");
+                $add++;
+            }
         }
 
 
         $objWriter = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
 
         $date = date("d-m-y-his");
-        $fileName = "./resources/report/Excel/".$date." - ".Session::getUserLogado()->getId()." - ".$this->name.".xlsx";
-        $objWriter->save(".".$fileName);
+        $fileName = "./resources/report/Excel/" . $date . " - " . Session::getUserLogado()->getId() . " - " . $this->name . ".xlsx";
+        $objWriter->save("." . $fileName);
         die(json_encode(array("fileName" => $fileName)));
     }
 
@@ -152,7 +235,8 @@ class ExportExcel
      * @param int $i
      * @return string
      */
-    private function getLetraColuna(int $i){
+    private function getLetraColuna(int $i)
+    {
         /**
          * @var array $listLetra
          */
@@ -160,7 +244,89 @@ class ExportExcel
         return $listLetra[$i];
     }
 
-    private function getAllTitle(){
+    private function getAllTitle()
+    {
         $this->listKey = array_keys($this->data[0]);
     }
+
+    /**
+     * @param string $param
+     * @return string
+     */
+    private function paramHasRename(string $param)
+    {
+        return (key_exists($param, $this->listRename)) ? $this->listRename[$param] : $param;
+    }
+
+    private function joinParam(string $param, array $data)
+    {
+        $return = "";
+        foreach ($this->joinParam as $join) {
+            $result = array_search($param, $join);
+            if (!is_bool($result) && $result == 0)
+                foreach ($join as $j) {
+                    $return .= " " . $this->hasKey($j, $data);
+                }
+        }
+
+        return ($return == "") ? $this->hasKey($param, $data) : $return;
+    }
+
+    private function getJoinTitle(string $param)
+    {
+        foreach ($this->joinParam as $key => $join) {
+            $result = array_search($param, $join);
+            if (!is_bool($result) && $result == 0)
+                return $this->listRename["join-" . $key];
+        }
+
+        return $param;
+    }
+
+    /**
+     * @param string $param
+     * @param array $data
+     * @return mixed|string
+     */
+    private function hasKey(string $param, array $data)
+    {
+        return (array_key_exists($param, $data))
+            ? $data[$param]
+            : "";
+    }
+
+    private function showOrHideParam(string $param)
+    {
+        foreach ($this->listParam as $pmKey => $pm) {
+            foreach ($pm as $pKey => $p) {
+                if ($p == $param)
+                    return $pmKey;
+            }
+        }
+        return ExportExcel::SHOW;
+    }
+
+    private function someParam(string $param, array $data)
+    {
+        foreach ($this->listParamSome as $pSome) {
+            if ($param == $pSome) {
+                $this->listValueSome[$param] = ($this->hasKey($param, $this->listValueSome) == "")
+                    ? $this->valueToSome($param, $data)
+                    : $this->listValueSome[$param] + $this->valueToSome($param, $data);
+                return;
+            }
+        }
+        $this->listValueSome[$param] = "";
+    }
+
+    /**
+     * @param string $param
+     * @param array $data
+     * @return float
+     */
+    private function valueToSome(string $param, array $data): float
+    {
+        return ((float)($this->hasKey($param, $data) == "" ? 0 : $data[$param]));
+    }
+
 }

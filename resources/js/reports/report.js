@@ -482,3 +482,22 @@ $(".icon-file-excel").click(function () {
 
     }
 });
+
+$(".icon-file-pdf").click(function () {
+    if(dataExport.haveData()) {
+        $.ajax({
+            url: "./bean/ExportReport.php",
+            type: "POST",
+            data: {"intensao": "exportPDF", report: dataExport},
+            dataType: "json",
+            success: function (e) {
+                open(e.fileName);
+            }, beforeSend: function () {  $(".mp-loading").fadeIn(); },
+            complete: function () {
+                $(".mp-loading").fadeOut();
+            }
+        });
+    }else{
+
+    }
+});
