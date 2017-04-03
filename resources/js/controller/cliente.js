@@ -412,13 +412,13 @@ function listCreditoCliente(_type) {
     $("#inf-cli-name").html('<i class="icon-user-tie"></i>'+clienteData['NAME'] + " " + lastName[lastName.length - 1]);
     $("#inf-cli-career").text(clienteData["PROFISAO"]);
 
-    $("#inf-cli-salario").text(((listCredito["CLIENTE SALARIO"] == null) ? "Indinponivel" : clienteData["CLIENTE SALARIO"]));
+    $("#inf-cli-salario").text(((listCredito["CLIENTE SALARIO"] === null) ? "Indisponivel" : clienteData["CLIENTE SALARIO"]));
 
     //"PAGOS" : "2",
 
     $("#cred-list-amort").html("");
     for (var jk = 0; jk < listCredito.length; jk++) {
-        if (_type == listCredito[jk]["credito"]["STATE COD"] || _type == "-1") {
+        if (_type === listCredito[jk]["credito"]["STATE COD"] || _type === "-1") {
             var bluider = new PrestacaoBluider();
             bluider.id = listCredito[jk]["credito"]["ID"];
             bluider.idState = listCredito[jk]["credito"]["STATE COD"];
@@ -457,23 +457,23 @@ $("#table-client").on("dblclick","tr", function () {
 function getDadosCliente() {
 
     $("#cli-dataNasc").val(clienteData["DATA NASCIMENTO"]).attr("disabled",true);
-    $("#cli-ar-ano").val((clienteData["TRADOSSIER ANO"] != null) ? clienteData["TRADOSSIER ANO"] : "0").attr("disabled",true);
-    $("#cli-ar-mes").val((clienteData["TRADOSSIER MES"] != null) ? clienteData["TRADOSSIER MES"] : "0").attr("disabled",true);
-    $("#cli-ar-let").val((clienteData["TRADOSSIER LETRA"] != null) ? clienteData["TRADOSSIER LETRA"] : "0").attr("disabled",true);
-    $("#cli-local").val((clienteData["LOCALIDADE ID"] != null) ? clienteData["LOCALIDADE ID"] : "0").attr("disabled",true);
+    $("#cli-ar-ano").val((clienteData["TRADOSSIER ANO"] !== null) ? clienteData["TRADOSSIER ANO"] : "0").attr("disabled",true);
+    $("#cli-ar-mes").val((clienteData["TRADOSSIER MES"] !== null) ? clienteData["TRADOSSIER MES"] : "0").attr("disabled",true);
+    $("#cli-ar-let").val((clienteData["TRADOSSIER LETRA"] !== null) ? clienteData["TRADOSSIER LETRA"] : "0").attr("disabled",true);
+    $("#cli-local").val((clienteData["LOCALIDADE ID"] !== null) ? clienteData["LOCALIDADE ID"] : "0").attr("disabled",true);
     $("#cli-ar-capa").val(clienteData["TRADOSSIER NUMERO DE CAPA"]).attr("disabled",true);
 
     if(clienteData["TRADOSSIER ANO"] === null){ $("#cli-ar-ano").removeAttr("disabled"); }
 
-    if(clienteData["DATA NASCIMENTO"] == null){ $("#cli-dataNasc").removeAttr("disabled"); }
+    if(clienteData["DATA NASCIMENTO"] === null){ $("#cli-dataNasc").removeAttr("disabled"); }
 
-    if(clienteData["TRADOSSIER MES"] == null){ $("#cli-ar-mes").removeAttr("disabled"); }
+    if(clienteData["TRADOSSIER MES"] === null){ $("#cli-ar-mes").removeAttr("disabled"); }
 
-    if(clienteData["TRADOSSIER LETRA"] == null){ $("#cli-ar-let").removeAttr("disabled"); }
+    if(clienteData["TRADOSSIER LETRA"] === null){ $("#cli-ar-let").removeAttr("disabled"); }
 
-    if(clienteData["LOCALIDADE ID"] == null){ $("#cli-local").removeAttr("disabled"); }
+    if(clienteData["LOCALIDADE ID"] === null){ $("#cli-local").removeAttr("disabled"); }
 
-    if(clienteData["TRADOSSIER NUMERO DE CAPA"] == null){ $("#cli-ar-capa").removeAttr("disabled"); }
+    if(clienteData["TRADOSSIER NUMERO DE CAPA"] === null){ $("#cli-ar-capa").removeAttr("disabled"); }
 
     $("#cli-nif").val(clienteData["NIF"]).attr("disabled",true);
     $("#cli-nome").val(clienteData["NAME"]).attr("disabled",true);
@@ -496,47 +496,59 @@ function getDadosCliente() {
 }
 
 $("#cred-pay-bt").click(function () {
-    var paymentActivity, typePayment;
-    if(validation1($("#cred-pay-form input, #cred-pay-form select"))){
+    if (containMenu("cre.pgto")) {
+        var paymentActivity, typePayment;
+        if (validation1($("#cred-pay-form input, #cred-pay-form select"))) {
 
-        var paga = new Pagamento();
-        paga.id = prestacaoS["ID"];
-        paga.data = $("#cred-pay-data").val();
-        paga.type = ( !$("#cred-pay-dife").hasClass("icon-checkbox-checked") ? "S"
-            : (!$("#cred-pay-fazea").hasClass("icon-checkbox-checked") ? "D"
-                : "F") );
-        paga.idBank = $("#cred-pay-bank").val();
-        paga.value = unformatted($("#cred-pay-value").val());
-        paga.doc = $("#cred-pay-doc").val();
+            var paga = new Pagamento();
+            paga.id = prestacaoS["ID"];
+            paga.data = $("#cred-pay-data").val();
+            paga.type = ( !$("#cred-pay-dife").hasClass("icon-checkbox-checked") ? "S"
+                : (!$("#cred-pay-fazea").hasClass("icon-checkbox-checked") ? "D"
+                    : "F") );
+            paga.idBank = $("#cred-pay-bank").val();
+            paga.value = unformatted($("#cred-pay-value").val());
+            paga.doc = $("#cred-pay-doc").val();
 
-         typePayment = ( !$("#cred-pay-dife").hasClass("icon-checkbox-checked") ? "Semelhante"
-            : (!$("#cred-pay-fazea").hasClass("icon-checkbox-checked") ? "Diferente"
-                : "Faseado") );
+            typePayment = ( !$("#cred-pay-dife").hasClass("icon-checkbox-checked") ? "Semelhante"
+                : (!$("#cred-pay-fazea").hasClass("icon-checkbox-checked") ? "Diferente"
+                    : "Faseado") );
 
-        paymentActivity = {"Data": paga.data, "Banco": $("#cred-pay-bank :selected").text(), "Valor":  $("#cred-pay-value").val(),
-        "Número de Documento": paga.doc, "Tipo de Pagamento": typePayment };
+            paymentActivity = {
+                "Data": paga.data, "Banco": $("#cred-pay-bank :selected").text(), "Valor": $("#cred-pay-value").val(),
+                "Número de Documento": paga.doc, "Tipo de Pagamento": typePayment
+            };
 
 
-        $.ajax({
-            url: "./bean/cliente.php",
-            type: "POST",
-            data: {"intensao": "efectuarPagamento", pagamento : paga },
-            dataType: "json",
-            success: function (e) {
-                if (e.result != true) {  callXpertAlert(e.msg, new Mensage().cross, -1); }
-                else {
-                    callXpertAlert("Novo pagamento registado sucesso!", new Mensage().checkmark, 8000);
-                    regUserActivity("./bean/activity.php", -1 , "Efetuou um novo Pagamento!", JSON.stringify(paymentActivity), LevelActivity.CRIACAO );
-                    $('#cred-pay-form').closest('.modalPage').fadeOut(300);
-                    setTimeout(reloadPestacaoCreditdo, 700);
-                    var re = new refresh();
-                    re.dataType = "PAYMENT";
-                    saveRefresh(re);
+            $.ajax({
+                url: "./bean/cliente.php",
+                type: "POST",
+                data: {"intensao": "efectuarPagamento", pagamento: paga},
+                dataType: "json",
+                success: function (e) {
+                    if (e.result != true) {
+                        callXpertAlert(e.msg, new Mensage().cross, -1);
+                    }
+                    else {
+                        callXpertAlert("Novo pagamento registado sucesso!", new Mensage().checkmark, 8000);
+                        regUserActivity("./bean/activity.php", -1, "Efetuou um novo Pagamento!", JSON.stringify(paymentActivity), LevelActivity.CRIACAO);
+                        $('#cred-pay-form').closest('.modalPage').fadeOut(300);
+                        setTimeout(reloadPestacaoCreditdo, 700);
+                        var re = new refresh();
+                        re.dataType = "PAYMENT";
+                        saveRefresh(re);
+                    }
+                },
+                beforeSend: function () {
+                    $(".mp-loading").fadeIn();
+                },
+                complete: function () {
+                    $(".mp-loading").fadeOut();
                 }
-            },
-            beforeSend: function () {  $(".mp-loading").fadeIn(); },
-            complete: function () { $(".mp-loading").fadeOut(); }
-        });
+            });
+        }
+    } else {
+        callXpertAlert("Infelizmente nao tens permissao para efectuar o pagamento de prestaçao!", new Mensage().warning, 8000);
     }
 });
 

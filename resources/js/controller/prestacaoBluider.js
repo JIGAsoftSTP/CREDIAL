@@ -176,16 +176,16 @@ function pagamentoPestacao(i) {
     // $(".mp-liquida").removeClass("icon-checkbox-checked").addClass("icon-checkbox-unchecked");
     // resetForm($("#cred-pay-form"));
     // $('.sec-another').removeClass('show');
-    if(containMenu("cre.pgto"))
-    {
+    // if(containMenu("cre.pgto"))
+    // {
         prestacaoS = listPrestacao[i];
         if (prestacaoS["STATE COD"] !== "0") {
             loadDataCredForForm();
             regUserActivity("./bean/activity.php", prestacaoS["ID"] , "Selecionou Prestação de um crédito", JSON.stringify(prestacaoS), LevelActivity.VISUALIZACAO );
         }
-    }else{
-        callXpertAlert("Infelizmente nao tens permiçao para efectuar o pagameto de prestaçao!", new Mensage().warning, 8000);
-    }
+    // }else{
+    //     callXpertAlert("Infelizmente nao tens permiçao para efectuar o pagameto de prestaçao!", new Mensage().warning, 8000);
+    // }
 }
 
 var reembloso = undefined;

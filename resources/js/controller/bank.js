@@ -158,6 +158,7 @@ function loadBankMoviment(position, component)
     $("contas li.active").removeClass("active");
     $(component).closest("li").addClass("active");
 
+    alert("um clique");
     if(bankAccountMsg === undefined)
     {
         if(listBanks[position]["NOME BANCO"] === $("#bankMovimentName").html())

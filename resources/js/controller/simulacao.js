@@ -94,9 +94,9 @@ $("#start-simulation").click(function () {
                    /*  $("#cred-taxaS").text(formattedString(Number(e.return['TAXA SEM DESCONTO']).dc().rp()));
                     $("#cred-taxaC").text(formattedString(Number(e.return['TAXA COM DESCONTO']).dc().rp()));*/
                     $("#cred-totalPagar").text(formattedString(Number(e.return['TOTAL PAGAR']).dc().rp()));
-                    $("#cred-prest").text(formattedString(Number(e.return['PRESTACAO']).dc().rp()));
+                   /* $("#cred-prest").text(formattedString(Number(e.return['PRESTACAO']).dc().rp()));*/
                     $("#cred-reePer").text(formattedString(Number(e.return['REEMBOLSO/PRESTACAO']).dc().rp()));
-                    $("#cred-segu").text(formattedString(Number(e.return['SEGURO']).dc().rp()));
+                    // $("#cred-segu").text(formattedString(Number(e.return['SEGURO']).dc().rp()));
 
                     si.numSemanaMes = Number(e.return["NUMERO SEMANA MES"]);
                     si.dia = Number($("#cred-dia").val());
@@ -336,7 +336,7 @@ function loadChequeSimulacao() {
             }
         });
     }else{
-        if($("#cred-cli-bank").attr("newid") != "0") {
+        if($("#cred-cli-bank").attr("newid") !== "0") {
             callXpertAlert("Banco " + sBank["NAME"] + " " + sBank["MESSAGE"], new Mensage().cross, 8000);
             si.numeroCheque = undefined;
             si.idCheque = undefined;
