@@ -27,11 +27,10 @@ var table, structureTable;
 
 $(function () {
     sessionStorage.removeItem('filterReport');
-    data();
 
     $('.x-icon-ok').click(function() {
 
-         if( $('#secondary-menu li.active').attr('id') !== "rep.gara")
+         if( $('#secondary-menu li.active').attr('id') !== "rep.gara") // se o relatorio não for de garrantia os dados para base de dados
             sendFilterReport();
          else if($('#secondary-menu li.active').attr('id') === "rep.gara")
          {
@@ -41,12 +40,11 @@ $(function () {
                  alterFormatDate($("#report-final-date").val())));
              $("#iframe-" + $('aside li.active').index()).contents().find('#labelWarranty').trigger('click');
          }
-
    });
 });
 
 
-
+data();
 
 
 function sendFilterReport() {
@@ -401,17 +399,21 @@ function validViewField(arrayValues) {
     }
 }
 
+/**
+ * Tendo a data não definida pelo utilizador, o sistema define a data inicial como
+ * a data de há um mês e data final a data atual
+ */
 function data()
 {
-    var month, year, day;
-    var d = new Date();
-     month = d.getMonth()+1;
-     day = d.getDate();
-     year = d.getFullYear();
-     if($("#report-inicial-date").val() === "" &&  $("#report-final-date").val() === "")
+    var dateOneMonthAgo = new Date();
+    dateOneMonthAgo.setMonth(dateOneMonthAgo.getMonth() - 1);
+    var actualDate = new Date();
+
+     if($("#report-inicial-date").val() === "" &&
+         $("#report-final-date").val() === "")
      {
-         $("#report-inicial-date").val(day+"-"+d.getMonth()+"-"+year);
-         $("#report-final-date").val(day+"-"+month+"-"+year);
+         $("#report-inicial-date").val(dateOneMonthAgo.getDate()+"-"+(dateOneMonthAgo.getMonth()+1)+"-"+dateOneMonthAgo.getFullYear());
+         $("#report-final-date").val(actualDate.getDate()+"-"+(actualDate.getMonth()+1)+"-"+actualDate.getFullYear());
      }
 
    $('.x-icon-ok').trigger("click");

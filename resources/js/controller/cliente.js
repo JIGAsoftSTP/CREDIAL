@@ -300,7 +300,7 @@ function regCliente() {
             }
         });
     }else{
-        callXpertAlert("Infelizmente, não tens permissão para efetuar o registo de Cliente!", new Mensage().warning, 8000);
+        callXpertAlert("Infelizmente, não tens permissão para efetuar o registo de cliente!", new Mensage().warning, 8000);
     }
 }
 
@@ -310,7 +310,7 @@ $("#cli-reg").click(function () {
         else { editeSelectedClient(); }
     }
     else{
-        callXpertAlert('Por favor, Preencha os Campos Obrigatórios!', 'warning', 8000);
+        callXpertAlert('Por favor, Preencha os campos obrigatórios!', 'warning', 8000);
     }
 });
 

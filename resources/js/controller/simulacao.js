@@ -292,7 +292,7 @@ function searchElement(obj, _title) {
             hasClassTo($(this), "good", "bad");
         } else {
             hasClassTo($(this), "bad", "good");
-            callXpertAlert("Por Favor, adicione a descrição "+_title+"!", new Mensage().warning, 8000);
+            callXpertAlert("Por favor, adicione a descrição "+_title+"!", new Mensage().warning, 8000);
             reValue = false;
             return false;
         }
@@ -341,7 +341,7 @@ function loadChequeSimulacao() {
             si.numeroCheque = undefined;
             si.idCheque = undefined;
         }else{
-            callXpertAlert("Por favor, secione um banco valido!", new Mensage().cross, 8000);
+            callXpertAlert("Por favor, selecione um banco válido!", new Mensage().cross, 8000);
             si.numeroCheque = undefined;
             si.idCheque = undefined;
         }
@@ -360,7 +360,7 @@ $("#import-simulation").click(function () {
         }
     }
     else {
-        callXpertAlert("Infelizmente nao tens permissão para efetuar o registro de Crédito!", new Mensage().warning, 8000);
+        callXpertAlert("Infelizmente, não tens permissão para efetuar o registo de Crédito!", new Mensage().warning, 8000);
     }
 });
 
@@ -378,7 +378,7 @@ function testTableAmortizacao() {
         return false;
     }
     if(!tableIsPriencida()){
-        callXpertAlert("Tabela de Amortização, incorretamente Preenchida!", new Mensage().warning, 8000);
+        callXpertAlert("Tabela de Amortização incorretamente preenchida!", new Mensage().warning, 8000);
         return false;
     }
     return true;
@@ -387,12 +387,12 @@ function testTableAmortizacao() {
 function testlistDocGar() {
     var result =  listDocGaraHasElement();
     if(result && si.listGara.length==0){
-        callXpertAlert("Por Favor, adicione Garantia!", new Mensage().warning, 8000);
+        callXpertAlert("Por favor, adicione Garrantia(s)!", new Mensage().warning, 8000);
         return false;
     }
 
     if(result && si.listDocu.length==0){
-        callXpertAlert("Por Favor, adicione Documento!", new Mensage().warning, 8000);
+        callXpertAlert("Por favor, adicione Documento(s)!", new Mensage().warning, 8000);
         return false;
     }
 
@@ -406,7 +406,7 @@ $("#cred-cli-numDoc").change(function () {
 function checkIsValid() {
     var isValid = false;
     if(si.numeroCheque == undefined){
-        callXpertAlert("Por Favor, Selecione o Banco!", new Mensage().warning, 8000);
+        callXpertAlert("Por favor, selecione o Banco!", new Mensage().warning, 8000);
         $("#cred-cli-numDoc").addClass("empty");
         $("#cred-cli-bank").addClass("empty");
     }else if($("#cred-cli-numDoc").val().length !== Number($("#cred-cli-numDoc").attr("maxlength"))){
