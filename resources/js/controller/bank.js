@@ -23,6 +23,15 @@ $(function(){
         }
     });
 
+    $(".contas").on("click", "li .update", function () {
+       loadDataUpdateAccount($(this).attr("position"));
+
+    }).on("click", "li span", function () {
+        $(".contas li.active").removeClass("active");
+        $(this).closest("li").addClass("active");
+        loadBankMoviment($(this).attr("position"));
+    });
+
 
 });
 
@@ -115,10 +124,11 @@ function carregarContas()
             $(".contas").empty();
             if(e.contas.length >0)
             {
-                $(".contas").append('<li class="active" onclick="loadBankMoviment(0, '+$(this)+')">'+e.contas[0]["DESCRICAO"]+'</li>');
+                $(".contas").append('<li class="active"><i class="icon-pencil update"  position="0" title="Editar Conta Banco" /><span style="padding-left: 0.5rem;" position="0">'+e.contas[0]["DESCRICAO"]+'</span></li>');
                 for(var i = 1;i<e.contas.length;i++)
-                    acounts +='<li onclick="loadBankMoviment('+i+', '+$(this)+')">'+e.contas[i]["DESCRICAO"]+'</li>';
+                    acounts +='<li><i class="icon-pencil update" position="'+i+'" title="Editar Conta Banco" /><span style="padding-left: 0.5rem;" position="'+i+'">'+e.contas[i]["DESCRICAO"]+'</span></li>';
 
+				
                 $(".contas").append(acounts);
                 loadBankMoviment(0);
             }
@@ -153,23 +163,12 @@ function loadDataUpdateAccount(accountIndex)
         }
     });
 }
-function loadBankMoviment(position, component)
+function loadBankMoviment(position)
 {
-    $("contas li.active").removeClass("active");
-    $(component).closest("li").addClass("active");
-
-    if(bankAccountMsg === undefined)
-    {
-        if(listBanks[position]["NOME BANCO"] === $("#bankMovimentName").html())
-            loadDataUpdateAccount(position);
-        else
-            sendRequestBankMoviment(position);
-    }
-    else
-    {
+    if(bankAccountMsg !== undefined)
         bankAccountMsg = undefined;
-        sendRequestBankMoviment(position);
-    }
+
+    sendRequestBankMoviment(position);
 }
 
 function sendRequestBankMoviment(position) {
