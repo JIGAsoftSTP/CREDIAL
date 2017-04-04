@@ -66,12 +66,18 @@ $("#tableCliente").scroll(function () {
         }
 });
 
+/**
+ * @returns {*}
+ */
 function addLETRAS() {
     var letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     var array = letras.split("");
     return $.makeArray(array);
 }
 
+/***
+ * @returns {Array}
+ */
 function addANO() {
     var data = new Date();
     var anos = [];
@@ -80,6 +86,9 @@ function addANO() {
      return anos;
 }
 
+/**
+ * @returns {[string,string,string,string,string,string,string,string,string,string,string,string]}
+ */
 function addMES() {
     return ['01','02','03','04','05','06','07','08','09','10','11','12'];
 }
@@ -463,17 +472,18 @@ function getDadosCliente() {
     $("#cli-local").val((clienteData["LOCALIDADE ID"] !== null) ? clienteData["LOCALIDADE ID"] : "0").attr("disabled",true);
     $("#cli-ar-capa").val(clienteData["TRADOSSIER NUMERO DE CAPA"]).attr("disabled",true);
 
-   /* if(clienteData["TRADOSSIER ANO"] === null){ */$("#cli-ar-ano").removeAttr("disabled"); /*}*/
+    if(clienteData["TRADOSSIER ANO"] === null){ $("#cli-ar-ano").removeAttr("disabled"); }
 
-    /*if(clienteData["DATA NASCIMENTO"] === null){*/ $("#cli-dataNasc").removeAttr("disabled");/* }*/
+    if(clienteData["DATA NASCIMENTO"] === null){ $("#cli-dataNasc").removeAttr("disabled"); }
 
-   /* if(clienteData["TRADOSSIER MES"] === null){*/ $("#cli-ar-mes").removeAttr("disabled");/* }*/
+    if(clienteData["TRADOSSIER MES"] === null){ $("#cli-ar-mes").removeAttr("disabled"); }
 
-    /*if(clienteData["TRADOSSIER LETRA"] === null){ */$("#cli-ar-let").removeAttr("disabled");/* }*/
+    if(clienteData["TRADOSSIER LETRA"] === null){ $("#cli-ar-let").removeAttr("disabled"); }
 
-    /*if(clienteData["LOCALIDADE ID"] === null){*/ $("#cli-local").removeAttr("disabled");/* }*/
+    if(clienteData["LOCALIDADE ID"] === null){ $("#cli-local").removeAttr("disabled"); }
 
-    /*if(clienteData["TRADOSSIER NUMERO DE CAPA"] === null){*/ $("#cli-ar-capa").removeAttr("disabled"); /*}*/
+    if(clienteData["TRADOSSIER NUMERO DE CAPA"] === null){ $("#cli-ar-capa").removeAttr("disabled"); }
+
 
     $("#cli-nif").val(clienteData["NIF"]).attr("disabled",true);
     $("#cli-nome").val(clienteData["NAME"]).attr("disabled",true);
@@ -491,6 +501,10 @@ function getDadosCliente() {
     $("#cli-cont-telf").val(clienteData["TELE FIXO"]);
     $("#cli-cont-tels").val(clienteData["TELE SERVICO"]);
     $("#cli-email").val(clienteData["MAIL"]);
+
+    if(valorEstaNoArray(clienteData["TRADOSSIER LETRA"], addLETRAS())){  $("#cli-ar-let").val("0") }
+
+    if(valorEstaNoArray(clienteData["TRADOSSIER MES"], addMES())){ $("#cli-ar-mes").val("0")  }
 
     isNull($(".add-new-form select"));
 }
@@ -828,3 +842,22 @@ $("#full-pay-bt").click(function () {
         complete: function () { $(".mp-loading").fadeOut(); }
     });
 });
+
+
+/***
+ *
+ * @param value string
+ * @param ar array
+ * @return string
+ */
+function valorEstaNoArray(value, ar) {
+    /**
+     * @type {Array}
+     */
+    for (var ari=0; ari< ar.length; ari++){
+        if((value+"") === (ar[ari]+"")){
+            return true;
+        }
+    }
+    return false;
+}
