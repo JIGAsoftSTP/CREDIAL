@@ -53,7 +53,7 @@ var PrestacaoBluider = function () {
             '<section class="'+((this.idState == 0) ? "pago" : ((this.idState == 1) ? "por-pagar" : "amortizado" ) )+'">' +
             '<i class="icon-ctrl sh-more" id="pret-'+this.id+'" onclick="showAmortizacao('+this.id+','+jk+')"></i>' +
             '<nav> ' +
-            '<div class="primary"><b>Dossier nº '+this.nunDossierCredito+'</b> <b>'+formatted(this.totalCreditoAPagar)+'</b></div> ' +
+            '<div class="primary"><b>Dossier nº '+this.nunDossierCredito+'</b> <b>'+formattedString(this.totalCreditoAPagar)+'</b></div> ' +
             '<div class="secondary"><small>Efetuado em '+this.dataInicioCredito+'</small> <b><small>'+ numCrediText +'</small></b> <small>Data fim crédito: '+this.dataFimCredito+'</small></div>' +
             '</nav> ' +
             ( (this.idState != 0 && (containMenu("cre.regFullPay"))) ? '<button l-id="'+this.id+'" jk="'+jk+'" class="bt-full-payment">Pagamento Antecipado</button>' : '') +
@@ -62,11 +62,11 @@ var PrestacaoBluider = function () {
             '<span class="state"></span> ' +
             '<div class="n-cheq">' +
             '<h3>Cheque nº '+this.nunCheckCredito+'</h3>' +
-            '<h3 >Total efetivo: '+formatted(this.totalEfetivoCredido)+'</h3>' +
+            '<h3 >Total efetivo: '+formattedString(this.totalEfetivoCredido)+'</h3>' +
             '</div>' +
             '<div class="other-details">' +
-            '<h4>Capital inicial: '+formatted(this.capitalInicialCredito)+'</h4>' +
-            '<h4>Penalidade:  '+formatted(this.penalidadeCretido)+'</h4>' +
+            '<h4>Capital inicial: '+formattedString(this.capitalInicialCredito)+'</h4>' +
+            '<h4>Penalidade:  '+formattedString(this.penalidadeCretido)+'</h4>' +
             '<h4>Data CNT: '+this.dataCNTCredito+'</h4>' +
             '</div>' +
             '<span class="table-amort">' +
@@ -136,7 +136,7 @@ var Prestacao =  function () {
         this.amortizacao = '<tr id="'+this.id+'-amor" ondblclick="pagamentoPestacao('+this.i+')" onclick="clickPestacao('+this.id+')">' +
             '<td>'+this.dataEmissaoValue+'</td>' +
             '<td>'+this.dataEndosseValue+'</td>' +
-            '<td>'+formatted(this.reembolsoValue)+'</td>' +
+            '<td>'+formattedString(this.reembolsoValue)+'</td>' +
             '<td>'+this.prestacaoPagaValue+'</td>' +
             '<td>'+this.estadoValue+'</td>' +
             '</tr>';
