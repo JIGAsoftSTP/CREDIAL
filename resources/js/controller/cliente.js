@@ -463,17 +463,17 @@ function getDadosCliente() {
     $("#cli-local").val((clienteData["LOCALIDADE ID"] !== null) ? clienteData["LOCALIDADE ID"] : "0").attr("disabled",true);
     $("#cli-ar-capa").val(clienteData["TRADOSSIER NUMERO DE CAPA"]).attr("disabled",true);
 
-    if(clienteData["TRADOSSIER ANO"] === null){ $("#cli-ar-ano").removeAttr("disabled"); }
+   /* if(clienteData["TRADOSSIER ANO"] === null){ */$("#cli-ar-ano").removeAttr("disabled"); /*}*/
 
-    if(clienteData["DATA NASCIMENTO"] === null){ $("#cli-dataNasc").removeAttr("disabled"); }
+    /*if(clienteData["DATA NASCIMENTO"] === null){*/ $("#cli-dataNasc").removeAttr("disabled");/* }*/
 
-    if(clienteData["TRADOSSIER MES"] === null){ $("#cli-ar-mes").removeAttr("disabled"); }
+   /* if(clienteData["TRADOSSIER MES"] === null){*/ $("#cli-ar-mes").removeAttr("disabled");/* }*/
 
-    if(clienteData["TRADOSSIER LETRA"] === null){ $("#cli-ar-let").removeAttr("disabled"); }
+    /*if(clienteData["TRADOSSIER LETRA"] === null){ */$("#cli-ar-let").removeAttr("disabled");/* }*/
 
-    if(clienteData["LOCALIDADE ID"] === null){ $("#cli-local").removeAttr("disabled"); }
+    /*if(clienteData["LOCALIDADE ID"] === null){*/ $("#cli-local").removeAttr("disabled");/* }*/
 
-    if(clienteData["TRADOSSIER NUMERO DE CAPA"] === null){ $("#cli-ar-capa").removeAttr("disabled"); }
+    /*if(clienteData["TRADOSSIER NUMERO DE CAPA"] === null){*/ $("#cli-ar-capa").removeAttr("disabled"); /*}*/
 
     $("#cli-nif").val(clienteData["NIF"]).attr("disabled",true);
     $("#cli-nome").val(clienteData["NAME"]).attr("disabled",true);
@@ -736,7 +736,7 @@ var payfullData = undefined;
 
 function getDadosPayFull() {
     iPrestacao = $(this).attr("jk");
-    if(payfull.idCred == undefined) {
+    if(payfull.idCred === undefined) {
         payfull.idCred = $(this).attr("l-id");
         payfull.bank = -1;
         payfull.desconto = 0;
