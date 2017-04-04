@@ -50,13 +50,13 @@ var PrestacaoBluider = function () {
         var numCredi = listCredito[jk]["prestacao"].length;
         var numCrediText = numCredi+" "+((numCredi === 0 || numCredi > 1) ? "prestações" : "prestação");
         this.credito =
-            '<section class="'+((this.idState === 0) ? "pago" : ((this.idState === 1) ? "por-pagar" : "amortizado" ) )+'">' +
+            '<section class="'+((this.idState == 0) ? "pago" : ((this.idState == 1) ? "por-pagar" : "amortizado" ) )+'">' +
             '<i class="icon-ctrl sh-more" id="pret-'+this.id+'" onclick="showAmortizacao('+this.id+','+jk+')"></i>' +
             '<nav> ' +
             '<div class="primary"><b>Dossier nº '+this.nunDossierCredito+'</b> <b>'+formatted(this.totalCreditoAPagar)+'</b></div> ' +
             '<div class="secondary"><small>Efetuado em '+this.dataInicioCredito+'</small> <b><small>'+ numCrediText +'</small></b> <small>Data fim crédito: '+this.dataFimCredito+'</small></div>' +
             '</nav> ' +
-            ( (this.idState !== 0 && (containMenu("cre.regFullPay"))) ? '<button l-id="'+this.id+'" jk="'+jk+'" class="bt-full-payment">Pagamento Antecipado</button>' : '') +
+            ( (this.idState != 0 && (containMenu("cre.regFullPay"))) ? '<button l-id="'+this.id+'" jk="'+jk+'" class="bt-full-payment">Pagamento Antecipado</button>' : '') +
             '<nav class="more-details"> ' +
             '<hr> ' +
             '<span class="state"></span> ' +
