@@ -96,7 +96,7 @@ function importSimulation(){
     $result = $call->getValors();
 
     if($result["RESULT"] != "true"){
-        die(json_encode(array("result" => false, "return" => $result["RESULT"])));
+        die(json_encode(array("result" => false, "return" => $result, "func"=>"funct_reg_credito_import_simulacao") ));
     }
 
     regPagamento($result['ID CREDITO']);
@@ -125,7 +125,7 @@ function regPagamento($idCredito){
         $result = $call->getValors();
 
         if ($result["result"] != true ) {
-            die(json_encode(array("result" => false, "return" => $result["result"])));
+            die(json_encode(array("result" => false, "return" => $result, "func"=>"funct_reg_pagamento")));
         }
     }
     regGarantia($idCredito);
@@ -144,7 +144,7 @@ function regGarantia($idCredito){
         $call->execute();
         $result = $call->getValors();
         if($result["RESULT"] != "true"){
-            die(json_encode(array("result" => false, "return" => $result["RESULT"])));
+            die(json_encode(array("result" => false, "return" => $result, "func"=>"funct_reg_garantia")));
         }
     }
     regDocumento($idCredito);
@@ -163,7 +163,7 @@ function regDocumento($idCredito){
         $call->execute();
         $result = $call->getValors();
         if($result["RESULT"] != "true"){
-            die(json_encode(array("result" => false, "return" => $result["RESULT"])));
+            die(json_encode(array("result" => false, "return" => $result,  "func"=>"funct_reg_documento_erntregue")));
         }
     }
     finalizeRegCredito($idCredito);
@@ -182,7 +182,7 @@ function finalizeRegCredito($idCredito){
 
     $result = $call->getValors();
     if($result["RESULT"] == true)
-        die(json_encode(array("result" => true, "return" => $result,$idCredito)));
+        die(json_encode(array("result" => true, "return" => $result,$idCredito, "func"=>"funct_finalizar_credito_true")));
     else
-        die(json_encode(array("result" => false, "return" => $result,$idCredito)));
+        die(json_encode(array("result" => false, "return" => $result,$idCredito , "func"=>"funct_finalizar_credito_false")));
 }
