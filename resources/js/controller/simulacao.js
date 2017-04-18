@@ -179,7 +179,7 @@ function bluiderTablePestacao() {
         depois.setMonth(Number(arData[1]) -1);
         depois.setDate(Number(arData[0]));
 
-        depois.setDate(depois.getDate() + si.dia);
+        depois.setDate(depois.getDate() + (Number(si.dia) / Number(si.numeroPrestacao)));
         si.data = depois.getDate()+"-"+(depois.getMonth()+1)+"-"+depois.getUTCFullYear();
 
         var day = (((depois.getDate()+"").length == 1) ? "0"+depois.getDate() : depois.getDate() );
