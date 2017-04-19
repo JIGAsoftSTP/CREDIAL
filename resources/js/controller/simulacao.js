@@ -172,15 +172,16 @@ function bluiderTablePestacao() {
     si.dataTableAmortizacao = [];
     $("#cred-table-prestacao").html("");
     for (var i = 0; i < si.numeroPrestacao ; i++ ) {
-        var arData = si.data.split("-");
+
+        var arData = ((i+1) === si.numeroPrestacao ) ? si.dataInicio.split("-") : si.data.split("-");
 
         var depois = new Date();
         depois.setUTCFullYear(Number(arData[2]));
         depois.setMonth(Number(arData[1]) -1);
         depois.setDate(Number(arData[0]));
 
-        depois.setDate(depois.getDate() + (Number(si.dia) / Number(si.numeroPrestacao)));
-        si.data = depois.getDate()+"-"+(depois.getMonth()+1)+"-"+depois.getUTCFullYear();
+        depois.setDate(depois.getDate() + (((i+1) === si.numeroPrestacao ) ? Number(si.dia) : (Number(si.dia) / Number(si.numeroPrestacao))));
+        si.data =  depois.getDate()+"-"+(depois.getMonth()+1)+"-"+depois.getUTCFullYear();
 
         var day = (((depois.getDate()+"").length === 1) ? "0"+depois.getDate() : depois.getDate() );
         var mouth = ((((depois.getMonth()+1)+"").length === 1) ? "0"+(depois.getMonth()+1) : (depois.getMonth()+1) );
