@@ -97,7 +97,7 @@
 				</div>
 				<div class="modal-header">
 					<b>Anular Cheque</b>
-					<span class="mp-close">X</span>
+					<span class="mp-close"></span>
 				</div>
 			</div>
 		</div>

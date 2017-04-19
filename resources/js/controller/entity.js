@@ -71,9 +71,18 @@ function loadObjectValues(id, type)
         }
     });
 }
-function disableObject(idObjeto) {
 
+var idObjeto = undefined;
+function disableObject(idOb) {
+    idObjeto = idOb;
+    $("#entity-title-desativar").text($(".desc"+idOb).text());
+    openModalFrame($(".mp-cancel-desativa-entity"));
+}
+
+function desativarModal() {
     var selectedEntity;
+
+    $(".mp-cancel-desativa-entity").fadeOut(300);
 
     $.ajax({
         url:address,
@@ -81,8 +90,7 @@ function disableObject(idObjeto) {
         type:"POST",
         dataType:"json",
         success:function (e) {
-            if(e.resultado["result"] === "true")
-            {
+            if(e.resultado["result"] === "true") {
                 callXpertAlert("Entidade removida com sucesso!", 'checkmark', 8000);
                 selectedEntity = $(".desc"+idObjeto).text();
                 $("#objectData"+ idObjeto).remove();

@@ -1,4 +1,73 @@
 
+var cliente_more = {
+    reiniciar_modal_novo_credito : function () {
+
+        /**
+         * reiniciar os campos de texto de sumulaçao
+         */
+        $("#cred-value").val("");
+        $("#cred-tipoCred").val("0");
+        $("#cred-data").val(new Date().getDatePt());
+        $("#cred-dia").val("");
+        $("#cred-desco").val("0");
+        $("#cred-corr").val("0");
+
+        /**
+         *reiniciar as label de Simulaçao
+         */
+        /* $("#cred-taxa").text(Number(e.return['TAXA']).dc().rp());*/
+        $("#cred-peri").text("0");
+        $("#cred-capi").text("0.0");
+        /*  $("#cred-taxaS").text(formattedString(Number(e.return['TAXA SEM DESCONTO']).dc().rp()));
+         $("#cred-taxaC").text(formattedString(Number(e.return['TAXA COM DESCONTO']).dc().rp()));*/
+        $("#cred-totalPagar").text("0.0");
+        /* $("#cred-prest").text(formattedString(Number(e.return['PRESTACAO']).dc().rp()));*/
+        $("#cred-reePer").text("0.0");
+        /*$("#cred-segu").text(formattedString(Number(e.return['SEGURO']).dc().rp()));*/
+
+        /**
+         * reiniciar os campos de texto de segunda parte formulario
+         */
+        $("#cred-cli-bank").val("");
+        $("#cred-cli-bank-list").val("0");
+        $("#cred-cli-numDoc").val("");
+        $("#cred-cli-numDoc-veiw").text("");
+        $("#cred-cli-fonRend").val("0");
+        $("#cred-cli-modaPag").val("0");
+        $("#cred-cli-list-garaValue").find("span").remove();
+        $("#cred-cli-list-docuValue").find("span").remove();
+        $("#cred-data-list-gara").val("");
+        $("#cred-data-list-docu").val("");
+
+        /**
+         * removendo todos os dados da tabela de prestação de credito
+         */
+        $("#cred-table-prestacao").empty();
+
+        /**
+         * @type {Simulation}
+         */
+        si = new Simulation();
+        nifClient = "";
+
+
+        /**
+         * reiniciando labels de cliente selecionado
+         */
+        $("#cred-cli-nif").text("");
+        $("#cred-cli-comName").text("Cliente não selecionado");
+
+        /**
+         * reiniciando editar cliente
+         */
+        $("#cred-sh-nif").val("");
+        $("#cred-sh-name").text("");
+        $('.select-client').removeClass('show');
+
+        tableEstructure($("#table-liquid"));
+    }
+};
+
 $('.header-tittle').click(function(event) {
     var father;
     if($(this).hasClass('header-tittle'))
@@ -140,8 +209,8 @@ function CtrlFormLiquidar(state){
 
 $('.new-simulation').click(function(event) {
     // if (containMenu("cre.regCre")){
-    cliente_more.reiniciar_modal_novo_credito();
     openModalFrame($('.mp-new-credit'));
+    cliente_more.reiniciar_modal_novo_credito();
     // }else{
     //     callXpertAlert("Infelizmente nao tens permiçao para efectuar o registro de Cliente!", new Mensage().warning, 8000);
     // }

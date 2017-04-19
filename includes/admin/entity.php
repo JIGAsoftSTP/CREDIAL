@@ -32,6 +32,23 @@
 			<button id="btAddEntity">Adicionar</button>
 		</div>
 	</div>
+    <section class="modalPage mp-cancel-desativa-entity">
+        <div class="modalFrame">
+            <div class="modalContainer">
+                <div class="content">
+                    <p>Tem a certeza que queres desativar <label id="entity-title-desativar"></label>?</p>
+                </div>
+                <div class="bt-yes-no-cancel">
+                    <button onclick="desativarModal()" >OK</button>
+                    <button class="bt-no-option">Cancelar</button>
+                </div>
+                <div class="modal-header">
+                    <b>Desativar Objeto</b>
+                    <span class="mp-close"></span>
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
 <script type="text/javascript" src="../../resources/js/jQuery.js"></script>
 <script type="text/javascript" src="../../resources/js/geralScript.js"></script>
