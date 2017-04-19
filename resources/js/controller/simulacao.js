@@ -62,7 +62,7 @@ $("#cred-simula-import").click(function () {
                     "<b>" + "Nome Banco: </b>" + e.return["BANCO NAME"] + "<br>" +
                     "<b>" + "Sigla Banco: </b>" + e.return["BANCO SIGLA"], new Mensage().checkmark, -1);
                 var re = new refresh();
-                re.dataType = "CREDIT";
+                re.dataType = "CLIENT";
                 si = new Simulation();
                 saveRefresh(re);
                 resetForm($(".mp-new-credit").fadeOut(800));

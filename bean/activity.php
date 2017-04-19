@@ -4,7 +4,17 @@ include "../modelo/Imagem.php";
 include "Session.php";
 include_once "../modelo/User.php";
 
-    if($_POST["intention"] == "reg_activity") regActivity();
+    if($_POST["intention"] == "reg_activity")
+        try { regActivity(); }
+        catch (Exception $e){
+
+            $bd = new CallPgSQL();
+            $bd->functionTable("credial.funct_refresh_materialized_views","*")
+                ->addString("ACTIVITY");
+            $bd->execute();
+
+            regActivity();
+        }
    else if($_POST["intention"] == "loadActivities") loadActivities();
    else if($_POST["intention"] == "loadUsers") loadUsers();
 

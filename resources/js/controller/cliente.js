@@ -2,6 +2,11 @@
  * Created by ahmedjorge on 9/26/16.
  */
 
+/**
+ * @type {*}
+ */
+var functionSearch = undefined;
+
 var hasSearched = false;
 $(function () {
     regUserActivity("./bean/activity.php", -1 , "Visualizou a página de cliente e créditos!", -1, LevelActivity.VISUALIZACAO );
@@ -19,7 +24,8 @@ $(function () {
 
     $("#client-search").keypress(function (e) {
         if (e.keyCode === 13) {
-            functionSearch = searchClient();
+            functionSearch = searchClient;
+            // console.log(functionSearch);
             carregarCliente(true, functionSearch);
             hasSearched = true;
         }
@@ -33,17 +39,12 @@ $(function () {
 });
 
 var i = 0;
-var lastI = 0;
+var lastI = -1;
 var addTable = 0;
 var clienteData = undefined;
 var clienteLetra = 1;
 var typeSearch = "Todos";
 var addCustomerActivity = undefined;
-/**
- * @type {*}
- */
-var functionSearch = undefined;
-
 var clientes = [];
 var listSearchCLients = [];
 function listarCliente() {
@@ -97,12 +98,13 @@ function addMES() {
  * @param functions {function}
  */
 function carregarCliente(empty, functions) {
+    // console.error(functions);
     if(functions === undefined) {
         clienteSearch = false;
         addTable = (clientes[clienteLetra] !== undefined) ? clientes[clienteLetra].length : 0;
         if (empty) {
             $('#tableCliente').empty();
-            lastI = 0;
+            lastI = -1;
         }
 
         var add = 0;
@@ -556,7 +558,7 @@ $("#cred-pay-bt").click(function () {
                         $('.history-selected').toggleClass('show');
 
                         var re = new refresh();
-                        re.dataType = "PAYMENT";
+                        re.dataType = "CLIENT";
                         saveRefresh(re);
                     }
                 },
@@ -585,9 +587,10 @@ function searchClient()
        data:{"intensao" : "search client", "search" : typeSearch, "valueSearch": value},
         success:function (e) {
             $('#tableCliente').empty();
-            lastI = 0;
+            lastI = -1;
             listSearchCLients = e.data;
-            functionSearch = loadDataSearch();
+            functionSearch = loadDataSearch;
+            functionSearch();
             // loadDataSearch();
         }
     });
@@ -596,6 +599,7 @@ function searchClient()
 function loadDataSearch() {
     clienteSearch = true;
     var add = 0;
+    lastI++;
     for (var i = lastI; i< listSearchCLients.length && add < 100 ; i++) {
         var client = listSearchCLients[i];
         var table = document.getElementById("tableCliente");
@@ -639,6 +643,7 @@ function loadDataSearch() {
         cell5.setAttribute("class","col-credit");
         add++;
         lastI = i;
+        // console.log(lastI);
     }
     tableEstructure($('.x-table.table-client'));
     setRowCount($('.x-table.table-client'));
@@ -843,7 +848,7 @@ $("#full-pay-bt").click(function () {
                     JSON.stringify(fullPaymentActivity), LevelActivity.CRIACAO );
                 setTimeout(reloadPestacaoCreditdo, 700);
                 var re = new refresh();
-                re.dataType = "PAYMENT";
+                re.dataType = "CLIENT";
                 saveRefresh(re);
             }
             else { callXpertAlert(e.msg, new Mensage().cross, 8000); }

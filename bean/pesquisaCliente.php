@@ -14,7 +14,7 @@ include "Session.php";
     function searchClientByNumDoc()
     {
         $call = new CallPgSQL();
-        $call->functionTable("filter.funct_filter_client_by_document_payment", "*")
+        $call->functionTable("filter.client_by_document_payment", "*")
             ->addString(Session::getUserLogado()->getId())
             ->addInt(Session::getUserLogado()->getIdAgencia())
             ->addString($_POST["valueSearch"]);
@@ -31,7 +31,7 @@ include "Session.php";
     function searchClientByWarranty()
     {
         $call = new CallPgSQL();
-        $call->functionTable("filter.funct_filter_client_by_credito_garantias", "*")
+        $call->functionTable("filter.client_by_credito_garantias", "*")
             ->addString(Session::getUserLogado()->getId())
             ->addInt(Session::getUserLogado()->getIdAgencia())
             ->addString($_POST["valueSearch"]);
@@ -48,7 +48,7 @@ include "Session.php";
     function searchClientByNif()
     {
         $call = new CallPgSQL();
-        $call->functionTable("filter.funct_filter_client_by_nif", "*")
+        $call->functionTable("filter.client_by_nif", "*")
             ->addString(Session::getUserLogado()->getId())
             ->addInt(Session::getUserLogado()->getIdAgencia())
             ->addString($_POST["valueSearch"]);
@@ -65,7 +65,7 @@ include "Session.php";
     function searchClientByAll()
     {
         $call = new CallPgSQL();
-        $call->functionTable("filter.funct_filter_client", "*")
+        $call->functionTable("filter.client", "*")
             ->addString(Session::getUserLogado()->getId())
             ->addInt(Session::getUserLogado()->getIdAgencia())
             ->addString($_POST["valueSearch"]);

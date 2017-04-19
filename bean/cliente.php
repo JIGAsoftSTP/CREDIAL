@@ -23,7 +23,9 @@ include "Session.php";
 
     function listCliente(){
         $call = new CallPgSQL();
-        $call->selects("ver_client_simple", "*");
+        $call->functionTable("filter.client", "*")
+            ->addString(Session::getUserLogado()->getId())
+            ->addInt(Session::getUserLogado()->getIdAgencia());
 //            ->finilize("order by","desc","\"QUANTIDADE DE CREDITO\"");
         $call->execute();
         $resut = array();
