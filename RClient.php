@@ -302,7 +302,7 @@
 										<p class="mabott">
 											Garântia
 											<div class="x-list input-total" id="cred-cli-list-garaValue">
-												<input class="_noObrigatory" datalist="list" list="cred-cli-list-gara">
+												<input id="cred-data-list-gara" class="_noObrigatory" datalist="list" list="cred-cli-list-gara">
 												<datalist id="cred-cli-list-gara">
 												</datalist>
 											</div>
@@ -310,7 +310,7 @@
 										<p>
 											Documentos
 											<div class="x-list input-total" id="cred-cli-list-docuValue">
-												<input class="_noObrigatory" datalist="list" list="cred-cli-list-docu">
+												<input id="cred-data-list-docu" class="_noObrigatory" datalist="list" list="cred-cli-list-docu">
 												<datalist id="cred-cli-list-docu">
 												</datalist>
 											</div>

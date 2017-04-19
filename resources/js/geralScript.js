@@ -94,15 +94,24 @@ $('input[datalist="list"]').on('input', function(event){
 });
 
 $('input[datalist="list"]').keyup(function(event){
-    if(event.which == 13 && verifyDataList($(this)) !== false){
+    if(event.which === 13 && verifyDataList($(this)) !== false){
         var newList = '<span id-opt="'+ verifyDataList($(this))['id'] +'" description="">'+ verifyDataList($(this))['valOpt'] +'<i></i><b></b></span>';
         prt.find('input').before(newList);
         $(this).val("");
         $(this).css('width', '5px');
+
+        /**
+         * @type {number}
+         */
+        var total_span = ($(this).parent("div").find("span").length - 1);
+        /***
+         * isso possibilita o aparecimento da textarea ao add new span
+         */
+        $(this).parent("div").find("span").eq(total_span).find("i").click();
     }
 });
 $('input[datalist="list"]').keydown(function(event){
-    if(event.which == 8 && $(this).val() == ""){
+    if(event.which === 8 && $(this).val() === ""){
         $(this).prev().remove();
     }
 });

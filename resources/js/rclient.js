@@ -140,7 +140,8 @@ function CtrlFormLiquidar(state){
 
 $('.new-simulation').click(function(event) {
     // if (containMenu("cre.regCre")){
-        openModalFrame($('.mp-new-credit'));
+    cliente_more.reiniciar_modal_novo_credito();
+    openModalFrame($('.mp-new-credit'));
     // }else{
     //     callXpertAlert("Infelizmente nao tens permiçao para efectuar o registro de Cliente!", new Mensage().warning, 8000);
     // }
@@ -153,7 +154,7 @@ $('.define-client').click(function(event) {
 $('.select-client b').click(function(event) {
     if(cliFind.isFind) {
         si.nifClient = cliFind.nif;
-        $('#cred-cli-nif').text(cliFind.nif);
+        $('#cred-cli-nif').text(cliFind.nif +" -");
         $('#cred-cli-comName').text(cliFind.name);
         $(this).closest('.select-client').removeClass('show');
     }

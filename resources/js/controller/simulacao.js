@@ -182,13 +182,13 @@ function bluiderTablePestacao() {
         depois.setDate(depois.getDate() + (Number(si.dia) / Number(si.numeroPrestacao)));
         si.data = depois.getDate()+"-"+(depois.getMonth()+1)+"-"+depois.getUTCFullYear();
 
-        var day = (((depois.getDate()+"").length == 1) ? "0"+depois.getDate() : depois.getDate() );
-        var mouth = ((((depois.getMonth()+1)+"").length == 1) ? "0"+(depois.getMonth()+1) : (depois.getMonth()+1) );
+        var day = (((depois.getDate()+"").length === 1) ? "0"+depois.getDate() : depois.getDate() );
+        var mouth = ((((depois.getMonth()+1)+"").length === 1) ? "0"+(depois.getMonth()+1) : (depois.getMonth()+1) );
         var year = depois.getUTCFullYear();
 
         id = (i);
 
-        if(i == 0){ si.valorAmotizado = si.totalPagar - si.reembolsoPeriodo; }
+        if(i === 0){ si.valorAmotizado = si.totalPagar - si.reembolsoPeriodo; }
         else{ si.valorAmotizado -= (si.reembolsoPeriodo + si.valorDesconto); }
         si.valorAmotizado = ((si.valorAmotizado<1) ? 0 : si.valorAmotizado);
 
@@ -283,7 +283,7 @@ function searchElement(obj, _title) {
     comoList = [];
     var reValue = true;
     obj.find("span").each(function () {
-        if( $(this).attr("description") != "") {
+        if( $(this).attr("description") !== "") {
              var cb = new ComoBox();
                 cb.value = $(this).attr("description");
                 var id = $(this).attr("id-opt").split("-");
@@ -373,7 +373,7 @@ function hasNif() {
 }
 
 function testTableAmortizacao() {
-    if(si.dataTableAmortizacao.length==0) {
+    if(si.dataTableAmortizacao.length === 0) {
         callXpertAlert("Tabela de Amortização vazia!", new Mensage().warning, 8000);
         return false;
     }
@@ -386,12 +386,12 @@ function testTableAmortizacao() {
 
 function testlistDocGar() {
     var result =  listDocGaraHasElement();
-    if(result && si.listGara.length==0){
+    if(result && si.listGara.length === 0){
         callXpertAlert("Por favor, adicione Garrantia(s)!", new Mensage().warning, 8000);
         return false;
     }
 
-    if(result && si.listDocu.length==0){
+    if(result && si.listDocu.length === 0){
         callXpertAlert("Por favor, adicione Documento(s)!", new Mensage().warning, 8000);
         return false;
     }
@@ -405,7 +405,7 @@ $("#cred-cli-numDoc").change(function () {
 
 function checkIsValid() {
     var isValid = false;
-    if(si.numeroCheque == undefined){
+    if(si.numeroCheque === undefined){
         callXpertAlert("Por favor, selecione o Banco!", new Mensage().warning, 8000);
         $("#cred-cli-numDoc").addClass("empty");
         $("#cred-cli-bank").addClass("empty");
@@ -492,5 +492,5 @@ function addBancoCheque(op, banks){
 }
 
 function getStats(state) {
-    return (Number(state) != 0) ? "good" : "bad";
+    return (Number(state) !== 0) ? "good" : "bad";
 }
