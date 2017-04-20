@@ -221,8 +221,8 @@
 											<option value="0">(Tipo de Crédito)</option>
 										</select>
 										<input type="text" id="cred-data" placeholder="Data Inicial" title="Data Inicial" maxdate="true" default="true" class="is-datepicker input-3">
-                                        <input type="text" id="cred-data-fim" placeholder="Data Fim" title="Data Fim" class="is-datepicker input-3">
 										<input type="text" id="cred-dia" placeholder="Dias" class="input-3 integer">
+                                        <input type="text" id="cred-data-fim" placeholder="Data Fim" title="Data Fim" class="is-datepicker input-3">
 										<input type="text" id="cred-desco" value="0" placeholder="Desconto (10%-20%)" title="Desconto (10%-20%)" class="input-2 double percent1020">
 										<input type="text" id="cred-corr" value="0" placeholder="Correção" title="Correção" class="input-2 double formatNumber">
 										<span><span class="xpert-toggle-2"><span class="active">A</span><span>B</span></span></span>

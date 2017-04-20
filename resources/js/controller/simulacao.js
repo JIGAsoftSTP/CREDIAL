@@ -180,7 +180,7 @@ function bluiderTablePestacao() {
         depois.setMonth(Number(arData[1]) -1);
         depois.setDate(Number(arData[0]));
 
-        depois.setDate(depois.getDate() + (((i+1) === si.numeroPrestacao ) ? Number(si.dia) : (Number(si.dia) / Number(si.numeroPrestacao))));
+        depois.setDate(depois.getDate() + (((i+1) === (si.numeroPrestacao ) ) ? (Number(si.dia) -1) : ((Number(si.dia) / Number(si.numeroPrestacao)) -1)));
         si.data =  depois.getDate()+"-"+(depois.getMonth()+1)+"-"+depois.getUTCFullYear();
 
         var day = (((depois.getDate()+"").length === 1) ? "0"+depois.getDate() : depois.getDate() );
@@ -496,25 +496,37 @@ function getStats(state) {
     return (Number(state) !== 0) ? "good" : "bad";
 }
 
-// $("#cred-data-fim").change(function () {
-//     if (validation1(($("#cred-data")))) {
-//         var datainiciar = new Date();
-//         var dataFinal = new Date();
-//
-//         var arDataFin = $("#cred-data-fim").val().split("-");
-//         dataFinal.setUTCFullYear(Number(arDataFin[2]));
-//         dataFinal.setMonth(Number(arDataFin[1]) -1);
-//         dataFinal.setDate(Number(arDataFin[0]));
-//
-//         var arDataInicio = $("#cred-data").val().split("-");
-//         datainiciar.setUTCFullYear(Number(arDataInicio[2]));
-//         datainiciar.setMonth(Number(arDataInicio[1]) -1);
-//         datainiciar.setDate(Number(arDataInicio[0]));
-//
-//         var mise = dataFinal.getMilliseconds() - datainiciar.getMilliseconds();
-//
-//     }
-// });
+$("#cred-data-fim").change(function () {
+    if ($(this).val() !== "" && $("#cred-data").val() !== "") {
+        var datainiciar = new Date();
+        var dataFinal = new Date();
+
+        var arDataFin = $("#cred-data-fim").val().split("-");
+        dataFinal.setUTCFullYear(Number(arDataFin[2]));
+        dataFinal.setMonth(Number(arDataFin[1]) -1);
+        dataFinal.setDate(Number(arDataFin[0]));
+
+        var arDataInicio = $("#cred-data").val().split("-");
+        datainiciar.setUTCFullYear(Number(arDataInicio[2]));
+        datainiciar.setMonth(Number(arDataInicio[1]) -1);
+        datainiciar.setDate(Number(arDataInicio[0]));
+
+        var diff  = new Date(dataFinal - datainiciar);
+        var days  = (diff/1000/60/60/24)+1;
+
+        $("#cred-dia").val(days);
+
+    }
+});
+
+$("#cred-data").change(function () {
+    if ($(this).val() !== "" && $("#cred-dia").val() !== "") {
+        $("#cred-dia").keyup();
+    }
+    else if ($(this).val() !== "" && $("#cred-data-fim").val() !== "") {
+        $("#cred-data-fim").change();
+    }
+});
 
 $("#cred-dia").keyup(function () {
     if($(this).val() !== "" && $("#cred-data").val() !== "" ) {
