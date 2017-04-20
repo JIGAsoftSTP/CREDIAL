@@ -5,17 +5,9 @@ include "Session.php";
 include_once "../modelo/User.php";
 
     if($_POST["intention"] == "reg_activity")
-        try { regActivity(); }
-        catch (Exception $e){
-
-            $bd = new CallPgSQL();
-            $bd->functionTable("credial.funct_refresh_materialized_views","*")
-                ->addString("ACTIVITY");
-            $bd->execute();
-
-            regActivity();
-        }
-   else if($_POST["intention"] == "loadActivities") loadActivities();
+         regActivity();
+   else if($_POST["intention"] == "loadActivities")
+           loadActivities();
    else if($_POST["intention"] == "loadUsers") loadUsers();
 
     function regActivity()
@@ -35,15 +27,14 @@ include_once "../modelo/User.php";
 
     function loadActivities()
     {
+        $arrayValues = array();
         $call = new CallPgSQL();
         $call->functionTable("report.funct_rep_activity", "*")
             ->addString($_POST["user"])
             ->addJsonb(($_POST["filter"] == -1 ? null : $_POST["jsonContent"]));
         $call->execute();
-        $arrayValues = array();
 
-        while($result = $call->getValors())
-        {
+        while ($result = $call->getValors()) {
             $arrayValues[count($arrayValues)] = $result;
         }
         die(json_encode(array("result" =>$arrayValues)));

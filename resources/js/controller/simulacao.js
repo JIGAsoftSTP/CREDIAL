@@ -495,3 +495,36 @@ function addBancoCheque(op, banks){
 function getStats(state) {
     return (Number(state) !== 0) ? "good" : "bad";
 }
+
+// $("#cred-data-fim").change(function () {
+//     if (validation1(($("#cred-data")))) {
+//         var datainiciar = new Date();
+//         var dataFinal = new Date();
+//
+//         var arDataFin = $("#cred-data-fim").val().split("-");
+//         dataFinal.setUTCFullYear(Number(arDataFin[2]));
+//         dataFinal.setMonth(Number(arDataFin[1]) -1);
+//         dataFinal.setDate(Number(arDataFin[0]));
+//
+//         var arDataInicio = $("#cred-data").val().split("-");
+//         datainiciar.setUTCFullYear(Number(arDataInicio[2]));
+//         datainiciar.setMonth(Number(arDataInicio[1]) -1);
+//         datainiciar.setDate(Number(arDataInicio[0]));
+//
+//         var mise = dataFinal.getMilliseconds() - datainiciar.getMilliseconds();
+//
+//     }
+// });
+
+$("#cred-dia").keyup(function () {
+    if($(this).val() !== "" && $("#cred-data").val() !== "" ) {
+        var datainiciar = new Date();
+        var arDataInicio = $("#cred-data").val().split("-");
+        datainiciar.setUTCFullYear(Number(arDataInicio[2]));
+        datainiciar.setMonth(Number(arDataInicio[1]) - 1);
+        datainiciar.setDate(Number(arDataInicio[0]));
+        datainiciar.setDate(datainiciar.getDate() + (Number($(this).val() - 1)));
+
+        $("#cred-data-fim").val(datainiciar.getDatePt());
+    }
+});
