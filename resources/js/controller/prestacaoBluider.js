@@ -71,7 +71,7 @@ var PrestacaoBluider = function () {
             '<h4>Data CNT: '+this.dataCNTCredito+'</h4>' +
             '</div>' +
             '<span class="table-amort">' +
-            '<h2>Tabela de amortização</h2>' +
+            '<h2 id="table-amortizacao-ele'+this.id+'">Tabela de amortização</h2>' +
             '<div class="x-table table-amort">'+
             '<table id="table-amortizacao-'+this.id+'" class="selectable" cellpadding="0" cellspacing="0">' +
             '<thead>' +
@@ -163,7 +163,7 @@ function showAmortizacao(id, jk, show) {
     pestacao_selecionada.parent().find('.more-details').toggleClass('show');
     tableEstructure($('#table-amortizacao-'+id));
     setTimeout(function (e) {
-        window.location = '#table-amortizacao-'+id;
+        window.location = '#table-amortizacao-ele'+id;
     }, 350);
 }
 
@@ -173,19 +173,11 @@ function clickPestacao(_idPrestacao) {
 
 var prestacaoS = undefined;
 function pagamentoPestacao(i) {
-    // $(".mp-liquida").removeClass("icon-checkbox-checked").addClass("icon-checkbox-unchecked");
-    // resetForm($("#cred-pay-form"));
-    // $('.sec-another').removeClass('show');
-    // if(containMenu("cre.pgto"))
-    // {
-        prestacaoS = gestClient.listPrestacao[i];
-        if (prestacaoS["STATE COD"] !== "0") {
-            loadDataCredForForm();
-            regUserActivity("./bean/activity.php", prestacaoS["ID"] , "Selecionou Prestação de um crédito", JSON.stringify(prestacaoS), LevelActivity.VISUALIZACAO );
-        }
-    // }else{
-    //     callXpertAlert("Infelizmente nao tens permiçao para efectuar o pagameto de prestaçao!", new Mensage().warning, 8000);
-    // }
+    prestacaoS = gestClient.listPrestacao[i];
+    if (prestacaoS["STATE COD"] !== "0") {
+        loadDataCredForForm();
+        regUserActivity("./bean/activity.php", prestacaoS["ID"], "Selecionou Prestação de um crédito", JSON.stringify(prestacaoS), LevelActivity.VISUALIZACAO);
+    }
 }
 
 var reembloso = undefined;

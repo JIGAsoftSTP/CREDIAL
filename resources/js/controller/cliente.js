@@ -658,7 +658,7 @@ function getDadosPayFull() {
                 payfullData = e.return;
                 payfull.paydValue = payfullData.creditpago;
                 payfull.reValue = payfullData.valuerecalculated;
-                payfull.difenceValue = payfullData.valuerecalculated;
+                payfull.difenceValue = payfullData.valuediference;
                 payfull.startValue = payfullData.creditvalue;
 
                 $("#full-pay-dife").html(formattedString(Number(payfull.difenceValue).dc().rp()));
