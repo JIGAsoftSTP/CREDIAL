@@ -536,7 +536,6 @@ function loadDataSearch() {
         cell5.setAttribute("class","col-credit");
         add++;
         lastI = i;
-        // console.log(lastI);
     }
     tableEstructure($('.x-table.table-client'));
     setRowCount($('.x-table.table-client'));
@@ -578,17 +577,6 @@ function editeSelectedClient() {
     }
 }
 
-function clientIsIncomple() {
-    return  (clienteData[ "CLIENTE SALARIO" ] === null
-    || clienteData[ "DATA NASCIMENTO" ] === null
-    || clienteData[ "LOCALIDADE" ] === null
-    || clienteData[ "TELE MOVEL" ] === null
-    || clienteData[ "TRADOSSIER ANO" ] === null
-    || clienteData[ "TRADOSSIER LETRA" ] === null
-    || clienteData[ "TRADOSSIER MES" ] === null
-    || clienteData[ "TRADOSSIER NUMERO DE CAPA" ] === null
-    || clienteData[ "TRADOSSIER SEQUENCIA" ] === null);
-}
 
  function clientIsCompleto(b,type) {
     cliente_more.reiniciar_modal_novo_credito();
@@ -629,7 +617,6 @@ var payfull = new FullPay();
 var payfullData = undefined;
 
 function getDadosPayFull() {
-    // gestClient.iPrestacao = $(this).attr("jk");
     if(payfull.idCred === undefined) {
         payfull.idCred = $(this).attr("l-id");
         payfull.bank = -1;
@@ -713,6 +700,13 @@ $("#full-pay-bt").click(function () {
                     JSON.stringify(fullPaymentActivity), LevelActivity.CRIACAO );
                 var re = new refresh();
                 re.dataType = "CLIENT";
+
+                /**
+                 * setTimeout(reloadPestacaoCreditdo, 700);
+                 *isso permitira a atualização automática da lista das prestações
+                 *foi comentado por apenas fechar
+                 **/
+                $('.history-selected').toggleClass('show');
                 saveRefresh(re);
             }
             else { callXpertAlert(e.msg, new Mensage().cross, 8000); }
