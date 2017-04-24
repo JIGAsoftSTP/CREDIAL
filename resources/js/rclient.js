@@ -146,7 +146,7 @@ $('.mp-info-client .menu-info li').click(function(event) {
 });
 
 $('.mini-report.rep2 small').click(function(event) {
-    showDataCliente();
+    gestClient.showDataCliente();
     openModalFrame($('.mp-info-client'));
 });
 
@@ -320,5 +320,6 @@ $('.mp-liquidar-full .type-font i').click(function(event) {
 });
 
 $('.list-history').on('click', '.bt-full-payment',function(event) {
+    payfull = new FullPay();
     getDadosPayFull.call(this)
 });

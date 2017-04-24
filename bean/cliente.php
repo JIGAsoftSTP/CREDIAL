@@ -16,10 +16,10 @@ include "Session.php";
     if($_POST["intensao"] == "loadStatusClient"){ loadStatusClient(); }
     if($_POST["intensao"] == "loadCreditoClient"){ loadCreditoClient(); }
     if($_POST["intensao"] == "efectuarPagamento"){ efectuarPagamento(); }
-    if($_POST["intensao"] == "reloadPestacaoCreditdo"){ reloadPestacaoCreditdo(); }
     if($_POST["intensao"] == "editeSelectedClient"){ changeClienteDataNasc(); }
     if($_POST["intensao"] == "regPavementFull"){ regPavementFull(); }
     if($_POST["intensao"] == "regPayFullNow"){ regPayFullNow(); }
+    if($_POST["intensao"] == "loadPrestacaoCreditoClient"){ loadPrestacao(); }
 
     function listCliente(){
         $call = new CallPgSQL();
@@ -142,9 +142,8 @@ include "Session.php";
             ->addNumeric(Session::getUserLogado()->getIdAgencia())
             ->addString($_POST["nifCliente"]);
         $call->execute();
-        die(json_encode(array("resultClient" => $call->getValors(),
-                            "resultCredito" => loadCreditoClient(),
-                            "resultRealDataCliente" => loadDataCliente())));
+
+        die(json_encode(array("resultClient" => $call->getValors(), "resultRealDataCliente" => loadDataCliente())));
     }
 
     function loadCreditoClient(){
@@ -155,27 +154,20 @@ include "Session.php";
             ->addString($_POST["nifCliente"]);
         $callC->execute();
         $listCredito = array();
-        while ($values = $callC->getValors() )
-        {
-            $listCredito[count($listCredito)] = array(
-                "credito" => $values,
-                "prestacao" => loadPrestacao($values["ID"])
-            );
-        }
-        return $listCredito;
+        while ($values = $callC->getValors() ) { $listCredito[] = $values; }
+        die(json_encode(array("lista_credito" => $listCredito)));
     }
 
-    function loadPrestacao($idCredito){
+    function loadPrestacao(){
         $callP = new CallPgSQL();
         $callP->functionTable("funct_load_prestacao_credito","*")
             ->addString(Session::getUserLogado()->getId())
             ->addNumeric(Session::getUserLogado()->getIdAgencia())
-            ->addNumeric($idCredito);
+            ->addNumeric($_POST["credito_id"]);
         $callP->execute();
         $listPestacao = array();
-        while ($valuesP = $callP->getValors())
-            $listPestacao[count($listPestacao)] = $valuesP;
-        return $listPestacao;
+        while ($valuesP = $callP->getValors()) $listPestacao[] = $valuesP;
+        die(json_encode(array("lista_prestacao" => $listPestacao)));
     }
 
     function loadDataCliente(){
@@ -209,10 +201,6 @@ include "Session.php";
             $j = json_encode(array("result"=>true, $return)); die($j);
         }
     }
-
-function reloadPestacaoCreditdo(){
-    die(json_encode(array("prestacao" => loadPrestacao($_POST['idCred']))));
-}
 
 function changeClienteDataNasc(){
     $call = new CallPgSQL();

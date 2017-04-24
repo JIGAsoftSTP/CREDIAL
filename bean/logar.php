@@ -16,6 +16,7 @@ if($_POST['intensao']=="changePwd"){ changePwd(); }
 if($_POST['intensao']=="getImageUser"){ loadImgUser(); }
 if($_POST['intensao']=="getDataUser"){ getDataUser(); }
 if($_POST['intensao']=="sendfeeback"){ sendfeeback(); }
+if($_POST['intensao']=="has_session"){ has_session(); }
 
 function logar(){
     $call = new CallPgSQL();
@@ -164,4 +165,9 @@ function sendfeeback(){
         ->Destino("jigasoft_stp@hotmail.com")
         ->sendEmail();
     die (json_encode(array("result" => ($enviado == true))));
+}
+
+function has_session(){
+    $user = Session::getUserLogado()->getId();
+    die (json_encode(array("hassession" => isset($user))));
 }

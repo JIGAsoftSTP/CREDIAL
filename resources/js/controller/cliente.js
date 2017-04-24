@@ -174,32 +174,25 @@ var reShowDataClient = false;
 var iSeletedCliente = undefined;
 function inforCiente(b, type, fill) {
     iSeletedCliente = b;
+    gestClient.idClientSeleted = (type !== undefined ? listSearchCLients[b]["NIF"] :clientes[clienteLetra][b]["NIF"]);
     $.ajax({
         url: "./bean/cliente.php",
         type: "POST",
-        data: {"intensao": "loadStatusClient", "nifCliente": (type !== undefined ? listSearchCLients[b]["NIF"] :clientes[clienteLetra][b]["NIF"]), fill : fill},
+        data: {"intensao": "loadStatusClient", "nifCliente": gestClient.idClientSeleted , fill : fill},
         dataType: "json",
         success: function (e) {
             clienteData = e.resultRealDataCliente;
             if(fill === undefined) {
-                listCredito = e.resultCredito;
                 clienteShortData = e.resultClient;
-                listCreditoCliente("-1");
-                if(!reShowDataClient)
-                    setTimeout(function () {
-                        $('.history-selected').toggleClass('show');
-                    }, 700);
-                else
-                    setTimeout(showAmortizacao, 800,idCredSeleted, iPrestacao, false);
+                gestClient.more_information_about_client();
+                gestClient.load_all_credito();
                 reShowDataClient = false;
-                //regUserActivity("./bean/activity.php", b , "Selecionou o Historico do cliente!", -1, LevelActivity.VISUALIZACAO );
             }
             else {
                 $('.add-new-form').toggleClass('show');
                 $('.add-new-form h1').text('Editar cliente');
                 $("#cli-reg").text('Editar cliente');
                 getDadosCliente();
-
                 regUserActivity("./bean/activity.php", -1 , "Selecionou Cliente para ver as Prestações do Crédito!", -1, LevelActivity.VISUALIZACAO );
             }
         },
@@ -208,15 +201,11 @@ function inforCiente(b, type, fill) {
     });
 }
 function editCiente(c, type) {
-    // if(containMenu("cre.EdCl")) {
-        CLIENTEEDITE = true;
-        if (type === undefined)
-            inforCiente(c, undefined, true);
-        else
-            inforCiente(c, 2, true);
-    // } else{
-    //     callXpertAlert("Infelizmente nao tens permiçao para efectuar o ediçao de Cliente!", new Mensage().warning, 8000);
-    // }
+    CLIENTEEDITE = true;
+    if (type === undefined)
+        inforCiente(c, undefined, true);
+    else
+        inforCiente(c, 2, true);
 }
 
 // loadOuther
@@ -353,106 +342,10 @@ $(".close-history").click(function () {
     $('.history-selected').toggleClass('show');
 });
 
-var listPrestacao = undefined;
-var iPrestacao = undefined;
-var idCredSeleted = undefined;
-function loadCreditoCliente(_idCreito, jk,_asClassShow) {
-    listPrestacao = listCredito[jk]["prestacao"];
-    iPrestacao = jk;
-    idCredSeleted = _idCreito;
-    if(!_asClassShow) {
-        var pre = new Prestacao();
-        for (var h = 0; h < listPrestacao.length; h++) {
-            pre.id = listPrestacao[h]["ID"];
-            pre.i = h;
-            pre.reembolso(listPrestacao[h]["REEMBOLSO"])
-                .prestacaoPaga(listPrestacao[h]["PRESTACAO PAGA"])
-                .estado(listPrestacao[h]["STATE"])
-                .dataEndosse((listPrestacao[h]["DATA ENDOSSADO"] === null) ? " ---------------- " : listPrestacao[h]["DATA ENDOSSADO"])
-                .dataEmissao(listPrestacao[h]["DATA EMISAO"])
-                .addAmortizacao();
-        }
-        $("#list-prestacao-" + _idCreito).html(pre.getListAmortiza());
-    }
-    else{ $("#list-prestacao-" + _idCreito).empty(); }
-}
-
-function showDataCliente(){
-    regUserActivity("./bean/activity.php", clienteData["NIF"] , "Visualizou dados do(a) cliente "+clienteData["NAME"]+" "+clienteData["SURNAME"], -1, LevelActivity.VISUALIZACAO );
-
-    $("#inf-cli-geral-nif").text(clienteData["NIF"]);
-    $("#inf-cli-geral-nome").text(clienteData["NAME"]+" "+clienteData["SURNAME"]);
-    $("#inf-cli-geral-dataNasc").text(clienteData["DATA NASCIMENTO"]);
-    $("#inf-cli-geral-sexo").text(clienteData["SEXO"]);
-    $("#inf-cli-geral-estadoCivil").text(clienteData["ESTADO CIVIL"]);
-    $("#inf-cli-geral-morada").text(clienteData["MORADA"]);
-
-    $("#inf-cli-geral-prof").text(clienteData["PROFISAO"]);
-    $("#inf-cli-geral-salario").text(clienteData["CLIENTE SALARIO"]);
-    $("#inf-cli-geral-lacali").text(clienteData["LOCALIDADE"]);
-    $("#inf-cli-geral-localTrab").text(clienteData["LOCAL TRABALHA"]);
-
-    $("#inf-cli-geral-telemo").text(clienteData["TELE MOVEL"]);
-    $("#inf-cli-geral-telefo").text(clienteData["TELE FIXO"]);
-    $("#inf-cli-geral-telSer").text(clienteData["TELE SERVICO"]);
-    $("#inf-cli-geral-email").text(clienteData["MAIL"]);
-
-    $("#inf-cli-geral-ano").text(clienteData["TRADOSSIER ANO"]);
-    $("#inf-cli-geral-mes").text(clienteData["TRADOSSIER MES"]);
-    $("#inf-cli-geral-letra").text(clienteData["TRADOSSIER LETRA"]);
-    $("#inf-cli-geral-capa").text(clienteData["TRADOSSIER NUMERO DE CAPA"]);
-}
-
-function listCreditoCliente(_type) {
-
-    regUserActivity("./bean/activity.php", -1 ,
-        "Selecionou mais informações sobre crédito do(a) cliente com NIF: "+clienteData["NIF"], -1, LevelActivity.VISUALIZACAO );
-
-    $("#inf-cli-ano").text("Cliente desde " + clienteShortData["DATA REGISTRO"]+((Number(clienteShortData["IDADE NA EMPRESA"]) > 1) ? " - Há " + clienteShortData["IDADE NA EMPRESA"] + " Anos" : "" ));
-    // $("#inf-cred-lqA").text(clienteShortData["ATRAZADO"]);
-    $("#inf-cred-porPa").text(clienteShortData["POR PAGAR"]);
-    $("#inf-cred-Pagos").text(clienteShortData["PAGOS"]);
-    $("#inf-cred-total").text(clienteShortData["TOTAL CREDITO"]);
-
-    $("#inf-cred-val-Pedido").text("$ "+clienteShortData["MONTANTE TOTAL SOLICITADO"]);
-    $("#inf-cred-val-porPagar").text("$ "+clienteShortData["MONTANTE TOTAL POR PAGAR"]);
-    $("#inf-cred-val-amorti").text("$ "+clienteShortData["MONTANTE TOTAL AMORTIZAR"]);
-    $("#inf-cred-val-pago").text("$ "+clienteShortData["MONTANTE TOTAL PAGO"]);
-
-    var lastName = clienteData['SURNAME'].split(" ");
-    $("#inf-cli-name").html('<i class="icon-user-tie"></i>'+clienteData['NAME'] + " " + lastName[lastName.length - 1]);
-    $("#inf-cli-career").text(clienteData["PROFISAO"]);
-
-    $("#inf-cli-salario").text(((listCredito["CLIENTE SALARIO"] === null) ? "Indisponivel" : clienteData["CLIENTE SALARIO"]));
-
-    //"PAGOS" : "2",
-
-    $("#cred-list-amort").html("");
-    for (var jk = 0; jk < listCredito.length; jk++) {
-        if (_type === listCredito[jk]["credito"]["STATE COD"] || _type === "-1") {
-            var bluider = new PrestacaoBluider();
-            bluider.id = listCredito[jk]["credito"]["ID"];
-            bluider.idState = listCredito[jk]["credito"]["STATE COD"];
-            bluider.nunDossierCredito = listCredito[jk]["credito"]["DOSSIER"];
-            bluider.nunCheckCredito = listCredito[jk]["credito"]["CHEQUE USADO"];
-            bluider.dataInicioCredito = listCredito[jk]["credito"]["DATA INICIO"];
-            bluider.dataFimCredito = listCredito[jk]["credito"]["DATA FIM"];
-            bluider.dataCNTCredito = listCredito[jk]["credito"]["DATA FINALIZAR"];
-            bluider.penalidadeCretido = listCredito[jk]["credito"]["TAEG"];
-            bluider.capitalInicialCredito = listCredito[jk]["credito"]["CAPITAL INICIAL"];
-            bluider.totalEfetivoCredido = listCredito[jk]["credito"]["VALOR PAGO"];
-            bluider.totalCreditoAPagar = listCredito[jk]["credito"]["TOTAL CREDITO"];
-            bluider.bluider(jk);
-
-            $("#cred-list-amort").append(bluider.credito);
-
-            tableEstructure($("#table-amortizacao-"+bluider.id));
-        }
-    }
-}
-
 $(".show-cred").click(function () {
-    listCreditoCliente(($(this).hasClass("cred-pago") ? "0" : ($(this).hasClass("cred-porPagar") ? "1" : "-1")));
+    $( "#cred-list-amort" ).empty();
+    gestClient.credito_i = 0;
+    gestClient.listCreditoCliente(($(this).hasClass("cred-pago") ? "0" : ($(this).hasClass("cred-porPagar") ? "1" : "-1")));
 });
 
 $("div.alphabet").on("click","span",function () {
@@ -649,11 +542,6 @@ function loadDataSearch() {
     setRowCount($('.x-table.table-client'));
 }
 
-function reloadPestacaoCreditdo() {
-    reShowDataClient = true;
-    inforCiente(iSeletedCliente, (clienteSearch) ? true : undefined);
-}
-
 function editeSelectedClient() {
     if(containMenu("cre.EdiCli")) {
         getDataClienteInForm("editeSelectedClient");
@@ -691,52 +579,29 @@ function editeSelectedClient() {
 }
 
 function clientIsIncomple() {
-    var rt = (clienteData["CLIENTE SALARIO"] === null
-        || clienteData["DATA NASCIMENTO"] === null
-        || clienteData["LOCALIDADE"] === null
-        || clienteData["TELE MOVEL"] === null
-        || clienteData["TRADOSSIER ANO"] === null
-        || clienteData["TRADOSSIER LETRA"] === null
-        || clienteData["TRADOSSIER MES"] ===  null
-        || clienteData["TRADOSSIER NUMERO DE CAPA"] === null
-        || clienteData["TRADOSSIER SEQUENCIA"] === null);
-    return  rt;
+    return  (clienteData[ "CLIENTE SALARIO" ] === null
+    || clienteData[ "DATA NASCIMENTO" ] === null
+    || clienteData[ "LOCALIDADE" ] === null
+    || clienteData[ "TELE MOVEL" ] === null
+    || clienteData[ "TRADOSSIER ANO" ] === null
+    || clienteData[ "TRADOSSIER LETRA" ] === null
+    || clienteData[ "TRADOSSIER MES" ] === null
+    || clienteData[ "TRADOSSIER NUMERO DE CAPA" ] === null
+    || clienteData[ "TRADOSSIER SEQUENCIA" ] === null);
 }
 
  function clientIsCompleto(b,type) {
-    /*$.ajax({
-        url: "./bean/cliente.php",
-        type: "POST",
-        data: {"intensao": "loadStatusClient", "nifCliente": (type !== undefined ? listSearchCLients[b]["NIF"] :clientes[clienteLetra][b]["NIF"]), fill : true},
-        dataType: "json",
-        success: function (e) {
-            clienteData = e.resultRealDataCliente;
-            if(clientIsIncomple()){
-                getDadosCliente();
-                CLIENTEEDITE = true;
-                DOCREDITO = true;
-                $('.add-new-form').toggleClass('show');
-                $('.add-new-form h1').text('Editar cliente');
-                $("#cli-reg").text('Editar cliente');
-                callXpertAlert('Cliente com dados incompletos<br>por favor atualize os dados!', new Mensage().warning, -1);
-            } else {*/
+    cliente_more.reiniciar_modal_novo_credito();
 
-                cliente_more.reiniciar_modal_novo_credito();
+    $("#cred-cli-nif").text((type !== undefined ?listSearchCLients[b]["NIF"]: clientes[clienteLetra][b]["NIF"])+" - ");
+    var lastName = (type !== undefined ?listSearchCLients[b]["SURNAME"]: clientes[clienteLetra][b]['SURNAME']).split(" ");
+    $("#cred-cli-comName").text((type !== undefined ?listSearchCLients[b]["NAME"]:clientes[clienteLetra][b]['NAME'])+" "+lastName[lastName.length-1]);
+    nifClient = type !== undefined ?listSearchCLients[b]["NIF"] : clientes[clienteLetra][b]["NIF"];
+    si.nifClient = nifClient;
+    openModalFrame($('.mp-new-credit'));
+    tableEstructure($('#table-liquid'));
 
-                $("#cred-cli-nif").text((type !== undefined ?listSearchCLients[b]["NIF"]: clientes[clienteLetra][b]["NIF"])+" - ");
-                var lastName = (type !== undefined ?listSearchCLients[b]["SURNAME"]: clientes[clienteLetra][b]['SURNAME']).split(" ");
-                $("#cred-cli-comName").text((type !== undefined ?listSearchCLients[b]["NAME"]:clientes[clienteLetra][b]['NAME'])+" "+lastName[lastName.length-1]);
-                nifClient = type !== undefined ?listSearchCLients[b]["NIF"] : clientes[clienteLetra][b]["NIF"];
-                si.nifClient = nifClient;
-                openModalFrame($('.mp-new-credit'));
-                tableEstructure($('#table-liquid'));
-
-                regUserActivity("./bean/activity.php", -1 , "Selecionou Cliente para efetuar crédito!", -1, LevelActivity.VISUALIZACAO );
-       /*     }
-        },
-        beforeSend: function () {  $(".mp-loading").fadeIn(); },
-        complete: function () { $(".mp-loading").fadeOut();}
-    });*/
+    regUserActivity("./bean/activity.php", -1 , "Selecionou Cliente para efetuar crédito!", -1, LevelActivity.VISUALIZACAO );
  }
 
 var FullPay = function () {
@@ -764,7 +629,7 @@ var payfull = new FullPay();
 var payfullData = undefined;
 
 function getDadosPayFull() {
-    iPrestacao = $(this).attr("jk");
+    // gestClient.iPrestacao = $(this).attr("jk");
     if(payfull.idCred === undefined) {
         payfull.idCred = $(this).attr("l-id");
         payfull.bank = -1;
@@ -846,7 +711,6 @@ $("#full-pay-bt").click(function () {
                 callXpertAlert('Novo pagamento antecipado registado com sucesso!', new Mensage().checkmark, 8000);
                 regUserActivity("./bean/activity.php", -1 , "Pagamento antecipado registado com sucesso!",
                     JSON.stringify(fullPaymentActivity), LevelActivity.CRIACAO );
-                setTimeout(reloadPestacaoCreditdo, 700);
                 var re = new refresh();
                 re.dataType = "CLIENT";
                 saveRefresh(re);

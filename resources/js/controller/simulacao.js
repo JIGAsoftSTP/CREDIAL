@@ -514,24 +514,27 @@ $("#cred-data-fim").change(function () {
         var diff  = new Date(dataFinal - datainiciar);
         var days  = (diff/1000/60/60/24)+1;
 
-        $("#cred-dia").val(days);
-
+        if(days >= 0) { $("#cred-dia").val(days); }
+        else $("#cred-dia").val(0);
     }
 });
 
 $("#cred-data").change(function () {
-    if ($(this).val() !== "" && $("#cred-dia").val() !== "") {
-        $("#cred-dia").keyup();
+    var dia = $("#cred-dia");
+    var data_fim = $("#cred-data-fim");
+    if ($(this).val() !== "" && dia.val() !== "") {
+       dia.keyup();
     }
-    else if ($(this).val() !== "" && $("#cred-data-fim").val() !== "") {
-        $("#cred-data-fim").change();
+    else if ($(this).val() !== "" && data_fim.val() !== "") {
+        data_fim.change();
     }
 });
 
 $("#cred-dia").keyup(function () {
-    if($(this).val() !== "" && $("#cred-data").val() !== "" ) {
+    var data_inicio = $("#cred-data");
+    if($(this).val() !== "" && data_inicio.val() !== "" ) {
         var datainiciar = new Date();
-        var arDataInicio = $("#cred-data").val().split("-");
+        var arDataInicio = data_inicio.val().split("-");
         datainiciar.setUTCFullYear(Number(arDataInicio[2]));
         datainiciar.setMonth(Number(arDataInicio[1]) - 1);
         datainiciar.setDate(Number(arDataInicio[0]));

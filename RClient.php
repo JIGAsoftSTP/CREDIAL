@@ -487,7 +487,7 @@
 	</div>
 </section>
 <script type="text/javascript" src="./resources/fw/pikaday/pikaday.js"></script>
-<!-- <div class="xpert-alert notification"><i class="icon-notification"></i><span class="txt">Text here!</span> <span class="close">X</span></div> -->
+    <?php include "includes/process.html"; ?>
 </body>
 <script type="text/javascript" src="./resources/js/jQuery.js"></script>
 <script type="text/javascript" src="resources/js/table.js"></script>
@@ -497,6 +497,7 @@
 <script type="text/javascript" src="./resources/js/controller/menu.js"></script>
 <script type="text/javascript" src="resources/js/rclient.js"></script>
 <script type="text/javascript" src="resources/js/controller/cliente.js"></script>
+<script type="text/javascript" src="resources/js/controller/gestClient.js"></script>
 <script type="text/javascript" src="resources/js/controller/simulacao.js"></script>
 <script type="text/javascript" src="resources/js/controller/prestacaoBluider.js"></script>
 </html>

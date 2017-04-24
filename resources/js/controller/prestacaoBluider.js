@@ -45,18 +45,19 @@ var PrestacaoBluider = function () {
     this.capitalInicialCredito = undefined;
     this.totalEfetivoCredido = undefined;
     this.totalCreditoAPagar = undefined;
+    this.numero_prestacao = undefined;
 
     this.bluider = function(jk) {
-        var numCredi = listCredito[jk]["prestacao"].length;
+        var numCredi = this.numero_prestacao;
         var numCrediText = numCredi+" "+((numCredi === 0 || numCredi > 1) ? "prestações" : "prestação");
         this.credito =
-            '<section class="'+((this.idState == 0) ? "pago" : ((this.idState == 1) ? "por-pagar" : "amortizado" ) )+'">' +
+            '<section class="'+((this.idState === 0) ? "pago" : ((this.idState === 1) ? "por-pagar" : "amortizado" ) )+'">' +
             '<i class="icon-ctrl sh-more" id="pret-'+this.id+'" onclick="showAmortizacao('+this.id+','+jk+')"></i>' +
             '<nav> ' +
             '<div class="primary"><b>Dossier nº '+this.nunDossierCredito+'</b> <b>'+formattedString(this.totalCreditoAPagar)+'</b></div> ' +
             '<div class="secondary"><small>Efetuado em '+this.dataInicioCredito+'</small> <b><small>'+ numCrediText +'</small></b> <small>Data fim crédito: '+this.dataFimCredito+'</small></div>' +
             '</nav> ' +
-            ( (this.idState != 0 && (containMenu("cre.regFullPay"))) ? '<button l-id="'+this.id+'" jk="'+jk+'" class="bt-full-payment">Pagamento Antecipado</button>' : '') +
+            ( (this.idState !== 0 && (containMenu("cre.regFullPay"))) ? '<button l-id="'+this.id+'" jk="'+jk+'" class="bt-full-payment">Pagamento Antecipado</button>' : '') +
             '<nav class="more-details"> ' +
             '<hr> ' +
             '<span class="state"></span> ' +
@@ -156,11 +157,10 @@ var Prestacao =  function () {
 };
 
 function showAmortizacao(id, jk, show) {
-
     regUserActivity("./bean/activity.php", id , "Selecionou Crédito, para ver as prestações do crédito!", -1, LevelActivity.VISUALIZACAO );
-
-    loadCreditoCliente(id,jk, (show === undefined) ? $("#pret-"+id).parent().find('.more-details').hasClass("show") : show);
-    $("#pret-"+id).parent().find('.more-details').toggleClass('show');
+    var pestacao_selecionada = $("#pret-"+id);
+    gestClient.loadCreditoCliente(id,jk, (show === undefined) ? pestacao_selecionada.parent().find('.more-details').hasClass("show") : show);
+    pestacao_selecionada.parent().find('.more-details').toggleClass('show');
     tableEstructure($('#table-amortizacao-'+id));
     setTimeout(function (e) {
         window.location = '#table-amortizacao-'+id;
@@ -178,7 +178,7 @@ function pagamentoPestacao(i) {
     // $('.sec-another').removeClass('show');
     // if(containMenu("cre.pgto"))
     // {
-        prestacaoS = listPrestacao[i];
+        prestacaoS = gestClient.listPrestacao[i];
         if (prestacaoS["STATE COD"] !== "0") {
             loadDataCredForForm();
             regUserActivity("./bean/activity.php", prestacaoS["ID"] , "Selecionou Prestação de um crédito", JSON.stringify(prestacaoS), LevelActivity.VISUALIZACAO );

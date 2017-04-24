@@ -301,3 +301,17 @@ function getNameReport(name) {
     dataExport.name = name;
 }
 
+var geral = {
+  has_session : function () {
+      $.ajax({
+          url: "./bean/logar.php",
+          type: "POST",
+          data: {"intensao": "has_session"},
+          dataType: "json",
+          async: false,
+          success: function (e) {
+              if(!e.hassession) window.location = "./index.php";
+          }
+      });
+  }
+};
