@@ -112,6 +112,7 @@ var gestClient = {
                 bluider.capitalInicialCredito = listCredito[ jk ][ "CAPITAL INICIAL" ];
                 bluider.totalEfetivoCredido = listCredito[ jk ][ "VALOR PAGO" ];
                 bluider.totalCreditoAPagar = listCredito[ jk ][ "TOTAL CREDITO" ];
+                bluider.numero_prestacao = Number(listCredito[ jk ].totalpagamento);
                 bluider.bluider( jk );
 
                 listaAmortizacao.append( bluider.credito );
@@ -133,6 +134,7 @@ var gestClient = {
                 $( "#cred-list-amort" ).empty();
                 listCredito = e.lista_credito;
                 gestClient.total_add = 10;
+                gestClient.credito_i = 0;
                 gestClient.listCreditoCliente("-1");
             }
         });
