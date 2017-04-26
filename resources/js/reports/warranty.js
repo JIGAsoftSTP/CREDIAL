@@ -204,7 +204,6 @@ function transformDataToCredito() {
             creditBluider.bluiderCreditos(Creditoe, i);
             add++;
             warranty.last_add = i+1;
-            console.log(warranty.last_add);
         }
 }
 

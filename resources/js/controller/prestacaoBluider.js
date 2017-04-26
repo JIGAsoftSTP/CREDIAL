@@ -46,6 +46,7 @@ var PrestacaoBluider = function () {
     this.totalEfetivoCredido = undefined;
     this.totalCreditoAPagar = undefined;
     this.numero_prestacao = undefined;
+    this.tota_em_pagamento = undefined;
 
     this.bluider = function(jk) {
         var numCredi = this.numero_prestacao;
@@ -53,7 +54,7 @@ var PrestacaoBluider = function () {
         var numCrediText = numCredi+" "+((numCredi === 0 || numCredi > 1) ? "prestações" : "prestação");
         this.credito =
             '<section id="sec-cred'+ this.id +'" class="'+((this.idState === 0) ? "pago" : ((this.idState === 1) ? "por-pagar" : "amortizado" ) )+'">' +
-            canAnulate+
+            ((this.tota_em_pagamento === 0) ? canAnulate : "")+
             '<i class="icon-ctrl sh-more" id="pret-'+this.id+'" onclick="showAmortizacao('+this.id+','+jk+')"></i>' +
             '<nav> ' +
             '<div class="primary"><b>Dossier nº '+this.nunDossierCredito+'</b> <b>'+formattedString(this.totalCreditoAPagar)+'</b></div> ' +

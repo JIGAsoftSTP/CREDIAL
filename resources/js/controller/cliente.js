@@ -25,7 +25,6 @@ $(function () {
     $("#client-search").keypress(function (e) {
         if (e.keyCode === 13) {
             functionSearch = searchClient;
-            // console.log(functionSearch);
             carregarCliente(true, functionSearch);
             hasSearched = true;
         }
@@ -98,7 +97,6 @@ function addMES() {
  * @param functions {function}
  */
 function carregarCliente(empty, functions) {
-    // console.error(functions);
     if(functions === undefined) {
         clienteSearch = false;
         addTable = (clientes[clienteLetra] !== undefined) ? clientes[clienteLetra].length : 0;

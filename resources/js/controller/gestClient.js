@@ -113,6 +113,7 @@ var gestClient = {
                 bluider.totalEfetivoCredido = listCredito[ jk ][ "VALOR PAGO" ];
                 bluider.totalCreditoAPagar = listCredito[ jk ][ "TOTAL CREDITO" ];
                 bluider.numero_prestacao = Number(listCredito[ jk ].totalpagamento);
+                bluider.tota_em_pagamento = Number(listCredito[ jk ].totalempagamento);
                 bluider.bluider( jk );
 
                 listaAmortizacao.append( bluider.credito );
