@@ -20,6 +20,7 @@ include "Session.php";
     if($_POST["intensao"] == "regPavementFull"){ regPavementFull(); }
     if($_POST["intensao"] == "regPayFullNow"){ regPayFullNow(); }
     if($_POST["intensao"] == "loadPrestacaoCreditoClient"){ loadPrestacao(); }
+    if($_POST["intensao"] == "anular_credito_cliente"){ anular_credito_cliente(); }
 
     function listCliente(){
         $call = new CallPgSQL();
@@ -249,6 +250,19 @@ function regPayFullNow(){
           ->addDouble($_POST["payFull"]["corecao"])
           ->addChar($_POST["payFull"]["opcao"]);
       $call->execute();
+    $result = $call->getValors();
+    if($result["result"] != "f") die(json_encode(array("result" => true)));
+    else die(json_encode(array("result" => false, "msg" => $result["message"])));
+}
+
+function anular_credito_cliente(){
+    $call = new CallPgSQL();
+    $call->functionTable("funct_anular_credito","*")
+        ->addString(Session::getUserLogado()->getId())
+        ->addNumeric(Session::getUserLogado()->getIdAgencia())
+        ->addNumeric($_POST["credito_id"])
+        ->addString($_POST["justificacao"]);
+    $call->execute();
     $result = $call->getValors();
     if($result["result"] != "f") die(json_encode(array("result" => true)));
     else die(json_encode(array("result" => false, "msg" => $result["message"])));

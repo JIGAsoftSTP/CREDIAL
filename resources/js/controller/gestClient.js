@@ -3,6 +3,7 @@
  */
 
 var gestClient = {
+    nome_cliente : undefined,
     idClientSeleted : undefined,
     valor_perquisa_credito : "",
     total_credito_cliente : undefined,
@@ -20,7 +21,8 @@ var gestClient = {
         $( "#inf-cred-val-pago" ).text( "$ " + clienteShortData[ "MONTANTE TOTAL PAGO" ] );
 
         var lastName = clienteData[ 'SURNAME' ].split( " " );
-        $( "#inf-cli-name" ).html( '<i class="icon-user-tie"></i>' + clienteData[ 'NAME' ] + " " + lastName[ lastName.length - 1 ] );
+        gestClient.nome_cliente = clienteData[ 'NAME' ] + " " + lastName[ lastName.length - 1 ];
+        $( "#inf-cli-name" ).html( '<i class="icon-user-tie"></i>' + gestClient.nome_cliente );
         $( "#inf-cli-career" ).text( clienteData[ "PROFISAO" ] );
 
         $( "#inf-cli-salario" ).text( ((listCredito[ "CLIENTE SALARIO" ] === null) ? "Indisponivel" : clienteData[ "CLIENTE SALARIO" ]) );
@@ -126,7 +128,7 @@ var gestClient = {
         }
 
     },
-    load_all_credito : function (  ) {
+    load_all_credito : function () {
         $.ajax( {
             url: "./bean/cliente.php",
             type: "POST",
@@ -143,11 +145,68 @@ var gestClient = {
             complete: function () { $(".mp-loading").fadeOut(); }
         });
     },
-    filter_credito_by_type : "-1"
+    filter_credito_by_type : "-1",
+    anular_credito: function () {
+        gestClient.idCredSeleted = gestClient.seleted_div_credito_anular.attr("id-id");
+        var i_credito = Number(gestClient.seleted_div_credito_anular.attr("i"));
+        var dosiier = listCredito[i_credito]["DOSSIER"];
+        $.ajax({
+            url: "./bean/cliente.php",
+            type: "POST",
+            data: {"intensao": "anular_credito_cliente", credito_id: gestClient.idCredSeleted, justificacao: $("#credito-anular-jusificacao").val()},
+            dataType: "json",
+            success: function (e) {
+                if(e.result) {
+
+
+                    $('.mp-anular-credito').closest('.modalPage').fadeOut(300);
+                    $('.history-selected').toggleClass('show');
+
+                    var json = {
+                        "Nome de Cliente" : gestClient.nome_cliente,
+                        "Numero de Dossier" : dosiier,
+                        "Valor Credito" : listCredito[i_credito]["TOTAL CREDITO"],
+                        "Data Inicio" : listCredito[i_credito]["DATA INICIO"],
+                        "Data Fim" : listCredito[i_credito]["DATA FIM"],
+                        "Data Registo" : listCredito[i_credito]["REGISTRO"],
+                        "Total de Credito" : formattedString(listCredito[i_credito]["totalpagamento"]),
+                        "Justificaçao" : $("#credito-anular-jusificacao").val()
+                    };
+
+                    callXpertAlert('O Credito foi anulado com sucesso!', new Mensage().checkmark, 8000);
+                    regUserActivity("./bean/activity.php", -1 , "O Credito com dossier "+dosiier+" do cliente "+gestClient.nome_cliente+" foi anulado com sucesso!", JSON.stringify(json), LevelActivity.ELIMINACAO );
+                    var re = new refresh();
+                    re.dataType = "CLIENT";
+                    saveRefresh(re);
+                }
+                else { callXpertAlert(e.msg, new Mensage().cross, 8000); }
+            },
+            beforeSend: function () {
+                $(".mp-loading").fadeIn();
+            },
+            complete: function () {
+                $(".mp-loading").fadeOut();
+            }
+        });
+    },
+    seleted_div_credito_anular : undefined
 };
 
 $(".history-selected").scroll(function (  ) {
     if($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
         gestClient.listCreditoCliente()
     }
+});
+
+$('#bt-cred-anular').on("click", function () {
+    if (validation1($(".mp-anular-credito textarea"))) {
+        gestClient.anular_credito();
+    } else {
+        callXpertAlert("Por favor preecha a justificaçao!", new Mensage().warning, 8000);
+    }
+});
+
+$('.list-history').on("click",".anulate", function () {
+    gestClient.seleted_div_credito_anular = $(this);
+    openModalFrame($(".mp-anular-credito"));
 });

@@ -978,11 +978,19 @@ nav.ph-bk{
 	max-height: 0;
 	overflow: hidden;
 }
-.content-feed textarea{
+
+.content-feed textarea {
 	height: 160px;
 	font-size: .98rem;
 	font-weight: lighter;
 }
+
+.mp-anular-credito textarea {
+	height: 160px;
+	font-size: .98rem;
+	font-weight: lighter;
+}
+
 .content-feed button{
 	margin: 2rem 0;
 	display: block;

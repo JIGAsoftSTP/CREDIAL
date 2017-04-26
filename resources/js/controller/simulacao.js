@@ -51,8 +51,16 @@ $("#cred-simula-import").click(function () {
         success: function (e) {
             if (!e.result) {  callXpertAlert(e.return["MESSAGE"], new Mensage().cross, -1); }
             else {
-                creditoRegisto = {"Número de Dossier" : e.return["NUM DOSSIER"], "Número de Cheque" : e.return["NUM CHEQUE"],
-                "Banco" :e.return["BANCO NAME"], "Sigla do Banco" :  e.return["BANCO SIGLA"]};
+
+                creditoRegisto = {
+                    "NIF Cliente" :  si.nifClient,
+                    "Nome Cliente" : $('#cred-cli-comName').text(),
+                    "Número de Dossier": e.return["NUM DOSSIER"],
+                    "Número de Cheque": e.return["NUM CHEQUE"],
+                    "Banco": e.return["BANCO NAME"],
+                    "Sigla do Banco": e.return["BANCO SIGLA"]
+                };
+
                 regUserActivity("./bean/activity.php", e.return["NUM DOSSIER"] ,
                     "Registou novo Crédito com o Dossier "+e.return["NUM DOSSIER"], JSON.stringify(creditoRegisto), LevelActivity.CRIACAO );
 

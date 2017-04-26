@@ -477,21 +477,39 @@
 				</div>
 			</div>
 		</section>
-		<section class="modalPage mp-confirm-simulation">
-			<div class="modalFrame">
-				<div class="modalContainer">
-					<p>Deseja realmente importar a simulaçao?</p>
-					<div class="bt-yes-no-cancel">
-						<button id="cred-simula-import">OK</button>
-						<button class="bt-no-option">Cancelar</button>
-					</div>
-					<div class="modal-header">
-						<b>Importar Simulaçao</b>
-						<span class="mp-close"></span>
-					</div>
-				</div>
-			</div>
-		</section>
+    <section class="modalPage mp-confirm-simulation">
+        <div class="modalFrame">
+            <div class="modalContainer">
+                <p>Deseja realmente importar a simulaçao?</p>
+                <div class="bt-yes-no-cancel">
+                    <button id="cred-simula-import">OK</button>
+                    <button class="bt-no-option">Cancelar</button>
+                </div>
+                <div class="modal-header">
+                    <b>Importar Simulaçao</b>
+                    <span class="mp-close"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="modalPage mp-anular-credito">
+        <div class="modalFrame">
+            <div class="modalContainer">
+                <div class="xpert-form flex-form">
+                    <p><b>Deseja realmente anular o Credito?</b></p>
+                    <textarea name="" placeholder="justificaçao" id="credito-anular-jusificacao"
+                              class="input-total"></textarea>
+                </div>
+                <div class="bt-yes-no-cancel">
+                    <button id="bt-cred-anular">OK</button>
+                    <button class="bt-no-option">Cancelar</button>
+                </div>
+                <div class="modal-header">
+                    <b>Anular Credito</b>
+                    <span class="mp-close"></span>
+                </div>
+            </div>
+    </section>
 		<script type="text/javascript" src="./resources/fw/pikaday/pikaday.js"></script>
 		<?php include "includes/process.html"; ?>
 	</body>
