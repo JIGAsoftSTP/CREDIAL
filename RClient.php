@@ -171,7 +171,7 @@
 								<i class="icon-coin-dollar"></i>
 							</section>
 							<section>
-								<nav>Amortizados <b></b></nav>
+								<nav>Total a pagar <b></b></nav>
 								<h1 id="inf-cred-val-amorti"><span >$ </span></h1>
 								<i class="icon-coin-dollar"></i>
 							</section>
@@ -181,7 +181,7 @@
 								<i class="icon-coin-dollar"></i>
 							</section>
 							<section class="show-cred cred-porPagar">
-								<nav>A pagar <b id="inf-cred-porPa">5</b></nav>
+								<nav>Restante a pagar <b id="inf-cred-porPa">5</b></nav>
 								<h1 id="inf-cred-val-porPagar"><span>$ </span></h1>
 								<i class="icon-coin-dollar"></i>
 							</section>
