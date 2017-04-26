@@ -173,6 +173,7 @@ var iSeletedCliente = undefined;
 function inforCiente(b, type, fill) {
     iSeletedCliente = b;
     gestClient.idClientSeleted = (type !== undefined ? listSearchCLients[b]["NIF"] :clientes[clienteLetra][b]["NIF"]);
+    gestClient.total_credito_cliente = Number(type !== undefined ? listSearchCLients[b]["QUANTIDADE DE CREDITO"] :clientes[clienteLetra][b]["QUANTIDADE DE CREDITO"]);
     $.ajax({
         url: "./bean/cliente.php",
         type: "POST",
@@ -181,7 +182,10 @@ function inforCiente(b, type, fill) {
         success: function (e) {
             clienteData = e.resultRealDataCliente;
             if(fill === undefined) {
+                gestClient.valor_perquisa_credito = $("#client-search").val();
+                $('.search-credit input').val(gestClient.valor_perquisa_credito);
                 clienteShortData = e.resultClient;
+                gestClient.filter_credito_by_type = "-1";
                 gestClient.more_information_about_client();
                 gestClient.load_all_credito();
                 reShowDataClient = false;
@@ -343,7 +347,8 @@ $(".close-history").click(function () {
 $(".show-cred").click(function () {
     $( "#cred-list-amort" ).empty();
     gestClient.credito_i = 0;
-    gestClient.listCreditoCliente(($(this).hasClass("cred-pago") ? "0" : ($(this).hasClass("cred-porPagar") ? "1" : "-1")));
+    gestClient.filter_credito_by_type = ($(this).hasClass("cred-pago") ? "0" : ($(this).hasClass("cred-porPagar") ? "1" : "-1"));
+    gestClient.listCreditoCliente();
 });
 
 $("div.alphabet").on("click","span",function () {

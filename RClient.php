@@ -143,7 +143,7 @@
 					<button id="cli-reg">Adicionar cliente</button>
 				</div>
 			</div>
-			<div class="history-selected show">
+			<div class="history-selected">
 			<div class="x-fixed">
 				<div class="search-credit xpert-form flex-form floated">	
 					<i class="icon-search"></i>

@@ -147,12 +147,16 @@ include "Session.php";
     }
 
     function loadCreditoClient(){
+
+        $pesquisa = ($_POST["pesquisa"] === "" ) ? null : json_encode(array("search" => $_POST["pesquisa"]));
         $callC = new CallPgSQL();
         $callC->functionTable("funct_load_credito_client","*")
             ->addString(Session::getUserLogado()->getId())
             ->addNumeric(Session::getUserLogado()->getIdAgencia())
-            ->addString($_POST["nifCliente"]);
+            ->addString($_POST["nifCliente"])
+            ->addJson($pesquisa);
         $callC->execute();
+        
         $listCredito = array();
         while ($values = $callC->getValors() ) { $listCredito[] = $values; }
         die(json_encode(array("lista_credito" => $listCredito)));

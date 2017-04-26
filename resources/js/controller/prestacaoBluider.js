@@ -50,7 +50,7 @@ var PrestacaoBluider = function () {
 
     this.bluider = function(jk) {
         var numCredi = this.numero_prestacao;
-        canAnulate = '<div class="anulate"><span>ANULAR CRÉDITO</span></div>';
+        var canAnulate = (!containMenu("cred.anular_cred")) ? '' :'<div class="anulate"><span>ANULAR CRÉDITO</span></div>';
         var numCrediText = numCredi+" "+((numCredi === 0 || numCredi > 1) ? "prestações" : "prestação");
         this.credito =
             '<section id="sec-cred'+ this.id +'" class="'+((this.idState === 0) ? "pago" : ((this.idState === 1) ? "por-pagar" : "amortizado" ) )+'">' +

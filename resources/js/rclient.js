@@ -326,6 +326,17 @@ $('.list-history').on('click', '.bt-full-payment',function(event) {
 
 $('.search-credit input').keyup(function(event) {
     advSearch($(this), $('.list-history section'));
+
+    function doPesquisa() {
+        gestClient.valor_perquisa_credito = $(this).val();
+        gestClient.load_all_credito();
+    }
+
+    if(event.keyCode === 13){
+        doPesquisa.call(this);
+    }else if($(this).val() === "" && gestClient.total_credito_cliente > listCredito.length){
+        doPesquisa.call(this);
+    }
 });
 $('.history-selected').on('scroll',function(event) {
     topp = $(this).scrollTop();

@@ -4,6 +4,8 @@
 
 var gestClient = {
     idClientSeleted : undefined,
+    valor_perquisa_credito : "",
+    total_credito_cliente : undefined,
     more_information_about_client: function () {
         regUserActivity( "./bean/activity.php", -1, "Selecionou mais informações sobre crédito do(a) cliente com NIF: " + this.idClientSeleted, -1, LevelActivity.VISUALIZACAO );
 
@@ -95,11 +97,11 @@ var gestClient = {
     },
     total_add : 0,
     credito_i : 0,
-    listCreditoCliente: function ( _type ) {
+    listCreditoCliente: function () {
         var listaAmortizacao = $( "#cred-list-amort" );
         var add =0;
         for ( var jk = this.credito_i; jk < listCredito.length && add < this.total_add;  jk++ ) {
-            if ( _type === listCredito[ jk ][ "STATE COD" ] || _type === "-1" ) {
+            if ( this.filter_credito_by_type === listCredito[ jk ][ "STATE COD" ] || this.filter_credito_by_type === "-1" ) {
                 var bluider = new PrestacaoBluider();
                 bluider.id = listCredito[ jk ][ "ID" ];
                 bluider.idState = Number( listCredito[ jk ][ "STATE COD" ] );
@@ -122,22 +124,23 @@ var gestClient = {
                 add++;
             }
         }
-        this.filter_credito_by_type = _type;
 
     },
     load_all_credito : function (  ) {
         $.ajax( {
             url: "./bean/cliente.php",
             type: "POST",
-            data: { "intensao": "loadCreditoClient", nifCliente: gestClient.idClientSeleted },
+            data: { "intensao": "loadCreditoClient", nifCliente: gestClient.idClientSeleted , pesquisa : gestClient.valor_perquisa_credito   },
             dataType: "json",
             success: function ( e ) {
                 $( "#cred-list-amort" ).empty();
                 listCredito = e.lista_credito;
                 gestClient.total_add = 10;
                 gestClient.credito_i = 0;
-                gestClient.listCreditoCliente("-1");
-            }
+                gestClient.listCreditoCliente();
+            },
+            beforeSend: function () { $(".mp-loading").fadeIn(); },
+            complete: function () { $(".mp-loading").fadeOut(); }
         });
     },
     filter_credito_by_type : "-1"
@@ -145,6 +148,6 @@ var gestClient = {
 
 $(".history-selected").scroll(function (  ) {
     if($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
-        gestClient.listCreditoCliente(gestClient.filter_credito_by_type)
+        gestClient.listCreditoCliente()
     }
 });
