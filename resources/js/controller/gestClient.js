@@ -162,6 +162,7 @@ var gestClient = {
                     $('.mp-anular-credito').closest('.modalPage').fadeOut(300);
                     $('.history-selected').toggleClass('show');
 
+                    var just = $("#credito-anular-jusificacao");
                     var json = {
                         "NIF de Cliente" : gestClient.idClientSeleted,
                         "Nome de Cliente" : gestClient.nome_cliente,
@@ -171,8 +172,10 @@ var gestClient = {
                         "Data Fim" : listCredito[i_credito]["DATA FIM"],
                         "Data Registo" : listCredito[i_credito]["REGISTRO"],
                         "Total de Credito" : formattedString(listCredito[i_credito]["totalpagamento"]),
-                        "Justificaçao" : $("#credito-anular-jusificacao").val()
+                        "Justificaçao" : just.val()
                     };
+
+                    just.val("");
 
                     callXpertAlert('O Credito foi anulado com sucesso!', new Mensage().checkmark, 8000);
                     regUserActivity("./bean/activity.php", -1 , "O Credito com dossier "+dosiier+" do cliente "+gestClient.nome_cliente+" foi anulado com sucesso!", JSON.stringify(json), LevelActivity.ELIMINACAO );
