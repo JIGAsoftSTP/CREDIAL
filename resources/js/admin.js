@@ -42,6 +42,7 @@ $('.containerEntidades').on('click', '.show-hide', function(event) {
 /* ############## BANK  ###########*/
 $('.bank .menu-bank li').click(function(event) {
     var idx = $(this).index();
+    $("#btBankActions").html("Adicionar");
     var sec = $('.bank').find('.add-new-admin section');
     sec.eq(idx).addClass('active').siblings().removeClass('active'); 
     addNewItem($(this));
