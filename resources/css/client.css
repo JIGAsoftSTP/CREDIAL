@@ -263,9 +263,32 @@
 .history-selected.show{
 	bottom: 0;
 }
+.history-selected .x-fixed{
+	position: absolute;
+	background: #FFF;
+	top: 0;
+	left: 0;
+	padding: 1rem;
+	width: 100%;
+	z-index: 20;
+	transition: none;
+	box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+}
 .history-selected .title-history{
 	text-align: center;
 	margin: 2rem 0 1rem 0;
+}
+.history-selected .search-credit{
+	margin: auto;
+	width: 340px;
+}
+.search-credit i{
+	position: absolute;
+	color: #999;
+}
+.search-credit input{
+	text-indent: 1.5rem;
+
 }
 .history-selected .close-history{
 	position: absolute;
@@ -273,31 +296,33 @@
 	right: 20px;
 	display: flex;
 	justify-content: center;
-	width: 40px;
-	height: 40px;
+	/*width: 40px;
+	height: 40px;*/
 	cursor: pointer;
 }
-.close-history hr{
-	border-left: 1px #555 solid;
+.close-history:before{
+	content: "\2715";
+	font-size: 2rem;
+	color: #888;
+	transition: none;
 }
-.close-history hr:first-child{
-	transform: rotate(135deg);
-}
-.close-history hr:last-child{
-	transform: rotate(45deg);
+.close-history:hover:before{
+	transition: all .3s;
+	color: tomato;
 }
 .hs-container{
 	width: 100%;
 	max-width: 1100px;
 	position: relative;
 	margin: auto;
+	margin-top: 2rem;
 }
 
 .hs-container .geral-info{
 	flex-wrap: wrap;
 	width: 100%;
 	justify-content: space-between;
-	margin-top: 2rem;
+	margin-top: 4rem;
 	background: #fff;
 	padding: 1rem;
 }
@@ -460,6 +485,31 @@
 	border-bottom: 2px #ddd solid;
 	margin-bottom: 10px;
 	position: relative;
+}
+.list-history section:hover .anulate{
+	transform: scale(1) ;
+}
+.list-history .anulate{
+	position: absolute;
+	display: flex;
+	left: 0;
+	top: 0;
+	align-items: center;
+	justify-content: center;
+	transform: scale(0);
+	
+	background: tomato;
+	padding: 1rem 2rem;
+
+}
+.list-history .anulate span{
+	line-height: 2rem;
+	padding: 0 1rem;
+	border: 1px #fff solid;
+	border-radius: 3px;
+	font-size: .75rem;
+	color: #FFF;
+	cursor: pointer;
 }
 .list-history section.amortizado {
 	border-left: 5px #FAC552 solid;

@@ -160,6 +160,7 @@ function loadDataUpdateAccount(accountIndex)
 
              bankAccountOp = 2;
             $('.bank .menu-bank li').trigger("click");
+            $("#btBankActions").html("Editar");
         }
     });
 }
@@ -450,6 +451,9 @@ function regBankAccount()
                                         JSON.stringify(bankAccountActivity), LevelActivity.CRIACAO);
                                     carregarContas();
                                     bankAccountOp = 1;
+
+                                    if($("#btBankActions").html() === "Editar")
+                                        $("#btBankActions").html("Adicionar");
                                 }
                                 else callXpertAlert(e.resultado["message"], 'warning', 8000);
                             }
