@@ -155,12 +155,12 @@ function getDataUser(){
 
 function sendfeeback(){
     include "../modelo/SendEmail.php";
-    $var = "Mensagem enviada de Credial SA por".Session::getUserLogado()->getNome()." ".Session::getUserLogado()->getAgencia()
-        ."<br><br>".$_POST["feed"]["text"]
-        ."<br><br>".$_POST["feed"]["mail"]
-        ."<br>Credial SA";
+    $var = "Mensagem enviada de Credial SA por" . Session::getUserLogado()->getNome() . " " . Session::getUserLogado()->getAgencia()
+        . "<br><br>" . $_POST["feed"]["text"]
+        . "<br><br>" . $_POST["feed"]["mail"]
+        . "<br>Credial SA";
     $se = new SendEmail();
-    $enviado = $se->Assunto("Credial ".($_POST["feed"]["type"] == "another") ? $_POST["feed"]["other"] : $_POST["feed"]["type"])
+    $enviado = $se->Assunto("Credial " . ($_POST["feed"]["type"] == "another") ? $_POST["feed"]["other"] : $_POST["feed"]["type"])
         ->Texto($var)
         ->Destino("jigasoft_stp@hotmail.com")
         ->sendEmail();

@@ -15,7 +15,12 @@ $('.list-warr').on("click", ".first small", function (event)
     } else {
         $("#" + ig).empty();
     }
+}).scroll(function () {
+    if($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
+        transformDataToCredito();
+    }
 });
+
 $("#labelWarranty").click(function () {
     loadDataToPage();
 });
@@ -124,7 +129,6 @@ var Information = function () {
 };
 
 var creditBluider = new CreditoBluider();
-var dataCredit = undefined;
 
 
 function loadDataToPage() {
@@ -134,11 +138,12 @@ function loadDataToPage() {
         data: {intensao: "loadListCredits", filter: getDataStorage(sessionStorage,'filterReport')},
         dataType: "json",
         success: function (e) {
-           dataCredit = e.credits;
+           warranty.data = e.credits;
+           warranty.last_add = 0;
         }, beforeSend: function () {  $(".mp-loading").fadeIn(); },
         complete: function () { $(".mp-loading").fadeOut();
             $(".list-warr").empty();
-        transformDataToCredito(dataCredit, 250);
+        transformDataToCredito();
         }
     });
 }
@@ -177,42 +182,35 @@ function getInformationCredit(i, credit, section) {
     });
 }
 
-var totalData = undefined;
-var iData = 0;
-/**
- *
- * @type {*}
- */
-var creditInte = undefined;
-/**
- *
- * @param data {*}
- * @param time {Number}
- */
-function transformDataToCredito(data, time) {
-    iData = 0;
-    totalData = (data !== undefined) ? data.length: 0;
-    clearInterval(creditInte);
-    if(totalData > 0)
-    creditInte = setInterval(function () {
-        var credits = data[iData];
-        var Creditoe = new Credito();
-        Creditoe.cheque = credits["cheque"];
-        Creditoe.id = credits["id"];
-        Creditoe.name = credits["name"];
-        Creditoe.nif = credits["nif"];
-        Creditoe.number = credits["number"];
-        Creditoe.other = credits["other"];
-        Creditoe.state = credits["state"];
-        Creditoe.surname = credits["surname"];
-        Creditoe.totalpagar = credits["totalpagar"];
-        Creditoe.value = credits["value"];
-        Creditoe.clienteNome = (Creditoe.name+" "+((Creditoe.surname === Creditoe.name)
-            ? "" : Creditoe.surname ));
-        creditBluider.addCredito(Creditoe);
-        creditBluider.bluiderCreditos(Creditoe, iData);
-        iData ++;
-        if(iData === totalData) { clearInterval(creditInte)}
-    }, time);
+function transformDataToCredito() {
+        var totalData = (warranty.data !== undefined) ? warranty.data.length: 0;
+        var add = 0;
+        for (var i = warranty.last_add; (i < totalData && add < warranty.total_add); i++) {
+            var credits = warranty.data[i];
+            var Creditoe = new Credito();
+            Creditoe.cheque = credits["cheque"];
+            Creditoe.id = credits["id"];
+            Creditoe.name = credits["name"];
+            Creditoe.nif = credits["nif"];
+            Creditoe.number = credits["number"];
+            Creditoe.other = credits["other"];
+            Creditoe.state = credits["state"];
+            Creditoe.surname = credits["surname"];
+            Creditoe.totalpagar = credits["totalpagar"];
+            Creditoe.value = credits["value"];
+            Creditoe.clienteNome = (Creditoe.name + " " + ((Creditoe.surname === Creditoe.name)
+                ? "" : Creditoe.surname ));
+            creditBluider.addCredito(Creditoe);
+            creditBluider.bluiderCreditos(Creditoe, i);
+            add++;
+            warranty.last_add = i+1;
+            console.log(warranty.last_add);
+        }
 }
+
+var warranty = {
+    last_add : 0,
+    data : undefined,
+    total_add : 100
+};
 
