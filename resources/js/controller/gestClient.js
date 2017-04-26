@@ -163,6 +163,7 @@ var gestClient = {
                     $('.history-selected').toggleClass('show');
 
                     var json = {
+                        "NIF de Cliente" : gestClient.idClientSeleted,
                         "Nome de Cliente" : gestClient.nome_cliente,
                         "Numero de Dossier" : dosiier,
                         "Valor Credito" : listCredito[i_credito]["TOTAL CREDITO"],
