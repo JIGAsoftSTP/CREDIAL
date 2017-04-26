@@ -116,13 +116,13 @@ var gestClient = {
                 bluider.bluider( jk );
 
                 listaAmortizacao.append( bluider.credito );
-
                 tableEstructure( $( "#table-amortizacao-" + bluider.id ) );
                 this.credito_i = jk+1;
                 add++;
             }
         }
         this.filter_credito_by_type = _type;
+
     },
     load_all_credito : function (  ) {
         $.ajax( {

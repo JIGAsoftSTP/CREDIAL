@@ -12,7 +12,7 @@ class Conectar
     static function connetToBd(PgSQL $class)
     {
 
-       $class->connect("localhost", "credial", "1234", "credial", "5432");
+       $class->connect("192.168.1.195", "credial", "1234", "credial", "5432");
 
 
 

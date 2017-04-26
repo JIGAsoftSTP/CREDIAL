@@ -323,3 +323,12 @@ $('.list-history').on('click', '.bt-full-payment',function(event) {
     payfull = new FullPay();
     getDadosPayFull.call(this)
 });
+
+$('.search-credit input').keyup(function(event) {
+    advSearch($(this), $('.list-history section'));
+});
+$('.history-selected').on('scroll',function(event) {
+    topp = $(this).scrollTop();
+    console.log(topp);
+    $('.x-fixed').css('top', topp+ 'px');
+});

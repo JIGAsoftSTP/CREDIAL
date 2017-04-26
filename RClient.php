@@ -15,7 +15,7 @@
 		<span class="new-simulation"><i class="icon-shift"></i></span>
 		<span class="search-span"><i class="icon-search"></i><input type="text" id="client-search" placeholder="Faça sua pesquisa aqui...">
 			<span id="span-type-search-client">
-                	<i class="icon-search" title="Todos"></i>
+				<i class="icon-search" title="Todos"></i>
 				<i class="icon-newspaper" title="NIF" id="nifS"></i>
 				<i class="icon-file-text2" title="Nº documento"></i>
 				<i class="icon-coin-dollar" title="Garantia"></i>
@@ -143,361 +143,367 @@
 					<button id="cli-reg">Adicionar cliente</button>
 				</div>
 			</div>
-			<div class="history-selected">
-				<span class="close-history"><hr>
-					<hr></span>
-					<div class="hs-container">
-						<div class="geral-info be-fixed">
-							<div class="mini-report rep2">
-								<section>
-									<h1 id="inf-cli-name"><i class="icon-user-tie"></i></h1>
-									<p><b id="inf-cli-career">Career here!</b></p>
-									<p><b>Vencimento atual -</b> <label id="inf-cli-salario">STD Salary here!</label></p><br>
-									<p id="inf-cli-ano" ></p>
-									<small><i>Mais informações</i></small>
-								</section>
+			<div class="history-selected show">
+			<div class="x-fixed">
+				<div class="search-credit xpert-form flex-form floated">	
+					<i class="icon-search"></i>
+					<input type="text" placeholder="Pesquise aqui..." class="input-total">
+				</div>
+				<span class="close-history floated"></span>
+				
+			</div>
+				<div class="hs-container">
+					<div class="geral-info be-fixed">
+						<div class="mini-report rep2">
+							<section>
+								<h1 id="inf-cli-name"><i class="icon-user-tie"></i></h1>
+								<p><b id="inf-cli-career">Career here!</b></p>
+								<p><b>Vencimento atual -</b> <label id="inf-cli-salario">STD Salary here!</label></p><br>
+								<p id="inf-cli-ano" ></p>
+								<small><i>Mais informações</i></small>
+							</section>
 
-							</div>
-							<div class="mini-report rep1">
-								<section class="show-cred cred-pedido">
-									<nav>Pedidos <b id="inf-cred-total"></b></nav>
-									<h1 id="inf-cred-val-Pedido"><span >$ </span></h1>
-									<i class="icon-coin-dollar"></i>
-								</section>
-								<section>
-									<nav>Amortizados <b></b></nav>
-									<h1 id="inf-cred-val-amorti"><span >$ </span></h1>
-									<i class="icon-coin-dollar"></i>
-								</section>
-								<section class="show-cred cred-pago">
-									<nav>Pagos <b id="inf-cred-Pagos"></b></nav>
-									<h1 id="inf-cred-val-pago"><span >$ </span ></h1>
-									<i class="icon-coin-dollar"></i>
-								</section>
-								<section class="show-cred cred-porPagar">
-									<nav>A pagar <b id="inf-cred-porPa">5</b></nav>
-									<h1 id="inf-cred-val-porPagar"><span>$ </span></h1>
-									<i class="icon-coin-dollar"></i>
-								</section>
-							</div>
 						</div>
-						<h1 class="title-history">Histórico de Créditos do Cliente</h1>
-						<div class="list-history" id="cred-list-amort">
+						<div class="mini-report rep1">
+							<section class="show-cred cred-pedido">
+								<nav>Pedidos <b id="inf-cred-total"></b></nav>
+								<h1 id="inf-cred-val-Pedido"><span >$ </span></h1>
+								<i class="icon-coin-dollar"></i>
+							</section>
+							<section>
+								<nav>Amortizados <b></b></nav>
+								<h1 id="inf-cred-val-amorti"><span >$ </span></h1>
+								<i class="icon-coin-dollar"></i>
+							</section>
+							<section class="show-cred cred-pago">
+								<nav>Pagos <b id="inf-cred-Pagos"></b></nav>
+								<h1 id="inf-cred-val-pago"><span >$ </span ></h1>
+								<i class="icon-coin-dollar"></i>
+							</section>
+							<section class="show-cred cred-porPagar">
+								<nav>A pagar <b id="inf-cred-porPa">5</b></nav>
+								<h1 id="inf-cred-val-porPagar"><span>$ </span></h1>
+								<i class="icon-coin-dollar"></i>
+							</section>
 						</div>
+					</div>
+					<h1 class="title-history">Histórico de Créditos do Cliente</h1>
+					<div class="list-history" id="cred-list-amort">
 					</div>
 				</div>
 			</div>
-			<section class="modalPage mp-new-credit">
-				<div class="modalFrame">
-					<div class="modalContainer">
-						<div class="select-client flex-form xpert-form">
-							<div>
-								<section>
-									<input type="text" id="cred-sh-nif" maxlength="9" placeholder="NIF do cliente" class="input-3">
-									<span id="cred-sh-name"></span>
-								</section>
-								<a>
-									<b>Concluir</b>
-									<small>Cancelar</small>
-								</a>
-							</div>
+		</div>
+		<section class="modalPage mp-new-credit">
+			<div class="modalFrame">
+				<div class="modalContainer">
+					<div class="select-client flex-form xpert-form">
+						<div>
+							<section>
+								<input type="text" id="cred-sh-nif" maxlength="9" placeholder="NIF do cliente" class="input-3">
+								<span id="cred-sh-name"></span>
+							</section>
+							<a>
+								<b>Concluir</b>
+								<small>Cancelar</small>
+							</a>
 						</div>
-						<div class="master-add-customer">
-							<div class="xpert-form">
-								<!-- <h1>Client Name here!</span></h1> -->
-								<div class="div-total">
-									<section class="flex-form part-1">
-										<span class="name-client">
-											<span>
-												<b id="cred-cli-nif"></b>
-												<span id="cred-cli-comName">Cliente não selecionado</span>
-											</span>
-											<b class="define-client">editar</b>
+					</div>
+					<div class="master-add-customer">
+						<div class="xpert-form">
+							<!-- <h1>Client Name here!</span></h1> -->
+							<div class="div-total">
+								<section class="flex-form part-1">
+									<span class="name-client">
+										<span>
+											<b id="cred-cli-nif"></b>
+											<span id="cred-cli-comName">Cliente não selecionado</span>
 										</span>
-										<span class="xpert-is-wl span-v input-total">
-											Valor: <input type="text" placehold="Valor" id="cred-value" class="input-total formatNumber double init-value">
-										</span>
-										<select id="cred-tipoCred" class="input-total">
-											<option value="0">(Tipo de Crédito)</option>
-										</select>
-										<input type="text" id="cred-data" placeholder="Data Inicial" title="Data Inicial" maxdate="true" default="true" class="is-datepicker input-3">
-										<input type="text" id="cred-dia" placeholder="Dias" class="input-3 integer">
-                                        <input type="text" id="cred-data-fim" placeholder="Data Fim" title="Data Fim" class="is-datepicker input-3">
-										<input type="text" id="cred-desco" value="0" placeholder="Desconto (10%-20%)" title="Desconto (10%-20%)" class="input-2 double percent1020">
-										<input type="text" id="cred-corr" value="0" placeholder="Correção" title="Correção" class="input-2 double formatNumber">
-										<span><span class="xpert-toggle-2"><span class="active">A</span><span>B</span></span></span>
-										<button id="start-simulation" >Simulação <i class="icon-arrow-right2"></i></button>
-									</section>
-									<section class="flex-form part-2">
-										<ul>
-											<li>Capital <b id="cred-capi">0</b></li>
-											<li>Periodo <b id="cred-peri">0</b></li>
-											<li>Reembolso/Periodo <b id="cred-reePer">0,00</b></li>
-											<li> Taxa <b id="cred-taxa"><!--0-->#.##</b></li>
-											<li> Taxa s/desconto <b id="cred-taxaS"><!--0,00-->#.##</b></li>
-											<li> Taxa c/desconto <b id="cred-taxaC"><!--0,00-->#.##</b></li>
-											<li> Prestação <b id="cred-prest"><!--0,00-->#.##</b></li>
-											<li> Seguro <b id="cred-segu"><!--0,00-->#.##</b></li>
-										</ul>
-									</section>
-								</div>
-								<div class="div-total-2">
-									<div class="table-liquid x-table">
-										<table id="table-liquid" class="selectable" cellpadding="0" cellspacing="0">
-											<thead>
-												<tr>                    
-													<th grow="1.5">Data</th>
-													<th grow="3">Reembolso</th>
-													<th grow="3">Capital restante</th>
-												</tr>
-											</thead>
-											<tbody id="cred-table-prestacao" >
-
-											</tbody>
-										</table>
-
-									</div>
-									<section class="flex-form add-detail-table">
-										<span class="close-add-detail">X</span>
-										<select id="cred-tab-amor-tipoPagamento" class="input-total" title="Tipo pagamento">
-											<option value="0">(Tipo de pagamento)</option>
-										</select>
-										<select id="cred-tab-amor-banco" class="input-total" title="Banco">
-											<option value="0">(Banco)</option>
-										</select>
-										<input id="cred-tab-amor-numDoc" type="text" placeholder="Nº Documento" title="Número documento" class="input-total">
-										<button id="cred-edit-table-amor">OK</button>
-									</section>
-								</div>
-								<div class="detail-table">
+										<b class="define-client">editar</b>
+									</span>
+									<span class="xpert-is-wl span-v input-total">
+										Valor: <input type="text" placehold="Valor" id="cred-value" class="input-total formatNumber double init-value">
+									</span>
+									<select id="cred-tipoCred" class="input-total">
+										<option value="0">(Tipo de Crédito)</option>
+									</select>
+									<input type="text" id="cred-data" placeholder="Data Inicial" title="Data Inicial" maxdate="true" default="true" class="is-datepicker input-3">
+									<input type="text" id="cred-dia" placeholder="Dias" class="input-3 integer">
+									<input type="text" id="cred-data-fim" placeholder="Data Fim" title="Data Fim" class="is-datepicker input-3">
+									<input type="text" id="cred-desco" value="0" placeholder="Desconto (10%-20%)" title="Desconto (10%-20%)" class="input-2 double percent1020">
+									<input type="text" id="cred-corr" value="0" placeholder="Correção" title="Correção" class="input-2 double formatNumber">
+									<span><span class="xpert-toggle-2"><span class="active">A</span><span>B</span></span></span>
+									<button id="start-simulation" >Simulação <i class="icon-arrow-right2"></i></button>
+								</section>
+								<section class="flex-form part-2">
 									<ul>
-										<li>Pagamento via: <b id="cred-tab-selTipoPag"></b></li>
-										<li>Banco: <b id="cred-tab-selNomeBanco"></b></li>
-										<li>Documento nº: <b id="cred-tab-selNumDoc"></b></li>
+										<li>Capital <b id="cred-capi">0</b></li>
+										<li>Periodo <b id="cred-peri">0</b></li>
+										<li>Reembolso/Periodo <b id="cred-reePer">0,00</b></li>
+										<li> Taxa <b id="cred-taxa"><!--0-->#.##</b></li>
+										<li> Taxa s/desconto <b id="cred-taxaS"><!--0,00-->#.##</b></li>
+										<li> Taxa c/desconto <b id="cred-taxaC"><!--0,00-->#.##</b></li>
+										<li> Prestação <b id="cred-prest"><!--0,00-->#.##</b></li>
+										<li> Seguro <b id="cred-segu"><!--0,00-->#.##</b></li>
 									</ul>
-								</div>
+								</section>
 							</div>
-							<div class="xpert-form  about-customer">
-								<div class="item-descript xpert-form flex-form">
-									<textarea name="" placeholder="Descrição" class="input-total"></textarea>
-									<small>Cancelar</small>
-								</div>
-								<span>
-									<h2>O cliente</h2>
-									<div class="flex-form" id="cred-form-cli">
-										<div class="x-list-select input-total">
-											<input type="text"  id="cred-cli-bank" placeholder="Banco" title="Banco" class="input-total" readonly>
-											<ul id="cred-cli-bank-list"></ul>
-										</div>
-										<div class="special-ipt">
-											<span placeholder="Nº Doc. p/ pgto" id="cred-cli-numDoc-veiw" ></span>
-											<input type="text"  id="cred-cli-numDoc" placeholder="Nº Doc. p/ pgto" title="Número documento" class="integer" maxlength="3">
-										</div>
+							<div class="div-total-2">
+								<div class="table-liquid x-table">
+									<table id="table-liquid" class="selectable" cellpadding="0" cellspacing="0">
+										<thead>
+											<tr>                    
+												<th grow="1.5">Data</th>
+												<th grow="3">Reembolso</th>
+												<th grow="3">Capital restante</th>
+											</tr>
+										</thead>
+										<tbody id="cred-table-prestacao" >
 
-										<select id="cred-cli-fonRend" class="input-total" title="Fonte rendimento">
-											<option value="0">(Fonte rendimento)</option>
-										</select>
-										<select id="cred-cli-modaPag" class="input-total" title="Modalidade pgto.">
-											<option value="0">(Modalidade pagamento)</option>
-										</select>
-										<p class="mabott">
-											Garântia
-											<div class="x-list input-total" id="cred-cli-list-garaValue">
-												<input id="cred-data-list-gara" class="_noObrigatory" datalist="list" list="cred-cli-list-gara">
-												<datalist id="cred-cli-list-gara">
-												</datalist>
-											</div>
-										</p>
-										<p>
-											Documentos
-											<div class="x-list input-total" id="cred-cli-list-docuValue">
-												<input id="cred-data-list-docu" class="_noObrigatory" datalist="list" list="cred-cli-list-docu">
-												<datalist id="cred-cli-list-docu">
-												</datalist>
-											</div>
-										</p>
+										</tbody>
+									</table>
+
+								</div>
+								<section class="flex-form add-detail-table">
+									<span class="close-add-detail">X</span>
+									<select id="cred-tab-amor-tipoPagamento" class="input-total" title="Tipo pagamento">
+										<option value="0">(Tipo de pagamento)</option>
+									</select>
+									<select id="cred-tab-amor-banco" class="input-total" title="Banco">
+										<option value="0">(Banco)</option>
+									</select>
+									<input id="cred-tab-amor-numDoc" type="text" placeholder="Nº Documento" title="Número documento" class="input-total">
+									<button id="cred-edit-table-amor">OK</button>
+								</section>
+							</div>
+							<div class="detail-table">
+								<ul>
+									<li>Pagamento via: <b id="cred-tab-selTipoPag"></b></li>
+									<li>Banco: <b id="cred-tab-selNomeBanco"></b></li>
+									<li>Documento nº: <b id="cred-tab-selNumDoc"></b></li>
+								</ul>
+							</div>
+						</div>
+						<div class="xpert-form  about-customer">
+							<div class="item-descript xpert-form flex-form">
+								<textarea name="" placeholder="Descrição" class="input-total"></textarea>
+								<small>Cancelar</small>
+							</div>
+							<span>
+								<h2>O cliente</h2>
+								<div class="flex-form" id="cred-form-cli">
+									<div class="x-list-select input-total">
+										<input type="text"  id="cred-cli-bank" placeholder="Banco" title="Banco" class="input-total" readonly>
+										<ul id="cred-cli-bank-list"></ul>
 									</div>
-				</span>
-				<div class="bottom-part">
-					<h1 class="total-val">A pagar: <br><b id="cred-totalPagar">0,00</b></h1>
-					<button id="import-simulation">Concluir Operação</button>
-				</div>
-			</div>
-		</div>
-		<div class="modal-header">
-			<b>Novo crédito</b>
-			<span class="mp-close"></span>
-		</div>
-	</div>
-</div>
-</section>
-<section class="modalPage mp-info-client">
-	<div class="modalFrame">
-		<div class="modalContainer">
-			<div class="content">
-				<div class="divSec">
-					<ul class="menu-info single">
-						<li class="active">Geral</li>
-						<li>Rendimento</li>
-						<li>Contacto</li>
-						<li>Arquivagem</li>
-					</ul>
-					<div class="content-info">
-						<section class="active">
-							<p><label>NIF</label><span id="inf-cli-geral-nif">cont</span></p>
-							<p><label>Nome Completo</label><span id="inf-cli-geral-nome">cont</span></p>
-							<p><label>Data Nascimento</label><span id="inf-cli-geral-dataNasc">cont</span></p>
-							<p><label>Sexo: </label><span id="inf-cli-geral-sexo">cont</span></p>
-							<p><label>Estado Civil</label><span id="inf-cli-geral-estadoCivil">cont</span></p>
-							<p><label>Morada</label><span id="inf-cli-geral-morada">cont</span></p>
-						</section>
-						<section>
-							<p><label>Profissão</label><span id="inf-cli-geral-prof">cont</span></p>
-							<p><label>Salário</label><span id="inf-cli-geral-salario">cont</span></p>
-							<p><label>Localidade</label><span id="inf-cli-geral-lacali">cont</span></p>
-							<p><label>Local Trabalho</label><span id="inf-cli-geral-localTrab">cont</span></p>
-						</section>
-						<section>
-							<p><label>Telemóvel</label><span id="inf-cli-geral-telemo">cont</span></p>
-							<p><label>Telefone</label><span id="inf-cli-geral-telefo">cont</span></p>
-							<p><label>Serviço</label><span id="inf-cli-geral-telSer">cont</span></p>
-							<p><label>Email</label><span id="inf-cli-geral-email">cont</span></p>
-						</section>
-						<section>
-							<p><label>Ano</label><span id="inf-cli-geral-ano">cont</span></p>
-							<p><label>Mês</label><span id="inf-cli-geral-mes">cont</span></p>
-							<p><label>Letra</label><span id="inf-cli-geral-letra">cont</span></p>
-							<p><label>Capa</label><span id="inf-cli-geral-capa">cont</span></p>
-						</section>
+									<div class="special-ipt">
+										<span placeholder="Nº Doc. p/ pgto" id="cred-cli-numDoc-veiw" ></span>
+										<input type="text"  id="cred-cli-numDoc" placeholder="Nº Doc. p/ pgto" title="Número documento" class="integer" maxlength="3">
+									</div>
+
+									<select id="cred-cli-fonRend" class="input-total" title="Fonte rendimento">
+										<option value="0">(Fonte rendimento)</option>
+									</select>
+									<select id="cred-cli-modaPag" class="input-total" title="Modalidade pgto.">
+										<option value="0">(Modalidade pagamento)</option>
+									</select>
+									<p class="mabott">
+										Garântia
+										<div class="x-list input-total" id="cred-cli-list-garaValue">
+											<input id="cred-data-list-gara" class="_noObrigatory" datalist="list" list="cred-cli-list-gara">
+											<datalist id="cred-cli-list-gara">
+											</datalist>
+										</div>
+									</p>
+									<p>
+										Documentos
+										<div class="x-list input-total" id="cred-cli-list-docuValue">
+											<input id="cred-data-list-docu" class="_noObrigatory" datalist="list" list="cred-cli-list-docu">
+											<datalist id="cred-cli-list-docu">
+											</datalist>
+										</div>
+									</p>
+								</div>
+							</span>
+							<div class="bottom-part">
+								<h1 class="total-val">A pagar: <br><b id="cred-totalPagar">0,00</b></h1>
+								<button id="import-simulation">Concluir Operação</button>
+							</div>
+						</div>
+					</div>
+					<div class="modal-header">
+						<b>Novo crédito</b>
+						<span class="mp-close"></span>
 					</div>
 				</div>
 			</div>
+		</section>
+		<section class="modalPage mp-info-client">
+			<div class="modalFrame">
+				<div class="modalContainer">
+					<div class="content">
+						<div class="divSec">
+							<ul class="menu-info single">
+								<li class="active">Geral</li>
+								<li>Rendimento</li>
+								<li>Contacto</li>
+								<li>Arquivagem</li>
+							</ul>
+							<div class="content-info">
+								<section class="active">
+									<p><label>NIF</label><span id="inf-cli-geral-nif">cont</span></p>
+									<p><label>Nome Completo</label><span id="inf-cli-geral-nome">cont</span></p>
+									<p><label>Data Nascimento</label><span id="inf-cli-geral-dataNasc">cont</span></p>
+									<p><label>Sexo: </label><span id="inf-cli-geral-sexo">cont</span></p>
+									<p><label>Estado Civil</label><span id="inf-cli-geral-estadoCivil">cont</span></p>
+									<p><label>Morada</label><span id="inf-cli-geral-morada">cont</span></p>
+								</section>
+								<section>
+									<p><label>Profissão</label><span id="inf-cli-geral-prof">cont</span></p>
+									<p><label>Salário</label><span id="inf-cli-geral-salario">cont</span></p>
+									<p><label>Localidade</label><span id="inf-cli-geral-lacali">cont</span></p>
+									<p><label>Local Trabalho</label><span id="inf-cli-geral-localTrab">cont</span></p>
+								</section>
+								<section>
+									<p><label>Telemóvel</label><span id="inf-cli-geral-telemo">cont</span></p>
+									<p><label>Telefone</label><span id="inf-cli-geral-telefo">cont</span></p>
+									<p><label>Serviço</label><span id="inf-cli-geral-telSer">cont</span></p>
+									<p><label>Email</label><span id="inf-cli-geral-email">cont</span></p>
+								</section>
+								<section>
+									<p><label>Ano</label><span id="inf-cli-geral-ano">cont</span></p>
+									<p><label>Mês</label><span id="inf-cli-geral-mes">cont</span></p>
+									<p><label>Letra</label><span id="inf-cli-geral-letra">cont</span></p>
+									<p><label>Capa</label><span id="inf-cli-geral-capa">cont</span></p>
+								</section>
+							</div>
+						</div>
+					</div>
 
-			<div class="modal-header">
-				<b>Informações sobre cliente</b>
-				<span class="mp-close"></span>
-			</div>
-		</div>
-	</div>
-</section>
-<section class="modalPage mp-liquidar" id="cred-pay-form">
-	<div class="modalFrame">
-		<div class="modalContainer">
-			<div class="content">
-				<p class="type-font">
-					<i class="icon-checkbox-unchecked" id="cred-pay-dife">
-						<label>Fonte de pagamento diferente</label>							
-					</i>
-				</p>
-				<div class="secDiv xpert-form" >
-					<section class="sec-same flex-form ">
-						<input type="text" id="cred-pay-doc" placeholder="Nº Documento" class="input-total" disabled>
-						<select id="cred-pay-bank" class="input-total" title="Banco" disabled>
-							<option value="0">(Banco)</option>
-						</select>			
-						<input type="text" placeholder="Data" id="cred-pay-data" class="input-total date-liquida is-datepicker">
-						<input type="text" placeholder="Valor" id="cred-pay-value" class=" formatNumber double input-total number-right" disabled>
-						<p class="rest input-total" id="cred-pay-value-rest">0,00</p>
-					</section>
-					<section class="sec-another flex-form">
-						<span>
-							<p class="input-total"><i class="icon-checkbox-unchecked" id="cred-pay-fazea" > <label>Pagamento Faseado</label></i> </p>
-							
-						</span>
-					</section>
+					<div class="modal-header">
+						<b>Informações sobre cliente</b>
+						<span class="mp-close"></span>
+					</div>
 				</div>
 			</div>
-			<div class="bt-yes-no-cancel">
-				<button id="cred-pay-bt">OK</button>
-				<button class="bt-no-option">Cancelar</button>
+		</section>
+		<section class="modalPage mp-liquidar" id="cred-pay-form">
+			<div class="modalFrame">
+				<div class="modalContainer">
+					<div class="content">
+						<p class="type-font">
+							<i class="icon-checkbox-unchecked" id="cred-pay-dife">
+								<label>Fonte de pagamento diferente</label>							
+							</i>
+						</p>
+						<div class="secDiv xpert-form" >
+							<section class="sec-same flex-form ">
+								<input type="text" id="cred-pay-doc" placeholder="Nº Documento" class="input-total" disabled>
+								<select id="cred-pay-bank" class="input-total" title="Banco" disabled>
+									<option value="0">(Banco)</option>
+								</select>			
+								<input type="text" placeholder="Data" id="cred-pay-data" class="input-total date-liquida is-datepicker">
+								<input type="text" placeholder="Valor" id="cred-pay-value" class=" formatNumber double input-total number-right" disabled>
+								<p class="rest input-total" id="cred-pay-value-rest">0,00</p>
+							</section>
+							<section class="sec-another flex-form">
+								<span>
+									<p class="input-total"><i class="icon-checkbox-unchecked" id="cred-pay-fazea" > <label>Pagamento Faseado</label></i> </p>
+
+								</span>
+							</section>
+						</div>
+					</div>
+					<div class="bt-yes-no-cancel">
+						<button id="cred-pay-bt">OK</button>
+						<button class="bt-no-option">Cancelar</button>
+					</div>
+					<div class="modal-header">
+						<b>Efetuar pagamento</b>
+						<span class="mp-close"></span>
+					</div>
+				</div>
 			</div>
-			<div class="modal-header">
-				<b>Efetuar pagamento</b>
-				<span class="mp-close"></span>
+		</section>
+		<section class="modalPage mp-liquidar-full" id="cred-pay-form-full">
+			<div class="modalFrame">
+				<div class="modalContainer">
+					<div class="content">
+						<p class="type-font">
+							<i class="icon-checkbox-unchecked" id="full-pay-dife-che">
+								<span>Fonte de pagamento diferente</span>
+							</i>
+						</p>
+						<div class="flex-form xpert-form" >
+							<input type="text" placeholder="Data" id="full-pay-data" class="input-total date-liquida is-datepicker changeValuePayFull" >
+						</div>
+						<div class="dffrent flex-form xpert-form">
+							<input type="text" id="full-pay-numDoc" placeholder="Nº Documento" class="input-total" >
+							<select id="full-pay-bank" class="input-total" title="Banco" >
+								<option value="0">(Banco)</option>
+							</select>
+							<input type="text" id="full-pay-desco" value="0" placeholder="Desconto (10%-20%)" title="Desconto (10%-20%)" class="input-2 double percent1020 changeValuePayFull">
+							<input type="text" id="full-pay-corr" value="0" placeholder="Correção" title="Correção" class="input-2 double formatNumber changeValuePayFull">
+							<span id="full-pay-op"><span class="xpert-toggle-2" ><span class="active">A</span><span>B</span></span></span>
+						</div>
+						<div class="secDiv xpert-form" >
+							<section class="sec-same">
+								<nav>
+									<label>Inicial</label>
+									<label id="full-pay-start">12522555</label>
+								</nav>
+								<nav>
+									<label>Pago</label>
+									<label id="full-pay-pago">12522555</label>
+								</nav>
+								<nav>
+									<label>Recalculado</label>
+									<label id="full-pay-recal">12522555</label>
+								</nav>
+								<nav>
+									<label>Diferença</label>
+									<label id="full-pay-dife">12522555</label>
+								</nav>
+							</section>
+						</div>
+					</div>
+					<div class="bt-yes-no-cancel">
+						<button id="full-pay-bt">OK</button>
+						<button class="bt-no-option">Cancelar</button>
+					</div>
+					<div class="modal-header">
+						<b>Efetuar pagamento antecipado</b>
+						<span class="mp-close"></span>
+					</div>
+				</div>
 			</div>
-		</div>
-	</div>
-</section>
-    <section class="modalPage mp-liquidar-full" id="cred-pay-form-full">
-        <div class="modalFrame">
-            <div class="modalContainer">
-                <div class="content">
-                    <p class="type-font">
-                        <i class="icon-checkbox-unchecked" id="full-pay-dife-che">
-                            <span>Fonte de pagamento diferente</span>
-                        </i>
-                    </p>
-                    <div class="flex-form xpert-form" >
-                        <input type="text" placeholder="Data" id="full-pay-data" class="input-total date-liquida is-datepicker changeValuePayFull" >
-                    </div>
-                    <div class="dffrent flex-form xpert-form">
-                    	<input type="text" id="full-pay-numDoc" placeholder="Nº Documento" class="input-total" >
-						<select id="full-pay-bank" class="input-total" title="Banco" >
-							<option value="0">(Banco)</option>
-						</select>
-                        <input type="text" id="full-pay-desco" value="0" placeholder="Desconto (10%-20%)" title="Desconto (10%-20%)" class="input-2 double percent1020 changeValuePayFull">
-                        <input type="text" id="full-pay-corr" value="0" placeholder="Correção" title="Correção" class="input-2 double formatNumber changeValuePayFull">
-                        <span id="full-pay-op"><span class="xpert-toggle-2" ><span class="active">A</span><span>B</span></span></span>
-                    </div>
-                    <div class="secDiv xpert-form" >
-                        <section class="sec-same">
-                            <nav>
-                                <label>Inicial</label>
-                                <label id="full-pay-start">12522555</label>
-                            </nav>
-                            <nav>
-                                <label>Pago</label>
-                                <label id="full-pay-pago">12522555</label>
-                            </nav>
-                            <nav>
-                                <label>Recalculado</label>
-                                <label id="full-pay-recal">12522555</label>
-                            </nav>
-                            <nav>
-                                <label>Diferença</label>
-                                <label id="full-pay-dife">12522555</label>
-                            </nav>
-                        </section>
-                    </div>
-                </div>
-                <div class="bt-yes-no-cancel">
-                    <button id="full-pay-bt">OK</button>
-                    <button class="bt-no-option">Cancelar</button>
-                </div>
-                <div class="modal-header">
-                    <b>Efetuar pagamento antecipado</b>
-                    <span class="mp-close"></span>
-                </div>
-            </div>
-        </div>
-    </section>
-<section class="modalPage mp-confirm-simulation">
-	<div class="modalFrame">
-		<div class="modalContainer">
-			<p>Deseja realmente importar a simulaçao?</p>
-			<div class="bt-yes-no-cancel">
-				<button id="cred-simula-import">OK</button>
-				<button class="bt-no-option">Cancelar</button>
+		</section>
+		<section class="modalPage mp-confirm-simulation">
+			<div class="modalFrame">
+				<div class="modalContainer">
+					<p>Deseja realmente importar a simulaçao?</p>
+					<div class="bt-yes-no-cancel">
+						<button id="cred-simula-import">OK</button>
+						<button class="bt-no-option">Cancelar</button>
+					</div>
+					<div class="modal-header">
+						<b>Importar Simulaçao</b>
+						<span class="mp-close"></span>
+					</div>
+				</div>
 			</div>
-			<div class="modal-header">
-				<b>Importar Simulaçao</b>
-				<span class="mp-close"></span>
-			</div>
-		</div>
-	</div>
-</section>
-<script type="text/javascript" src="./resources/fw/pikaday/pikaday.js"></script>
-    <?php include "includes/process.html"; ?>
-</body>
-<script type="text/javascript" src="./resources/js/jQuery.js"></script>
-<script type="text/javascript" src="resources/js/table.js"></script>
-<script type="text/javascript" src="resources/js/geralScript.js"></script>
-<script type="text/javascript" src="resources/js/controller/geral.js"></script>
-<script type="text/javascript" src="resources/js/controller/logar.js"></script>
-<script type="text/javascript" src="./resources/js/controller/menu.js"></script>
-<script type="text/javascript" src="resources/js/rclient.js"></script>
-<script type="text/javascript" src="resources/js/controller/cliente.js"></script>
-<script type="text/javascript" src="resources/js/controller/gestClient.js"></script>
-<script type="text/javascript" src="resources/js/controller/simulacao.js"></script>
-<script type="text/javascript" src="resources/js/controller/prestacaoBluider.js"></script>
-</html>
+		</section>
+		<script type="text/javascript" src="./resources/fw/pikaday/pikaday.js"></script>
+		<?php include "includes/process.html"; ?>
+	</body>
+	<script type="text/javascript" src="./resources/js/jQuery.js"></script>
+	<script type="text/javascript" src="resources/js/table.js"></script>
+	<script type="text/javascript" src="resources/js/geralScript.js"></script>
+	<script type="text/javascript" src="resources/js/controller/geral.js"></script>
+	<script type="text/javascript" src="resources/js/controller/logar.js"></script>
+	<script type="text/javascript" src="./resources/js/controller/menu.js"></script>
+	<script type="text/javascript" src="resources/js/rclient.js"></script>
+	<script type="text/javascript" src="resources/js/controller/cliente.js"></script>
+	<script type="text/javascript" src="resources/js/controller/gestClient.js"></script>
+	<script type="text/javascript" src="resources/js/controller/simulacao.js"></script>
+	<script type="text/javascript" src="resources/js/controller/prestacaoBluider.js"></script>
+	</html>
