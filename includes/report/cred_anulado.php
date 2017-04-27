@@ -1,50 +1,28 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html>
 <head>
-	<meta charset="UTF-8">
-	<script type="text/javascript" src="../../resources/js/admission.js"></script>
-	<link rel="stylesheet" href="../../resources/css/geralStyle.css">
-	<link rel="stylesheet" href="../../resources/css/report.css">
-	<link rel="stylesheet" href="../../resources/css/reports/report-all.css">
-	
-	
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="../../resources/js/admission.js"></script>
+    <link rel="stylesheet" href="../../resources/css/geralStyle.css">
+    <link rel="stylesheet" href="../../resources/css/report.css">
+    <link rel="styleshteet" href="../../resources/css/reports/report-all.css">
+    <link rel="stylesheet" href="../../resources/css/activity.css">
+    <link rel="stylesheet" href="../../resources/css/reports/warranty.css">
 </head>
-<body>
-	<div class="master-content">
+<body class="bd-warr">
 
-		<div class="table-list">
-			<nav class="to-report">
-				<h2></h2>
-			</nav>
-			
+<div class="arend">
+    <div class="list-warr">
+    </div>
+</div>
 
+<?php include "../process.html"; ?>
+<div  id="labelAnulado" >
+</div>
 
-			<div class="x-table table-client auto-width">
-				<table id="table-report-credit" class="" cellpadding="0" cellspacing="0">
-					<thead>
-						<tr>
-							<th grow="2" orderBy>Nº Dossier</th>
-							<th grow="1" orderBy>Data Registo</th>
-							<th grow="1" orderBy>NIF</th>
-							<th grow="4" orderBy>Cliente</th>
-							<th grow="2" orderBy>Valor Crédito</th>
-							<th grow="2" orderBy>Montante Dívida</th>
-							<th grow="1" orderBy>TAEG</th>
-							<th grow="1">Data Inicio</th>
-							<th grow="1">Data Fim</th>
-						</tr>
-					</thead>
-					<tbody id="table-report-credit-body">
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</div>
-    <?php include "../process.html"; ?>
 </body>
 <script type="text/javascript" src="../../resources/js/jQuery.js"></script>
-<script type="text/javascript" src="../../resources/js/table.js"></script>
 <script type="text/javascript" src="../../resources/js/geralScript.js"></script>
+<script type="text/javascript" src="../../resources/js/reports/report.js"></script>
+<script type="text/javascript" src="../../resources/js/reports/anulados.js"></script>
 </html>
-
-

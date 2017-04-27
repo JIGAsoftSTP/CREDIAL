@@ -11,6 +11,7 @@ include "Session.php";
 
 if($_POST["intensao"] == "loadListCredits"){ loadCredit(); }
 if($_POST["intensao"] == "loadListInformationCredit"){ loadInformationByCredit(); }
+if($_POST["intensao"] == "loadListCreditsAlunado"){ loadListCreditsAlunado(); }
 
 function loadCredit(){
 
@@ -49,4 +50,18 @@ function loadInformationByCredit(){
         $information[count($information)] = $value;
     }
     die(json_encode(array("information" => $information)));
+}
+
+function loadListCreditsAlunado(){
+    $call = new CallPgSQL();
+    $call->functionTable("report.funct_rep_credito_anulado","*")
+        ->addString(Session::getUserLogado()->getId())
+        ->addNumeric(Session::getUserLogado()->getIdAgencia())
+        ->addJson(($_POST["filter"] == "" ? null : json_encode($_POST["filter"])));
+    $call->execute();
+    $credits = array();
+    while ($value = $call->getValors()){
+        $credits[count($credits)] = $value;
+    }
+    die(json_encode(array("credits" => $credits)));
 }

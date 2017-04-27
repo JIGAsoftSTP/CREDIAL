@@ -61,7 +61,8 @@
 	</div>
 
     <?php include "../process.html"; ?>
-    <div  id="labelWarranty" />
+    <div  id="labelWarranty" >
+    </div>
 
 </body>
 <script type="text/javascript" src="../../resources/js/jQuery.js"></script>
