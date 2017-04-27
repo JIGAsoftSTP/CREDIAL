@@ -29,7 +29,6 @@ var CreditoBluiderAnulados = function () {
      * @param ig {Number}
      */
     this.bluiderCreditos = function (credito, ig) {
-        console.log("hdhfhfhf");
         var nome_cliente = (credito.clientname + ((credito.clientsurname === credito.clientname) ? '' : ' '+credito.clientsurname));
         var rt = '<section>' +
             '<div class="first">' +
