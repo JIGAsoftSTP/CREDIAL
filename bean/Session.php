@@ -34,7 +34,9 @@ class Session
     static function getUserLogado()
     {
         if(session_status() != PHP_SESSION_ACTIVE)
-            session_start();
+            session_start([
+                'cookie_lifetime' => (86400*5),
+            ]);
         if(isset($_SESSION[Session::USER]))
         {
             return $_SESSION[Session::USER];
