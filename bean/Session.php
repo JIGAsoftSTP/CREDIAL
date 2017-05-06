@@ -14,7 +14,9 @@ class Session
     static function newSession($name,$object)
     {
         if(session_status() != PHP_SESSION_ACTIVE)
-            session_start();
+            session_start([
+                'cookie_lifetime' => (86400*5),
+            ]);
         $_SESSION[$name]=$object;
     }
     
@@ -49,7 +51,9 @@ class Session
     static function getUserMenu()
     {
         if(session_status() != PHP_SESSION_ACTIVE)
-            session_start();
+            session_start([
+                'cookie_lifetime' => (86400*5),
+            ]);
         if(isset($_SESSION[Session::MENU]))
            return $_SESSION[Session::MENU];
         else return null;
@@ -81,7 +85,9 @@ class Session
      */
     static function terminarSessao()
     {
-        session_start();
+        session_start([
+            'cookie_lifetime' => (86400*5),
+        ]);
         session_destroy();
     }
     
