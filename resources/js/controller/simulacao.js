@@ -506,24 +506,17 @@ function getStats(state) {
 
 $("#cred-data-fim").change(function () {
     if ($(this).val() !== "" && $("#cred-data").val() !== "") {
-        var datainiciar = new Date();
-        var dataFinal = new Date();
-
-        var arDataFin = $("#cred-data-fim").val().split("-");
-        dataFinal.setUTCFullYear(Number(arDataFin[2]));
-        dataFinal.setMonth(Number(arDataFin[1]) -1);
-        dataFinal.setDate(Number(arDataFin[0]));
-
-        var arDataInicio = $("#cred-data").val().split("-");
-        datainiciar.setUTCFullYear(Number(arDataInicio[2]));
-        datainiciar.setMonth(Number(arDataInicio[1]) -1);
-        datainiciar.setDate(Number(arDataInicio[0]));
-
-        var diff  = new Date(dataFinal - datainiciar);
-        var days  = (diff/1000/60/60/24)+1;
-
-        if(days >= 0) { $("#cred-dia").val(days); }
-        else $("#cred-dia").val(0);
+        var datainiciar = $("#cred-data").val().stringToDate();
+        var dataFinal = $("#cred-data-fim").val().stringToDate();
+        if((dataFinal - datainiciar) < 0){
+            $("#cred-dia").val(0);
+            return false;
+        }
+        var i;
+        for( i = 1; (datainiciar.getDatePt() !== dataFinal.getDatePt()) ; i++){
+            datainiciar.setDate(datainiciar.getDate()+1)
+        }
+        $("#cred-dia").val(i);
     }
 });
 

@@ -315,3 +315,76 @@ var geral = {
       });
   }
 };
+
+if(!String.prototype.stringToDate) {
+    /***
+     * @param format
+     * @param delimiter
+     * @return {Date}
+     */
+    String.prototype.stringToDate = function (format, delimiter) {
+        var dt = new Date();
+        var st = undefined;
+        if(format === undefined){
+            st = this.split("-");
+            dt.setDate(Number(st[0]));
+            dt.setMonth((Number(st[1]) -1));
+            dt.setFullYear(Number(st[2]));
+        }
+        else{
+            st = this.split(delimiter);
+            var fo = format.split(delimiter);
+            dt.setDate(Number(st[getPositionParam("DD", fo)]));
+            dt.setMonth((Number(st[getPositionParam("MM", fo)])-1));
+            dt.setFullYear(Number(st[getPositionParam("YYYY", fo)]));
+        }
+
+        /**
+         * @param str {String}
+         * @param array {Array}
+         */
+        function getPositionParam( str, array ) {
+            for ( var i = 0; i < array.length; i++ ) {
+                if ( str === array[ i ].toUpperCase() ) {
+                    return i;
+                }
+            }
+        }
+        return dt;
+    };
+}
+
+if (!String.prototype.this_is_date){
+    /***
+     * @return {boolean}
+     */
+    String.prototype.this_is_date = function () {
+        return valideData(this.toString());
+    }
+}
+
+if (!String.prototype.data_BD_to_DDMMYYYY) {
+    /**
+     * @return {string}
+     */
+    String.prototype.data_BD_to_DDMMYYYY = function () {
+        var data = this.split("-");
+        return data[2]+"-"+data[1]+"-"+data[0];
+    };
+}
+
+if(!Date.prototype.getDatePt){
+    Date.prototype.getDatePt = function () {
+        return (((this.getDate()+"").length === 1) ? "0"+this.getDate() : this.getDate() )
+            +"-"+((((this.getMonth()+1)+"").length === 1) ? "0"+(this.getMonth()+1) : (this.getMonth()+1))
+            +"-"+this.getUTCFullYear();
+    }
+}
+
+if(!Date.prototype.getDateEn){
+    Date.prototype.getDateEn = function () {
+        return this.getUTCFullYear()
+            +"-"+((((this.getMonth()+1)+"").length === 1) ? "0"+(this.getMonth()+1) : (this.getMonth()+1))
+            +"-"+(((this.getDate()+"").length === 1) ? "0"+this.getDate() : this.getDate());
+    }
+}
