@@ -154,16 +154,27 @@ function getDataUser(){
 }
 
 function sendfeeback(){
+    require '../resources/fw/PHPMailer/class.phpmailer.php';
+    require '../resources/fw/PHPMailer/PHPMailerAutoload.php';
     include "../modelo/SendEmail.php";
-    $var = "Mensagem enviada de Credial SA por" . Session::getUserLogado()->getNome() . " " . Session::getUserLogado()->getAgencia()
+    $var = "Mensagem enviada de Credial SA por " . Session::getUserLogado()->getNome() . " " . Session::getUserLogado()->getAgencia()
         . "<br><br>" . $_POST["feed"]["text"]
         . "<br><br>" . $_POST["feed"]["mail"]
         . "<br>Credial SA";
+
     $se = new SendEmail();
-    $enviado = $se->Assunto("Credial " . ($_POST["feed"]["type"] == "another") ? $_POST["feed"]["other"] : $_POST["feed"]["type"])
-        ->Texto($var)
-        ->Destino("jigasoft_stp@hotmail.com")
-        ->sendEmail();
+    $se->getMail()->setFrom($_POST["feed"]["mail"], "Credial →".Session::getUserLogado()->getNome()." ".Session::getUserLogado()->getApelido());
+    $se->getMail()->addAddress("jigasoft_stp@hotmail.com", "JIGAsoft HD");     // Add a recipient
+
+    //$se->getMail()->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+    //$se->getMail()->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+    $se->getMail()->isHTML(true);                             // Set email format to HTML
+
+    $se->getMail()->Subject = ("Credial " . (($_POST["feed"]["type"] == "another") ? $_POST["feed"]["other"] : $_POST["feed"]["type"]));
+    $se->getMail()->Body    = $var;
+
+    $enviado = $se->getMail()->send();
+
     die (json_encode(array("result" => ($enviado == true))));
 }
 

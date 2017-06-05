@@ -323,20 +323,16 @@ if(!String.prototype.stringToDate) {
      * @return {Date}
      */
     String.prototype.stringToDate = function (format, delimiter) {
-        var dt = new Date();
+        var dt;
         var st = undefined;
         if(format === undefined){
             st = this.split("-");
-            dt.setDate(Number(st[0]));
-            dt.setMonth((Number(st[1]) -1));
-            dt.setFullYear(Number(st[2]));
+            dt = new Date(st[2]+"-"+st[1]+"-"+st[0]);
         }
         else{
             st = this.split(delimiter);
             var fo = format.split(delimiter);
-            dt.setDate(Number(st[getPositionParam("DD", fo)]));
-            dt.setMonth((Number(st[getPositionParam("MM", fo)])-1));
-            dt.setFullYear(Number(st[getPositionParam("YYYY", fo)]));
+            dt = new Date(st[getPositionParam("YYYY", fo)]+"-"+st[getPositionParam("MM", fo)]+"-"+st[getPositionParam("DD", fo)]);
         }
 
         /**
