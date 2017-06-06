@@ -222,6 +222,7 @@ function send_notification_to_client(){
     file_put_contents("../resources/json/log-mail-send.json", json_encode($j_log, JSON_UNESCAPED_UNICODE));
     die (json_encode(array("result" => $has_send_all)));
 }
+
 function send_message_to_clients(){
     /**
      * @return array
