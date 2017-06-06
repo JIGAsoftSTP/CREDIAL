@@ -245,9 +245,6 @@ function send_message_to_clients(){
         $datatime1 = new DateTime($inicial);
         $datatime2 = new DateTime(date("Y-m-d H:i:s"));
 
-//        $data1  = $datatime1->format('d-m-Y H:i:s');
-//        $data2  = $datatime2->format('d-m-Y H:i:s');
-
         $diff = $datatime1->diff($datatime2);
         $horas = $diff->h + ($diff->days * 24);
 
