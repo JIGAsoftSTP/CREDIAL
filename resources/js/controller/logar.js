@@ -15,6 +15,7 @@ $("#logar").click(function () {
                 if (e.result) {
                     if (e.state === 1) {
                         if (e.pageUser !== null) {
+                            if(e["send-mail"]){ sessionStorage.setItem("send-mail", e["send-mail"]); }
                             window.location = e.pageUser["LINK"];
                             regUserActivity(loginActivityAddress, -1, "Acessou a aplicação", -1, LevelActivity.VISUALIZACAO);
                         } else {
@@ -67,7 +68,7 @@ $("#confirme").click(function () {
     }
 });
 
-var loginActivityAddress = "bean/activity";
+var loginActivityAddress = "bean/activity.php";
 $("#pwd1").keyup(function () {
     isValid($("#pwd1"), $("#pwd2"));
 });
@@ -141,6 +142,20 @@ $(document).ready(function (e) {
     if (sessionStorage.getItem("hasBeenActiveNow") !== null) {
         $("#wel-link").attr("href", "../" + sessionStorage.getItem("hasBeenActiveNow")).on('click', function () {
             sessionStorage.removeItem("hasBeenActiveNow");
+        });
+    }
+
+    if(sessionStorage.getItem("send-mail") !== null){
+        $.ajax({
+            url: "./bean/logar.php",
+            type: "POST",
+            data: {"intensao": "send_notification_to_client"},
+            dataType: "json",
+            success: function (e) {
+                if(e.result) {
+                    sessionStorage.removeItem("send-mail")
+                }
+            }
         });
     }
 });

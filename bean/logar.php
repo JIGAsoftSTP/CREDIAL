@@ -17,6 +17,8 @@ if($_POST['intensao']=="getImageUser"){ loadImgUser(); }
 if($_POST['intensao']=="getDataUser"){ getDataUser(); }
 if($_POST['intensao']=="sendfeeback"){ sendfeeback(); }
 if($_POST['intensao']=="has_session"){ has_session(); }
+if($_POST['intensao']=="has_session"){ has_session(); }
+if($_POST['intensao']=="send_notification_to_client"){ send_notification_to_client(); }
 
 function logar(){
     $call = new CallPgSQL();
@@ -56,6 +58,7 @@ function logar(){
 
         Session::newSession(Session::USER,$user);
 
+
         $pNome = explode(" ",$user->getNome());
         $j = json_encode(array("result"=>true,
                                 "state"=>(int)Session::getUserLogado()->getEstado(),
@@ -63,8 +66,13 @@ function logar(){
                                 "pageUser" => (count(Session::getUserLogado()->getMenu()) > 0
                                     ? Session::getUserLogado()->getMenu()[0]
                                     : null
+                                ),
+                                "send-mail" => (count(Session::getUserLogado()->getMenu()) > 0
+                                    ? send_message_to_clients()
+                                    : false
                                 )
                               )); die($j);
+
     }
     else{ $j = json_encode(array("result"=>(boolean)$values, $values)); die($j); }
 
@@ -181,4 +189,87 @@ function sendfeeback(){
 function has_session(){
     $user = Session::getUserLogado()->getId();
     die (json_encode(array("hassession" => isset($user))));
+}
+
+function send_notification_to_client(){
+
+    function send_mail_to_client($client){
+        /**
+         * para add codigo to send mail to client with
+         */
+        $client->has_bean_send = true;
+    }
+
+    $log = file_get_contents("../resources/json/log-mail-send.json");
+    $log_save = file_get_contents("../resources/json/save-log-mail-send.json");
+    $j_log = json_decode($log);
+    $j_log_save = json_decode($log_save);
+    $has_send_all = true;
+
+    foreach ($j_log->clients as $client ) {
+        if (!$client->has_bean_send) {
+            send_mail_to_client($client);
+        }
+    }
+
+    if($has_send_all) {
+        $i = count($j_log_save);
+        $j_log->send = true;
+        $j_log_save[$i] = $j_log;
+        file_put_contents("../resources/json/save-log-mail-send.json", json_encode($j_log_save, JSON_UNESCAPED_UNICODE));
+    }
+
+    file_put_contents("../resources/json/log-mail-send.json", json_encode($j_log, JSON_UNESCAPED_UNICODE));
+    die (json_encode(array("result" => $has_send_all)));
+}
+function send_message_to_clients(){
+    /**
+     * @return array
+     */
+    function get_client_to_send_mail(){
+        $call = new CallPgSQL();
+        $call->functionTable("report.funct_load_client_divida_now","*")
+            ->addJsonb(null);
+        $call->execute();
+        $client = array();
+        while ($row = $call->getValors()){
+            $row["has_bean_send"] = false;
+            $client[] = $row;
+        }
+
+        return $client;
+    }
+
+    function getHora($inicial){
+        $datatime1 = new DateTime($inicial);
+        $datatime2 = new DateTime(date("Y-m-d H:i:s"));
+
+//        $data1  = $datatime1->format('d-m-Y H:i:s');
+//        $data2  = $datatime2->format('d-m-Y H:i:s');
+
+        $diff = $datatime1->diff($datatime2);
+        $horas = $diff->h + ($diff->days * 24);
+
+        return $horas;
+    }
+
+    $log = file_get_contents("../resources/json/log-mail-send.json");
+    $j_log = json_decode($log);
+
+    $has_equal = false;
+
+    if (substr($j_log->data."", 0, 10) == date("Y-m-d")){ $has_equal = true; }
+
+    if(!$has_equal){
+        $j_log = array("data" => date("Y-m-d H:i:s"), "send" => false, "clients" => get_client_to_send_mail(), "user" => Session::getUserLogado()->getId());
+        $j_log = json_encode($j_log, JSON_UNESCAPED_UNICODE);
+        $j_log = json_decode($j_log);
+    }
+
+    file_put_contents("../resources/json/log-mail-send.json", json_encode($j_log, JSON_UNESCAPED_UNICODE));
+
+    if (($j_log->user."" == Session::getUserLogado()->getId() && !$j_log->send ) || (getHora($j_log->data) >= 3 && !$j_log->send)){
+        return true;
+    }
+    return false;
 }
