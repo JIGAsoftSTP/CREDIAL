@@ -84,7 +84,7 @@ class Session
     public static function start_session()
     {
         if (session_status() != PHP_SESSION_ACTIVE) {
-            session_cache_limiter('private');
+            session_cache_limiter('private, must-revalidate');
             session_cache_expire(-1);
             session_start();
         }

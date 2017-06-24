@@ -192,12 +192,36 @@ function has_session(){
 }
 
 function send_notification_to_client(){
+    global $empresa;
+    $empresa = json_decode(file_get_contents("../resources/json/enterprise.json"));
+    include "mgs-cliente.php";
+    require '../resources/fw/PHPMailer/class.phpmailer.php';
+    require '../resources/fw/PHPMailer/PHPMailerAutoload.php';
+    include "../modelo/SendEmail.php";
 
     function send_mail_to_client($client){
-        /**
-         * para add codigo to send mail to client with
-         */
-        $client->has_bean_send = true;
+        global $empresa;
+        global $cliente_nome;
+        global $cliente_apelido;
+
+        $cliente_nome = trim($client->clientenome);
+        $cliente_apelido = trim($client->clienteapelido);
+
+        if($client->clientmail != null) {
+            $var = getMessagem();
+
+            $se = new SendEmail();
+            $se->getMail()->setFrom($empresa->mail, $empresa->name);
+            $se->getMail()->addAddress($client->clientmail, $cliente_nome);
+
+            $se->getMail()->isHTML(true);
+
+            $se->getMail()->Subject = "Credial SA → Pagamento de Credito";
+            $se->getMail()->Body = $var;
+
+            $enviado = $se->getMail()->send();
+        }
+        $client->has_bean_send = (isset($enviado) ? $enviado : true);
     }
 
     $log = file_get_contents("../resources/json/log-mail-send.json");
@@ -230,7 +254,7 @@ function send_message_to_clients(){
     function get_client_to_send_mail(){
         $call = new CallPgSQL();
         $call->functionTable("report.funct_load_client_divida_now","*")
-            ->addJsonb(null);
+            ->addJsonb(/*json_encode(["inicio" => "2017-01-01", "date" => "2017-06-24" ])*/ null);
         $call->execute();
         $client = array();
         while ($row = $call->getValors()){
@@ -256,7 +280,7 @@ function send_message_to_clients(){
 
     $has_equal = false;
 
-    if (substr($j_log->data."", 0, 10) == date("Y-m-d")){ $has_equal = true; }
+    if (substr(((isset($j_log->data) ? $j_log->data : ""))."", 0, 10) == date("Y-m-d")){ $has_equal = true; }
 
     if(!$has_equal){
         $j_log = array("data" => date("Y-m-d H:i:s"), "send" => false, "clients" => get_client_to_send_mail(), "user" => Session::getUserLogado()->getId());
