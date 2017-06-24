@@ -85,7 +85,7 @@ class Session
     {
         if (session_status() != PHP_SESSION_ACTIVE) {
             session_cache_limiter('private');
-            session_cache_expire(1);
+            session_cache_expire(-1);
             session_start();
         }
     }
