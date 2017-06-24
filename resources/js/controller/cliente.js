@@ -683,10 +683,12 @@ $("#full-pay-bt").click(function () {
      if(payfull.bank !== "null")
      {
          fullPaymentActivity = {"Banco":  $("#full-pay-bank :selected").text(), "Número de Documento": payfull.doc,
-         "Tipo de Pagamento": (!$("#full-pay-dife-che").hasClass("icon-checkbox-checked") ? "Semelhante" : "Diferente" ) };
+         "Tipo de Pagamento": (!$("#full-pay-dife-che").hasClass("icon-checkbox-checked") ? "Semelhante" : "Diferente" ),
+             "Data Pagamento" : $("#full-pay-data").val()};
      }
      else
-         fullPaymentActivity = {"Tipo de Pagamento": (!$("#full-pay-dife-che").hasClass("icon-checkbox-checked") ? "Semelhante" : "Diferente" ) };
+         fullPaymentActivity = {"Tipo de Pagamento": (!$("#full-pay-dife-che").hasClass("icon-checkbox-checked") ? "Semelhante" : "Diferente" ),
+             "Data Pagamento" : $("#full-pay-data").val() };
 
 
 
