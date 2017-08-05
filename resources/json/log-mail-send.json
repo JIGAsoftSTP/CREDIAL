@@ -1,0 +1,39 @@
+{
+  "data": "2017-06-24 15:44:48",
+  "send": true,
+  "clients": [
+    {
+      "clientenif": "109039527",
+      "clientenome": "ANA",
+      "clienteapelido": "FERNANDA DO ESPIRITO SANTO ALVES COTRIN",
+      "clientmovel": "2222222",
+      "clientmail": "ahmedferreira11@gmail.com",
+      "creditoid": "25190",
+      "creditonumero": "017508301852",
+      "creditodatainicio": "2017-04-26",
+      "creditodatafinalizarprazo": "2017-06-24",
+      "creditocapitalinicial": "3000000",
+      "creditomontantepagar": "4850000",
+      "creditomontanterestante": "4850000",
+      "more": null,
+      "has_bean_send": true
+    },
+    {
+      "clientenif": "109006327",
+      "clientenome": "MIGUEL ",
+      "clienteapelido": "SACRAMENTO DOS SANTOS",
+      "clientmovel": "9934926",
+      "clientmail": "ahmedferreira11@gmail.com",
+      "creditoid": "25194",
+      "creditonumero": "013171301851",
+      "creditodatainicio": "2017-04-26",
+      "creditodatafinalizarprazo": "2017-06-24",
+      "creditocapitalinicial": "1350000",
+      "creditomontantepagar": "2210000",
+      "creditomontanterestante": "1105000",
+      "more": null,
+      "has_bean_send": true
+    }
+  ],
+  "user": "109000001"
+}

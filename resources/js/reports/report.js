@@ -63,29 +63,20 @@ function sendFilterReport() {
 function reportGrowth(list)
 {
     table.empty();
-    totalReport = list.length-1;
-    clearInterval(reportInterval);
-    size = 0;
-
-    if(totalReport >0)
+    for(var i = 0;i<list.length;i++ )
     {
-        reportInterval = setInterval(function () {
-             growth = list[size];
-            table.append('' +
-                '<tr><td >' + growth["NIF"] + '</td><td >' + growth["CLIENT NAME"]+" "+growth["CLIENT SURNAME"] + '</td>' +
-                '<td>'+growth["LOCALIDADE"]+'</td><td>'+growth["QUANTIDADE ANO"]+'</td>' +
-                '<td>'+growth["QUANTIDADE PASSADO"]+'</td>' +
-                '<td>'+growth["DIFERENCA"]+'</td></tr>');
-            size++;
+         growth = list[i];
+        table.append('' +
+            '<tr><td >' + growth["NIF"] + '</td><td >' + growth["CLIENT NAME"]+" "+growth["CLIENT SURNAME"] + '</td>' +
+            '<td>'+growth["LOCALIDADE"]+'</td><td>'+growth["QUANTIDADE ANO"]+'</td>' +
+            '<td>'+growth["QUANTIDADE PASSADO"]+'</td>' +
+            '<td>'+growth["DIFERENCA"]+'</td></tr>');
 
-            listLastValues = {"Ano Atual": list[list.length-1]["QUANTIDADE ANO"], "Ano Passado" : list[list.length-1]["QUANTIDADE PASSADO"],
-                "Crescimento" : list[list.length-1]["DIFERENCA"]};
+        listLastValues = {"Ano Atual": list[list.length-1]["QUANTIDADE ANO"], "Ano Passado" : list[list.length-1]["QUANTIDADE PASSADO"],
+            "Crescimento" : list[list.length-1]["DIFERENCA"]};
 
-            sumTable(listLastValues);
-            tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
-
-            if(size === totalReport) clearInterval(reportInterval);
-        }, 250);
+        sumTable(listLastValues);
+        tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
     }
 
 
@@ -95,9 +86,6 @@ function reportGrowth(list)
 function reportTaeg(list)
 {
     table.empty();
-    totalReport = list.length;
-    clearInterval(reportInterval);
-    size = 0;
     if(list.length >0){
         $("#iframe-" + $('aside li.active').index()).contents().find('.first-section h1:eq(0) span').text(formattedString(list[list.length-2]["CREDITO VALUE"]));
         $("#iframe-" + $('aside li.active').index()).contents().find('.first-section h1:eq(1) span').text(formattedString(list[list.length-1]["CREDITO VALUE"]));
@@ -110,23 +98,18 @@ function reportTaeg(list)
         $("#iframe-" + $('aside li.active').index()).contents().find('.third-section h1:eq(1) span').text(formattedString(list[list.length-1]["CREDITO TAEG"]));
     }
 
-    if(totalReport >0)
+    for(var i = 0;i<list.length;i++)
     {
-        reportInterval = setInterval(function () {
-             taeg = list[size];
-            if(taeg["NIF"].toUpperCase() !=="TOTAL"){
-                table.append('' +
-                    '<tr><td >' + taeg["CREDITO NUM DOSSCIER"] + '</td><td >' + taeg["NIF"]+'</td>' +
-                    '<td>'+taeg["NAME"]+" "+taeg["SURNAME"]+'</td><td>'+formattedString(taeg["CREDITO VALUE"])+'</td>' +
-                    '<td>'+formattedString(taeg["CREDITO TOTAL PAGAR MONTANTE DIVIDA"])+'</td>' +
-                    '<td>'+formattedString(taeg["CREDITO TAEG"])+'</td><td>'+formatDate(taeg["CREDITO INICIO"],2)+'</td>' +
-                    '<td>'+formatDate(taeg["CREDITO FINALIZAR"],2)+'</td><td>'+taeg["CREDITO STATE"]+'</td></tr>');
-            }
-            size++;
-            tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
-
-            if(size === totalReport) clearInterval(reportInterval);
-        }, 250);
+         taeg = list[i];
+        if(taeg["NIF"].toUpperCase() !=="TOTAL"){
+            table.append('' +
+                '<tr><td >' + taeg["CREDITO NUM DOSSCIER"] + '</td><td >' + taeg["NIF"]+'</td>' +
+                '<td>'+taeg["NAME"]+" "+taeg["SURNAME"]+'</td><td>'+formattedString(taeg["CREDITO VALUE"])+'</td>' +
+                '<td>'+formattedString(taeg["CREDITO TOTAL PAGAR MONTANTE DIVIDA"])+'</td>' +
+                '<td>'+formattedString(taeg["CREDITO TAEG"])+'</td><td>'+formatDate(taeg["CREDITO INICIO"],2)+'</td>' +
+                '<td>'+formatDate(taeg["CREDITO FINALIZAR"],2)+'</td><td>'+taeg["CREDITO STATE"]+'</td></tr>');
+        }
+        tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
     }
 
 }
@@ -134,23 +117,16 @@ function reportTaeg(list)
 
 function reportChequeDistribuido(list) {
     table.empty();
-    totalReport = list.length-1;
-    clearInterval(reportInterval);
-    size = 0;
 
-    if(totalReport >0)
+    for(var i =0;i<list.length;i++)
     {
-        reportInterval = setInterval(function () {
-             cheque = list[size];
-            table.append('' +
-                '<tr><td >' + formatDate(cheque["DATA"],2) + '</td><td >' + formattedString(cheque["DEBITO"])+'</td>' +
-                '<td>'+formattedString(cheque["CREDITO"])+'</td><td>'+cheque["BANCO SIGLA"]+"-"+cheque["BANCO NAME"]+'</td>' +
-                '<td>'+cheque["AGENCIA"]+'</td></tr>');
+         cheque = list[i];
+        table.append('' +
+            '<tr><td >' + formatDate(cheque["DATA"],2) + '</td><td >' + formattedString(cheque["DEBITO"])+'</td>' +
+            '<td>'+formattedString(cheque["CREDITO"])+'</td><td>'+cheque["BANCO SIGLA"]+"-"+cheque["BANCO NAME"]+'</td>' +
+            '<td>'+cheque["AGENCIA"]+'</td></tr>');
 
-            size++;
-            tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
-            if(size === totalReport) clearInterval(reportInterval);
-        }, 250);
+        tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
     }
 }
 
@@ -222,25 +198,19 @@ function reportCustomer(list)
 {
     var totalQuantity = 0;
     $("#iframe-" + $('aside li.active').index()).contents().find('table').find('tbody').empty();
-    totalReport = list.length-1;
-    clearInterval(reportInterval);
-     size = 0;
-    if(totalReport >0)
-    {
-        reportInterval = setInterval(function()
-        {
-            customer = list[size];
-            table.append('' +
-                '<tr><td >' + customer["NIF"] + '</td><td >' + customer["NAME"]+" "+customer["SURNAME"] + '</td>' +
-                '<td>'+customer["QUANTIDADE CREDITO"]+'</td><td>'+formattedString(customer["VALOR"])+'</td><td>'+customer["LOCAL TRABALHO"]+'</td></tr>');
 
-            totalQuantity  += Number(customer["QUANTIDADE CREDITO"]);
-            size++;
-            listLastValues  = {"Quantidade" : totalQuantity, "Valor" : formattedString((list[list.length-1]["VALOR"]))};
-            sumTable(listLastValues);
-            tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
-            if(size === totalReport) clearInterval(reportInterval);
-        }, 250);
+    for(var i =0;i<list.length;i++)
+    {
+        customer = list[i];
+        table.append('' +
+            '<tr><td >' + customer["NIF"] + '</td><td >' + customer["NAME"]+" "+customer["SURNAME"] + '</td>' +
+            '<td>'+customer["QUANTIDADE CREDITO"]+'</td><td>'+formattedString(customer["VALOR"])+'</td><td>'+customer["LOCAL TRABALHO"]+'</td></tr>');
+
+        totalQuantity  += Number(customer["QUANTIDADE CREDITO"]);
+        listLastValues  = {"Quantidade" : totalQuantity, "Valor" : formattedString((list[list.length-1]["VALOR"]))};
+        sumTable(listLastValues);
+        tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
+
     }
 }
 
@@ -263,9 +233,6 @@ function relatorioCheque(list) {
 function relatorioDividaProduto(list) {
 
     table.empty();
-    totalReport = list.length;
-    clearInterval(reportInterval);
-    size = 0;
     if(list.length >1){
         $("#iframe-" + $('aside li.active').index()).contents().find('.first-section h1:eq(0) span').text(formattedString(list[list.length-2]["CREDITO VALUE SOLICITADO"]));
         $("#iframe-" + $('aside li.active').index()).contents().find('.first-section h1:eq(1) span').text(formattedString(list[list.length-1]["CREDITO VALUE SOLICITADO"]));
@@ -277,74 +244,57 @@ function relatorioDividaProduto(list) {
         $("#iframe-" + $('aside li.active').index()).contents().find('.third-section h1:eq(1) span').text(formattedString(list[list.length-1]["CREDITO VALUE PAGO"]));
     }
 
-    if(totalReport>0)
+    for(var i =0;i<list.length;i++)
     {
-        reportInterval = setInterval(function () {
-            divida = list[i];
-            if(divida["NIF"].toUpperCase() !== "TOTAL"){
-                table.append('' +
-                    '<tr><td >' + divida["NIF"] + '</td><td >' + divida["NAME"]+" "+divida["SURNAME"] + '</td>' +
-                    '<td>'+formattedString(divida["CREDITO VALUE SOLICITADO"])+'</td><td>'+formattedString(divida["CREDITO TOTAL PAGAR MONTANTE"])+'</td>' +
-                    '<td>'+formattedString(divida["CREDITO VALUE PAGO"])+'</td></tr>');
-            }
-            tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
-            if(size === totalReport) clearInterval(reportInterval);
-        }, 250);
+        divida = list[i];
+        if(divida["NIF"].toUpperCase() !== "TOTAL"){
+            table.append('' +
+                '<tr><td >' + divida["NIF"] + '</td><td >' + divida["NAME"]+" "+divida["SURNAME"] + '</td>' +
+                '<td>'+formattedString(divida["CREDITO VALUE SOLICITADO"])+'</td><td>'+formattedString(divida["CREDITO TOTAL PAGAR MONTANTE"])+'</td>' +
+                '<td>'+formattedString(divida["CREDITO VALUE PAGO"])+'</td></tr>');
+        }
+        tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
     }
 }
 
 function relatorioChequeEstado(list) {
     table.empty();
-    totalReport = list.length-1;
-    clearInterval(reportInterval);
-    size = 0;
 
-    if(totalReport >0)
+    for(var i=0;i<list.length;i++)
     {
-        reportInterval = setInterval(function () {
-            cheque = list[size];
-            table.append('' +
-                '<tr><td></td><td ></td><td></td><td></td><td></td>' +
-                '<td>'+cheque["NIF"]+'</td><td>'+cheque["NAME"]+" "+cheque["SURNAME"]+'</td><td>'+cheque["PAGAMENTO NUM DOCUMENTO"]+'</td><td>'
-                +formattedString(cheque["VALOR CHEQUE REEMBOLSO"])+'</td><td>'+formatDate(cheque["DATA DOCUMENTO PAGAMENTO PREVISTO DEPOSITO"],2)+'' +
-                '</td><td>'+cheque["BANCO SIGLA"]+'</td><td>'+verifyEmpty(cheque["PAGAMENTO DATA ENDOSSADO"])+'</td></tr>');
+        cheque = list[i];
+        table.append('' +
+            '<tr><td></td><td ></td><td></td><td></td><td></td>' +
+            '<td>'+cheque["NIF"]+'</td><td>'+cheque["NAME"]+" "+cheque["SURNAME"]+'</td><td>'+cheque["PAGAMENTO NUM DOCUMENTO"]+'</td><td>'
+            +formattedString(cheque["VALOR CHEQUE REEMBOLSO"])+'</td><td>'+formatDate(cheque["DATA DOCUMENTO PAGAMENTO PREVISTO DEPOSITO"],2)+'' +
+            '</td><td>'+cheque["BANCO SIGLA"]+'</td><td>'+verifyEmpty(cheque["PAGAMENTO DATA ENDOSSADO"])+'</td></tr>');
 
-            size++;
-            tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
-            if(size === totalReport) clearInterval(reportInterval);
-        }, 250);
+        tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
     }
 }
 
 function reportCredit(list)
 {
     table.empty();
-    totalReport = list.length;
-    clearInterval(reportInterval);
-    size = 0;
 
-    if(totalReport >0)
+    for(var i= 0;i<list.length;i++)
     {
-        reportInterval = setInterval(function () {
-            credit = list[size];
-            if (credit["NIF"].toUpperCase() !== "TOTAL") {
-                date = formatDate(credit["DATA"], 1);
-                table.append('' +
-                    '<tr><td >' + credit["NUM CREDITO DOSSCIER"] + '</td><td >' + formatDate(credit["DATA"], 1) + '</td>' +
-                    '<td>' + credit["NIF"] + '</td><td>' + credit["NAME"] + " " + credit["SURNAME"] + '</td><td>' + formattedString(credit["VALOR CREDITO"]) + '</td>' +
-                    '<td>' + formattedString(credit["TOTAL PAGAR MONTANTE DIVIDA"]) + '</td><td>' + formattedString(credit["TAEG"]) + '</td>' +
-                    '<td>' + formatDate(credit["DATA INICIO"], 2) + '</td><td>' + formatDate(credit["DATA FINALIZAR"], 2) + '</td></tr>');
-                listLastValues = {
-                    "Valor Crédito": formattedString(list[list.length - 1]["VALOR CREDITO"]),
-                    "Montante Dívida": formattedString(list[list.length - 1]["TOTAL PAGAR MONTANTE DIVIDA"]),
-                    "TAEG": formattedString(list[list.length - 1]["TAEG"])
-                };
-                sumTable(listLastValues);
-            }
-            size++;
-            tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
-            if (size === totalReport) clearInterval(reportInterval);
-        }, 250);
+        credit = list[i];
+        if (credit["NIF"].toUpperCase() !== "TOTAL") {
+            date = formatDate(credit["DATA"], 1);
+            table.append('' +
+                '<tr><td >' + credit["NUM CREDITO DOSSCIER"] + '</td><td >' + formatDate(credit["DATA"], 1) + '</td>' +
+                '<td>' + credit["NIF"] + '</td><td>' + credit["NAME"] + " " + credit["SURNAME"] + '</td><td>' + formattedString(credit["VALOR CREDITO"]) + '</td>' +
+                '<td>' + formattedString(credit["TOTAL PAGAR MONTANTE DIVIDA"]) + '</td><td>' + formattedString(credit["TAEG"]) + '</td>' +
+                '<td>' + formatDate(credit["DATA INICIO"], 2) + '</td><td>' + formatDate(credit["DATA FINALIZAR"], 2) + '</td></tr>');
+            listLastValues = {
+                "Valor Crédito": formattedString(list[list.length - 1]["VALOR CREDITO"]),
+                "Montante Dívida": formattedString(list[list.length - 1]["TOTAL PAGAR MONTANTE DIVIDA"]),
+                "TAEG": formattedString(list[list.length - 1]["TAEG"])
+            };
+            sumTable(listLastValues);
+        }
+        tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
     }
 }
 
@@ -357,29 +307,22 @@ var ReportFiler = function (dataI, dataF, periodo) {
 function reportCobrancas(list) {
 
     table.empty();
-    totalReport = list.length;
-    clearInterval(reportInterval);
-    size = 0;
 
-    if(totalReport >0)
+    for(var i=0;i<list.length;i++)
     {
-        reportInterval = setInterval(function () {
-             cobranca = list[size];
-            if(cobranca["NIF"].toUpperCase() !=="TOTAL"){
-                table.append('' +
-                    '<tr><td >' + cobranca["NIF"] + '</td><td >' + cobranca["NAME"] + " " + cobranca["SURNAME"] + '</td>' +
-                    '<td>' + formattedString(cobranca["VALOR REEMBOLSO"]) + '</td><td>' + cobranca["NUM DOCUMENTO REAL"] + '</td>' +
-                    '<td>' + cobranca["NUM DOCUMENTO PREVISTO"] + '</td><td>' + formatDate(cobranca["DATA DOCUMENTO REAL"],2) + '</td>' +
-                    '<td>' + formatDate(cobranca["DATA DOCUMENTO PREVISTO"],2) + '</td></tr>');
-            }
-            size++;
-            listLastValues = {"Valor Reembolso em Relação ao Ano em Comparação" : formattedString(list[list.length-1]["VALOR REEMBOLSO"]),
-                "Valor Reembolso em Relação Ano Atual" : formattedString(list[list.length-2]["VALOR REEMBOLSO"])};
-            tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
-            sumTable(listLastValues);
+         cobranca = list[i];
+        if(cobranca["NIF"].toUpperCase() !=="TOTAL"){
+            table.append('' +
+                '<tr><td >' + cobranca["NIF"] + '</td><td >' + cobranca["NAME"] + " " + cobranca["SURNAME"] + '</td>' +
+                '<td>' + formattedString(cobranca["VALOR REEMBOLSO"]) + '</td><td>' + cobranca["NUM DOCUMENTO REAL"] + '</td>' +
+                '<td>' + cobranca["NUM DOCUMENTO PREVISTO"] + '</td><td>' + formatDate(cobranca["DATA DOCUMENTO REAL"],2) + '</td>' +
+                '<td>' + formatDate(cobranca["DATA DOCUMENTO PREVISTO"],2) + '</td></tr>');
+        }
+        listLastValues = {"Valor Reembolso em Relação ao Ano em Comparação" : formattedString(list[list.length-1]["VALOR REEMBOLSO"]),
+            "Valor Reembolso em Relação Ano Atual" : formattedString(list[list.length-2]["VALOR REEMBOLSO"])};
+        tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
+        sumTable(listLastValues);
 
-            if(size === totalReport) clearInterval(reportInterval);
-        }, 250);
     }
 }
 

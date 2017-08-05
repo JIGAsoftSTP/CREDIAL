@@ -13,15 +13,13 @@ class Session
 
     static function newSession($name,$object)
     {
-        if(session_status() != PHP_SESSION_ACTIVE)
-            session_start([
-                'cookie_lifetime' => (86400*5),
-            ]);
+        self::start_session();
         $_SESSION[$name]=$object;
     }
     
     static function sessionDestroy()
     {
+        self::start_session();
         session_destroy();
     }
     
@@ -35,10 +33,7 @@ class Session
      */
     static function getUserLogado()
     {
-        if(session_status() != PHP_SESSION_ACTIVE)
-            session_start([
-                'cookie_lifetime' => (86400*5),
-            ]);
+        self::start_session();
         if(isset($_SESSION[Session::USER]))
         {
             return $_SESSION[Session::USER];
@@ -50,10 +45,7 @@ class Session
      */
     static function getUserMenu()
     {
-        if(session_status() != PHP_SESSION_ACTIVE)
-            session_start([
-                'cookie_lifetime' => (86400*5),
-            ]);
+        self::start_session();
         if(isset($_SESSION[Session::MENU]))
            return $_SESSION[Session::MENU];
         else return null;
@@ -85,10 +77,17 @@ class Session
      */
     static function terminarSessao()
     {
-        session_start([
-            'cookie_lifetime' => (86400*5),
-        ]);
+        self::start_session();
         session_destroy();
+    }
+
+    public static function start_session()
+    {
+        if (session_status() != PHP_SESSION_ACTIVE) {
+            session_cache_limiter('private, must-revalidate');
+            session_cache_expire(-1);
+            session_start();
+        }
     }
     
 }

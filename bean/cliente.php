@@ -32,7 +32,7 @@ include "Session.php";
         $resut = array();
         $arrayList = str_split("*ABCDEFGHIJKLMNOPQRSTUVWXYZ");
         while ( $valor = $call->getValors()){
-            $letra = $valor["NAME"];
+            $letra = trim($valor["NAME"]);
             $letra = str_split(strtoupper(str_replace(" ", "", $letra)));
             $letra = $letra[0];
             $cont = is_numeric(array_search($letra, $arrayList))
