@@ -43,6 +43,9 @@ var si = new Simulation();
 var banks = undefined;
 $("#cred-simula-import").click(function () {
    var creditoRegisto;
+
+    $("#cred-simula-import").hide();
+
     $.ajax({
         url: "./bean/simulation.php",
         type: "POST",
@@ -51,7 +54,9 @@ $("#cred-simula-import").click(function () {
         success: function (e) {
             if (!e.result) {  callXpertAlert(e.return["MESSAGE"], new Mensage().cross, -1); }
             else {
-
+                setTimeout(function () {
+                    $("#cred-simula-import").show();
+                }, 10000);
                 creditoRegisto = {
                     "NIF Cliente" :  si.nifClient,
                     "Nome Cliente" : $('#cred-cli-comName').text(),
@@ -359,6 +364,7 @@ function loadChequeSimulacao() {
 
 $("#import-simulation").click(function () {
     if (containMenu("cre.regCre")) {
+        $("#cred-simula-import").show();
         if (hasNif() && validarSimulacao($("#cred-form-cli input, #cred-form-cli select")) && checkIsValid() && testTableAmortizacao() && testlistDocGar()) {
             si.numeroCheque = $("#cred-cli-numDoc-veiw").html() + $("#cred-cli-numDoc").val();
             si.idBank = $("#cred-cli-bank").attr("newid");
