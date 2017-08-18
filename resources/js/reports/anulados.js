@@ -131,6 +131,7 @@ function loadDataToPage() {
         dataType: "json",
         success: function (e) {
             anulados.data = e.credits;
+            sessionStorage.dataExport = e.credits;
             anulados.last_add = 0;
         }, beforeSend: function () {  $(".mp-loading").fadeIn(); },
         complete: function () { $(".mp-loading").fadeOut();

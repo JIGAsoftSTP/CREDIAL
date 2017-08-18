@@ -190,6 +190,7 @@ function reportChequeDistribuido(list) {
 
                     dataExport.data = e.result;
                     dataExport.type = activeReport;
+                    sessionStorage.dataExport = JSON.stringify(dataExport);
                 }
             });
     }
@@ -414,7 +415,7 @@ $(".icon-file-excel").click(function () {
         $.ajax({
             url: "./bean/ExportReport.php",
             type: "POST",
-            data: {"intensao": "exportExcel", report: dataExport},
+            data: {"intensao": "exportExcel", report: JSON.parse(sessionStorage.dataExport)},
             dataType: "json",
             success: function (e) {
                 open(e.fileName);
@@ -433,7 +434,7 @@ $(".icon-file-pdf").click(function () {
         $.ajax({
             url: "./bean/ExportReport.php",
             type: "POST",
-            data: {"intensao": "exportPDF", report: dataExport},
+            data: {"intensao": "exportPDF", report: JSON.parse(sessionStorage.dataExport)},
             dataType: "json",
             success: function (e) {
                 open(e.fileName);

@@ -151,6 +151,7 @@ class ExportExcel
         $excel->getActiveSheet()->setTitle($this->name);
 
         $excel->getActiveSheet()->getColumnDimension("A")->setAutoSize(true);
+        $excel->getActiveSheet()->getRowDimension(1)->setRowHeight(35);
 
         $excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true)->setSize(30);
         $excel->getActiveSheet()->getStyle('A2')->getFont()->setBold(true)->setSize(13);
@@ -167,10 +168,19 @@ class ExportExcel
         $excel->getActiveSheet()->mergeCells("A3:E3");
         $excel->getActiveSheet()->mergeCells("A4:E4");
 
+        $arrayBorder = array('borders' => [
+            "allborders" =>  [
+                'style' => PHPExcel_Style_Border::BORDER_THIN,
+                'color' => array('rgb' => 'FFFFFF')
+            ],
+            "outline" =>  ['style' => PHPExcel_Style_Border::BORDER_MEDIUMDASHED]
+        ]);
+        $excel->getActiveSheet()->getStyle("A1:E4")->applyFromArray($arrayBorder);
+
         $excel->getActiveSheet()->setCellValue("A1", $enterprise->name);
-        $excel->getActiveSheet()->setCellValue("A2", $enterprise->nif);
-        $excel->getActiveSheet()->setCellValue("A3", $enterprise->telefone);
-        $excel->getActiveSheet()->setCellValue("A4", $enterprise->mail);
+        $excel->getActiveSheet()->setCellValue("A2", "NIF ".$enterprise->nif);
+        $excel->getActiveSheet()->setCellValue("A3", "Tef".$enterprise->telefone);
+        $excel->getActiveSheet()->setCellValue("A4", "Email ".$enterprise->mail);
 
         $this->row = 6;
 
@@ -187,6 +197,13 @@ class ExportExcel
                 $value = $this->listKey[$if];
                 $excel->getActiveSheet()->getStyle($key)->getFont()->setBold(true);
                 $excel->getActiveSheet()->setCellValue($key, $this->paramHasRename($this->getJoinTitle($value)));
+                $excel->getActiveSheet()
+                    ->getStyle($key)
+                    ->getAlignment()
+                    ->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+                $arrayBorder = array('borders' => array("allborders" => array('style' => PHPExcel_Style_Border::BORDER_MEDIUM)));
+                $excel->getActiveSheet()->getStyle($key)->applyFromArray($arrayBorder);
+                $excel->getActiveSheet()->getRowDimension($this->row)->setRowHeight(25);
                 $add++;
             }
         }
@@ -201,6 +218,9 @@ class ExportExcel
                     $value = $this->joinParam($this->listKey[$if], $lineReport);
                     $excel->getActiveSheet()->setCellValue($key, $value);
                     $excel->getActiveSheet()->getColumnDimension($letra)->setAutoSize(true);
+                    $arrayBorder = array('borders' => array("allborders" => array('style' => PHPExcel_Style_Border::BORDER_THIN)));
+                    $excel->getActiveSheet()->getStyle($key)->applyFromArray($arrayBorder);
+                    $excel->getActiveSheet()->getRowDimension($this->row)->setRowHeight(20);
                     $add++;
                 }
                 $this->someParam($this->listKey[$if], $lineReport);
@@ -218,6 +238,9 @@ class ExportExcel
                 $excel->getActiveSheet()->getColumnDimension($letra)->setAutoSize(true);
                 $excel->getActiveSheet()->getStyle($key)->getFont()->setBold(true);
                 $excel->getActiveSheet()->getStyle($key)->getFont()->getColor()->setRGB("e78f08");
+                $arrayBorder = array('borders' => array("allborders" => array('style' => PHPExcel_Style_Border::BORDER_MEDIUM)));
+                $excel->getActiveSheet()->getStyle($key)->applyFromArray($arrayBorder);
+                $excel->getActiveSheet()->getRowDimension($this->row)->setRowHeight(20);
                 $add++;
             }
         }

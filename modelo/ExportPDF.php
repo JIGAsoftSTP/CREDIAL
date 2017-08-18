@@ -203,15 +203,17 @@ class ExportPDF{
                 font-size: 1.5rem;
             }
             table{
-                border : 0.3px solid #555555 !important;
+                border : 1px solid #555555;
             }
             tr th{
                 font-size: 14px;
-                border : 0.2px solid !important;
+                border : 1px solid;
+                padding: 5px;
             }
             tr td{
-                font-size: 11.9px;
-                border : 0.01px solid !important;
+                font-size: 12px;
+                border : 1px solid;
+                padding: 5px;
             }
             table label{
                 margin: 0.5rem;
