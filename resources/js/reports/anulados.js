@@ -120,8 +120,20 @@ var Information = function () {
     this.value = undefined;
 };
 
+
+var ExportData = function () {
+    this.type = undefined;
+    this.name = undefined;
+    this.data = undefined;
+
+    this.haveData = function () {
+        return (this.data !== undefined || $.isArray(this.data));
+    };
+};
+
 var creditBluider = new CreditoBluiderAnulados();
 
+var dataExport = new ExportData();
 
 function loadDataToPage() {
     $.ajax({
@@ -131,7 +143,10 @@ function loadDataToPage() {
         dataType: "json",
         success: function (e) {
             anulados.data = e.credits;
-            sessionStorage.dataExport = e.credits;
+            dataExport.data = anulados.data;
+            dataExport.type = "rep.cred_anulado";
+            dataExport.name = "Creditos Anulados";
+            sessionStorage.dataExport = JSON.stringify(dataExport);
             anulados.last_add = 0;
         }, beforeSend: function () {  $(".mp-loading").fadeIn(); },
         complete: function () { $(".mp-loading").fadeOut();

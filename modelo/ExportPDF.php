@@ -15,6 +15,11 @@ class ExportPDF{
     private $name;
 
     /**
+     * @var bool
+     */
+    private $hideOther;
+
+    /**
      * @var string
      */
     private $user;
@@ -61,6 +66,17 @@ class ExportPDF{
     public function setName($name)
     {
         $this->name = $name;
+        return $this;
+    }
+
+
+    /**
+     * @param bool $hideOther
+     * @return ExportPDF
+     */
+    public function setHideOther(bool $hideOther): ExportPDF
+    {
+        $this->hideOther = $hideOther;
         return $this;
     }
 
@@ -285,7 +301,7 @@ class ExportPDF{
                     return $pmKey;
             }
         }
-        return ExportExcel::SHOW;
+        return ((!$this->hideOther) ?  ExportPDF::SHOW : ExportPDF::HIDE);
     }
 
     private function someParam(string $param, array $data)
