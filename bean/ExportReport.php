@@ -16,7 +16,7 @@ if ($_POST["intensao"] == "exportExcel") {
 
 function exportExcel()
 {
-    $data = $_POST["report"];
+    $data = json_decode($_POST["report"], JSON_OBJECT_AS_ARRAY);
     $export = new ExportExcel();
     if ($data["type"] == "rep.cliente") {
         $export->setUser(Session::getUserLogado()->getNome() . " " . Session::getUserLogado()->getApelido())
@@ -121,7 +121,7 @@ function exportExcel()
 }
 
 function exportPDF() {
-    $data = $_POST["report"];
+    $data = json_decode($_POST["report"], JSON_OBJECT_AS_ARRAY);
     $export = new ExportPDF();
     if ($data["type"] == "rep.cliente") {
         $export->setUser(Session::getUserLogado()->getNome() . " " . Session::getUserLogado()->getApelido())

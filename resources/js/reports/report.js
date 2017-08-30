@@ -405,10 +405,15 @@ function sumTable(array){
 
 $(".icon-file-excel").click(function () {
     if(dataExport.haveData()) {
+        var fd = new FormData();
+        fd.append("intensao", "exportExcel");
+        fd.append("report", sessionStorage.dataExport);
         $.ajax({
             url: "./bean/ExportReport.php",
             type: "POST",
-            data: {"intensao": "exportExcel", report: JSON.parse(sessionStorage.dataExport)},
+            processData: false,
+            contentType: false,
+            data: fd,
             dataType: "json",
             success: function (e) {
                 open(e.fileName);
@@ -424,10 +429,15 @@ $(".icon-file-excel").click(function () {
 
 $(".icon-file-pdf").click(function () {
     if(dataExport.haveData()) {
+        var fd = new FormData();
+        fd.append("intensao", "exportPDF");
+        fd.append("report", sessionStorage.dataExport);
         $.ajax({
             url: "./bean/ExportReport.php",
             type: "POST",
-            data: {"intensao": "exportPDF", report: JSON.parse(sessionStorage.dataExport)},
+            processData: false,
+            contentType: false,
+            data: fd,
             dataType: "json",
             success: function (e) {
                 open(e.fileName);
