@@ -3,6 +3,7 @@ $('aside .single').on('click','li',function(event) {
 	$('.title-report').text($(this).text());
 	CtrlMenu($(this), $('.report-content'));
     reset();
+
     $.ajax({
         url: "bean/relatorio.php",
         type:"POST",
@@ -24,15 +25,10 @@ $('aside .single').on('click','li',function(event) {
                 data();
                 if( $('#secondary-menu li.active').attr('id') === TypeReport.CHEQUE)
                     $("#iframe-" + $('aside li.active').index()).contents().find(".filter-type-cheq li.active").trigger("click");
-
 		},
-		error:function (e) {
-			console.info(e);
-        }
-
     });
     header = $('.header-report');
-    $(this).attr('id') == 'rel.acti' ? header.hide(200) : header.show(200);
+    $(this).attr('id') === 'rel.acti' ? header.hide(200) : header.show(200);
 });
 
 var typeReport = undefined;
@@ -66,7 +62,8 @@ $('.filter-added').on('click','.xClose',function(event) {
 	Ipt = $(this).parent().find('input');
 	myIdent = Ipt.attr('identifier');
   	myValue = "";
-  	deleteContentDataStorage(sessionStorage, 'filterReport',myIdent);
+
+  	sessionStorage.filterReport = null;
 	$(this).closest('section').remove();
 });
 
