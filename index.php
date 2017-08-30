@@ -1,6 +1,7 @@
 <?php
 function hasSession()
 {
+    header('Access-Control-Allow-Origin: *');
     include "modelo/User.php";
     include "bean/Session.php";
     $user = Session::getUserLogado()->getId();
