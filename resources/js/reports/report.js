@@ -18,18 +18,15 @@ var chequeFiltro = 1;
 var listLastValues = {};
 var listReportData = [];
 var size = 0;
-var totalReport = 0;
-var reportInterval = undefined;
 var customer,growth, credit,
     date, cobranca, taeg, divida,
     cheque;
-var table, structureTable;
+var table;
 
 $(function () {
     sessionStorage.removeItem('filterReport');
 
     $('.x-icon-ok').click(function() {
-
          if( $('#secondary-menu li.active').attr('id') !== "rep.gara") // se o relatorio não for de garrantia os dados para base de dados
             sendFilterReport();
          else if($('#secondary-menu li.active').attr('id') === "rep.gara")
@@ -62,11 +59,11 @@ function sendFilterReport() {
 
 function reportGrowth(list)
 {
-    table.empty();
-    for(var i = 0;i<list.length;i++ )
+    $("#iframe-" + $('aside li.active').index()).contents().find('table tbody').empty();
+    for(var i = 0;i<list.length-1;i++ )
     {
          growth = list[i];
-        table.append('' +
+        $("#iframe-" + $('aside li.active').index()).contents().find('table tbody').append('' +
             '<tr><td >' + growth["NIF"] + '</td><td >' + growth["CLIENT NAME"]+" "+growth["CLIENT SURNAME"] + '</td>' +
             '<td>'+growth["LOCALIDADE"]+'</td><td>'+growth["QUANTIDADE ANO"]+'</td>' +
             '<td>'+growth["QUANTIDADE PASSADO"]+'</td>' +
@@ -85,7 +82,7 @@ function reportGrowth(list)
 // relatorio TAEG
 function reportTaeg(list)
 {
-    table.empty();
+    $("#iframe-" + $('aside li.active').index()).contents().find('table tbody').empty();
     if(list.length >0){
         $("#iframe-" + $('aside li.active').index()).contents().find('.first-section h1:eq(0) span').text(formattedString(list[list.length-2]["CREDITO VALUE"]));
         $("#iframe-" + $('aside li.active').index()).contents().find('.first-section h1:eq(1) span').text(formattedString(list[list.length-1]["CREDITO VALUE"]));
@@ -102,7 +99,7 @@ function reportTaeg(list)
     {
          taeg = list[i];
         if(taeg["NIF"].toUpperCase() !=="TOTAL"){
-            table.append('' +
+            $("#iframe-" + $('aside li.active').index()).contents().find('table tbody').append('' +
                 '<tr><td >' + taeg["CREDITO NUM DOSSCIER"] + '</td><td >' + taeg["NIF"]+'</td>' +
                 '<td>'+taeg["NAME"]+" "+taeg["SURNAME"]+'</td><td>'+formattedString(taeg["CREDITO VALUE"])+'</td>' +
                 '<td>'+formattedString(taeg["CREDITO TOTAL PAGAR MONTANTE DIVIDA"])+'</td>' +
@@ -111,17 +108,16 @@ function reportTaeg(list)
         }
         tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
     }
-
 }
 
 
 function reportChequeDistribuido(list) {
-    table.empty();
+    $("#iframe-" + $('aside li.active').index()).contents().find('table tbody').empty();
 
     for(var i =0;i<list.length;i++)
     {
          cheque = list[i];
-        table.append('' +
+        $("#iframe-" + $('aside li.active').index()).contents().find('table tbody').append('' +
             '<tr><td >' + formatDate(cheque["DATA"],2) + '</td><td >' + formattedString(cheque["DEBITO"])+'</td>' +
             '<td>'+formattedString(cheque["CREDITO"])+'</td><td>'+cheque["BANCO SIGLA"]+"-"+cheque["BANCO NAME"]+'</td>' +
             '<td>'+cheque["AGENCIA"]+'</td></tr>');
@@ -133,10 +129,8 @@ function reportChequeDistribuido(list) {
     function dataReport(sub)
     {
          var dados;
-         table =  $("#iframe-" + $('aside li.active').index()).contents().find('table').find('tbody');
-         structureTable = $("#iframe-" + $('aside li.active').index()).contents().find('table');
-
          var activeReport = $('#secondary-menu li.active').attr('id');
+
          if(sub === 0)
             var reportFilter = new ReportFiler($("#report-inicial-date").val(), $("#report-final-date").val(), null);
         else
@@ -174,36 +168,36 @@ function reportChequeDistribuido(list) {
             beforeSend: function () { $("#iframe-" + $('aside li.active').index()).contents().find(".mp-loading").fadeIn(); },
             complete: function () {
                 $("#iframe-" + $('aside li.active').index()).contents().find(".mp-loading").fadeOut();},
-                error:function (e) {
-                    console.info(e);
-                },
-                success:function (e) {
-                    regUserActivity("bean/activity.php", -1, "Visualizou dados do Relatório de "+$('.title-report').text(),
-                        -1, LevelActivity.VISUALIZACAO);
-                    if(activeReport === TypeReport.CLIENTES) reportCustomer(e.result);
-                    else if(activeReport === TypeReport.CRESCIMENTO_HOMOLOGO) reportGrowth(e.result);
-                    else if(activeReport === TypeReport.CREDITO_CONCEDIDO) reportCredit(e.result);
-                    else if(activeReport === TypeReport.COBRANCA) reportCobrancas(e.result);
-                    else if(activeReport === TypeReport.CAPITAL_TAEG) reportTaeg(e.result);
-                    else if(activeReport === TypeReport.DIVIDA_PRODUTO) relatorioDividaProduto(e.result);
-                    else relatorioCheque(e.result);
+            success:function (e) {
+                regUserActivity("bean/activity.php", -1, "Visualizou dados do Relatório de "+$('.title-report').text(),
+                    -1, LevelActivity.VISUALIZACAO);
+                listReportData = [];
+                listReportData = e.result;
+                if(activeReport === TypeReport.CLIENTES) reportCustomer(e.result);
+                else if(activeReport === TypeReport.CRESCIMENTO_HOMOLOGO) reportGrowth(e.result);
+                else if(activeReport === TypeReport.CREDITO_CONCEDIDO) reportCredit(e.result);
+                else if(activeReport === TypeReport.COBRANCA) reportCobrancas(e.result);
+                else if(activeReport === TypeReport.CAPITAL_TAEG) reportTaeg(e.result);
+                else if(activeReport === TypeReport.DIVIDA_PRODUTO) relatorioDividaProduto(e.result);
+                else relatorioCheque(e.result);
 
-                    dataExport.data = e.result;
-                    dataExport.type = activeReport;
-                    sessionStorage.dataExport = JSON.stringify(dataExport);
-                }
-            });
+                dataExport.data = e.result;
+                dataExport.type = activeReport;
+                sessionStorage.dataExport = JSON.stringify(dataExport);
+            }
+        });
     }
 
 function reportCustomer(list)
 {
     var totalQuantity = 0;
-    $("#iframe-" + $('aside li.active').index()).contents().find('table').find('tbody').empty();
+    $("#iframe-" + $('aside li.active').index()).contents().find('table tbody').empty();
 
-    for(var i =0;i<list.length;i++)
+    for(var i =0;i<list.length-1;i++)
     {
         customer = list[i];
-        table.append('' +
+
+        $("#iframe-" + $('aside li.active').index()).contents().find('table tbody').append('' +
             '<tr><td >' + customer["NIF"] + '</td><td >' + customer["NAME"]+" "+customer["SURNAME"] + '</td>' +
             '<td>'+customer["QUANTIDADE CREDITO"]+'</td><td>'+formattedString(customer["VALOR"])+'</td><td>'+customer["LOCAL TRABALHO"]+'</td></tr>');
 
@@ -211,7 +205,6 @@ function reportCustomer(list)
         listLastValues  = {"Quantidade" : totalQuantity, "Valor" : formattedString((list[list.length-1]["VALOR"]))};
         sumTable(listLastValues);
         tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
-
     }
 }
 
@@ -233,7 +226,7 @@ function relatorioCheque(list) {
 
 function relatorioDividaProduto(list) {
 
-    table.empty();
+    $("#iframe-" + $('aside li.active').index()).contents().find('table tbody').empty();
     if(list.length >1){
         $("#iframe-" + $('aside li.active').index()).contents().find('.first-section h1:eq(0) span').text(formattedString(list[list.length-2]["CREDITO VALUE SOLICITADO"]));
         $("#iframe-" + $('aside li.active').index()).contents().find('.first-section h1:eq(1) span').text(formattedString(list[list.length-1]["CREDITO VALUE SOLICITADO"]));
@@ -249,7 +242,7 @@ function relatorioDividaProduto(list) {
     {
         divida = list[i];
         if(divida["NIF"].toUpperCase() !== "TOTAL"){
-            table.append('' +
+            $("#iframe-" + $('aside li.active').index()).contents().find('table tbody').append('' +
                 '<tr><td >' + divida["NIF"] + '</td><td >' + divida["NAME"]+" "+divida["SURNAME"] + '</td>' +
                 '<td>'+formattedString(divida["CREDITO VALUE SOLICITADO"])+'</td><td>'+formattedString(divida["CREDITO TOTAL PAGAR MONTANTE"])+'</td>' +
                 '<td>'+formattedString(divida["CREDITO VALUE PAGO"])+'</td></tr>');
@@ -259,12 +252,12 @@ function relatorioDividaProduto(list) {
 }
 
 function relatorioChequeEstado(list) {
-    table.empty();
+    $("#iframe-" + $('aside li.active').index()).contents().find('table tbody').empty();
 
     for(var i=0;i<list.length;i++)
     {
         cheque = list[i];
-        table.append('' +
+        $("#iframe-" + $('aside li.active').index()).contents().find('table tbody').append('' +
             '<tr><td></td><td ></td><td></td><td></td><td></td>' +
             '<td>'+cheque["NIF"]+'</td><td>'+cheque["NAME"]+" "+cheque["SURNAME"]+'</td><td>'+cheque["PAGAMENTO NUM DOCUMENTO"]+'</td><td>'
             +formattedString(cheque["VALOR CHEQUE REEMBOLSO"])+'</td><td>'+formatDate(cheque["DATA DOCUMENTO PAGAMENTO PREVISTO DEPOSITO"],2)+'' +
@@ -276,14 +269,14 @@ function relatorioChequeEstado(list) {
 
 function reportCredit(list)
 {
-    table.empty();
+    $("#iframe-" + $('aside li.active').index()).contents().find('table tbody').empty();
 
     for(var i= 0;i<list.length;i++)
     {
         credit = list[i];
         if (credit["NIF"].toUpperCase() !== "TOTAL") {
             date = formatDate(credit["DATA"], 1);
-            table.append('' +
+            $("#iframe-" + $('aside li.active').index()).contents().find('table tbody').append('' +
                 '<tr><td >' + credit["NUM CREDITO DOSSCIER"] + '</td><td >' + formatDate(credit["DATA"], 1) + '</td>' +
                 '<td>' + credit["NIF"] + '</td><td>' + credit["NAME"] + " " + credit["SURNAME"] + '</td><td>' + formattedString(credit["VALOR CREDITO"]) + '</td>' +
                 '<td>' + formattedString(credit["TOTAL PAGAR MONTANTE DIVIDA"]) + '</td><td>' + formattedString(credit["TAEG"]) + '</td>' +
@@ -307,13 +300,13 @@ var ReportFiler = function (dataI, dataF, periodo) {
 
 function reportCobrancas(list) {
 
-    table.empty();
+    $("#iframe-" + $('aside li.active').index()).contents().find('table tbody').empty();
 
     for(var i=0;i<list.length;i++)
     {
          cobranca = list[i];
         if(cobranca["NIF"].toUpperCase() !=="TOTAL"){
-            table.append('' +
+            $("#iframe-" + $('aside li.active').index()).contents().find('table tbody').append('' +
                 '<tr><td >' + cobranca["NIF"] + '</td><td >' + cobranca["NAME"] + " " + cobranca["SURNAME"] + '</td>' +
                 '<td>' + formattedString(cobranca["VALOR REEMBOLSO"]) + '</td><td>' + cobranca["NUM DOCUMENTO REAL"] + '</td>' +
                 '<td>' + cobranca["NUM DOCUMENTO PREVISTO"] + '</td><td>' + formatDate(cobranca["DATA DOCUMENTO REAL"],2) + '</td>' +
