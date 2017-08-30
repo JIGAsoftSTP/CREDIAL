@@ -17,6 +17,11 @@ class ExportExcel
     private $name;
 
     /**
+     * @var bool
+     */
+    private $hideOther = false;
+
+    /**
      * @var string
      */
     private $user;
@@ -68,6 +73,16 @@ class ExportExcel
     public function setName($name)
     {
         $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * @param bool $hideOther
+     * @return ExportExcel
+     */
+    public function setHideOther(bool $hideOther): ExportExcel
+    {
+        $this->hideOther = $hideOther;
         return $this;
     }
 
@@ -207,6 +222,7 @@ class ExportExcel
             }
         }
 
+        $excel->getActiveSheet()->freezePane('A7');
         $this->row++;
         $add = 0;
         foreach ($this->data as $lineReport) {
@@ -325,7 +341,7 @@ class ExportExcel
                     return $pmKey;
             }
         }
-        return ExportExcel::SHOW;
+        return ((!$this->hideOther) ?  ExportExcel::SHOW : ExportExcel::HIDE);
     }
 
     private function someParam(string $param, array $data)

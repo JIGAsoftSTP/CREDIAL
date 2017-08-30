@@ -22,7 +22,7 @@ input::-webkit-calendar-picker-indicator {
 }
 
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 0.18rem;
 }
  
 ::-webkit-scrollbar-track {

@@ -103,6 +103,21 @@ function exportExcel()
             ->setName($data["name"])
             ->export($data["data"]);
     }
+    else if($data["type"] == "rep.cred_anulado"){
+        $export->setUser(Session::getUserLogado()->getNome() . " " . Session::getUserLogado()->getApelido())
+            ->setJoinParam("USER", "useranulaname", "useranulasurname")
+            ->setJoinParam("CLIENTE", "clientname", "clientsurname")
+            ->setListParamSome("creditovalor", "creditoprestacaoe")
+            ->setListRename("clientnif","CLIENTE NIF" )
+            ->setListRename("creditovalor","VALOR CREDITO")
+            ->setListRename("creditoprestacaoe","Nº PRESTAÇAO")
+            ->setListRename( "anulaobs","JUSTIFICAÇAO")
+            ->setListRename("anuladatanulacao","DT ANULAÇAO")
+            ->setHideOther(true)
+            ->setListParam(ExportExcel::SHOW, "useranulaname", "clientname", "anuladatanulacao", "anulaobs", "creditoprestacaoe", "clientnif", "creditovalor")
+            ->setName($data["name"])
+            ->export($data["data"]);
+    }
 }
 
 function exportPDF() {
@@ -181,7 +196,7 @@ function exportPDF() {
             ->setName($data["name"])
             ->export($data["data"]);
     }
-    else if($data["type"] == "rep.cheques"){///
+    else if($data["type"] == "rep.cheques"){
         $export->setUser(Session::getUserLogado()->getNome() . " " . Session::getUserLogado()->getApelido())
 //            ->setJoinParam("CLIENTE", "NAME", "SURNAME")
 //            ->setListParamSome("VALOR REEMBOLSO")
@@ -190,6 +205,21 @@ function exportPDF() {
 //            ->setListRename("DATA DOCUMENTO REAL", "DATA REAL")
 //            ->setListRename("DATA DOCUMENTO PREVISTO", "DATA PREVISTA")
 //            ->setListParam(ExportExcel::HIDE,"SURNAME", "ID" )
+            ->setName($data["name"])
+            ->export($data["data"]);
+    }
+    else if($data["type"] == "rep.cred_anulado") {
+        $export->setUser(Session::getUserLogado()->getNome() . " " . Session::getUserLogado()->getApelido())
+            ->setJoinParam("USER", "useranulaname", "useranulasurname")
+            ->setJoinParam("CLIENTE", "clientname", "clientsurname")
+            ->setListParamSome("creditovalor", "creditoprestacaoe")
+            ->setListRename("clientnif", "CLIENTE NIF")
+            ->setListRename("creditovalor", "VALOR CREDITO")
+            ->setListRename("creditoprestacaoe", "Nº PRESTAÇAO")
+            ->setListRename("anulaobs", "JUSTIFICAÇAO")
+            ->setListRename("anuladatanulacao", "DT ANULAÇAO")
+            ->setHideOther(true)
+            ->setListParam(ExportExcel::SHOW, "useranulaname", "clientname", "anuladatanulacao", "anulaobs", "creditoprestacaoe", "clientnif", "creditovalor")
             ->setName($data["name"])
             ->export($data["data"]);
     }

@@ -35,4 +35,5 @@
 <script type="text/javascript" src="resources/js/admin.js"></script>
 <!--<script type="text/javascript" src="resources/js/controller/user.js"></script>-->
 <!--<script type="text/javascript" src="resources/js/controller/Administracao.js"></script>-->
+<script type="text/javascript" src="resources/fw/firebase/firebase.js"></script>
 </html>

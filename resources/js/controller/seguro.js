@@ -55,11 +55,6 @@ function loadInsurance() {
                 var row = table.insertRow(table.childElementCount);
                 var insurance = e.result[i];
                 row.id = i;
-
-                row.onclick = function () {
-                    (this).addClass('selected') .siblings().removeClass('selected');
-                };
-
                 var column0 = row.insertCell(0);
                 var column1 = row.insertCell(1);
 

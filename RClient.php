@@ -524,4 +524,5 @@
 	<script type="text/javascript" src="resources/js/controller/gestClient.js"></script>
 	<script type="text/javascript" src="resources/js/controller/simulacao.js"></script>
 	<script type="text/javascript" src="resources/js/controller/prestacaoBluider.js"></script>
+    <script type="text/javascript" src="resources/fw/firebase/firebase.js"></script>
 	</html>

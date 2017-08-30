@@ -64,4 +64,6 @@ hasSession();
 <script type="text/javascript" src="resources/js/index.js"></script>
 <script type="text/javascript" src="resources/js/controller/geral.js"></script>
 <script type="text/javascript" src="resources/js/controller/logar.js"></script>
+<script type="text/javascript" src="resources/fw/firebase/firebase.js"></script>
+<script type="text/javascript" src="resources/js/controller/g-firebase.js"></script>
 </html>
