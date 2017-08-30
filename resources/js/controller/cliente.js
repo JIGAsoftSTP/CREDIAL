@@ -363,20 +363,20 @@ $("#table-client").on("dblclick","tr", function () {
 
 function getDadosCliente() {
 
-    $("#cli-dataNasc").val(clienteData["DATA NASCIMENTO"]).attr("disabled",true);
-    $("#cli-ar-ano").val((clienteData["TRADOSSIER ANO"] !== null) ? clienteData["TRADOSSIER ANO"] : "0").attr("disabled",true);
-    $("#cli-ar-mes").val((clienteData["TRADOSSIER MES"] !== null) ? clienteData["TRADOSSIER MES"] : "0").attr("disabled",true);
-    $("#cli-ar-let").val((clienteData["TRADOSSIER LETRA"] !== null) ? clienteData["TRADOSSIER LETRA"] : "0").attr("disabled",true);
-    $("#cli-local").val((clienteData["LOCALIDADE ID"] !== null) ? clienteData["LOCALIDADE ID"] : "0").attr("disabled",true);
-    $("#cli-ar-capa").val(clienteData["TRADOSSIER NUMERO DE CAPA"]).attr("disabled",true);
+    $("#cli-dataNasc ").val(clienteData["DATA NASCIMENTO"]).attr("disabled",true);
+    $("#cli-ar-ano ").val((clienteData["TRADOSSIER ANO"] !== null) ? clienteData["TRADOSSIER ANO"] : "0").attr("disabled",true);
+    $("#cli-ar-mes ").val((clienteData["TRADOSSIER MES"] !== null) ? clienteData["TRADOSSIER MES"] : "0").attr("disabled",true);
+    $("#cli-ar-let ").val((clienteData["TRADOSSIER LETRA"] !== null) ? clienteData["TRADOSSIER LETRA"] : "0").attr("disabled",true);
+    $("#cli-local ").val((clienteData["LOCALIDADE ID"] !== null) ? clienteData["LOCALIDADE ID"] : "0").attr("disabled",true);
+    $("#cli-ar-capa ").val(clienteData["TRADOSSIER NUMERO DE CAPA"]).attr("disabled",true);
 
-    if(clienteData["TRADOSSIER ANO"] === null){ $("#cli-ar-ano").removeAttr("disabled"); }
+    if(clienteData["TRADOSSIER ANO"] === null || $(" #cli-ar-ano").val() === null ){ $("#cli-ar-ano").removeAttr("disabled"); }
 
     if(clienteData["DATA NASCIMENTO"] === null){ $("#cli-dataNasc").removeAttr("disabled"); }
 
-    if(clienteData["TRADOSSIER MES"] === null){ $("#cli-ar-mes").removeAttr("disabled"); }
+    if(clienteData["TRADOSSIER MES"] === null || $(" #cli-ar-mes").val() === null ){ $("#cli-ar-mes").removeAttr("disabled"); }
 
-    if(clienteData["TRADOSSIER LETRA"] === null){ $("#cli-ar-let").removeAttr("disabled"); }
+    if(clienteData["TRADOSSIER LETRA"] === null || $(" #cli-ar-let").val() === null ){ $("#cli-ar-let").removeAttr("disabled"); }
 
     if(clienteData["LOCALIDADE ID"] === null){ $("#cli-local").removeAttr("disabled"); }
 
@@ -400,9 +400,9 @@ function getDadosCliente() {
     $("#cli-cont-tels").val(clienteData["TELE SERVICO"]);
     $("#cli-email").val(clienteData["MAIL"]);
 
-    if(valorEstaNoArray(clienteData["TRADOSSIER LETRA"], addLETRAS())){  $("#cli-ar-let").val("0") }
+    /*if(valorEstaNoArray(clienteData["TRADOSSIER LETRA"], addLETRAS())){  $("#cli-ar-let").val("0") }
 
-    if(valorEstaNoArray(clienteData["TRADOSSIER MES"], addMES())){ $("#cli-ar-mes").val("0")  }
+    if(valorEstaNoArray(clienteData["TRADOSSIER MES"], addMES())){ $("#cli-ar-mes").val("0")  }*/
 
     isNull($(".add-new-form select"));
 }
