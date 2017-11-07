@@ -18,7 +18,7 @@ $(function () {
     loadOutherData();
     /*$("#cli-dataNasc").mask("99-99-9999");*/
 
-    $("#span-type-search-client i").click(function () {
+    $("#span-type-search-client").find("i").click(function () {
        typeSearch = $(this).attr("title");
     });
 
@@ -61,7 +61,7 @@ function listarCliente() {
     });
 }
 $("#tableCliente").scroll(function () {
-        if($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
+        if(Math.round($(this).scrollTop() + $(this).innerHeight()) >= $(this)[0].scrollHeight) {
             carregarCliente(false, functionSearch);
         }
 });
