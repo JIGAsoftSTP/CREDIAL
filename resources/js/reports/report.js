@@ -73,10 +73,8 @@ function reportGrowth(list)
             "Crescimento" : list[list.length-1]["DIFERENCA"]};
 
         sumTable(listLastValues);
-        tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
     }
-
-
+    tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
 }
 
 // relatorio TAEG
@@ -106,8 +104,8 @@ function reportTaeg(list)
                 '<td>'+formattedString(taeg["CREDITO TAEG"])+'</td><td>'+formatDate(taeg["CREDITO INICIO"],2)+'</td>' +
                 '<td>'+formatDate(taeg["CREDITO FINALIZAR"],2)+'</td><td>'+taeg["CREDITO STATE"]+'</td></tr>');
         }
-        tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
     }
+    tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
 }
 
 
@@ -121,9 +119,8 @@ function reportChequeDistribuido(list) {
             '<tr><td >' + formatDate(cheque["DATA"],2) + '</td><td >' + formattedString(cheque["DEBITO"])+'</td>' +
             '<td>'+formattedString(cheque["CREDITO"])+'</td><td>'+cheque["BANCO SIGLA"]+"-"+cheque["BANCO NAME"]+'</td>' +
             '<td>'+cheque["AGENCIA"]+'</td></tr>');
-
-        tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
     }
+    tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
 }
 
     function dataReport(sub)
@@ -204,8 +201,8 @@ function reportCustomer(list)
         totalQuantity  += Number(customer["QUANTIDADE CREDITO"]);
         listLastValues  = {"Quantidade" : totalQuantity, "Valor" : formattedString((list[list.length-1]["VALOR"]))};
         sumTable(listLastValues);
-        tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
     }
+    tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
 }
 
 function relatorioCheque(list) {
@@ -247,8 +244,8 @@ function relatorioDividaProduto(list) {
                 '<td>'+formattedString(divida["CREDITO VALUE SOLICITADO"])+'</td><td>'+formattedString(divida["CREDITO TOTAL PAGAR MONTANTE"])+'</td>' +
                 '<td>'+formattedString(divida["CREDITO VALUE PAGO"])+'</td></tr>');
         }
-        tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
     }
+    tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
 }
 
 function relatorioChequeEstado(list) {
@@ -262,9 +259,8 @@ function relatorioChequeEstado(list) {
             '<td>'+cheque["NIF"]+'</td><td>'+cheque["NAME"]+" "+cheque["SURNAME"]+'</td><td>'+cheque["PAGAMENTO NUM DOCUMENTO"]+'</td><td>'
             +formattedString(cheque["VALOR CHEQUE REEMBOLSO"])+'</td><td>'+formatDate(cheque["DATA DOCUMENTO PAGAMENTO PREVISTO DEPOSITO"],2)+'' +
             '</td><td>'+cheque["BANCO SIGLA"]+'</td><td>'+verifyEmpty(cheque["PAGAMENTO DATA ENDOSSADO"])+'</td></tr>');
-
-        tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
     }
+    tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
 }
 
 function reportCredit(list)
@@ -288,8 +284,8 @@ function reportCredit(list)
             };
             sumTable(listLastValues);
         }
-        tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
     }
+    tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
 }
 
 var ReportFiler = function (dataI, dataF, periodo) {
@@ -314,10 +310,9 @@ function reportCobrancas(list) {
         }
         listLastValues = {"Valor Reembolso em Relação ao Ano em Comparação" : formattedString(list[list.length-1]["VALOR REEMBOLSO"]),
             "Valor Reembolso em Relação Ano Atual" : formattedString(list[list.length-2]["VALOR REEMBOLSO"])};
-        tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
         sumTable(listLastValues);
-
     }
+    tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
 }
 
 
