@@ -458,9 +458,10 @@ var relatorio = {
         var div_pagination = $("#relatorio_pagination");
         div_pagination.empty();
         for (var i = 0; i < total; i++){
-            var page = '<div begin="$begin" end="$end" class="'+( (i === 0) ? "active" : "")+'">'+(i+1)+'</div>';
+            var page = '<div begin="$begin" end="$end" class="'+( (i === 0) ? "active" : "")+'">$i</div>';
             page = page.replace("$begin", begin);
             page = page.replace("$end", end);
+            page = page.replace("$i", (i+1));
             div_pagination.append(page);
             begin += end+1;
             end += this.step;
