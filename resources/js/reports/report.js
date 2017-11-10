@@ -170,6 +170,7 @@ function reportChequeDistribuido(list) {
                     -1, LevelActivity.VISUALIZACAO);
                 listReportData = [];
                 listReportData = e.result;
+                relatorio.create_pagination(e.result);
                 if(activeReport === TypeReport.CLIENTES) reportCustomer(e.result);
                 else if(activeReport === TypeReport.CRESCIMENTO_HOMOLOGO) reportGrowth(e.result);
                 else if(activeReport === TypeReport.CREDITO_CONCEDIDO) reportCredit(e.result);
@@ -292,7 +293,7 @@ var ReportFiler = function (dataI, dataF, periodo) {
     this.dataInicio = dataI;
     this.dataFim = dataF;
     this.periodoComparacao = periodo;
-}
+};
 
 function reportCobrancas(list) {
 
@@ -445,3 +446,24 @@ $(".icon-file-pdf").click(function () {
 
     }
 });
+
+var relatorio = {
+    step: 500,
+    create_pagination: function (report) {
+        var total_no_arendodado = Math.trunc(report.length/this.step);
+        var total_arendodado = report/this.step;
+        var total = ((total_arendodado !== total_no_arendodado) ? (total_no_arendodado +1) : total_no_arendodado);
+        var begin = 0;
+        var end = this.step;
+        var div_pagination = $("#relatorio_pagination");
+        div_pagination.empty();
+        for (var i = 0; i < total; i++){
+            var page = '<div begin="$begin" end="$end" class="'+( (i === 0) ? "active" : "")+'">'+(i+1)+'</div>';
+            page = page.replace("$begin", begin);
+            page = page.replace("$end", end);
+            div_pagination.append(page);
+            begin += end+1;
+            end += this.step;
+        }
+    }
+};

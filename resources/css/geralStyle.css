@@ -1151,3 +1151,56 @@ xtitle:before{
 	border-top: 5px rgba(0,0,0,.85) solid;
 	top: 100%;
 }
+
+	.pagination {
+		margin: auto;
+	}
+
+	.pagination div {
+		width: 37px;
+		line-height: 32px;
+		border: 1px #ccc solid;
+		text-align: center;
+		margin: 0 5px;
+		border-radius: 1px;
+		cursor: pointer;
+	}
+
+	.pagination div:hover {
+		border-color: #3B94CD;
+	}
+
+	.pagination div.active {
+		background: #3B94CD;
+		border-color: #3B94CD;
+		color: #FFF;
+	}
+
+	.flex {
+		display: -webkit-box;
+		display: -webkit-flex;
+		display: -ms-flexbox;
+		display: flex; }
+
+	.flex.wrap {
+		-webkit-flex-wrap: wrap;
+		-ms-flex-wrap: wrap;
+		flex-wrap: wrap; }
+
+	.flex.h-sb {
+		-webkit-box-pack: justify;
+		-webkit-justify-content: space-between;
+		-ms-flex-pack: justify;
+		justify-content: space-between; }
+
+	.flex.h-ct {
+		-webkit-box-pack: center;
+		-webkit-justify-content: center;
+		-ms-flex-pack: center;
+		justify-content: center; }
+
+	.flex.v-ct {
+		-webkit-box-align: center;
+		-webkit-align-items: center;
+		-ms-flex-align: center;
+		align-items: center; }
