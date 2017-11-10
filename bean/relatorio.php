@@ -45,6 +45,7 @@ function reportSearchFilter()
     else if ($reportName == "rep.capiTAEG") $reportName = "funct_rep_divida_capital_taeg";
     else if ($reportName == "rep.diviProd") $reportName = "funct_rep_dividas_produtos";
     else if ($reportName == "rep.gara") $reportName = "funct_rep_credits_filter";
+    else if ($reportName == "rep.cabaz") $reportName = "funct_rep_client_cabaz";
     else $reportName = "funct_rep_cheques_distribuidos";
 
     $call = new CallPgSQL();

@@ -11,8 +11,7 @@ $('aside .single').on('click','li',function(event) {
         data:{"intention" : "load report filters",
             "reportName":  $('#secondary-menu li.active').attr('id')},
         beforeSend: function () {  $(".mp-loading").fadeIn(); },
-        complete: function () {
-            $(".mp-loading").fadeOut();},
+        complete: function () { $(".mp-loading").fadeOut();},
         success:function (e)
 		{
             sessionStorage.removeItem('filterReport');
@@ -25,7 +24,7 @@ $('aside .single').on('click','li',function(event) {
                 data();
                 if( $('#secondary-menu li.active').attr('id') === TypeReport.CHEQUE)
                     $("#iframe-" + $('aside li.active').index()).contents().find(".filter-type-cheq li.active").trigger("click");
-		},
+		}
     });
     header = $('.header-report');
     $(this).attr('id') === 'rel.acti' ? header.hide(200) : header.show(200);
