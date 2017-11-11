@@ -23,14 +23,18 @@
 				<table id="table-client" class="" cellpadding="0" cellspacing="0">
 					<thead>
 						<tr>                    
-							<th grow="1.5">NIF</th>
+							<th grow="2">NIF</th>
 							<th grow="5">Nome</th>
-							<th grow="1">Crédito</th>
-							<th grow="3">Total pedido</th>
+							<th grow="2">N. Crédito</th>
+							<th grow="3">T. Crédito</th>
+							<th grow="3">Pedido</th>
+							<th grow="3">Reebolso I.</th>
+							<th grow="3">Reebolso A.</th>
+							<th grow="3">TEAG A.</th>
+							<th grow="3">TEAG I.</th>
 						</tr>
 					</thead>
 					<tbody id="tableCliente">
-						<tr><td>109935310</td><td>WALDEMIRO QUARESMA FERNANDES</td><td>5</td><td>5 000 000</td></tr>
 					</tbody>
 				</table>
 			</div>

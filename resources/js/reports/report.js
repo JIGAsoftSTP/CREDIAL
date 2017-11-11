@@ -213,6 +213,30 @@ function reportCabaz(list)
     tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
 }
 
+function reportPagamentoAntecipado(list)
+{
+    $("#iframe-" + $('aside li.active').index()).contents().find('table tbody').empty();
+
+    for(var i = relatorio.begin;(i<list.length && i !== relatorio.end) ;i++)
+    {
+        customer = list[i];
+        $("#iframe-" + $('aside li.active').index()).contents().find('table tbody').append(
+            '<tr>' +
+            '<td >'+customer["clientnif"] + '</td' + '>' +
+            '<td >'+customer["clientname"]+" "+customer["clientsurname"] + '</td>' +
+            '<td>'+customer["creditonumero"]+'</td>' +
+            '<td>'+customer["creditovalorpedido"]+'</td>' +
+            '<td>'+customer["tipocreditodesc"]+'</td>' +
+            '<td>'+formattedString(customer["creditoreebolsoinicial"])+'</td>'+
+            '<td>'+formattedString(customer["creditoreebolsoanticipado"])+'</td>'+
+            '<td>'+formattedString(customer["creditotaeginicial"])+'</td>'+
+            '<td>'+formattedString(customer["creditotaeganticiapado"])+'</td>'
+            +'</tr>'
+        );
+    }
+    tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
+}
+
 function relatorioCheque(list) {
 
     if(chequeFiltro === "1")
@@ -502,7 +526,7 @@ var relatorio = {
         else if (this.activeReport === TypeReport.DIVIDA_PRODUTO) relatorioDividaProduto(this.data);
         else if (this.activeReport === TypeReport.CHEQUE) relatorioCheque(this.data);
         else if (this.activeReport === TypeReport.CABAZ) reportCabaz(this.data);
-        else if (this.activeReport === TypeReport.PAGAMENTO_ATECIPADO) relatorioCheque(this.data);
+        else if (this.activeReport === TypeReport.PAGAMENTO_ATECIPADO) reportPagamentoAntecipado(this.data);
     }
 };
 

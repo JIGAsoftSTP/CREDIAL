@@ -30,7 +30,7 @@ function report()
         if ($_POST["chequeFiltro"] == 1) relatorioChequeEntrados();
         else relatorioCheque_PorCobrar_Cobrados_Todos();
     } else if ($_POST["reportName"] == "rep.cabaz") relatorioCabaz();
-    else if ($_POST["reportName"] == "rep.antecipado") relatorioCobrancas();
+    else if ($_POST["reportName"] == "rep.antecipado") relatorioPagamentoAntecipado();
 
 }
 
@@ -46,6 +46,7 @@ function reportSearchFilter()
     else if ($reportName == "rep.diviProd") $reportName = "funct_rep_dividas_produtos";
     else if ($reportName == "rep.gara") $reportName = "funct_rep_credits_filter";
     else if ($reportName == "rep.cabaz") $reportName = "funct_rep_client_cabaz";
+    else if ($reportName == "rep.cabaz") $reportName = "funct_rep_cheques_distribuidos";
     else $reportName = "funct_rep_cheques_distribuidos";
 
     $call = new CallPgSQL();
@@ -202,12 +203,12 @@ function relatorioCabaz()
 function relatorioPagamentoAntecipado()
 {
     $call = new CallPgSQL();
-    $call->functionTable("report.funct_rep_cobranca", "*")
+    $call->functionTable("report.funct_rep_credito_anticipados", "*")
         ->addString(Session::getUserLogado()->getId())
         ->addInt(Session::getUserLogado()->getIdAgencia())
         ->addDate($_POST["ReportFiler"]["dataInicio"])
         ->addDate($_POST["ReportFiler"]["dataFim"])
-        ->addJson(json_encode($_POST["jsonValue"]));
+        ->addJsonb(json_encode($_POST["jsonValue"]));
     $call->execute();
     $arrayValues = array();
     while ($result = $call->getValors()) {
