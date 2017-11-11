@@ -344,8 +344,6 @@ function setTitle(element){
 
 }
 
-
-
 $('.integer').keypress(function (event) {
 
     if ((event.which != 44 || $(this).val().indexOf('/') != -1) &&
@@ -360,9 +358,9 @@ $('.double').keypress(function (event) {
 
     //$( ".integer" ).trigger("keypress ");
 
-    if ((event.which != 44 || $(this).val().indexOf(',') != -1) &&
+    if ((event.which !== 44 || $(this).val().indexOf(',') !== -1) &&
         ((event.which < 48 || event.which > 57) &&
-            (event.which != 0 && event.which != 8))) {
+            (event.which !== 0 && event.which !== 8))) {
         event.preventDefault();
 }
 
@@ -410,6 +408,16 @@ function setDatePicker(){
     });
 }
 
+function checkObject(obj) {
+    var isEmpty = true;
+
+    for (var i in obj) {
+        if(obj.hasOwnProperty(i)) {
+            return false;
+        }
+    }
+    return true;
+}
 function setDataStorage(_type, myObject, myKey, myValue){
 
     var typeData = _type === localStorage ? localStorage : sessionStorage;
