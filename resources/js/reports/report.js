@@ -122,6 +122,7 @@ function reportChequeDistribuido(list) {
 
     function dataReport() {
          var dados;
+         var obj = getDataStorage(sessionStorage,'filterReport');
          var activeReport = $('#secondary-menu li.active').attr('id');
          var reportFilter = new ReportFiler($("#report-inicial-date").val(), $("#report-final-date").val());
 
@@ -129,7 +130,7 @@ function reportChequeDistribuido(list) {
             dados ={"intention": "report",
             "ReportFiler": reportFilter,
             "reportName": $('#secondary-menu li.active').attr('id'),
-            "jsonValue": getDataStorage(sessionStorage,'filterReport')};
+            "jsonValue": (checkObject(obj) ? "" : getDataStorage(sessionStorage,'filterReport'))};
         }
         else {
             if(chequeFiltro === "2")
