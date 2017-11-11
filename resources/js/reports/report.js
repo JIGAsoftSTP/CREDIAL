@@ -50,11 +50,8 @@ function sendFilterReport() {
          chequeFiltro = $("#iframe-" + $('aside li.active').index()).contents().find(".filter-type-cheq li.active").attr("id");
     }
 
- if(validation1($(".reportDate"))){
-    if($(".report-P").attr('id') !== undefined)
-        dataReport(1);
-    else dataReport(0);
-}
+ if(validation1($(".reportDate")))
+        dataReport();
 }
 
 function reportGrowth(list)
@@ -123,27 +120,18 @@ function reportChequeDistribuido(list) {
     tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
 }
 
-    function dataReport(sub)
-    {
+    function dataReport() {
          var dados;
          var activeReport = $('#secondary-menu li.active').attr('id');
+         var reportFilter = new ReportFiler($("#report-inicial-date").val(), $("#report-final-date").val());
 
-         if(sub === 0)
-            var reportFilter = new ReportFiler($("#report-inicial-date").val(), $("#report-final-date").val(), null);
-        else
-        {
-            setDataStorage(sessionStorage, 'filterReport', "anoSub" , ($(".report-P").val() === "" ? "1" :$(".report-P").val()));
-            var reportFilter = new ReportFiler($("#report-inicial-date").val(), $("#report-final-date").val(),
-                ($(".report-P").val() === "" ? "1" :$(".report-P").val()));
-        }
         if($('#secondary-menu li.active').attr('id') !==  TypeReport.CHEQUE){
             dados ={"intention": "report",
             "ReportFiler": reportFilter,
             "reportName": $('#secondary-menu li.active').attr('id'),
             "jsonValue": getDataStorage(sessionStorage,'filterReport')};
         }
-        else
-        {
+        else {
             if(chequeFiltro === "2")
                 setDataStorage(sessionStorage, 'filterReport', "state", "1");
             else if(chequeFiltro === "3"){
@@ -287,7 +275,6 @@ function reportCredit(list)
 var ReportFiler = function (dataI, dataF, periodo) {
     this.dataInicio = dataI;
     this.dataFim = dataF;
-    this.periodoComparacao = periodo;
 };
 
 function reportCobrancas(list) {
