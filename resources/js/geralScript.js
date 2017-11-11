@@ -412,7 +412,7 @@ function setDatePicker(){
 
 function setDataStorage(_type, myObject, myKey, myValue){
 
-    typeData = _type === localStorage ? localStorage : sessionStorage;
+    var typeData = _type === localStorage ? localStorage : sessionStorage;
     var objectData = {};
 
     if (typeData.getItem(myObject))
@@ -426,14 +426,14 @@ function setDataStorage(_type, myObject, myKey, myValue){
 }
 
 function getDataStorage(_type, myObject){
-    typeData = _type === localStorage ? localStorage : sessionStorage;
+    var typeData = _type === localStorage ? localStorage : sessionStorage;
 
     return $.parseJSON(typeData.getItem(myObject));
 
 }
 
 function deleteContentDataStorage(_type, myObject, myKey) {
-    typeData = _type === localStorage ? localStorage : sessionStorage;
+    var typeData = _type === localStorage ? localStorage : sessionStorage;
     var objectData = {};
 
     if (typeData.getItem(myObject))
