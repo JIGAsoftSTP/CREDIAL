@@ -16,21 +16,21 @@
 			<nav class="to-report">
 				<h2></h2>
 			</nav>
-			
-
 
 			<div class="x-table table-client auto-width">
 				<table id="table-client" class="" cellpadding="0" cellspacing="0">
 					<thead>
 						<tr>                    
-							<th grow="1.5">NIF</th>
+							<th grow="2">NIF</th>
 							<th grow="5">Nome</th>
-							<th grow="1">Crédito</th>
-							<th grow="3">Total pedido</th>
+							<th grow="2">Contratos</th>
+							<th grow="2">Con. Pago</th>
+							<th grow="2">Con. Não Pago</th>
+							<th grow="4">Total Ca. Pago</th>
+							<th grow="4">TAEG</th>
 						</tr>
 					</thead>
 					<tbody id="tableCliente">
-						<tr><td>109935310</td><td>WALDEMIRO QUARESMA FERNANDES</td><td>5</td><td>5 000 000</td></tr>
 					</tbody>
 				</table>
 			</div>

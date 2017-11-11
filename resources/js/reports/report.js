@@ -160,6 +160,7 @@ function reportChequeDistribuido(list) {
                 listReportData = [];
                 listReportData = e.result;
 
+                relatorio.type = activeReport;
                 relatorio.create_pagination(e.result);
                 relatorio.add_data_to_relatorio();
 
@@ -186,6 +187,28 @@ function reportCustomer(list)
         totalQuantity  += Number(customer["QUANTIDADE CREDITO"]);
         listLastValues  = {"Quantidade" : totalQuantity, "Valor" : formattedString((list[list.length-1]["VALOR"]))};
         sumTable(listLastValues);
+    }
+    tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
+}
+
+function reportCabaz(list)
+{
+    $("#iframe-" + $('aside li.active').index()).contents().find('table tbody').empty();
+
+    for(var i = relatorio.begin;(i<list.length && i !== relatorio.end) ;i++)
+    {
+        customer = list[i];
+        $("#iframe-" + $('aside li.active').index()).contents().find('table tbody').append(
+            '<tr>' +
+            '<td >'+customer["dos_nif"] + '</td' + '>' +
+            '<td >'+customer["dos_name"]+" "+customer["dos_surname"] + '</td>' +
+            '<td>'+customer["num_contrato"]+'</td>' +
+            '<td>'+customer["num_contrato_pago"]+'</td>' +
+            '<td>'+customer["num_contrato_nao_pago"]+'</td>' +
+            '<td>'+formattedString(customer["total_capital_pago"])+'</td>'+
+            '<td>'+formattedString(customer["total_taeg"])+'</td>'
+            +'</tr>'
+        );
     }
     tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
 }
@@ -448,8 +471,10 @@ var relatorio = {
     create_pagination: function (report) {
         this.activeReport = $('#secondary-menu li.active').attr('id');
         this.data = report;
-        var total_no_arendodado = Math.trunc((this.data.length-1)/this.step);
-        var total_arendodado = (this.data-1)/this.step;
+        var totaldata =  ((TypeReport.CABAZ === this.activeReport) ? this.data.length : this.data.length-1);
+        console.log(totaldata);
+        var total_no_arendodado = Math.trunc(totaldata/this.step);
+        var total_arendodado = totaldata/this.step;
         var total = ((total_arendodado !== total_no_arendodado) ? (total_no_arendodado +1) : total_no_arendodado);
         var begin = 0;
         var end = this.step;
@@ -476,7 +501,7 @@ var relatorio = {
         else if (this.activeReport === TypeReport.CAPITAL_TAEG) reportTaeg(this.data);
         else if (this.activeReport === TypeReport.DIVIDA_PRODUTO) relatorioDividaProduto(this.data);
         else if (this.activeReport === TypeReport.CHEQUE) relatorioCheque(this.data);
-        else if (this.activeReport === TypeReport.CABAZ) relatorioCheque(this.data);
+        else if (this.activeReport === TypeReport.CABAZ) reportCabaz(this.data);
         else if (this.activeReport === TypeReport.PAGAMENTO_ATECIPADO) relatorioCheque(this.data);
     }
 };
