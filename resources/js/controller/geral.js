@@ -14,42 +14,14 @@ function loadComoBoxIDandValue(element, array, id, value) {
     }
 }
 
-function loadComoBoxIDandValueReport(element, array) {
-  var existAnoSub = false;
-  var hasContents = true;
-    if($(".report-P").attr('id') !== undefined) $(".report-P").remove();
-
+function loadContensFilterReport(element, array) {
     for (var x=0; x < array.length; x++){
         var lista = array[x];
-        if(lista["cod"] === "anoSub")
-            existAnoSub = true;
-       else
-        {
-            if(lista.contents !== null) {
-                if (lista["type"] !== "5")
-                    element.append('<option value="' + lista["contents"]["table"] + '" filter="' + lista["name"] + '" identifier="' + lista["cod"] + '">' + lista["name"] + '</option>');
-                else
-                    element.append('<option value="' + lista["name"] + '" filter="' + lista["name"] + '" identifier="' + lista["cod"] + '">' + lista["name"] + '</option>');
-            }
-            else
-                hasContents = false;
-        }
+        if(lista.contents !== null)
+            element.append('<option loadData="1" value="' + lista["contents"]["table"] + '" filter="' + lista["name"] + '" identifier="' + lista["cod"] + '">' + lista["name"] + '</option>');
+        else
+            element.append('<option loadData="0" value="' + lista["name"] + '" filter="' + lista["name"] + '" identifier="' + lista["cod"] + '">' + lista["name"] + '</option>');
     }
-
-    if(!hasContents){
-        $(".prd-enabled").append('<input type="text" id="relatorio-periodo" class="report-P integer" maxlength="3" ' +
-            'onkeypress="numericNumbers(event)" placeholder="Periodo em Comparação" value="1"/>');
-        setDataStorage(sessionStorage, 'filterReport', "anoSub" , "1");
-    }
-    else{
-        if(existAnoSub && $(".report-P").attr('id') === undefined){
-            $(".prd-enabled").append('<input type="text" id="relatorio-periodo" class="report-P integer" maxlength="3" ' +
-                'onkeypress="numericNumbers(event)" placeholder="Periodo em Comparação" value="1"/>');
-            setDataStorage(sessionStorage, 'filterReport', "anoSub" , "1");
-        }
-        else $(".report-P").remove();
-    }
-
 }
 
 function regUserActivity(url, contentKey, operation, jsonContent, level )
