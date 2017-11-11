@@ -190,7 +190,7 @@ function relatorioCabaz()
         ->addInt(Session::getUserLogado()->getIdAgencia())
         ->addDate($_POST["ReportFiler"]["dataInicio"])
         ->addDate($_POST["ReportFiler"]["dataFim"])
-        ->addJson(json_encode($_POST["jsonValue"]));
+        ->addJsonb(json_encode($_POST["jsonValue"]));
     $call->execute();
     $arrayValues = array();
     while ($result = $call->getValors()) {
