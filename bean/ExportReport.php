@@ -118,6 +118,56 @@ function exportExcel()
             ->setName($data["name"])
             ->export($data["data"]);
     }
+    else if($data["type"] == "rep.cabaz"){
+        $export->setUser(Session::getUserLogado()->getNome() . " " . Session::getUserLogado()->getApelido())
+            ->setJoinParam("CLIENTE", "dos_name", "dos_surname")
+            ->setListParamSome(
+                "num_contrato",
+                "total_taeg_contato_pago",
+                "total_taeg",
+                "total_capital_pago",
+                "total_capital_inicial",
+                "num_contrato_vencido_nao_pago",
+                "num_contrato_pago_tardio",
+                "num_contrato_nao_pago",
+                "num_contrato_pago")
+            ->setListRename("dos_nif","CLIENTE NIF" )
+            ->setListRename("dos_name","CLIENTE")
+            ->setListRename("num_contrato","CONTRATOS")
+            ->setListRename("num_contrato_pago","CONTRATO PAGO")
+            ->setListRename("num_contrato_nao_pago","CONTRATO NÃO PAGO")
+            ->setListRename("num_contrato_vencido_nao_pago","CONTRATO NÃO VENCIDO")
+            ->setListRename("num_contrato_pago_tardio","CONTRATO PAGO TARDIO")
+            ->setListRename("total_capital_inicial","CAPITAL INICIAL")
+            ->setListRename("total_capital_pago","CAPITAL PAGO")
+            ->setListRename("total_taeg","TEAG")
+            ->setListRename("hisdos_mail","EMAIL")
+            ->setListRename("hisdos_telefone","TELEMOVEL")
+            ->setListRename("hisdos_telfixo","TELEFONE")
+            ->setListRename("hisdos_telservico","TELEFONE SERVIÇO")
+            ->setListParam(ExportExcel::HIDE, "more", "dos_surname", "dos_numdos")
+            ->setName($data["name"])
+            ->export($data["data"]);
+    }else if($data["type"] == "rep.antecipado"){
+        $export->setUser(Session::getUserLogado()->getNome() . " " . Session::getUserLogado()->getApelido())
+            ->setJoinParam("CLIENTE", "clientname", "clientsurname")
+            ->setListParamSome("creditovalor", "creditoprestacaoe")
+            ->setListRename("clientnif","CLIENTE NIF" )
+            ->setListRename("creditocheque","CHEQUE")
+            ->setListRename("tipocreditodesc","T. CREDITO")
+            ->setListRename("creditonumero","Nº CREDITO")
+            ->setListRename( "creditovalorpedido","VALOR PEDIDO")
+            ->setListRename("creditoreebolsoinicial","REEBOLSO INICIAL")
+            ->setListRename("creditoreebolsoanticipado","REEBOLSO ANTICIPADO")
+            ->setListRename("creditotaeginicial","TEAG INICIAL")
+            ->setListRename("creditotaeganticiapado","TEAG ANTICIPADO")
+            ->setListRename("creditodatafim","D. FIM C.")
+            ->setListRename("creditodatafimanticipado","D. FIM C. ANTICIPADO")
+            ->setListRename("creditodatafinalizarinicial","D. FIM C. INICIAL")
+            ->setListParam(ExportPDF::HIDE, "tipocreditoid", "more", "creditoid" , "clientsurname")
+            ->setName($data["name"])
+            ->export($data["data"]);
+    }
 }
 
 function exportPDF() {
@@ -128,7 +178,7 @@ function exportPDF() {
             ->setJoinParam("CLIENTE", "NAME", "SURNAME")
             ->setListParamSome("QUANTIDADE CREDITO", "VALOR")
             ->setListRename("QUANTIDADE CREDITO", "QUANTIDADE")
-            ->setListParam(ExportExcel::HIDE, "SURNAME")
+            ->setListParam(ExportPDF::HIDE, "SURNAME")
             ->setName($data["name"])
             ->export($data["data"]);
     }
@@ -139,7 +189,7 @@ function exportPDF() {
             ->setListRename("QUANTIDADE ANO", "ANO ATUAL")
             ->setListRename("QUANTIDADE PASSADO", "ANO PASSADO")
             ->setListRename("DIFERENCA", "QUANTIDADE")
-            ->setListParam(ExportExcel::HIDE, "CLIENT SURNAME")
+            ->setListParam(ExportPDF::HIDE, "CLIENT SURNAME")
             ->setName($data["name"])
             ->export($data["data"]);
     }
@@ -153,7 +203,7 @@ function exportPDF() {
             ->setListRename("TOTAL PAGAR MONTANTE DIVIDA", "MONTANTE DIVIDA")
             ->setListRename("DATA INICIO", "DATA INICIO")
             ->setListRename("DATA FINALIZAR", "DATA FIM")
-            ->setListParam(ExportExcel::HIDE, "ESTADO", "SURNAME", "ID" )
+            ->setListParam(ExportPDF::HIDE, "ESTADO", "SURNAME", "ID" )
             ->setName($data["name"])
             ->export($data["data"]);
     }
@@ -165,7 +215,7 @@ function exportPDF() {
             ->setListRename("NUM DOCUMENTO PREVISTO", "Nº DOC PREVISTO")
             ->setListRename("DATA DOCUMENTO REAL", "DATA REAL")
             ->setListRename("DATA DOCUMENTO PREVISTO", "DATA PREVISTA")
-            ->setListParam(ExportExcel::HIDE,"SURNAME", "ID" )
+            ->setListParam(ExportPDF::HIDE,"SURNAME", "ID" )
             ->setName($data["name"])
             ->export($data["data"]);
     }
@@ -180,7 +230,7 @@ function exportPDF() {
             ->setListRename("CREDITO TAEG", "CREDITO TAEG")
             ->setListRename("CREDITO INICIO", "DATA INICIO")
             ->setListRename("CREDITO FINALIZAR", "DATA FIM")
-            ->setListParam(ExportExcel::HIDE,"SURNAME" )
+            ->setListParam(ExportPDF::HIDE,"SURNAME" )
             ->setName("Capital - TAEG")
             ->export($data["data"]);
     }
@@ -192,7 +242,7 @@ function exportPDF() {
             ->setListRename("CREDITO VALUE SOLICITADO", "VALOR CREDITO")
             ->setListRename("CREDITO TOTAL PAGAR MONTANTE", "MONTANTE EM DIVIDA")
             ->setListRename("CREDITO VALUE PAGO", "CREDITO VALOR PAGO")
-            ->setListParam(ExportExcel::HIDE,"SURNAME", "ID" )
+            ->setListParam(ExportPDF::HIDE,"SURNAME", "ID" )
             ->setName($data["name"])
             ->export($data["data"]);
     }
@@ -219,7 +269,57 @@ function exportPDF() {
             ->setListRename("anulaobs", "JUSTIFICAÇAO")
             ->setListRename("anuladatanulacao", "DT ANULAÇAO")
             ->setHideOther(true)
-            ->setListParam(ExportExcel::SHOW, "useranulaname", "clientname", "anuladatanulacao", "anulaobs", "creditoprestacaoe", "clientnif", "creditovalor")
+            ->setListParam(ExportPDF::SHOW, "useranulaname", "clientname", "anuladatanulacao", "anulaobs", "creditoprestacaoe", "clientnif", "creditovalor")
+            ->setName($data["name"])
+            ->export($data["data"]);
+    }
+    else if($data["type"] == "rep.cabaz"){
+        $export->setUser(Session::getUserLogado()->getNome() . " " . Session::getUserLogado()->getApelido())
+            ->setJoinParam("CLIENTE", "dos_name", "dos_surname")
+            ->setListParamSome(
+                "num_contrato",
+                "total_taeg_contato_pago",
+                "total_taeg",
+                "total_capital_pago",
+                "total_capital_inicial",
+                "num_contrato_vencido_nao_pago",
+                "num_contrato_pago_tardio",
+                "num_contrato_nao_pago",
+                "num_contrato_pago")
+            ->setListRename("dos_nif","CLIENTE NIF" )
+            ->setListRename("dos_name","CLIENTE")
+            ->setListRename("num_contrato","CONTRATOS")
+            ->setListRename("num_contrato_pago","CONTRATO PAGO")
+            ->setListRename("num_contrato_nao_pago","CONTRATO NÃO PAGO")
+            ->setListRename("num_contrato_vencido_nao_pago","CONTRATO NÃO VENCIDO")
+            ->setListRename("num_contrato_pago_tardio","CONTRATO PAGO TARDIO")
+            ->setListRename("total_capital_inicial","CAPITAL INICIAL")
+            ->setListRename("total_capital_pago","CAPITAL PAGO")
+            ->setListRename("total_taeg","TEAG")
+            ->setListRename("hisdos_mail","EMAIL")
+            ->setListRename("hisdos_telefone","TELEMOVEL")
+            ->setListRename("hisdos_telfixo","TELEFONE")
+            ->setListRename("hisdos_telservico","TELEFONE SERVIÇO")
+            ->setListParam(ExportPDF::HIDE, "more", "dos_surname", "dos_numdos")
+            ->setName($data["name"])
+            ->export($data["data"]);
+    }else if($data["type"] == "rep.antecipado"){
+        $export->setUser(Session::getUserLogado()->getNome() . " " . Session::getUserLogado()->getApelido())
+            ->setJoinParam("CLIENTE", "clientname", "clientsurname")
+            ->setListParamSome("creditovalor", "creditoprestacaoe")
+            ->setListRename("clientnif","CLIENTE NIF" )
+            ->setListRename("creditocheque","CHEQUE")
+            ->setListRename("tipocreditodesc","T. CREDITO")
+            ->setListRename("creditonumero","Nº CREDITO")
+            ->setListRename( "creditovalorpedido","VALOR PEDIDO")
+            ->setListRename("creditoreebolsoinicial","REEBOLSO INICIAL")
+            ->setListRename("creditoreebolsoanticipado","REEBOLSO ANTICIPADO")
+            ->setListRename("creditotaeginicial","TEAG INICIAL")
+            ->setListRename("creditotaeganticiapado","TEAG ANTICIPADO")
+            ->setListRename("creditodatafim","D. FIM C.")
+            ->setListRename("creditodatafimanticipado","D. FIM C. ANTICIPADO")
+            ->setListRename("creditodatafinalizarinicial","D. FIM C. INICIAL")
+            ->setListParam(ExportPDF::HIDE, "tipocreditoid", "more", "creditoid" , "clientsurname")
             ->setName($data["name"])
             ->export($data["data"]);
     }
