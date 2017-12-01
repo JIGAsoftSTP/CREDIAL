@@ -80,7 +80,7 @@ var PrestacaoBluider = function () {
             '<thead>' +
             '<tr>' +
             '<th grow="1.5">Data Emissão</th>' +
-            '<th grow="1.5">Data Endosse</th> ' +
+            '<th grow="1.5">Data Pagamento</th> ' +
             '<th grow="2.5">Reembolso</th>' +
             '<th grow="2.5">Prestação paga</th>' +
             '<th grow="2">Estado</th>' +
