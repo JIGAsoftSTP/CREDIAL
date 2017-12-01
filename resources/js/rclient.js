@@ -1,7 +1,11 @@
 
 var cliente_more = {
+    star_operation : undefined,
+    end_operation : undefined,
+    duracao : undefined,
     reiniciar_modal_novo_credito : function () {
 
+        this.star_operation = new Date();
         /**
          * reiniciar os campos de texto de sumulaçao
          */

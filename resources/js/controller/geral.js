@@ -362,6 +362,19 @@ if(!Date.prototype.getDatePt){
     }
 }
 
+if(!Date.prototype.getTimeStamp){
+    Date.prototype.getTimeStamp = function () {
+
+        function test(int) {
+            return (((int+"").length === 1) ? "0"+int : int );
+        }
+
+        return test(this.getDate())
+            +"-"+test(this.getMonth()+1)
+            +"-"+this.getUTCFullYear()+" "+test(this.getHours())+":"+test(this.getMinutes());
+    }
+}
+
 if(!Date.prototype.getDateEn){
     Date.prototype.getDateEn = function () {
         return this.getUTCFullYear()

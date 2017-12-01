@@ -57,13 +57,27 @@ $("#cred-simula-import").click(function () {
                 setTimeout(function () {
                     $("#cred-simula-import").show();
                 }, 10000);
+
+                /****
+                 *para calcular duração
+                 * @type {Date}
+                 */
+                cliente_more.end_operation = new Date();
+                var diffMs = (cliente_more.end_operation - cliente_more.star_operation);
+                var diffHrs = Math.floor((diffMs % 86400000) / 3600000);
+                var diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000);
+                var diff = diffHrs + 'h ' + diffMins + 'm';
+
                 creditoRegisto = {
                     "NIF Cliente" :  si.nifClient,
                     "Nome Cliente" : $('#cred-cli-comName').text(),
                     "Número de Dossier": e.return["NUM DOSSIER"],
                     "Número de Cheque": e.return["NUM CHEQUE"],
                     "Banco": e.return["BANCO NAME"],
-                    "Sigla do Banco": e.return["BANCO SIGLA"]
+                    "Sigla do Banco": e.return["BANCO SIGLA"],
+                    "Tempo Inicial" : cliente_more.star_operation.getTimeStamp(),
+                    "Tempo Final" : cliente_more.end_operation.getTimeStamp(),
+                    "Duração" : diff
                 };
 
                 regUserActivity("./bean/activity.php", e.return["NUM DOSSIER"] ,
