@@ -535,7 +535,7 @@ var relatorio = {
             var menos5Value = number - 7;
             var inicial_view_page = ((menos5Value < 1) ? 1 : menos5Value);
             var final_view_page = ((menos5Value < 1) ? ( -menos5Value + mais5Value) : mais5Value);
-            var final_view_page = ((final_view_page > totalpage) ? (  ) : mais5Value);
+            var final_view_page = ((final_view_page > totalpage) ? ( final_view_page - (to) ) : mais5Value);
 
             console.info(inicial_view_page, final_view_page, "PAGINA");
         }
