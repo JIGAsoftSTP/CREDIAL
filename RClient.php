@@ -11,8 +11,8 @@
 	<?php include 'includes/menu.php'; ?> 
 	<div class="content-body" >
 
-		<span class="new-client">+</span>
-		<span class="new-simulation"><i class="icon-shift"></i></span>
+		<span class="new-client" title="Adicionar Cliente">+</span>
+		<span class="new-simulation" title="Fazer simulação"><i class="icon-shift"></i></span>
 		<span class="search-span"><i class="icon-search"></i><input type="text" id="client-search" placeholder="Faça sua pesquisa aqui...">
 			<span id="span-type-search-client">
 				<i class="icon-search" title="Todos"></i>
