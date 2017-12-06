@@ -59,6 +59,7 @@
 }
 .x-table tr{
 	padding-left: 5px;
+	width: calc(100% - 10px);
 }
 .x-table tr > *{
 	white-space: nowrap;
@@ -96,7 +97,7 @@
 }
 .x-table tbody td{
 	line-height: 2.4em;	
-	font-weight: lighter;
+	font-weight: 300;
 }
 .x-table tbody tr:nth-child(odd){
 	background: #F7F7F7;

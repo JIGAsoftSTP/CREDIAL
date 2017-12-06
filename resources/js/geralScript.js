@@ -475,3 +475,8 @@ function advSearch(ipt, _items){
     });
 }
 
+$('body').on('scroll', '.scrolling-fixed', function(event) {
+    ttp = $(this).scrollTop();
+    console.log(ttp);
+    $(this).find('.fixed-on-scroll').top(ttp);
+});
