@@ -22,12 +22,12 @@
 					<thead>
 						<tr>                    
 							<th grow="2">NIF</th>
-							<th grow="5">Nome</th>
-							<th grow="2">Contratos</th>
+							<th grow="7">Nome</th>
+							<th grow="1">Con.</th>
 							<th grow="2">Con. Pago</th>
-							<th grow="2">Con. Não Pago</th>
-							<th grow="4">Total Ca. Pago</th>
-							<th grow="4">TAEG</th>
+							<th grow="5">Montante à Pagar</th>
+							<th grow="5">Total M. Pago</th>
+							<th grow="5">TAEG</th>
 						</tr>
 					</thead>
 					<tbody id="tableCliente">

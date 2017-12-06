@@ -204,8 +204,8 @@ function reportCabaz(list)
             '<td >'+customer["dos_name"]+" "+customer["dos_surname"] + '</td>' +
             '<td>'+customer["num_contrato"]+'</td>' +
             '<td>'+customer["num_contrato_pago"]+'</td>' +
-            '<td>'+customer["num_contrato_nao_pago"]+'</td>' +
-            '<td>'+formattedString(customer["total_capital_pago"])+'</td>'+
+            '<td>'+formattedString(customer["total_montante_pagar"])+'</td>'+
+            '<td>'+formattedString(customer["total_montante_pago"])+'</td>'+
             '<td>'+formattedString(customer["total_taeg"])+'</td>'
             +'</tr>'
         );
@@ -527,6 +527,19 @@ var relatorio = {
         else if (this.activeReport === TypeReport.CHEQUE) relatorioCheque(this.data);
         else if (this.activeReport === TypeReport.CABAZ) reportCabaz(this.data);
         else if (this.activeReport === TypeReport.PAGAMENTO_ATECIPADO) reportPagamentoAntecipado(this.data);
+    },
+    alter_pages_vist : function (number) {
+        var totalpage = $("#relatorio_pagination").find("div").length;
+        if( totalpage >= 17){
+            var mais5Value = 7 + number;
+            var menos5Value = 7 - number;
+            var mais5Emaior = (mais5Value > totalpage);
+            var valueAMaisdoMais5Value = (mais5Value - (mais5Value-totalpage));
+            var inicio_view_page = ((mais5Emaior) ? (mais5Value - valueAMaisdoMais5Value) : mais5Value );
+            var final_view_page = ((mais5Emaior) ? (menos5Value + valueAMaisdoMais5Value) : menos5Value );
+            console.info(inicio_view_page, final_view_page);
+            console.info(menos5Value, mais5Value);
+        }
     }
 };
 
@@ -534,4 +547,5 @@ $("#relatorio_pagination").on("click", ".page", function () {
     $(".page").removeClass("active");
     $(this).addClass("active");
     relatorio.add_data_to_relatorio();
+    relatorio.alter_pages_vist(Number( $(this).text()));
 });
