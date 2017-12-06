@@ -17,6 +17,9 @@ switch ($_POST["intention"]) {
         report();
         break;
 }
+/**
+ *
+ */
 
 function report()
 {
