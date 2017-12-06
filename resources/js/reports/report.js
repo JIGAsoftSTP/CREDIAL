@@ -166,7 +166,7 @@ function reportChequeDistribuido(list) {
 
                 dataExport.data = e.result;
                 dataExport.type = activeReport;
-                sessionStorage.dataExport = JSON.stringify(dataExport);
+                /*sessionStorage.dataExport = JSON.stringify(dataExport);*/
             }
         });
     }
@@ -532,13 +532,12 @@ var relatorio = {
         var totalpage = $("#relatorio_pagination").find("div").length;
         if( totalpage >= 17){
             var mais5Value = 7 + number;
-            var menos5Value = 7 - number;
-            var mais5Emaior = (mais5Value > totalpage);
-            var valueAMaisdoMais5Value = (mais5Value - (mais5Value-totalpage));
-            var inicio_view_page = ((mais5Emaior) ? (mais5Value - valueAMaisdoMais5Value) : mais5Value );
-            var final_view_page = ((mais5Emaior) ? (menos5Value + valueAMaisdoMais5Value) : menos5Value );
-            console.info(inicio_view_page, final_view_page);
-            console.info(menos5Value, mais5Value);
+            var menos5Value = number - 7;
+            var inicial_view_page = ((menos5Value < 1) ? 1 : menos5Value);
+            var final_view_page = ((menos5Value < 1) ? ( -menos5Value + mais5Value) : mais5Value);
+            var final_view_page = ((final_view_page > totalpage) ? (  ) : mais5Value);
+
+            console.info(inicial_view_page, final_view_page, "PAGINA");
         }
     }
 };
