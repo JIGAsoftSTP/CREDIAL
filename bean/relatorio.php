@@ -22,7 +22,7 @@ function report()
 {
     if ($_POST["reportName"] == "rep.cliente") relatorioCreditoSomatorio();
     else if ($_POST["reportName"] == "rep.cresHomo") relatorioCrescimentoHomologo();
-    else if ($_POST["reportName"] == "rep.credConc") relatorioCreditoContagem();
+    else if ($_POST["reportName"] == "rep.credConc") relatorioCreditoConcedido();
     else if ($_POST["reportName"] == "rep.capiTAEG") relatorioDivida_taeg();
     else if ($_POST["reportName"] == "rep.diviProd") relatorioDividaProduto();
     else if ($_POST["reportName"] == "rep.cobranca") relatorioCobrancas();
@@ -40,7 +40,7 @@ function reportSearchFilter()
 
     if ($reportName == "rep.cliente") $reportName = "funct_rep_client_credito_somatorio";
     else if ($reportName == "rep.cresHomo") $reportName = "funct_rep_client_crescimento_homologo";
-    else if ($reportName == "rep.credConc") $reportName = "funct_rep_client_credito_contagem";
+    else if ($reportName == "rep.credConc") $reportName = "funct_rep_credito_concedido";
     else if ($reportName == "rep.cobranca") $reportName = "funct_rep_cobranca";
     else if ($reportName == "rep.capiTAEG") $reportName = "funct_rep_divida_capital_taeg";
     else if ($reportName == "rep.diviProd") $reportName = "funct_rep_dividas_produtos";
@@ -147,7 +147,7 @@ function relatorioCrescimentoHomologo()
     die(json_encode(array("result" => $arrayValues)));
 }
 
-function relatorioCreditoContagem()
+function relatorioCreditoConcedido()
 {
     $call = new CallPgSQL();
     $call->functionTable("report.funct_rep_credito_concedido", "*")
