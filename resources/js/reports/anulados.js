@@ -146,7 +146,7 @@ function loadDataToPage() {
             dataExport.data = anulados.data;
             dataExport.type = "rep.cred_anulado";
             dataExport.name = "Creditos Anulados";
-            sessionStorage.dataExport = JSON.stringify(dataExport);
+            /*sessionStorage.dataExport = JSON.stringify(dataExport);*/
             anulados.last_add = 0;
         }, beforeSend: function () {  $(".mp-loading").fadeIn(); },
         complete: function () { $(".mp-loading").fadeOut();

@@ -166,7 +166,7 @@ function reportChequeDistribuido(list) {
 
                 dataExport.data = e.result;
                 dataExport.type = activeReport;
-                sessionStorage.dataExport = JSON.stringify(dataExport);
+                /*sessionStorage.dataExport = JSON.stringify(dataExport);*/
             }
         });
     }
@@ -204,8 +204,8 @@ function reportCabaz(list)
             '<td >'+customer["dos_name"]+" "+customer["dos_surname"] + '</td>' +
             '<td>'+customer["num_contrato"]+'</td>' +
             '<td>'+customer["num_contrato_pago"]+'</td>' +
-            '<td>'+customer["num_contrato_nao_pago"]+'</td>' +
-            '<td>'+formattedString(customer["total_capital_pago"])+'</td>'+
+            '<td>'+formattedString(customer["total_montante_pagar"])+'</td>'+
+            '<td>'+formattedString(customer["total_montante_pago"])+'</td>'+
             '<td>'+formattedString(customer["total_taeg"])+'</td>'
             +'</tr>'
         );
@@ -527,6 +527,18 @@ var relatorio = {
         else if (this.activeReport === TypeReport.CHEQUE) relatorioCheque(this.data);
         else if (this.activeReport === TypeReport.CABAZ) reportCabaz(this.data);
         else if (this.activeReport === TypeReport.PAGAMENTO_ATECIPADO) reportPagamentoAntecipado(this.data);
+    },
+    alter_pages_vist : function (number) {
+        var totalpage = $("#relatorio_pagination").find("div").length;
+        if( totalpage >= 17){
+            var mais5Value = 7 + number;
+            var menos5Value = number - 7;
+            var inicial_view_page = ((menos5Value < 1) ? 1 : menos5Value);
+            var final_view_page = ((menos5Value < 1) ? ( -menos5Value + mais5Value) : mais5Value);
+            var final_view_page = ((final_view_page > totalpage) ? (  ) : mais5Value);
+
+            console.info(inicial_view_page, final_view_page, "PAGINA");
+        }
     }
 };
 
@@ -534,4 +546,5 @@ $("#relatorio_pagination").on("click", ".page", function () {
     $(".page").removeClass("active");
     $(this).addClass("active");
     relatorio.add_data_to_relatorio();
+    relatorio.alter_pages_vist(Number( $(this).text()));
 });
