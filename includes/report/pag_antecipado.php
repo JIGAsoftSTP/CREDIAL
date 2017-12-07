@@ -26,12 +26,12 @@
 							<th grow="2">NIF</th>
 							<th grow="5">Nome</th>
 							<th grow="2">N. Crédito</th>
-							<th grow="3">T. Crédito</th>
+<!--							<th grow="3">T. Crédito</th>-->
 							<th grow="3">Pedido</th>
 							<th grow="3">Reebolso I.</th>
 							<th grow="3">Reebolso A.</th>
-							<th grow="3">TEAG A.</th>
 							<th grow="3">TEAG I.</th>
+							<th grow="3">TEAG A.</th>
 						</tr>
 					</thead>
 					<tbody id="tableCliente">
