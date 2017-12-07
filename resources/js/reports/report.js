@@ -534,10 +534,17 @@ var relatorio = {
             var mais5Value = 7 + number;
             var menos5Value = number - 7;
             var inicial_view_page = ((menos5Value < 1) ? 1 : menos5Value);
-            var final_view_page = ((menos5Value < 1) ? ( -menos5Value + mais5Value) : mais5Value);
-            var final_view_page = ((final_view_page > totalpage) ? ( final_view_page - (to) ) : mais5Value);
+            var final_view_page = mais5Value;
+            final_view_page += inicial_view_page - number + 7;
 
-            console.info(inicial_view_page, final_view_page, "PAGINA");
+            if(final_view_page > totalpage){
+                inicial_view_page -= (final_view_page-totalpage);
+                final_view_page = totalpage;
+            }
+            for( var i = inicial_view_page ; i < final_view_page ; i++){
+
+            }
+            $("#relatorio_pagination").find("div")
         }
     }
 };
