@@ -225,7 +225,7 @@ function reportPagamentoAntecipado(list)
             '<td >'+customer["clientnif"] + '</td' + '>' +
             '<td >'+customer["clientname"]+" "+customer["clientsurname"] + '</td>' +
             '<td>'+customer["creditonumero"]+'</td>' +
-            '<td>'+customer["tipocreditodesc"]+'</td>' +
+            // '<td>'+customer["tipocreditodesc"]+'</td>' +
             '<td>'+customer["creditovalorpedido"]+'</td>' +
             '<td>'+formattedString(customer["creditoreebolsoinicial"])+'</td>'+
             '<td>'+formattedString(customer["creditoreebolsoanticipado"])+'</td>'+
