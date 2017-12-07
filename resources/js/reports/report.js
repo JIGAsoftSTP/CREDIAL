@@ -199,7 +199,7 @@ function reportCabaz(list)
     {
         customer = list[i];
         $("#iframe-" + $('aside li.active').index()).contents().find('table tbody').append(
-            '<tr>' +
+            '<tr data="'+$.base64.btoa(JSON.stringify(customer), true)+'">' +
             '<td >'+customer["dos_nif"] + '</td' + '>' +
             '<td >'+customer["dos_name"]+" "+customer["dos_surname"] + '</td>' +
             '<td>'+customer["num_contrato"]+'</td>' +
