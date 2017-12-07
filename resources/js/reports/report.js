@@ -505,14 +505,16 @@ var relatorio = {
         var div_pagination = $("#relatorio_pagination");
         div_pagination.empty();
         for (var i = 0; i < total; i++){
-            var page = '<div begin="$begin" end="$end" class="'+( (i === 0) ? "active" : "")+' page">$i</div>';
+            var page = '<div begin="$begin" end="$end" _i="$i" class="'+( (i === 0) ? "active" : "")+' page">$i</div>';
             page = page.replace("$begin", begin);
             page = page.replace("$end", end);
+            page = page.replace("$i", (i+1));
             page = page.replace("$i", (i+1));
             div_pagination.append(page);
             begin = end;
             end += this.step;
         }
+        div_pagination.find(".active").click();
     },
     add_data_to_relatorio : function(){
         var pagination = $("#relatorio_pagination").find(".active");
@@ -529,22 +531,25 @@ var relatorio = {
         else if (this.activeReport === TypeReport.PAGAMENTO_ATECIPADO) reportPagamentoAntecipado(this.data);
     },
     alter_pages_vist : function (number) {
-        var totalpage = $("#relatorio_pagination").find("div").length;
+        var pages = $("#relatorio_pagination");
+        var totalpage = pages.find("div").length;
+        var value_por_lado = 5;
         if( totalpage >= 17){
-            var mais5Value = 7 + number;
-            var menos5Value = number - 7;
+            var mais5Value = value_por_lado + number;
+            var menos5Value = number - value_por_lado;
             var inicial_view_page = ((menos5Value < 1) ? 1 : menos5Value);
             var final_view_page = mais5Value;
-            final_view_page += inicial_view_page - number + 7;
+            final_view_page += inicial_view_page - number + value_por_lado;
 
             if(final_view_page > totalpage){
                 inicial_view_page -= (final_view_page-totalpage);
                 final_view_page = totalpage;
             }
-            for( var i = inicial_view_page ; i < final_view_page ; i++){
 
+            pages.find("div.page").hide();
+            for( var i = inicial_view_page ; i <= final_view_page ; i++){
+                pages.find("div.page[_i='"+i+"']").show();
             }
-            $("#relatorio_pagination").find("div")
         }
     }
 };

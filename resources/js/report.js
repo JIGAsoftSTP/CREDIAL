@@ -143,9 +143,13 @@ function returnListFilter(listDB, loadData, identifier){
                 "object" : listDB},
             success:function (e) {
                 if(e.objeto.length >0){
+                    /****
+					 * fikfikfk
+                     * @type {string}
+                     */
                     desc = validViewField(e.objeto);
                     for(var i=0;i<e.objeto.length;i++){
-                        $("#dataList"+identifier).append('<option data-id ="'+e.objeto[i]["ID"]+'" value="'+e.objeto[i][desc]+'"></option>');
+                        $("#dataList"+identifier).append('<option data-id ="'+e.objeto[i]["ID"]+'" value="'+e.objeto[i]["DESC"]+'"></option>');
                     }
                 }
                 regUserActivity(reportActivityAddress, -1, "Adicionou filtros de pesquisa no Relatório de "+$('.title-report').text(),
