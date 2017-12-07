@@ -25,9 +25,9 @@
 							<th grow="10">Nome</th>
 							<th grow="1">Con.</th>
 							<th grow="2">Con. Pago</th>
-							<th grow="4">Montante à Pagar</th>
-							<th grow="4">Total M. Pago</th>
-							<th grow="4">TAEG</th>
+							<th grow="3">Montante à Pagar</th>
+							<th grow="3">Total M. Pago</th>
+							<th grow="3">TAEG</th>
 						</tr>
 					</thead>
 					<tbody id="tableCliente">
