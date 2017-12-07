@@ -487,7 +487,7 @@ $(".icon-file-pdf").click(function () {
 });
 
 var relatorio = {
-    step: 300,
+    step: 500,
     data : [],
     begin : undefined,
     end : undefined,
