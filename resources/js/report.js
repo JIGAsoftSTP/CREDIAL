@@ -143,10 +143,6 @@ function returnListFilter(listDB, loadData, identifier){
                 "object" : listDB},
             success:function (e) {
                 if(e.objeto.length >0){
-                    /****
-					 * fikfikfk
-                     * @type {string}
-                     */
                     desc = validViewField(e.objeto);
                     for(var i=0;i<e.objeto.length;i++){
                         $("#dataList"+identifier).append('<option data-id ="'+e.objeto[i]["ID"]+'" value="'+e.objeto[i]["DESC"]+'"></option>');
