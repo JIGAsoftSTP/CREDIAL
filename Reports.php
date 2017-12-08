@@ -37,6 +37,10 @@
 
                 </div>
                 <div class="pagination flex h-ct" id="relatorio_pagination">
+                    <div class="icon-backward2">
+                    </div>
+                    <div id="relatorio_pagination-add" class="icon-forward3">
+                    </div>
                 </div>
             </div>
 
@@ -86,6 +90,7 @@
 <script type="text/javascript" src="resources/js/report.js"></script>
 <script type="text/javascript" src="resources/js/reports/report.js"></script>
 <script type="text/javascript" src="resources/fw/firebase/firebase.js"></script>
+<script type="text/javascript" src="resources/js/Base64/jquery.base64.js"></script>
 
 
 </html>

@@ -16,6 +16,9 @@ switch ($_POST["intention"]) {
     case "report":
         report();
         break;
+    case "load filters":
+        loadDataFilters();
+        break;
 }
 /**
  *
@@ -34,13 +37,11 @@ function report()
         else relatorioCheque_PorCobrar_Cobrados_Todos();
     } else if ($_POST["reportName"] == "rep.cabaz") relatorioCabaz();
     else if ($_POST["reportName"] == "rep.antecipado") relatorioPagamentoAntecipado();
-
 }
 
 function reportSearchFilter()
 {
     $reportName = $_POST["reportName"];
-
     if ($reportName == "rep.cliente") $reportName = "funct_rep_client_credito_somatorio";
     else if ($reportName == "rep.cresHomo") $reportName = "funct_rep_client_crescimento_homologo";
     else if ($reportName == "rep.credConc") $reportName = "funct_rep_credito_concedido";
@@ -49,7 +50,7 @@ function reportSearchFilter()
     else if ($reportName == "rep.diviProd") $reportName = "funct_rep_dividas_produtos";
     else if ($reportName == "rep.gara") $reportName = "funct_rep_credits_filter";
     else if ($reportName == "rep.cabaz") $reportName = "funct_rep_client_cabaz";
-    else if ($reportName == "rep.cabaz") $reportName = "funct_rep_cheques_distribuidos";
+    else if ($reportName == "rep.antecipado") $reportName = "funct_rep_credito_anticipados";
     else $reportName = "funct_rep_cheques_distribuidos";
 
     $call = new CallPgSQL();
@@ -94,6 +95,7 @@ function relatorioDividaProduto()
     while ($result = $call->getValors()) {
         $arrayValues[count($arrayValues)] = $result;
     }
+    $_SESSION["report"] = $arrayValues;
     die(json_encode(array("result" => $arrayValues)));
 }
 
@@ -112,6 +114,7 @@ function relatorioDivida_taeg()
     while ($result = $call->getValors()) {
         $arrayValues[count($arrayValues)] = $result;
     }
+    $_SESSION["report"] = $arrayValues;
     die(json_encode(array("result" => $arrayValues)));
 }
 
@@ -130,6 +133,7 @@ function relatorioCreditoSomatorio()
     while ($result = $call->getValors()) {
         $arrayValues[count($arrayValues)] = $result;
     }
+    $_SESSION["report"] = $arrayValues;
     die(json_encode(array("result" => $arrayValues)));
 }
 
@@ -147,6 +151,7 @@ function relatorioCrescimentoHomologo()
     while ($result = $call->getValors()) {
         $arrayValues[count($arrayValues)] = $result;
     }
+    $_SESSION["report"] = $arrayValues;
     die(json_encode(array("result" => $arrayValues)));
 }
 
@@ -164,8 +169,10 @@ function relatorioCreditoConcedido()
     while ($result = $call->getValors()) {
         $arrayValues[count($arrayValues)] = $result;
     }
+    $_SESSION["report"] = $arrayValues;
     die(json_encode(array("result" => $arrayValues)));
 }
+
 
 function relatorioCobrancas()
 {
@@ -182,6 +189,7 @@ function relatorioCobrancas()
     while ($result = $call->getValors()) {
         $arrayValues[count($arrayValues)] = $result;
     }
+    $_SESSION["report"] = $arrayValues;
     die(json_encode(array("result" => $arrayValues)));
 }
 
@@ -200,6 +208,7 @@ function relatorioCabaz()
     while ($result = $call->getValors()) {
         $arrayValues[count($arrayValues)] = $result;
     }
+    $_SESSION["report"] = $arrayValues;
     die(json_encode(array("result" => $arrayValues)));
 }
 
@@ -217,6 +226,7 @@ function relatorioPagamentoAntecipado()
     while ($result = $call->getValors()) {
         $arrayValues[count($arrayValues)] = $result;
     }
+    $_SESSION["report"] = $arrayValues;
     die(json_encode(array("result" => $arrayValues)));
 }
 
@@ -234,6 +244,7 @@ function relatorioChequeEntrados()
     while ($result = $call->getValors()) {
         $arrayValues[count($arrayValues)] = $result;
     }
+    $_SESSION["report"] = $arrayValues;
     die(json_encode(array("result" => $arrayValues)));
 }
 
@@ -251,7 +262,20 @@ function relatorioCheque_PorCobrar_Cobrados_Todos()
     while ($result = $call->getValors()) {
         $arrayValues[count($arrayValues)] = $result;
     }
+    $_SESSION["report"] = $arrayValues;
     die(json_encode(array("result" => $arrayValues)));
+}
+
+function loadDataFilters(){
+   $list_data_filters = [];
+    $call = new CallPgSQL();
+    $call->functionTable("report.funct_load_filters_datas", "*")
+        ->addJsonb(null);
+    $call->execute();
+    while ($row = $call->getValors()) {
+        $list_data_filters[] = $row;
+    }
+    die(json_encode(array("filters" => $list_data_filters)));
 }
 
 

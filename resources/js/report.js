@@ -9,9 +9,11 @@ $('aside .single').on('click','li',function(event) {
         type:"POST",
         dataType:"json",
         data:{"intention" : "load report filters",
-            "reportName":  $('#secondary-menu li.active').attr('id')},
+            "reportName":  $('#secondary-menu li.active').attr('id')},										
         beforeSend: function () {  $(".mp-loading").fadeIn(); },
-        complete: function () { $(".mp-loading").fadeOut();},
+        complete: function () {
+			$(".mp-loading").fadeOut();
+		},
         success:function (e) {
             sessionStorage.removeItem('filterReport');
 			$("#report-entities").empty();
@@ -29,8 +31,10 @@ $('aside .single').on('click','li',function(event) {
     $(this).attr('id') === 'rel.acti' ? header.hide(200) : header.show(200);
 });
 
+var list_filters_datas = [];
 var typeReport = undefined;
 var reportActivityAddress = "bean/activity.php";
+var table;
 
 $('.ctrls .hide-filter').click(function() {
 	if(!$('.filter-report').hasClass('fixed')){
@@ -93,6 +97,19 @@ $(".filter-added").on("change", ".dataListValue", function () {
     }
 });
 
+function load_data_filter() {
+    $.ajax({
+        url: "bean/relatorio.php",
+        type:"POST",
+        dataType:"json",
+        data:{"intention" : "load filters"},
+        success:function (e) {
+            list_filters_datas = [];
+            list_filters_datas = e.filters;
+        }
+    });
+}
+
 
 function filterConstruct(identifier, selected, filter, loadData){
 	var structure;
@@ -102,7 +119,7 @@ function filterConstruct(identifier, selected, filter, loadData){
 		'<span class="xClose" title="Remover filtragem por '+ filter +'"><hr><hr></span>' +
 		'<span class="x-autocomplete">' +
 		'<input  loadData="'+loadData+'" id="'+identifier+'"  class="dataListValue"  identifier="'+ identifier + '" list ="dataList'+ identifier +'" placeholder="' + filter + '">' +
-		'<datalist  id="dataList' + identifier + '">' + returnListFilter(selected, loadData, identifier)+
+		'<datalist  id="dataList' + identifier + '">' + returnListFilter(identifier)+
 		'</datalist>' +
 		'</span>' +
 		'</section>';
@@ -130,32 +147,25 @@ function filterExists(filter){
 	return arrayExist;
 }
 
-function returnListFilter(listDB, loadData, identifier){
-	var desc;
+function returnListFilter(identifier){
+    $("#dataList"+identifier).empty();
+    var datasources;
+	var rt = "";
 
-	if(loadData === "1")
-	{
-        $.ajax({
-            url: "bean/relatorio.php",
-            type:"POST",
-            dataType:"json",
-            data:{"intention" : "load report object",
-                "object" : listDB},
-            success:function (e) {
-                if(e.objeto.length >0){
-                    desc = validViewField(e.objeto);
-                    for(var i=0;i<e.objeto.length;i++){
-                        $("#dataList"+identifier).append('<option data-id ="'+e.objeto[i]["ID"]+'" value="'+e.objeto[i][desc]+'"></option>');
-                    }
-                }
-                regUserActivity(reportActivityAddress, -1, "Adicionou filtros de pesquisa no Relatório de "+$('.title-report').text(),
-                    -1, LevelActivity.ATUALIZACAO);
-            }
-        });
+    for(var i= 0;i<list_filters_datas.length;i++){
+    	if(identifier === list_filters_datas[i].filter_cod){
+             datasources = JSON.parse(list_filters_datas[i].filter_datasource);
+             break;
+		}
 	}
-	else
-        $("#dataList"+identifier).empty();
 
+	if(datasources !== null) {
+        for (i = 0; i < datasources.length; i++) {
+            var filter_source = datasources[i];
+            rt += '<option data-id ="' + filter_source["ID"] + '" value="' + filter_source["DESC"] + '"></option>';
+        }
+    }
+	return rt;
 }
 
 function reset() {
@@ -163,6 +173,7 @@ function reset() {
 		$(this).remove();
     });
 }
+load_data_filter();
 
 
 

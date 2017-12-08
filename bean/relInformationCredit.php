@@ -12,6 +12,7 @@ include "Session.php";
 if($_POST["intensao"] == "loadListCredits"){ loadCredit(); }
 if($_POST["intensao"] == "loadListInformationCredit"){ loadInformationByCredit(); }
 if($_POST["intensao"] == "loadListCreditsAlunado"){ loadListCreditsAlunado(); }
+if($_POST["intensao"] == "relatorioNotificacaoPagamentoCredito"){ relatorioNotificacaoPagamentoCredito(); }
 
 function loadCredit(){
 
@@ -63,5 +64,28 @@ function loadListCreditsAlunado(){
     while ($value = $call->getValors()){
         $credits[count($credits)] = $value;
     }
+    $_SESSION["report"] = $credits;
     die(json_encode(array("credits" => $credits)));
+}
+
+function relatorioNotificacaoPagamentoCredito(){
+    $json = file_get_contents("../resources/json/save-log-mail-send.json");
+    $datas = json_decode($json, JSON_OBJECT_AS_ARRAY);
+    $credits = [];
+    for ($i = count($datas) - 1; $i > 0; $i--) {
+        $data = $datas[$i];
+        $nova_data=date('Y-m-d', strtotime($data["data"]));
+
+        $de = date('Y-m-d', strtotime($_POST['filter']['date-inicio']));
+        $ate = date('Y-m-d', strtotime($_POST['filter']['date-fim']));
+
+        if(($nova_data >= $de) && ($nova_data <= $ate)) {
+            foreach ($data["clients"] as $client) {
+                $client["data-send"] = $data["data"];
+                $credits[] = $client;
+            }
+        }
+    }
+    $_SESSION["report"] = $credits;
+    die(json_encode(array("credits" => $credits, $datas)));
 }

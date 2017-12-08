@@ -18,16 +18,16 @@
 			</nav>
 
 			<div class="x-table table-client auto-width">
-				<table id="table-client" class="" cellpadding="0" cellspacing="0">
+				<table id="table-client" class="selectable" cellpadding="0" cellspacing="0">
 					<thead>
 						<tr>                    
 							<th grow="2">NIF</th>
-							<th grow="7">Nome</th>
+							<th grow="10">Nome</th>
 							<th grow="1">Con.</th>
 							<th grow="2">Con. Pago</th>
-							<th grow="5">Montante à Pagar</th>
-							<th grow="5">Total M. Pago</th>
-							<th grow="5">TAEG</th>
+							<th grow="3">Montante à Pagar</th>
+							<th grow="3">Total M. Pago</th>
+							<th grow="3">TAEG</th>
 						</tr>
 					</thead>
 					<tbody id="tableCliente">
@@ -36,11 +36,30 @@
 			</div>
 		</div>
 	</div>
+    <section class="modalPage mp-show-more-information-client-credit">
+        <div class="modalFrame">
+            <div class="modalContainer">
+                <ul id="more-detalhes-list">
+                    <!--<li>
+                        <b>ddd</b>
+                        <span>dd</span>
+                    </li>-->
+                </ul>
+                <div class="modal-header">
+                    <b>Mais Detalhes</b>
+                    <span class="mp-close"></span>
+                </div>
+            </div>
+        </div>
+    </section>
     <?php include "../process.html"; ?>
 </body>
 <script type="text/javascript" src="../../resources/js/jQuery.js"></script>
 <script type="text/javascript" src="../../resources/js/table.js"></script>
 <script type="text/javascript" src="../../resources/js/geralScript.js"></script>
+<script type="text/javascript" src="../../resources/js/controller/geral.js"></script>
+<script type="text/javascript" src="../../resources/js/Base64/jquery.base64.js"></script>
+<script type="text/javascript" src="../../resources/js/reports/cabaz.js"></script>
 </html>
 
 
