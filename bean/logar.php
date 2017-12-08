@@ -171,7 +171,10 @@ function sendfeeback(){
         . "<br>Credial SA";
 
     $se = new SendEmail();
-    $se->getMail()->setFrom($_POST["feed"]["mail"], "Credial →".Session::getUserLogado()->getNome()." ".Session::getUserLogado()->getApelido());
+    try {
+        $se->getMail()->setFrom($_POST["feed"]["mail"], "Credial →" . Session::getUserLogado()->getNome() . " " . Session::getUserLogado()->getApelido());
+    } catch (phpmailerException $e) {
+    }
     $se->getMail()->addAddress("jigasoft_stp@hotmail.com", "JIGAsoft HD");     // Add a recipient
 
     //$se->getMail()->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
@@ -181,7 +184,10 @@ function sendfeeback(){
     $se->getMail()->Subject = ("Credial " . (($_POST["feed"]["type"] == "another") ? $_POST["feed"]["other"] : $_POST["feed"]["type"]));
     $se->getMail()->Body    = $var;
 
-    $enviado = $se->getMail()->send();
+    try {
+        $enviado = $se->getMail()->send();
+    } catch (phpmailerException $e) {
+    }
 
     die (json_encode(array("result" => ($enviado == true))));
 }
@@ -211,7 +217,10 @@ function send_notification_to_client(){
             $var = getMessagem();
 
             $se = new SendEmail();
-            $se->getMail()->setFrom($empresa->mail, $empresa->name);
+            try {
+                $se->getMail()->setFrom($empresa->mail, $empresa->name);
+            } catch (phpmailerException $e) {
+            }
             $se->getMail()->addAddress($client->clientmail, $cliente_nome);
 
             $se->getMail()->isHTML(true);
@@ -219,7 +228,10 @@ function send_notification_to_client(){
             $se->getMail()->Subject = "Credial SA → Pagamento de Credito";
             $se->getMail()->Body = $var;
 
-            $enviado = $se->getMail()->send();
+            try {
+                $enviado = $se->getMail()->send();
+            } catch (phpmailerException $e) {
+            }
         }
         $client->has_bean_send = (isset($enviado) ? $enviado : true);
     }

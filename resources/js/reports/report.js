@@ -25,19 +25,28 @@ var table;
 
 $(function () {
     sessionStorage.removeItem('filterReport');
-
-    $('.x-icon-ok').click(function() {
-         if( $('#secondary-menu li.active').attr('id') !== "rep.gara") // se o relatorio não for de garrantia os dados para base de dados
+    $('.x-icon-ok').click(function () {
+        if ($('#secondary-menu').find('li.active').attr('id') !== "rep.gara"
+            && $('#secondary-menu').find('li.active').attr('id') !== "rep.cred_anulado"
+            && $('#secondary-menu').find('li.active').attr('id') !== "rep.notifcredito") {
+            // se o relatorio não for de garrantia os dados para base de dados
             sendFilterReport();
-         else if($('#secondary-menu li.active').attr('id') === "rep.gara")
-         {
-             setDataStorage(sessionStorage, "filterReport", "date-inicio", ($("#report-inicial-date").val() === "" ? "" :
-                 alterFormatDate($("#report-inicial-date").val())));
-             setDataStorage(sessionStorage, "filterReport", "date-fim", ($("#report-final-date").val() === "" ? "" :
-                 alterFormatDate($("#report-final-date").val())));
-             $("#iframe-" + $('aside li.active').index()).contents().find('#labelWarranty').trigger('click');
-         }
-   });
+            $("#relatorio_pagination").show();
+        }
+        else if ($('#secondary-menu').find('li.active').attr('id') === "rep.gara"
+            || $('#secondary-menu').find('li.active').attr('id') === "rep.cred_anulado"
+            || $('#secondary-menu').find('li.active').attr('id') === "rep.notifcredito") {
+            setDataStorage(sessionStorage, "filterReport", "date-inicio", ($("#report-inicial-date").val() === "" ? "" :
+                alterFormatDate($("#report-inicial-date").val())));
+            setDataStorage(sessionStorage, "filterReport", "date-fim", ($("#report-final-date").val() === "" ? "" :
+                alterFormatDate($("#report-final-date").val())));
+            var iframe = $("#iframe-" + $('aside li.active').index());
+            iframe.contents().find('#labelNotificacao').click();
+            iframe.contents().find('#labelWarranty').click();
+            iframe.contents().find('#labelAnulado').click();
+            $("#relatorio_pagination").hide();
+        }
+    });
 });
 
 
