@@ -400,6 +400,8 @@ else{
 
 }
 
+
+
 function verifyEmpty(_value)
 {
     if(_value === null) return "";
@@ -427,7 +429,6 @@ function sumTable(array){
     $('<div class="sum-parts"></div>').insertAfter(xTbl);
 
     for (var key in array) {
-         var value = data[key];
         $("#iframe-" + $('aside li.active').index()).contents().find('.sum-parts').append(
             '<section>'+
             '<h1>'+ array[key] +'</h1>'+
@@ -591,3 +592,4 @@ $("#relatorio_pagination").on("click", ".page-k", function () {
     $("#relatorio_pagination").find("div.page-k[_i='"+(relatorio.page_selected-1)+"']").click();
     relatorio.test_pagination_status();
 });
+

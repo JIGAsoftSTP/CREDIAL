@@ -17,10 +17,7 @@ function loadComoBoxIDandValue(element, array, id, value) {
 function loadContensFilterReport(element, array) {
     for (var x=0; x < array.length; x++){
         var lista = array[x];
-        if(lista.contents !== null)
-            element.append('<option loadData="1" value="' + lista["contents"]["table"] + '" filter="' + lista["name"] + '" identifier="' + lista["cod"] + '">' + lista["name"] + '</option>');
-        else
-            element.append('<option loadData="0" value="' + lista["name"] + '" filter="' + lista["name"] + '" identifier="' + lista["cod"] + '">' + lista["name"] + '</option>');
+        element.append('<option loadData="'+(lista.contents !== null ? "1" : "0")+'" value="' + (lista.contents !== null ? lista["contents"]["table"] : lista["name"]) + '" filter="' + lista["name"] + '" identifier="' + lista["cod"] + '">' + lista["name"] + '</option>');
     }
 }
 
