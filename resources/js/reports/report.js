@@ -199,7 +199,7 @@ function reportCabaz(list)
     {
         customer = list[i];
         $("#iframe-" + $('aside li.active').index()).contents().find('table tbody').append(
-            '<tr>' +
+            '<tr data="'+$.base64.btoa(JSON.stringify(customer), true)+'">' +
             '<td >'+customer["dos_nif"] + '</td' + '>' +
             '<td >'+customer["dos_name"]+" "+customer["dos_surname"] + '</td>' +
             '<td>'+customer["num_contrato"]+'</td>' +
@@ -225,7 +225,7 @@ function reportPagamentoAntecipado(list)
             '<td >'+customer["clientnif"] + '</td' + '>' +
             '<td >'+customer["clientname"]+" "+customer["clientsurname"] + '</td>' +
             '<td>'+customer["creditonumero"]+'</td>' +
-            '<td>'+customer["tipocreditodesc"]+'</td>' +
+            // '<td>'+customer["tipocreditodesc"]+'</td>' +
             '<td>'+customer["creditovalorpedido"]+'</td>' +
             '<td>'+formattedString(customer["creditoreebolsoinicial"])+'</td>'+
             '<td>'+formattedString(customer["creditoreebolsoanticipado"])+'</td>'+

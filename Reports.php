@@ -90,6 +90,7 @@
 <script type="text/javascript" src="resources/js/report.js"></script>
 <script type="text/javascript" src="resources/js/reports/report.js"></script>
 <script type="text/javascript" src="resources/fw/firebase/firebase.js"></script>
+<script type="text/javascript" src="resources/js/Base64/jquery.base64.js"></script>
 
 
 </html>
