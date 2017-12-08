@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<script type="text/javascript" src="../../resources/js/admission.js"></script>
+<!--	<script type="text/javascript" src="../../resources/js/admission.js"></script>-->
 	<link rel="stylesheet" href="../../resources/css/geralStyle.css">
 	<link rel="stylesheet" href="../../resources/css/report.css">
 	<link rel="styleshteet" href="../../resources/css/reports/report-all.css">
@@ -65,7 +65,7 @@
     </div>
 
 </body>
-<script type="text/javascript" src="../../resources/js/jQuery.js"></script>
-<script type="text/javascript" src="../../resources/js/geralScript.js"></script>
+<!--<script type="text/javascript" src="../../resources/js/jQuery.js"></script>
+<script type="text/javascript" src="../../resources/js/geralScript.js"></script>-->
 <script type="text/javascript" src="../../resources/js/reports/warranty.js"></script>
 </html>

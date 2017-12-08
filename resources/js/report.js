@@ -1,7 +1,7 @@
 
 $('aside .single').on('click','li',function(event) {
 	$('.title-report').text($(this).text());
-	CtrlMenu($(this), $('.report-content'));
+	CtrlMenu2($(this), $('.report-content'));
     reset();
 
     $.ajax({

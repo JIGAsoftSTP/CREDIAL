@@ -265,6 +265,23 @@ function CtrlMenu(element, element2){
     /*event.stopPropagation();*/
 }
 
+function CtrlMenu2(element, element2){
+    element.addClass('active').siblings().removeClass('active');
+    $.ajax({
+        url: element.attr('urldata'),
+        type: "POST",
+        processData: false,
+        contentType: false,
+        dataType: "html",
+        success: function (e) {
+            element2.html(e);
+            element.find('li').eq(0).trigger('click');
+        }
+    });
+
+    /*event.stopPropagation();*/
+}
+
 // ###################     VALIDATION      ##############
 function isEmpty(element) {
     if (element.attr('type') === 'password')

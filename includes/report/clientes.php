@@ -2,7 +2,7 @@
 <html lang="pt">
 <head>
 	<meta charset="UTF-8">
-	<script type="text/javascript" src="../../resources/js/admission.js"></script>
+<!--	<script type="text/javascript" src="../../resources/js/admission.js"></script>-->
 	<link rel="stylesheet" href="../../resources/css/geralStyle.css">
 	<link rel="stylesheet" href="../../resources/css/reports/report-all.css">
 	<link rel="stylesheet" href="../../resources/css/report.css">
@@ -39,15 +39,15 @@
 	</div>
     <?php include "../process.html"; ?>
 </body>
-<script type="text/javascript" src="../../resources/fw/pikaday/pikaday.js"></script>
+<!--<script type="text/javascript" src="../../resources/fw/pikaday/pikaday.js"></script>
 <script type="text/javascript" src="../../resources/js/jQuery.js"></script>
 <script type="text/javascript" src="../../resources/js/table.js"></script>
 <script type="text/javascript" src="../../resources/js/geralScript.js"></script>
-<script type="text/javascript" src="../../resources/js/controller/geral.js"></script>
-<script type="text/javascript" src="../../resources/js/reports/report.js"></script>
-<script type="text/javascript" src="../../resources/fw/js/angular.min.js"></script>
-<script type="text/javascript" src="../../resources/js/xMenu.js"></script>
-<script type="text/javascript" src=""></script>
+<script type="text/javascript" src="../../resources/js/controller/geral.js"></script>-->
+<!--<script type="text/javascript" src="../../resources/js/reports/report.js"></script>-->
+<!--<script type="text/javascript" src="../../resources/fw/js/angular.min.js"></script>-->
+<!--<script type="text/javascript" src="../../resources/js/xMenu.js"></script>-->
+<!--<script type="text/javascript" src=""></script>-->
 
 </html>
 

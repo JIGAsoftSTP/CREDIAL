@@ -79,7 +79,7 @@ function loadSubMenuSecondaryReport(menus) {
 }
 
 $('.multiple').on("click", "li", function(event) {
-    CtrlMenu($(this), $('.report-content'));
+    CtrlMenu2($(this), $('.report-content'));
     event.stopPropagation();
 });
 

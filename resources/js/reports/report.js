@@ -40,10 +40,10 @@ $(function () {
                 alterFormatDate($("#report-inicial-date").val())));
             setDataStorage(sessionStorage, "filterReport", "date-fim", ($("#report-final-date").val() === "" ? "" :
                 alterFormatDate($("#report-final-date").val())));
-            var iframe = $("#iframe-" + $('aside li.active').index());
-            iframe.contents().find('#labelNotificacao').click();
-            iframe.contents().find('#labelWarranty').click();
-            iframe.contents().find('#labelAnulado').click();
+            var iframe = $(".report-content");
+            iframe.find('#labelNotificacao').click();
+            iframe.find('#labelWarranty').click();
+            iframe.find('#labelAnulado').click();
             $("#relatorio_pagination").hide();
         }
     });
@@ -56,7 +56,7 @@ data();
 function sendFilterReport() {
 
     if($('#secondary-menu li.active').attr('id') ===  TypeReport.CHEQUE){
-         chequeFiltro = $("#iframe-" + $('aside li.active').index()).contents().find(".filter-type-cheq li.active").attr("id");
+         chequeFiltro = $(".report-content").find(".filter-type-cheq li.active").attr("id");
     }
 
  if(validation1($(".reportDate")))
@@ -65,11 +65,11 @@ function sendFilterReport() {
 
 function reportGrowth(list)
 {
-    $("#iframe-" + $('aside li.active').index()).contents().find('table tbody').empty();
+    $(".report-content").find('table tbody').empty();
     for(var i = relatorio.begin;(i<list.length-1 && i !== relatorio.end) ;i++)
     {
          growth = list[i];
-        $("#iframe-" + $('aside li.active').index()).contents().find('table tbody').append('' +
+        $(".report-content").find('table tbody').append('' +
             '<tr><td >' + growth["NIF"] + '</td><td >' + growth["CLIENT NAME"]+" "+growth["CLIENT SURNAME"] + '</td>' +
             '<td>'+growth["LOCALIDADE"]+'</td><td>'+growth["QUANTIDADE ANO"]+'</td>' +
             '<td>'+growth["QUANTIDADE PASSADO"]+'</td>' +
@@ -80,30 +80,30 @@ function reportGrowth(list)
 
         sumTable(listLastValues);
     }
-    tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
+    tableEstructure($(".report-content").find('table'));
 }
 
 // relatorio TAEG
 function reportTaeg(list)
 {
-    $("#iframe-" + $('aside li.active').index()).contents().find('table tbody').empty();
+    $(".report-content").find('table tbody').empty();
     if(list.length >0){
-        $("#iframe-" + $('aside li.active').index()).contents().find('.first-section h1:eq(0) span').text(formattedString(list[list.length-2]["CREDITO VALUE"]));
-        $("#iframe-" + $('aside li.active').index()).contents().find('.first-section h1:eq(1) span').text(formattedString(list[list.length-1]["CREDITO VALUE"]));
+        $(".report-content").find('.first-section h1:eq(0) span').text(formattedString(list[list.length-2]["CREDITO VALUE"]));
+        $(".report-content").find('.first-section h1:eq(1) span').text(formattedString(list[list.length-1]["CREDITO VALUE"]));
 
 
-        $("#iframe-" + $('aside li.active').index()).contents().find('.second-section h1:eq(0) span').text(formattedString(list[list.length-2]["CREDITO TOTAL PAGAR MONTANTE DIVIDA"]));
-        $("#iframe-" + $('aside li.active').index()).contents().find('.second-section h1:eq(1) span').text(formattedString(list[list.length-1]["CREDITO TOTAL PAGAR MONTANTE DIVIDA"]));
+        $(".report-content").find('.second-section h1:eq(0) span').text(formattedString(list[list.length-2]["CREDITO TOTAL PAGAR MONTANTE DIVIDA"]));
+        $(".report-content").find('.second-section h1:eq(1) span').text(formattedString(list[list.length-1]["CREDITO TOTAL PAGAR MONTANTE DIVIDA"]));
 
-        $("#iframe-" + $('aside li.active').index()).contents().find('.third-section h1:eq(0) span').text(formattedString(list[list.length-2]["CREDITO TAEG"]));
-        $("#iframe-" + $('aside li.active').index()).contents().find('.third-section h1:eq(1) span').text(formattedString(list[list.length-1]["CREDITO TAEG"]));
+        $(".report-content").find('.third-section h1:eq(0) span').text(formattedString(list[list.length-2]["CREDITO TAEG"]));
+        $(".report-content").find('.third-section h1:eq(1) span').text(formattedString(list[list.length-1]["CREDITO TAEG"]));
     }
 
     for(var i = relatorio.begin;(i<list.length-1 && i !== relatorio.end) ;i++)
     {
          taeg = list[i];
         if(taeg["NIF"].toUpperCase() !=="TOTAL"){
-            $("#iframe-" + $('aside li.active').index()).contents().find('table tbody').append('' +
+            $(".report-content").find('table tbody').append('' +
                 '<tr><td >' + taeg["CREDITO NUM DOSSCIER"] + '</td><td >' + taeg["NIF"]+'</td>' +
                 '<td>'+taeg["NAME"]+" "+taeg["SURNAME"]+'</td><td>'+formattedString(taeg["CREDITO VALUE"])+'</td>' +
                 '<td>'+formattedString(taeg["CREDITO TOTAL PAGAR MONTANTE DIVIDA"])+'</td>' +
@@ -111,22 +111,22 @@ function reportTaeg(list)
                 '<td>'+formatDate(taeg["CREDITO FINALIZAR"],2)+'</td><td>'+taeg["CREDITO STATE"]+'</td></tr>');
         }
     }
-    tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
+    tableEstructure($(".report-content").find('table'));
 }
 
 
 function reportChequeDistribuido(list) {
-    $("#iframe-" + $('aside li.active').index()).contents().find('table tbody').empty();
+    $(".report-content").find('table tbody').empty();
 
     for(var i = relatorio.begin;(i<list.length-1 && i !== relatorio.end) ;i++)
     {
          cheque = list[i];
-        $("#iframe-" + $('aside li.active').index()).contents().find('table tbody').append('' +
+        $(".report-content").find('table tbody').append('' +
             '<tr><td >' + formatDate(cheque["DATA"],2) + '</td><td >' + formattedString(cheque["DEBITO"])+'</td>' +
             '<td>'+formattedString(cheque["CREDITO"])+'</td><td title="'+cheque["BANCO NAME"]+'">'+cheque["BANCO SIGLA"]+'</td>' +
             '<td>'+cheque["AGENCIA"]+'</td></tr>');
     }
-    tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
+    tableEstructure($(".report-content").find('table'));
 }
 
     function dataReport() {
@@ -160,9 +160,9 @@ function reportChequeDistribuido(list) {
             type:"POST",
             dataType:"json",
             data: dados,
-            beforeSend: function () { $("#iframe-" + $('aside li.active').index()).contents().find(".mp-loading").fadeIn(); },
+            beforeSend: function () { $(".report-content").find(".mp-loading").fadeIn(); },
             complete: function () {
-                $("#iframe-" + $('aside li.active').index()).contents().find(".mp-loading").fadeOut();},
+                $(".report-content").find(".mp-loading").fadeOut();},
             success:function (e) {
                 regUserActivity("bean/activity.php", -1, "Visualizou dados do Relatório de "+$('.title-report').text(),
                     -1, LevelActivity.VISUALIZACAO);
@@ -183,13 +183,13 @@ function reportChequeDistribuido(list) {
 function reportCustomer(list)
 {
     var totalQuantity = 0;
-    $("#iframe-" + $('aside li.active').index()).contents().find('table tbody').empty();
+    $(".report-content").find('table tbody').empty();
 
     for(var i = relatorio.begin;(i<list.length-1 && i !== relatorio.end) ;i++)
     {
         customer = list[i];
 
-        $("#iframe-" + $('aside li.active').index()).contents().find('table tbody').append('' +
+        $(".report-content").find('table tbody').append('' +
             '<tr><td >' + customer["NIF"] + '</td><td >' + customer["NAME"]+" "+customer["SURNAME"] + '</td>' +
             '<td>'+customer["QUANTIDADE CREDITO"]+'</td><td>'+formattedString(customer["VALOR"])+'</td><td>'+customer["LOCAL TRABALHO"]+'</td></tr>');
 
@@ -197,17 +197,17 @@ function reportCustomer(list)
         listLastValues  = {"Quantidade" : totalQuantity, "Valor" : formattedString((list[list.length-1]["VALOR"]))};
         sumTable(listLastValues);
     }
-    tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
+    tableEstructure($(".report-content").find('table'));
 }
 
 function reportCabaz(list)
 {
-    $("#iframe-" + $('aside li.active').index()).contents().find('table tbody').empty();
+    $(".report-content").find('table tbody').empty();
 
     for(var i = relatorio.begin;(i<list.length && i !== relatorio.end) ;i++)
     {
         customer = list[i];
-        $("#iframe-" + $('aside li.active').index()).contents().find('table tbody').append(
+        $(".report-content").find('table tbody').append(
             '<tr data="'+$.base64.btoa(JSON.stringify(customer), true)+'">' +
             '<td >'+customer["dos_nif"] + '</td' + '>' +
             '<td >'+customer["dos_name"]+" "+customer["dos_surname"] + '</td>' +
@@ -219,17 +219,17 @@ function reportCabaz(list)
             +'</tr>'
         );
     }
-    tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
+    tableEstructure($(".report-content").find('table'));
 }
 
 function reportPagamentoAntecipado(list)
 {
-    $("#iframe-" + $('aside li.active').index()).contents().find('table tbody').empty();
+    $(".report-content").find('table tbody').empty();
 
     for(var i = relatorio.begin;(i<list.length && i !== relatorio.end) ;i++)
     {
         customer = list[i];
-        $("#iframe-" + $('aside li.active').index()).contents().find('table tbody').append(
+        $(".report-content").find('table tbody').append(
             '<tr>' +
             '<td >'+customer["clientnif"] + '</td' + '>' +
             '<td >'+customer["clientname"]+" "+customer["clientsurname"] + '</td>' +
@@ -243,7 +243,7 @@ function reportPagamentoAntecipado(list)
             +'</tr>'
         );
     }
-    tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
+    tableEstructure($(".report-content").find('table'));
 }
 
 function relatorioCheque(list) {
@@ -264,56 +264,56 @@ function relatorioCheque(list) {
 
 function relatorioDividaProduto(list) {
 
-    $("#iframe-" + $('aside li.active').index()).contents().find('table tbody').empty();
+    $(".report-content").find('table tbody').empty();
     if(list.length >1){
-        $("#iframe-" + $('aside li.active').index()).contents().find('.first-section h1:eq(0) span').text(formattedString(list[list.length-2]["CREDITO VALUE SOLICITADO"]));
-        $("#iframe-" + $('aside li.active').index()).contents().find('.first-section h1:eq(1) span').text(formattedString(list[list.length-1]["CREDITO VALUE SOLICITADO"]));
+        $(".report-content").find('.first-section h1:eq(0) span').text(formattedString(list[list.length-2]["CREDITO VALUE SOLICITADO"]));
+        $(".report-content").find('.first-section h1:eq(1) span').text(formattedString(list[list.length-1]["CREDITO VALUE SOLICITADO"]));
 
-        $("#iframe-" + $('aside li.active').index()).contents().find('.second-section h1:eq(0) span').text(formattedString(list[list.length-2]["CREDITO TOTAL PAGAR MONTANTE"]));
-        $("#iframe-" + $('aside li.active').index()).contents().find('.second-section h1:eq(1) span').text(formattedString(list[list.length-1]["CREDITO TOTAL PAGAR MONTANTE"]));
+        $(".report-content").find('.second-section h1:eq(0) span').text(formattedString(list[list.length-2]["CREDITO TOTAL PAGAR MONTANTE"]));
+        $(".report-content").find('.second-section h1:eq(1) span').text(formattedString(list[list.length-1]["CREDITO TOTAL PAGAR MONTANTE"]));
 
-        $("#iframe-" + $('aside li.active').index()).contents().find('.third-section h1:eq(0) span').text(formattedString(list[list.length-2]["CREDITO VALUE PAGO"]));
-        $("#iframe-" + $('aside li.active').index()).contents().find('.third-section h1:eq(1) span').text(formattedString(list[list.length-1]["CREDITO VALUE PAGO"]));
+        $(".report-content").find('.third-section h1:eq(0) span').text(formattedString(list[list.length-2]["CREDITO VALUE PAGO"]));
+        $(".report-content").find('.third-section h1:eq(1) span').text(formattedString(list[list.length-1]["CREDITO VALUE PAGO"]));
     }
 
     for(var i = relatorio.begin;(i<list.length-1 && i !== relatorio.end) ;i++)
     {
         divida = list[i];
         if(divida["NIF"].toUpperCase() !== "TOTAL"){
-            $("#iframe-" + $('aside li.active').index()).contents().find('table tbody').append('' +
+            $(".report-content").find('table tbody').append('' +
                 '<tr><td >' + divida["NIF"] + '</td><td >' + divida["NAME"]+" "+divida["SURNAME"] + '</td>' +
                 '<td>'+formattedString(divida["CREDITO VALUE SOLICITADO"])+'</td><td>'+formattedString(divida["CREDITO TOTAL PAGAR MONTANTE"])+'</td>' +
                 '<td>'+formattedString(divida["CREDITO VALUE PAGO"])+'</td></tr>');
         }
     }
-    tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
+    tableEstructure($(".report-content").find('table'));
 }
 
 function relatorioChequeEstado(list) {
-    $("#iframe-" + $('aside li.active').index()).contents().find('table tbody').empty();
+    $(".report-content").find('table tbody').empty();
 
     for(var i = relatorio.begin;(i<list.length-1 && i !== relatorio.end) ;i++)
     {
         cheque = list[i];
-        $("#iframe-" + $('aside li.active').index()).contents().find('table tbody').append('' +
+        $(".report-content").find('table tbody').append('' +
             '<tr><td></td><td ></td><td></td><td></td><td></td>' +
             '<td>'+cheque["NIF"]+'</td><td>'+cheque["NAME"]+" "+cheque["SURNAME"]+'</td><td>'+cheque["PAGAMENTO NUM DOCUMENTO"]+'</td><td>'
             +formattedString(cheque["VALOR CHEQUE REEMBOLSO"])+'</td><td>'+formatDate(cheque["DATA DOCUMENTO PAGAMENTO PREVISTO DEPOSITO"],2)+'' +
             '</td><td>'+cheque["BANCO SIGLA"]+'</td><td>'+verifyEmpty(cheque["PAGAMENTO DATA ENDOSSADO"])+'</td></tr>');
     }
-    tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
+    tableEstructure($(".report-content").find('table'));
 }
 
 function reportCredit(list)
 {
-    $("#iframe-" + $('aside li.active').index()).contents().find('table tbody').empty();
+    $(".report-content").find('table tbody').empty();
 
     for(var i = relatorio.begin;(i<list.length-1 && i !== relatorio.end) ;i++)
     {
         credit = list[i];
         if (credit["NIF"].toUpperCase() !== "TOTAL") {
             date = formatDate(credit["DATA"], 1);
-            $("#iframe-" + $('aside li.active').index()).contents().find('table tbody').append('' +
+            $(".report-content").find('table tbody').append('' +
                 '<tr><td >' + credit["NUM CREDITO DOSSCIER"] + '</td><td >' + formatDate(credit["DATA"], 1) + '</td>' +
                 '<td>' + credit["NIF"] + '</td><td>' + credit["NAME"] + " " + credit["SURNAME"] + '</td><td>' + formattedString(credit["VALOR CREDITO"]) + '</td>' +
                 '<td>' + formattedString(credit["TOTAL PAGAR MONTANTE DIVIDA"]) + '</td><td>' + formattedString(credit["TAEG"]) + '</td>' +
@@ -326,7 +326,7 @@ function reportCredit(list)
             sumTable(listLastValues);
         }
     }
-    tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
+    tableEstructure($(".report-content").find('table'));
 }
 
 var ReportFiler = function (dataI, dataF, periodo) {
@@ -336,13 +336,13 @@ var ReportFiler = function (dataI, dataF, periodo) {
 
 function reportCobrancas(list) {
 
-    $("#iframe-" + $('aside li.active').index()).contents().find('table tbody').empty();
+    $(".report-content").find('table tbody').empty();
 
     for(var i = relatorio.begin;(i<list.length-1 && i !== relatorio.end) ;i++)
     {
          cobranca = list[i];
         if(cobranca["NIF"].toUpperCase() !=="TOTAL"){
-            $("#iframe-" + $('aside li.active').index()).contents().find('table tbody').append('' +
+            $(".report-content").find('table tbody').append('' +
                 '<tr><td >' + cobranca["NIF"] + '</td><td >' + cobranca["NAME"] + " " + cobranca["SURNAME"] + '</td>' +
                 '<td>' + formattedString(cobranca["VALOR REEMBOLSO"]) + '</td><td>' + cobranca["NUM DOCUMENTO REAL"] + '</td>' +
                 '<td>' + cobranca["NUM DOCUMENTO PREVISTO"] + '</td><td>' + formatDate(cobranca["DATA DOCUMENTO REAL"],2) + '</td>' +
@@ -352,7 +352,7 @@ function reportCobrancas(list) {
             "Valor Reembolso em Relação Ano Atual" : formattedString(list[list.length-2]["VALOR REEMBOLSO"])};
         sumTable(listLastValues);
     }
-    tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
+    tableEstructure($(".report-content").find('table'));
 }
 
 
@@ -433,12 +433,12 @@ var TypeReport = {
 
 function sumTable(array){
 
-    $("#iframe-" + $('aside li.active').index()).contents().find('.sum-parts').remove();
-    xTbl = $("#iframe-" + $('aside li.active').index()).contents().find('.master-content .x-table');
+    $(".report-content").find('.sum-parts').remove();
+    xTbl = $(".report-content").find('.master-content .x-table');
     $('<div class="sum-parts"></div>').insertAfter(xTbl);
 
     for (var key in array) {
-        $("#iframe-" + $('aside li.active').index()).contents().find('.sum-parts').append(
+        $(".report-content").find('.sum-parts').append(
             '<section>'+
             '<h1>'+ array[key] +'</h1>'+
             '<span>'+ key +'</span>'+
@@ -571,7 +571,7 @@ var relatorio = {
     test_pagination_status : function () {
         var pagination = $("#relatorio_pagination");
         if (this.page_selected === 1 && this.page_total === 1){
-            pagination.find(".icon-forward3, .icon-backward2").hide();
+            pagination.find(".icon-forward3, .icon-backward2, .page-k").hide();
         }else if(this.page_selected === this.page_total){
             pagination.find(".icon-forward3").hide();
             pagination.find(".icon-backward2").show();
@@ -601,4 +601,3 @@ $("#relatorio_pagination").on("click", ".page-k", function () {
     $("#relatorio_pagination").find("div.page-k[_i='"+(relatorio.page_selected-1)+"']").click();
     relatorio.test_pagination_status();
 });
-

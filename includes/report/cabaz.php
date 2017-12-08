@@ -2,7 +2,7 @@
 <html lang="pt">
 <head>
 	<meta charset="UTF-8">
-	<script type="text/javascript" src="../../resources/js/admission.js"></script>
+<!--	<script type="text/javascript" src="../../resources/js/admission.js"></script>-->
 	<link rel="stylesheet" href="../../resources/css/geralStyle.css">
 	<link rel="stylesheet" href="../../resources/css/report.css">
 	<link rel="stylesheet" href="../../resources/css/reports/report-all.css">
@@ -54,11 +54,11 @@
     </section>
     <?php include "../process.html"; ?>
 </body>
-<script type="text/javascript" src="../../resources/js/jQuery.js"></script>
+<!--<script type="text/javascript" src="../../resources/js/jQuery.js"></script>
 <script type="text/javascript" src="../../resources/js/table.js"></script>
 <script type="text/javascript" src="../../resources/js/geralScript.js"></script>
-<script type="text/javascript" src="../../resources/js/controller/geral.js"></script>
-<script type="text/javascript" src="../../resources/js/Base64/jquery.base64.js"></script>
+<script type="text/javascript" src="../../resources/js/controller/geral.js"></script>-->
+<!--<script type="text/javascript" src="../../resources/js/Base64/jquery.base64.js"></script>-->
 <script type="text/javascript" src="../../resources/js/reports/cabaz.js"></script>
 </html>
 
