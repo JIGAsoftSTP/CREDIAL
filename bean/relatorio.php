@@ -95,6 +95,7 @@ function relatorioDividaProduto()
     while ($result = $call->getValors()) {
         $arrayValues[count($arrayValues)] = $result;
     }
+    $_SESSION["report"] = $arrayValues;
     die(json_encode(array("result" => $arrayValues)));
 }
 
@@ -113,6 +114,7 @@ function relatorioDivida_taeg()
     while ($result = $call->getValors()) {
         $arrayValues[count($arrayValues)] = $result;
     }
+    $_SESSION["report"] = $arrayValues;
     die(json_encode(array("result" => $arrayValues)));
 }
 
@@ -131,6 +133,7 @@ function relatorioCreditoSomatorio()
     while ($result = $call->getValors()) {
         $arrayValues[count($arrayValues)] = $result;
     }
+    $_SESSION["report"] = $arrayValues;
     die(json_encode(array("result" => $arrayValues)));
 }
 
@@ -148,6 +151,7 @@ function relatorioCrescimentoHomologo()
     while ($result = $call->getValors()) {
         $arrayValues[count($arrayValues)] = $result;
     }
+    $_SESSION["report"] = $arrayValues;
     die(json_encode(array("result" => $arrayValues)));
 }
 
@@ -165,6 +169,7 @@ function relatorioCreditoConcedido()
     while ($result = $call->getValors()) {
         $arrayValues[count($arrayValues)] = $result;
     }
+    $_SESSION["report"] = $arrayValues;
     die(json_encode(array("result" => $arrayValues)));
 }
 
@@ -184,6 +189,7 @@ function relatorioCobrancas()
     while ($result = $call->getValors()) {
         $arrayValues[count($arrayValues)] = $result;
     }
+    $_SESSION["report"] = $arrayValues;
     die(json_encode(array("result" => $arrayValues)));
 }
 
@@ -202,6 +208,7 @@ function relatorioCabaz()
     while ($result = $call->getValors()) {
         $arrayValues[count($arrayValues)] = $result;
     }
+    $_SESSION["report"] = $arrayValues;
     die(json_encode(array("result" => $arrayValues)));
 }
 
@@ -219,6 +226,7 @@ function relatorioPagamentoAntecipado()
     while ($result = $call->getValors()) {
         $arrayValues[count($arrayValues)] = $result;
     }
+    $_SESSION["report"] = $arrayValues;
     die(json_encode(array("result" => $arrayValues)));
 }
 
@@ -236,6 +244,7 @@ function relatorioChequeEntrados()
     while ($result = $call->getValors()) {
         $arrayValues[count($arrayValues)] = $result;
     }
+    $_SESSION["report"] = $arrayValues;
     die(json_encode(array("result" => $arrayValues)));
 }
 
@@ -253,6 +262,7 @@ function relatorioCheque_PorCobrar_Cobrados_Todos()
     while ($result = $call->getValors()) {
         $arrayValues[count($arrayValues)] = $result;
     }
+    $_SESSION["report"] = $arrayValues;
     die(json_encode(array("result" => $arrayValues)));
 }
 

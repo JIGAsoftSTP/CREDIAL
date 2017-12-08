@@ -173,9 +173,9 @@ function reportChequeDistribuido(list) {
                 relatorio.create_pagination(e.result);
                 relatorio.add_data_to_relatorio();
 
-                dataExport.data = e.result;
+                /*dataExport.data = e.result;*/
                 dataExport.type = activeReport;
-                /*sessionStorage.dataExport = JSON.stringify(dataExport);*/
+                sessionStorage.dataExport = JSON.stringify(dataExport);
             }
         });
     }

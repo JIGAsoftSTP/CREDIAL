@@ -16,7 +16,9 @@ if ($_POST["intensao"] == "exportExcel") {
 
 function exportExcel()
 {
+    session_start();
     $data = json_decode($_POST["report"], JSON_OBJECT_AS_ARRAY);
+    $data["data"] = $_SESSION["report"];
     $export = new ExportExcel();
     if ($data["type"] == "rep.cliente") {
         $export->setUser(Session::getUserLogado()->getNome() . " " . Session::getUserLogado()->getApelido())

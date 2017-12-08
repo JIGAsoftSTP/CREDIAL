@@ -127,7 +127,7 @@ var ExportData = function () {
     this.data = undefined;
 
     this.haveData = function () {
-        return (this.data !== undefined || $.isArray(this.data));
+        return true/*(this.data !== undefined || $.isArray(this.data))*/;
     };
 };
 

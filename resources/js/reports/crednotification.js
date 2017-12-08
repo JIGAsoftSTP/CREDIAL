@@ -80,7 +80,7 @@ var ExportData = function () {
     this.data = undefined;
 
     this.haveData = function () {
-        return (this.data !== undefined || $.isArray(this.data));
+        return true/*(this.data !== undefined || $.isArray(this.data))*/;
     };
 };
 
@@ -99,10 +99,10 @@ function loadDataToPage() {
         dataType: "json",
         success: function (e) {
             notificacao.data = e.credits;
-            dataExport.data = notificacao.data;
+            /*dataExport.data = notificacao.data;*/
             dataExport.type = "rep.notifcredito";
             dataExport.name = "Notificação para Pagamento de Credito";
-            /*sessionStorage.dataExport = JSON.stringify(dataExport);*/
+            sessionStorage.dataExport = JSON.stringify(dataExport);
             notificacao.last_add = 0;
         }, beforeSend: function () {
             $(".mp-loading").fadeIn();

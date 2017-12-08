@@ -64,6 +64,7 @@ function loadListCreditsAlunado(){
     while ($value = $call->getValors()){
         $credits[count($credits)] = $value;
     }
+    $_SESSION["report"] = $credits;
     die(json_encode(array("credits" => $credits)));
 }
 
@@ -85,5 +86,6 @@ function relatorioNotificacaoPagamentoCredito(){
             }
         }
     }
+    $_SESSION["report"] = $credits;
     die(json_encode(array("credits" => $credits, $datas)));
 }
