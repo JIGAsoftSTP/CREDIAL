@@ -70,5 +70,20 @@ function loadListCreditsAlunado(){
 function relatorioNotificacaoPagamentoCredito(){
     $json = file_get_contents("../resources/json/save-log-mail-send.json");
     $datas = json_decode($json, JSON_OBJECT_AS_ARRAY);
-    die($json);
+    $credits = [];
+    for ($i = count($datas) - 1; $i > 0; $i--) {
+        $data = $datas[$i];
+        $nova_data=date('Y-m-d', strtotime($data["data"]));
+
+        $de = date('Y-m-d', strtotime($_POST['filter']['date-inicio']));
+        $ate = date('Y-m-d', strtotime($_POST['filter']['date-fim']));
+
+        if(($nova_data >= $de) && ($nova_data <= $ate)) {
+            foreach ($data["clients"] as $client) {
+                $client["data-send"] = $data["data"];
+                $credits[] = $client;
+            }
+        }
+    }
+    die(json_encode(array("credits" => $credits, $datas)));
 }

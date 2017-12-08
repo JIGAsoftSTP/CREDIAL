@@ -4,12 +4,11 @@
 
 loadDataToPage();
 
-$('.list-warr').on("click", ".first small", function (event)
-{
+$('.list-warr').on("click", ".first small", function (event) {
     me = $(this).closest('section');
     me.find('.more').toggleClass('show');
 }).scroll(function () {
-    if($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
+    if ($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
         transformDataToCredito();
     }
 });
@@ -19,105 +18,59 @@ $("#labelNotificacao").click(function () {
 });
 
 var CreditoBluiderNotificacao = function () {
-    /**
-     * @type {[CreditoNotificacao]}
-     */
     this.listaCredito = [];
 
     /**
-     * @param credito {CreditoNotificacao}
+     * @param credito
      * @param ig {Number}
      */
     this.bluiderCreditos = function (credito, ig) {
-        var nome_cliente = (credito.clientname + ((credito.clientsurname === credito.clientname) ? '' : ' '+credito.clientsurname));
+        var nome_cliente = (credito.clientenome + ((credito.clienteapelido === credito.clientenome) ? '' : ' ' + credito.clienteapelido));
         var rt = '<section>' +
             '<div class="first">' +
-            '<b><span>Crédito nº <span>' + credito.creditonumero + '</span></span><small   id-id="' + ig + '">Mais detalhes</small></b>' +
+            '<b><span>Crédito nº <span>' + credito.creditonumero + '</span></span><small id-id="' + ig + '">Mais detalhes</small></b>' +
             '<h3 title="Nome de cliente">' + nome_cliente + '</h3>' +
-            '<h3 title="Nome do Utilizador">' +credito.agenciaanulaname+' → '+ (credito.useranulaname + ((credito.useranulasurname === credito.useranulaname) ? '' : ' ' +credito.useranulasurname)) +' ← '+credito.anuladatanulacao+ '</h3>' +
+            '<h3 title="Notificação Enviada em">' + credito["data-send"] + '</h3>' +
             '</div>' +
             '<div class="more" >' +
-                '<h4>NIF Cliente</h4>' +
-                '<p>'+credito.clientnif+'</p>'+
+            '<h4>NIF Cliente</h4>' +
+            '<p>' + credito.clientenif + '</p>' +
 
-                '<h4>Tipo Credito</h4>' +
-                '<p>'+credito.tipocreditoname+'</p>'+
+            '<h4>Email Cliente</h4>' +
+            '<p>' + credito.clientmail + '</p>' +
 
-                '<h4>Data de inicio do credito</h4>' +
-                '<p>'+credito.creditoinicio+'</p>'+
+            '<h4>Telefone Cliente</h4>' +
+            '<p>' + credito.clientmovel + '</p>' +
 
-                '<h4>Data de fim do Credito</h4>' +
-                '<p>'+credito.creditofinalizar+'</p>'+
+            '<h4>NIF Cliente</h4>' +
+            '<p>' + credito.clientenif + '</p>' +
 
-                '<h4>Numero de prestaçao</h4>' +
-                '<p>'+credito.creditoprestacaoe+((credito.creditoprestacaoe > 1 || credito.creditoprestacaoe !==0) ? ' prestaçoes' : ' prestaçao' )+'</p>'+
+            '<h4>Tipo Credito</h4>' +
+            '<p>' + credito.tipocreditoname + '</p>' +
 
-                '<h4>Valor Credito</h4>' +
-                '<p>'+notificacao.formattedString(credito.creditovalor)+'</p>'+
+            '<h4>Data de inicio do credito</h4>' +
+            '<p>' + credito.creditodatainicio + '</p>' +
 
-                '<h4>Justificaçao</h4>' +
-                '<p>'+credito.anulaobs+'</p>'+
-                '</div>' +
+            '<h4>Data de fim do Credito</h4>' +
+            '<p>' + credito.creditodatafinalizarprazo + '</p>' +
+
+            '<h4>Valor Credito Inicial</h4>' +
+            '<p>' + notificacao.formattedString(credito.creditocapitalinicial) + '</p>' +
+
+            '<h4>Montante Credito a Pagar</h4>' +
+            '<p>' + notificacao.formattedString(credito.creditomontantepagar) + '</p>' +
+
+            '<h4>Montante Credito Restante</h4>' +
+            '<p>' + notificacao.formattedString(credito.creditomontanterestante) + '</p>' +
+
+            '</div>' +
             '</section>';
         $(".list-warr").append(rt);
     };
 
-    /**
-     * @param GarClient {CreditoNotificacao}
-     */
     this.addCredito = function (GarClient) {
         this.listaCredito[this.listaCredito.length] = GarClient;
     };
-};
-
-
-
-var CreditoNotificacao = function () {
-    this.id = undefined;
-    this.agenciaanulaid = undefined;
-    this.agenciaanulaname = undefined;
-    this.agenciacreateid = undefined;
-    this.agenciacreatename = undefined;
-    this.anuladatanulacao = undefined;
-    this.anulaobs = undefined;
-    this.clientname = undefined;
-    this.clientnif = undefined;
-    this.clientsurname = undefined;
-    this.creditofinalizar = undefined;
-    this.creditoinicio = undefined;
-    this.creditonumero = undefined;
-    this.creditoprestacaoe = undefined;
-    this.creditorembolso = undefined;
-    this.creditovalor = undefined;
-    this.tipocreditoid = undefined;
-    this.tipocreditoname = undefined;
-    this.useranulaname = undefined;
-    this.useranulanif = undefined;
-    this.useranulasurname = undefined;
-    this.usercreatename = undefined;
-    this.usercreatenif = undefined;
-    this.usercreatesurname = undefined;
-
-    /**
-     *
-     * @type {[Information]}
-     */
-    this.listaInformacao = [];
-
-    /**
-     *
-     * @param information {Information}
-     */
-    this.addInformation = function (information) {
-        this.listaInformacao[this.listaInformacao.length] = information;
-    }
-};
-
-var Information = function () {
-    this.id = undefined;
-    this.tipo = undefined;
-    this.name = undefined;
-    this.value = undefined;
 };
 
 
@@ -139,7 +92,10 @@ function loadDataToPage() {
     $.ajax({
         url: "../../bean/relInformationCredit.php",
         type: "POST",
-        data: {intensao: "relatorioNotificacaoPagamentoCredito", filter: getDataStorage(sessionStorage,'filterReport')},
+        data: {
+            intensao: "relatorioNotificacaoPagamentoCredito",
+            filter: getDataStorage(sessionStorage, 'filterReport')
+        },
         dataType: "json",
         success: function (e) {
             notificacao.data = e.credits;
@@ -148,8 +104,11 @@ function loadDataToPage() {
             dataExport.name = "Notificação para Pagamento de Credito";
             /*sessionStorage.dataExport = JSON.stringify(dataExport);*/
             notificacao.last_add = 0;
-        }, beforeSend: function () {  $(".mp-loading").fadeIn(); },
-        complete: function () { $(".mp-loading").fadeOut();
+        }, beforeSend: function () {
+            $(".mp-loading").fadeIn();
+        },
+        complete: function () {
+            $(".mp-loading").fadeOut();
             $(".list-warr").empty();
             transformDataToCredito();
         }
@@ -157,49 +116,25 @@ function loadDataToPage() {
 }
 
 function transformDataToCredito() {
-    var totalData = (notificacao.data !== undefined) ? notificacao.data.length: 0;
+    var totalData = (notificacao.data !== undefined) ? notificacao.data.length : 0;
     var add = 0;
     for (var i = notificacao.last_add; (i < totalData && add < notificacao.total_add); i++) {
         var credits = notificacao.data[i];
-        var anu_cre = new CreditoNotificacao();
-        anu_cre.agenciaanulaid = credits.agenciaanulaid;
-        anu_cre.agenciaanulaname = credits.agenciaanulaname;
-        anu_cre.agenciacreateid = credits.agenciacreateid;
-        anu_cre.agenciacreatename = credits.agenciacreatename;
-        anu_cre.anuladatanulacao = credits.anuladatanulacao.substr(0, 16);
-        anu_cre.anulaobs = credits.anulaobs;
-        anu_cre.clientname = credits.clientname;
-        anu_cre.clientnif = credits.clientnif;
-        anu_cre.clientsurname = credits.clientsurname;
-        anu_cre.creditofinalizar = credits.creditofinalizar;
-        anu_cre.creditoinicio = credits.creditoinicio;
-        anu_cre.creditonumero = credits.creditonumero;
-        anu_cre.creditoprestacaoe = Number(credits.creditoprestacaoe);
-        anu_cre.creditorembolso = credits.creditorembolso;
-        anu_cre.creditovalor = credits.creditovalor;
-        anu_cre.tipocreditoid = credits.tipocreditoid;
-        anu_cre.tipocreditoname = credits.tipocreditoname;
-        anu_cre.useranulaname = credits.useranulaname;
-        anu_cre.useranulanif = credits.useranulanif;
-        anu_cre.useranulasurname = credits.useranulasurname;
-        anu_cre.usercreatename = credits.usercreatename;
-        anu_cre.usercreatenif = credits.usercreatenif;
-        anu_cre.usercreatesurname = credits.usercreatesurname;
-        creditBluider.addCredito(anu_cre);
-        creditBluider.bluiderCreditos(anu_cre, i);
+        creditBluider.addCredito(credits);
+        creditBluider.bluiderCreditos(credits, i);
         add++;
-        notificacao.last_add = i+1;
+        notificacao.last_add = i + 1;
     }
 }
 
 var notificacao = {
-    last_add : 0,
-    data : undefined,
-    total_add : 100,
-    formattedString : function(nStr) {
-    var num = nStr.replace(/(\s)/g, '');
-    return  num.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ");
-}
+    last_add: 0,
+    data: undefined,
+    total_add: 100,
+    formattedString: function (nStr) {
+        var num = nStr.replace(/(\s)/g, '');
+        return num.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ");
+    }
 };
 
 
