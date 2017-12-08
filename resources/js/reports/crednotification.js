@@ -101,7 +101,7 @@ function loadDataToPage() {
             notificacao.data = e.credits;
             /*dataExport.data = notificacao.data;*/
             dataExport.type = "rep.notifcredito";
-            dataExport.name = "Notificação para Pagamento de Credito";
+            dataExport.name = "Notificações de Creditos";
             sessionStorage.dataExport = JSON.stringify(dataExport);
             notificacao.last_add = 0;
         }, beforeSend: function () {
