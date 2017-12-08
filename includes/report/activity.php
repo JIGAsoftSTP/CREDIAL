@@ -100,8 +100,8 @@
 </body>
 <!--<script src="../../resources/js/jQuery.js"></script>-->
 <!--<script src="../../resources/js/controller/geral.js"></script>
-<script src="../../resources/js/geralScript.js"></script>
+<script src="../../resources/js/geralScript.js"></script>-->
 <script src="../../resources/js/activity.js"></script>
-<script src="../../resources/js/controller/activity.js"></script>-->
+<script src="../../resources/js/controller/activity.js"></script>
 
 </html>
