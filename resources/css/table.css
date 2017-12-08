@@ -2,16 +2,30 @@
 	overflow: hidden;
 	position: relative;
 }
-.x-table .sh-rcrs{
+.x-table.expanded{
+	position: fixed;
+	right: 0;
+	top: 0;
+	width: 100%;
+	max-width: 100% !important;
+	height: 100vh !important;
+	max-height: 100vh !important;
+	z-index: 1000000;
+	background: #FFF;
+}
+.x-table .sh-rcrs,
+.x-table .icon-enlarge2{
 	position: absolute;
 	right: 2px;
-	top: 0;
+	top: 5px;
 	cursor: pointer;
 	padding: 6px;
 }
 .x-table .sh-rcrs.icon-sigma{
 	font-size: .8rem;
 	opacity: 0;
+	right: 2rem;
+	
 }
 .x-table:hover .sh-rcrs.icon-sigma{
 	opacity: 1;
