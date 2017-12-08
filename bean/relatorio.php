@@ -43,7 +43,6 @@ function report()
 function reportSearchFilter()
 {
     $reportName = $_POST["reportName"];
-
     if ($reportName == "rep.cliente") $reportName = "funct_rep_client_credito_somatorio";
     else if ($reportName == "rep.cresHomo") $reportName = "funct_rep_client_crescimento_homologo";
     else if ($reportName == "rep.credConc") $reportName = "funct_rep_credito_concedido";
@@ -52,7 +51,7 @@ function reportSearchFilter()
     else if ($reportName == "rep.diviProd") $reportName = "funct_rep_dividas_produtos";
     else if ($reportName == "rep.gara") $reportName = "funct_rep_credits_filter";
     else if ($reportName == "rep.cabaz") $reportName = "funct_rep_client_cabaz";
-    else if ($reportName == "rep.cabaz") $reportName = "funct_rep_cheques_distribuidos";
+    else if ($reportName == "rep.antecipado") $reportName = "funct_rep_credito_anticipados";
     else $reportName = "funct_rep_cheques_distribuidos";
 
     $call = new CallPgSQL();
