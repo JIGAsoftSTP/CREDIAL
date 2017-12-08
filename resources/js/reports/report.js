@@ -6,6 +6,8 @@ $('.report-content').on("click", ".filter-type-cheq li", function(event) {
         expandTable($(this).closest('.master-content').find('.x-table'), false, true);
     else
         expandTable($(this).closest('.master-content').find('.x-table'), false, false);
+
+    $('.x-icon-ok').click();
 });
 
 /*################     COBRANÇAS  	#####################*/
