@@ -114,7 +114,7 @@ function reportChequeDistribuido(list) {
          cheque = list[i];
         $("#iframe-" + $('aside li.active').index()).contents().find('table tbody').append('' +
             '<tr><td >' + formatDate(cheque["DATA"],2) + '</td><td >' + formattedString(cheque["DEBITO"])+'</td>' +
-            '<td>'+formattedString(cheque["CREDITO"])+'</td><td>'+cheque["BANCO SIGLA"]+"-"+cheque["BANCO NAME"]+'</td>' +
+            '<td>'+formattedString(cheque["CREDITO"])+'</td><td title="'+cheque["BANCO NAME"]+'">'+cheque["BANCO SIGLA"]+'</td>' +
             '<td>'+cheque["AGENCIA"]+'</td></tr>');
     }
     tableEstructure($("#iframe-" + $('aside li.active').index()).contents().find('table'));
