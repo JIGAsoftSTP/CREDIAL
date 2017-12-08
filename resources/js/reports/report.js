@@ -35,7 +35,9 @@ $(function () {
                  alterFormatDate($("#report-inicial-date").val())));
              setDataStorage(sessionStorage, "filterReport", "date-fim", ($("#report-final-date").val() === "" ? "" :
                  alterFormatDate($("#report-final-date").val())));
-             $("#iframe-" + $('aside li.active').index()).contents().find('#labelWarranty').trigger('click');
+             $("#iframe-" + $('aside li.active').index()).contents().find('#labelNotificacao').click();
+             $("#iframe-" + $('aside li.active').index()).contents().find('#labelWarranty').click();
+             $("#iframe-" + $('aside li.active').index()).contents().find('#labelAnulado').click();
          }
    });
 });

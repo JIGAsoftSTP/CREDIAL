@@ -12,6 +12,7 @@ include "Session.php";
 if($_POST["intensao"] == "loadListCredits"){ loadCredit(); }
 if($_POST["intensao"] == "loadListInformationCredit"){ loadInformationByCredit(); }
 if($_POST["intensao"] == "loadListCreditsAlunado"){ loadListCreditsAlunado(); }
+if($_POST["intensao"] == "relatorioNotificacaoPagamentoCredito"){ relatorioNotificacaoPagamentoCredito(); }
 
 function loadCredit(){
 
@@ -64,4 +65,10 @@ function loadListCreditsAlunado(){
         $credits[count($credits)] = $value;
     }
     die(json_encode(array("credits" => $credits)));
+}
+
+function relatorioNotificacaoPagamentoCredito(){
+    $json = file_get_contents("../resources/json/save-log-mail-send.json");
+    $datas = json_decode($json, JSON_OBJECT_AS_ARRAY);
+    die($json);
 }

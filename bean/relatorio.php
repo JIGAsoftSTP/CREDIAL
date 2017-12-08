@@ -37,7 +37,6 @@ function report()
         else relatorioCheque_PorCobrar_Cobrados_Todos();
     } else if ($_POST["reportName"] == "rep.cabaz") relatorioCabaz();
     else if ($_POST["reportName"] == "rep.antecipado") relatorioPagamentoAntecipado();
-
 }
 
 function reportSearchFilter()
