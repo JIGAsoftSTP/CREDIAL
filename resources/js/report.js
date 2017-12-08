@@ -9,9 +9,11 @@ $('aside .single').on('click','li',function(event) {
         type:"POST",
         dataType:"json",
         data:{"intention" : "load report filters",
-            "reportName":  $('#secondary-menu li.active').attr('id')},
+            "reportName":  $('#secondary-menu li.active').attr('id')},										
         beforeSend: function () {  $(".mp-loading").fadeIn(); },
-        complete: function () { $(".mp-loading").fadeOut();},
+        complete: function () {
+			$(".mp-loading").fadeOut();
+		},
         success:function (e) {
             sessionStorage.removeItem('filterReport');
 			$("#report-entities").empty();
@@ -32,6 +34,7 @@ $('aside .single').on('click','li',function(event) {
 var list_filters_datas = [];
 var typeReport = undefined;
 var reportActivityAddress = "bean/activity.php";
+var table;
 
 $('.ctrls .hide-filter').click(function() {
 	if(!$('.filter-report').hasClass('fixed')){
@@ -147,13 +150,11 @@ function filterExists(filter){
 function returnListFilter(identifier){
     $("#dataList"+identifier).empty();
     var datasources;
-    var contents;
 	var rt = "";
 
     for(var i= 0;i<list_filters_datas.length;i++){
     	if(identifier === list_filters_datas[i].filter_cod){
              datasources = JSON.parse(list_filters_datas[i].filter_datasource);
-             contents = JSON.parse(list_filters_datas[i].filter_contents);
              break;
 		}
 	}
@@ -161,7 +162,7 @@ function returnListFilter(identifier){
 	if(datasources !== null) {
         for (i = 0; i < datasources.length; i++) {
             var filter_source = datasources[i];
-            rt += '<option data-id ="' + filter_source[contents.id] + '" value="' + filter_source[contents.DESC] + '"></option>';
+            rt += '<option data-id ="' + filter_source["ID"] + '" value="' + filter_source["DESC"] + '"></option>';
         }
     }
 	return rt;
