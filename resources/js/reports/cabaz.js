@@ -30,7 +30,7 @@ var cabaz = {
         },
         {
             value: "hisdos_telservico",
-            name: "hisdos_telservico"
+            name: "Telefone Serviço"
         },
         {
             value: "num_contrato",
