@@ -16,6 +16,9 @@ switch ($_POST["intention"]) {
     case "report":
         report();
         break;
+    case "load filters":
+        loadDataFilters();
+        break;
 }
 /**
  *
@@ -167,6 +170,7 @@ function relatorioCreditoConcedido()
     die(json_encode(array("result" => $arrayValues)));
 }
 
+
 function relatorioCobrancas()
 {
 
@@ -252,6 +256,18 @@ function relatorioCheque_PorCobrar_Cobrados_Todos()
         $arrayValues[count($arrayValues)] = $result;
     }
     die(json_encode(array("result" => $arrayValues)));
+}
+
+function loadDataFilters(){
+   $list_data_filters = [];
+    $call = new CallPgSQL();
+    $call->functionTable("report.funct_load_filters_datas", "*")
+        ->addJsonb(null);
+    $call->execute();
+    while ($row = $call->getValors()) {
+        $list_data_filters[] = $row;
+    }
+    die(json_encode(array("filters" => $list_data_filters)));
 }
 
 
