@@ -1,6 +1,6 @@
 
 /*################     CHEQUE  	#####################*/
-$('.filter-type-cheq li').click(function(event) {
+$('.report-content').on("click", ".filter-type-cheq li", function(event) {
     $(this).addClass('active').siblings().removeClass('active');
     if($(this).index() !== 0)
         expandTable($(this).closest('.master-content').find('.x-table'), false, true);
