@@ -18,7 +18,7 @@ function tableEstructure(myTable){
 
 		$(this).css('width', unitGrow * getGrow(head.eq(idx)) + 'px');
 	});
-    $('.x-table').prepend('<span class="icon-sigma sh-rcrs"></span>')
+    $('.x-table').prepend('<span class="icon-sigma sh-rcrs"></span><span class="icon-enlarge2 enlargar"></span>')
 	if(myTable.find('.rowCount').length !== 1)
 	myTable.append('<div class="table-resources rowCount"><span></span></div>')
 
@@ -40,6 +40,16 @@ $('.x-table').on('click','.selectable td', function(event) {
 	.addClass('selected')
 	.siblings().removeClass('selected');
 	$(this).closest('.x-table').find('.table-resources').removeClass('show');
+});
+
+$('.x-table').on('click','.enlargar',function(event) {
+	// $(this).toggleClass('icon-enlarge2 icon-shrinked2');
+	tbl = $(this).closest('.x-table');
+	tbl.toggleClass('expanded');
+	setTimeout(function () {
+        tableEstructure(tbl);
+    }, 500);
+	
 });
 
 $('.x-table').on('click','.sh-rcrs',function(event) {
