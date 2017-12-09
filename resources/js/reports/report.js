@@ -639,7 +639,7 @@ var relatorio = {
     }
 };
 
-$("#relatorio_pagination").on("click", ".page-k", function () {
+$(".report-content").on("click", "#relatorio_pagination .page-k", function () {
     relatorio.page_selected = Number($(this).text());
     $(".page").removeClass("active");
     $(".page-start").removeClass("active");
@@ -649,10 +649,10 @@ $("#relatorio_pagination").on("click", ".page-k", function () {
     relatorio.add_data_to_relatorio();
     relatorio.alter_pages_vist(relatorio.page_selected);
     relatorio.test_pagination_status();
-}).on("click", ".icon-forward3", function () {
-    $("#relatorio_pagination").find("div.page-k[_i='"+(relatorio.page_selected+1)+"']").click();
+}).on("click", "#relatorio_pagination .icon-forward3", function () {
+    $(".report-content").find("#relatorio_pagination div.page-k[_i='"+(relatorio.page_selected+1)+"']").click();
     relatorio.test_pagination_status();
-}).on("click", ".icon-backward2", function () {
-    $("#relatorio_pagination").find("div.page-k[_i='"+(relatorio.page_selected-1)+"']").click();
+}).on("click", "#relatorio_pagination .icon-backward2", function () {
+    $(".report-content").find("#relatorio_pagination div.page-k[_i='"+(relatorio.page_selected-1)+"']").click();
     relatorio.test_pagination_status();
 });

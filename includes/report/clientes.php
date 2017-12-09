@@ -26,7 +26,12 @@
 				<tbody id="tableReportCustomerBody">
 				</tbody>
 			</table>
-
+            <div class="pagination flex h-ct" id="relatorio_pagination">
+                <div class="icon-backward2">
+                </div>
+                <div id="relatorio_pagination-add" class="icon-forward3">
+                </div>
+            </div>
 		</div>
 	</div>
 	<?php include "../process.html"; ?>

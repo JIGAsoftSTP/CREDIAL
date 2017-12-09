@@ -37,13 +37,6 @@
 
 
        </div>
-       <div class="pagination flex h-ct" id="relatorio_pagination">
-        <div class="icon-backward2">
-        </div>
-        <div id="relatorio_pagination-add" class="icon-forward3">
-        </div>
-      </div>
-
       <div id="log-rep-filter-form" class="filter-report xpert-form">
         <nav class="ctrls">
           <i class="x-icon-ok"></i>

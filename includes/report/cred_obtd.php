@@ -33,6 +33,12 @@
 						<tr><td>109935310</td><td>WALDEMIRO QUARESMA FERNANDES</td><td>5</td><td>5 000 000</td></tr>
 					</tbody>
 				</table>
+                <div class="pagination flex h-ct" id="relatorio_pagination">
+                    <div class="icon-backward2">
+                    </div>
+                    <div id="relatorio_pagination-add" class="icon-forward3">
+                    </div>
+                </div>
 			</div>
 		</div>
 	</div>
