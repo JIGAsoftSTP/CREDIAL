@@ -627,14 +627,18 @@ var relatorio = {
         var pagination = $("#relatorio_pagination");
         if (this.page_selected === 1 && this.page_total === 1){
             pagination.find(".icon-forward3, .icon-backward2, .page-k").hide();
+            pagination.hide();
         }else if(this.page_selected === this.page_total){
             pagination.find(".icon-forward3").hide();
             pagination.find(".icon-backward2").show();
+            pagination.show();
         }else if (this.page_selected === 1){
             pagination.find(".icon-backward2").hide();
             pagination.find(".icon-forward3").show();
+            pagination.show();
         }else{
             pagination.find(".icon-forward3, .icon-backward2").show();
+            pagination.show();
         }
     }
 };
