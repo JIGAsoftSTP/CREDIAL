@@ -281,7 +281,7 @@ function loadDataFilters(){
 
 function relatorioChequeRegistado(){
     $call = new CallPgSQL();
-    $call->functionTable("report.funct_rep_cheques_cobranca_state", "*")
+    $call->functionTable("report.funct_rep_cheques", "*")
         ->addString(Session::getUserLogado()->getId())
         ->addInt(Session::getUserLogado()->getIdAgencia())
         ->addDate($_POST["ReportFiler"]["dataInicio"])
