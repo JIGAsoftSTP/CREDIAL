@@ -34,7 +34,7 @@ function report()
     else if ($_POST["reportName"] == "rep.cobranca") relatorioCobrancas();
     else if ($_POST["reportName"] == "rep.cheques") {
         if ($_POST["chequeFiltro"] == 1) relatorioChequeEntrados();
-        elseif ($_POST["chequeFiltro"] === 4) relatorioChequeRegistado();
+        elseif ($_POST["chequeFiltro"] == 4) relatorioChequeRegistado();
         else relatorioCheque_PorCobrar_Cobrados_Todos();
     } else if ($_POST["reportName"] == "rep.cabaz") relatorioCabaz();
     else if ($_POST["reportName"] == "rep.antecipado") relatorioPagamentoAntecipado();
@@ -286,14 +286,14 @@ function relatorioChequeRegistado(){
         ->addInt(Session::getUserLogado()->getIdAgencia())
         ->addDate($_POST["ReportFiler"]["dataInicio"])
         ->addDate($_POST["ReportFiler"]["dataFim"])
-        ->addJson(json_encode($_POST["jsonValue"]));
+        ->addJsonb(json_encode($_POST["jsonValue"]));
     $call->execute();
     $arrayValues = array();
     while ($result = $call->getValors()) {
         $arrayValues[count($arrayValues)] = $result;
     }
     $_SESSION["report"] = $arrayValues;
-    die(json_encode(array("result" => $arrayValues)));
+    die(json_encode(array("result" => $arrayValues, "djdjjdjdjd")));
 }
 
 
