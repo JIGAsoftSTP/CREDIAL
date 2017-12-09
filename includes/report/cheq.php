@@ -20,51 +20,31 @@
 			<li type="cobrados" class="bt-table-action" id="3">Cobrados</li>
 			<li class="bt-table-action" id="4">Criados</li>
 		</ul>
-		<div class="table-list">
-			<nav class="to-report">
-				<h2></h2>
-			</nav>
-			
+		<div class="x-table table-client auto-width">
+			<table id="tabela-relatorio-cheque" class="selectable" cellpadding="0" cellspacing="0">
+				<thead>
+					<tr>
+						<th grow="1" grow2="0">Data Registo</th>
+						<th grow="2" grow2="0">Débito</th>
+						<th grow="2" grow2="0">Crédito</th>
+						<th grow="2" grow2="0">Banco</th>
+						<th grow="1" grow2="0">Agência</th>
 
-
-			<div class="x-table table-client auto-width">
-				<table id="tabela-relatorio-cheque" class="selectable" cellpadding="0" cellspacing="0">
-                    <thead>
-                    <tr>
-                        <th grow="1" grow2="0">Data Registo</th>
-                        <th grow="2" grow2="0">Débito</th>
-                        <th grow="2" grow2="0">Crédito</th>
-                        <th grow="2" grow2="0">Banco</th>
-                        <th grow="1" grow2="0">Agência</th>
-
-                        <th grow="0" grow2="1">NIF</th>
-                        <th grow="0" grow2="2">Cliente</th>
-                        <th grow="0" grow2="2">Nº Doc. Pagamento</th>
-                        <th grow="0" grow2="2">Valor Cheque Reembolso</th>
-                        <th grow="0" grow2="1">Data Previsto</th>
-                        <th grow="0" grow2="1">Banco</th>
-                       <th grow="0" grow2="1">Data Endossado</th>
-                    </tr>
-                    </thead>
-
-<!--                    <thead>-->
-<!--                    <tr>-->
-<!--                        <th grow="2">NIF</th>-->
-<!--                        <th grow="2">Cliente</th>-->
-<!--                        <th grow="2">Nº Doc. Pagamento</th>-->
-<!--                        <th grow="2">Valor Cheque Reembolso</th>-->
-<!--                        <th grow="1">Data Previsto</th>-->
-<!--                        <th grow="1">Banco</th>-->
-<!--                        <th grow="1">Data Endossado</th>-->
-<!--                    </tr>-->
-<!--                    </thead>-->
-                    <tbody id="tabela-cheque-corpo">
-					</tbody>
-				</table>
-			</div>
+						<th grow="0" grow2="1">NIF</th>
+						<th grow="0" grow2="2">Cliente</th>
+						<th grow="0" grow2="2">Nº Doc. Pagamento</th>
+						<th grow="0" grow2="2">Valor Cheque Reembolso</th>
+						<th grow="0" grow2="1">Data Previsto</th>
+						<th grow="0" grow2="1">Banco</th>
+						<th grow="0" grow2="1">Data Endossado</th>
+					</tr>
+				</thead>
+				<tbody id="tabela-cheque-corpo">
+				</tbody>
+			</table>
 		</div>
 	</div>
-    <?php include "../process.html"; ?>
+	<?php include "../process.html"; ?>
 </body>
 <!--<script type="text/javascript" src="../../resources/js/jQuery.js"></script>
 <script type="text/javascript" src="../../resources/js/table.js"></script>

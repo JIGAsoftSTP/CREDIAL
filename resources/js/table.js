@@ -42,7 +42,7 @@ $('.x-table').on('click','.selectable td', function(event) {
 	$(this).closest('.x-table').find('.table-resources').removeClass('show');
 });
 
-$('.x-table').on('click','.enlargar',function(event) {
+$('body').on('click','.x-table .enlargar',function(event) {
 	// $(this).toggleClass('icon-enlarge2 icon-shrinked2');
 	tbl = $(this).closest('.x-table');
 	tbl.toggleClass('expanded');

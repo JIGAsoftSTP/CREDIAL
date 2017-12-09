@@ -1,12 +1,6 @@
-.bd-warr{
-	padding-top: 2rem;
-	height: 100vh;
-}
-.bd-warr .arend{
-	display: flex;
-	flex-direction: column;
-}
-.list-warr{
+
+
+.master-content .list-warr{
 	flex-grow: 1;
 	padding-right: 2rem;
 	overflow: auto;
@@ -21,6 +15,7 @@
 	padding: 1rem;
 	box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.14);
 	margin-bottom: 1rem;
+	border: 1px #dfdfdf solid;
 }
 .list-warr > section hr{
 	border-bottom: 1px #ddd solid;

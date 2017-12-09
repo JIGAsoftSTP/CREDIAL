@@ -12,12 +12,6 @@
 <body>
 	<div class="master-content">
 
-		<div class="table-list">
-			<nav class="to-report">
-				<h2></h2>
-			</nav>
-			
-
 
 			<div class="x-table table-client auto-width">
 				<table id="table-report-credit" class="" cellpadding="0" cellspacing="0">
@@ -37,7 +31,6 @@
 					<tbody id="table-report-credit-body">
 					</tbody>
 				</table>
-			</div>
 		</div>
 	</div>
     <?php include "../process.html"; ?>

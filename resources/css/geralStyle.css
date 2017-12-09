@@ -187,10 +187,10 @@ header .pin{
 	position: fixed;
 	top: 15px;
 	left: 5px;
-	font-size: .95rem;
+	font-size: .8rem;
 	cursor: pointer;
-	width: 37px;
-	line-height: 35px;
+	width: 27px;
+	line-height: 25px;
 	background: rgba(220,220,220, .1);
 	
 	text-align: center;
@@ -500,7 +500,7 @@ header .pin.unpin{
 
 
 .content-w-lateral.shrinked aside{
-	width: 45px;
+	width: 55px;
 }
 .content-w-lateral.shrinked ul span{
 	display: none;

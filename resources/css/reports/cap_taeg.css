@@ -7,6 +7,7 @@
 }
 .true-report{
 	margin-bottom: 2rem;
+	flex-shrink: 0;
 }
 .true-report h1{
 	/*margin-bottom: 3rem;*/

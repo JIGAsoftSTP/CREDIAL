@@ -1,16 +1,15 @@
-body{
-	height: 100vh;
-	background: #F3F7FA;
-	padding-left: 2rem;
+.master-content.is-activity .arend{
+	flex-grow: 1;
 }
 .log-user i.icon-search{
 	font-size: .9rem;
 }
 .log-user{
-	height: 100%;
 	padding-top: 1rem;
+	flex-grow: 1;
+
 }
-.log-user .content,
+.log-user,
 .log-user .arend,
 .arend .super-search,
 .arend .det-tabs,
@@ -34,7 +33,8 @@ body{
 	height: 100%;
 }
 .log-user .list-user-log{
-	min-width: 270px;
+	max-width: 270px;
+	width: 100%;
 	padding: 1rem;
 	background: #FFF;
 	margin-right: 3%;
@@ -192,6 +192,7 @@ body{
 	text-align: center;
 	color: #FFF;
 	margin-right: 1.5rem;
+	flex-shrink: 0;
 }
 .list-logs section .detail > span{
 	border-left: 1px #eee solid;
