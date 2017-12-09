@@ -329,29 +329,32 @@ function relatorioCarteiraCheque(list) {
     var report = $(".report-content");
     report.find('table tbody').empty();
     report.find("thead tr").html(
-        '<th grow="2">Data</th>' +
+        '<th grow="1">Data</th>' +
         '<th grow="1">Sigla</th>' +
         '<th grow="2">Agencia</th>' +
-        '<th grow="2">Folhas</th>' +
+        '<th grow="1">Folhas</th>' +
         '<th grow="3">Sequência</th>' +
-        '<th grow="3">Capital</th>' +
-        '<th grow="3">C. à Cobrar</th>' +
-        '<th grow="3">C. Cobrado</th>');
+        '<th grow="2">Capital</th>' +
+        '<th grow="2">C. à Cobrar</th>' +
+        '<th grow="2">C. Cobrado</th>'+
+        '<th grow="1">Estado</th>');
 
     for(var i = relatorio.begin;(i<list.length-1 && i !== relatorio.end) ;i++)
     {
         cheque = list[i];
-        report.find('table tbody').append('' +
+        var title_cheque = cheque["cheq_sequenceinicio"]+" → Inicio\n-------------------------------------------\n"+cheque["cheq_sequencefim"]+" → Fim";
+        report.find('table tbody').append(
             '<tr>'+
-                '<td>' +cheque["cheq_dtreg"] + '</td>' +
+                '<td title="'+cheque["cheq_dtregdesc"]+'" >' + (cheque["cheq_dtreg"]).stringToDate("YYYY-MM-DD", "-").getDatePt() + '</td>' +
                 '<td title="'+cheque["banco_nome"]+'">' + cheque["banco_sigla"] + '</td>' +
                 '<td>' + cheque["agencia_nome"] + '</td>' +
                 '<td>' + (cheque["cheq_totaldistribuido"]+" - "+cheque["cheq_total"]) + '</td>' +
-                '<td>' + cheque["cheq_sequenceinicio"] + '' + '</td>' +
-                '<td>' + cheque["cheq_montantecapitaldistribuido"] + '</td>' +
-                '<td>' + cheque["cheq_montantetotalcobrar"] + '</td>' +
-                '<td>' + cheque["cheq_montantetotalcobrado"] + '</td>' +
-            '</tr>');
+                '<td title="'+title_cheque+'">' + cheque["cheq_sequenceinicio"] + '</td>' +
+                '<td>' + formattedString(cheque["cheq_montantecapitaldistribuido"]) + '</td>' +
+                '<td>' + formattedString(cheque["cheq_montantetotalcobrar"]) + '</td>' +
+                '<td>' + formattedString(cheque["cheq_montantetotalcobrado"]) + '</td>' +
+                '<td>' + cheque["cheq_estadodesc"] + '</td>' +
+            '</tr >');
     }
     tableEstructure(report.find('table'));
 }
