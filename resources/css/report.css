@@ -37,9 +37,7 @@
 	top: 12px;
 	color: #888;
 }
-.article-report .pagination{
-	display: none;
-}
+
 .article-report .report-content{
 	flex-grow: 1;
 	display: flex;

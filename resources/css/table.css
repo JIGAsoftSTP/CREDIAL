@@ -61,10 +61,12 @@
 	border-radius: 2px;
 	padding-top: 10px;
 	width: 100%;
-	height: 100%;
+	flex-grow: 1;
 	
 }
-
+.x-table .pagination{
+	flex-shrink: 0;
+}
 .x-table thead,
 .x-table tbody{
 	display: block;
