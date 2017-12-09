@@ -118,17 +118,24 @@ function reportTaeg(list)
 
 
 function reportChequeDistribuido(list) {
-    $(".report-content").find('table tbody').empty();
+
+    var report = $(".report-content");
+    report.find('table tbody').empty();
+    report.find("thead tr").html('<th grow="1">Data Registo</th>' +
+                                '<th grow="2">Débito</th>' +
+                                '<th grow="2">Crédito</th>' +
+                                '<th grow="2">Banco</th>' +
+                                '<th grow="1">Agência</th>');
 
     for(var i = relatorio.begin;(i<list.length-1 && i !== relatorio.end) ;i++)
     {
          cheque = list[i];
-        $(".report-content").find('table tbody').append('' +
-            '<tr><td >' + formatDate(cheque["DATA"],2) + '</td><td >' + formattedString(cheque["DEBITO"])+'</td>' +
+
+        report.find('table tbody').append('<tr><td >' + formatDate(cheque["DATA"],2) + '</td><td >' + formattedString(cheque["DEBITO"])+'</td>' +
             '<td>'+formattedString(cheque["CREDITO"])+'</td><td title="'+cheque["BANCO NAME"]+'">'+cheque["BANCO SIGLA"]+'</td>' +
             '<td>'+cheque["AGENCIA"]+'</td></tr>');
     }
-    tableEstructure($(".report-content").find('table'));
+    tableEstructure(report.find('table'));
 }
 
     function dataReport() {
@@ -256,6 +263,9 @@ function relatorioCheque(list) {
         sumTable(listLastValues);
         reportChequeDistribuido(list);
     }
+    else if(chequeFiltro === "4"){
+        relatorioCarteiraCheque(list);
+    }
     else
     {
         listLastValues = {"Valor Cheque Reembolso": formattedString(list[list.length-1]["VALOR CHEQUE REEMBOLSO"])};
@@ -292,18 +302,61 @@ function relatorioDividaProduto(list) {
 }
 
 function relatorioChequeEstado(list) {
-    $(".report-content").find('table tbody').empty();
+    var report = $(".report-content");
+    report.find('table tbody').empty();
+    report.find("thead tr").html(
+        '<th grow="1">NIF</th>' +
+        '<th grow="2">Cliente</th>' +
+        '<th grow="2">Nº Doc. Pagamento</th>' +
+        '<th grow="2">Valor Cheque Reembolso</th>' +
+        '<th grow="1">Data Previsto</th>' +
+        '<th grow="1">Banco</th>' +
+        ((chequeFiltro === "3")  ? '<th grow="0" grow2="1">Data Endossado</th>' : ''));
 
     for(var i = relatorio.begin;(i<list.length-1 && i !== relatorio.end) ;i++)
     {
         cheque = list[i];
-        $(".report-content").find('table tbody').append('' +
-            '<tr><td></td><td ></td><td></td><td></td><td></td>' +
-            '<td>'+cheque["NIF"]+'</td><td>'+cheque["NAME"]+" "+cheque["SURNAME"]+'</td><td>'+cheque["PAGAMENTO NUM DOCUMENTO"]+'</td><td>'
-            +formattedString(cheque["VALOR CHEQUE REEMBOLSO"])+'</td><td>'+formatDate(cheque["DATA DOCUMENTO PAGAMENTO PREVISTO DEPOSITO"],2)+'' +
-            '</td><td>'+cheque["BANCO SIGLA"]+'</td><td>'+verifyEmpty(cheque["PAGAMENTO DATA ENDOSSADO"])+'</td></tr>');
+        report.find('table tbody').append('' +
+            '<tr>'+
+            '<td>' + cheque["NIF"] + '</td><td>' + cheque["NAME"] + " " + cheque["SURNAME"] + '</td><td>' + cheque["PAGAMENTO NUM DOCUMENTO"] + '</td><td>'
+            + formattedString(cheque["VALOR CHEQUE REEMBOLSO"]) + '</td><td>' + formatDate(cheque["DATA DOCUMENTO PAGAMENTO PREVISTO DEPOSITO"], 2) + '' +
+            '</td><td>' + cheque["BANCO SIGLA"] + '</td><td>' + verifyEmpty(cheque["PAGAMENTO DATA ENDOSSADO"]) + '</td></tr>');
     }
-    tableEstructure($(".report-content").find('table'));
+    tableEstructure(report.find('table'));
+}
+
+function relatorioCarteiraCheque(list) {
+    var report = $(".report-content");
+    report.find('table tbody').empty();
+    report.find("thead tr").html(
+        '<th grow="1">Data</th>' +
+        '<th grow="1">Sigla</th>' +
+        '<th grow="2">Agencia</th>' +
+        '<th grow="1">Folhas</th>' +
+        '<th grow="3">Sequência</th>' +
+        '<th grow="2">Capital</th>' +
+        '<th grow="2">C. à Cobrar</th>' +
+        '<th grow="2">C. Cobrado</th>'+
+        '<th grow="1">Estado</th>');
+
+    for(var i = relatorio.begin;(i<list.length-1 && i !== relatorio.end) ;i++)
+    {
+        cheque = list[i];
+        var title_cheque = cheque["cheq_sequenceinicio"]+" → Inicio\n-------------------------------------------\n"+cheque["cheq_sequencefim"]+" → Fim";
+        report.find('table tbody').append(
+            '<tr>'+
+                '<td title="'+cheque["cheq_dtregdesc"]+'" >' + (cheque["cheq_dtreg"]).stringToDate("YYYY-MM-DD", "-").getDatePt() + '</td>' +
+                '<td title="'+cheque["banco_nome"]+'">' + cheque["banco_sigla"] + '</td>' +
+                '<td>' + cheque["agencia_nome"] + '</td>' +
+                '<td>' + (cheque["cheq_totaldistribuido"]+" - "+cheque["cheq_total"]) + '</td>' +
+                '<td title="'+title_cheque+'">' + cheque["cheq_sequenceinicio"] + '</td>' +
+                '<td>' + formattedString(cheque["cheq_montantecapitaldistribuido"]) + '</td>' +
+                '<td>' + formattedString(cheque["cheq_montantetotalcobrar"]) + '</td>' +
+                '<td>' + formattedString(cheque["cheq_montantetotalcobrado"]) + '</td>' +
+                '<td>' + cheque["cheq_estadodesc"] + '</td>' +
+            '</tr >');
+    }
+    tableEstructure(report.find('table'));
 }
 
 function reportCredit(list)
