@@ -69,6 +69,7 @@ function loadListCreditsAlunado(){
 }
 
 function relatorioNotificacaoPagamentoCredito(){
+    Session::getUserLogado();
     $json = file_get_contents("../resources/json/save-log-mail-send.json");
     $datas = json_decode($json, JSON_OBJECT_AS_ARRAY);
     $credits = [];
