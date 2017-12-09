@@ -18,7 +18,7 @@
 			<li type="entrados" class="bt-table-action active" id="1">Entrados</li>
 			<li type="porcobrar" class="bt-table-action" id="2">Por cobrar</li>
 			<li type="cobrados" class="bt-table-action" id="3">Cobrados</li>
-			<li class="bt-table-action" id="4">Criados</li>
+			<li class="bt-table-action" id="4">Carteira</li>
 		</ul>
 		<div class="x-table table-client auto-width">
 			<table id="tabela-relatorio-cheque" class="selectable" cellpadding="0" cellspacing="0">
