@@ -28,7 +28,10 @@ $('aside .single').on('click','li',function(event) {
 		}
     });
     var header = $('.header-report');
-    $(this).attr('id') === 'rel.acti' ? header.hide(200) : header.show(200);
+	($(this).attr('id') === 'rel.acti') ? header.hide(200) : header.show(200);
+	($(this).attr('id') === 'rep.gara' )
+	? header.find(".icon-file-pdf, .icon-file-excel").hide(200)
+	: header.find(".icon-file-pdf, .icon-file-excel").show(200);
 });
 
 var list_filters_datas = [];

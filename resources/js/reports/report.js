@@ -660,3 +660,5 @@ $(".report-content").on("click", "#relatorio_pagination .page-k", function () {
     $(".report-content").find("#relatorio_pagination div.page-k[_i='"+(relatorio.page_selected-1)+"']").click();
     relatorio.test_pagination_status();
 });
+
+$(".search-item").hide();
