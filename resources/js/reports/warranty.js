@@ -133,7 +133,7 @@ var creditBluider = new CreditoBluider();
 
 function loadDataToPage() {
    $.ajax({
-        url: "../../bean/relInformationCredit.php",
+        url: "./bean/relInformationCredit.php",
         type: "POST",
         data: {intensao: "loadListCredits", filter: getDataStorage(sessionStorage,'filterReport')},
         dataType: "json",
@@ -155,7 +155,7 @@ function loadDataToPage() {
  */
 function getInformationCredit(i, credit, section) {
     $.ajax({
-        url: "../../bean/relInformationCredit.php",
+        url: "./bean/relInformationCredit.php",
         type: "POST",
         data: {intensao: "loadListInformationCredit", id: credit.id, filter : getDataStorage(sessionStorage,'filterReport')},
         dataType: "json",

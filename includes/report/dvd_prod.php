@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<!--	<script type="text/javascript" src="../../resources/js/admission.js"></script>-->
-	<link rel="stylesheet" href="../../resources/css/reports/cap_taeg.css">
+	<link rel="stylesheet" href="./resources/css/reports/cap_taeg.css">
 	
 	
 </head>

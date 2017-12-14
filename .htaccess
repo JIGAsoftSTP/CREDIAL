@@ -1,6 +1,7 @@
 RewriteEngine on
 Options -Indexes
 RewriteBase /
+RewriteBase /CREDIAL/
 ErrorDocument 404 /redirect/404.html
 ErrorDocument 403 /redirect/403.html
 ErrorDocument 500 /redirect/500.html

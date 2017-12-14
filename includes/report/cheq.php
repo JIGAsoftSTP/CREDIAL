@@ -3,11 +3,11 @@
 <head>
 	<meta charset="UTF-8">
 	<!--<script type="text/javascript" src="../../resources/js/admission.js"></script>-->
-	<link rel="stylesheet" href="../../resources/css/geralStyle.css">
-	<link rel="stylesheet" href="../../resources/css/report.css">
-	<link rel="stylesheet" href="../../resources/css/reports/report-all.css">
-	<link rel="stylesheet" href="../../resources/css/reports/report.css">
-	<link rel="stylesheet" href="../../resources/css/reports/cheq.css">
+	<link rel="stylesheet" href="./resources/css/geralStyle.css">
+	<link rel="stylesheet" href="./resources/css/report.css">
+	<link rel="stylesheet" href="./resources/css/reports/report-all.css">
+	<link rel="stylesheet" href="./resources/css/reports/report.css">
+	<link rel="stylesheet" href="./resources/css/reports/cheq.css">
 	
 	
 </head>

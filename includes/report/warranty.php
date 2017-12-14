@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" href="../../resources/css/reports/warranty.css">
+	<link rel="stylesheet" href="./resources/css/reports/warranty.css">
 </head>
 <body>
 
@@ -18,5 +18,5 @@
 	</div>
 
 </body>
-<script type="text/javascript" src="../../resources/js/reports/warranty.js"></script>
+<script type="text/javascript" src="./resources/js/reports/warranty.js"></script>
 </html>

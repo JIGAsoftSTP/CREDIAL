@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" href="../../resources/css/reports/warranty.css">
+	<link rel="stylesheet" href="./resources/css/reports/warranty.css">
 </head>
 <body class="bd-warr">
 
@@ -17,5 +17,5 @@
 	</div>
 
 </body>
-<script type="text/javascript" src="../../resources/js/reports/crednotification.js"></script>
+<script type="text/javascript" src="./resources/js/reports/crednotification.js"></script>
 </html>

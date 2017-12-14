@@ -90,7 +90,7 @@ var dataExport = new ExportData();
 
 function loadDataToPage() {
     $.ajax({
-        url: "../../bean/relInformationCredit.php",
+        url: "./bean/relInformationCredit.php",
         type: "POST",
         data: {
             intensao: "relatorioNotificacaoPagamentoCredito",

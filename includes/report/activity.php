@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<title></title>
-	<link rel="stylesheet" href="../../resources/css/activity.css">
-	<link rel="stylesheet" href="../../resources/fw/pikaday/pikaday.css">
+	<link rel="stylesheet" href="./resources/css/activity.css">
+	<link rel="stylesheet" href="./resources/fw/pikaday/pikaday.css">
 
 </head>
 <body>
@@ -87,7 +87,7 @@
 	</div>
 	<?php include "../process.html"; ?>
 </body>
-<script src="../../resources/js/activity.js"></script>
-<script src="../../resources/js/controller/activity.js"></script>
+<script src="./resources/js/activity.js"></script>
+<script src="./resources/js/controller/activity.js"></script>
 
 </html>
