@@ -261,7 +261,7 @@ function XpertToggleCtrl(tgID, txtON, txtOFF){
 function CtrlMenu(element, element2){
     element.addClass('active').siblings().removeClass('active');
     element2.html('<iframe src="'+ element.attr('urldata') +'" frameborder="0" id="iframe-'+ element.index() +'"></iframe>');
-    element.find('li').eq(0).trigger('click');
+    // element.find('li').eq(0).trigger('click');
     /*event.stopPropagation();*/
 }
 
@@ -275,7 +275,7 @@ function CtrlMenu2(element, element2){
         dataType: "html",
         success: function (e) {
             element2.html(e);
-            element.find('li').eq(0).trigger('click');
+            // element.find('li').eq(0).trigger('click');
         }
     });
 

@@ -78,10 +78,12 @@ function loadSubMenuSecondaryReport(menus) {
     isFirstReport = false;
 }
 
+/*
 $('.multiple').on("click", "li", function(event) {
     CtrlMenu2($(this), $('.report-content'));
     event.stopPropagation();
 });
+*/
 
 $('.single').on("click", "li", function(event) {
     CtrlMenu($(this), $('.article-admin'));
