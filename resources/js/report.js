@@ -25,9 +25,7 @@ $('aside .single').on('click', 'li', function (event) {
             regUserActivity(reportActivityAddress, -1, "Visualizou a página de Relatório de " + $('.title-report').text(),
                 -1, LevelActivity.VISUALIZACAO);
             loadContensFilterReport($("#report-entities"), e.reportFilter);
-            setTimeout(function () {
-                data();
-            }, 1000);
+            /*data();*/
         }
     });
     var header = $('.header-report');

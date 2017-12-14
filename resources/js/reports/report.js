@@ -16,52 +16,12 @@ $('.test-expand').click(function(event) {
     expandTable($(this).closest('.master-content').find('.x-table'), true);
 });
 
-var chequeFiltro = 1;
-var listLastValues = {};
-var listReportData = [];
-var size = 0;
-var customer,growth, credit,
-    date, cobranca, taeg, divida,
-    cheque;
-var table;
-
-$(function () {
-    sessionStorage.removeItem('filterReport');
-    $('.x-icon-ok').click(function () {
-        if ($('#secondary-menu').find('li.active').attr('id') !== "rep.gara"
-            && $('#secondary-menu').find('li.active').attr('id') !== "rep.cred_anulado"
-            && $('#secondary-menu').find('li.active').attr('id') !== "rep.notifcredito") {
-            // se o relatorio não for de garrantia os dados para base de dados
-            sendFilterReport();
-            $("#relatorio_pagination").show();
-        }
-        else if ($('#secondary-menu').find('li.active').attr('id') === "rep.gara"
-            || $('#secondary-menu').find('li.active').attr('id') === "rep.cred_anulado"
-            || $('#secondary-menu').find('li.active').attr('id') === "rep.notifcredito") {
-            setDataStorage(sessionStorage, "filterReport", "date-inicio", ($("#report-inicial-date").val() === "" ? "" :
-                alterFormatDate($("#report-inicial-date").val())));
-            setDataStorage(sessionStorage, "filterReport", "date-fim", ($("#report-final-date").val() === "" ? "" :
-                alterFormatDate($("#report-final-date").val())));
-            var iframe = $(".report-content");
-            iframe.find('#labelNotificacao').click();
-            iframe.find('#labelWarranty').click();
-            iframe.find('#labelAnulado').click();
-            $("#relatorio_pagination").hide();
-        }
-    });
-});
-
-
-data();
-
-
 function sendFilterReport() {
 
     if($('#secondary-menu li.active').attr('id') ===  TypeReport.CHEQUE){
          chequeFiltro = $(".report-content").find(".filter-type-cheq li.active").attr("id");
     }
 
- if(validation1($(".reportDate")))
         dataReport();
 }
 
@@ -145,10 +105,12 @@ function reportChequeDistribuido(list) {
          var reportFilter = new ReportFiler($("#report-inicial-date").val(), $("#report-final-date").val());
 
         if($('#secondary-menu li.active').attr('id') !==  TypeReport.CHEQUE){
-            dados ={"intention": "report",
-            "ReportFiler": reportFilter,
-            "reportName": $('#secondary-menu li.active').attr('id'),
-            "jsonValue": (checkObject(obj) ? "" : getDataStorage(sessionStorage,'filterReport'))};
+            dados = {
+                "intention": "report",
+                "ReportFiler": reportFilter,
+                "reportName": $('#secondary-menu li.active').attr('id'),
+                "jsonValue": getDataStorage(sessionStorage, 'filterReport')
+            };
         }
         else {
             if(chequeFiltro === "2")
@@ -157,11 +119,13 @@ function reportChequeDistribuido(list) {
                 setDataStorage(sessionStorage, "filterReport", "state", "0");
             }
 
-            dados ={"intention": "report",
-            "ReportFiler": reportFilter,
-            "reportName": $('#secondary-menu li.active').attr('id'),
-            "chequeFiltro": chequeFiltro,
-            "jsonValue": getDataStorage(sessionStorage,'filterReport')};
+            dados ={
+                "intention": "report",
+                "ReportFiler": reportFilter,
+                "reportName": $('#secondary-menu li.active').attr('id'),
+                "chequeFiltro": chequeFiltro,
+                "jsonValue": getDataStorage(sessionStorage,'filterReport')
+            };
         }
 
         $.ajax({
@@ -443,7 +407,7 @@ function data()
          $("#report-final-date").val(actualDate.getDate()+"-"+(actualDate.getMonth()+1)+"-"+actualDate.getFullYear());
      }
 
-   $('.x-icon-ok').trigger("click");
+   $('.x-icon-ok').click();
 }
 
 function formatDate(date, type) {
@@ -662,3 +626,40 @@ $(".report-content").on("click", "#relatorio_pagination .page-k", function () {
 });
 
 $(".search-item").hide();
+
+var chequeFiltro = 1;
+var listLastValues = {};
+var listReportData = [];
+var size = 0;
+var customer,growth, credit,
+    date, cobranca, taeg, divida,
+    cheque;
+var table;
+
+$(function () {
+    sessionStorage.removeItem('filterReport');
+    $('.x-icon-ok').click(function () {
+        if ($('#secondary-menu').find('li.active').attr('id') !== "rep.gara"
+            && $('#secondary-menu').find('li.active').attr('id') !== "rep.cred_anulado"
+            && $('#secondary-menu').find('li.active').attr('id') !== "rep.notifcredito") {
+            // se o relatorio não for de garrantia os dados para base de dados
+            sendFilterReport();
+            $("#relatorio_pagination").show();
+        }
+        else if ($('#secondary-menu').find('li.active').attr('id') === "rep.gara"
+            || $('#secondary-menu').find('li.active').attr('id') === "rep.cred_anulado"
+            || $('#secondary-menu').find('li.active').attr('id') === "rep.notifcredito") {
+            setDataStorage(sessionStorage, "filterReport", "date-inicio", ($("#report-inicial-date").val() === "" ? "" :
+                alterFormatDate($("#report-inicial-date").val())));
+            setDataStorage(sessionStorage, "filterReport", "date-fim", ($("#report-final-date").val() === "" ? "" :
+                alterFormatDate($("#report-final-date").val())));
+            var iframe = $(".report-content");
+            iframe.find('#labelNotificacao').click();
+            iframe.find('#labelWarranty').click();
+            iframe.find('#labelAnulado').click();
+            $("#relatorio_pagination").hide();
+        }
+    });
+});
+
+data();
