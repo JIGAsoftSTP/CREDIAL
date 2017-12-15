@@ -17,18 +17,18 @@
 				<table id="table-report-credit" class="" cellpadding="0" cellspacing="0">
 					<thead>
 						<tr>
-							<th grow="2" orderBy>Nº Dossier</th>
-							<th grow="1" orderBy>Data Registo</th>
-							<th grow="1" orderBy>NIF</th>
-							<th grow="4" orderBy>Cliente</th>
-							<th grow="2" orderBy>Valor Crédito</th>
-							<th grow="2" orderBy>Montante Dívida</th>
+							<th grow="1" orderBy >Nº Dossier</th>
+							<th grow="1" orderBy title="Data de registo">Data</th>
+							<th grow="3.5" orderBy>Cliente</th>
+							<th grow="1" orderBy>Capital</th>
+							<th grow="1" orderBy>Montante</th>
 							<th grow="1" orderBy>TAEG</th>
 							<th grow="1">Data Inicio</th>
 							<th grow="1">Data Fim</th>
+							<th grow="1">Estado</th>
 						</tr>
 					</thead>
-					<tbody id="table-report-credit-body">
+					<tbody id="table-report-credit-body" style="font-size: 12.5px;">
 					</tbody>
 				</table>
                 <div class="pagination flex h-ct" id="relatorio_pagination">
