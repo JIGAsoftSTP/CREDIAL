@@ -11,8 +11,6 @@
 </head>
 <body>
 	<div class="master-content">
-
-
 			<div class="x-table table-client auto-width">
 				<table id="table-report-credit" class="" cellpadding="0" cellspacing="0">
 					<thead>
