@@ -350,7 +350,6 @@ function reportCredit(list)
 
 function showReportCreditTotal(type) {
     var listLastValues = [];
-
     var indexActualYear =  type === "atual" ? relatorio.data.length-2 : relatorio.data.length-1;
     tableEstructure($(".report-content").find('table'));
     listLastValues.push({"titulo" : (type === "atual" ? "Capital (Atual)" : "Capital (Em comparação)"),
