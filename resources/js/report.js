@@ -14,7 +14,7 @@ $('aside .single').on('click', 'li', function (event) {
         success: function (e) {
             sessionStorage.removeItem('filterReport');
             $("#report-entities").html('<option value="">(Selecione)</option>');
-            regUserActivity(reportActivityAddress, -1, "Visualizou a página de Relatório de " + $('.title-report').text(), -1, LevelActivity.VISUALIZACAO);
+            // regUserActivity(reportActivityAddress, -1, "Visualizou a página de Relatório de " + $('.title-report').text(), -1, LevelActivity.VISUALIZACAO);
             loadContensFilterReport($("#report-entities"), e.reportFilter);
             /*data();*/
         }
