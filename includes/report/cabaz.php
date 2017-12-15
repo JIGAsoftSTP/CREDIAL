@@ -32,9 +32,9 @@
 	<section class="modalPage mp-show-more-information-client-credit">
 		<div class="modalFrame">
 			<div class="modalContainer">
-				<ul id="more-detalhes-list">
+				<div class="content" id="more-detalhes-list">
 
-				</ul>
+				</div>
 				<div class="modal-header">
 					<b>Mais Detalhes</b>
 					<span class="mp-close"></span>
