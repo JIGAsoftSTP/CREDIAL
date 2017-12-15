@@ -329,26 +329,57 @@ function relatorioCarteiraCheque(list) {
 function reportCredit(list)
 {
     $(".report-content").find('table tbody').empty();
+    var listLastValues = [];
+    var total_capital = 0;
+    var total_capital_pago = 0;
+    var total_montante = 0;
+    var total_montante_pago = 0;
+    var total_taeg = 0;
+    var total_taeg_pago = 0;
 
     for(var i = relatorio.begin;(i<list.length-1 && i !== relatorio.end) ;i++)
     {
         credit = list[i];
+        var client_surname =  credit.SURNAME === null ? "" : credit.SURNAME;
         if (credit["NIF"].toUpperCase() !== "TOTAL") {
             date = formatDate(credit["DATA"], 1);
             $(".report-content").find('table tbody').append('' +
-                '<tr><td >' + credit["NUM CREDITO DOSSCIER"] + '</td><td >' + formatDate(credit["DATA"], 1) + '</td>' +
-                '<td>' + credit["NIF"] + '</td><td>' + credit["NAME"] + " " + credit["SURNAME"] + '</td><td>' + formattedString(credit["VALOR CREDITO"]) + '</td>' +
-                '<td>' + formattedString(credit["TOTAL PAGAR MONTANTE DIVIDA"]) + '</td><td>' + formattedString(credit["TAEG"]) + '</td>' +
-                '<td>' + formatDate(credit["DATA INICIO"], 2) + '</td><td>' + formatDate(credit["DATA FINALIZAR"], 2) + '</td></tr>');
-            listLastValues = {
-                "Valor Crédito": formattedString(list[list.length - 1]["VALOR CREDITO"]),
-                "Montante Dívida": formattedString(list[list.length - 1]["TOTAL PAGAR MONTANTE DIVIDA"]),
-                "TAEG": formattedString(list[list.length - 1]["TAEG"])
-            };
-            sumTable(listLastValues);
+                '<tr><td >' + credit["NUM CREDITO DOSSCIER"] + '</td><td >' + alterFormatDate(credit.DATA.substring(0, 10)) + '</td>' +
+                '<td>' + credit["NAME"] + " " + client_surname+ '</td><td>' + formattedString(credit.credito_capital) + '</td><td title="Montante: '+formattedString(credit.credito_montante)+'">' + formattedString(credit.credito_montante) + '</td>' +
+                '<td title="TAEG: '+formattedString(credit.credito_taeg)+'">' + formattedString(credit.credito_taeg) + '</td><td>' + alterFormatDate(credit["DATA INICIO"]) + '</td>' +
+                '<td>' + alterFormatDate(credit["DATA FINALIZAR"]) + '</td><td>' + credit.ESTADO + '</td></tr>');
+                 total_capital += Number(credit.credito_capital);
+                 total_capital_pago += Number(credit.credito_capital_pago);
+                 total_montante += Number(credit.credito_montante);
+                 total_montante_pago += Number(credit.credito_montante_pago);
+                 total_taeg += Number(credit.credito_taeg);
+                 total_taeg_pago += Number(credit.credito_taeg_pago);
         }
     }
+
     tableEstructure($(".report-content").find('table'));
+    listLastValues.push({"titulo" : "Capital", "descricao_campo1" : "C", "valor_campo1" :formattedString(total_capital+"") , "descricao_campo2": "C.P",
+                    "valor_campo2": formattedString(total_capital_pago+"")});
+
+    listLastValues.push({"titulo" : "Montante", "descricao_campo1" : "M", "valor_campo1" : formattedString(total_montante+"") , "descricao_campo2": "M.P",
+        "valor_campo2": formattedString(total_montante_pago+"")});
+
+    listLastValues.push({"titulo" : "TAEG", "descricao_campo1" : "T", "valor_campo1" :formattedString(total_taeg+"") , "descricao_campo2": "T.P",
+        "valor_campo2": formattedString(total_taeg_pago+"")});
+
+    $(".report-content").find('.sum-parts').remove();
+    var xTbl = $(".report-content").find('.master-content .x-table');
+    $('<div class="sum-parts"></div>').insertAfter(xTbl);
+
+    listLastValues.forEach(function (value) {
+        $(".report-content").find('.sum-parts').append(
+            '<section>'+
+            '<h1 style="font: bold;">'+value.titulo+'</h1>'+
+            '<h3>'+value.descricao_campo1+': <span>'+ value.valor_campo1+'</span></h3>'+
+            '<h3>'+value.descricao_campo2+': <span>'+value.valor_campo2+'</span></h3>'+
+            '</section>');
+    });
+
 }
 
 var ReportFiler = function (dataI, dataF, periodo) {
@@ -454,7 +485,7 @@ var TypeReport = {
 function sumTable(array){
 
     $(".report-content").find('.sum-parts').remove();
-    xTbl = $(".report-content").find('.master-content .x-table');
+    var xTbl = $(".report-content").find('.master-content .x-table');
     $('<div class="sum-parts"></div>').insertAfter(xTbl);
 
     for (var key in array) {
