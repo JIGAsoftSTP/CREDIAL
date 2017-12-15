@@ -46,7 +46,7 @@
 						<th grow="1" orderBy>Estado Crédito</th>
 					</tr>
 				</thead>
-				<tbody id="tabela-taeg-corpo">
+				<tbody id="tabela-taeg-corpo" style="font-size: 12.5px;">
 
 				</tbody>
 			</table>

@@ -23,7 +23,7 @@
 						<th grow="3" orderBy>Local Trabalho</th>
 					</tr>
 				</thead>
-				<tbody id="tableReportCustomerBody">
+				<tbody id="tableReportCustomerBody" style="font-size: 12.5px;">
 				</tbody>
 			</table>
             <div class="pagination flex h-ct" id="relatorio_pagination">

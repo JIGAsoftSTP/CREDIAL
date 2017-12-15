@@ -26,7 +26,7 @@
 						<th grow="1" grow2="0" >Data Prevista</th>
 					</tr>
 				</thead>
-				<tbody id="report-cobrancas-corpo">
+				<tbody id="report-cobrancas-corpo" style="font-size: 12.5px;">
 				</tbody>
 			</table>
             <div class="pagination flex h-ct" id="relatorio_pagination">

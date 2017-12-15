@@ -21,7 +21,7 @@
 						<th grow="3">TEAG A.</th>
 					</tr>
 				</thead>
-				<tbody id="tableCliente">
+				<tbody id="tableCliente" style="font-size: 12.5px;">
 				</tbody>
 			</table>
             <div class="pagination flex h-ct" id="relatorio_pagination">

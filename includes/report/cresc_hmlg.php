@@ -24,7 +24,7 @@
 						<th grow="2" orderBy>Crescimento</th>
 					</tr>
 				</thead>
-				<tbody id="tabelaCresHCorpo">
+				<tbody id="tabelaCresHCorpo" style="font-size: 12.5px;">
 				</tbody>
 			</table>
             <div class="pagination flex h-ct" id="relatorio_pagination">

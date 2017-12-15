@@ -29,7 +29,7 @@
 							<th grow="3">Total pedido</th>
 						</tr>
 					</thead>
-					<tbody id="tableCliente">
+					<tbody id="tableCliente" style="font-size: 12.5px;">
 						<tr><td>109935310</td><td>WALDEMIRO QUARESMA FERNANDES</td><td>5</td><td>5 000 000</td></tr>
 					</tbody>
 				</table>

@@ -39,7 +39,7 @@
 						<th grow="3">Crédito Valor Pago</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody style="font-size: 12.5px;">
 				</tbody>
 			</table>
             <div class="pagination flex h-ct" id="relatorio_pagination">

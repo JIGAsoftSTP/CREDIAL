@@ -39,7 +39,7 @@
 						<th grow="0" grow2="1">Data Endossado</th>
 					</tr>
 				</thead>
-				<tbody id="tabela-cheque-corpo">
+				<tbody id="tabela-cheque-corpo" style="font-size: 12.5px;">
 				</tbody>
 			</table>
             <div class="pagination flex h-ct" id="relatorio_pagination">
