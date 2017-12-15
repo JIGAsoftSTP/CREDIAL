@@ -41,7 +41,6 @@
 	</div>
     <?php include "../process.html"; ?>
 </body>
-<script type="text/javascript" src="resources/js/reports/report.js"></script>
 </html>
 
 

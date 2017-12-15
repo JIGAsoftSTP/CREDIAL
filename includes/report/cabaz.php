@@ -44,7 +44,6 @@
 	</section>
 	<?php include "../process.html"; ?>
 </body>
-<script type="text/javascript" src="resources/js/reports/report.js"></script>
 <script type="text/javascript" src="./resources/js/reports/cabaz.js"></script>
 </html>
 

@@ -270,8 +270,6 @@ function CtrlMenu2(element, element2){
     $.ajax({
         url: element.attr('urldata'),
         type: "POST",
-        processData: false,
-        contentType: false,
         dataType: "html",
         success: function (e) {
             element2.html(e);

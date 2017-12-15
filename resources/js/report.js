@@ -11,19 +11,10 @@ $('aside .single').on('click', 'li', function (event) {
             "intention": "load report filters",
             "reportName": $('#secondary-menu li.active').attr('id')
         },
-        beforeSend: function () {
-            $(".mp-loading").fadeIn();
-        },
-        complete: function () {
-            $(".mp-loading").fadeOut();
-        },
         success: function (e) {
             sessionStorage.removeItem('filterReport');
-            $("#report-entities").empty();
-            $("#report-entities").append('<option value="">(Selecione)</option>');
-
-            regUserActivity(reportActivityAddress, -1, "Visualizou a página de Relatório de " + $('.title-report').text(),
-                -1, LevelActivity.VISUALIZACAO);
+            $("#report-entities").html('<option value="">(Selecione)</option>');
+            regUserActivity(reportActivityAddress, -1, "Visualizou a página de Relatório de " + $('.title-report').text(), -1, LevelActivity.VISUALIZACAO);
             loadContensFilterReport($("#report-entities"), e.reportFilter);
             /*data();*/
         }
@@ -33,6 +24,9 @@ $('aside .single').on('click', 'li', function (event) {
     ($(this).attr('id') === 'rep.gara')
         ? header.find(".icon-file-pdf, .icon-file-excel").hide(200)
         : header.find(".icon-file-pdf, .icon-file-excel").show(200);
+
+    $('.x-icon-ok').click();
+    console.log("dkdkdk");
 });
 
 var list_filters_datas = [];
