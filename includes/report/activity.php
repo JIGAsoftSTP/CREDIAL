@@ -87,7 +87,7 @@
 	</div>
 	<?php include "../process.html"; ?>
 </body>
+<script src="./resources/js/geralScript.js" ></script>
 <script src="./resources/js/activity.js"></script>
 <script src="./resources/js/controller/activity.js"></script>
-<script src="./resources/js/geralScript.js" ></script>
 </html>

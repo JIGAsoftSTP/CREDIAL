@@ -404,22 +404,23 @@ function resetForm(form){
 }
 
 setDatePicker();
-
 function setDatePicker(){
     i = 0;
     $('.is-datepicker').each(function(index, el) {
         var me = $(this);
         me.attr('readonly','readonly');
-
-        new Pikaday(
-        {
-            field : $('.is-datepicker')[i],
-            setDefaultDate : me.attr('default') === 'true' ? true : false,
-            defaultDate : me.attr('default') === 'true' ? new Date() : "",
-            firstDay : 1,
-            maxDate : me.attr('maxdate') ? new Date() : ""
-        });
-        i++;
+        console.log(me.attr("was_add"), "lldldldld");
+        if(me.attr("was_add") === undefined) {
+            new Pikaday({
+                field: $('.is-datepicker')[i],
+                setDefaultDate: me.attr('default') === 'true' ? true : false,
+                defaultDate: me.attr('default') === 'true' ? new Date() : "",
+                firstDay: 1,
+                maxDate: me.attr('maxdate') ? new Date() : ""
+            });
+            me.attr("was_add", true);
+            i++;
+        }
     });
 }
 
