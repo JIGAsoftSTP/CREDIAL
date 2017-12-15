@@ -19,7 +19,9 @@ $('.test-expand').click(function(event) {
 function sendFilterReport() {
 
     if($('#secondary-menu li.active').attr('id') ===  TypeReport.CHEQUE){
-         chequeFiltro = $(".report-content").find(".filter-type-cheq li.active").attr("id");
+        var idforForme = $(".report-content").find(".filter-type-cheq li.active").attr("id");
+         chequeFiltro = (( idforForme === undefined)
+                ? "1" : idforForme );
     }
 
         dataReport();
