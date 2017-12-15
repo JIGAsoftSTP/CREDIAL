@@ -2,6 +2,30 @@
 <html lang="pt">
 <head>
 	<meta charset="UTF-8">
+    <style>
+        .modalContainer .content{
+            max-height: 85vh;
+            overflow: auto;
+            padding: 1rem 2rem;
+        }
+        .modalContainer nav{
+            line-height: 2.4rem;
+            border-bottom: 1px #f2f2f2 solid;
+        }
+        .modalContainer .mykey{
+            font-weight: bold;
+            font-size: .9rem;
+            display: inline-block;
+            min-width: 200px;
+        }
+        .modalContainer .myVal{
+            display: inline-block;
+            margin-left: 2rem;
+        }
+        .modalContainer .myVal:before{
+            content: ": ";
+        }
+    </style>
 </head>
 <body>
 	<div class="master-content">

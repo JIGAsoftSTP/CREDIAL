@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<title></title>
-	<link rel="stylesheet" href="./resources/css/activity.css">
+	<link rel="stylesheet" href="../../resources/css/activity.css">
 	<link rel="stylesheet" href="./resources/fw/pikaday/pikaday.css">
 
 </head>
