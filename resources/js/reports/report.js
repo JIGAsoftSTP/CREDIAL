@@ -302,8 +302,8 @@ function relatorioCarteiraCheque(list) {
         '<th grow="1">Folhas</th>' +
         '<th grow="3">Sequência</th>' +
         '<th grow="2">Capital</th>' +
-        '<th grow="2">C. à Cobrar</th>' +
-        '<th grow="2">C. Cobrado</th>'+
+        '<th title="Montante" grow="2">Montante</th>' +
+        '<th title="Montante cobrado" grow="2">M. Cobrado</th>'+
         '<th grow="1">Estado</th>');
 
     for(var i = relatorio.begin;(i<list.length-1 && i !== relatorio.end) ;i++)
