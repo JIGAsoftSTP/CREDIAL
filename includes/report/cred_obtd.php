@@ -44,6 +44,7 @@
 	</div>
     <?php include "../process.html"; ?>
 </body>
+<script src="./resources/js/geralScript.js" ></script>
 </html>
 
 

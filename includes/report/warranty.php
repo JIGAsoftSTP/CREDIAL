@@ -19,4 +19,5 @@
 
 </body>
 <script type="text/javascript" src="./resources/js/reports/warranty.js"></script>
+<script src="./resources/js/geralScript.js" ></script>
 </html>

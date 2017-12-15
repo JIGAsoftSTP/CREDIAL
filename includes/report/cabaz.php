@@ -45,6 +45,7 @@
 	<?php include "../process.html"; ?>
 </body>
 <script type="text/javascript" src="./resources/js/reports/cabaz.js"></script>
+<script src="./resources/js/geralScript.js" ></script>
 </html>
 
 

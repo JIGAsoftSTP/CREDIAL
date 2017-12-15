@@ -18,4 +18,5 @@
 
 </body>
 <script type="text/javascript" src="./resources/js/reports/crednotification.js"></script>
+<script src="./resources/js/geralScript.js" ></script>
 </html>
