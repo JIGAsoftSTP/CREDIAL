@@ -83,10 +83,10 @@ var cabaz = {
         var idlist = $("#more-detalhes-list");
         idlist.empty();
         this.conversions.forEach(function (conv) {
-            var li = "<li>" +
-                "<b>$name : </b>" +
-                "<span>$value</span>" +
-                "</li>";
+            var li = '<nav>' +
+                '<span class="mykey">$name</span>' +
+                '<span class="myVal">$value</span>' +
+                '</nav>';
             li = li.replace("$name", conv.name);
             li = li.replace("$value", cabaz.put_value(cabaz.data[conv.value], conv));
             idlist.append(li);
