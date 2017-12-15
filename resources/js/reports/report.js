@@ -543,7 +543,7 @@ $(".icon-file-pdf").click(function () {
 });
 
 var relatorio = {
-    step: 500,
+    step: 400,
     data : [],
     begin : undefined,
     end : undefined,
