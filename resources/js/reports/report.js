@@ -372,9 +372,9 @@ function showReportCreditTotal(type) {
     listLastValues.forEach(function (value) {
         $(".report-content").find('.sum-parts').append(
             '<section class="creditoConcedidoTotal" tipo="'+type+'">'+
-            '<h1 style="font: bold;">'+value.titulo+'</h1>'+
-            '<h3>'+value.descricao_campo1+': <span title="'+value.valor_campo1+'">'+ value.valor_campo1+'</span></h3>'+
-            '<h3>'+value.descricao_campo2+': <span title="'+value.valor_campo2+'">'+value.valor_campo2+'</span></h3>'+
+            '<h2 >'+value.titulo+'</h2>'+
+            '<h3>'+value.descricao_campo1+': <span title="'+value.descricao_campo1+":"+ value.valor_campo1+'">'+ value.valor_campo1+'</span></h3>'+
+            '<h3>'+value.descricao_campo2+': <span title="'+value.descricao_campo2+": "+value.valor_campo2+'">'+value.valor_campo2+'</span></h3>'+
             '</section>');
     });
 }
