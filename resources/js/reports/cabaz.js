@@ -58,6 +58,11 @@ var cabaz = {
             type: "moeda"
         },
         {
+            value: "total_capital_pago",
+            name: "Total Capital Pago",
+            type: "moeda"
+        },
+        {
             value: "total_montante_pagar",
             name: "Total Montante à Pagar",
             type: "moeda"

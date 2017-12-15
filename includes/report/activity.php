@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<title></title>
-	<link rel="stylesheet" href="../../resources/css/activity.css">
+	<link rel="stylesheet" href="./resources/css/activity.css">
 	<link rel="stylesheet" href="./resources/fw/pikaday/pikaday.css">
 
 </head>
@@ -89,5 +89,5 @@
 </body>
 <script src="./resources/js/activity.js"></script>
 <script src="./resources/js/controller/activity.js"></script>
-<script src="./resources/js/geralScript.js" ></script>
+<script src="../../resources/js/geralScript.js" ></script>
 </html>
