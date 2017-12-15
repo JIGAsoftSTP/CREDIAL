@@ -329,26 +329,53 @@ function relatorioCarteiraCheque(list) {
 function reportCredit(list)
 {
     $(".report-content").find('table tbody').empty();
-
     for(var i = relatorio.begin;(i<list.length-1 && i !== relatorio.end) ;i++)
     {
         credit = list[i];
+        var client_surname =  credit.SURNAME === null ? "" : credit.SURNAME;
         if (credit["NIF"].toUpperCase() !== "TOTAL") {
             date = formatDate(credit["DATA"], 1);
             $(".report-content").find('table tbody').append('' +
-                '<tr><td >' + credit["NUM CREDITO DOSSCIER"] + '</td><td >' + formatDate(credit["DATA"], 1) + '</td>' +
-                '<td>' + credit["NIF"] + '</td><td>' + credit["NAME"] + " " + credit["SURNAME"] + '</td><td>' + formattedString(credit["VALOR CREDITO"]) + '</td>' +
-                '<td>' + formattedString(credit["TOTAL PAGAR MONTANTE DIVIDA"]) + '</td><td>' + formattedString(credit["TAEG"]) + '</td>' +
-                '<td>' + formatDate(credit["DATA INICIO"], 2) + '</td><td>' + formatDate(credit["DATA FINALIZAR"], 2) + '</td></tr>');
-            listLastValues = {
-                "Valor Crédito": formattedString(list[list.length - 1]["VALOR CREDITO"]),
-                "Montante Dívida": formattedString(list[list.length - 1]["TOTAL PAGAR MONTANTE DIVIDA"]),
-                "TAEG": formattedString(list[list.length - 1]["TAEG"])
-            };
-            sumTable(listLastValues);
+                '<tr><td >' + credit["NUM CREDITO DOSSCIER"] + '</td><td >' + alterFormatDate(credit.DATA.substring(0, 10)) + '</td>' +
+                '<td>' + credit["NAME"] + " " + client_surname+ '</td><td>' + formattedString(credit.credito_capital) + '</td><td title="Montante: '+formattedString(credit.credito_montante)+'">' + formattedString(credit.credito_montante) + '</td>' +
+                '<td title="TAEG: '+formattedString(credit.credito_taeg)+'">' + formattedString(credit.credito_taeg) + '</td><td>' + alterFormatDate(credit["DATA INICIO"]) + '</td>' +
+                '<td>' + alterFormatDate(credit["DATA FINALIZAR"]) + '</td><td>' + credit.ESTADO + '</td></tr>');
+
         }
     }
+
     tableEstructure($(".report-content").find('table'));
+    showReportCreditTotal("atual");
+}
+
+function showReportCreditTotal(type) {
+    var listLastValues = [];
+    var indexActualYear =  type === "atual" ? relatorio.data.length-2 : relatorio.data.length-1;
+    tableEstructure($(".report-content").find('table'));
+    listLastValues.push({"titulo" : (type === "atual" ? "Capital (Atual)" : "Capital (Em comparação)"),
+        "descricao_campo1" : "C", "valor_campo1" :formattedString(relatorio.data[indexActualYear].credito_capital) , "descricao_campo2": "C.P",
+        "valor_campo2": formattedString(relatorio.data[indexActualYear].credito_capital_pago)});
+
+    listLastValues.push({"titulo" : (type === "atual" ? "Montante (Atual)" : "Montante (Em comparação)")
+        , "descricao_campo1" : "M", "valor_campo1" : formattedString(relatorio.data[indexActualYear].credito_montante) , "descricao_campo2": "M.P",
+        "valor_campo2": formattedString(relatorio.data[indexActualYear].credito_montante_pago)});
+
+    listLastValues.push({"titulo" : (type === "atual" ? "TAEG (Atual)" : "TAEG (Em comparação)"),
+                "descricao_campo1" : "T", "valor_campo1" :formattedString(relatorio.data[indexActualYear].credito_taeg) , "descricao_campo2": "T.P",
+        "valor_campo2": formattedString(relatorio.data[indexActualYear].credito_taeg_pago)});
+
+    $(".report-content").find('.sum-parts').remove();
+    var xTbl = $(".report-content").find('.master-content .x-table');
+    $('<div class="sum-parts" style="cursor: pointer;"></div>').insertAfter(xTbl);
+
+    listLastValues.forEach(function (value) {
+        $(".report-content").find('.sum-parts').append(
+            '<section class="creditoConcedidoTotal" tipo="'+type+'">'+
+            '<h2 >'+value.titulo+'</h2>'+
+            '<h3>'+value.descricao_campo1+': <span title="'+value.descricao_campo1+":"+ value.valor_campo1+'">'+ value.valor_campo1+'</span></h3>'+
+            '<h3>'+value.descricao_campo2+': <span title="'+value.descricao_campo2+": "+value.valor_campo2+'">'+value.valor_campo2+'</span></h3>'+
+            '</section>');
+    });
 }
 
 var ReportFiler = function (dataI, dataF, periodo) {
@@ -426,7 +453,6 @@ else{
         return newDate.substr(3, 13);
     }
 }
-
 }
 
 
@@ -454,7 +480,7 @@ var TypeReport = {
 function sumTable(array){
 
     $(".report-content").find('.sum-parts').remove();
-    xTbl = $(".report-content").find('.master-content .x-table');
+    var xTbl = $(".report-content").find('.master-content .x-table');
     $('<div class="sum-parts"></div>').insertAfter(xTbl);
 
     for (var key in array) {
@@ -663,3 +689,7 @@ $('.x-icon-ok').click(function (event) {
 });
 
 data();
+
+$(".report-content").on("click", ".creditoConcedidoTotal", function () {
+    showReportCreditTotal(($(this).attr("tipo") === "atual"? "Em comparação": "atual"));
+});

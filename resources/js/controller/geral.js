@@ -263,7 +263,6 @@ function alterFormatDate(date)
     newDate = $.makeArray(newDate);
     return newDate[2]+"-"+newDate[1]+"-"+newDate[0];
 }
-
 var ExportData = function () {
     this.type = undefined;
     this.name = undefined;
