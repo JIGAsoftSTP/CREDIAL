@@ -409,7 +409,6 @@ function setDatePicker(){
     $('.is-datepicker').each(function(index, el) {
         var me = $(this);
         me.attr('readonly','readonly');
-        console.log(me.attr("was_add"), "lldldldld");
         if(me.attr("was_add") === undefined) {
             new Pikaday({
                 field: $('.is-datepicker')[i],
